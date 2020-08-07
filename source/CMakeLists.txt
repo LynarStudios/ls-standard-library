@@ -10,6 +10,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/base/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/boxing/Integer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/boxing/IBoxing.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/exception/IllegalOperationException.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/exception/IllegalOperationException.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/base/Types.hpp)
 
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
