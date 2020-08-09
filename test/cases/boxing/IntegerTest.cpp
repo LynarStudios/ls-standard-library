@@ -33,6 +33,10 @@ namespace {
 
     x = 44;
     ASSERT_EQ(44, x);
+
+    ls_std::Integer y {3};
+    x = y;
+    ASSERT_EQ(3, x);
   }
 
   // arithmetic operators
