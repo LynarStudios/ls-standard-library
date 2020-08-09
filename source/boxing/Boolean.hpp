@@ -25,6 +25,11 @@ namespace ls_std {
 
       operator bool() const;
 
+      // assignment operators
+
+      Boolean& operator=(int _value);
+      Boolean& operator=(bool _value);
+
       // stream operators
 
       friend std::ostream& operator<<(std::ostream& outputStream, const Boolean& _boolean) {

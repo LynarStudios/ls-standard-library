@@ -23,6 +23,18 @@ ls_std::Boolean::operator bool() const
   return this->value;
 }
 
+ls_std::Boolean & ls_std::Boolean::operator=(int _value)
+{
+  this->value = _value;
+  return *this;
+}
+
+ls_std::Boolean & ls_std::Boolean::operator=(bool _value)
+{
+  this->value = _value;
+  return *this;
+}
+
 bool ls_std::Boolean::operator&&(const Boolean &_boolean) const
 {
   return this->value && _boolean;

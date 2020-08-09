@@ -24,6 +24,17 @@ namespace {
       {}
   };
 
+  TEST_F(BooleanTest, operatorAssignment)
+  {
+    ls_std::Boolean expression {};
+
+    expression = true;
+    ASSERT_TRUE(expression);
+
+    expression = 1;
+    ASSERT_TRUE(expression);
+  }
+
   TEST_F(BooleanTest, operatorOutputStream)
   {
     ls_std::Boolean expression {true};
