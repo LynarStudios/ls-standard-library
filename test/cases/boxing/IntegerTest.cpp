@@ -53,6 +53,7 @@ namespace {
     ls_std::Integer z {-15};
 
     ASSERT_EQ(20, x + y);
+    ASSERT_EQ(8, 1 + y);
     ASSERT_EQ(5, x + y + z);
     ASSERT_EQ(15, x + 2);
     ASSERT_EQ(0, x + 2 + z);
