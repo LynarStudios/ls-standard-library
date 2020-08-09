@@ -26,14 +26,7 @@ namespace
       {}
   };
 
-  TEST_F(IntegerTest, operatorHyphen)
-  {
-    ls_std::Integer x {13};
-    ls_std::Integer y {-13};
-
-    ASSERT_EQ(-13, -x);
-    ASSERT_EQ(13, -y);
-  }
+  // assignment operators
 
   TEST_F(IntegerTest, operatorAssignment)
   {
@@ -42,6 +35,17 @@ namespace
 
     x = 44;
     ASSERT_EQ(44, x);
+  }
+
+  // arithmetic operators
+
+  TEST_F(IntegerTest, operatorHyphen)
+  {
+    ls_std::Integer x {13};
+    ls_std::Integer y {-13};
+
+    ASSERT_EQ(-13, -x);
+    ASSERT_EQ(13, -y);
   }
 
   TEST_F(IntegerTest, operatorAddition)
@@ -88,6 +92,68 @@ namespace
     ASSERT_EQ(3, x / y / 3);
     ASSERT_EQ(1, 19 / 10);
   }
+
+  // compound operators
+
+  TEST_F(IntegerTest, operatorAddEqual)
+  {
+    ls_std::Integer x {4};
+    ls_std::Integer y {2};
+    ASSERT_EQ(4, x);
+
+    x += y;
+    ASSERT_EQ(6, x);
+
+    x += 4;
+    ASSERT_EQ(10, x);
+
+    x += -5;
+    ASSERT_EQ(5, x);
+  }
+
+  TEST_F(IntegerTest, operatorSubEqual)
+  {
+    ls_std::Integer x {14};
+    ls_std::Integer y {2};
+    ASSERT_EQ(14, x);
+
+    x -= y;
+    ASSERT_EQ(12, x);
+
+    x -= 6;
+    ASSERT_EQ(6, x);
+
+    x -= -3;
+    ASSERT_EQ(9, x);
+  }
+
+  TEST_F(IntegerTest, operatorMulEqual)
+  {
+    ls_std::Integer x {6};
+    ls_std::Integer y {3};
+    ASSERT_EQ(6, x);
+
+    x *= y;
+    ASSERT_EQ(18, x);
+
+    x *= 2;
+    ASSERT_EQ(36, x);
+  }
+
+  TEST_F(IntegerTest, operatorDivEqual)
+  {
+    ls_std::Integer x {12};
+    ls_std::Integer y {3};
+    ASSERT_EQ(12, x);
+
+    x /= y;
+    ASSERT_EQ(4, x);
+
+    x /= 2;
+    ASSERT_EQ(2, x);
+  }
+
+  // implementation
 
   TEST_F(IntegerTest, parse)
   {
