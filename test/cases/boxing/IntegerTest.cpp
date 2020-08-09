@@ -361,4 +361,14 @@ namespace
     ls_std::Integer x {112};
     ASSERT_STREQ("112", x.toString().c_str());
   }
+
+  // additional testing
+
+  TEST_F(IntegerTest, constApproach)
+  {
+    const ls_std::Integer x {3};
+    ASSERT_EQ(3, x);
+
+//     x = 4; // wouldn't work
+  }
 }
