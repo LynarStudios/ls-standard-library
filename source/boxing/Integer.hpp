@@ -40,6 +40,8 @@ namespace ls_std {
       int operator-(int _value) const;
       int operator/(const Integer& _integer) const;
       int operator/(int _value) const;
+      int operator%(const Integer& _integer) const;
+      int operator%(int _value) const;
 
       // compound operators
 

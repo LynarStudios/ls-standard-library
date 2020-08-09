@@ -81,6 +81,16 @@ int ls_std::Integer::operator/(int _value) const
   return this->value / _value;
 }
 
+int ls_std::Integer::operator%(const Integer &_integer) const
+{
+  return this->value % _integer;
+}
+
+int ls_std::Integer::operator%(int _value) const
+{
+  return this->value % _value;
+}
+
 ls_std::Integer & ls_std::Integer::operator+=(const Integer &_integer)
 {
   this->value += _integer;

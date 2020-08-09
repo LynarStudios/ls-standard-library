@@ -93,6 +93,15 @@ namespace
     ASSERT_EQ(1, 19 / 10);
   }
 
+  TEST_F(IntegerTest, operatorModulus)
+  {
+    ls_std::Integer x {85};
+    ls_std::Integer y {9};
+
+    ASSERT_EQ(4, x % y);
+    ASSERT_EQ(1, x % 3);
+  }
+
   // compound operators
 
   TEST_F(IntegerTest, operatorAddEqual)
