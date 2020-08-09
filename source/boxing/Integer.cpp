@@ -149,12 +149,12 @@ bool ls_std::Integer::operator==(int _value) const
 
 bool ls_std::Integer::operator!=(const Integer &_integer) const
 {
-  return this->value == _integer;
+  return this->value != _integer;
 }
 
 bool ls_std::Integer::operator!=(int _value) const
 {
-  return this->value == _value;
+  return this->value != _value;
 }
 
 bool ls_std::Integer::operator>(const Integer &_integer) const
