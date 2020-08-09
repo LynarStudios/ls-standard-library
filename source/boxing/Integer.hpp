@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-07
+ * Changed:         2020-08-09
  *
  * */
 
@@ -20,6 +20,10 @@ namespace ls_std {
       explicit Integer(int _value);
       Integer();
       ~Integer() = default;
+
+      // conversion operator
+
+      operator int() const;
 
       // assignment operators
 

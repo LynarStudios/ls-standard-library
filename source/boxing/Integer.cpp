@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-07
+ * Changed:         2020-08-09
  *
  * */
 
@@ -16,6 +16,11 @@ value(_value)
 
 ls_std::Integer::Integer() : Class("Integer")
 {}
+
+ls_std::Integer::operator int() const
+{
+  return this->value;
+}
 
 ls_std::Integer& ls_std::Integer::operator=(int _value)
 {
