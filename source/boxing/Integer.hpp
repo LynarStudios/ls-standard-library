@@ -99,6 +99,8 @@ namespace ls_std {
 
       void parse(std::string parseText) override;
 
+    private:
+
       int value {};
   };
 }

@@ -35,7 +35,7 @@ int ls_std::Integer::operator-() const
 
 int ls_std::Integer::operator+(const Integer &_integer) const
 {
-  return this->value + _integer.value;
+  return this->value + _integer;
 }
 
 int ls_std::Integer::operator+(int _value) const
@@ -45,7 +45,7 @@ int ls_std::Integer::operator+(int _value) const
 
 int ls_std::Integer::operator*(const Integer &_integer) const
 {
-  return this->value * _integer.value;
+  return this->value * _integer;
 }
 
 int ls_std::Integer::operator*(int _value) const
@@ -55,7 +55,7 @@ int ls_std::Integer::operator*(int _value) const
 
 int ls_std::Integer::operator-(const Integer &_integer) const
 {
-  return this->value - _integer.value;
+  return this->value - _integer;
 }
 
 int ls_std::Integer::operator-(int _value) const
@@ -65,11 +65,11 @@ int ls_std::Integer::operator-(int _value) const
 
 int ls_std::Integer::operator/(const Integer &_integer) const
 {
-  if(_integer.value == 0) {
+  if(_integer == 0) {
     throw ls_std::IllegalOperationException {};
   }
 
-  return this->value / _integer.value;
+  return this->value / _integer;
 }
 
 int ls_std::Integer::operator/(int _value) const
@@ -83,7 +83,7 @@ int ls_std::Integer::operator/(int _value) const
 
 ls_std::Integer & ls_std::Integer::operator+=(const Integer &_integer)
 {
-  this->value += _integer.value;
+  this->value += _integer;
   return *this;
 }
 
@@ -95,7 +95,7 @@ ls_std::Integer & ls_std::Integer::operator+=(int _value)
 
 ls_std::Integer & ls_std::Integer::operator-=(const Integer &_integer)
 {
-  this->value -= _integer.value;
+  this->value -= _integer;
   return *this;
 }
 
@@ -107,7 +107,7 @@ ls_std::Integer & ls_std::Integer::operator-=(int _value)
 
 ls_std::Integer & ls_std::Integer::operator*=(const Integer &_integer)
 {
-  this->value *= _integer.value;
+  this->value *= _integer;
   return *this;
 }
 
@@ -119,11 +119,11 @@ ls_std::Integer & ls_std::Integer::operator*=(int _value)
 
 ls_std::Integer & ls_std::Integer::operator/=(const Integer &_integer)
 {
-  if(_integer.value == 0) {
+  if(_integer == 0) {
     throw ls_std::IllegalOperationException {};
   }
 
-  this->value /= _integer.value;
+  this->value /= _integer;
   return *this;
 }
 
@@ -139,7 +139,7 @@ ls_std::Integer & ls_std::Integer::operator/=(int _value)
 
 bool ls_std::Integer::operator==(const Integer &_integer) const
 {
-  return this->value == _integer.value;
+  return this->value == _integer;
 }
 
 bool ls_std::Integer::operator==(int _value) const
@@ -149,7 +149,7 @@ bool ls_std::Integer::operator==(int _value) const
 
 bool ls_std::Integer::operator!=(const Integer &_integer) const
 {
-  return this->value == _integer.value;
+  return this->value == _integer;
 }
 
 bool ls_std::Integer::operator!=(int _value) const
@@ -159,7 +159,7 @@ bool ls_std::Integer::operator!=(int _value) const
 
 bool ls_std::Integer::operator>(const Integer &_integer) const
 {
-  return this->value > _integer.value;
+  return this->value > _integer;
 }
 
 bool ls_std::Integer::operator>(int _value) const
@@ -169,7 +169,7 @@ bool ls_std::Integer::operator>(int _value) const
 
 bool ls_std::Integer::operator>=(const Integer &_integer) const
 {
-  return this->value >= _integer.value;
+  return this->value >= _integer;
 }
 
 bool ls_std::Integer::operator>=(int _value) const
@@ -179,7 +179,7 @@ bool ls_std::Integer::operator>=(int _value) const
 
 bool ls_std::Integer::operator<(const Integer &_integer) const
 {
-  return this->value < _integer.value;
+  return this->value < _integer;
 }
 
 bool ls_std::Integer::operator<(int _value) const
@@ -189,7 +189,7 @@ bool ls_std::Integer::operator<(int _value) const
 
 bool ls_std::Integer::operator<=(const Integer &_integer) const
 {
-  return this->value <= _integer.value;
+  return this->value <= _integer;
 }
 
 bool ls_std::Integer::operator<=(int _value) const
@@ -199,7 +199,7 @@ bool ls_std::Integer::operator<=(int _value) const
 
 bool ls_std::Integer::operator&&(const Integer &_integer) const
 {
-  return this->value && _integer.value;
+  return this->value && _integer;
 }
 
 bool ls_std::Integer::operator&&(int _value) const
@@ -209,7 +209,7 @@ bool ls_std::Integer::operator&&(int _value) const
 
 bool ls_std::Integer::operator||(const Integer &_integer) const
 {
-  return this->value || _integer.value;
+  return this->value || _integer;
 }
 
 bool ls_std::Integer::operator||(int _value) const
