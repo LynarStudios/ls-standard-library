@@ -241,3 +241,8 @@ void ls_std::Integer::parse(std::string parseText)
 {
   this->value = std::stoi(parseText);
 }
+
+std::string ls_std::Integer::toString()
+{
+  return std::to_string(this->value);
+}

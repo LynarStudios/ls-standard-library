@@ -346,4 +346,10 @@ namespace
     x.parse("-17");
     ASSERT_EQ(-17, x);
   }
+
+  TEST_F(IntegerTest, toString)
+  {
+    ls_std::Integer x {112};
+    ASSERT_STREQ("112", x.toString().c_str());
+  }
 }
