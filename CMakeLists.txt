@@ -40,8 +40,21 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/IllegalOperationException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Types.hpp)
 
+set(TEST_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp)
+
 ##########################################################
 # Build
 ##########################################################
 
+message("${PROJECT_NAME}: Building...")
+
+add_executable(${PROJECT_NAME}_test ${TEST_FILES})
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
+
+##########################################################
+# Linking
+##########################################################
+
+message("${PROJECT_NAME}: Linking...")
+target_link_libraries(${PROJECT_NAME}_test gtest gtest_main ls_std)
