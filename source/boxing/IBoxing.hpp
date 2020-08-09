@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-07
+ * Changed:         2020-08-09
  *
  * */
 
@@ -20,6 +20,7 @@ namespace ls_std {
       ~IBoxing() = default;
 
       virtual void parse(std::string parseText) = 0;
+      virtual std::string toString() = 0;
   };
 }
 
