@@ -88,4 +88,15 @@ namespace
     ASSERT_EQ(3, x / y / 3);
     ASSERT_EQ(1, 19 / 10);
   }
+
+  TEST_F(IntegerTest, parse)
+  {
+    ls_std::Integer x {};
+
+    x.parse("1989");
+    ASSERT_EQ(1989, x);
+
+    x.parse("-17");
+    ASSERT_EQ(-17, x);
+  }
 }
