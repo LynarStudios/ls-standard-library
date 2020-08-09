@@ -310,6 +310,30 @@ namespace
     ASSERT_FALSE(x || y);
   }
 
+  // increment / decrement operator
+
+  TEST_F(IntegerTest, operatorIncrement)
+  {
+    ls_std::Integer x {};
+
+    ++x;
+    ASSERT_EQ(1, x);
+
+    ++x;
+    ASSERT_EQ(2, x);
+  }
+
+  TEST_F(IntegerTest, operatorDecrement)
+  {
+    ls_std::Integer x {};
+
+    --x;
+    ASSERT_EQ(-1, x);
+
+    --x;
+    ASSERT_EQ(-2, x);
+  }
+
   // implementation
 
   TEST_F(IntegerTest, parse)
