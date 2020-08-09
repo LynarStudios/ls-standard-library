@@ -249,6 +249,17 @@ namespace
     ASSERT_FALSE(x <= y);
   }
 
+  // stream operators / input stream not testable by using automated tests
+
+  TEST_F(IntegerTest, operatorOutputStream)
+  {
+    ls_std::Integer x {10};
+    std::ostringstream _stream {};
+    _stream << x;
+
+    ASSERT_STREQ("10", _stream.str().c_str());
+  }
+
   // implementation
 
   TEST_F(IntegerTest, parse)
