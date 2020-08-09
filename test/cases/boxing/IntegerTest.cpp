@@ -153,6 +153,102 @@ namespace
     ASSERT_EQ(2, x);
   }
 
+  // comparison operators
+
+  TEST_F(IntegerTest, operatorEqual)
+  {
+    ls_std::Integer x {12};
+    ls_std::Integer y {3};
+    ls_std::Integer z {3};
+
+    ASSERT_TRUE(x == 12);
+    ASSERT_TRUE(y == z);
+    ASSERT_TRUE(z == y);
+  }
+
+  TEST_F(IntegerTest, operatorNotEqual)
+  {
+    ls_std::Integer x {12};
+    ls_std::Integer y {3};
+    ls_std::Integer z {3};
+
+    ASSERT_TRUE(x != 14);
+    ASSERT_TRUE(y != x);
+    ASSERT_TRUE(z != x);
+  }
+
+  TEST_F(IntegerTest, operatorGreaterThan)
+  {
+    ls_std::Integer x {12};
+    ls_std::Integer y {3};
+
+    ASSERT_TRUE(x > 4);
+    ASSERT_TRUE(x > y);
+  }
+
+  TEST_F(IntegerTest, operatorGreaterThanNegative)
+  {
+    ls_std::Integer x {12};
+    ls_std::Integer y {3};
+
+    ASSERT_FALSE(x > 14);
+    ASSERT_FALSE(x > (y + 20));
+  }
+
+  TEST_F(IntegerTest, operatorGreaterThanEqual)
+  {
+    ls_std::Integer x {12};
+    ls_std::Integer y {12};
+
+    ASSERT_TRUE(x >= 12);
+    ASSERT_TRUE(x >= y);
+  }
+
+  TEST_F(IntegerTest, operatorGreaterThanEqualNegative)
+  {
+    ls_std::Integer x {12};
+    ls_std::Integer y {13};
+
+    ASSERT_FALSE(x >= 13);
+    ASSERT_FALSE(x >= y);
+  }
+
+  TEST_F(IntegerTest, operatorLessThan)
+  {
+    ls_std::Integer x {10};
+    ls_std::Integer y {12};
+
+    ASSERT_TRUE(x < 12);
+    ASSERT_TRUE(x < y);
+  }
+
+  TEST_F(IntegerTest, operatorLessThanNegative)
+  {
+    ls_std::Integer x {10};
+    ls_std::Integer y {10};
+
+    ASSERT_FALSE(x < 10);
+    ASSERT_FALSE(x < y);
+  }
+
+  TEST_F(IntegerTest, operatorLessThanEqual)
+  {
+    ls_std::Integer x {10};
+    ls_std::Integer y {10};
+
+    ASSERT_TRUE(x <= 11);
+    ASSERT_TRUE(x <= y);
+  }
+
+  TEST_F(IntegerTest, operatorLessThanEqualNegative)
+  {
+    ls_std::Integer x {11};
+    ls_std::Integer y {10};
+
+    ASSERT_FALSE(x <= 10);
+    ASSERT_FALSE(x <= y);
+  }
+
   // implementation
 
   TEST_F(IntegerTest, parse)
