@@ -38,17 +38,24 @@ namespace ls_std {
         return !_boolean.value;
       }
 
-//      bool operator&&(const Boolean& _boolean) const;
-//      bool operator&&(bool _value) const;
-//      bool operator&&(int _value) const;
-//      bool operator||(const Boolean& _boolean) const;
-//      bool operator||(bool _value) const;
-//      bool operator||(int _value) const;
+      bool operator&&(const Boolean& _boolean) const;
+      bool operator&&(bool _value) const;
+      bool operator&&(int _value) const;
+      bool operator||(const Boolean& _boolean) const;
+      bool operator||(bool _value) const;
+      bool operator||(int _value) const;
 
       // implementation
 
       void parse(std::string parseText) override;
       std::string toString() override;
+
+      // additional functionality
+
+//      static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);
+//      static bool AND(const Boolean& _leftExpression, const Boolean& _rightExpression);
+//      static bool NOT(const Boolean& _leftExpression, const Boolean& _rightExpression);
+//      static bool OR(const Boolean& _leftExpression, const Boolean& _rightExpression);
 
     private:
 

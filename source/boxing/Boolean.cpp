@@ -23,6 +23,36 @@ ls_std::Boolean::operator bool() const
   return this->value;
 }
 
+bool ls_std::Boolean::operator&&(const Boolean &_boolean) const
+{
+  return this->value && _boolean;
+}
+
+bool ls_std::Boolean::operator&&(bool _value) const
+{
+  return this->value && _value;
+}
+
+bool ls_std::Boolean::operator&&(int _value) const
+{
+  return this->value && _value;
+}
+
+bool ls_std::Boolean::operator||(const Boolean &_boolean) const
+{
+  return this->value || _boolean;
+}
+
+bool ls_std::Boolean::operator||(bool _value) const
+{
+  return this->value || _value;
+}
+
+bool ls_std::Boolean::operator||(int _value) const
+{
+  return this->value || _value;
+}
+
 void ls_std::Boolean::parse(std::string parseText)
 {
   std::transform(parseText.begin(), parseText.end(), parseText.begin(), ::tolower);
