@@ -10,10 +10,8 @@
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Integer.hpp"
 
-namespace
-{
-  class IntegerTest : public ::testing::Test
-  {
+namespace {
+  class IntegerTest : public ::testing::Test {
     protected:
 
       IntegerTest() = default;
