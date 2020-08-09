@@ -38,10 +38,14 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Integer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/IBoxing.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/IllegalOperationException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Types.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Types.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Boolean.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Boolean.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/IllegalArgumentException.hpp)
 
 set(TEST_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp)
 
 ##########################################################
 # Build
