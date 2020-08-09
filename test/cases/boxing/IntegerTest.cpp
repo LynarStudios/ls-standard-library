@@ -260,6 +260,56 @@ namespace
     ASSERT_STREQ("10", _stream.str().c_str());
   }
 
+  // logical operators
+
+  TEST_F(IntegerTest, operatorNot)
+  {
+    ls_std::Integer x {};
+    ASSERT_TRUE(!x);
+  }
+
+  TEST_F(IntegerTest, operatorNotNegative)
+  {
+    ls_std::Integer x {10};
+    ASSERT_FALSE(!x);
+  }
+
+  TEST_F(IntegerTest, operatorAnd)
+  {
+    ls_std::Integer x {1};
+    ls_std::Integer y {1};
+    ASSERT_TRUE(x && 1);
+    ASSERT_TRUE(x && true);
+    ASSERT_TRUE(x && y);
+  }
+
+  TEST_F(IntegerTest, operatorAndNegative)
+  {
+    ls_std::Integer x {};
+    ls_std::Integer y {1};
+    ASSERT_FALSE(x && 1);
+    ASSERT_FALSE(x && true);
+    ASSERT_FALSE(x && y);
+  }
+
+  TEST_F(IntegerTest, operatorOr)
+  {
+    ls_std::Integer x {};
+    ls_std::Integer y {1};
+    ASSERT_TRUE(x || 1);
+    ASSERT_TRUE(x || true);
+    ASSERT_TRUE(x || y);
+  }
+
+  TEST_F(IntegerTest, operatorOrNegative)
+  {
+    ls_std::Integer x {};
+    ls_std::Integer y {};
+    ASSERT_FALSE(x || 0);
+    ASSERT_FALSE(x || false);
+    ASSERT_FALSE(x || y);
+  }
+
   // implementation
 
   TEST_F(IntegerTest, parse)
