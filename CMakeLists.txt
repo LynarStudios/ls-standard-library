@@ -10,7 +10,22 @@ project(${PROJECT_NAME})
 # Compiler
 ##########################################################
 
+message("${PROJECT_NAME}: Setting compiler flags...")
 set(CMAKE_CXX_STANDARD 11)
+
+######################################################
+# Include Directories
+######################################################
+
+message("${PROJECT_NAME}: Adding include directories...")
+include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
+
+######################################################
+# Add Other CMake Dependencies
+######################################################
+
+message("${PROJECT_NAME}: Adding additional cmake dependencies...")
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
 
 ##########################################################
 # Source Files
