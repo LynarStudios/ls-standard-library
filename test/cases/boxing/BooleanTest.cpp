@@ -125,4 +125,13 @@ namespace {
     expression.parse("FALSE");
     ASSERT_FALSE(expression);
   }
+
+  TEST_F(BooleanTest, toString)
+  {
+    ls_std::Boolean expression { 2 < 3};
+    ASSERT_STREQ("true", expression.toString().c_str());
+
+    expression = 4 < 3;
+    ASSERT_STREQ("false", expression.toString().c_str());
+  }
 }
