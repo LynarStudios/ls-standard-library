@@ -87,6 +87,22 @@ std::string ls_std::Boolean::toString()
   return this->_toString();
 }
 
+bool ls_std::Boolean::XOR(const Boolean &_leftExpression, const Boolean &_rightExpression) {
+  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
+}
+
+bool ls_std::Boolean::XOR(const Boolean &_leftExpression, bool _rightExpression) {
+  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
+}
+
+bool ls_std::Boolean::XOR(bool _leftExpression, const Boolean &_rightExpression) {
+  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
+}
+
+bool ls_std::Boolean::XOR(bool _leftExpression, bool _rightExpression) {
+  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
+}
+
 std::string ls_std::Boolean::_toString() const
 {
   std::string booleanString {};

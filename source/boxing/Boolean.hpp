@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-09
+ * Changed:         2020-08-13
  *
  * */
 
@@ -57,10 +57,10 @@ namespace ls_std {
 
       // additional functionality
 
-//      static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);
-//      static bool AND(const Boolean& _leftExpression, const Boolean& _rightExpression);
-//      static bool NOT(const Boolean& _leftExpression, const Boolean& _rightExpression);
-//      static bool OR(const Boolean& _leftExpression, const Boolean& _rightExpression);
+      static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);
+      static bool XOR(const Boolean& _leftExpression, bool _rightExpression);
+      static bool XOR(bool _leftExpression, const Boolean& _rightExpression);
+      static bool XOR(bool _leftExpression, bool _rightExpression);
 
     private:
 
