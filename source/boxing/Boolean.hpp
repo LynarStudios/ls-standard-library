@@ -17,7 +17,7 @@ namespace ls_std {
   class Boolean : public Class, IBoxing {
     public:
 
-      explicit Boolean(bool _value);
+      Boolean(bool _value);
       Boolean();
       ~Boolean() = default;
 

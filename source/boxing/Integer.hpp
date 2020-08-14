@@ -17,7 +17,7 @@ namespace ls_std {
   class Integer : public Class, IBoxing {
     public:
 
-      explicit Integer(int _value);
+      Integer(int _value);
       Integer();
       ~Integer() = default;
 
