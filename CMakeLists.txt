@@ -45,13 +45,16 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Float.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Float.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Double.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Double.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Double.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/String.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/String.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/FloatTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/DoubleTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/DoubleTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/StringTest.cpp)
 
 ##########################################################
 # Build
