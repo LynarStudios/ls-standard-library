@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-13
+ * Changed:         2020-08-14
  *
  * */
 
@@ -17,13 +17,13 @@ namespace ls_std {
   class Integer : public Class, IBoxing {
     public:
 
-      Integer(int _value);
+      explicit Integer(int _value);
       Integer();
       ~Integer() = default;
 
       // conversion operator
 
-      operator int() const;
+      explicit operator int() const;
 
       // assignment operators
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-13
+ * Changed:         2020-08-14
  *
  * */
 
@@ -17,13 +17,13 @@ namespace ls_std {
   class Boolean : public Class, IBoxing {
     public:
 
-      Boolean(bool _value);
+      explicit Boolean(bool _value);
       Boolean();
       ~Boolean() = default;
 
       // conversion operator
 
-      operator bool() const;
+      explicit operator bool() const;
 
       // assignment operators
 
