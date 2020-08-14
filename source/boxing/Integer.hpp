@@ -23,7 +23,7 @@ namespace ls_std {
 
       // conversion operator
 
-      explicit operator int() const;
+      operator int() const;
 
       // assignment operators
 
