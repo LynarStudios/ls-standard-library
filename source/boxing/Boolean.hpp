@@ -49,6 +49,7 @@ namespace ls_std {
       bool operator||(const Boolean& _boolean) const;
       bool operator||(bool _value) const;
       bool operator||(int _value) const;
+      // INFO: operator ^ can not be taken for XOR, since it's not possible to implement it respecting commutative law
 
       // implementation
 
