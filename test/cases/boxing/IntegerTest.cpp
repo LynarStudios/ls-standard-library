@@ -366,6 +366,14 @@ namespace {
     ASSERT_STREQ("112", x.toString().c_str());
   }
 
+  // additional functionality
+
+  TEST_F(IntegerTest, getValue)
+  {
+    ls_std::Integer x {3};
+    ASSERT_EQ(3, x.getValue());
+  }
+
   // additional testing
 
   TEST_F(IntegerTest, constApproach)

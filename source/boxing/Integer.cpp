@@ -256,3 +256,7 @@ std::string ls_std::Integer::toString()
 {
   return std::to_string(this->value);
 }
+
+int ls_std::Integer::getValue() {
+  return this->value;
+}

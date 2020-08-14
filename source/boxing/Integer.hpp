@@ -105,6 +105,10 @@ namespace ls_std {
       void parse(std::string parseText) override;
       std::string toString() override;
 
+      // additional functionality
+
+      int getValue();
+
     private:
 
       int value {};
