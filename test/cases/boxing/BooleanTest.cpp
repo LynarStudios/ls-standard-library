@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-09
+ * Changed:         2020-08-14
  *
  * */
 
@@ -144,6 +144,12 @@ namespace {
   }
 
   // additional functionality
+
+  TEST_F(BooleanTest, getValue)
+  {
+    ls_std::Boolean x {2 < 3};
+    ASSERT_TRUE(x.getValue());
+  }
 
   TEST_F(BooleanTest, XOR)
   {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-09
+ * Changed:         2020-08-14
  *
  * */
 
@@ -85,6 +85,10 @@ void ls_std::Boolean::parse(std::string parseText)
 std::string ls_std::Boolean::toString()
 {
   return this->_toString();
+}
+
+bool ls_std::Boolean::getValue() {
+  return this->value;
 }
 
 bool ls_std::Boolean::XOR(const Boolean &_leftExpression, const Boolean &_rightExpression) {

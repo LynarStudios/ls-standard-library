@@ -58,6 +58,7 @@ namespace ls_std {
 
       // additional functionality
 
+      bool getValue();
       static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);
       static bool XOR(const Boolean& _leftExpression, bool _rightExpression);
       static bool XOR(bool _leftExpression, const Boolean& _rightExpression);
