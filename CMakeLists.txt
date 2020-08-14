@@ -41,11 +41,13 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Types.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Boolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Boolean.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/IllegalArgumentException.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/IllegalArgumentException.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Float.hpp source/boxing/Float.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/FloatTest.cpp)
 
 ##########################################################
 # Build
