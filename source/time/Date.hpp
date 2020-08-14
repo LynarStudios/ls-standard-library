@@ -28,7 +28,13 @@ namespace ls_std {
 
       bool after(Date foreignDate);
       bool before(Date foreignDate);
+      int getDay();
+      int getHour();
+      int getMinute();
+      int getMonth();
+      int getSecond();
       time_t getTime();
+      int getYear();
       void setTime(time_t _timestamp);
       std::string toString();
 

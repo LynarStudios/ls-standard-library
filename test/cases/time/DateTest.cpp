@@ -55,10 +55,58 @@ namespace {
     ASSERT_TRUE(date.before(date2));
   }
 
+  TEST_F(DateTest, getDay)
+  {
+    ls_std::Date date {};
+    date.setTime(1597433693);
+
+    ASSERT_EQ(14, date.getDay());
+  }
+
+  TEST_F(DateTest, getHour)
+  {
+    ls_std::Date date {};
+    date.setTime(1597433693);
+
+    ASSERT_EQ(21, date.getHour());
+  }
+
+  TEST_F(DateTest, getMinute)
+  {
+    ls_std::Date date {};
+    date.setTime(1597433693);
+
+    ASSERT_EQ(34, date.getMinute());
+  }
+
+  TEST_F(DateTest, getMonth)
+  {
+    ls_std::Date date {};
+    date.setTime(1597433693);
+
+    ASSERT_EQ(8, date.getMonth());
+  }
+
+  TEST_F(DateTest, getSecond)
+  {
+    ls_std::Date date {};
+    date.setTime(1597433693);
+
+    ASSERT_EQ(53, date.getSecond());
+  }
+
   TEST_F(DateTest, getTime)
   {
     ls_std::Date date {};
     ASSERT_TRUE(date.getTime() > 0);
+  }
+
+  TEST_F(DateTest, getYear)
+  {
+    ls_std::Date date {};
+    date.setTime(1597433693);
+
+    ASSERT_EQ(2020, date.getYear());
   }
 
   TEST_F(DateTest, setTime)

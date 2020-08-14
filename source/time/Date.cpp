@@ -30,6 +30,30 @@ bool ls_std::Date::before(Date foreignDate) {
   return this->timestamp < foreignDate.getTime();
 }
 
+int ls_std::Date::getDay() {
+  return this->localTime->tm_mday;
+}
+
+int ls_std::Date::getHour() {
+  return this->localTime->tm_hour;
+}
+
+int ls_std::Date::getMinute() {
+  return this->localTime->tm_min;
+}
+
+int ls_std::Date::getMonth() {
+  return this->localTime->tm_mon;
+}
+
+int ls_std::Date::getSecond() {
+  return this->localTime->tm_sec;
+}
+
+int ls_std::Date::getYear() {
+  return this->localTime->tm_year;
+}
+
 time_t ls_std::Date::getTime() {
   return this->timestamp;
 }
@@ -49,4 +73,5 @@ std::string ls_std::Date::toString() {
 void ls_std::Date::init() {
   this->localTime = std::localtime(&this->timestamp);
   this->localTime->tm_mon += 1;
+  this->localTime->tm_year += 1900;
 }
