@@ -52,7 +52,13 @@ namespace {
 
   TEST_F(FileTest, canExecute)
   {
-    ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app.exe"};
+      #ifdef _WIN32
+        ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app.exe"};
+      #endif
+      #ifdef unix
+        ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app"};
+      #endif
+
     ASSERT_TRUE(executableFile.canExecute());
   }
 
