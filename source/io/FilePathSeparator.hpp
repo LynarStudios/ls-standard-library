@@ -23,6 +23,19 @@ namespace ls_std {
         return '/';
       }
 
+      static char getOperatingSystemSpecificSeparator() {
+        char separator {};
+
+        #ifdef _WIN32
+          separator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
+        #endif
+        #ifdef unix
+          separator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
+        #endif
+
+        return separator;
+      }
+
       static char getUnixFilePathSeparator() {
         return '\\';
       }
