@@ -18,8 +18,12 @@ class TestHelper {
     TestHelper() = default;
     ~TestHelper() = default;
 
+    static std::string getResourcesFolderLocation() {
+      return TestHelper::getTestFolderLocation() + R"(resources\)";
+    }
+
     static std::string getTestFolderLocation() {
-      return R"(C:\Users\drums\CLionProjects\lynar-studios-standard-library\test)";
+      return R"(C:\Users\drums\CLionProjects\lynar-studios-standard-library\test\)";
     }
 };
 
