@@ -37,7 +37,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Integer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/IBoxing.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/IllegalOperationException.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/IllegalArithmeticOperationException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Types.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Boolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Boolean.cpp
@@ -49,7 +49,12 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/String.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/String.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/time/Date.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/time/Date.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/time/Date.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/File.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/File.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/FileOperationException.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FilePathSeparatorMatch.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FilePathSeparator.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -57,7 +62,9 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/FloatTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/DoubleTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/StringTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/TestHelper.hpp)
 
 ##########################################################
 # Build
