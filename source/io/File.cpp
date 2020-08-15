@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-15
+ * Changed:         2020-08-16
  *
  * */
 
@@ -14,12 +14,14 @@
 #include <sys/stat.h>
 #include <algorithm>
 #include <sstream>
+#include <vector>
 
 #ifdef unix
 #include <unistd.h>
-#include <vector>
-#include <sstream>
+#endif
 
+#ifdef __APPLE__
+#include <unistd.h>
 #endif
 
 ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
