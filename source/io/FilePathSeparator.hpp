@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-15
+ * Changed:         2020-08-16
  *
  * */
 
@@ -30,6 +30,9 @@ namespace ls_std {
           separator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
         #endif
         #ifdef unix
+          separator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
+        #endif
+        #ifdef __APLLE__
           separator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
         #endif
 
