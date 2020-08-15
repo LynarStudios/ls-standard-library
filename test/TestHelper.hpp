@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-15
+ * Changed:         2020-08-16
  *
  * */
 
@@ -27,6 +27,9 @@ class TestHelper {
       #ifdef unix
         location = TestHelper::getTestFolderLocation() + R"(resources/)";
       #endif
+      #ifdef __APPLE__
+        location = TestHelper::getTestFolderLocation() + R"(resources/)";
+      #endif
 
       return location;
     }
@@ -39,6 +42,9 @@ class TestHelper {
       #endif
       #ifdef unix
         location = R"(/home/patrick/CLionProjects/lynar-studios-standard-library/test/)";
+      #endif
+      #ifdef __APPLE__
+        location = R"(/Users/lynarstudios/CLionProjects/lynar-studios-standard-library/test/)";
       #endif
 
       return location;
