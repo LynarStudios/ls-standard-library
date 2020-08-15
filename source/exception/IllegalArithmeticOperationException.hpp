@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-07
+ * Changed:         2020-08-15
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <exception>
 
 namespace ls_std {
-  class IllegalOperationException : public std::exception {
+  class IllegalArithmeticOperationException : public std::exception {
     public:
 
       const char *what() const noexcept override {

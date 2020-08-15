@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-14
+ * Changed:         2020-08-15
  *
  * */
 
 #include "Integer.hpp"
-#include "../exception/IllegalOperationException.hpp"
+#include "../exception/IllegalArithmeticOperationException.hpp"
 
 ls_std::Integer::Integer(int _value) : Class("Integer"),
 value(_value)
@@ -66,7 +66,7 @@ int ls_std::Integer::operator-(int _value) const
 int ls_std::Integer::operator/(const Integer &_integer) const
 {
   if(_integer == 0) {
-    throw ls_std::IllegalOperationException {};
+    throw ls_std::IllegalArithmeticOperationException {};
   }
 
   return this->value / _integer;
@@ -75,7 +75,7 @@ int ls_std::Integer::operator/(const Integer &_integer) const
 int ls_std::Integer::operator/(int _value) const
 {
   if(_value == 0) {
-    throw ls_std::IllegalOperationException {};
+    throw ls_std::IllegalArithmeticOperationException {};
   }
 
   return this->value / _value;
@@ -130,7 +130,7 @@ ls_std::Integer & ls_std::Integer::operator*=(int _value)
 ls_std::Integer & ls_std::Integer::operator/=(const Integer &_integer)
 {
   if(_integer == 0) {
-    throw ls_std::IllegalOperationException {};
+    throw ls_std::IllegalArithmeticOperationException {};
   }
 
   this->value /= _integer;
@@ -140,7 +140,7 @@ ls_std::Integer & ls_std::Integer::operator/=(const Integer &_integer)
 ls_std::Integer & ls_std::Integer::operator/=(int _value)
 {
   if(_value == 0) {
-    throw ls_std::IllegalOperationException {};
+    throw ls_std::IllegalArithmeticOperationException {};
   }
 
   this->value /= _value;
