@@ -106,7 +106,7 @@ bool ls_std::File::isFile()
 
 void ls_std::File::makeDirectory()
 {
-  if(this->_mkdir()) {
+  if(ls_std::File::_mkdir(this->absoluteFilePath)) {
     throw ls_std::FileOperationException {this->absoluteFilePath};
   }
 }
@@ -156,15 +156,15 @@ bool ls_std::File::_isFile()
   return match;
 }
 
-int ls_std::File::_mkdir() {
+int ls_std::File::_mkdir(const std::string& path) {
   int result {};
 
   #ifdef _WIN32
-    result = mkdir(this->absoluteFilePath.c_str());
+    result = mkdir(path.c_str());
   #endif
 
   #ifdef unix
-    result = mkdir(this->absoluteFilePath.c_str(), 0777);
+    result = mkdir(path.c_str(), 0777);
   #endif
 
   return result;

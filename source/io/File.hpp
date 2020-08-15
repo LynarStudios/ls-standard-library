@@ -45,7 +45,7 @@ namespace ls_std {
       bool _exists();
       bool _isDirectory();
       bool _isFile();
-      int _mkdir();
+      static int _mkdir(const std::string& path);
       static std::string _normalizePath(std::string path);
   };
 }
