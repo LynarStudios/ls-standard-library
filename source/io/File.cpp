@@ -14,24 +14,22 @@
 #include <sys/stat.h>
 #include <algorithm>
 
+#ifdef unix
+#include <unistd.h>
+#endif
+
 ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
-absoluteFilePath(std::move(_absoluteFilePath))
+absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
 {}
 
 bool ls_std::File::operator==(File &_file)
 {
-  std::string normalizedFilePath = ls_std::File::normalizePath(this->absoluteFilePath);
-  std::string normalizedForeignFilePath = ls_std::File::normalizePath(_file.getAbsoluteFilePath());
-
-  return normalizedFilePath == normalizedForeignFilePath;
+  return this->absoluteFilePath == _file.getAbsoluteFilePath();
 }
 
 bool ls_std::File::operator!=(File &_file)
 {
-  std::string normalizedFilePath = ls_std::File::normalizePath(this->absoluteFilePath);
-  std::string normalizedForeignFilePath = ls_std::File::normalizePath(_file.getAbsoluteFilePath());
-
-  return normalizedFilePath != normalizedForeignFilePath;
+  return this->absoluteFilePath != _file.getAbsoluteFilePath();
 }
 
 bool ls_std::File::canExecute()
@@ -108,7 +106,7 @@ bool ls_std::File::isFile()
 
 void ls_std::File::makeDirectory()
 {
-  if(mkdir(this->absoluteFilePath.c_str())) {
+  if(this->_mkdir()) {
     throw ls_std::FileOperationException {this->absoluteFilePath};
   }
 }
@@ -158,8 +156,29 @@ bool ls_std::File::_isFile()
   return match;
 }
 
-std::string ls_std::File::normalizePath(std::string path)
+int ls_std::File::_mkdir() {
+  int result {};
+
+  #ifdef _WIN32
+    result = mkdir(this->absoluteFilePath.c_str());
+  #endif
+
+  #ifdef unix
+    result = mkdir(this->absoluteFilePath.c_str(), 0777);
+  #endif
+
+  return result;
+}
+
+std::string ls_std::File::_normalizePath(std::string path)
 {
-  std::replace(path.begin(), path.end(), '\\', '/');
+  #ifdef unix
+    std::replace(path.begin(), path.end(), '\\', '/');
+  #endif
+
+  #ifdef _WIN32
+    std::replace(path.begin(), path.end(), '/', '\\');
+  #endif
+
   return path;
 }
