@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-08-15
  *
  * */
 
@@ -22,11 +22,11 @@ ls_std::Date & ls_std::Date::operator+(int _value) {
   return *this;
 }
 
-bool ls_std::Date::after(Date foreignDate) {
+bool ls_std::Date::after(const Date& foreignDate) const {
   return this->timestamp > foreignDate.getTime();
 }
 
-bool ls_std::Date::before(Date foreignDate) {
+bool ls_std::Date::before(const Date& foreignDate) const {
   return this->timestamp < foreignDate.getTime();
 }
 
@@ -54,7 +54,7 @@ int ls_std::Date::getYear() {
   return this->localTime->tm_year;
 }
 
-time_t ls_std::Date::getTime() {
+time_t ls_std::Date::getTime() const {
   return this->timestamp;
 }
 

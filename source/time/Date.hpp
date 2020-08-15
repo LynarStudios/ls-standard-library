@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-08-15
  *
  * */
 
@@ -26,14 +26,14 @@ namespace ls_std {
 
       // additional functionality
 
-      bool after(Date foreignDate);
-      bool before(Date foreignDate);
+      bool after(const Date& foreignDate) const;
+      bool before(const Date& foreignDate) const;
       int getDay();
       int getHour();
       int getMinute();
       int getMonth();
       int getSecond();
-      time_t getTime();
+      time_t getTime() const;
       int getYear();
       void setTime(time_t _timestamp);
       std::string toString();
