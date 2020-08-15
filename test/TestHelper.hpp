@@ -19,11 +19,29 @@ class TestHelper {
     ~TestHelper() = default;
 
     static std::string getResourcesFolderLocation() {
-      return TestHelper::getTestFolderLocation() + R"(resources\)";
+      std::string location {};
+
+      #ifdef _WIN32
+        location = TestHelper::getTestFolderLocation() + R"(resources\)";
+      #endif
+      #ifdef unix
+        location = TestHelper::getTestFolderLocation() + R"(resources/)";
+      #endif
+
+      return location;
     }
 
     static std::string getTestFolderLocation() {
-      return R"(C:\Users\drums\CLionProjects\lynar-studios-standard-library\test\)";
+      std::string location {};
+
+      #ifdef _WIN32
+        location = R"(C:\Users\drums\CLionProjects\lynar-studios-standard-library\test\)";
+      #endif
+      #ifdef unix
+        location = R"(/home/patrick/CLionProjects/lynar-studios-standard-library/test/)";
+      #endif
+
+      return location;
     }
 };
 
