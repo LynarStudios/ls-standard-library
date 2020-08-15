@@ -13,6 +13,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <algorithm>
+#include <sstream>
 
 #ifdef unix
 #include <unistd.h>
