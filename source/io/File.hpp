@@ -12,6 +12,7 @@
 
 #include "../base/Class.hpp"
 #include <string>
+#include <vector>
 
 namespace ls_std {
   class File : public Class {
@@ -36,17 +37,19 @@ namespace ls_std {
       bool isDirectory();
       bool isFile();
       void makeDirectory();
+      void makeDirectories();
       void remove();
 
     private:
 
       std::string absoluteFilePath {};
 
-      bool _exists();
-      bool _isDirectory();
-      bool _isFile();
+      bool _exists(const std::string& path);
+      bool _isDirectory(const std::string& path);
+      bool _isFile(const std::string& path);
       static int _mkdir(const std::string& path);
       static std::string _normalizePath(std::string path);
+      static std::vector<std::string> _splitIntoSubDirectoryNames(const std::string& path);
   };
 }
 

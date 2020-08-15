@@ -16,6 +16,9 @@
 
 #ifdef unix
 #include <unistd.h>
+#include <vector>
+#include <sstream>
+
 #endif
 
 ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
@@ -46,7 +49,7 @@ bool ls_std::File::canExecute()
 
 void ls_std::File::create()
 {
-  if(!this->_exists()) {
+  if(!this->_exists(this->absoluteFilePath)) {
     std::ofstream file {this->absoluteFilePath};
     file.close();
   } else {
@@ -56,7 +59,7 @@ void ls_std::File::create()
 
 bool ls_std::File::exists()
 {
-  return this->_exists();
+  return this->_exists(this->absoluteFilePath);
 }
 
 std::string ls_std::File::getAbsoluteFilePath() {
@@ -69,7 +72,7 @@ std::string ls_std::File::getName()
 
   // if it's a directory, remove separator from end, if it does exist
 
-  if(this->_isDirectory()) {
+  if(this->_isDirectory(this->absoluteFilePath)) {
     copy.erase(std::remove_if(copy.end() - 1, copy.end(), ls_std::FilePathSeparatorMatch()), copy.end());
   }
 
@@ -83,7 +86,7 @@ long ls_std::File::getSize()
 {
   std::streampos fileSize {};
 
-  if(this->_exists()) {
+  if(this->_exists(this->absoluteFilePath)) {
     std::ifstream fileHandler{this->absoluteFilePath, std::ios::in};
     fileSize = fileHandler.tellg();
     fileHandler.seekg(0, std::ios::end);
@@ -96,12 +99,12 @@ long ls_std::File::getSize()
 
 bool ls_std::File::isDirectory()
 {
-  return this->_isDirectory();
+  return this->_isDirectory(this->absoluteFilePath);
 }
 
 bool ls_std::File::isFile()
 {
-  return this->_isFile();
+  return this->_isFile(this->absoluteFilePath);
 }
 
 void ls_std::File::makeDirectory()
@@ -111,28 +114,44 @@ void ls_std::File::makeDirectory()
   }
 }
 
+void ls_std::File::makeDirectories() {
+  std::vector<std::string> subDirectories = ls_std::File::_splitIntoSubDirectoryNames(this->absoluteFilePath);
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  std::string currentHierarchy {};
+
+  for(const auto& subDirectory : subDirectories) {
+    currentHierarchy += subDirectory;
+
+    if(!this->_exists(currentHierarchy)) {
+      ls_std::File::_mkdir(currentHierarchy);
+    }
+
+    currentHierarchy += separator;
+  }
+}
+
 void ls_std::File::remove()
 {
-  if(this->_isFile()) {
+  if(this->_isFile(this->absoluteFilePath)) {
     if(std::remove(this->absoluteFilePath.c_str())) {
       throw ls_std::FileOperationException{this->absoluteFilePath};
     }
   }
 
-  if(this->_isDirectory()) {
+  if(this->_isDirectory(this->absoluteFilePath)) {
     if(rmdir(this->absoluteFilePath.c_str())) {
       throw ls_std::FileOperationException{this->absoluteFilePath};
     }
   }
 }
 
-bool ls_std::File::_exists()
+bool ls_std::File::_exists(const std::string& path)
 {
   struct stat _stat {};
   return (stat(this->absoluteFilePath.c_str(), &_stat) == 0);
 }
 
-bool ls_std::File::_isDirectory()
+bool ls_std::File::_isDirectory(const std::string& path)
 {
   bool match {};
   struct stat _stat {};
@@ -144,7 +163,7 @@ bool ls_std::File::_isDirectory()
   return match;
 }
 
-bool ls_std::File::_isFile()
+bool ls_std::File::_isFile(const std::string& path)
 {
   bool match {};
   struct stat _stat {};
@@ -181,4 +200,17 @@ std::string ls_std::File::_normalizePath(std::string path)
   #endif
 
   return path;
+}
+
+std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::string& path) {
+  std::vector<std::string> subDirectoryNames {};
+  std::stringstream _stream {path};
+  std::string subDirectoryName {};
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+
+  while(std::getline(_stream, subDirectoryName, separator)) {
+    subDirectoryNames.push_back(subDirectoryName);
+  }
+
+  return subDirectoryNames;
 }

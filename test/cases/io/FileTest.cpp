@@ -161,4 +161,23 @@ namespace {
     directory.remove();
     ASSERT_FALSE(directory.exists());
   }
+
+  TEST_F(FileTest, makeDirectories)
+  {
+    ls_std::File directory {TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp/bla"};
+    ASSERT_FALSE(directory.exists());
+
+    directory.makeDirectories();
+    ASSERT_TRUE(directory.exists());
+
+    // clean up
+
+    directory.remove();
+    directory = ls_std::File(TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp");
+    directory.remove();
+    directory = ls_std::File(TestHelper::getResourcesFolderLocation() + "testDir/sub");
+    directory.remove();
+    directory = ls_std::File(TestHelper::getResourcesFolderLocation() + "testDir");
+    directory.remove();
+  }
 }
