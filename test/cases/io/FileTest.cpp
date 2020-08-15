@@ -111,7 +111,13 @@ namespace {
   TEST_F(FileTest, getSize)
   {
     ls_std::File file {this->fileLocation};
-    ASSERT_EQ(8, file.getSize());
+
+    #ifdef _WIN32
+      ASSERT_EQ(8, file.getSize());
+    #endif
+    #ifdef unix
+      ASSERT_EQ(7, file.getSize());
+    #endif
   }
 
   TEST_F(FileTest, isDirectory)
