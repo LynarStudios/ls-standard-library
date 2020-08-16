@@ -29,7 +29,7 @@ namespace ls_std {
       // additional functionality
 
       bool canExecute();
-      void create();
+      void createNewFile();
       bool exists();
       std::string getAbsoluteFilePath();
       std::string getName();

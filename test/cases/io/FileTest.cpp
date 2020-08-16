@@ -71,12 +71,12 @@ namespace {
     ASSERT_FALSE(file.canExecute());
   }
 
-  TEST_F(FileTest, createAndRemove)
+  TEST_F(FileTest, createNewFileAndRemove)
   {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "tmp.txt"};
     ASSERT_FALSE(file.exists());
 
-    file.create();
+    file.createNewFile();
     ASSERT_TRUE(file.exists());
 
     file.remove();

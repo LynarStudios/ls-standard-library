@@ -50,7 +50,7 @@ bool ls_std::File::canExecute()
   return executable;
 }
 
-void ls_std::File::create()
+void ls_std::File::createNewFile()
 {
   if(!this->_exists(this->absoluteFilePath)) {
     std::ofstream file {this->absoluteFilePath};
