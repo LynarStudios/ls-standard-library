@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-14
+ * Changed:         2020-08-16
  *
  * */
 
@@ -65,18 +65,18 @@ bool ls_std::Boolean::operator||(int _value) const
   return this->value || _value;
 }
 
-void ls_std::Boolean::parse(std::string parseText)
+void ls_std::Boolean::parse(std::string _parseText)
 {
-  std::transform(parseText.begin(), parseText.end(), parseText.begin(), ::tolower);
+  std::transform(_parseText.begin(), _parseText.end(), _parseText.begin(), ::tolower);
 
-  if(parseText != this->TRUE_STRING && parseText != this->FALSE_STRING) {
+  if(_parseText != this->TRUE_STRING && _parseText != this->FALSE_STRING) {
     throw ls_std::IllegalArgumentException {};
   } else {
-    if(parseText == this->TRUE_STRING) {
+    if(_parseText == this->TRUE_STRING) {
       this->value = true;
     }
 
-    if(parseText == this->FALSE_STRING) {
+    if(_parseText == this->FALSE_STRING) {
       this->value = false;
     }
   }

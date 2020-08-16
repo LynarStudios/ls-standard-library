@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-08-16
  *
  * */
 
@@ -54,7 +54,7 @@ namespace ls_std {
 
       // implementation
 
-      void parse(std::string parseText) override;
+      void parse(std::string _parseText) override;
       std::string toString() override;
 
       // additional functionality

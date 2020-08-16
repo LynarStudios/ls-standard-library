@@ -53,7 +53,7 @@ namespace ls_std {
 
       // implementation
 
-      void parse(std::string parseText) override;
+      void parse(std::string _parseText) override;
       std::string toString() override;
 
       // additional functionality

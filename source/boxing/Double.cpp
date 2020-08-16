@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-08-16
  *
  * */
 
@@ -160,8 +160,8 @@ void ls_std::Double::operator--() {
   this->value -= 1.0f;
 }
 
-void ls_std::Double::parse(std::string parseText) {
-  this->value = std::stod(parseText);
+void ls_std::Double::parse(std::string _parseText) {
+  this->value = std::stod(_parseText);
 }
 
 std::string ls_std::Double::toString() {

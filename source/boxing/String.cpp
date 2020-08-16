@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-08-16
  *
  * */
 
@@ -45,7 +45,7 @@ std::string ls_std::String::operator+(const char *_string) const {
 
 std::string ls_std::String::operator-(int _number) {
   std::string copy = this->value;
-  return copy.substr(0, copy.size() - _number);;
+  return copy.substr(0, copy.size() - _number);
 }
 
 ls_std::String & ls_std::String::operator+=(String _string) {
@@ -82,8 +82,8 @@ bool ls_std::String::operator!=(const char *_value) {
   return this->value != _value;
 }
 
-void ls_std::String::parse(std::string parseText) {
-  this->value = std::move(parseText);
+void ls_std::String::parse(std::string _parseText) {
+  this->value = std::move(_parseText);
 }
 
 std::string ls_std::String::toString() {
