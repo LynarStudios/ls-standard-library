@@ -64,7 +64,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/StringTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/TestHelper.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/TestHelper.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/ClassTest.cpp)
 
 ##########################################################
 # Build
