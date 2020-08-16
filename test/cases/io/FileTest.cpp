@@ -117,6 +117,12 @@ namespace {
     ASSERT_STREQ("resources", directory.getName().c_str());
   }
 
+  TEST_F(FileTest, getParent)
+  {
+    ls_std::File file {this->fileLocation};
+    ASSERT_STREQ(TestHelper::getResourcesFolderLocation().c_str(), file.getParent().c_str());
+  }
+
   TEST_F(FileTest, getSize)
   {
     ls_std::File file {this->fileLocation};

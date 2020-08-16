@@ -33,6 +33,7 @@ namespace ls_std {
       bool exists();
       std::string getAbsoluteFilePath();
       std::string getName();
+      std::string getParent();
       long getSize();
       bool isDirectory();
       bool isFile();

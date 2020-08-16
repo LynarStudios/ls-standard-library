@@ -85,6 +85,20 @@ std::string ls_std::File::getName()
   return std::string(base, copy.end());
 }
 
+std::string ls_std::File::getParent()
+{
+  std::string parent {};
+  std::vector<std::string> subDirectoryNames = ls_std::File::_splitIntoSubDirectoryNames(this->absoluteFilePath);
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  subDirectoryNames.pop_back();
+
+  for(auto const& subDirectoryName : subDirectoryNames) {
+    parent += subDirectoryName + separator;
+  }
+
+  return parent;
+}
+
 long ls_std::File::getSize()
 {
   std::streampos fileSize {};
