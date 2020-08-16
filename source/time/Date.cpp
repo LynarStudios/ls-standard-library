@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-15
+ * Changed:         2020-08-16
  *
  * */
 
@@ -14,7 +14,7 @@
 ls_std::Date::Date() : Class("Date")
 {
   this->timestamp = std::time(nullptr);
-  this->init();
+  this->_init();
 }
 
 ls_std::Date & ls_std::Date::operator+(int _value) {
@@ -22,12 +22,12 @@ ls_std::Date & ls_std::Date::operator+(int _value) {
   return *this;
 }
 
-bool ls_std::Date::after(const Date& foreignDate) const {
-  return this->timestamp > foreignDate.getTime();
+bool ls_std::Date::after(const Date& _foreignDate) const {
+  return this->timestamp > _foreignDate.getTime();
 }
 
-bool ls_std::Date::before(const Date& foreignDate) const {
-  return this->timestamp < foreignDate.getTime();
+bool ls_std::Date::before(const Date& _foreignDate) const {
+  return this->timestamp < _foreignDate.getTime();
 }
 
 int ls_std::Date::getDay() {
@@ -60,7 +60,7 @@ time_t ls_std::Date::getTime() const {
 
 void ls_std::Date::setTime(time_t _timestamp) {
   this->timestamp = _timestamp;
-  this->init();
+  this->_init();
 }
 
 std::string ls_std::Date::toString() {
@@ -70,7 +70,7 @@ std::string ls_std::Date::toString() {
   return _stream.str();
 }
 
-void ls_std::Date::init() {
+void ls_std::Date::_init() {
   this->localTime = std::localtime(&this->timestamp);
   this->localTime->tm_mon += 1;
   this->localTime->tm_year += 1900;

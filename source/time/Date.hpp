@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-15
+ * Changed:         2020-08-16
  *
  * */
 
@@ -26,8 +26,8 @@ namespace ls_std {
 
       // additional functionality
 
-      bool after(const Date& foreignDate) const;
-      bool before(const Date& foreignDate) const;
+      bool after(const Date& _foreignDate) const;
+      bool before(const Date& _foreignDate) const;
       int getDay();
       int getHour();
       int getMinute();
@@ -43,7 +43,7 @@ namespace ls_std {
       time_t timestamp {};
       tm* localTime {};
 
-      void init();
+      void _init();
   };
 }
 
