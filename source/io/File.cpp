@@ -52,7 +52,7 @@ bool ls_std::File::canExecute()
 
 void ls_std::File::createNewFile()
 {
-  if(!this->_exists(this->absoluteFilePath)) {
+  if(!ls_std::File::_exists(this->absoluteFilePath)) {
     std::ofstream file {this->absoluteFilePath};
     file.close();
   } else {
@@ -62,7 +62,7 @@ void ls_std::File::createNewFile()
 
 bool ls_std::File::exists()
 {
-  return this->_exists(this->absoluteFilePath);
+  return ls_std::File::_exists(this->absoluteFilePath);
 }
 
 std::string ls_std::File::getAbsoluteFilePath() {
@@ -75,7 +75,7 @@ std::string ls_std::File::getName()
 
   // if it's a directory, remove separator from end, if it does exist
 
-  if(this->_isDirectory(this->absoluteFilePath)) {
+  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
     copy.erase(std::remove_if(copy.end() - 1, copy.end(), ls_std::FilePathSeparatorMatch()), copy.end());
   }
 
@@ -103,7 +103,7 @@ long ls_std::File::getSize()
 {
   std::streampos fileSize {};
 
-  if(this->_exists(this->absoluteFilePath)) {
+  if(ls_std::File::_exists(this->absoluteFilePath)) {
     std::ifstream fileHandler{this->absoluteFilePath, std::ios::in};
     fileSize = fileHandler.tellg();
     fileHandler.seekg(0, std::ios::end);
@@ -116,12 +116,12 @@ long ls_std::File::getSize()
 
 bool ls_std::File::isDirectory()
 {
-  return this->_isDirectory(this->absoluteFilePath);
+  return ls_std::File::_isDirectory(this->absoluteFilePath);
 }
 
 bool ls_std::File::isFile()
 {
-  return this->_isFile(this->absoluteFilePath);
+  return ls_std::File::_isFile(this->absoluteFilePath);
 }
 
 time_t ls_std::File::lastModified()
@@ -144,7 +144,7 @@ void ls_std::File::makeDirectories() {
   for(const auto& subDirectory : subDirectories) {
     currentHierarchy += subDirectory;
 
-    if(!this->_exists(currentHierarchy)) {
+    if(!ls_std::File::_exists(currentHierarchy)) {
       ls_std::File::_mkdir(currentHierarchy);
     }
 
@@ -154,13 +154,13 @@ void ls_std::File::makeDirectories() {
 
 void ls_std::File::remove()
 {
-  if(this->_isFile(this->absoluteFilePath)) {
+  if(ls_std::File::_isFile(this->absoluteFilePath)) {
     if(std::remove(this->absoluteFilePath.c_str())) {
       throw ls_std::FileOperationException{this->absoluteFilePath};
     }
   }
 
-  if(this->_isDirectory(this->absoluteFilePath)) {
+  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
     if(rmdir(this->absoluteFilePath.c_str())) {
       throw ls_std::FileOperationException{this->absoluteFilePath};
     }
@@ -170,7 +170,7 @@ void ls_std::File::remove()
 bool ls_std::File::_exists(const std::string& _path)
 {
   struct stat _stat {};
-  return (stat(this->absoluteFilePath.c_str(), &_stat) == 0);
+  return (stat(_path.c_str(), &_stat) == 0);
 }
 
 bool ls_std::File::_isDirectory(const std::string& _path)
@@ -178,7 +178,7 @@ bool ls_std::File::_isDirectory(const std::string& _path)
   bool match {};
   struct stat _stat {};
 
-  if(stat(this->absoluteFilePath.c_str(), &_stat) == 0) {
+  if(stat(_path.c_str(), &_stat) == 0) {
     match = _stat.st_mode & (unsigned short) S_IFDIR;
   }
 
@@ -190,7 +190,7 @@ bool ls_std::File::_isFile(const std::string& _path)
   bool match {};
   struct stat _stat {};
 
-  if(stat(this->absoluteFilePath.c_str(), &_stat) == 0) {
+  if(stat(_path.c_str(), &_stat) == 0) {
     match = _stat.st_mode & (unsigned short) S_IFREG;
   }
 

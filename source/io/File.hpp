@@ -47,9 +47,9 @@ namespace ls_std {
 
       std::string absoluteFilePath {};
 
-      bool _exists(const std::string& _path);
-      bool _isDirectory(const std::string& _path);
-      bool _isFile(const std::string& _path);
+      static bool _exists(const std::string& _path);
+      static bool _isDirectory(const std::string& _path);
+      static bool _isFile(const std::string& _path);
       static time_t _lastModified(const std::string& _path);
       static int _mkdir(const std::string& _path);
       static std::string _normalizePath(std::string _path);
