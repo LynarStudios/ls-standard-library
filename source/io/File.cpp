@@ -189,6 +189,10 @@ int ls_std::File::_mkdir(const std::string& path) {
     result = mkdir(path.c_str(), 0777);
   #endif
 
+  #ifdef __APPLE__
+    result = mkdir(path.c_str(), 0777);
+  #endif
+
   return result;
 }
 
