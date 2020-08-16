@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-14
+ * Changed:         2020-08-16
  *
  * */
 
@@ -32,9 +32,9 @@ namespace ls_std {
 
       // stream operators
 
-      friend std::ostream& operator<<(std::ostream& outputStream, const Boolean& _boolean) {
-        outputStream << _boolean._toString();
-        return outputStream;
+      friend std::ostream& operator<<(std::ostream& _outputStream, const Boolean& _boolean) {
+        _outputStream << _boolean._toString();
+        return _outputStream;
       }
 
       // logical operators
