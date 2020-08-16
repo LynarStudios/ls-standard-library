@@ -124,6 +124,11 @@ bool ls_std::File::isFile()
   return this->_isFile(this->absoluteFilePath);
 }
 
+time_t ls_std::File::lastModified()
+{
+  return ls_std::File::_lastModified(this->absoluteFilePath);
+}
+
 void ls_std::File::makeDirectory()
 {
   if(ls_std::File::_mkdir(this->absoluteFilePath)) {
@@ -190,6 +195,18 @@ bool ls_std::File::_isFile(const std::string& _path)
   }
 
   return match;
+}
+
+time_t ls_std::File::_lastModified(const std::string &_path)
+{
+  time_t lastModifiedTimeStamp {};
+  struct stat _stat {};
+
+  if(stat(_path.c_str(), &_stat) == 0) {
+    lastModifiedTimeStamp = _stat.st_mtime;
+  }
+
+  return lastModifiedTimeStamp;
 }
 
 int ls_std::File::_mkdir(const std::string& _path) {

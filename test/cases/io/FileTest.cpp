@@ -162,6 +162,12 @@ namespace {
     ASSERT_FALSE(directory.isFile());
   }
 
+  TEST_F(FileTest, lastModified)
+  {
+    ls_std::File file {this->fileLocation};
+    ASSERT_EQ(1597475488, file.lastModified());
+  }
+
   TEST_F(FileTest, makeDirectory)
   {
     ls_std::File directory {TestHelper::getResourcesFolderLocation() + "testDir"};
