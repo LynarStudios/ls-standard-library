@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-15
+ * Changed:         2020-08-16
  *
  * */
 
@@ -44,12 +44,12 @@ namespace ls_std {
 
       std::string absoluteFilePath {};
 
-      bool _exists(const std::string& path);
-      bool _isDirectory(const std::string& path);
-      bool _isFile(const std::string& path);
-      static int _mkdir(const std::string& path);
-      static std::string _normalizePath(std::string path);
-      static std::vector<std::string> _splitIntoSubDirectoryNames(const std::string& path);
+      bool _exists(const std::string& _path);
+      bool _isDirectory(const std::string& _path);
+      bool _isFile(const std::string& _path);
+      static int _mkdir(const std::string& _path);
+      static std::string _normalizePath(std::string _path);
+      static std::vector<std::string> _splitIntoSubDirectoryNames(const std::string& _path);
   };
 }
 

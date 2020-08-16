@@ -148,13 +148,13 @@ void ls_std::File::remove()
   }
 }
 
-bool ls_std::File::_exists(const std::string& path)
+bool ls_std::File::_exists(const std::string& _path)
 {
   struct stat _stat {};
   return (stat(this->absoluteFilePath.c_str(), &_stat) == 0);
 }
 
-bool ls_std::File::_isDirectory(const std::string& path)
+bool ls_std::File::_isDirectory(const std::string& _path)
 {
   bool match {};
   struct stat _stat {};
@@ -166,7 +166,7 @@ bool ls_std::File::_isDirectory(const std::string& path)
   return match;
 }
 
-bool ls_std::File::_isFile(const std::string& path)
+bool ls_std::File::_isFile(const std::string& _path)
 {
   bool match {};
   struct stat _stat {};
@@ -178,47 +178,47 @@ bool ls_std::File::_isFile(const std::string& path)
   return match;
 }
 
-int ls_std::File::_mkdir(const std::string& path) {
-  int result {};
+int ls_std::File::_mkdir(const std::string& _path) {
+  int result;
 
   #ifdef _WIN32
-    result = mkdir(path.c_str());
+    result = mkdir(_path.c_str());
   #endif
 
   #ifdef unix
-    result = mkdir(path.c_str(), 0777);
+    result = mkdir(_path.c_str(), 0777);
   #endif
 
   #ifdef __APPLE__
-    result = mkdir(path.c_str(), 0777);
+    result = mkdir(_path.c_str(), 0777);
   #endif
 
   return result;
 }
 
-std::string ls_std::File::_normalizePath(std::string path)
+std::string ls_std::File::_normalizePath(std::string _path)
 {
   const char linuxSeparator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
   const char windowsSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
 
   #ifdef unix
-    std::replace(path.begin(), path.end(), windowsSeparator, linuxSeparator);
+    std::replace(_path.begin(), _path.end(), windowsSeparator, linuxSeparator);
   #endif
 
   #ifdef __APPLE__
-    std::replace(path.begin(), path.end(), windowsSeparator, linuxSeparator);
+    std::replace(_path.begin(), _path.end(), windowsSeparator, linuxSeparator);
   #endif
 
   #ifdef _WIN32
-    std::replace(path.begin(), path.end(), linuxSeparator, windowsSeparator);
+    std::replace(_path.begin(), _path.end(), linuxSeparator, windowsSeparator);
   #endif
 
-  return path;
+  return _path;
 }
 
-std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::string& path) {
+std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::string& _path) {
   std::vector<std::string> subDirectoryNames {};
-  std::stringstream _stream {path};
+  std::stringstream _stream {_path};
   std::string subDirectoryName {};
   const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
 
