@@ -32,7 +32,7 @@ namespace ls_std {
         #ifdef unix
           separator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
         #endif
-        #ifdef __APLLE__
+        #ifdef __APPLE__
           separator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
         #endif
 
