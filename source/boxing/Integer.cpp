@@ -217,9 +217,9 @@ bool ls_std::Integer::operator&&(int _value) const
   return this->value && _value;
 }
 
-bool ls_std::Integer::operator&&(bool expression) const
+bool ls_std::Integer::operator&&(bool _expression) const
 {
-  return this->value && expression;
+  return this->value && _expression;
 }
 
 bool ls_std::Integer::operator||(const Integer &_integer) const
@@ -232,9 +232,9 @@ bool ls_std::Integer::operator||(int _value) const
   return this->value || _value;
 }
 
-bool ls_std::Integer::operator||(bool expression) const
+bool ls_std::Integer::operator||(bool _expression) const
 {
-  return this->value || expression;
+  return this->value || _expression;
 }
 
 void ls_std::Integer::operator++()

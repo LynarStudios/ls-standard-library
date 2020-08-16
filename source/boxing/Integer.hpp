@@ -90,10 +90,10 @@ namespace ls_std {
 
       bool operator&&(const Integer& _integer) const;
       bool operator&&(int _value) const;
-      bool operator&&(bool expression) const;
+      bool operator&&(bool _expression) const;
       bool operator||(const Integer& _integer) const;
       bool operator||(int _value) const;
-      bool operator||(bool expression) const;
+      bool operator||(bool _expression) const;
 
       // increment / decrement operator
 
