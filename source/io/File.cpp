@@ -194,12 +194,19 @@ int ls_std::File::_mkdir(const std::string& path) {
 
 std::string ls_std::File::_normalizePath(std::string path)
 {
+  const char linuxSeparator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
+  const char windowsSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
+
   #ifdef unix
-    std::replace(path.begin(), path.end(), '\\', '/');
+    std::replace(path.begin(), path.end(), windowsSeparator, linuxSeparator);
+  #endif
+
+  #ifdef __APPLE__
+    std::replace(path.begin(), path.end(), windowsSeparator, linuxSeparator);
   #endif
 
   #ifdef _WIN32
-    std::replace(path.begin(), path.end(), '/', '\\');
+    std::replace(path.begin(), path.end(), linuxSeparator, windowsSeparator);
   #endif
 
   return path;
