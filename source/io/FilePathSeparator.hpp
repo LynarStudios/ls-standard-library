@@ -24,7 +24,7 @@ namespace ls_std {
       }
 
       static char getOperatingSystemSpecificSeparator() {
-        char separator {};
+        char separator;
 
         #ifdef _WIN32
           separator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
