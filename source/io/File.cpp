@@ -176,7 +176,7 @@ void ls_std::File::remove()
     }
   }
 }
-
+#ifdef _WIN32
 void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list)
 {
   const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
@@ -190,6 +190,7 @@ void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDir
     }
   }
 }
+#endif
 
 bool ls_std::File::_exists(const std::string& _path)
 {
