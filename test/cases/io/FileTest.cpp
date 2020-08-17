@@ -160,7 +160,7 @@ namespace {
   TEST_F(FileTest, lastModified)
   {
     ls_std::File file {this->fileLocation};
-    ASSERT_EQ(1597475488, file.lastModified());
+    ASSERT_TRUE(file.lastModified() > 1590000000);
   }
 
   TEST_F(FileTest, list)
