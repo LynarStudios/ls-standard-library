@@ -11,6 +11,7 @@
 #include "../../../source/io/File.hpp"
 #include "../../../source/io/FilePathSeparator.hpp"
 #include "../../TestHelper.hpp"
+#include "../../../source/utils/STLUtils.hpp"
 
 namespace {
   class FileTest : public ::testing::Test {
@@ -167,22 +168,27 @@ namespace {
   {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "list_test"};
     std::list<std::string> filesInDirectory = file.list();
+    std::string expectedFile {};
+
     auto filesIterator = filesInDirectory.begin();
 
     ASSERT_FALSE(filesInDirectory.empty());
-    ASSERT_EQ(6, filesInDirectory.size());
+    ASSERT_EQ(7, filesInDirectory.size());
 
-    ASSERT_STREQ(std::string(file.getParent() + ".").c_str(), filesIterator->c_str());
-    filesIterator++;
-    ASSERT_STREQ(std::string(file.getParent() + "..").c_str(), filesIterator->c_str());
-    filesIterator++;
-    ASSERT_STREQ(std::string(file.getParent() + "another_file.txt").c_str(), filesIterator->c_str());
-    filesIterator++;
-    ASSERT_STREQ(std::string(file.getParent() + "bla.txt").c_str(), filesIterator->c_str());
-    filesIterator++;
-    ASSERT_STREQ(std::string(file.getParent() + "hello.txt").c_str(), filesIterator->c_str());
-    filesIterator++;
-    ASSERT_STREQ(std::string(file.getParent() + "list_test_sub").c_str(), filesIterator->c_str());
+    expectedFile = file.getParent() + ".";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + "..";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + "another_file.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + "bla.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + "hello.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + "list_test_sub";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + ".hidden_file.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
   }
 
   TEST_F(FileTest, makeDirectory)

@@ -18,6 +18,7 @@
 
 #if defined(unix) || defined(__APPLE__)
 #include <unistd.h>
+#include <dirent.h>
 #endif
 
 #ifdef _WIN32
@@ -243,7 +244,13 @@ std::list<std::string> ls_std::File::_list(const std::string &_path)
 std::list<std::string> ls_std::File::_listUnix(const std::string &_path)
 {
   std::list<std::string> filesInDirectory {};
+  DIR* directory = opendir(_path.c_str());
+  struct dirent* directoryEntity;
+  std::string parent = ls_std::File::_getParent(_path);
 
+  while((directoryEntity = readdir(directory)) != nullptr) {
+    filesInDirectory.emplace_back(parent + directoryEntity->d_name);
+  }
 
   return filesInDirectory;
 }
