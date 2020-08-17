@@ -54,7 +54,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/File.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/FileOperationException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FilePathSeparatorMatch.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FilePathSeparator.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FilePathSeparator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/utils/STLUtils.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -65,7 +66,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestHelper.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/ClassTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/ClassTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/utils/STLUtilsTest.cpp)
 
 ##########################################################
 # Build
