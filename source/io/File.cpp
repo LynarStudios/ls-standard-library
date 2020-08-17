@@ -21,10 +21,6 @@
 #include <dirent.h>
 #endif
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
 ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
 absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
 {}
@@ -181,6 +177,20 @@ void ls_std::File::remove()
   }
 }
 
+void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list)
+{
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  std::string absolutePath = _path + separator + _data.cFileName;
+
+  if(_withDirectories) {
+    _list.emplace_back(absolutePath);
+  } else {
+    if(ls_std::File::_isFile(absolutePath)) {
+      _list.emplace_back(absolutePath);
+    }
+  }
+}
+
 bool ls_std::File::_exists(const std::string& _path)
 {
   struct stat _stat {};
@@ -297,22 +307,11 @@ std::list<std::string> ls_std::File::_listWindows(const std::string &_path, bool
   std::list<std::string> filesInDirectory {};
   WIN32_FIND_DATA data {};
   HANDLE hFind;
-  std::string parent = ls_std::File::_getParent(_path);
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
-  std::string pattern {_path + separator + "*"};
-  std::string absolutePath {};
+  std::string pattern {_path + ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator() + "*"};
 
   if((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
     do {
-      absolutePath = _path + separator + data.cFileName;
-
-      if(withDirectories) {
-        filesInDirectory.emplace_back(absolutePath);
-      } else {
-        if(ls_std::File::_isFile(absolutePath)) {
-          filesInDirectory.emplace_back(absolutePath);
-        }
-      }
+      ls_std::File::_addToFileListWindows(_path, withDirectories, data, filesInDirectory);
     }
     while(FindNextFile(hFind, &data) != 0);
 

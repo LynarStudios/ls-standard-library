@@ -16,6 +16,10 @@
 #include <list>
 #include <ctime>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 namespace ls_std {
   class File : public Class {
     public:
@@ -50,6 +54,9 @@ namespace ls_std {
 
       std::string absoluteFilePath {};
 
+      #ifdef _WIN32
+        static void _addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list);
+      #endif
       static bool _exists(const std::string& _path);
       static std::string _getParent(const std::string& _path);
       static bool _isDirectory(const std::string& _path);
