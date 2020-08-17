@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-16
+ * Changed:         2020-08-17
  *
  * */
 
@@ -16,12 +16,12 @@
 #include <sstream>
 #include <vector>
 
-#ifdef unix
+#if defined(unix) || defined(__APPLE__)
 #include <unistd.h>
 #endif
 
-#ifdef __APPLE__
-#include <unistd.h>
+#ifdef _WIN32
+#include <windows.h>
 #endif
 
 ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
@@ -87,16 +87,7 @@ std::string ls_std::File::getName()
 
 std::string ls_std::File::getParent()
 {
-  std::string parent {};
-  std::vector<std::string> subDirectoryNames = ls_std::File::_splitIntoSubDirectoryNames(this->absoluteFilePath);
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
-  subDirectoryNames.pop_back();
-
-  for(auto const& subDirectoryName : subDirectoryNames) {
-    parent += subDirectoryName + separator;
-  }
-
-  return parent;
+  return ls_std::File::_getParent(this->absoluteFilePath);
 }
 
 long ls_std::File::getSize()
@@ -127,6 +118,17 @@ bool ls_std::File::isFile()
 time_t ls_std::File::lastModified()
 {
   return ls_std::File::_lastModified(this->absoluteFilePath);
+}
+
+std::list<std::string> ls_std::File::list()
+{
+  std::list<std::string> fileList {};
+
+  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
+    fileList = ls_std::File::_list(this->absoluteFilePath);
+  }
+
+  return fileList;
 }
 
 void ls_std::File::makeDirectory()
@@ -173,6 +175,20 @@ bool ls_std::File::_exists(const std::string& _path)
   return (stat(_path.c_str(), &_stat) == 0);
 }
 
+std::string ls_std::File::_getParent(const std::string &_path)
+{
+  std::string parent {};
+  std::vector<std::string> subDirectoryNames = ls_std::File::_splitIntoSubDirectoryNames(_path);
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  subDirectoryNames.pop_back();
+
+  for(auto const& subDirectoryName : subDirectoryNames) {
+    parent += subDirectoryName + separator;
+  }
+
+  return parent;
+}
+
 bool ls_std::File::_isDirectory(const std::string& _path)
 {
   bool match {};
@@ -209,6 +225,52 @@ time_t ls_std::File::_lastModified(const std::string &_path)
   return lastModifiedTimeStamp;
 }
 
+std::list<std::string> ls_std::File::_list(const std::string &_path)
+{
+  std::list<std::string> filesInDirectory {};
+
+  #if defined(unix) || defined(__APPLE__)
+    filesInDirectory = ls_std::File::_listUnix(_path);
+  #endif
+  #ifdef _WIN32
+    filesInDirectory = ls_std::File::_listWindows(_path);
+  #endif
+
+  return filesInDirectory;
+}
+
+#if defined(unix) || defined(__APPLE__)
+std::list<std::string> ls_std::File::_listUnix(const std::string &_path)
+{
+  std::list<std::string> filesInDirectory {};
+
+
+  return filesInDirectory;
+}
+#endif
+
+#ifdef _WIN32
+std::list<std::string> ls_std::File::_listWindows(const std::string &_path)
+{
+  std::list<std::string> filesInDirectory {};
+  WIN32_FIND_DATA data {};
+  HANDLE hFind;
+  std::string parent = ls_std::File::_getParent(_path);
+  std::string pattern {_path + ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator() + "*"};
+
+  if((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
+    do {
+      filesInDirectory.emplace_back(parent + data.cFileName);
+    }
+    while(FindNextFile(hFind, &data) != 0);
+
+    FindClose(hFind);
+  }
+
+  return filesInDirectory;
+}
+#endif
+
 int ls_std::File::_mkdir(const std::string& _path) {
   int result;
 
@@ -216,11 +278,7 @@ int ls_std::File::_mkdir(const std::string& _path) {
     result = mkdir(_path.c_str());
   #endif
 
-  #ifdef unix
-    result = mkdir(_path.c_str(), 0777);
-  #endif
-
-  #ifdef __APPLE__
+  #if defined(unix) || defined(__APPLE__)
     result = mkdir(_path.c_str(), 0777);
   #endif
 
@@ -229,19 +287,15 @@ int ls_std::File::_mkdir(const std::string& _path) {
 
 std::string ls_std::File::_normalizePath(std::string _path)
 {
-  const char linuxSeparator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
+  const char unixSeparator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
   const char windowsSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
 
-  #ifdef unix
-    std::replace(_path.begin(), _path.end(), windowsSeparator, linuxSeparator);
-  #endif
-
-  #ifdef __APPLE__
-    std::replace(_path.begin(), _path.end(), windowsSeparator, linuxSeparator);
+  #if defined(unix) || defined(__APPLE__)
+    std::replace(_path.begin(), _path.end(), windowsSeparator, unixSeparator);
   #endif
 
   #ifdef _WIN32
-    std::replace(_path.begin(), _path.end(), linuxSeparator, windowsSeparator);
+    std::replace(_path.begin(), _path.end(), unixSeparator, windowsSeparator);
   #endif
 
   return _path;

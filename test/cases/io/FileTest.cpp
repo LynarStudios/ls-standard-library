@@ -9,6 +9,7 @@
 
 #include <gtest/gtest.h>
 #include "../../../source/io/File.hpp"
+#include "../../../source/io/FilePathSeparator.hpp"
 #include "../../TestHelper.hpp"
 
 namespace {
@@ -160,6 +161,28 @@ namespace {
   {
     ls_std::File file {this->fileLocation};
     ASSERT_EQ(1597475488, file.lastModified());
+  }
+
+  TEST_F(FileTest, list)
+  {
+    ls_std::File file {TestHelper::getResourcesFolderLocation() + "list_test"};
+    std::list<std::string> filesInDirectory = file.list();
+    auto filesIterator = filesInDirectory.begin();
+
+    ASSERT_FALSE(filesInDirectory.empty());
+    ASSERT_EQ(6, filesInDirectory.size());
+
+    ASSERT_STREQ(std::string(file.getParent() + ".").c_str(), filesIterator->c_str());
+    filesIterator++;
+    ASSERT_STREQ(std::string(file.getParent() + "..").c_str(), filesIterator->c_str());
+    filesIterator++;
+    ASSERT_STREQ(std::string(file.getParent() + "another_file.txt").c_str(), filesIterator->c_str());
+    filesIterator++;
+    ASSERT_STREQ(std::string(file.getParent() + "bla.txt").c_str(), filesIterator->c_str());
+    filesIterator++;
+    ASSERT_STREQ(std::string(file.getParent() + "hello.txt").c_str(), filesIterator->c_str());
+    filesIterator++;
+    ASSERT_STREQ(std::string(file.getParent() + "list_test_sub").c_str(), filesIterator->c_str());
   }
 
   TEST_F(FileTest, makeDirectory)

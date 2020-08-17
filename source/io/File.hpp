@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-16
+ * Changed:         2020-08-17
  *
  * */
 
@@ -13,6 +13,7 @@
 #include "../base/Class.hpp"
 #include <string>
 #include <vector>
+#include <list>
 #include <ctime>
 
 namespace ls_std {
@@ -39,6 +40,7 @@ namespace ls_std {
       bool isDirectory();
       bool isFile();
       time_t lastModified();
+      std::list<std::string> list();
       void makeDirectory();
       void makeDirectories();
       void remove();
@@ -48,9 +50,17 @@ namespace ls_std {
       std::string absoluteFilePath {};
 
       static bool _exists(const std::string& _path);
+      static std::string _getParent(const std::string& _path);
       static bool _isDirectory(const std::string& _path);
       static bool _isFile(const std::string& _path);
       static time_t _lastModified(const std::string& _path);
+      static std::list<std::string> _list(const std::string& _path);
+      #if defined(unix) || defined(__APPLE__)
+        static std::list<std::string> _listUnix(const std::string& _path);
+      #endif
+      #ifdef _WIN32
+        static std::list<std::string> _listWindows(const std::string& _path);
+      #endif
       static int _mkdir(const std::string& _path);
       static std::string _normalizePath(std::string _path);
       static std::vector<std::string> _splitIntoSubDirectoryNames(const std::string& _path);
