@@ -148,8 +148,13 @@ namespace {
 
   TEST_F(FileTest, isFile)
   {
+    const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+
     ls_std::File file {this->fileLocation};
     ASSERT_TRUE(file.isFile());
+
+    ls_std::File file2 {TestHelper::getResourcesFolderLocation() + "list_test" + separator + "bla.txt"};
+    ASSERT_TRUE(file2.isFile());
   }
 
   TEST_F(FileTest, isFileNegative)
@@ -169,25 +174,26 @@ namespace {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "list_test"};
     std::list<std::string> filesInDirectory = file.list();
     std::string expectedFile {};
+    const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
 
     auto filesIterator = filesInDirectory.begin();
 
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(7, filesInDirectory.size());
 
-    expectedFile = file.getParent() + ".";
+    expectedFile = file.getAbsoluteFilePath() + separator + ".";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + "..";
+    expectedFile = file.getAbsoluteFilePath() + separator + "..";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + "another_file.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + "bla.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + "hello.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + "list_test_sub";
+    expectedFile = file.getAbsoluteFilePath() + separator + "list_test_sub";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + ".hidden_file.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
   }
 
@@ -196,19 +202,18 @@ namespace {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "list_test"};
     std::list<std::string> filesInDirectory = file.listFiles();
     std::string expectedFile {};
-
-    auto filesIterator = filesInDirectory.begin();
+    const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
 
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(4, filesInDirectory.size());
 
-    expectedFile = file.getParent() + "another_file.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + "bla.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + "hello.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getParent() + ".hidden_file.txt";
+    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
   }
 

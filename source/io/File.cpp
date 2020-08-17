@@ -273,9 +273,10 @@ std::list<std::string> ls_std::File::_listUnix(const std::string &_path, bool wi
   struct dirent* directoryEntity;
   std::string parent = ls_std::File::_getParent(_path);
   std::string absolutePath {};
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
 
   while((directoryEntity = readdir(directory)) != nullptr) {
-    absolutePath = parent + directoryEntity->d_name;
+    absolutePath = _path + separator + directoryEntity->d_name;
 
     if(withDirectories) {
       filesInDirectory.emplace_back(absolutePath);
@@ -297,12 +298,13 @@ std::list<std::string> ls_std::File::_listWindows(const std::string &_path, bool
   WIN32_FIND_DATA data {};
   HANDLE hFind;
   std::string parent = ls_std::File::_getParent(_path);
-  std::string pattern {_path + ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator() + "*"};
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  std::string pattern {_path + separator + "*"};
   std::string absolutePath {};
 
   if((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
     do {
-      absolutePath = parent + data.cFileName;
+      absolutePath = _path + separator + data.cFileName;
 
       if(withDirectories) {
         filesInDirectory.emplace_back(absolutePath);
