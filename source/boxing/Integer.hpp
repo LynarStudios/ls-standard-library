@@ -107,7 +107,7 @@ namespace ls_std {
 
       // additional functionality
 
-      int getValue();
+      int getValue() const;
 
     private:
 
