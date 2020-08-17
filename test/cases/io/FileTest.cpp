@@ -247,4 +247,22 @@ namespace {
     directory = ls_std::File(TestHelper::getResourcesFolderLocation() + "testDir");
     directory.remove();
   }
+
+  TEST_F(FileTest, renameTo)
+  {
+    std::string currentName = TestHelper::getResourcesFolderLocation() + "tmp_rename_to.txt";
+    std::string newName = TestHelper::getResourcesFolderLocation() + "tmp_rename_to_better_name.txt";
+
+    ls_std::File file {currentName};
+    file.createNewFile();
+
+    ASSERT_TRUE(file.exists());
+    ASSERT_STREQ(currentName.c_str(), file.getAbsoluteFilePath().c_str());
+
+    file.renameTo(newName);
+    ASSERT_TRUE(file.exists());
+    ASSERT_STREQ(newName.c_str(), file.getAbsoluteFilePath().c_str());
+
+    file.remove();
+  }
 }

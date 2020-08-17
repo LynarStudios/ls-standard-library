@@ -53,6 +53,7 @@ namespace ls_std {
       void makeDirectory();
       void makeDirectories();
       void remove();
+      bool renameTo(const std::string& _newName);
 
     private:
 
@@ -79,6 +80,7 @@ namespace ls_std {
       #endif
       static int _mkdir(const std::string& _path);
       static std::string _normalizePath(std::string _path);
+      static bool _renameTo(const std::string& _oldName, const std::string& _newName);
       static std::vector<std::string> _splitIntoSubDirectoryNames(const std::string& _path);
   };
 }

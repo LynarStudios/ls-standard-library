@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <sstream>
 #include <vector>
+#include <cstdio>
 
 #if defined(unix) || defined(__APPLE__)
 #include <unistd.h>
@@ -175,6 +176,18 @@ void ls_std::File::remove()
     }
   }
 }
+
+bool ls_std::File::renameTo(const std::string &_newName)
+{
+  bool renamed = ls_std::File::_renameTo(this->absoluteFilePath, _newName);
+
+  if(renamed) {
+    this->absoluteFilePath = _newName;
+  }
+
+  return renamed;
+}
+
 #ifdef _WIN32
 void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list)
 {
@@ -356,6 +369,11 @@ std::string ls_std::File::_normalizePath(std::string _path)
   #endif
 
   return _path;
+}
+
+bool ls_std::File::_renameTo(const std::string &_oldName, const std::string &_newName)
+{
+  return std::rename(_oldName.c_str(), _newName.c_str()) == 0;
 }
 
 std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::string& _path) {
