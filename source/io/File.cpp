@@ -53,7 +53,7 @@ void ls_std::File::createNewFile()
     std::ofstream file {this->absoluteFilePath};
     file.close();
   } else {
-    throw ls_std::FileOperationException{this->absoluteFilePath};
+    throw ls_std::FileOperationException{};
   }
 }
 
@@ -142,7 +142,7 @@ std::list<std::string> ls_std::File::listFiles()
 void ls_std::File::makeDirectory()
 {
   if(ls_std::File::_mkdir(this->absoluteFilePath)) {
-    throw ls_std::FileOperationException {this->absoluteFilePath};
+    throw ls_std::FileOperationException {};
   }
 }
 
@@ -166,13 +166,13 @@ void ls_std::File::remove()
 {
   if(ls_std::File::_isFile(this->absoluteFilePath)) {
     if(std::remove(this->absoluteFilePath.c_str())) {
-      throw ls_std::FileOperationException{this->absoluteFilePath};
+      throw ls_std::FileOperationException{};
     }
   }
 
   if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
     if(rmdir(this->absoluteFilePath.c_str())) {
-      throw ls_std::FileOperationException{this->absoluteFilePath};
+      throw ls_std::FileOperationException{};
     }
   }
 }
