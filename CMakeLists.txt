@@ -57,7 +57,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FilePathSeparator.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/utils/STLUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Long.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Long.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Long.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IWriter.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
