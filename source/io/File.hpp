@@ -16,6 +16,10 @@
 #include <list>
 #include <ctime>
 
+#if defined(unix) || defined(__APPLE__)
+#include <dirent.h>
+#endif
+
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -56,6 +60,9 @@ namespace ls_std {
 
       #ifdef _WIN32
         static void _addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list);
+      #endif
+      #if defined(unix) || defined(__APPLE__)
+        static void _addToFileListUnix(const std::string& _path, bool _withDirectories, dirent* directoryEntity, std::list<std::string>& _list);
       #endif
       static bool _exists(const std::string& _path);
       static std::string _getParent(const std::string& _path);

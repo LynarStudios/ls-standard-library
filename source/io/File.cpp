@@ -18,7 +18,6 @@
 
 #if defined(unix) || defined(__APPLE__)
 #include <unistd.h>
-#include <dirent.h>
 #endif
 
 ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
@@ -192,6 +191,22 @@ void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDir
 }
 #endif
 
+#if defined(unix) || defined(__APPLE__)
+void ls_std::File::_addToFileListUnix(const std::string& _path, bool _withDirectories, dirent* directoryEntity, std::list<std::string>& _list)
+{
+  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  std::string absolutePath = _path + separator + directoryEntity->d_name;
+
+  if(_withDirectories) {
+    _list.emplace_back(absolutePath);
+  } else {
+    if(ls_std::File::_isFile(absolutePath)) {
+      _list.emplace_back(absolutePath);
+    }
+  }
+}
+#endif
+
 bool ls_std::File::_exists(const std::string& _path)
 {
   struct stat _stat {};
@@ -282,20 +297,10 @@ std::list<std::string> ls_std::File::_listUnix(const std::string &_path, bool wi
   std::list<std::string> filesInDirectory {};
   DIR* directory = opendir(_path.c_str());
   struct dirent* directoryEntity;
-  std::string parent = ls_std::File::_getParent(_path);
   std::string absolutePath {};
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
 
   while((directoryEntity = readdir(directory)) != nullptr) {
-    absolutePath = _path + separator + directoryEntity->d_name;
-
-    if(withDirectories) {
-      filesInDirectory.emplace_back(absolutePath);
-    } else {
-      if(ls_std::File::_isFile(absolutePath)) {
-        filesInDirectory.emplace_back(absolutePath);
-      }
-    }
+    ls_std::File::_addToFileListUnix(_path, withDirectories, directoryEntity, filesInDirectory);
   }
 
   return filesInDirectory;
