@@ -61,7 +61,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileWriter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/FileNotFoundException.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/FileNotFoundException.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IReader.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
