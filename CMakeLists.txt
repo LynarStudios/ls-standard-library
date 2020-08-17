@@ -58,7 +58,10 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/utils/STLUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Long.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/boxing/Long.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IWriter.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IWriter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileWriter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/FileNotFoundException.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -71,7 +74,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestHelper.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/ClassTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/utils/STLUtilsTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/LongTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/LongTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp)
 
 ##########################################################
 # Build
