@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-15
+ * Changed:         2020-08-17
  *
  * */
 
@@ -17,18 +17,11 @@ namespace ls_std {
   class FileOperationException : public std::exception {
     public:
 
-      explicit FileOperationException(std::string _filePath):
-      filePath(std::move(_filePath))
-      {}
+      explicit FileOperationException() = default;
 
       const char *what() const noexcept override {
-        const std::string errorMessage = "file operation failed!\nfile: " + this->filePath;
-        return std::move(errorMessage.c_str());
+        return "file operation failed!";
       }
-
-    private:
-
-      std::string filePath {};
   };
 }
 
