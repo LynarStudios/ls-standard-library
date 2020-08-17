@@ -41,6 +41,7 @@ namespace ls_std {
       bool isFile();
       time_t lastModified();
       std::list<std::string> list();
+      std::list<std::string> listFiles();
       void makeDirectory();
       void makeDirectories();
       void remove();
@@ -55,11 +56,12 @@ namespace ls_std {
       static bool _isFile(const std::string& _path);
       static time_t _lastModified(const std::string& _path);
       static std::list<std::string> _list(const std::string& _path);
+      static std::list<std::string> _listFiles(const std::string& _path);
       #if defined(unix) || defined(__APPLE__)
-        static std::list<std::string> _listUnix(const std::string& _path);
+        static std::list<std::string> _listUnix(const std::string& _path, bool withDirectories);
       #endif
       #ifdef _WIN32
-        static std::list<std::string> _listWindows(const std::string& _path);
+        static std::list<std::string> _listWindows(const std::string& _path, bool withDirectories);
       #endif
       static int _mkdir(const std::string& _path);
       static std::string _normalizePath(std::string _path);

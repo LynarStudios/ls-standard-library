@@ -132,6 +132,17 @@ std::list<std::string> ls_std::File::list()
   return fileList;
 }
 
+std::list<std::string> ls_std::File::listFiles()
+{
+  std::list<std::string> fileList {};
+
+  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
+    fileList = ls_std::File::_listFiles(this->absoluteFilePath);
+  }
+
+  return fileList;
+}
+
 void ls_std::File::makeDirectory()
 {
   if(ls_std::File::_mkdir(this->absoluteFilePath)) {
@@ -231,25 +242,48 @@ std::list<std::string> ls_std::File::_list(const std::string &_path)
   std::list<std::string> filesInDirectory {};
 
   #if defined(unix) || defined(__APPLE__)
-    filesInDirectory = ls_std::File::_listUnix(_path);
+    filesInDirectory = ls_std::File::_listUnix(_path, true);
   #endif
   #ifdef _WIN32
-    filesInDirectory = ls_std::File::_listWindows(_path);
+    filesInDirectory = ls_std::File::_listWindows(_path, true);
+  #endif
+
+  return filesInDirectory;
+}
+
+std::list<std::string> ls_std::File::_listFiles(const std::string &_path)
+{
+  std::list<std::string> filesInDirectory {};
+
+  #if defined(unix) || defined(__APPLE__)
+    filesInDirectory = ls_std::File::_listUnix(_path, false);
+  #endif
+  #ifdef _WIN32
+    filesInDirectory = ls_std::File::_listWindows(_path, false);
   #endif
 
   return filesInDirectory;
 }
 
 #if defined(unix) || defined(__APPLE__)
-std::list<std::string> ls_std::File::_listUnix(const std::string &_path)
+std::list<std::string> ls_std::File::_listUnix(const std::string &_path, bool withDirectories)
 {
   std::list<std::string> filesInDirectory {};
   DIR* directory = opendir(_path.c_str());
   struct dirent* directoryEntity;
   std::string parent = ls_std::File::_getParent(_path);
+  std::string absolutePath {};
 
   while((directoryEntity = readdir(directory)) != nullptr) {
-    filesInDirectory.emplace_back(parent + directoryEntity->d_name);
+    absolutePath = parent + directoryEntity->d_name;
+
+    if(withDirectories) {
+      filesInDirectory.emplace_back(absolutePath);
+    } else {
+      if(ls_std::File::_isFile(absolutePath)) {
+        filesInDirectory.emplace_back(absolutePath);
+      }
+    }
   }
 
   return filesInDirectory;
@@ -257,17 +291,26 @@ std::list<std::string> ls_std::File::_listUnix(const std::string &_path)
 #endif
 
 #ifdef _WIN32
-std::list<std::string> ls_std::File::_listWindows(const std::string &_path)
+std::list<std::string> ls_std::File::_listWindows(const std::string &_path, bool withDirectories)
 {
   std::list<std::string> filesInDirectory {};
   WIN32_FIND_DATA data {};
   HANDLE hFind;
   std::string parent = ls_std::File::_getParent(_path);
   std::string pattern {_path + ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator() + "*"};
+  std::string absolutePath {};
 
   if((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
     do {
-      filesInDirectory.emplace_back(parent + data.cFileName);
+      absolutePath = parent + data.cFileName;
+
+      if(withDirectories) {
+        filesInDirectory.emplace_back(absolutePath);
+      } else {
+        if(ls_std::File::_isFile(absolutePath)) {
+          filesInDirectory.emplace_back(absolutePath);
+        }
+      }
     }
     while(FindNextFile(hFind, &data) != 0);
 

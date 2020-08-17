@@ -191,6 +191,27 @@ namespace {
     ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
   }
 
+  TEST_F(FileTest, listFiles)
+  {
+    ls_std::File file {TestHelper::getResourcesFolderLocation() + "list_test"};
+    std::list<std::string> filesInDirectory = file.listFiles();
+    std::string expectedFile {};
+
+    auto filesIterator = filesInDirectory.begin();
+
+    ASSERT_FALSE(filesInDirectory.empty());
+    ASSERT_EQ(4, filesInDirectory.size());
+
+    expectedFile = file.getParent() + "another_file.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + "bla.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + "hello.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getParent() + ".hidden_file.txt";
+    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+  }
+
   TEST_F(FileTest, makeDirectory)
   {
     ls_std::File directory {TestHelper::getResourcesFolderLocation() + "testDir"};
