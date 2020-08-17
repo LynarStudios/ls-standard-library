@@ -20,7 +20,7 @@ namespace ls_std {
       IWriter() = default;
       ~IWriter() = default;
 
-      virtual bool write(const std::vector<ls_std::byte>& _data) = 0;
+      virtual bool write(const ls_std::byte* _data) = 0;
   };
 }
 
