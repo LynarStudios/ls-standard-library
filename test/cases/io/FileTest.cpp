@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-16
+ * Changed:         2020-08-17
  *
  * */
 
@@ -52,15 +52,12 @@ namespace {
 
   TEST_F(FileTest, canExecute)
   {
-      #ifdef _WIN32
-        ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app.exe"};
-      #endif
-      #ifdef unix
-        ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app"};
-      #endif
-      #ifdef __APPLE__
-        ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app"};
-      #endif
+    #ifdef _WIN32
+      ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app.exe"};
+    #endif
+    #if defined(unix) || defined(__APPLE__)
+      ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app"};
+    #endif
 
     ASSERT_TRUE(executableFile.canExecute());
   }
@@ -130,10 +127,7 @@ namespace {
     #ifdef _WIN32
       ASSERT_EQ(8, file.getSize());
     #endif
-    #ifdef unix
-      ASSERT_EQ(7, file.getSize());
-    #endif
-    #ifdef __APPLE__
+    #if defined(unix) || defined(__APPLE__)
       ASSERT_EQ(7, file.getSize());
     #endif
   }
