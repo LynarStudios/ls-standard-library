@@ -287,8 +287,8 @@ int ls_std::File::_mkdir(const std::string& _path) {
 
 std::string ls_std::File::_normalizePath(std::string _path)
 {
-  const char unixSeparator = ls_std::FilePathSeparator::getLinuxFilePathSeparator();
-  const char windowsSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
+  const char unixSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
+  const char windowsSeparator = ls_std::FilePathSeparator::getWindowsFilePathSeparator();
 
   #if defined(unix) || defined(__APPLE__)
     std::replace(_path.begin(), _path.end(), windowsSeparator, unixSeparator);
