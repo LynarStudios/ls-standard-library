@@ -357,6 +357,7 @@ int ls_std::File::_mkdir(const std::string& _path) {
   return result;
 }
 
+// TODO: also consider "/////" formatted paths, which would have to be converted to "/"
 std::string ls_std::File::_normalizePath(std::string _path)
 {
   const char unixSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
