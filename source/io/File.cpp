@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-17
+ * Changed:         2020-08-18
  *
  * */
 
@@ -25,7 +25,7 @@ ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
 absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
 {}
 
-bool ls_std::File::operator==(File &_file)
+bool ls_std::File::operator==(File &_file) // TODO: also compare executable, readable, writable flag
 {
   return this->absoluteFilePath == _file.getAbsoluteFilePath();
 }
