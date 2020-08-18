@@ -65,7 +65,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/NewLine.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/NewLine.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/utils/RegexUtils.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -80,7 +81,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/utils/STLUtilsTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/LongTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileReaderTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileReaderTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/utils/RegexUtilsTest.cpp)
 
 ##########################################################
 # Build
