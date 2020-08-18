@@ -62,7 +62,10 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/exception/FileNotFoundException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IReader.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IReader.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileReader.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/NewLine.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -76,7 +79,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/ClassTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/utils/STLUtilsTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/LongTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileReaderTest.cpp)
 
 ##########################################################
 # Build
