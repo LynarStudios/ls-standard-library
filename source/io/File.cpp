@@ -358,11 +358,46 @@ int ls_std::File::_mkdir(const std::string& _path) {
   return result;
 }
 
-// TODO: also consider "/////" formatted paths, which would have to be converted to "/"
 std::string ls_std::File::_normalizePath(std::string _path)
 {
-  const char unixSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
-  const char windowsSeparator = ls_std::FilePathSeparator::getWindowsFilePathSeparator();
+  _path = ls_std::File::_replaceWrongSeparator(_path);
+  _path = ls_std::File::_reduceSeparators(_path);
+
+  return _path;
+}
+
+std::string ls_std::File::_reduceSeparators(const std::string& _path)
+{
+  static const char separator = {ls_std::FilePathSeparator::get()};
+  std::string normalizedPath {};
+  int index {};
+
+  while(index  < _path.size()) {
+    if(_path[index] == separator) {
+      normalizedPath += _path[index];
+
+      do {
+        index++;
+      }
+      while(_path[index] == separator);
+    } else {
+      normalizedPath += _path[index];
+      index++;
+    }
+  }
+
+  return normalizedPath;
+}
+
+bool ls_std::File::_renameTo(const std::string &_oldName, const std::string &_newName)
+{
+  return std::rename(_oldName.c_str(), _newName.c_str()) == 0;
+}
+
+std::string ls_std::File::_replaceWrongSeparator(std::string _path)
+{
+  static const char unixSeparator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
+  static const char windowsSeparator = ls_std::FilePathSeparator::getWindowsFilePathSeparator();
 
   #if defined(unix) || defined(__APPLE__)
     std::replace(_path.begin(), _path.end(), windowsSeparator, unixSeparator);
@@ -373,11 +408,6 @@ std::string ls_std::File::_normalizePath(std::string _path)
   #endif
 
   return _path;
-}
-
-bool ls_std::File::_renameTo(const std::string &_oldName, const std::string &_newName)
-{
-  return std::rename(_oldName.c_str(), _newName.c_str()) == 0;
 }
 
 std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::string& _path) {

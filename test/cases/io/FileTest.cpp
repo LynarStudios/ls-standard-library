@@ -100,7 +100,13 @@ namespace {
   TEST_F(FileTest, getAbsoluteFilePath)
   {
     ls_std::File file {this->fileLocation};
-    ASSERT_STREQ(fileLocation.c_str(), file.getAbsoluteFilePath().c_str());
+    ASSERT_STREQ(this->fileLocation.c_str(), file.getAbsoluteFilePath().c_str());
+    std::string s = {ls_std::FilePathSeparator::get()};
+
+    std::string wrongFilePath = "home" + s + s + s + "user" + s + "bla" + s + s + "sub_folder";
+    std::string expectedFilePath = "home" + s + "user" + s + "bla" + s + "sub_folder";
+    ls_std::File anotherFile {wrongFilePath};
+    ASSERT_STREQ(expectedFilePath.c_str(), anotherFile.getAbsoluteFilePath().c_str());
   }
 
   TEST_F(FileTest, getName)

@@ -15,6 +15,7 @@
 #include <vector>
 #include <list>
 #include <ctime>
+#include <regex>
 
 #if defined(unix) || defined(__APPLE__)
 #include <dirent.h>
@@ -80,7 +81,9 @@ namespace ls_std {
       #endif
       static int _mkdir(const std::string& _path);
       static std::string _normalizePath(std::string _path);
+      static std::string _reduceSeparators(const std::string& _path);
       static bool _renameTo(const std::string& _oldName, const std::string& _newName);
+      static std::string _replaceWrongSeparator(std::string _path);
       static std::vector<std::string> _splitIntoSubDirectoryNames(const std::string& _path);
   };
 }
