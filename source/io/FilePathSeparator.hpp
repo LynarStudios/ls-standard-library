@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-17
+ * Changed:         2020-08-18
  *
  * */
 
@@ -19,7 +19,7 @@ namespace ls_std {
       FilePathSeparator() = default;
       ~FilePathSeparator() = default;
 
-      static char getOperatingSystemSpecificSeparator() {
+      static char get() {
         char separator;
 
         #ifdef _WIN32

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-17
+ * Changed:         2020-08-18
  *
  * */
 
@@ -148,7 +148,7 @@ namespace {
 
   TEST_F(FileTest, isFile)
   {
-    const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+    const char separator = ls_std::FilePathSeparator::get();
 
     ls_std::File file {this->fileLocation};
     ASSERT_TRUE(file.isFile());
@@ -174,7 +174,7 @@ namespace {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "list_test"};
     std::list<std::string> filesInDirectory = file.list();
     std::string expectedFile {};
-    const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+    const char separator = ls_std::FilePathSeparator::get();
 
     auto filesIterator = filesInDirectory.begin();
 
@@ -202,7 +202,7 @@ namespace {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "list_test"};
     std::list<std::string> filesInDirectory = file.listFiles();
     std::string expectedFile {};
-    const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+    const char separator = ls_std::FilePathSeparator::get();
 
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(4, filesInDirectory.size());

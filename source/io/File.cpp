@@ -150,7 +150,7 @@ void ls_std::File::makeDirectory()
 
 void ls_std::File::makeDirectories() {
   std::vector<std::string> subDirectories = ls_std::File::_splitIntoSubDirectoryNames(this->absoluteFilePath);
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  const char separator = ls_std::FilePathSeparator::get();
   std::string currentHierarchy {};
 
   for(const auto& subDirectory : subDirectories) {
@@ -193,7 +193,7 @@ bool ls_std::File::renameTo(const std::string &_newName)
 #ifdef _WIN32
 void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list)
 {
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  const char separator = ls_std::FilePathSeparator::get();
   std::string absolutePath = _path + separator + _data.cFileName;
 
   if(_withDirectories) {
@@ -209,7 +209,7 @@ void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDir
 #if defined(unix) || defined(__APPLE__)
 void ls_std::File::_addToFileListUnix(const std::string& _path, bool _withDirectories, dirent* directoryEntity, std::list<std::string>& _list)
 {
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  const char separator = ls_std::FilePathSeparator::get();
   std::string absolutePath = _path + separator + directoryEntity->d_name;
 
   if(_withDirectories) {
@@ -232,7 +232,7 @@ std::string ls_std::File::_getParent(const std::string &_path)
 {
   std::string parent {};
   std::vector<std::string> subDirectoryNames = ls_std::File::_splitIntoSubDirectoryNames(_path);
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  const char separator = ls_std::FilePathSeparator::get();
   subDirectoryNames.pop_back();
 
   for(auto const& subDirectoryName : subDirectoryNames) {
@@ -328,7 +328,7 @@ std::list<std::string> ls_std::File::_listWindows(const std::string &_path, bool
   std::list<std::string> filesInDirectory {};
   WIN32_FIND_DATA data {};
   HANDLE hFind;
-  std::string pattern {_path + ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator() + "*"};
+  std::string pattern {_path + ls_std::FilePathSeparator::get() + "*"};
 
   if((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
     do {
@@ -383,7 +383,7 @@ std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::st
   std::vector<std::string> subDirectoryNames {};
   std::stringstream _stream {_path};
   std::string subDirectoryName {};
-  const char separator = ls_std::FilePathSeparator::getOperatingSystemSpecificSeparator();
+  const char separator = ls_std::FilePathSeparator::get();
 
   while(std::getline(_stream, subDirectoryName, separator)) {
     subDirectoryNames.push_back(subDirectoryName);
