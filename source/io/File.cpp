@@ -26,15 +26,16 @@ absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
 {}
 
 // TODO: also compare executable, readable, writable flag
-// TODO: normalize foreign file path for comparison
 bool ls_std::File::operator==(File &_file)
 {
-  return this->absoluteFilePath == _file.getAbsoluteFilePath();
+  std::string normalizedForeignFilePath = ls_std::File::_normalizePath(_file.getAbsoluteFilePath());
+  return this->absoluteFilePath == normalizedForeignFilePath;
 }
 
 bool ls_std::File::operator!=(File &_file)
 {
-  return this->absoluteFilePath != _file.getAbsoluteFilePath();
+  std::string normalizedForeignFilePath = ls_std::File::_normalizePath(_file.getAbsoluteFilePath());
+  return this->absoluteFilePath != normalizedForeignFilePath;
 }
 
 bool ls_std::File::canExecute()
