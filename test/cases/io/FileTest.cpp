@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-18
+ * Changed:         2020-08-19
  *
  * */
 
@@ -288,5 +288,14 @@ namespace {
     ASSERT_STREQ(newName.c_str(), file.getAbsoluteFilePath().c_str());
 
     file.remove();
+  }
+
+  TEST_F(FileTest, reset)
+  {
+    ls_std::File file {this->fileLocation};
+    ASSERT_TRUE(file.exists());
+
+    file.reset(TestHelper::getResourcesFolderLocation() + "list_test/hello.txt");
+    ASSERT_TRUE(file.exists());
   }
 }

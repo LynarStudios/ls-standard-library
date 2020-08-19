@@ -200,6 +200,11 @@ bool ls_std::File::renameTo(const std::string &_newName)
   return renamed;
 }
 
+void ls_std::File::reset(const std::string &_newPath)
+{
+  this->absoluteFilePath = ls_std::File::_normalizePath(_newPath);
+}
+
 #ifdef _WIN32
 void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list)
 {

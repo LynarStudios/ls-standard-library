@@ -57,6 +57,7 @@ namespace ls_std {
       void makeDirectories();
       void remove();
       bool renameTo(const std::string& _newName);
+      void reset(const std::string& _newPath);
 
     private:
 
