@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-18
+ * Changed:         2020-08-19
  *
  * */
 
@@ -40,14 +40,7 @@ bool ls_std::File::operator!=(File &_file)
 
 bool ls_std::File::canExecute()
 {
-  bool executable {};
-  struct stat _stat {};
-
-  if(stat(this->absoluteFilePath.c_str(), &_stat) == 0) {
-    executable = (_stat.st_mode & (unsigned short) S_IEXEC) != 0;
-  }
-
-  return executable;
+  return ls_std::File::_isExecutable(this->absoluteFilePath);
 }
 
 void ls_std::File::createNewFile()
@@ -253,6 +246,21 @@ bool ls_std::File::_isDirectory(const std::string& _path)
   }
 
   return match;
+}
+
+bool ls_std::File::_isExecutable(const std::string &_path)
+{
+  bool executable {};
+
+  if(ls_std::File::_exists(_path)) {
+    struct stat _stat {};
+
+    if(stat(_path.c_str(), &_stat) == 0) {
+      executable = (_stat.st_mode & (unsigned short) S_IEXEC) != 0;
+    }
+  }
+
+  return executable;
 }
 
 bool ls_std::File::_isFile(const std::string& _path)

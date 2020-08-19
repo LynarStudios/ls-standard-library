@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-17
+ * Changed:         2020-08-19
  *
  * */
 
@@ -69,6 +69,7 @@ namespace ls_std {
       static bool _exists(const std::string& _path);
       static std::string _getParent(const std::string& _path);
       static bool _isDirectory(const std::string& _path);
+      static bool _isExecutable(const std::string& _path);
       static bool _isFile(const std::string& _path);
       static time_t _lastModified(const std::string& _path);
       static std::list<std::string> _list(const std::string& _path);
