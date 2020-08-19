@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-08-19
  *
  * */
 
@@ -21,11 +21,14 @@ namespace ls_std {
       explicit FileWriter(File& _file);
       ~FileWriter() = default;
 
+      void reset(File& _file);
       bool write(const ls_std::byte* _data) override;
 
     private:
 
       File file;
+
+      static void _init(File& _file);
   };
 }
 

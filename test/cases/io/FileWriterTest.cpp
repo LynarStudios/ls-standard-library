@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-08-19
  *
  * */
 
@@ -22,6 +22,31 @@ namespace {
       void SetUp() override {}
       void TearDown() override {}
   };
+
+  TEST_F(FileWriterTest, reset)
+  {
+    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
+    ls_std::File file {path};
+    file.createNewFile();
+    ls_std::FileWriter writer {file};
+    ASSERT_TRUE(writer.write("Testing something!\n"));
+
+    // reset
+
+    path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test2.txt";
+    ls_std::File anotherFile {path};
+    anotherFile.createNewFile();
+
+    writer.reset(anotherFile);
+    ASSERT_TRUE(writer.write("Testing something else!\n"));
+
+    // remove
+
+    file.remove();
+    ASSERT_FALSE(file.exists());
+    anotherFile.remove();
+    ASSERT_FALSE(anotherFile.exists());
+  }
 
   TEST_F(FileWriterTest, write)
   {
