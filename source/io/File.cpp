@@ -43,6 +43,20 @@ bool ls_std::File::canExecute()
   return ls_std::File::_isExecutable(this->absoluteFilePath);
 }
 
+bool ls_std::File::canRead()
+{
+  bool readable;
+
+  #if defined(unix) || defined(__APPLE__)
+    readable = ls_std::File::_isReadableUnix(this->absoluteFilePath);
+  #endif
+  #ifdef _WIN32
+    readable = ls_std::File::_isReadableWindows(this->absoluteFilePath);
+  #endif
+
+  return readable;
+}
+
 void ls_std::File::createNewFile()
 {
   if(!ls_std::File::_exists(this->absoluteFilePath)) {
@@ -274,6 +288,23 @@ bool ls_std::File::_isFile(const std::string& _path)
 
   return match;
 }
+
+#ifdef _WIN32
+bool ls_std::File::_isReadableWindows(const std::string &_path)
+{
+  bool readable;
+  WIN32_FIND_DATA data {};
+  HANDLE handleFind = FindFirstFile(_path.c_str(), &data);
+
+  if(handleFind != INVALID_HANDLE_VALUE) {
+    readable = GetFileAttributes(data.cFileName) & (unsigned) FILE_ATTRIBUTE_READONLY;
+  } else {
+    throw ls_std::FileOperationException {};
+  }
+
+  return readable;
+}
+#endif
 
 time_t ls_std::File::_lastModified(const std::string &_path)
 {

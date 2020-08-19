@@ -70,6 +70,12 @@ namespace {
     ASSERT_FALSE(file.canExecute());
   }
 
+  TEST_F(FileTest, canRead)
+  {
+    ls_std::File readableFile {this->fileLocation};
+    ASSERT_TRUE(readableFile.canRead());
+  }
+
   TEST_F(FileTest, createNewFileAndRemove)
   {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "tmp.txt"};

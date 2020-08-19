@@ -40,6 +40,7 @@ namespace ls_std {
       // additional functionality
 
       bool canExecute();
+      bool canRead();
       void createNewFile();
       bool exists();
       std::string getAbsoluteFilePath();
@@ -60,17 +61,23 @@ namespace ls_std {
 
       std::string absoluteFilePath {};
 
-      #ifdef _WIN32
-        static void _addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list);
-      #endif
       #if defined(unix) || defined(__APPLE__)
         static void _addToFileListUnix(const std::string& _path, bool _withDirectories, dirent* directoryEntity, std::list<std::string>& _list);
+      #endif
+      #ifdef _WIN32
+        static void _addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list);
       #endif
       static bool _exists(const std::string& _path);
       static std::string _getParent(const std::string& _path);
       static bool _isDirectory(const std::string& _path);
       static bool _isExecutable(const std::string& _path);
       static bool _isFile(const std::string& _path);
+      #if defined(unix) || defined(__APPLE__)
+        static bool _isReadableUnix(const std::string& _path);
+      #endif
+      #ifdef _WIN32
+        static bool _isReadableWindows(const std::string& _path);
+      #endif
       static time_t _lastModified(const std::string& _path);
       static std::list<std::string> _list(const std::string& _path);
       static std::list<std::string> _listFiles(const std::string& _path);
