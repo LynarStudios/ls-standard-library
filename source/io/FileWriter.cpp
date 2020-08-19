@@ -10,6 +10,7 @@
 #include <fstream>
 #include "FileWriter.hpp"
 #include "../exception/FileNotFoundException.hpp"
+#include "../exception/FileOperationException.hpp"
 
 ls_std::FileWriter::FileWriter(ls_std::File &_file) : Class("FileWriter"),
 file(_file)
@@ -31,6 +32,8 @@ bool ls_std::FileWriter::write(const ls_std::byte* _data)
 
   if(outputStream << _data) {
     succeeded = true;
+  } else {
+    throw ls_std::FileOperationException {};
   }
 
   outputStream.close();
