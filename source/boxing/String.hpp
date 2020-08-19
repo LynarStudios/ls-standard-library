@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-18
+ * Changed:         2020-08-19
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls_std {
 
       // conversion operator
 
-      operator const char*() const; // do not make explicit! FIXME: is that save?
+      operator const char*() const; // do not make explicit!
       operator std::string() const; // do not make explicit!
 
       // assignment operators
