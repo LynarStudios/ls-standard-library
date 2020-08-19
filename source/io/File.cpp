@@ -57,6 +57,11 @@ bool ls_std::File::canRead()
   return readable;
 }
 
+bool ls_std::File::canWrite()
+{
+  return ls_std::File::_isWritable(this->absoluteFilePath);
+}
+
 void ls_std::File::createNewFile()
 {
   if(!ls_std::File::_exists(this->absoluteFilePath)) {
@@ -322,6 +327,21 @@ bool ls_std::File::_isReadableWindows(const std::string &_path)
   return readable;
 }
 #endif
+
+bool ls_std::File::_isWritable(const std::string &_path)
+{
+  bool writable {};
+
+  if(ls_std::File::_exists(_path)) {
+    struct stat _stat {};
+
+    if(stat(_path.c_str(), &_stat) == 0) {
+      writable = (_stat.st_mode & (unsigned) S_IWRITE) != 0;
+    }
+  }
+
+  return writable;
+}
 
 time_t ls_std::File::_lastModified(const std::string &_path)
 {

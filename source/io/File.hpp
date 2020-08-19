@@ -41,6 +41,7 @@ namespace ls_std {
 
       bool canExecute();
       bool canRead();
+      bool canWrite();
       void createNewFile();
       bool exists();
       std::string getAbsoluteFilePath();
@@ -78,6 +79,7 @@ namespace ls_std {
       #ifdef _WIN32
         static bool _isReadableWindows(const std::string& _path);
       #endif
+      static bool _isWritable(const std::string& _path);
       static time_t _lastModified(const std::string& _path);
       static std::list<std::string> _list(const std::string& _path);
       static std::list<std::string> _listFiles(const std::string& _path);

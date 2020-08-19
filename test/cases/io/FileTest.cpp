@@ -76,6 +76,18 @@ namespace {
     ASSERT_TRUE(readableFile.canRead());
   }
 
+  TEST_F(FileTest, canWrite)
+  {
+    ls_std::File readableFile {this->fileLocation};
+    ASSERT_TRUE(readableFile.canWrite());
+  }
+
+  TEST_F(FileTest, canWriteNegative)
+  {
+    ls_std::File noWritableFile {TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    ASSERT_FALSE(noWritableFile.canWrite());
+  }
+
   TEST_F(FileTest, createNewFileAndRemove)
   {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "tmp.txt"};
