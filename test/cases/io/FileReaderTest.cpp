@@ -27,29 +27,32 @@ namespace {
   {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "simple.txt"};
     ls_std::FileReader reader {file};
-    std::string expected = "Hello!" + ls_std::NewLine::get();
+    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
 
     ls_std::byte* data = reader.read();
     std::string content {data, (size_t) file.getSize()};
-    ASSERT_STREQ(expected.c_str(), content.c_str());
+    ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
   TEST_F(FileReaderTest, reset)
   {
     ls_std::File file {TestHelper::getResourcesFolderLocation() + "simple.txt"};
     ls_std::FileReader reader {file};
-    std::string expected = "Hello!" + ls_std::NewLine::get();
+    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
 
     ls_std::byte* data = reader.read();
     std::string content {data, (size_t) file.getSize()};
-    ASSERT_STREQ(expected.c_str(), content.c_str());
+    ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
     ls_std::File anotherFile {TestHelper::getResourcesFolderLocation() + "list_test/bla.txt"};
     reader.reset(anotherFile);
-    expected = "nothing to say!" + ls_std::NewLine::get();
+    expectedUnix = "nothing to say!" + ls_std::NewLine::getUnixNewLine();
+    expectedWindows = "nothing to say!" + ls_std::NewLine::getWindowsNewLine();
 
     data = reader.read();
     content = {data, (size_t) anotherFile.getSize()};
-    ASSERT_STREQ(expected.c_str(), content.c_str());
+    ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 }

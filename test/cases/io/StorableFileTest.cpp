@@ -35,27 +35,30 @@ namespace {
   {
     ls_std::StorableFile storableFile {this->fileLocation};
     storableFile.load();
-    std::string expected = "Hello!" + ls_std::NewLine::get();
+    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
 
-    ASSERT_STREQ(expected.c_str(), storableFile.getContent().c_str());
+    ASSERT_TRUE(storableFile.getContent() == expectedUnix || storableFile.getContent() == expectedWindows);
   }
 
   TEST_F(StorableFileTest, reset)
   {
     ls_std::StorableFile storableFile {this->fileLocation};
     storableFile.load();
-    std::string expected = "Hello!" + ls_std::NewLine::get();
+    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
 
-    ASSERT_STREQ(expected.c_str(), storableFile.getContent().c_str());
+    ASSERT_TRUE(storableFile.getContent() == expectedUnix || storableFile.getContent() == expectedWindows);
 
     // reset
 
     std::string anotherFileLocation = TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
     storableFile.reset(anotherFileLocation);
     storableFile.load();
-    expected = "nothing to say!" + ls_std::NewLine::get();
+    expectedUnix = "nothing to say!" + ls_std::NewLine::getUnixNewLine();
+    expectedWindows = "nothing to say!" + ls_std::NewLine::getWindowsNewLine();
 
-    ASSERT_STREQ(expected.c_str(), storableFile.getContent().c_str());
+    ASSERT_TRUE(storableFile.getContent() == expectedUnix || storableFile.getContent() == expectedWindows);
   }
 
   TEST_F(StorableFileTest, save)
@@ -65,14 +68,15 @@ namespace {
     file.createNewFile();
 
     ls_std::StorableFile storableFile {path};
-    std::string text = "Testing save method!" + ls_std::NewLine::get();
+    std::string textUnix = "Testing save method!" + ls_std::NewLine::getUnixNewLine();
+    std::string textWindows = "Testing save method!" + ls_std::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(storableFile.getContent().empty());
-    storableFile.setContent(text);
-    ASSERT_STREQ(text.c_str(), storableFile.getContent().c_str());
+    storableFile.setContent(textUnix);
+    ASSERT_TRUE(storableFile.getContent() == textUnix || storableFile.getContent() == textWindows);
     storableFile.save();
     storableFile.load();
-    ASSERT_STREQ(text.c_str(), storableFile.getContent().c_str());
+    ASSERT_TRUE(storableFile.getContent() == textUnix || storableFile.getContent() == textWindows);
 
     file.remove();
   }

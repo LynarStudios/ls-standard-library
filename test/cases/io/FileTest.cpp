@@ -84,8 +84,14 @@ namespace {
 
   TEST_F(FileTest, canWriteNegative)
   {
-    ls_std::File noWritableFile {TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
-    ASSERT_FALSE(noWritableFile.canWrite());
+    #if defined(unix) || defined(__APPLE__)
+      ls_std::File noWritableFile {TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+      ASSERT_FALSE(noWritableFile.canWrite());
+    #endif
+    #ifdef _WIN32
+      ls_std::File noWritableFile {TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+      ASSERT_FALSE(noWritableFile.canWrite());
+    #endif
   }
 
   TEST_F(FileTest, createNewFileAndRemove)
@@ -149,13 +155,9 @@ namespace {
   TEST_F(FileTest, getSize)
   {
     ls_std::File file {this->fileLocation};
+    size_t size = file.getSize();
 
-    #ifdef _WIN32
-      ASSERT_EQ(8, file.getSize());
-    #endif
-    #if defined(unix) || defined(__APPLE__)
-      ASSERT_EQ(7, file.getSize());
-    #endif
+    ASSERT_TRUE(size == 7 || size == 8); // different OS specific new lines
   }
 
   TEST_F(FileTest, isDirectory)
