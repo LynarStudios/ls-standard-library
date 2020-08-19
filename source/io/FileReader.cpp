@@ -15,9 +15,7 @@
 ls_std::FileReader::FileReader(File &_file) : Class("FileReader"),
 file(_file)
 {
-  if(!_file.exists()) {
-    throw ls_std::FileNotFoundException {};
-  }
+  ls_std::FileReader::_init(_file);
 }
 
 ls_std::byte * ls_std::FileReader::read()
@@ -34,4 +32,17 @@ ls_std::byte * ls_std::FileReader::read()
 
   inputStream.close();
   return data;
+}
+
+void ls_std::FileReader::reset(File &_file)
+{
+  ls_std::FileReader::_init(_file);
+  this->file = _file;
+}
+
+void ls_std::FileReader::_init(File &_file)
+{
+  if(!_file.exists()) {
+    throw ls_std::FileNotFoundException {};
+  }
 }
