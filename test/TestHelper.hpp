@@ -44,7 +44,7 @@ class TestHelper {
         location = R"(/home/patrick/CLionProjects/lynar-studios-standard-library/test/)";
       #endif
       #ifdef __APPLE__
-        location = R"(/Users/lynarstudios/CLionProjects/lynar-studios-standard-library/test/)";
+        location = R"(/Users/patrickmattulat/CLionProjects/lynar-studios-standard-library/test/)";
       #endif
 
       return location;
