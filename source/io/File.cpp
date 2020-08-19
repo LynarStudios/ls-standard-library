@@ -239,12 +239,15 @@ void ls_std::File::_addToFileListUnix(const std::string& _path, bool _withDirect
 
 bool ls_std::File::_equals(File &_file, File &_foreignFile)
 {
-  bool pathEquals = _file.getAbsoluteFilePath() == _foreignFile.getAbsoluteFilePath();
-  bool readableEquals = _file.canRead() == _foreignFile.canRead();
-  bool writableEquals = _file.canWrite() == _foreignFile.canWrite();
-  bool executableEquals = _file.canExecute() == _foreignFile.canExecute();
+  bool isEqual = _file.getAbsoluteFilePath() == _foreignFile.getAbsoluteFilePath();
 
-  return pathEquals && readableEquals && writableEquals && executableEquals;
+  if(_file.exists() && _foreignFile.exists()) {
+    isEqual = isEqual && _file.canRead() == _foreignFile.canRead();
+    isEqual = isEqual && _file.canWrite() == _foreignFile.canWrite();
+    isEqual = isEqual && _file.canExecute() == _foreignFile.canExecute();
+  }
+
+  return isEqual;
 }
 
 bool ls_std::File::_exists(const std::string& _path)
