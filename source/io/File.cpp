@@ -25,17 +25,14 @@ ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
 absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
 {}
 
-// TODO: also compare executable, readable, writable flag
 bool ls_std::File::operator==(File &_file)
 {
-  std::string normalizedForeignFilePath = ls_std::File::_normalizePath(_file.getAbsoluteFilePath());
-  return this->absoluteFilePath == normalizedForeignFilePath;
+  return ls_std::File::_equals(*this, _file);
 }
 
 bool ls_std::File::operator!=(File &_file)
 {
-  std::string normalizedForeignFilePath = ls_std::File::_normalizePath(_file.getAbsoluteFilePath());
-  return this->absoluteFilePath != normalizedForeignFilePath;
+  return !ls_std::File::_equals(*this, _file);
 }
 
 bool ls_std::File::canExecute()
@@ -234,6 +231,16 @@ void ls_std::File::_addToFileListUnix(const std::string& _path, bool _withDirect
   }
 }
 #endif
+
+bool ls_std::File::_equals(File &_file, File &_foreignFile)
+{
+  bool pathEquals = _file.getAbsoluteFilePath() == _foreignFile.getAbsoluteFilePath();
+  bool readableEquals = _file.canRead() == _foreignFile.canRead();
+  bool writableEquals = _file.canWrite() == _foreignFile.canWrite();
+  bool executableEquals = _file.canExecute() == _foreignFile.canExecute();
+
+  return pathEquals && readableEquals && writableEquals && executableEquals;
+}
 
 bool ls_std::File::_exists(const std::string& _path)
 {
