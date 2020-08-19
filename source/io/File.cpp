@@ -283,11 +283,28 @@ bool ls_std::File::_isFile(const std::string& _path)
   struct stat _stat {};
 
   if(stat(_path.c_str(), &_stat) == 0) {
-    match = _stat.st_mode & (unsigned short) S_IFREG;
+    match = _stat.st_mode & (unsigned) S_IFREG;
   }
 
   return match;
 }
+
+#if defined(unix) || defined(__APPLE__)
+bool ls_std::File::_isReadableUnix(const std::string &_path)
+{
+  bool readable {};
+
+  if(ls_std::File::_exists(_path)) {
+    struct stat _stat {};
+
+    if(stat(_path.c_str(), &_stat) == 0) {
+      readable = (_stat.st_mode & (unsigned) S_IREAD) != 0;
+    }
+  }
+
+  return readable;
+}
+#endif
 
 #ifdef _WIN32
 bool ls_std::File::_isReadableWindows(const std::string &_path)
