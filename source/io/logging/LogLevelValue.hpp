@@ -7,13 +7,13 @@
  *
  * */
 
-#ifndef LOG_LEVEL_HPP
-#define LOG_LEVEL_HPP
+#ifndef LOG_LEVEL_VALUE_HPP
+#define LOG_LEVEL_VALUE_HPP
 
 namespace ls_std {
-  enum LogLevel {
+  enum LogLevelValue {
     FATAL = 0,
-    ERROR,
+    ERR,
     WARN,
     INFO,
     DEBUG,

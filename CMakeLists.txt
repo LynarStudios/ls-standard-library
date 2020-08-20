@@ -70,9 +70,13 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IStorable.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/StorableFile.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/StorableFile.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/LogLevel.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevel.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileOutputStream.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileOutputStream.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/FileOutputStream.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/Logger.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/Logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevelValue.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -90,7 +94,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileReaderTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/utils/RegexUtilsTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileOutputStreamTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileOutputStreamTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp)
 
 ##########################################################
 # Build
