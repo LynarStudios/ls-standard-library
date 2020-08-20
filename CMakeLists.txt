@@ -69,7 +69,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/utils/RegexUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/IStorable.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/StorableFile.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/StorableFile.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/StorableFile.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/LogLevel.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
