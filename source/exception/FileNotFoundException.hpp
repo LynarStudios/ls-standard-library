@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-08-20
  *
  * */
 
@@ -14,6 +14,7 @@
 #include <string>
 #include <cstring>
 
+// TODO: pass parameters, use class, show class name
 namespace ls_std {
   class FileNotFoundException : public std::exception {
     public:
