@@ -10,6 +10,7 @@
 #include "Logger.hpp"
 #include "../../time/Date.hpp"
 #include "../NewLine.hpp"
+#include "../../boxing/String.hpp"
 
 ls_std::Logger::Logger(const std::string &_path) : Class("Logger"),
 file(ls_std::File{_path}),
@@ -92,7 +93,7 @@ void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel& _lo
 
   std::string message = "[" +
       date.toString() + "] " +
-      _logLevel.toString() + ":\t" +
+      ls_std::String {_logLevel.toString() + ":"}.padRight(10, ' ') +
       std::string(_data) +
       ls_std::NewLine::getUnixNewLine();
 
