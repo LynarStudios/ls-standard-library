@@ -86,7 +86,7 @@ void ls_std::Logger::_init()
 void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel& _logLevel)
 {
   if(this->outputStream == nullptr) {
-    this->outputStream = std::make_shared<ls_std::FileOutputStream>(this->file);
+    this->outputStream = std::make_shared<ls_std::FileOutputStream>(this->file, true);
   }
 
   ls_std::Date date {};
