@@ -19,8 +19,8 @@ namespace ls_std {
       ISerializable() = default;
       ~ISerializable() = default;
 
-      virtual const ls_std::byte* Marshal() = 0;
-      virtual void Unmarshal(const ls_std::byte* _data) = 0;
+      virtual const ls_std::byte* marshal() = 0;
+      virtual void unmarshal(const ls_std::byte* _data) = 0;
   };
 }
 
