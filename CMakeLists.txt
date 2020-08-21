@@ -18,7 +18,9 @@ set(CMAKE_CXX_STANDARD 11)
 ######################################################
 
 message("${PROJECT_NAME}: Adding include directories...")
+
 include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/source/lib/nlohmann_json/include/nlohmann)
 
 ######################################################
 # Add Other CMake Dependencies
@@ -95,7 +97,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/utils/RegexUtilsTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileOutputStreamTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/json/JSONTest.cpp)
 
 ##########################################################
 # Build
