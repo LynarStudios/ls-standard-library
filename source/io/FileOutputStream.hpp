@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-20
+ * Changed:         2020-08-21
  *
  * */
 
@@ -20,6 +20,7 @@ namespace ls_std {
     public:
 
       explicit FileOutputStream(File& _file);
+      explicit FileOutputStream(File& _file, bool _append);
       ~FileOutputStream();
 
       void close();
@@ -27,10 +28,12 @@ namespace ls_std {
 
     private:
 
+      bool append {};
       File file;
       std::ofstream outputStream {};
 
       void _close();
+      void _init();
   };
 }
 
