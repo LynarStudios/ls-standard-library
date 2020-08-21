@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-08-21
  *
  * */
 
@@ -31,6 +31,15 @@ namespace {
 
     date = date + 1;
     ASSERT_EQ(timestamp + 86400, date.getTime());
+  }
+
+  TEST_F(DateTest, operatorSub)
+  {
+    ls_std::Date date {};
+    time_t timestamp = date.getTime();
+
+    date = date - 1;
+    ASSERT_EQ(timestamp - 86400, date.getTime());
   }
 
   // additional functionality

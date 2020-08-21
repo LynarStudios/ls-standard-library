@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-16
+ * Changed:         2020-08-21
  *
  * */
 
@@ -23,6 +23,7 @@ namespace ls_std {
       // arithmetic operators
 
       Date& operator+(int _value);
+      Date& operator-(int _value);
 
       // additional functionality
 

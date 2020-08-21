@@ -22,6 +22,11 @@ ls_std::Date & ls_std::Date::operator+(int _value) {
   return *this;
 }
 
+ls_std::Date & ls_std::Date::operator-(int _value) {
+  this->timestamp -= (_value * 86400);
+  return *this;
+}
+
 bool ls_std::Date::after(const Date& _foreignDate) const {
   return this->timestamp > _foreignDate.getTime();
 }
