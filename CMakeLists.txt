@@ -78,7 +78,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/Logger.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevelValue.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevelValue.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/ISerializable.hpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
