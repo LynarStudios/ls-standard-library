@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-16
+ * Changed:         2020-08-21
  *
  * */
 
@@ -43,7 +43,7 @@ int ls_std::Date::getMinute() {
 }
 
 int ls_std::Date::getMonth() {
-  return this->localTime->tm_mon;
+  return this->localTime->tm_mon + 1;
 }
 
 int ls_std::Date::getSecond() {
@@ -51,7 +51,7 @@ int ls_std::Date::getSecond() {
 }
 
 int ls_std::Date::getYear() {
-  return this->localTime->tm_year;
+  return this->localTime->tm_year + 1900;
 }
 
 time_t ls_std::Date::getTime() const {
@@ -72,6 +72,4 @@ std::string ls_std::Date::toString() {
 
 void ls_std::Date::_init() {
   this->localTime = std::localtime(&this->timestamp);
-  this->localTime->tm_mon += 1;
-  this->localTime->tm_year += 1900;
 }
