@@ -185,7 +185,7 @@ namespace {
 
   TEST_F(LoggerTest, warn)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "output_trace.log";
+    std::string path = TestHelper::getResourcesFolderLocation() + "output_warn.log";
 
     ls_std::Logger logger {path};
     logger.setLogLevel(ls_std::LogLevelValue::WARN);
