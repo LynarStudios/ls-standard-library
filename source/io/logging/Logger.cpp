@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-20
+ * Changed:         2020-08-21
  *
  * */
 
@@ -25,9 +25,6 @@ void ls_std::Logger::close()
 
 void ls_std::Logger::debug(const ls_std::byte *_data)
 {
-  uint8_t thisLogLevel = this->logLevel;
-  uint8_t constant = ls_std::LogLevelValue::DEBUG;
-
   if(this->logLevel >= ls_std::LogLevelValue::DEBUG) {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::DEBUG));
   }
@@ -35,9 +32,6 @@ void ls_std::Logger::debug(const ls_std::byte *_data)
 
 void ls_std::Logger::error(const ls_std::byte *_data)
 {
-  uint8_t thisLogLevel = this->logLevel;
-  uint8_t constant = ls_std::LogLevelValue::ERR;
-
   if(this->logLevel >= ls_std::LogLevelValue::ERR) {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::ERR));
   }
@@ -45,9 +39,6 @@ void ls_std::Logger::error(const ls_std::byte *_data)
 
 void ls_std::Logger::fatal(const ls_std::byte *_data)
 {
-  uint8_t thisLogLevel = this->logLevel;
-  uint8_t constant = ls_std::LogLevelValue::FATAL;
-
   if(this->logLevel >= ls_std::LogLevelValue::FATAL) {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::FATAL));
   }
@@ -60,9 +51,6 @@ ls_std::LogLevel ls_std::Logger::getLogLevel()
 
 void ls_std::Logger::info(const ls_std::byte *_data)
 {
-  uint8_t thisLogLevel = this->logLevel;
-  uint8_t constant = ls_std::LogLevelValue::INFO;
-
   if(this->logLevel >= ls_std::LogLevelValue::INFO) {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::INFO));
   }
@@ -75,9 +63,6 @@ void ls_std::Logger::setLogLevel(const ls_std::LogLevelValue &_logLevelValue)
 
 void ls_std::Logger::trace(const ls_std::byte *_data)
 {
-  uint8_t thisLogLevel = this->logLevel;
-  uint8_t constant = ls_std::LogLevelValue::TRACE;
-
   if(this->logLevel >= ls_std::LogLevelValue::TRACE) {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::TRACE));
   }
@@ -85,9 +70,6 @@ void ls_std::Logger::trace(const ls_std::byte *_data)
 
 void ls_std::Logger::warn(const ls_std::byte *_data)
 {
-  uint8_t thisLogLevel = this->logLevel;
-  uint8_t constant = ls_std::LogLevelValue::WARN;
-
   if(this->logLevel >= ls_std::LogLevelValue::WARN) {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::WARN));
   }
