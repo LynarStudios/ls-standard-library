@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-20
+ * Changed:         2020-08-21
  *
  * */
 
@@ -17,7 +17,6 @@
 #include "../FileOutputStream.hpp"
 #include <string>
 
-// TODO: add append functionality
 namespace ls_std {
   class Logger : public Class {
     public:
