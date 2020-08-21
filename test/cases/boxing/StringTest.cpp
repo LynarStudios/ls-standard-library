@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-08-21
  *
  * */
 
@@ -147,6 +147,32 @@ namespace {
     text = "abcdef";
 
     ASSERT_FALSE(text.endsWith("efg"));
+  }
+
+  TEST_F(StringTest, padLeft)
+  {
+    ls_std::String text {"abcdef"};
+    ls_std::String anotherText {"ab"};
+    ls_std::String emptyText {};
+    ls_std::String longText {"This text is too long to fill!"};
+
+    ASSERT_STREQ("    abcdef", text.padLeft(10, ' ').c_str());
+    ASSERT_STREQ("        ab", anotherText.padLeft(10, ' ').c_str());
+    ASSERT_STREQ("          ", emptyText.padLeft(10, ' ').c_str());
+    ASSERT_STREQ("This text is too long to fill!", longText.padLeft(10, ' ').c_str());
+  }
+
+  TEST_F(StringTest, padRight)
+  {
+    ls_std::String text {"abcdef"};
+    ls_std::String anotherText {"ab"};
+    ls_std::String emptyText {};
+    ls_std::String longText {"This text is too long to fill!"};
+
+    ASSERT_STREQ("abcdef    ", text.padRight(10, ' ').c_str());
+    ASSERT_STREQ("ab        ", anotherText.padRight(10, ' ').c_str());
+    ASSERT_STREQ("          ", emptyText.padRight(10, ' ').c_str());
+    ASSERT_STREQ("This text is too long to fill!", longText.padRight(10, ' ').c_str());
   }
 
   TEST_F(StringTest, reverse)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-16
+ * Changed:         2020-08-21
  *
  * */
 
@@ -106,6 +106,14 @@ bool ls_std::String::equalsIgnoreCase(std::string _text) {
   return this->toLowerCase() == ls_std::String{std::move(_text)}.toLowerCase();
 }
 
+std::string ls_std::String::padLeft(size_t _width, const char _fillCharacter) {
+  return ls_std::String::_createFillContent(this->value, _width, _fillCharacter) + this->value;
+}
+
+std::string ls_std::String::padRight(size_t _width, const char _fillCharacter) {
+  return this->value + ls_std::String::_createFillContent(this->value, _width, _fillCharacter);
+}
+
 std::string ls_std::String::reverse() {
   std::string copy = this->value;
   std::reverse(copy.begin(), copy.end());
@@ -129,4 +137,25 @@ std::string ls_std::String::toUpperCase() {
   std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
 
   return copy;
+}
+
+std::string ls_std::String::_buildCharacterChain(size_t _amount, const char _fillCharacter) {
+  std::string fillContent {};
+
+  for(size_t iteration {} ; iteration < _amount ; iteration++) {
+    fillContent += _fillCharacter;
+  }
+
+  return fillContent;
+}
+
+std::string ls_std::String::_createFillContent(const std::string& _text, size_t _width, const char _fillCharacter) {
+  size_t fillSize = _text.size() > _width ? 0 : _width - _text.size();
+  std::string fillContent {};
+
+  if(fillSize > 0) {
+    fillContent = ls_std::String::_buildCharacterChain(fillSize, _fillCharacter);
+  }
+
+  return fillContent;
 }
