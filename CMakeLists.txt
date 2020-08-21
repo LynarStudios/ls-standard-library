@@ -79,7 +79,9 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevelValue.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/ISerializable.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/ISerializable.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONInteger.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONInteger.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -99,7 +101,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileOutputStreamTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/json/JSONTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JSONTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONIntegerTest.cpp)
 
 ##########################################################
 # Build
