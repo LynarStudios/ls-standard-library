@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-08-19
+ * Changed:         2020-08-22
  *
  * */
 
@@ -16,16 +16,15 @@ ls_std::StorableFile::StorableFile(const std::string &_path)
   this->_init(_path);
 }
 
-std::string ls_std::StorableFile::getContent()
+std::shared_ptr<ls_std::File> ls_std::StorableFile::getFile()
 {
-  return this->content;
+  return this->file;
 }
 
-void ls_std::StorableFile::load()
+ls_std::byte* ls_std::StorableFile::load()
 {
   ls_std::FileReader reader {*this->file};
-  ls_std::byte* data = reader.read();
-  this->content = {data, (size_t) this->file->getSize()};
+  return reader.read();
 }
 
 void ls_std::StorableFile::reset(const std::string &_path)
@@ -33,15 +32,10 @@ void ls_std::StorableFile::reset(const std::string &_path)
   this->_init(_path);
 }
 
-void ls_std::StorableFile::save()
+void ls_std::StorableFile::save(ls_std::byte* _data)
 {
   ls_std::FileWriter writer {*this->file};
-  writer.write(this->content.c_str());
-}
-
-void ls_std::StorableFile::setContent(const std::string &_content)
-{
-  this->content = _content;
+  writer.write(_data);
 }
 
 void ls_std::StorableFile::_init(const std::string &_path)

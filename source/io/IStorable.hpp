@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-08-19
+ * Changed:         2020-08-22
  *
  * */
 
@@ -18,8 +18,8 @@ namespace ls_std {
       IStorable() = default;
       ~IStorable() = default;
 
-      virtual void load() = 0;
-      virtual void save() = 0;
+      virtual ls_std::byte* load() = 0;
+      virtual void save(ls_std::byte* _data) = 0;
   };
 }
 
