@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-08-21
+ * Changed:         2020-08-22
  *
  * */
 
@@ -16,7 +16,7 @@
 #include <json.hpp>
 
 namespace ls_std {
-  class SerializableJSONInteger : public Class, ISerializable {
+  class SerializableJSONInteger : public Class, public ISerializable {
     public:
 
       explicit SerializableJSONInteger(std::shared_ptr<ls_std::Integer> _integer);
