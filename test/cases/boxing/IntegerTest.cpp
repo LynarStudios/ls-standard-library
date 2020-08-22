@@ -10,6 +10,9 @@
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Integer.hpp"
 #include "../../../source/serialization/boxing/SerializableJSONInteger.hpp"
+#include "../../../source/io/StorableFile.hpp"
+#include "../../TestHelper.hpp"
+#include "../../../source/io/FileWriter.hpp"
 
 namespace {
   class IntegerTest : public ::testing::Test {
@@ -349,6 +352,31 @@ namespace {
   }
 
   // implementation
+
+  TEST_F(IntegerTest, load)
+  {
+    // preparation
+
+    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>();
+    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_integer.json";
+    ls_std::File file {path};
+    file.createNewFile();
+    ls_std::FileWriter writer {file};
+    writer.write(R"({"class":"Integer","value":1990})");
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    auto storable = std::make_shared<ls_std::StorableFile>(path);
+    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+    // check
+
+    x->load();
+    ASSERT_EQ(1990, *x);
+
+    file.remove();
+  }
 
   TEST_F(IntegerTest, marshal)
   {

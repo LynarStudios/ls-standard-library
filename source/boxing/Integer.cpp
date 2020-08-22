@@ -247,6 +247,18 @@ void ls_std::Integer::operator--()
   this->value -= 1;
 }
 
+ls_std::byte * ls_std::Integer::load()
+{
+  ls_std::byte* data {};
+
+  if(this->storable != nullptr && this->serializable != nullptr) {
+    data = this->storable->load();
+    this->serializable->unmarshal(data);
+  }
+
+  return data;
+}
+
 const ls_std::byte * ls_std::Integer::marshal()
 {
   ls_std::byte* data {};
@@ -261,6 +273,17 @@ const ls_std::byte * ls_std::Integer::marshal()
 void ls_std::Integer::parse(std::string _parseText)
 {
   this->value = std::stoi(_parseText);
+}
+
+void ls_std::Integer::save(ls_std::byte *_data)
+{
+  if(this->serializable != nullptr) {
+    if(_data == nullptr) {
+      this->storable->save((char *) this->serializable->marshal());
+    } else {
+      this->storable->save(_data);
+    }
+  }
 }
 
 std::string ls_std::Integer::toString()
@@ -282,4 +305,9 @@ int ls_std::Integer::getValue() const {
 void ls_std::Integer::setSerializable(std::shared_ptr<ISerializable> _serializable)
 {
   this->serializable = std::move(_serializable);
+}
+
+void ls_std::Integer::setStorable(std::shared_ptr<IStorable> _storable)
+{
+  this->storable = std::move(_storable);
 }

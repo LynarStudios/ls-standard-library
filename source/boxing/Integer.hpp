@@ -14,9 +14,10 @@
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
 #include "../serialization/ISerializable.hpp"
+#include "../io/IStorable.hpp"
 
 namespace ls_std {
-  class Integer : public Class, public IBoxing, public ISerializable {
+  class Integer : public Class, public IBoxing, public ISerializable, public IStorable {
     public:
 
       explicit Integer(int _value);
@@ -104,8 +105,10 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte* load() override;
       const ls_std::byte* marshal() override;
       void parse(std::string _parseText) override;
+      void save(ls_std::byte* _data) override;
       std::string toString() override;
       void unmarshal(const ls_std::byte* _data) override;
 
@@ -113,11 +116,13 @@ namespace ls_std {
 
       int getValue() const;
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
+      void setStorable(std::shared_ptr<IStorable> _storable);
 
     private:
 
       int value {};
       std::shared_ptr<ISerializable> serializable {};
+      std::shared_ptr<IStorable> storable {};
   };
 }
 
