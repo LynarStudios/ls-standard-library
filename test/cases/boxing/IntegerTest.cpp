@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-14
+ * Changed:         2020-08-22
  *
  * */
 
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Integer.hpp"
+#include "../../../source/serialization/boxing/SerializableJSONInteger.hpp"
 
 namespace {
   class IntegerTest : public ::testing::Test {
@@ -349,6 +350,19 @@ namespace {
 
   // implementation
 
+  TEST_F(IntegerTest, marshal)
+  {
+    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(3);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    ASSERT_STREQ(R"({"class":"Integer","value":3})", x->marshal());
+
+    *x = 17;
+    ASSERT_STREQ(R"({"class":"Integer","value":17})", x->marshal());
+  }
+
   TEST_F(IntegerTest, parse)
   {
     ls_std::Integer x {};
@@ -364,6 +378,19 @@ namespace {
   {
     ls_std::Integer x {112};
     ASSERT_STREQ("112", x.toString().c_str());
+  }
+
+  TEST_F(IntegerTest, unmarshal)
+  {
+    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(13);
+    ASSERT_EQ(13, *x);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    x->unmarshal(R"({"class":"Integer","value":1989})");
+
+    ASSERT_EQ(1989, *x);
   }
 
   // additional functionality

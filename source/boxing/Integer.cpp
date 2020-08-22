@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-16
+ * Changed:         2020-08-22
  *
  * */
 
@@ -247,6 +247,17 @@ void ls_std::Integer::operator--()
   this->value -= 1;
 }
 
+const ls_std::byte * ls_std::Integer::marshal()
+{
+  ls_std::byte* data {};
+
+  if(this->serializable != nullptr) {
+    data = (char*) this->serializable->marshal();
+  }
+
+  return data;
+}
+
 void ls_std::Integer::parse(std::string _parseText)
 {
   this->value = std::stoi(_parseText);
@@ -257,6 +268,18 @@ std::string ls_std::Integer::toString()
   return std::to_string(this->value);
 }
 
+void ls_std::Integer::unmarshal(const ls_std::byte *_data)
+{
+  if(this->serializable != nullptr) {
+    this->serializable->unmarshal(_data);
+  }
+}
+
 int ls_std::Integer::getValue() const {
   return this->value;
+}
+
+void ls_std::Integer::setSerializable(std::shared_ptr<ISerializable> _serializable)
+{
+  this->serializable = std::move(_serializable);
 }

@@ -3,18 +3,20 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-16
+ * Changed:         2020-08-22
  *
  * */
 
 #ifndef INTEGER_HPP
 #define INTEGER_HPP
 
+#include <memory>
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
+#include "../serialization/ISerializable.hpp"
 
 namespace ls_std {
-  class Integer : public Class, IBoxing {
+  class Integer : public Class, public IBoxing, public ISerializable {
     public:
 
       explicit Integer(int _value);
@@ -102,16 +104,20 @@ namespace ls_std {
 
       // implementation
 
+      const ls_std::byte* marshal() override;
       void parse(std::string _parseText) override;
       std::string toString() override;
+      void unmarshal(const ls_std::byte* _data) override;
 
       // additional functionality
 
       int getValue() const;
+      void setSerializable(std::shared_ptr<ISerializable> _serializable);
 
     private:
 
       int value {};
+      std::shared_ptr<ISerializable> serializable {};
   };
 }
 
