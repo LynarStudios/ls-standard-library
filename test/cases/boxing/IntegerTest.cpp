@@ -265,18 +265,6 @@ namespace {
     ASSERT_FALSE(x <= y);
   }
 
-  // stream operators / input stream not testable by using automated tests
-
-  // TODO: not compilable
-//  TEST_F(IntegerTest, operatorOutputStream)
-//  {
-//    ls_std::Integer x {10};
-//    std::ostringstream _stream {};
-//    _stream << x;
-//
-//    ASSERT_STREQ("10", _stream.str().c_str());
-//  }
-
   // logical operators
 
   TEST_F(IntegerTest, operatorNot)

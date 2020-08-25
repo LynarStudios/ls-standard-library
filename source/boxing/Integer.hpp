@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-23
+ * Changed:         2020-08-25
  *
  * */
 
@@ -72,19 +72,6 @@ namespace ls_std {
       bool operator<=(const Integer& _integer) const;
       bool operator<=(int _value) const;
 
-      // stream operators
-
-      // TODO: not compilable
-//      friend std::ostream& operator<<(std::ostream& outputStream, const Integer& _integer) {
-//        outputStream << _integer.value;
-//        return outputStream;
-//      }
-//
-//      friend std::istream& operator>>(std::istream& inputStream, Integer& _integer) {
-//        inputStream >> _integer.value;
-//        return inputStream;
-//      }
-
       // logical operators
 
       friend bool operator!(const Integer& _integer) {
@@ -120,9 +107,9 @@ namespace ls_std {
 
     private:
 
-      int value {};
       std::shared_ptr<ISerializable> serializable {};
       std::shared_ptr<IStorable> storable {};
+      int value {};
   };
 }
 
