@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-08-23
+ * Changed:         2020-08-25
  *
  * */
 
@@ -16,10 +16,7 @@ integer(std::move(_integer))
 ls_std::byte_field ls_std::SerializableJSONInteger::marshal()
 {
   this->_update();
-  auto* data = new char[this->jsonObject.dump().size() + 1];
-  strcpy(data, this->jsonObject.dump().c_str());
-
-  return data;
+  return this->jsonObject.dump();
 }
 
 void ls_std::SerializableJSONInteger::unmarshal(const ls_std::byte_field& _data)
