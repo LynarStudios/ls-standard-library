@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-08-25
  *
  * */
 
@@ -68,19 +68,6 @@ namespace ls_std {
       bool operator<(long _value) const;
       bool operator<=(const Long& _long) const;
       bool operator<=(long _value) const;
-
-      // stream operators
-
-      // TODO: not compilable
-//      friend std::ostream& operator<<(std::ostream& outputStream, const Long& _long) {
-//        outputStream << _long.value;
-//        return outputStream;
-//      }
-//
-//      friend std::istream& operator>>(std::istream& inputStream, Long& _long) {
-//        inputStream >> _long.value;
-//        return inputStream;
-//      }
 
       // logical operators
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-08-25
  *
  * */
 
@@ -260,18 +260,6 @@ namespace {
     ASSERT_FALSE(x <= (long) 10);
     ASSERT_FALSE(x <= y);
   }
-
-  // stream operators / input stream not testable by using automated tests
-
-  // TODO: not compilable
-//  TEST_F(LongTest, operatorOutputStream)
-//  {
-//    ls_std::Long x {10};
-//    std::ostringstream _stream {};
-//    _stream << x;
-//
-//    ASSERT_STREQ("10", _stream.str().c_str());
-//  }
 
   // logical operators
 
