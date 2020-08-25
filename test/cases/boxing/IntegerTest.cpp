@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-22
+ * Changed:         2020-08-25
  *
  * */
 
@@ -385,10 +385,10 @@ namespace {
     auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
-    ASSERT_STREQ(R"({"class":"Integer","value":3})", x->marshal());
+    ASSERT_STREQ(R"({"class":"Integer","value":3})", x->marshal().c_str());
 
     *x = 17;
-    ASSERT_STREQ(R"({"class":"Integer","value":17})", x->marshal());
+    ASSERT_STREQ(R"({"class":"Integer","value":17})", x->marshal().c_str());
   }
 
   TEST_F(IntegerTest, parse)

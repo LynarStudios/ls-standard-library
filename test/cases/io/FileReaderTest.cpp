@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2020-08-19
+ * Changed:         2020-08-25
  *
  * */
 
@@ -30,8 +30,7 @@ namespace {
     std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
 
-    ls_std::byte* data = reader.read();
-    std::string content {data, (size_t) file.getSize()};
+    ls_std::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
@@ -42,8 +41,7 @@ namespace {
     std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
 
-    ls_std::byte* data = reader.read();
-    std::string content {data, (size_t) file.getSize()};
+    ls_std::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
     ls_std::File anotherFile {TestHelper::getResourcesFolderLocation() + "list_test/bla.txt"};
@@ -51,8 +49,7 @@ namespace {
     expectedUnix = "nothing to say!" + ls_std::NewLine::getUnixNewLine();
     expectedWindows = "nothing to say!" + ls_std::NewLine::getWindowsNewLine();
 
-    data = reader.read();
-    content = {data, (size_t) anotherFile.getSize()};
+    content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 }

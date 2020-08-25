@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-20
+ * Changed:         2020-08-25
  *
  * */
 
@@ -24,7 +24,7 @@ void ls_std::FileWriter::reset(File &_file)
   this->file = _file;
 }
 
-bool ls_std::FileWriter::write(const ls_std::byte* _data)
+bool ls_std::FileWriter::write(const ls_std::byte_field& _data)
 {
   std::ofstream outputStream {};
   outputStream.open(this->file.getAbsoluteFilePath());

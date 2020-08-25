@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-08-21
+ * Changed:         2020-08-25
  *
  * */
 
@@ -26,7 +26,7 @@ namespace {
   {
     ls_std::Integer x {3};
     ls_std::SerializableJSONInteger serializable {std::make_shared<ls_std::Integer>(x)};
-    std::string content = serializable.marshal();
+    ls_std::byte_field content = serializable.marshal();
 
     ASSERT_STREQ(R"({"class":"Integer","value":3})", content.c_str());
   }

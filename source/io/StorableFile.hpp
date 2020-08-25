@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-08-22
+ * Changed:         2020-08-25
  *
  * */
 
@@ -23,9 +23,9 @@ namespace ls_std {
       ~StorableFile() = default;
 
       std::shared_ptr<ls_std::File> getFile();
-      ls_std::byte* load() override;
+      ls_std::byte_field load() override;
       void reset(const std::string& _path);
-      void save(ls_std::byte* _data) override;
+      void save(const ls_std::byte_field& _data) override;
 
     private:
 

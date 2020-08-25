@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-19
+ * Changed:         2020-08-25
  *
  * */
 
@@ -18,7 +18,7 @@ file(_file)
   ls_std::FileReader::_init(_file);
 }
 
-ls_std::byte * ls_std::FileReader::read()
+ls_std::byte_field ls_std::FileReader::read()
 {
   ls_std::byte* data;
   std::ifstream inputStream {this->file.getAbsoluteFilePath(), std::ifstream::binary};
@@ -31,7 +31,7 @@ ls_std::byte * ls_std::FileReader::read()
   }
 
   inputStream.close();
-  return data;
+  return ls_std::byte_field {data, (size_t) this->file.getSize()};
 }
 
 void ls_std::FileReader::reset(File &_file)

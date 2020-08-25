@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-08-21
+ * Changed:         2020-08-23
  *
  * */
 
@@ -13,7 +13,7 @@ ls_std::SerializableJSONInteger::SerializableJSONInteger(std::shared_ptr<ls_std:
 integer(std::move(_integer))
 {}
 
-const ls_std::byte * ls_std::SerializableJSONInteger::marshal()
+ls_std::byte_field ls_std::SerializableJSONInteger::marshal()
 {
   this->_update();
   auto* data = new char[this->jsonObject.dump().size() + 1];
@@ -22,7 +22,7 @@ const ls_std::byte * ls_std::SerializableJSONInteger::marshal()
   return data;
 }
 
-void ls_std::SerializableJSONInteger::unmarshal(const ls_std::byte *_data)
+void ls_std::SerializableJSONInteger::unmarshal(const ls_std::byte_field& _data)
 {
   std::string jsonString = std::string(_data);
   this->jsonObject = nlohmann::json::parse(jsonString);

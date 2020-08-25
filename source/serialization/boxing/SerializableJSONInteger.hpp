@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-08-22
+ * Changed:         2020-08-23
  *
  * */
 
@@ -22,8 +22,8 @@ namespace ls_std {
       explicit SerializableJSONInteger(std::shared_ptr<ls_std::Integer> _integer);
       ~SerializableJSONInteger() = default;
 
-      const ls_std::byte* marshal() override;
-      void unmarshal(const ls_std::byte* _data) override;
+      ls_std::byte_field marshal() override;
+      void unmarshal(const ls_std::byte_field& _data) override;
 
     private:
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-22
+ * Changed:         2020-08-23
  *
  * */
 
@@ -247,9 +247,9 @@ void ls_std::Integer::operator--()
   this->value -= 1;
 }
 
-ls_std::byte * ls_std::Integer::load()
+ls_std::byte_field ls_std::Integer::load()
 {
-  ls_std::byte* data {};
+  ls_std::byte_field data {};
 
   if(this->storable != nullptr && this->serializable != nullptr) {
     data = this->storable->load();
@@ -259,12 +259,12 @@ ls_std::byte * ls_std::Integer::load()
   return data;
 }
 
-const ls_std::byte * ls_std::Integer::marshal()
+ls_std::byte_field ls_std::Integer::marshal()
 {
-  ls_std::byte* data {};
+  ls_std::byte_field data {};
 
   if(this->serializable != nullptr) {
-    data = (char*) this->serializable->marshal();
+    data = this->serializable->marshal();
   }
 
   return data;
@@ -275,11 +275,11 @@ void ls_std::Integer::parse(std::string _parseText)
   this->value = std::stoi(_parseText);
 }
 
-void ls_std::Integer::save(ls_std::byte *_data)
+void ls_std::Integer::save(const ls_std::byte_field& _data)
 {
   if(this->serializable != nullptr) {
-    if(_data == nullptr) {
-      this->storable->save((char *) this->serializable->marshal());
+    if(_data.empty()) {
+      this->storable->save(this->serializable->marshal());
     } else {
       this->storable->save(_data);
     }
@@ -291,7 +291,7 @@ std::string ls_std::Integer::toString()
   return std::to_string(this->value);
 }
 
-void ls_std::Integer::unmarshal(const ls_std::byte *_data)
+void ls_std::Integer::unmarshal(const ls_std::byte_field& _data)
 {
   if(this->serializable != nullptr) {
     this->serializable->unmarshal(_data);

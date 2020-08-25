@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-22
+ * Changed:         2020-08-23
  *
  * */
 
@@ -105,12 +105,12 @@ namespace ls_std {
 
       // implementation
 
-      ls_std::byte* load() override;
-      const ls_std::byte* marshal() override;
+      ls_std::byte_field load() override;
+      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
-      void save(ls_std::byte* _data) override;
+      void save(const ls_std::byte_field& _data) override;
       std::string toString() override;
-      void unmarshal(const ls_std::byte* _data) override;
+      void unmarshal(const ls_std::byte_field& _data) override;
 
       // additional functionality
 

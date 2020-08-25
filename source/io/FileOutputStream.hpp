@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-21
+ * Changed:         2020-08-25
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls_std {
       ~FileOutputStream();
 
       void close();
-      bool write(const ls_std::byte* _data) override;
+      bool write(const ls_std::byte_field& _data) override;
 
     private:
 
