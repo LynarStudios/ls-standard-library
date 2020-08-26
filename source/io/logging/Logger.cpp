@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-21
+ * Changed:         2020-08-26
  *
  * */
 
@@ -97,5 +97,5 @@ void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel& _lo
       std::string(_data) +
       ls_std::NewLine::getUnixNewLine();
 
-  outputStream->write(message.c_str());
+  outputStream->write(message);
 }
