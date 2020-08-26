@@ -10,69 +10,69 @@
 #include "Long.hpp"
 #include "../exception/IllegalArithmeticOperationException.hpp"
 
-ls_std::Long::Long(long _value) : Class("Long"),
-value((long) _value)
+ls_std::Long::Long(ls_std::long_type _value) : Class("Long"),
+value(_value)
 {}
 
 ls_std::Long::Long() : Class("Long")
 {}
 
-ls_std::Long::operator long() const
+ls_std::Long::operator ls_std::long_type() const
 {
   return this->value;
 }
 
-ls_std::Long& ls_std::Long::operator=(long _value)
+ls_std::Long& ls_std::Long::operator=(ls_std::long_type _value)
 {
   this->value = _value;
   return *this;
 }
 
-long ls_std::Long::operator-() const
+ls_std::long_type ls_std::Long::operator-() const
 {
   return -this->value;
 }
 
-long ls_std::Long::operator+(const Long &_long) const
+ls_std::long_type ls_std::Long::operator+(const Long &_long) const
 {
   return this->value + _long;
 }
 
-long ls_std::Long::operator+(long _value) const
+ls_std::long_type ls_std::Long::operator+(ls_std::long_type _value) const
 {
   return this->value + _value;
 }
 
-long ls_std::Long::operator*(const Long &_long) const
+ls_std::long_type ls_std::Long::operator*(const Long &_long) const
 {
   return this->value * _long;
 }
 
-long ls_std::Long::operator*(long _value) const
+ls_std::long_type ls_std::Long::operator*(ls_std::long_type _value) const
 {
   return this->value * _value;
 }
 
-long ls_std::Long::operator-(const Long &_long) const
+ls_std::long_type ls_std::Long::operator-(const Long &_long) const
 {
   return this->value - _long;
 }
 
-long ls_std::Long::operator-(long _value) const
+ls_std::long_type ls_std::Long::operator-(ls_std::long_type _value) const
 {
   return this->value - _value;
 }
 
-long ls_std::Long::operator/(const Long &_long) const
+ls_std::long_type ls_std::Long::operator/(const Long &_long) const
 {
-  if(_long == (long) 0) {
+  if(_long == (ls_std::long_type) 0) {
     throw ls_std::IllegalArithmeticOperationException {};
   }
 
   return this->value / _long;
 }
 
-long ls_std::Long::operator/(long _value) const
+ls_std::long_type ls_std::Long::operator/(ls_std::long_type _value) const
 {
   if(_value == 0) {
     throw ls_std::IllegalArithmeticOperationException {};
@@ -81,12 +81,12 @@ long ls_std::Long::operator/(long _value) const
   return this->value / _value;
 }
 
-long ls_std::Long::operator%(const Long &_long) const
+ls_std::long_type ls_std::Long::operator%(const Long &_long) const
 {
   return this->value % _long;
 }
 
-long ls_std::Long::operator%(long _value) const
+ls_std::long_type ls_std::Long::operator%(ls_std::long_type _value) const
 {
   return this->value % _value;
 }
@@ -97,7 +97,7 @@ ls_std::Long & ls_std::Long::operator+=(const Long &_long)
   return *this;
 }
 
-ls_std::Long & ls_std::Long::operator+=(long _value)
+ls_std::Long & ls_std::Long::operator+=(ls_std::long_type _value)
 {
   this->value += _value;
   return *this;
@@ -109,7 +109,7 @@ ls_std::Long & ls_std::Long::operator-=(const Long &_long)
   return *this;
 }
 
-ls_std::Long & ls_std::Long::operator-=(long _value)
+ls_std::Long & ls_std::Long::operator-=(ls_std::long_type _value)
 {
   this->value -= _value;
   return *this;
@@ -121,7 +121,7 @@ ls_std::Long & ls_std::Long::operator*=(const Long &_long)
   return *this;
 }
 
-ls_std::Long & ls_std::Long::operator*=(long _value)
+ls_std::Long & ls_std::Long::operator*=(ls_std::long_type _value)
 {
   this->value *= _value;
   return *this;
@@ -129,7 +129,7 @@ ls_std::Long & ls_std::Long::operator*=(long _value)
 
 ls_std::Long & ls_std::Long::operator/=(const Long &_long)
 {
-  if(_long == (long) 0) {
+  if(_long == (ls_std::long_type) 0) {
     throw ls_std::IllegalArithmeticOperationException {};
   }
 
@@ -137,7 +137,7 @@ ls_std::Long & ls_std::Long::operator/=(const Long &_long)
   return *this;
 }
 
-ls_std::Long & ls_std::Long::operator/=(long _value)
+ls_std::Long & ls_std::Long::operator/=(ls_std::long_type _value)
 {
   if(_value == 0) {
     throw ls_std::IllegalArithmeticOperationException {};
@@ -152,7 +152,7 @@ bool ls_std::Long::operator==(const Long &_long) const
   return this->value == _long;
 }
 
-bool ls_std::Long::operator==(long _value) const
+bool ls_std::Long::operator==(ls_std::long_type _value) const
 {
   return this->value == _value;
 }
@@ -162,7 +162,7 @@ bool ls_std::Long::operator!=(const Long &_long) const
   return this->value != _long;
 }
 
-bool ls_std::Long::operator!=(long _value) const
+bool ls_std::Long::operator!=(ls_std::long_type _value) const
 {
   return this->value != _value;
 }
@@ -172,7 +172,7 @@ bool ls_std::Long::operator>(const Long &_long) const
   return this->value > _long;
 }
 
-bool ls_std::Long::operator>(long _value) const
+bool ls_std::Long::operator>(ls_std::long_type _value) const
 {
   return this->value > _value;
 }
@@ -182,7 +182,7 @@ bool ls_std::Long::operator>=(const Long &_long) const
   return this->value >= _long;
 }
 
-bool ls_std::Long::operator>=(long _value) const
+bool ls_std::Long::operator>=(ls_std::long_type _value) const
 {
   return this->value >= _value;
 }
@@ -192,7 +192,7 @@ bool ls_std::Long::operator<(const Long &_long) const
   return this->value < _long;
 }
 
-bool ls_std::Long::operator<(long _value) const
+bool ls_std::Long::operator<(ls_std::long_type _value) const
 {
   return this->value < _value;
 }
@@ -202,7 +202,7 @@ bool ls_std::Long::operator<=(const Long &_long) const
   return this->value <= _long;
 }
 
-bool ls_std::Long::operator<=(long _value) const
+bool ls_std::Long::operator<=(ls_std::long_type _value) const
 {
   return this->value <= _value;
 }
@@ -212,7 +212,7 @@ bool ls_std::Long::operator&&(const Long &_long) const
   return this->value && _long;
 }
 
-bool ls_std::Long::operator&&(long _value) const
+bool ls_std::Long::operator&&(ls_std::long_type _value) const
 {
   return this->value && _value;
 }
@@ -227,7 +227,7 @@ bool ls_std::Long::operator||(const Long &_long) const
   return this->value || _long;
 }
 
-bool ls_std::Long::operator||(long _value) const
+bool ls_std::Long::operator||(ls_std::long_type _value) const
 {
   return this->value || _value;
 }
@@ -257,6 +257,6 @@ std::string ls_std::Long::toString()
   return std::to_string(this->value);
 }
 
-long ls_std::Long::getValue() const {
+ls_std::long_type ls_std::Long::getValue() const {
   return this->value;
 }

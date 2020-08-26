@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-25
+ * Changed:         2020-08-26
  *
  * */
 
@@ -12,62 +12,63 @@
 
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
+#include "../base/Types.hpp"
 
 namespace ls_std {
   class Long : public Class, IBoxing {
     public:
 
-      explicit Long(long _value);
+      explicit Long(ls_std::long_type _value);
       Long();
       ~Long() = default;
 
       // conversion operator
 
-      operator long() const;
+      operator ls_std::long_type() const;
 
       // assignment operators
 
-      Long& operator=(long _value);
+      Long& operator=(ls_std::long_type _value);
 
       // arithmetic operators
 
-      long operator-() const;
-      long operator+(const Long& _long) const;
-      long operator+(long _value) const;
-      long operator*(const Long& _long) const;
-      long operator*(long _value) const;
-      long operator-(const Long& _long) const;
-      long operator-(long _value) const;
-      long operator/(const Long& _long) const;
-      long operator/(long _value) const;
-      long operator%(const Long& _long) const;
-      long operator%(long _value) const;
+      ls_std::long_type operator-() const;
+      ls_std::long_type operator+(const Long& _long) const;
+      ls_std::long_type operator+(ls_std::long_type _value) const;
+      ls_std::long_type operator*(const Long& _long) const;
+      ls_std::long_type operator*(ls_std::long_type _value) const;
+      ls_std::long_type operator-(const Long& _long) const;
+      ls_std::long_type operator-(ls_std::long_type _value) const;
+      ls_std::long_type operator/(const Long& _long) const;
+      ls_std::long_type operator/(ls_std::long_type _value) const;
+      ls_std::long_type operator%(const Long& _long) const;
+      ls_std::long_type operator%(ls_std::long_type _value) const;
 
       // compound operators
 
       Long& operator+=(const Long& _long);
-      Long& operator+=(long _value);
+      Long& operator+=(ls_std::long_type _value);
       Long& operator-=(const Long& _long);
-      Long& operator-=(long _value);
+      Long& operator-=(ls_std::long_type _value);
       Long& operator*=(const Long& _long);
-      Long& operator*=(long _value);
+      Long& operator*=(ls_std::long_type _value);
       Long& operator/=(const Long& _long);
-      Long& operator/=(long _value);
+      Long& operator/=(ls_std::long_type _value);
 
       // comparison operators
 
       bool operator==(const Long& _long) const;
-      bool operator==(long _value) const;
+      bool operator==(ls_std::long_type _value) const;
       bool operator!=(const Long& _long) const;
-      bool operator!=(long _value) const;
+      bool operator!=(ls_std::long_type _value) const;
       bool operator>(const Long& _long) const;
-      bool operator>(long _value) const;
+      bool operator>(ls_std::long_type _value) const;
       bool operator>=(const Long& _long) const;
-      bool operator>=(long _value) const;
+      bool operator>=(ls_std::long_type _value) const;
       bool operator<(const Long& _long) const;
-      bool operator<(long _value) const;
+      bool operator<(ls_std::long_type _value) const;
       bool operator<=(const Long& _long) const;
-      bool operator<=(long _value) const;
+      bool operator<=(ls_std::long_type _value) const;
 
       // logical operators
 
@@ -76,10 +77,10 @@ namespace ls_std {
       }
 
       bool operator&&(const Long& _long) const;
-      bool operator&&(long _value) const;
+      bool operator&&(ls_std::long_type _value) const;
       bool operator&&(bool _expression) const;
       bool operator||(const Long& _long) const;
-      bool operator||(long _value) const;
+      bool operator||(ls_std::long_type _value) const;
       bool operator||(bool _expression) const;
 
       // increment / decrement operator
@@ -94,11 +95,11 @@ namespace ls_std {
 
       // additional functionality
 
-      long getValue() const;
+      ls_std::long_type getValue() const;
 
     private:
 
-      long value {};
+      ls_std::long_type value {};
   };
 }
 

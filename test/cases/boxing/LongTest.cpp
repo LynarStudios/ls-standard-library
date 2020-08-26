@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-25
+ * Changed:         2020-08-26
  *
  * */
 
@@ -59,8 +59,8 @@ namespace {
     ASSERT_EQ(20, x + y);
     ASSERT_EQ(8, 1 + y);
     ASSERT_EQ(5, x + y + z);
-    ASSERT_EQ(15, x + (long) 2);
-    ASSERT_EQ(0, x + (long) 2 + z);
+    ASSERT_EQ(15, x + (ls_std::long_type) 2);
+    ASSERT_EQ(0, x + (ls_std::long_type) 2 + z);
   }
 
   TEST_F(LongTest, operatorMultiplication)
@@ -71,8 +71,8 @@ namespace {
 
     ASSERT_EQ(21, x * y);
     ASSERT_EQ(105, x * y * z);
-    ASSERT_EQ(6, x * (long) 2);
-    ASSERT_EQ(71, 1 + y * (long) 2 * z);
+    ASSERT_EQ(6, x * (ls_std::long_type) 2);
+    ASSERT_EQ(71, 1 + y * (ls_std::long_type) 2 * z);
   }
 
   TEST_F(LongTest, operatorSubtraction)
@@ -81,8 +81,8 @@ namespace {
     ls_std::Long y {17};
 
     ASSERT_EQ(34, x - y);
-    ASSERT_EQ(30, x - (long) 21);
-    ASSERT_EQ(13, x - (long) 21 - y);
+    ASSERT_EQ(30, x - (ls_std::long_type) 21);
+    ASSERT_EQ(13, x - (ls_std::long_type) 21 - y);
   }
 
   TEST_F(LongTest, operatorDivision)
@@ -102,7 +102,7 @@ namespace {
     ls_std::Long y {9};
 
     ASSERT_EQ(4, x % y);
-    ASSERT_EQ(1, x % (long) 3);
+    ASSERT_EQ(1, x % (ls_std::long_type) 3);
   }
 
   // compound operators
@@ -173,7 +173,7 @@ namespace {
     ls_std::Long y {3};
     ls_std::Long z {3};
 
-    ASSERT_TRUE(x == (long) 12);
+    ASSERT_TRUE(x == (ls_std::long_type) 12);
     ASSERT_TRUE(y == z);
     ASSERT_TRUE(z == y);
   }
@@ -184,7 +184,7 @@ namespace {
     ls_std::Long y {3};
     ls_std::Long z {3};
 
-    ASSERT_TRUE(x != (long) 14);
+    ASSERT_TRUE(x != (ls_std::long_type) 14);
     ASSERT_TRUE(y != x);
     ASSERT_TRUE(z != x);
   }
@@ -194,7 +194,7 @@ namespace {
     ls_std::Long x {12};
     ls_std::Long y {3};
 
-    ASSERT_TRUE(x > (long) 4);
+    ASSERT_TRUE(x > (ls_std::long_type) 4);
     ASSERT_TRUE(x > y);
   }
 
@@ -203,8 +203,8 @@ namespace {
     ls_std::Long x {12};
     ls_std::Long y {3};
 
-    ASSERT_FALSE(x > (long) 14);
-    ASSERT_FALSE(x > (y + (long) 20));
+    ASSERT_FALSE(x > (ls_std::long_type) 14);
+    ASSERT_FALSE(x > (y + (ls_std::long_type) 20));
   }
 
   TEST_F(LongTest, operatorGreaterThanEqual)
@@ -212,7 +212,7 @@ namespace {
     ls_std::Long x {12};
     ls_std::Long y {12};
 
-    ASSERT_TRUE(x >= (long) 12);
+    ASSERT_TRUE(x >= (ls_std::long_type) 12);
     ASSERT_TRUE(x >= y);
   }
 
@@ -221,7 +221,7 @@ namespace {
     ls_std::Long x {12};
     ls_std::Long y {13};
 
-    ASSERT_FALSE(x >= (long) 13);
+    ASSERT_FALSE(x >= (ls_std::long_type) 13);
     ASSERT_FALSE(x >= y);
   }
 
@@ -230,7 +230,7 @@ namespace {
     ls_std::Long x {10};
     ls_std::Long y {12};
 
-    ASSERT_TRUE(x < (long) 12);
+    ASSERT_TRUE(x < (ls_std::long_type) 12);
     ASSERT_TRUE(x < y);
   }
 
@@ -239,7 +239,7 @@ namespace {
     ls_std::Long x {10};
     ls_std::Long y {10};
 
-    ASSERT_FALSE(x < (long) 10);
+    ASSERT_FALSE(x < (ls_std::long_type) 10);
     ASSERT_FALSE(x < y);
   }
 
@@ -248,7 +248,7 @@ namespace {
     ls_std::Long x {10};
     ls_std::Long y {10};
 
-    ASSERT_TRUE(x <= (long) 11);
+    ASSERT_TRUE(x <= (ls_std::long_type) 11);
     ASSERT_TRUE(x <= y);
   }
 
@@ -257,7 +257,7 @@ namespace {
     ls_std::Long x {11};
     ls_std::Long y {10};
 
-    ASSERT_FALSE(x <= (long) 10);
+    ASSERT_FALSE(x <= (ls_std::long_type) 10);
     ASSERT_FALSE(x <= y);
   }
 
@@ -279,7 +279,7 @@ namespace {
   {
     ls_std::Long x {1};
     ls_std::Long y {1};
-    ASSERT_TRUE(x && (long) 1);
+    ASSERT_TRUE(x && (ls_std::long_type) 1);
     ASSERT_TRUE(x && true);
     ASSERT_TRUE(x && y);
   }
@@ -288,7 +288,7 @@ namespace {
   {
     ls_std::Long x {};
     ls_std::Long y {1};
-    ASSERT_FALSE(x && (long) 1);
+    ASSERT_FALSE(x && (ls_std::long_type) 1);
     ASSERT_FALSE(x && true);
     ASSERT_FALSE(x && y);
   }
@@ -297,7 +297,7 @@ namespace {
   {
     ls_std::Long x {};
     ls_std::Long y {1};
-    ASSERT_TRUE(x || (long) 1);
+    ASSERT_TRUE(x || (ls_std::long_type) 1);
     ASSERT_TRUE(x || true);
     ASSERT_TRUE(x || y);
   }
@@ -306,7 +306,7 @@ namespace {
   {
     ls_std::Long x {};
     ls_std::Long y {};
-    ASSERT_FALSE(x || (long) 0);
+    ASSERT_FALSE(x || (ls_std::long_type) 0);
     ASSERT_FALSE(x || false);
     ASSERT_FALSE(x || y);
   }
