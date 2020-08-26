@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-08-26
  *
  * */
 
@@ -11,7 +11,7 @@
 #include "../exception/IllegalArithmeticOperationException.hpp"
 
 ls_std::Long::Long(long _value) : Class("Long"),
-                                       value(_value)
+value((long) _value)
 {}
 
 ls_std::Long::Long() : Class("Long")
@@ -33,9 +33,9 @@ long ls_std::Long::operator-() const
   return -this->value;
 }
 
-long ls_std::Long::operator+(const Long &_integer) const
+long ls_std::Long::operator+(const Long &_long) const
 {
-  return this->value + _integer;
+  return this->value + _long;
 }
 
 long ls_std::Long::operator+(long _value) const
@@ -43,9 +43,9 @@ long ls_std::Long::operator+(long _value) const
   return this->value + _value;
 }
 
-long ls_std::Long::operator*(const Long &_integer) const
+long ls_std::Long::operator*(const Long &_long) const
 {
-  return this->value * _integer;
+  return this->value * _long;
 }
 
 long ls_std::Long::operator*(long _value) const
@@ -53,9 +53,9 @@ long ls_std::Long::operator*(long _value) const
   return this->value * _value;
 }
 
-long ls_std::Long::operator-(const Long &_integer) const
+long ls_std::Long::operator-(const Long &_long) const
 {
-  return this->value - _integer;
+  return this->value - _long;
 }
 
 long ls_std::Long::operator-(long _value) const
