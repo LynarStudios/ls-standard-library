@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-26
+ * Changed:         2020-08-27
  *
  * */
 
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Long.hpp"
+#include "../../../source/serialization/boxing/SerializableJSONLong.hpp"
 
 namespace {
   class LongTest : public ::testing::Test {
@@ -337,6 +338,19 @@ namespace {
 
   // implementation
 
+  TEST_F(LongTest, marshal)
+  {
+    std::shared_ptr<ls_std::Long> x = std::make_shared<ls_std::Long>(3);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONLong>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    ASSERT_STREQ(R"({"class":"Long","value":3})", x->marshal().c_str());
+
+    *x = 17;
+    ASSERT_STREQ(R"({"class":"Long","value":17})", x->marshal().c_str());
+  }
+
   TEST_F(LongTest, parse)
   {
     ls_std::Long x {};
@@ -352,6 +366,19 @@ namespace {
   {
     ls_std::Long x {112};
     ASSERT_STREQ("112", x.toString().c_str());
+  }
+
+  TEST_F(LongTest, unmarshal)
+  {
+    std::shared_ptr<ls_std::Long> x = std::make_shared<ls_std::Long>(13);
+    ASSERT_EQ(13, *x);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONLong>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    x->unmarshal(R"({"class":"Long","value":1989})");
+
+    ASSERT_EQ(1989, *x);
   }
 
   // additional functionality

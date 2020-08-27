@@ -3,19 +3,21 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-26
+ * Changed:         2020-08-27
  *
  * */
 
 #ifndef LONG_HPP
 #define LONG_HPP
 
+#include <memory>
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
 #include "../base/Types.hpp"
+#include "../serialization/ISerializable.hpp"
 
 namespace ls_std {
-  class Long : public Class, IBoxing {
+  class Long : public Class, public IBoxing, public ISerializable {
     public:
 
       explicit Long(ls_std::long_type _value);
@@ -90,15 +92,19 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
       std::string toString() override;
+      void unmarshal(const ls_std::byte_field& _data) override;
 
       // additional functionality
 
       ls_std::long_type getValue() const;
+      void setSerializable(std::shared_ptr<ISerializable> _serializable);
 
     private:
 
+      std::shared_ptr<ISerializable> serializable {};
       ls_std::long_type value {};
   };
 }
