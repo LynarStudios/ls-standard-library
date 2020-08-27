@@ -10,6 +10,10 @@
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Long.hpp"
 #include "../../../source/serialization/boxing/SerializableJSONLong.hpp"
+#include "../../TestHelper.hpp"
+#include "../../../source/io/File.hpp"
+#include "../../../source/io/FileWriter.hpp"
+#include "../../../source/io/StorableFile.hpp"
 
 namespace {
   class LongTest : public ::testing::Test {
@@ -337,6 +341,31 @@ namespace {
   }
 
   // implementation
+
+  TEST_F(LongTest, load)
+  {
+    // preparation
+
+    std::shared_ptr<ls_std::Long> x = std::make_shared<ls_std::Long>();
+    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_long.json";
+    ls_std::File file {path};
+    file.createNewFile();
+    ls_std::FileWriter writer {file};
+    writer.write(R"({"class":"Long","value":1990})");
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONLong>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    auto storable = std::make_shared<ls_std::StorableFile>(path);
+    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+    // check
+
+    x->load();
+    ASSERT_EQ(1990, *x);
+
+    file.remove();
+  }
 
   TEST_F(LongTest, marshal)
   {

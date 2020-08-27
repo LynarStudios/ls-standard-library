@@ -15,9 +15,10 @@
 #include "IBoxing.hpp"
 #include "../base/Types.hpp"
 #include "../serialization/ISerializable.hpp"
+#include "../io/IStorable.hpp"
 
 namespace ls_std {
-  class Long : public Class, public IBoxing, public ISerializable {
+  class Long : public Class, public IBoxing, public ISerializable, public IStorable {
     public:
 
       explicit Long(ls_std::long_type _value);
@@ -92,8 +93,10 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field load() override;
       ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
+      void save(const ls_std::byte_field& _data) override;
       std::string toString() override;
       void unmarshal(const ls_std::byte_field& _data) override;
 
@@ -101,10 +104,12 @@ namespace ls_std {
 
       ls_std::long_type getValue() const;
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
+      void setStorable(std::shared_ptr<IStorable> _storable);
 
     private:
 
       std::shared_ptr<ISerializable> serializable {};
+      std::shared_ptr<IStorable> storable {};
       ls_std::long_type value {};
   };
 }

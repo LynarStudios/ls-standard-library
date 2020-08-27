@@ -249,6 +249,18 @@ void ls_std::Long::operator--()
   this->value -= 1;
 }
 
+ls_std::byte_field ls_std::Long::load()
+{
+  ls_std::byte_field data {};
+
+  if(this->storable != nullptr && this->serializable != nullptr) {
+    data = this->storable->load();
+    this->serializable->unmarshal(data);
+  }
+
+  return data;
+}
+
 ls_std::byte_field ls_std::Long::marshal()
 {
   ls_std::byte_field data {};
@@ -263,6 +275,17 @@ ls_std::byte_field ls_std::Long::marshal()
 void ls_std::Long::parse(std::string _parseText)
 {
   this->value = std::stoi(_parseText);
+}
+
+void ls_std::Long::save(const ls_std::byte_field& _data)
+{
+  if(this->serializable != nullptr) {
+    if(_data.empty()) {
+      this->storable->save(this->serializable->marshal());
+    } else {
+      this->storable->save(_data);
+    }
+  }
 }
 
 std::string ls_std::Long::toString()
@@ -283,4 +306,8 @@ ls_std::long_type ls_std::Long::getValue() const {
 
 void ls_std::Long::setSerializable(std::shared_ptr<ISerializable> _serializable) {
   this->serializable = std::move(_serializable);
+}
+
+void ls_std::Long::setStorable(std::shared_ptr<IStorable> _storable) {
+  this->storable = std::move(_storable);
 }
