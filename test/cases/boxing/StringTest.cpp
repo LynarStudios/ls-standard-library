@@ -10,6 +10,9 @@
 #include <gtest/gtest.h>
 #include "../../../source/boxing/String.hpp"
 #include "../../../source/serialization/boxing/SerializableJSONString.hpp"
+#include "../../TestHelper.hpp"
+#include "../../../source/io/FileWriter.hpp"
+#include "../../../source/io/StorableFile.hpp"
 
 namespace {
   class StringTest : public ::testing::Test {
@@ -91,6 +94,31 @@ namespace {
   }
 
   // implementation
+
+  TEST_F(StringTest, load)
+  {
+    // preparation
+
+    std::shared_ptr<ls_std::String> x = std::make_shared<ls_std::String>();
+    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_string.json";
+    ls_std::File file {path};
+    file.createNewFile();
+    ls_std::FileWriter writer {file};
+    writer.write(R"({"class":"String","value":"Hello!"})");
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    auto storable = std::make_shared<ls_std::StorableFile>(path);
+    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+    // check
+
+    x->load();
+    ASSERT_STREQ("Hello!", *x);
+
+    file.remove();
+  }
 
   TEST_F(StringTest, marshal)
   {

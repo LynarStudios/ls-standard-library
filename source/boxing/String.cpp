@@ -82,6 +82,17 @@ bool ls_std::String::operator!=(const char *_value) {
   return this->value != _value;
 }
 
+ls_std::byte_field ls_std::String::load() {
+  ls_std::byte_field data {};
+
+  if(this->storable != nullptr && this->serializable != nullptr) {
+    data = this->storable->load();
+    this->serializable->unmarshal(data);
+  }
+
+  return data;
+}
+
 ls_std::byte_field ls_std::String::marshal() {
   ls_std::byte_field data {};
 
@@ -94,6 +105,16 @@ ls_std::byte_field ls_std::String::marshal() {
 
 void ls_std::String::parse(std::string _parseText) {
   this->value = std::move(_parseText);
+}
+
+void ls_std::String::save(const ls_std::byte_field &_data) {
+  if(this->serializable != nullptr) {
+    if(_data.empty()) {
+      this->storable->save(this->serializable->marshal());
+    } else {
+      this->storable->save(_data);
+    }
+  }
 }
 
 std::string ls_std::String::toString() {
@@ -139,6 +160,10 @@ std::string ls_std::String::reverse() {
 
 void ls_std::String::setSerializable(std::shared_ptr<ISerializable> _serializable) {
   this->serializable = std::move(_serializable);
+}
+
+void ls_std::String::setStorable(std::shared_ptr<IStorable> _storable) {
+  this->storable = std::move(_storable);
 }
 
 bool ls_std::String::startsWith(const std::string &_text) {

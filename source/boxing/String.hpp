@@ -13,11 +13,12 @@
 #include "IBoxing.hpp"
 #include "../base/Class.hpp"
 #include "../serialization/ISerializable.hpp"
+#include "../io/IStorable.hpp"
 #include <string>
 #include <memory>
 
 namespace ls_std {
-  class String : public Class, public IBoxing, public ISerializable {
+  class String : public Class, public IBoxing, public ISerializable, public IStorable {
     public:
 
       String();
@@ -56,8 +57,10 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field load() override;
       ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
+      void save(const ls_std::byte_field& _data) override;
       std::string toString() override;
       void unmarshal(const ls_std::byte_field& _data) override;
 
@@ -71,6 +74,7 @@ namespace ls_std {
       std::string padRight(size_t _width, const char _fillCharacter);
       std::string reverse();
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
+      void setStorable(std::shared_ptr<IStorable> _storable);
       bool startsWith(const std::string& _text);
       std::string toLowerCase();
       std::string toUpperCase();
@@ -78,6 +82,7 @@ namespace ls_std {
     private:
 
       std::shared_ptr<ISerializable> serializable {};
+      std::shared_ptr<IStorable> storable {};
       std::string value {};
 
       static std::string _buildCharacterChain(size_t _amount, const char _fillCharacter);
