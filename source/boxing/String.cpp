@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-21
+ * Changed:         2020-08-30
  *
  * */
 
@@ -82,12 +82,28 @@ bool ls_std::String::operator!=(const char *_value) {
   return this->value != _value;
 }
 
+ls_std::byte_field ls_std::String::marshal() {
+  ls_std::byte_field data {};
+
+  if(this->serializable != nullptr) {
+    data = this->serializable->marshal();
+  }
+
+  return data;
+}
+
 void ls_std::String::parse(std::string _parseText) {
   this->value = std::move(_parseText);
 }
 
 std::string ls_std::String::toString() {
   return this->value;
+}
+
+void ls_std::String::unmarshal(const ls_std::byte_field &_data) {
+  if(this->serializable != nullptr) {
+    this->serializable->unmarshal(_data);
+  }
 }
 
 bool ls_std::String::contains(const std::string& _text) {
@@ -119,6 +135,10 @@ std::string ls_std::String::reverse() {
   std::reverse(copy.begin(), copy.end());
 
   return copy;
+}
+
+void ls_std::String::setSerializable(std::shared_ptr<ISerializable> _serializable) {
+  this->serializable = std::move(_serializable);
 }
 
 bool ls_std::String::startsWith(const std::string &_text) {

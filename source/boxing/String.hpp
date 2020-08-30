@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-21
+ * Changed:         2020-08-30
  *
  * */
 
@@ -12,10 +12,12 @@
 
 #include "IBoxing.hpp"
 #include "../base/Class.hpp"
+#include "../serialization/ISerializable.hpp"
 #include <string>
+#include <memory>
 
 namespace ls_std {
-  class String : public Class, IBoxing {
+  class String : public Class, public IBoxing, public ISerializable {
     public:
 
       String();
@@ -54,8 +56,10 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
       std::string toString() override;
+      void unmarshal(const ls_std::byte_field& _data) override;
 
       // additional functionality
 
@@ -66,12 +70,14 @@ namespace ls_std {
       std::string padLeft(size_t _width, const char _fillCharacter);
       std::string padRight(size_t _width, const char _fillCharacter);
       std::string reverse();
+      void setSerializable(std::shared_ptr<ISerializable> _serializable);
       bool startsWith(const std::string& _text);
       std::string toLowerCase();
       std::string toUpperCase();
 
     private:
 
+      std::shared_ptr<ISerializable> serializable {};
       std::string value {};
 
       static std::string _buildCharacterChain(size_t _amount, const char _fillCharacter);
