@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-16
+ * Changed:         2020-09-04
  *
  * */
 
@@ -160,6 +160,18 @@ void ls_std::Float::operator--() {
   this->value -= 1.0f;
 }
 
+ls_std::byte_field ls_std::Float::load()
+{
+  ls_std::byte_field data {};
+
+  if(this->storable != nullptr && this->serializable != nullptr) {
+    data = this->storable->load();
+    this->serializable->unmarshal(data);
+  }
+
+  return data;
+}
+
 ls_std::byte_field ls_std::Float::marshal()
 {
   ls_std::byte_field data {};
@@ -173,6 +185,17 @@ ls_std::byte_field ls_std::Float::marshal()
 
 void ls_std::Float::parse(std::string _parseText) {
   this->value = std::stof(_parseText);
+}
+
+void ls_std::Float::save(const ls_std::byte_field& _data)
+{
+  if(this->serializable != nullptr) {
+    if(_data.empty()) {
+      this->storable->save(this->serializable->marshal());
+    } else {
+      this->storable->save(_data);
+    }
+  }
 }
 
 std::string ls_std::Float::toString() {
@@ -200,4 +223,8 @@ void ls_std::Float::setEpsilon(float _epsilon) {
 
 void ls_std::Float::setSerializable(std::shared_ptr<ISerializable> _serializable) {
   this->serializable = std::move(_serializable);
+}
+
+void ls_std::Float::setStorable(std::shared_ptr<IStorable> _storable) {
+  this->storable = std::move(_storable);
 }

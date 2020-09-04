@@ -11,6 +11,10 @@
 #include "../../../source/boxing/Float.hpp"
 #include "../../../source/serialization/boxing/SerializableJSONFloat.hpp"
 #include "../../../source/boxing/String.hpp"
+#include "../../TestHelper.hpp"
+#include "../../../source/io/File.hpp"
+#include "../../../source/io/FileWriter.hpp"
+#include "../../../source/io/StorableFile.hpp"
 
 namespace {
   class FloatTest : public ::testing::Test {
@@ -269,6 +273,31 @@ namespace {
   }
 
   // implementation
+
+  TEST_F(FloatTest, load)
+  {
+    // preparation
+
+    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>();
+    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_float.json";
+    ls_std::File file {path};
+    file.createNewFile();
+    ls_std::FileWriter writer {file};
+    writer.write(R"({"value":3.14159})");
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONFloat>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    auto storable = std::make_shared<ls_std::StorableFile>(path);
+    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+    // check
+
+    x->load();
+    ASSERT_FLOAT_EQ(3.14159f, *x);
+
+    file.remove();
+  }
 
   TEST_F(FloatTest, marshal)
   {
