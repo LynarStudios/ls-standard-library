@@ -87,7 +87,9 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONString.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONString.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONFloat.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONFloat.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONFloat.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONDouble.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONDouble.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -111,7 +113,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONIntegerTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONLongTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONStringTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONFloatTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONFloatTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONDoubleTest.cpp)
 
 ##########################################################
 # Build
