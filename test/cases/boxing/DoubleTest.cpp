@@ -11,6 +11,10 @@
 #include "../../../source/boxing/Double.hpp"
 #include "../../../source/serialization/boxing/SerializableJSONDouble.hpp"
 #include "../../../source/boxing/String.hpp"
+#include "../../TestHelper.hpp"
+#include "../../../source/io/File.hpp"
+#include "../../../source/io/FileWriter.hpp"
+#include "../../../source/io/StorableFile.hpp"
 
 namespace {
   class DoubleTest : public ::testing::Test {
@@ -269,6 +273,31 @@ namespace {
   }
 
   // implementation
+
+  TEST_F(DoubleTest, load)
+  {
+    // preparation
+
+    std::shared_ptr<ls_std::Double> x = std::make_shared<ls_std::Double>();
+    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_double.json";
+    ls_std::File file {path};
+    file.createNewFile();
+    ls_std::FileWriter writer {file};
+    writer.write(R"({"value":3.14159})");
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONDouble>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    auto storable = std::make_shared<ls_std::StorableFile>(path);
+    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+    // check
+
+    x->load();
+    ASSERT_DOUBLE_EQ(3.14159, *x);
+
+    file.remove();
+  }
 
   TEST_F(DoubleTest, marshal)
   {

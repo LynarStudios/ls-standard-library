@@ -14,9 +14,10 @@
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
 #include "../serialization/ISerializable.hpp"
+#include "../io/IStorable.hpp"
 
 namespace ls_std {
-  class Double : public Class, public IBoxing, public ISerializable {
+  class Double : public Class, public IBoxing, public ISerializable, public IStorable {
     public:
 
       Double();
@@ -76,8 +77,10 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field load() override;
       ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
+      void save(const ls_std::byte_field& _data) override;
       std::string toString() override;
       void unmarshal(const ls_std::byte_field& _data) override;
 
@@ -87,11 +90,13 @@ namespace ls_std {
       double getValue();
       void setEpsilon(double _epsilon);
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
+      void setStorable(std::shared_ptr<IStorable> _storable);
 
     private:
 
       double epsilon {};
       std::shared_ptr<ISerializable> serializable {};
+      std::shared_ptr<IStorable> storable {};
       double value {};
   };
 }
