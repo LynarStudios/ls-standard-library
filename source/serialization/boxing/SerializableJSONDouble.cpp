@@ -9,8 +9,9 @@
 
 #include "SerializableJSONDouble.hpp"
 
-ls_std::SerializableJSONDouble::SerializableJSONDouble(std::shared_ptr<ls_std::Double> _doubleValue) : Class("SerializableJSONDouble"),
-doubleValue(std::move(_doubleValue))
+ls_std::SerializableJSONDouble::SerializableJSONDouble(std::shared_ptr<ls_std::Double> _value) :
+Class("SerializableJSONDouble"),
+value(std::move(_value))
 {}
 
 ls_std::byte_field ls_std::SerializableJSONDouble::marshal()
@@ -25,14 +26,14 @@ void ls_std::SerializableJSONDouble::unmarshal(const ls_std::byte_field& _data)
   this->jsonObject = nlohmann::json::parse(jsonString);
 
   if(this->jsonObject.contains("value")) {
-    *this->doubleValue = this->jsonObject["value"];
+    *this->value = this->jsonObject["value"];
   }
 }
 
 void ls_std::SerializableJSONDouble::_update()
 {
   this->jsonObject = {
-      {"class", this->doubleValue->getClassName()},
-      {"value", this->doubleValue->getValue()}
+      {"class", this->value->getClassName()},
+      {"value", this->value->getValue()}
   };
 }

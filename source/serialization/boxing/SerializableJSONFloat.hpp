@@ -20,7 +20,7 @@ namespace ls_std {
   class SerializableJSONFloat : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONFloat(std::shared_ptr<ls_std::Float> _floatValue);
+      explicit SerializableJSONFloat(std::shared_ptr<ls_std::Float> _value);
       ~SerializableJSONFloat() = default;
 
       ls_std::byte_field marshal() override;
@@ -28,7 +28,7 @@ namespace ls_std {
 
     private:
 
-      std::shared_ptr<ls_std::Float> floatValue {};
+      std::shared_ptr<ls_std::Float> value {};
       nlohmann::json jsonObject {};
 
       void _update();

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-25
- * Changed:         2020-08-30
+ * Changed:         2020-09-04
  *
  * */
 
@@ -19,7 +19,7 @@ namespace ls_std {
   class SerializableJSONLong : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONLong(std::shared_ptr<ls_std::Long> _longValue);
+      explicit SerializableJSONLong(std::shared_ptr<ls_std::Long> _value);
       ~SerializableJSONLong() = default;
 
       ls_std::byte_field marshal() override;
@@ -28,7 +28,7 @@ namespace ls_std {
     private:
 
       nlohmann::json jsonObject {};
-      std::shared_ptr<ls_std::Long> longValue {};
+      std::shared_ptr<ls_std::Long> value {};
 
       void _update();
   };

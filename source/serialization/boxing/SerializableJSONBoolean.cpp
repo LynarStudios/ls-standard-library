@@ -9,7 +9,8 @@
 
 #include "SerializableJSONBoolean.hpp"
 
-ls_std::SerializableJSONBoolean::SerializableJSONBoolean(std::shared_ptr<ls_std::Boolean> _value) : Class("SerializableJSONBoolean"),
+ls_std::SerializableJSONBoolean::SerializableJSONBoolean(std::shared_ptr<ls_std::Boolean> _value) :
+Class("SerializableJSONBoolean"),
 value(std::move(_value))
 {}
 

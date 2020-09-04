@@ -9,8 +9,9 @@
 
 #include "SerializableJSONFloat.hpp"
 
-ls_std::SerializableJSONFloat::SerializableJSONFloat(std::shared_ptr<ls_std::Float> _floatValue) : Class("SerializableJSONFloat"),
-floatValue(std::move(_floatValue))
+ls_std::SerializableJSONFloat::SerializableJSONFloat(std::shared_ptr<ls_std::Float> _value) :
+Class("SerializableJSONFloat"),
+value(std::move(_value))
 {}
 
 ls_std::byte_field ls_std::SerializableJSONFloat::marshal()
@@ -25,14 +26,14 @@ void ls_std::SerializableJSONFloat::unmarshal(const ls_std::byte_field& _data)
   this->jsonObject = nlohmann::json::parse(jsonString);
 
   if(this->jsonObject.contains("value")) {
-    *this->floatValue = this->jsonObject["value"];
+    *this->value = this->jsonObject["value"];
   }
 }
 
 void ls_std::SerializableJSONFloat::_update()
 {
   this->jsonObject = {
-      {"class", this->floatValue->getClassName()},
-      {"value", this->floatValue->getValue()}
+      {"class", this->value->getClassName()},
+      {"value", this->value->getValue()}
   };
 }

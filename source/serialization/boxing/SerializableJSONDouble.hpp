@@ -20,7 +20,7 @@ namespace ls_std {
   class SerializableJSONDouble : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONDouble(std::shared_ptr<ls_std::Double> _doubleValue);
+      explicit SerializableJSONDouble(std::shared_ptr<ls_std::Double> _value);
       ~SerializableJSONDouble() = default;
 
       ls_std::byte_field marshal() override;
@@ -28,7 +28,7 @@ namespace ls_std {
 
     private:
 
-      std::shared_ptr<ls_std::Double> doubleValue {};
+      std::shared_ptr<ls_std::Double> value {};
       nlohmann::json jsonObject {};
 
       void _update();

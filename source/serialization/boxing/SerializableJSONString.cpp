@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-08-30
+ * Changed:         2020-09-04
  *
  * */
 
 #include "SerializableJSONString.hpp"
 
-ls_std::SerializableJSONString::SerializableJSONString(std::shared_ptr<ls_std::String> _value) : Class("SerializableJSONString"),
+ls_std::SerializableJSONString::SerializableJSONString(std::shared_ptr<ls_std::String> _value) :
+Class("SerializableJSONString"),
 value(std::move(_value))
 {}
 
