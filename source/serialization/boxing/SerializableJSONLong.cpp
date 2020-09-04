@@ -33,7 +33,6 @@ void ls_std::SerializableJSONLong::unmarshal(const ls_std::byte_field& _data)
 void ls_std::SerializableJSONLong::_update()
 {
   this->jsonObject = {
-      {"class", this->value->getClassName()},
       {"value", (ls_std::long_type) this->value->getValue()}
   };
 }

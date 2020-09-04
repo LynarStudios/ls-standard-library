@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-26
- * Changed:         2020-08-26
+ * Changed:         2020-09-04
  *
  * */
 
@@ -28,7 +28,7 @@ namespace {
     ls_std::SerializableJSONLong serializable {std::make_shared<ls_std::Long>(x)};
     ls_std::byte_field content = serializable.marshal();
 
-    ASSERT_STREQ(R"({"class":"Long","value":31983771009271})", content.c_str());
+    ASSERT_STREQ(R"({"value":31983771009271})", content.c_str());
   }
 
   TEST_F(SerializableJSONLongTest, unmarshal)
@@ -37,7 +37,7 @@ namespace {
     ASSERT_EQ(31983771009271, *x);
 
     ls_std::SerializableJSONLong serializable {x};
-    serializable.unmarshal(R"({"class":"Long","value":1989})");
+    serializable.unmarshal(R"({"value":1989})");
 
     ASSERT_EQ(1989, *x);
   }
