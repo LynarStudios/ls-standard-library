@@ -29,7 +29,7 @@ namespace {
     ls_std::SerializableJSONDouble serializable {std::make_shared<ls_std::Double>(x)};
     ls_std::String jsonString {serializable.marshal()};
 
-    ASSERT_TRUE(jsonString.contains(R"({"class":"Double","value":3.14159)"));
+    ASSERT_TRUE(jsonString.contains(R"({"value":3.14159)"));
   }
 
   TEST_F(SerializableJSONDoubleTest, unmarshal)
@@ -39,7 +39,7 @@ namespace {
     ASSERT_DOUBLE_EQ(14.2234, *x);
 
     ls_std::SerializableJSONDouble serializable {x};
-    serializable.unmarshal(R"({"class":"Double","value":3.14159})");
+    serializable.unmarshal(R"({"value":3.14159})");
 
     ASSERT_DOUBLE_EQ(3.14159, *x);
   }
