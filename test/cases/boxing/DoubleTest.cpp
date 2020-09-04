@@ -9,6 +9,8 @@
 
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Double.hpp"
+#include "../../../source/serialization/boxing/SerializableJSONDouble.hpp"
+#include "../../../source/boxing/String.hpp"
 
 namespace {
   class DoubleTest : public ::testing::Test {
@@ -268,6 +270,21 @@ namespace {
 
   // implementation
 
+  TEST_F(DoubleTest, marshal)
+  {
+    std::shared_ptr<ls_std::Double> x = std::make_shared<ls_std::Double>(3.14159);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONDouble>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    ls_std::String jsonString {x->marshal()};
+
+    ASSERT_TRUE(jsonString.contains(R"({"value":3.14159)"));
+
+    *x = 17.13149;
+    jsonString = x->marshal();
+    ASSERT_TRUE(jsonString.contains(R"({"value":17.1314)"));
+  }
+
   TEST_F(DoubleTest, parse)
   {
     ls_std::Double x {};
@@ -283,6 +300,19 @@ namespace {
   {
     ls_std::Double x {13.1543};
     ASSERT_TRUE(x.toString().find("13.1543") != std::string::npos);
+  }
+
+  TEST_F(DoubleTest, unmarshal)
+  {
+    std::shared_ptr<ls_std::Double> x = std::make_shared<ls_std::Double>(3.14159);
+
+    ASSERT_DOUBLE_EQ(3.14159f, *x);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONDouble>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    x->unmarshal(R"({"value":17.4132})");
+
+    ASSERT_DOUBLE_EQ(17.4132, *x);
   }
 
   // additional functionality

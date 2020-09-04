@@ -10,11 +10,13 @@
 #ifndef LS_STD_DOUBLE_HPP
 #define LS_STD_DOUBLE_HPP
 
+#include <memory>
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
+#include "../serialization/ISerializable.hpp"
 
 namespace ls_std {
-  class Double : public Class, IBoxing {
+  class Double : public Class, public IBoxing, public ISerializable {
     public:
 
       Double();
@@ -74,19 +76,23 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
       std::string toString() override;
+      void unmarshal(const ls_std::byte_field& _data) override;
 
       // additional functionality
 
       double getEpsilon();
       double getValue();
       void setEpsilon(double _epsilon);
+      void setSerializable(std::shared_ptr<ISerializable> _serializable);
 
     private:
 
-      double value {};
       double epsilon {};
+      std::shared_ptr<ISerializable> serializable {};
+      double value {};
   };
 }
 

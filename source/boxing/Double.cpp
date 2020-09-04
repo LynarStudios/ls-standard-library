@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-16
+ * Changed:         2020-09-04
  *
  * */
 
@@ -160,12 +160,28 @@ void ls_std::Double::operator--() {
   this->value -= 1.0f;
 }
 
+ls_std::byte_field ls_std::Double::marshal() {
+  ls_std::byte_field data {};
+
+  if(this->serializable != nullptr) {
+    data = this->serializable->marshal();
+  }
+
+  return data;
+}
+
 void ls_std::Double::parse(std::string _parseText) {
   this->value = std::stod(_parseText);
 }
 
 std::string ls_std::Double::toString() {
   return std::to_string(this->value);
+}
+
+void ls_std::Double::unmarshal(const ls_std::byte_field &_data) {
+  if(this->serializable != nullptr) {
+    this->serializable->unmarshal(_data);
+  }
 }
 
 double ls_std::Double::getEpsilon() {
@@ -178,4 +194,8 @@ double ls_std::Double::getValue() {
 
 void ls_std::Double::setEpsilon(double _epsilon) {
   this->epsilon = _epsilon;
+}
+
+void ls_std::Double::setSerializable(std::shared_ptr<ISerializable> _serializable) {
+  this->serializable = std::move(_serializable);
 }
