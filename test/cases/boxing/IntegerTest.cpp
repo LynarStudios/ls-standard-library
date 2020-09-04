@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-25
+ * Changed:         2020-09-04
  *
  * */
 
@@ -350,7 +350,7 @@ namespace {
     ls_std::File file {path};
     file.createNewFile();
     ls_std::FileWriter writer {file};
-    writer.write(R"({"class":"Integer","value":1990})");
+    writer.write(R"({"value":1990})");
 
     auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
@@ -373,10 +373,10 @@ namespace {
     auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
-    ASSERT_STREQ(R"({"class":"Integer","value":3})", x->marshal().c_str());
+    ASSERT_STREQ(R"({"value":3})", x->marshal().c_str());
 
     *x = 17;
-    ASSERT_STREQ(R"({"class":"Integer","value":17})", x->marshal().c_str());
+    ASSERT_STREQ(R"({"value":17})", x->marshal().c_str());
   }
 
   TEST_F(IntegerTest, parse)
@@ -404,7 +404,7 @@ namespace {
     auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
-    x->unmarshal(R"({"class":"Integer","value":1989})");
+    x->unmarshal(R"({"value":1989})");
 
     ASSERT_EQ(1989, *x);
   }
