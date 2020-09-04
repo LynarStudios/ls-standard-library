@@ -10,11 +10,13 @@
 #ifndef LS_STD_FLOAT_HPP
 #define LS_STD_FLOAT_HPP
 
+#include <memory>
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
+#include "../serialization/ISerializable.hpp"
 
 namespace ls_std {
-  class Float : public Class, IBoxing {
+  class Float : public Class, public IBoxing, public ISerializable {
     public:
 
       Float();
@@ -74,16 +76,21 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
       std::string toString() override;
+      void unmarshal(const ls_std::byte_field& _data) override;
 
       // additional functionality
 
       float getEpsilon();
       float getValue();
       void setEpsilon(float _epsilon);
+      void setSerializable(std::shared_ptr<ISerializable> _serializable);
 
     private:
+
+      std::shared_ptr<ISerializable> serializable {};
 
       float value {};
       float epsilon {};

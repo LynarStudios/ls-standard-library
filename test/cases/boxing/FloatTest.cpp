@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-14
+ * Changed:         2020-09-04
  *
  * */
 
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Float.hpp"
+#include "../../../source/serialization/boxing/SerializableJSONFloat.hpp"
+#include "../../../source/boxing/String.hpp"
 
 namespace {
   class FloatTest : public ::testing::Test {
@@ -268,6 +270,21 @@ namespace {
 
   // implementation
 
+  TEST_F(FloatTest, marshal)
+  {
+    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>(3.14159f);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONFloat>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    ls_std::String jsonString {x->marshal()};
+
+    ASSERT_TRUE(jsonString.contains(R"({"value":3.14159)"));
+
+    *x = 17.13149f;
+    jsonString = x->marshal();
+    ASSERT_TRUE(jsonString.contains(R"({"value":17.1314)"));
+  }
+
   TEST_F(FloatTest, parse)
   {
     ls_std::Float x {};
@@ -283,6 +300,19 @@ namespace {
   {
     ls_std::Float x {13.1543f};
     ASSERT_TRUE(x.toString().find("13.1543") != std::string::npos);
+  }
+
+  TEST_F(FloatTest, unmarshal)
+  {
+    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>(3.14159f);
+
+    ASSERT_FLOAT_EQ(3.14159f, *x);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONFloat>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    x->unmarshal(R"({"value":17.4132})");
+
+    ASSERT_FLOAT_EQ(17.4132, *x);
   }
 
   // additional functionality
