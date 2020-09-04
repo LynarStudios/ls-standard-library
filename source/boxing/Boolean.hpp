@@ -14,9 +14,10 @@
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
 #include "../serialization/ISerializable.hpp"
+#include "../io/IStorable.hpp"
 
 namespace ls_std {
-  class Boolean : public Class, public IBoxing, public ISerializable {
+  class Boolean : public Class, public IBoxing, public ISerializable, public IStorable {
     public:
 
       explicit Boolean(bool _value);
@@ -55,8 +56,10 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field load() override;
       ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
+      void save(const ls_std::byte_field& _data) override;
       std::string toString() override;
       void unmarshal(const ls_std::byte_field& _data) override;
 
@@ -64,6 +67,7 @@ namespace ls_std {
 
       bool getValue();
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
+      void setStorable(std::shared_ptr<IStorable> _storable);
       static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);
       static bool XOR(const Boolean& _leftExpression, bool _rightExpression);
       static bool XOR(bool _leftExpression, const Boolean& _rightExpression);
@@ -72,9 +76,11 @@ namespace ls_std {
     private:
 
       std::shared_ptr<ISerializable> serializable {};
+      std::shared_ptr<IStorable> storable {};
       bool value {};
-      const std::string TRUE_STRING = "true";
+
       const std::string FALSE_STRING = "false";
+      const std::string TRUE_STRING = "true";
 
       std::string _toString() const;
   };

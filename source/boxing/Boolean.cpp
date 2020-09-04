@@ -65,6 +65,17 @@ bool ls_std::Boolean::operator||(int _value) const
   return this->value || _value;
 }
 
+ls_std::byte_field ls_std::Boolean::load() {
+  ls_std::byte_field data {};
+
+  if(this->storable != nullptr && this->serializable != nullptr) {
+    data = this->storable->load();
+    this->serializable->unmarshal(data);
+  }
+
+  return data;
+}
+
 ls_std::byte_field ls_std::Boolean::marshal() {
   ls_std::byte_field data {};
 
@@ -92,6 +103,16 @@ void ls_std::Boolean::parse(std::string _parseText)
   }
 }
 
+void ls_std::Boolean::save(const ls_std::byte_field &_data) {
+  if(this->serializable != nullptr) {
+    if(_data.empty()) {
+      this->storable->save(this->serializable->marshal());
+    } else {
+      this->storable->save(_data);
+    }
+  }
+}
+
 std::string ls_std::Boolean::toString()
 {
   return this->_toString();
@@ -109,6 +130,10 @@ bool ls_std::Boolean::getValue() {
 
 void ls_std::Boolean::setSerializable(std::shared_ptr<ISerializable> _serializable) {
   this->serializable = std::move(_serializable);
+}
+
+void ls_std::Boolean::setStorable(std::shared_ptr<IStorable> _storable) {
+  this->storable = std::move(_storable);
 }
 
 bool ls_std::Boolean::XOR(const Boolean &_leftExpression, const Boolean &_rightExpression) {

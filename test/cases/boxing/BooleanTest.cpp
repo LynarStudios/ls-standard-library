@@ -10,6 +10,10 @@
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Boolean.hpp"
 #include "../../../source/serialization/boxing/SerializableJSONBoolean.hpp"
+#include "../../TestHelper.hpp"
+#include "../../../source/io/File.hpp"
+#include "../../../source/io/FileWriter.hpp"
+#include "../../../source/io/StorableFile.hpp"
 
 namespace {
   class BooleanTest : public ::testing::Test {
@@ -106,6 +110,31 @@ namespace {
   }
 
   // implementation
+
+  TEST_F(BooleanTest, load)
+  {
+    // preparation
+
+    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>();
+    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_bool.json";
+    ls_std::File file {path};
+    file.createNewFile();
+    ls_std::FileWriter writer {file};
+    writer.write(R"({"value":true})");
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    auto storable = std::make_shared<ls_std::StorableFile>(path);
+    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+    // check
+
+    x->load();
+    ASSERT_TRUE(*x);
+
+    file.remove();
+  }
 
   TEST_F(BooleanTest, marshal)
   {
