@@ -29,7 +29,7 @@ namespace {
     ls_std::SerializableJSONFloat serializable {std::make_shared<ls_std::Float>(x)};
     ls_std::String jsonString {serializable.marshal()};
 
-    ASSERT_TRUE(jsonString.contains(R"({"class":"Float","value":3.14159)"));
+    ASSERT_TRUE(jsonString.contains(R"({"value":3.14159)"));
   }
 
   TEST_F(SerializableJSONFloatTest, unmarshal)
@@ -38,7 +38,7 @@ namespace {
     ASSERT_FLOAT_EQ(14.2234f, *x);
 
     ls_std::SerializableJSONFloat serializable {x};
-    serializable.unmarshal(R"({"class":"Float","value":3.14159})");
+    serializable.unmarshal(R"({"value":3.14159})");
 
     ASSERT_FLOAT_EQ(3.14159f, *x);
   }

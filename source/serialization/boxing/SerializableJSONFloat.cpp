@@ -33,7 +33,6 @@ void ls_std::SerializableJSONFloat::unmarshal(const ls_std::byte_field& _data)
 void ls_std::SerializableJSONFloat::_update()
 {
   this->jsonObject = {
-      {"class", this->value->getClassName()},
       {"value", this->value->getValue()}
   };
 }
