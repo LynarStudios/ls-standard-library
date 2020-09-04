@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-16
+ * Changed:         2020-09-04
  *
  * */
 
@@ -65,6 +65,16 @@ bool ls_std::Boolean::operator||(int _value) const
   return this->value || _value;
 }
 
+ls_std::byte_field ls_std::Boolean::marshal() {
+  ls_std::byte_field data {};
+
+  if(this->serializable != nullptr) {
+    data = this->serializable->marshal();
+  }
+
+  return data;
+}
+
 void ls_std::Boolean::parse(std::string _parseText)
 {
   std::transform(_parseText.begin(), _parseText.end(), _parseText.begin(), ::tolower);
@@ -87,8 +97,18 @@ std::string ls_std::Boolean::toString()
   return this->_toString();
 }
 
+void ls_std::Boolean::unmarshal(const ls_std::byte_field &_data) {
+  if(this->serializable != nullptr) {
+    this->serializable->unmarshal(_data);
+  }
+}
+
 bool ls_std::Boolean::getValue() {
   return this->value;
+}
+
+void ls_std::Boolean::setSerializable(std::shared_ptr<ISerializable> _serializable) {
+  this->serializable = std::move(_serializable);
 }
 
 bool ls_std::Boolean::XOR(const Boolean &_leftExpression, const Boolean &_rightExpression) {

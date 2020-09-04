@@ -10,11 +10,13 @@
 #ifndef LS_STD_BOOLEAN_HPP
 #define LS_STD_BOOLEAN_HPP
 
+#include <memory>
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
+#include "../serialization/ISerializable.hpp"
 
 namespace ls_std {
-  class Boolean : public Class, IBoxing {
+  class Boolean : public Class, public IBoxing, public ISerializable {
     public:
 
       explicit Boolean(bool _value);
@@ -53,12 +55,15 @@ namespace ls_std {
 
       // implementation
 
+      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
       std::string toString() override;
+      void unmarshal(const ls_std::byte_field& _data) override;
 
       // additional functionality
 
       bool getValue();
+      void setSerializable(std::shared_ptr<ISerializable> _serializable);
       static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);
       static bool XOR(const Boolean& _leftExpression, bool _rightExpression);
       static bool XOR(bool _leftExpression, const Boolean& _rightExpression);
@@ -66,6 +71,7 @@ namespace ls_std {
 
     private:
 
+      std::shared_ptr<ISerializable> serializable {};
       bool value {};
       const std::string TRUE_STRING = "true";
       const std::string FALSE_STRING = "false";

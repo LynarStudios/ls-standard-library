@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-14
+ * Changed:         2020-09-04
  *
  * */
 
 #include <gtest/gtest.h>
 #include "../../../source/boxing/Boolean.hpp"
+#include "../../../source/serialization/boxing/SerializableJSONBoolean.hpp"
 
 namespace {
   class BooleanTest : public ::testing::Test {
@@ -106,6 +107,19 @@ namespace {
 
   // implementation
 
+  TEST_F(BooleanTest, marshal)
+  {
+    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>(true);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+    ASSERT_STREQ(R"({"value":true})", x->marshal().c_str());
+
+    *x = false;
+    ASSERT_STREQ(R"({"value":false})", x->marshal().c_str());
+  }
+
   TEST_F(BooleanTest, parse)
   {
     ls_std::Boolean expression {};
@@ -141,6 +155,19 @@ namespace {
 
     expression = 4 < 3;
     ASSERT_STREQ("false", expression.toString().c_str());
+  }
+
+  TEST_F(BooleanTest, unmarshal)
+  {
+    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>(false);
+
+    ASSERT_FALSE(*x);
+
+    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
+    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    x->unmarshal(R"({"value":true})");
+
+    ASSERT_TRUE(*x);
   }
 
   // additional functionality
