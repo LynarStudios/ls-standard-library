@@ -306,7 +306,7 @@ namespace {
   {
     std::shared_ptr<ls_std::Double> x = std::make_shared<ls_std::Double>(3.14159);
 
-    ASSERT_DOUBLE_EQ(3.14159f, *x);
+    ASSERT_DOUBLE_EQ(3.14159, *x);
 
     auto serializable = std::make_shared<ls_std::SerializableJSONDouble>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
