@@ -94,11 +94,10 @@ namespace ls_std {
 
     private:
 
+      float epsilon {};
       std::shared_ptr<ISerializable> serializable {};
       std::shared_ptr<IStorable> storable {};
-
       float value {};
-      float epsilon {};
   };
 }
 
