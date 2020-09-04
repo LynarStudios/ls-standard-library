@@ -33,7 +33,6 @@ void ls_std::SerializableJSONString::unmarshal(const ls_std::byte_field& _data)
 void ls_std::SerializableJSONString::_update()
 {
   this->jsonObject = {
-      {"class", this->value->getClassName()},
       {"value", this->value->toString()}
   };
 }

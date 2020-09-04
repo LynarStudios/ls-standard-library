@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-30
+ * Changed:         2020-09-04
  *
  * */
 
@@ -104,7 +104,7 @@ namespace {
     ls_std::File file {path};
     file.createNewFile();
     ls_std::FileWriter writer {file};
-    writer.write(R"({"class":"String","value":"Hello!"})");
+    writer.write(R"({"value":"Hello!"})");
 
     auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
@@ -127,10 +127,10 @@ namespace {
     auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
-    ASSERT_STREQ(R"({"class":"String","value":"Hello!"})", x->marshal().c_str());
+    ASSERT_STREQ(R"({"value":"Hello!"})", x->marshal().c_str());
 
     *x = "Test!";
-    ASSERT_STREQ(R"({"class":"String","value":"Test!"})", x->marshal().c_str());
+    ASSERT_STREQ(R"({"value":"Test!"})", x->marshal().c_str());
   }
 
   TEST_F(StringTest, parse)
@@ -156,7 +156,7 @@ namespace {
     auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
-    x->unmarshal(R"({"class":"String","value":"Test!"})");
+    x->unmarshal(R"({"value":"Test!"})");
 
     ASSERT_STREQ("Test!", *x);
   }

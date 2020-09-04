@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-08-30
+ * Changed:         2020-09-04
  *
  * */
 
@@ -28,7 +28,7 @@ namespace {
     ls_std::SerializableJSONString serializable {std::make_shared<ls_std::String>(x)};
     ls_std::byte_field content = serializable.marshal();
 
-    ASSERT_STREQ(R"({"class":"String","value":"Testing something!"})", content.c_str());
+    ASSERT_STREQ(R"({"value":"Testing something!"})", content.c_str());
   }
 
   TEST_F(SerializableJSONStringTest, unmarshal)
@@ -37,7 +37,7 @@ namespace {
     ASSERT_STREQ("Hello!", *x);
 
     ls_std::SerializableJSONString serializable {x};
-    serializable.unmarshal(R"({"class":"String","value":"Ups!"})");
+    serializable.unmarshal(R"({"value":"Ups!"})");
 
     ASSERT_STREQ("Ups!", *x);
   }
