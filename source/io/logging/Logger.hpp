@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-21
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef LOGGER_HPP
-#define LOGGER_HPP
+#ifndef LS_STD_LOGGER_HPP
+#define LS_STD_LOGGER_HPP
 
 #include "../../base/Class.hpp"
 #include "LogLevel.hpp"

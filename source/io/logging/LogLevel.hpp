@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-20
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef LOG_LEVEL_HPP
-#define LOG_LEVEL_HPP
+#ifndef LS_STD_LOG_LEVEL_HPP
+#define LS_STD_LOG_LEVEL_HPP
 
 #include <unordered_map>
 #include "../../base/Class.hpp"

@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-20
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef FILE_NOT_FOUND_EXCEPTION_HPP
-#define FILE_NOT_FOUND_EXCEPTION_HPP
+#ifndef LS_STD_FILE_NOT_FOUND_EXCEPTION_HPP
+#define LS_STD_FILE_NOT_FOUND_EXCEPTION_HPP
 
 #include <exception>
 #include <string>

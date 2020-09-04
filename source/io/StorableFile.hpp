@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-08-25
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef STORABLE_FILE_HPP
-#define STORABLE_FILE_HPP
+#ifndef LS_STD_STORABLE_FILE_HPP
+#define LS_STD_STORABLE_FILE_HPP
 
 #include <string>
 #include <memory>

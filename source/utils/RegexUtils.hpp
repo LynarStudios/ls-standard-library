@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2020-08-18
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef REGEX_UTILS_HPP
-#define REGEX_UTILS_HPP
+#ifndef LS_STD_REGEX_UTILS_HPP
+#define LS_STD_REGEX_UTILS_HPP
 
 #include <string>
 #include <regex>

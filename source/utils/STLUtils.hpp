@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef STL_UTILS_HPP
-#define STL_UTILS_HPP
+#ifndef LS_STD_STL_UTILS_HPP
+#define LS_STD_STL_UTILS_HPP
 
 #include <algorithm>
 

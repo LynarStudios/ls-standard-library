@@ -7,8 +7,8 @@
  *
  * */
 
-#ifndef SERIALIZABLE_JSON_FLOAT_HPP
-#define SERIALIZABLE_JSON_FLOAT_HPP
+#ifndef LS_STD_SERIALIZABLE_JSON_FLOAT_HPP
+#define LS_STD_SERIALIZABLE_JSON_FLOAT_HPP
 
 #include <memory>
 #include <json.hpp>

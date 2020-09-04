@@ -7,8 +7,8 @@
  *
  * */
 
-#ifndef SERIALIZABLE_JSON_DOUBLE_HPP
-#define SERIALIZABLE_JSON_DOUBLE_HPP
+#ifndef LS_STD_SERIALIZABLE_JSON_DOUBLE_HPP
+#define LS_STD_SERIALIZABLE_JSON_DOUBLE_HPP
 
 #include <memory>
 #include <json.hpp>

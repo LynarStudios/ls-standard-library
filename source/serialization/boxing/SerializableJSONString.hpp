@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-08-30
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef SERIALIZABLE_JSON_STRING_HPP
-#define SERIALIZABLE_JSON_STRING_HPP
+#ifndef LS_STD_SERIALIZABLE_JSON_STRING_HPP
+#define LS_STD_SERIALIZABLE_JSON_STRING_HPP
 
 #include <memory>
 #include <json.hpp>

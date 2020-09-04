@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-17
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef ILLEGAL_ARGUMENT_EXCEPTION_HPP
-#define ILLEGAL_ARGUMENT_EXCEPTION_HPP
+#ifndef LS_STD_ILLEGAL_ARGUMENT_EXCEPTION_HPP
+#define LS_STD_ILLEGAL_ARGUMENT_EXCEPTION_HPP
 
 #include <exception>
 

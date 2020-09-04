@@ -7,8 +7,8 @@
  *
  * */
 
-#ifndef SERIALIZABLE_JSON_LONG_HPP
-#define SERIALIZABLE_JSON_LONG_HPP
+#ifndef LS_STD_SERIALIZABLE_JSON_LONG_HPP
+#define LS_STD_SERIALIZABLE_JSON_LONG_HPP
 
 #include "../../base/Class.hpp"
 #include "../ISerializable.hpp"

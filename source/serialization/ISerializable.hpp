@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-08-23
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef SERIALIZABLE_HPP
-#define SERIALIZABLE_HPP
+#ifndef LS_STD_SERIALIZABLE_HPP
+#define LS_STD_SERIALIZABLE_HPP
 
 #include "../base/Types.hpp"
 

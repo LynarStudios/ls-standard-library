@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2020-08-18
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef NEW_LINE_HPP
-#define NEW_LINE_HPP
+#ifndef LS_STD_NEW_LINE_HPP
+#define LS_STD_NEW_LINE_HPP
 
 #include <string>
 

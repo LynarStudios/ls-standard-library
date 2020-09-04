@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-08-07
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef CLASS_HPP
-#define CLASS_HPP
+#ifndef LS_STD_CLASS_HPP
+#define LS_STD_CLASS_HPP
 
 #include <string>
 

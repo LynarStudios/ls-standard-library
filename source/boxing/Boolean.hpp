@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-08-16
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef BOOLEAN_HPP
-#define BOOLEAN_HPP
+#ifndef LS_STD_BOOLEAN_HPP
+#define LS_STD_BOOLEAN_HPP
 
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"

@@ -7,8 +7,8 @@
  *
  * */
 
-#ifndef SERIALIZABLE_JSON_INTEGER_HPP
-#define SERIALIZABLE_JSON_INTEGER_HPP
+#ifndef LS_STD_SERIALIZABLE_JSON_INTEGER_HPP
+#define LS_STD_SERIALIZABLE_JSON_INTEGER_HPP
 
 #include "../../base/Class.hpp"
 #include "../ISerializable.hpp"

@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-16
+ * Changed:         2020-09-04
  *
  * */
 
-#ifndef FLOAT_HPP
-#define FLOAT_HPP
+#ifndef LS_STD_FLOAT_HPP
+#define LS_STD_FLOAT_HPP
 
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
