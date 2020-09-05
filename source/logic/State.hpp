@@ -11,19 +11,30 @@
 #define LS_STD_STATE_HPP
 
 #include <memory>
-#include <vector>
+#include <list>
 #include "../base/Class.hpp"
 
 namespace ls_std {
   class State : public Class {
     public:
 
-      State();
+      explicit State(std::string  _id);
       ~State() = default;
+
+      bool addStateConnection(const std::shared_ptr<State>& _connectedState);
+      std::list<std::shared_ptr<State>> getConnectedStates();
+      std::string getId();
+      bool isAccessible() const;
+      void removeStateConnection(const std::string& _id);
+      void updateAccessCondition(bool _enteredCondition);
 
     private:
 
-      std::vector<std::shared_ptr<State>> connectedStates {};
+      bool accessCondition {};
+      std::list<std::shared_ptr<State>> connectedStates {};
+      std::string id {};
+
+      bool _stateIsConnected(const std::string& _id);
   };
 }
 

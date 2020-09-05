@@ -121,7 +121,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONStringTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONFloatTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONDoubleTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONBooleanTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONBooleanTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp)
 
 ##########################################################
 # Build
