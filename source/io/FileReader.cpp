@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-25
+ * Changed:         2020-09-08
  *
  * */
 
@@ -31,7 +31,10 @@ ls_std::byte_field ls_std::FileReader::read()
   }
 
   inputStream.close();
-  return ls_std::byte_field {data, (size_t) this->file.getSize()};
+  ls_std::byte_field readData = ls_std::byte_field {data, (size_t) this->file.getSize()};
+  delete[] data;
+
+  return readData;
 }
 
 void ls_std::FileReader::reset(File &_file)
