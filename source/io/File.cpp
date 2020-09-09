@@ -410,6 +410,7 @@ std::list<std::string> ls_std::File::_listUnix(const std::string &_path, bool wi
     ls_std::File::_addToFileListUnix(_path, withDirectories, directoryEntity, filesInDirectory);
   }
 
+  closedir(directory);
   return filesInDirectory;
 }
 #endif
