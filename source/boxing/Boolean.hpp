@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-09-04
+ * Changed:         2020-09-09
  *
  * */
 
@@ -65,7 +65,7 @@ namespace ls_std {
 
       // additional functionality
 
-      bool getValue();
+      bool getValue() const;
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
       void setStorable(std::shared_ptr<IStorable> _storable);
       static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);

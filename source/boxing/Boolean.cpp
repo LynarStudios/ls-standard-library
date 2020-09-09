@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-09-04
+ * Changed:         2020-09-09
  *
  * */
 
@@ -124,7 +124,7 @@ void ls_std::Boolean::unmarshal(const ls_std::byte_field &_data) {
   }
 }
 
-bool ls_std::Boolean::getValue() {
+bool ls_std::Boolean::getValue() const {
   return this->value;
 }
 
