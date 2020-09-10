@@ -95,7 +95,9 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/StateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/StateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/State.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/State.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/State.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/StateConnection.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/StateConnection.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -122,7 +124,9 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONFloatTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONDoubleTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONBooleanTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp)
 
 ##########################################################
 # Build
