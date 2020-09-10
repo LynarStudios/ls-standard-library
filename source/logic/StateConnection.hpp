@@ -19,7 +19,6 @@ namespace ls_std {
     public:
 
       explicit StateConnection(StateConnectionId _connectionId, StateId _stateId);
-      StateConnection();
       ~StateConnection() = default;
 
       StateConnectionId getConnectionId();
