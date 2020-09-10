@@ -13,6 +13,7 @@
 #include <memory>
 #include <unordered_map>
 #include "../base/Class.hpp"
+#include "StateMachineTypes.hpp"
 
 namespace ls_std {
   class State : public Class {
@@ -22,7 +23,7 @@ namespace ls_std {
       ~State() = default;
 
       bool addStateConnection(const std::string& _connectionId, const std::shared_ptr<State>& _connectedState);
-      std::unordered_map<std::string, std::shared_ptr<State>> getConnectedStates();
+      std::unordered_map<StateConnectionId, std::shared_ptr<State>> getConnectedStates();
       std::string getId();
 
     private:

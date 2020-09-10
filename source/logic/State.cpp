@@ -25,7 +25,7 @@ bool ls_std::State::addStateConnection(const std::string& _connectionId, const s
   return added;
 }
 
-std::unordered_map<std::string, std::shared_ptr<ls_std::State>> ls_std::State::getConnectedStates()
+std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::State>> ls_std::State::getConnectedStates()
 {
   return this->connectedStates;
 }
