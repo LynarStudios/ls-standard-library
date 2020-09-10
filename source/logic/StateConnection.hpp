@@ -13,25 +13,25 @@
 #include <memory>
 #include <atomic>
 #include "../base/Class.hpp"
-#include "State.hpp"
+#include "StateMachineTypes.hpp"
 
 namespace ls_std {
   class StateConnection : public Class {
     public:
 
-      explicit StateConnection(std::string _connectionId, std::shared_ptr<State> _state);
+      explicit StateConnection(StateConnectionId _connectionId, StateId _stateId);
       ~StateConnection() = default;
 
-      std::string getConnectionId();
-      std::shared_ptr<State> getState();
+      StateConnectionId getConnectionId();
+      StateId getState();
       bool isPassable();
       void updatePassCondition(bool _condition);
 
     private:
 
       std::atomic<bool> condition {};
-      std::string connectionId {};
-      std::shared_ptr<State> state {};
+      StateConnectionId connectionId {};
+      StateId stateId {};
   };
 }
 

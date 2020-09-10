@@ -9,20 +9,18 @@
 
 #include "StateConnection.hpp"
 
-#include <utility>
-
-ls_std::StateConnection::StateConnection(std::string _connectionId, std::shared_ptr<State> _state) :
+ls_std::StateConnection::StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId) :
 Class("StateConnection"),
 connectionId(std::move(_connectionId)),
-state(std::move(_state))
+stateId(std::move(_stateId))
 {}
 
-std::string ls_std::StateConnection::getConnectionId() {
+ls_std::StateConnectionId ls_std::StateConnection::getConnectionId() {
   return this->connectionId;
 }
 
-std::shared_ptr<ls_std::State> ls_std::StateConnection::getState() {
-  return this->state;
+ls_std::StateId ls_std::StateConnection::getState() {
+  return this->stateId;
 }
 
 bool ls_std::StateConnection::isPassable() {
