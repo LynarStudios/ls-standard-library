@@ -19,7 +19,7 @@ ls_std::StateConnectionId ls_std::StateConnection::getConnectionId() {
   return this->connectionId;
 }
 
-ls_std::StateId ls_std::StateConnection::getState() {
+ls_std::StateId ls_std::StateConnection::getStateId() {
   return this->stateId;
 }
 

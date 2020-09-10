@@ -23,7 +23,7 @@ namespace ls_std {
       ~StateConnection() = default;
 
       StateConnectionId getConnectionId();
-      StateId getState();
+      StateId getStateId();
       bool isPassable();
       void updatePassCondition(bool _condition);
 

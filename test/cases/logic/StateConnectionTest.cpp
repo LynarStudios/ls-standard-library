@@ -30,7 +30,7 @@ namespace {
   TEST_F(StateConnectionTest, getState)
   {
     ls_std::StateConnection connection {"AB", "B"};
-    ASSERT_STREQ("B", connection.getState().c_str());
+    ASSERT_STREQ("B", connection.getStateId().c_str());
   }
 
   TEST_F(StateConnectionTest, isPassable)
