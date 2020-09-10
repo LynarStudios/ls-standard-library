@@ -14,24 +14,25 @@
 #include <unordered_map>
 #include "../base/Class.hpp"
 #include "StateMachineTypes.hpp"
+#include "StateConnection.hpp"
 
 namespace ls_std {
   class State : public Class {
     public:
 
-      explicit State(std::string _id);
+      explicit State(StateId _id);
       ~State() = default;
 
-      bool addStateConnection(const std::string& _connectionId, const std::shared_ptr<State>& _connectedState);
-      std::unordered_map<StateConnectionId, std::shared_ptr<State>> getConnectedStates();
-      std::string getId();
+      bool addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState);
+      std::unordered_map<StateConnectionId, StateConnection> getConnectedStates();
+      StateId getId();
 
     private:
 
-      std::unordered_map<std::string, std::shared_ptr<State>> connectedStates {};
-      std::string id {};
+      std::unordered_map<StateConnectionId, StateConnection> connectedStates {};
+      StateId id {};
 
-      bool _stateIsConnected(const std::string& _id);
+      bool _stateIsConnected(const StateId& _id);
   };
 }
 

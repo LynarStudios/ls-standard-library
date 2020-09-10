@@ -9,28 +9,28 @@
 
 #include "State.hpp"
 
-ls_std::State::State(std::string  _id) : Class("State"),
+ls_std::State::State(ls_std::StateId _id) : Class("State"),
 id(std::move(_id))
 {}
 
-bool ls_std::State::addStateConnection(const std::string& _connectionId, const std::shared_ptr<State>& _connectedState)
+bool ls_std::State::addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState)
 {
   bool added {};
 
   if(_connectedState != nullptr && !this->_stateIsConnected(_connectionId)) {
-    this->connectedStates.insert({_connectionId, _connectedState});
+    this->connectedStates.insert({_connectionId, ls_std::StateConnection {_connectionId, _connectedState->getId()}});
     added = true;
   }
 
   return added;
 }
 
-std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::State>> ls_std::State::getConnectedStates()
+std::unordered_map<ls_std::StateConnectionId, ls_std::StateConnection> ls_std::State::getConnectedStates()
 {
   return this->connectedStates;
 }
 
-std::string ls_std::State::getId()
+ls_std::StateId ls_std::State::getId()
 {
   return this->id;
 }
