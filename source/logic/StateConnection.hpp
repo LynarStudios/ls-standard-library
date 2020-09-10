@@ -11,7 +11,6 @@
 #define LS_STD_STATE_CONNECTION_HPP
 
 #include <memory>
-#include <atomic>
 #include "../base/Class.hpp"
 #include "StateMachineTypes.hpp"
 
@@ -19,7 +18,8 @@ namespace ls_std {
   class StateConnection : public Class {
     public:
 
-      explicit StateConnection(StateConnectionId _connectionId, StateId _stateId);
+      explicit StateConnection(StateConnectionId _connectionId, StateId _stateId, std::memory_order _order);
+      StateConnection();
       ~StateConnection() = default;
 
       StateConnectionId getConnectionId();
@@ -29,7 +29,7 @@ namespace ls_std {
 
     private:
 
-      std::atomic<bool> condition {};
+      bool condition {};
       StateConnectionId connectionId {};
       StateId stateId {};
   };

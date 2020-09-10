@@ -9,10 +9,14 @@
 
 #include "StateConnection.hpp"
 
-ls_std::StateConnection::StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId) :
+ls_std::StateConnection::StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId, std::memory_order _order = std::memory_order_seq_cst) :
 Class("StateConnection"),
+condition(this->condition.load(_order)),
 connectionId(std::move(_connectionId)),
 stateId(std::move(_stateId))
+{}
+
+ls_std::StateConnection::StateConnection() : Class("StateConnection")
 {}
 
 ls_std::StateConnectionId ls_std::StateConnection::getConnectionId() {
