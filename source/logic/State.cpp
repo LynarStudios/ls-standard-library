@@ -35,16 +35,6 @@ std::string ls_std::State::getId()
   return this->id;
 }
 
-bool ls_std::State::isAccessible() const
-{
-  return this->accessCondition;
-}
-
-void ls_std::State::updateAccessCondition(bool _enteredCondition)
-{
-  this->accessCondition = _enteredCondition;
-}
-
 bool ls_std::State::_stateIsConnected(const std::string &_id)
 {
   return this->connectedStates.find(_id) != this->connectedStates.end();

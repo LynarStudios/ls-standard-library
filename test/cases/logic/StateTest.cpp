@@ -63,19 +63,4 @@ namespace {
     ls_std::State stateA {"A"};
     ASSERT_STREQ("A", stateA.getId().c_str());
   }
-
-  TEST_F(StateTest, isAccessible)
-  {
-    ls_std::State stateA {"A"};
-    ASSERT_FALSE(stateA.isAccessible());
-  }
-
-  TEST_F(StateTest, updateAccessCondition)
-  {
-    ls_std::State stateA {"A"};
-    ASSERT_FALSE(stateA.isAccessible());
-
-    stateA.updateAccessCondition(true);
-    ASSERT_TRUE(stateA.isAccessible());
-  }
 }

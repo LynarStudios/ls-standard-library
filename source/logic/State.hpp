@@ -24,12 +24,9 @@ namespace ls_std {
       bool addStateConnection(const std::string& _connectionId, const std::shared_ptr<State>& _connectedState);
       std::unordered_map<std::string, std::shared_ptr<State>> getConnectedStates();
       std::string getId();
-      bool isAccessible() const;
-      void updateAccessCondition(bool _enteredCondition);
 
     private:
 
-      bool accessCondition {};
       std::unordered_map<std::string, std::shared_ptr<State>> connectedStates {};
       std::string id {};
 
