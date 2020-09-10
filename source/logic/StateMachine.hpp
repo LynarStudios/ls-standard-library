@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-07
+ * Changed:         2020-09-10
  *
  * */
 
@@ -13,26 +13,32 @@
 #include <memory>
 #include <unordered_map>
 #include <string>
+#include <vector>
 #include "../base/Class.hpp"
 #include "State.hpp"
+#include "StateMachineTypes.hpp"
 
 namespace ls_std {
   class StateMachine : public Class {
     public:
 
-      StateMachine();
+      explicit StateMachine(std::string _name);
       ~StateMachine() = default;
 
-      bool addState(std::shared_ptr<State> _state);
+      bool addState(const std::shared_ptr<State>& _state);
+      std::shared_ptr<State> getCurrentState();
+      std::string getName();
       bool proceed();
-      bool setStartState(const std::string& _id);
+      bool setStartState(const StateId& _id);
 
     private:
 
       std::shared_ptr<State> currentState {};
-      std::unordered_map<std::string, std::shared_ptr<State>> states {};
+      std::string name {};
+      std::unordered_map<StateId, std::shared_ptr<State>> states {};
 
-      bool _stateExists(const std::string& _id);
+      std::vector<StateId> _getNextValidStates();
+      bool _stateExists(const StateId& _id);
   };
 }
 
