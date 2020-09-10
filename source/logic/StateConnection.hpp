@@ -18,7 +18,7 @@ namespace ls_std {
   class StateConnection : public Class {
     public:
 
-      explicit StateConnection(StateConnectionId _connectionId, StateId _stateId, std::memory_order _order);
+      explicit StateConnection(StateConnectionId _connectionId, StateId _stateId);
       StateConnection();
       ~StateConnection() = default;
 
