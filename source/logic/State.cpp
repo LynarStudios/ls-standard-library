@@ -16,16 +16,18 @@ id(std::move(_id))
 bool ls_std::State::addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState)
 {
   bool added {};
+  std::shared_ptr<ls_std::StateConnection> connection {};
 
   if(_connectedState != nullptr && !this->_stateIsConnected(_connectionId)) {
-    this->connectedStates.insert({_connectionId, ls_std::StateConnection {_connectionId, _connectedState->getId()}});
+    connection = std::make_shared<ls_std::StateConnection>(_connectionId, _connectedState->getId());
+    this->connectedStates.insert({_connectionId, connection});
     added = true;
   }
 
   return added;
 }
 
-std::unordered_map<ls_std::StateConnectionId, ls_std::StateConnection> ls_std::State::getConnectedStates()
+std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::StateConnection>> ls_std::State::getConnectedStates()
 {
   return this->connectedStates;
 }

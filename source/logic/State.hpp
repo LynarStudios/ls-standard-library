@@ -24,12 +24,12 @@ namespace ls_std {
       ~State() = default;
 
       bool addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState);
-      std::unordered_map<StateConnectionId, StateConnection> getConnectedStates();
+      std::unordered_map<StateConnectionId, std::shared_ptr<StateConnection>> getConnectedStates();
       StateId getId();
 
     private:
 
-      std::unordered_map<StateConnectionId, StateConnection> connectedStates {};
+      std::unordered_map<StateConnectionId, std::shared_ptr<StateConnection>> connectedStates {};
       StateId id {};
 
       bool _stateIsConnected(const StateId& _id);
