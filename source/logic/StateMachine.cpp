@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-10
+ * Changed:         2020-09-11
  *
  * */
 
@@ -29,6 +29,10 @@ std::shared_ptr<ls_std::State> ls_std::StateMachine::getCurrentState() {
   return this->currentState;
 }
 
+std::vector<ls_std::StateId> ls_std::StateMachine::getMemory() {
+  return this->memory;
+}
+
 std::string ls_std::StateMachine::getName() {
   return this->name;
 }
@@ -39,6 +43,7 @@ bool ls_std::StateMachine::proceed() {
 
   if(condition) {
     this->currentState = this->states[nextValidStates.at(0)];
+    this->_remember(nextValidStates.at(0));
   }
 
   return condition;
@@ -49,6 +54,7 @@ bool ls_std::StateMachine::setStartState(const ls_std::StateId&_id) {
 
   if(exists) {
     this->currentState = this->states[_id];
+    this->_remember(_id);
   }
 
   return exists;
@@ -64,6 +70,10 @@ std::vector<ls_std::StateId> ls_std::StateMachine::_getNextValidStates() {
   }
 
   return validStates;
+}
+
+void ls_std::StateMachine::_remember(const ls_std::StateId &_id) {
+  this->memory.push_back(_id);
 }
 
 bool ls_std::StateMachine::_stateExists(const ls_std::StateId &_id) {

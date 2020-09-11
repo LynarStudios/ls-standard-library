@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2020-09-10
+ * Changed:         2020-09-11
  *
  * */
 
@@ -69,6 +69,42 @@ namespace {
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
 
     ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
+  }
+
+  TEST_F(StateMachineTest, getMemory)
+  {
+    ls_std::StateMachine stateMachine = _createStateMachine();
+    ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
+    ASSERT_EQ(0, stateMachine.getMemory().size());
+
+    stateMachine.setStartState("A");
+    ASSERT_EQ(1, stateMachine.getMemory().size());
+    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
+
+    ASSERT_FALSE(stateMachine.proceed());
+    ASSERT_EQ(1, stateMachine.getMemory().size());
+    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
+
+    stateMachine.getCurrentState()->getConnectedStates().at("AB")->updatePassCondition(true);
+    ASSERT_TRUE(stateMachine.proceed());
+    ASSERT_EQ(2, stateMachine.getMemory().size());
+    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
+    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
+
+    stateMachine.getCurrentState()->getConnectedStates().at("BC")->updatePassCondition(true);
+    ASSERT_TRUE(stateMachine.proceed());
+    ASSERT_EQ(3, stateMachine.getMemory().size());
+    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
+    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
+    ASSERT_STREQ("C", stateMachine.getMemory().at(2).c_str());
+
+    stateMachine.getCurrentState()->getConnectedStates().at("CB")->updatePassCondition(true);
+    ASSERT_TRUE(stateMachine.proceed());
+    ASSERT_EQ(4, stateMachine.getMemory().size());
+    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
+    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
+    ASSERT_STREQ("C", stateMachine.getMemory().at(2).c_str());
+    ASSERT_STREQ("B", stateMachine.getMemory().at(3).c_str());
   }
 
   TEST_F(StateMachineTest, getName)

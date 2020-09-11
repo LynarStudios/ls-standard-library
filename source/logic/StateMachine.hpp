@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-10
+ * Changed:         2020-09-11
  *
  * */
 
@@ -27,6 +27,7 @@ namespace ls_std {
 
       bool addState(const std::shared_ptr<State>& _state);
       std::shared_ptr<State> getCurrentState();
+      std::vector<ls_std::StateId> getMemory();
       std::string getName();
       bool proceed();
       bool setStartState(const StateId& _id);
@@ -34,10 +35,12 @@ namespace ls_std {
     private:
 
       std::shared_ptr<State> currentState {};
+      std::vector<ls_std::StateId> memory {};
       std::string name {};
       std::unordered_map<StateId, std::shared_ptr<State>> states {};
 
       std::vector<StateId> _getNextValidStates();
+      void _remember(const StateId& _id);
       bool _stateExists(const StateId& _id);
   };
 }
