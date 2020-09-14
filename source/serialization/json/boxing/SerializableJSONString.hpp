@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-09-04
+ * Changed:         2020-09-14
  *
  * */
 
@@ -12,8 +12,8 @@
 
 #include <memory>
 #include <json.hpp>
-#include "../../serialization/ISerializable.hpp"
-#include "../../boxing/String.hpp"
+#include "../../ISerializable.hpp"
+#include "../../../boxing/String.hpp"
 
 namespace ls_std {
   class SerializableJSONString : public Class, public ISerializable {

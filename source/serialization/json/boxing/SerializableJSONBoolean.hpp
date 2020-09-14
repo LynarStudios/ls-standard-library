@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-09-04
+ * Changed:         2020-09-14
  *
  * */
 
@@ -12,9 +12,9 @@
 
 #include <memory>
 #include <json.hpp>
-#include "../../base/Class.hpp"
-#include "../ISerializable.hpp"
-#include "../../boxing/Boolean.hpp"
+#include "../../../base/Class.hpp"
+#include "../../ISerializable.hpp"
+#include "../../../boxing/Boolean.hpp"
 
 namespace ls_std {
   class SerializableJSONBoolean : public Class, public ISerializable {

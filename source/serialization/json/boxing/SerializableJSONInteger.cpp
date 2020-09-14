@@ -2,25 +2,25 @@
  * Author:          Patrick-Christopher Mattulat
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
- * Created:         2020-09-04
- * Changed:         2020-09-04
+ * Created:         2020-08-21
+ * Changed:         2020-09-14
  *
  * */
 
-#include "SerializableJSONFloat.hpp"
+#include "SerializableJSONInteger.hpp"
 
-ls_std::SerializableJSONFloat::SerializableJSONFloat(std::shared_ptr<ls_std::Float> _value) :
-Class("SerializableJSONFloat"),
+ls_std::SerializableJSONInteger::SerializableJSONInteger(std::shared_ptr<ls_std::Integer> _value) :
+Class("SerializableJSONInteger"),
 value(std::move(_value))
 {}
 
-ls_std::byte_field ls_std::SerializableJSONFloat::marshal()
+ls_std::byte_field ls_std::SerializableJSONInteger::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls_std::SerializableJSONFloat::unmarshal(const ls_std::byte_field& _data)
+void ls_std::SerializableJSONInteger::unmarshal(const ls_std::byte_field& _data)
 {
   std::string jsonString = std::string(_data);
   this->jsonObject = nlohmann::json::parse(jsonString);
@@ -30,7 +30,7 @@ void ls_std::SerializableJSONFloat::unmarshal(const ls_std::byte_field& _data)
   }
 }
 
-void ls_std::SerializableJSONFloat::_update()
+void ls_std::SerializableJSONInteger::_update()
 {
   this->jsonObject = {
       {"value", this->value->getValue()}

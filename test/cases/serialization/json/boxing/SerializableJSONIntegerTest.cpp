@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-09-04
+ * Changed:         2020-09-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/boxing/Integer.hpp"
-#include "../../../../source/serialization/boxing/SerializableJSONInteger.hpp"
+#include "../../../../../source/boxing/Integer.hpp"
+#include "../../../../../source/serialization/json/boxing/SerializableJSONInteger.hpp"
 
 namespace {
   class SerializableJSONIntegerTest : public ::testing::Test {

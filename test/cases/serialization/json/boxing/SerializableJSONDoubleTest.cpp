@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-09-04
+ * Changed:         2020-09-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/boxing/Double.hpp"
-#include "../../../../source/serialization/boxing/SerializableJSONDouble.hpp"
-#include "../../../../source/boxing/String.hpp"
+#include "../../../../../source/boxing/Double.hpp"
+#include "../../../../../source/serialization/json/boxing/SerializableJSONDouble.hpp"
+#include "../../../../../source/boxing/String.hpp"
 
 namespace {
   class SerializableJSONDoubleTest : public ::testing::Test {

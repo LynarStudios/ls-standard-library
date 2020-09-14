@@ -3,16 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-25
- * Changed:         2020-09-04
+ * Changed:         2020-09-14
  *
  * */
 
 #ifndef LS_STD_SERIALIZABLE_JSON_LONG_HPP
 #define LS_STD_SERIALIZABLE_JSON_LONG_HPP
 
-#include "../../base/Class.hpp"
-#include "../ISerializable.hpp"
-#include "../../boxing/Long.hpp"
+#include "../../../base/Class.hpp"
+#include "../../ISerializable.hpp"
+#include "../../../boxing/Long.hpp"
 #include <json.hpp>
 
 namespace ls_std {

@@ -80,18 +80,18 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/logging/LogLevelValue.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/ISerializable.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONInteger.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONInteger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONLong.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONLong.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONString.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONString.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONFloat.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONFloat.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONDouble.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONDouble.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONBoolean.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/boxing/SerializableJSONBoolean.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONInteger.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONInteger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONLong.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONLong.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONString.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONString.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONFloat.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONFloat.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONDouble.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONDouble.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONBoolean.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/boxing/SerializableJSONBoolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/StateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/StateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/logic/State.hpp
@@ -118,13 +118,13 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileOutputStreamTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JSONTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONIntegerTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONLongTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONStringTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONFloatTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONDoubleTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/boxing/SerializableJSONBooleanTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/JSONTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONIntegerTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONLongTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONStringTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONFloatTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONDoubleTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONBooleanTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp)
