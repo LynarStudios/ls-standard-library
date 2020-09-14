@@ -20,7 +20,7 @@ namespace ls_std {
   class SerializableJSONStateConnection : public Class, public ISerializable {
     public:
 
-      SerializableJSONStateConnection(std::shared_ptr<ls_std::StateConnection> _value);
+      explicit SerializableJSONStateConnection(std::shared_ptr<ls_std::StateConnection> _value);
       ~SerializableJSONStateConnection() = default;
 
       ls_std::byte_field marshal() override;
