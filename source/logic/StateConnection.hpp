@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-09-10
+ * Changed:         2020-09-14
  *
  * */
 
@@ -23,7 +23,9 @@ namespace ls_std {
 
       StateConnectionId getConnectionId();
       StateId getStateId();
-      bool isPassable();
+      bool isPassable() const;
+      void setConnectionId(StateConnectionId _connectionId);
+      void setStateId(StateId _stateId);
       void updatePassCondition(bool _condition);
 
     private:
