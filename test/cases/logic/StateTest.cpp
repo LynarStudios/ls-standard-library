@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-10
+ * Changed:         2020-09-14
  *
  * */
 
@@ -62,5 +62,14 @@ namespace {
   {
     ls_std::State stateA {"A"};
     ASSERT_STREQ("A", stateA.getId().c_str());
+  }
+
+  TEST_F(StateTest, setId)
+  {
+    ls_std::State stateA {"A"};
+    ASSERT_STREQ("A", stateA.getId().c_str());
+
+    stateA.setId("B");
+    ASSERT_STREQ("B", stateA.getId().c_str());
   }
 }

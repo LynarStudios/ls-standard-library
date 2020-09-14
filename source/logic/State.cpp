@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-10
+ * Changed:         2020-09-14
  *
  * */
 
@@ -35,6 +35,11 @@ std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::StateConne
 ls_std::StateId ls_std::State::getId()
 {
   return this->id;
+}
+
+void ls_std::State::setId(StateId _id)
+{
+  this->id = std::move(_id);
 }
 
 bool ls_std::State::_stateIsConnected(const std::string &_id)
