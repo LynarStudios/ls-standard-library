@@ -24,6 +24,7 @@ namespace ls_std {
       ~State() = default;
 
       bool addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState);
+      bool addStateConnection(const std::shared_ptr<StateConnection>& _connection);
       std::unordered_map<StateConnectionId, std::shared_ptr<StateConnection>> getConnectedStates();
       StateId getId();
       bool hasConnection(const StateConnectionId& _connectionId);

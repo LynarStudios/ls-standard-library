@@ -40,6 +40,20 @@ namespace {
     ASSERT_FALSE(stateA.addStateConnection("XX", nullptr));
   }
 
+  TEST_F(StateTest, addStateConnectionV2)
+  {
+    ls_std::State stateA {"A"};
+    ls_std::State stateB {"B"};
+
+    ASSERT_TRUE(stateA.addStateConnection(std::make_shared<ls_std::StateConnection>("AB", stateB.getId())));
+  }
+
+  TEST_F(StateTest, addStateConnectionV2Negative)
+  {
+    ls_std::State stateA {"A"};
+    ASSERT_FALSE(stateA.addStateConnection(nullptr));
+  }
+
   TEST_F(StateTest, getConnectedStates)
   {
     ls_std::State stateA {"A"};
