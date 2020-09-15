@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-14
+ * Changed:         2020-09-15
  *
  * */
 
@@ -26,6 +26,7 @@ namespace ls_std {
       bool addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState);
       std::unordered_map<StateConnectionId, std::shared_ptr<StateConnection>> getConnectedStates();
       StateId getId();
+      bool hasConnection(const StateConnectionId& _connectionId);
       void setId(StateId _id);
 
     private:
@@ -33,7 +34,7 @@ namespace ls_std {
       std::unordered_map<StateConnectionId, std::shared_ptr<StateConnection>> connectedStates {};
       StateId id {};
 
-      bool _stateIsConnected(const StateId& _id);
+      bool _hasConnection(const StateConnectionId& _connectionId);
   };
 }
 

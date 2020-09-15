@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-14
+ * Changed:         2020-09-15
  *
  * */
 
@@ -18,7 +18,7 @@ bool ls_std::State::addStateConnection(const StateConnectionId& _connectionId, c
   bool added {};
   std::shared_ptr<ls_std::StateConnection> connection {};
 
-  if(_connectedState != nullptr && !this->_stateIsConnected(_connectionId)) {
+  if(_connectedState != nullptr && !this->_hasConnection(_connectionId)) {
     connection = std::make_shared<ls_std::StateConnection>(_connectionId, _connectedState->getId());
     this->connectedStates.insert({_connectionId, connection});
     added = true;
@@ -37,12 +37,17 @@ ls_std::StateId ls_std::State::getId()
   return this->id;
 }
 
+bool ls_std::State::hasConnection(const StateConnectionId &_connectionId)
+{
+  return this->_hasConnection(_connectionId);
+}
+
 void ls_std::State::setId(StateId _id)
 {
   this->id = std::move(_id);
 }
 
-bool ls_std::State::_stateIsConnected(const std::string &_id)
+bool ls_std::State::_hasConnection(const StateConnectionId &_connectionId)
 {
-  return this->connectedStates.find(_id) != this->connectedStates.end();
+  return this->connectedStates.find(_connectionId) != this->connectedStates.end();
 }
