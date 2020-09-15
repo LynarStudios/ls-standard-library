@@ -3,11 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-09-14
+ * Changed:         2020-09-15
  *
  * */
 
 #include "SerializableJSONStateConnection.hpp"
+
+#include <utility>
 
 ls_std::SerializableJSONStateConnection::SerializableJSONStateConnection(std::shared_ptr<ls_std::StateConnection> _value) :
 Class("SerializableJSONStateConnection"),
@@ -28,6 +30,11 @@ void ls_std::SerializableJSONStateConnection::unmarshal(const ls_std::byte_field
   this->value->setConnectionId(this->jsonObject["connectionId"]);
   this->value->setStateId(this->jsonObject["stateId"]);
   this->value->updatePassCondition(this->jsonObject["condition"]);
+}
+
+void ls_std::SerializableJSONStateConnection::setValue(std::shared_ptr<ls_std::StateConnection> _value)
+{
+  this->value = std::move(_value);
 }
 
 void ls_std::SerializableJSONStateConnection::_update()

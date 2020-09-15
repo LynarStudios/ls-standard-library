@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-09-14
+ * Changed:         2020-09-15
  *
  * */
 
@@ -22,6 +22,8 @@ namespace {
       void SetUp() override {}
       void TearDown() override {}
   };
+
+  // implementation
 
   TEST_F(SerializableJSONStateConnectionTest, marshal)
   {
