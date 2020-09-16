@@ -113,6 +113,14 @@ namespace {
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
   }
 
+  TEST_F(StateMachineTest, getStates)
+  {
+    ls_std::StateMachine stateMachine = _createStateMachine();
+
+    ASSERT_TRUE(!stateMachine.getStates().empty());
+    ASSERT_EQ(5, stateMachine.getStates().size());
+  }
+
   TEST_F(StateMachineTest, hasState)
   {
     ls_std::StateMachine stateMachine = _createStateMachine();

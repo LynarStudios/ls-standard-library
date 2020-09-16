@@ -37,6 +37,11 @@ std::string ls_std::StateMachine::getName() {
   return this->name;
 }
 
+std::unordered_map<ls_std::StateId, std::shared_ptr<ls_std::State>> ls_std::StateMachine::getStates()
+{
+  return this->states;
+}
+
 bool ls_std::StateMachine::hasState(const StateId &_id)
 {
   return this->_hasState(_id);

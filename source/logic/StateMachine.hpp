@@ -29,6 +29,7 @@ namespace ls_std {
       std::shared_ptr<State> getCurrentState();
       std::vector<ls_std::StateId> getMemory();
       std::string getName();
+      std::unordered_map<StateId, std::shared_ptr<State>> getStates();
       bool hasState(const StateId& _id);
       bool proceed();
       bool setStartState(const StateId& _id);
