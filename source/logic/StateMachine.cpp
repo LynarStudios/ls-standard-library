@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-11
+ * Changed:         2020-09-16
  *
  * */
 
@@ -15,11 +15,11 @@ name(std::move(_name))
 {}
 
 bool ls_std::StateMachine::addState(const std::shared_ptr<State>& _state) {
-  bool condition = !this->_stateExists(_state->getId());
+  bool condition = !this->_hasState(_state->getId());
 
   if(condition) {
     this->states.insert({_state->getId(), _state});
-    condition = this->_stateExists(_state->getId());
+    condition = this->_hasState(_state->getId());
   }
 
   return condition;
@@ -37,6 +37,11 @@ std::string ls_std::StateMachine::getName() {
   return this->name;
 }
 
+bool ls_std::StateMachine::hasState(const StateId &_id)
+{
+  return this->_hasState(_id);
+}
+
 bool ls_std::StateMachine::proceed() {
   std::vector<ls_std::StateId> nextValidStates = this->_getNextValidStates();
   bool condition = nextValidStates.size() == 1;
@@ -50,7 +55,7 @@ bool ls_std::StateMachine::proceed() {
 }
 
 bool ls_std::StateMachine::setStartState(const ls_std::StateId&_id) {
-  bool exists = this->_stateExists(_id);
+  bool exists = this->_hasState(_id);
 
   if(exists) {
     this->currentState = this->states[_id];
@@ -76,6 +81,6 @@ void ls_std::StateMachine::_remember(const ls_std::StateId &_id) {
   this->memory.push_back(_id);
 }
 
-bool ls_std::StateMachine::_stateExists(const ls_std::StateId &_id) {
+bool ls_std::StateMachine::_hasState(const ls_std::StateId &_id) {
   return this->states.find(_id) != this->states.end();
 }
