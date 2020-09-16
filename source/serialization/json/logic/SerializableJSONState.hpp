@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-09-15
+ * Changed:         2020-09-16
  *
  * */
 
@@ -23,8 +23,14 @@ namespace ls_std {
       explicit SerializableJSONState(std::shared_ptr<State> _value);
       ~SerializableJSONState() = default;
 
+      // implementation
+
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;
+
+      // additional functionality
+
+      void setValue(std::shared_ptr<State> _value);
 
     private:
 
