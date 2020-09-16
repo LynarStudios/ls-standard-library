@@ -9,6 +9,7 @@
 
 #include <gtest/gtest.h>
 #include "../../../source/logic/StateMachine.hpp"
+#include "../../TestDataFactory.hpp"
 
 namespace {
   class StateMachineTest : public ::testing::Test {
@@ -19,35 +20,6 @@ namespace {
 
       void SetUp() override {}
       void TearDown() override {}
-
-      static ls_std::StateMachine _createStateMachine() {
-        ls_std::StateMachine stateMachine {"test_machine"};
-
-        std::shared_ptr<ls_std::State> stateA = std::make_shared<ls_std::State>("A");
-        std::shared_ptr<ls_std::State> stateB = std::make_shared<ls_std::State>("B");
-        std::shared_ptr<ls_std::State> stateC = std::make_shared<ls_std::State>("C");
-        std::shared_ptr<ls_std::State> stateD = std::make_shared<ls_std::State>("D");
-        std::shared_ptr<ls_std::State> stateE = std::make_shared<ls_std::State>("E");
-
-        // add states
-
-        stateMachine.addState(stateA);
-        stateMachine.addState(stateB);
-        stateMachine.addState(stateC);
-        stateMachine.addState(stateD);
-        stateMachine.addState(stateE);
-
-        // add connections / see state_machine_test.png
-
-        stateA->addStateConnection("AB", stateB);
-        stateB->addStateConnection("BC", stateC);
-        stateB->addStateConnection("BD", stateD);
-        stateC->addStateConnection("CB", stateB);
-        stateC->addStateConnection("CE", stateE);
-        stateD->addStateConnection("DE", stateE);
-
-        return stateMachine;
-      }
   };
 
   TEST_F(StateMachineTest, addStateConnection)
@@ -73,7 +45,7 @@ namespace {
 
   TEST_F(StateMachineTest, getMemory)
   {
-    ls_std::StateMachine stateMachine = _createStateMachine();
+    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
     ASSERT_EQ(0, stateMachine.getMemory().size());
 
@@ -115,7 +87,7 @@ namespace {
 
   TEST_F(StateMachineTest, getStates)
   {
-    ls_std::StateMachine stateMachine = _createStateMachine();
+    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
 
     ASSERT_TRUE(!stateMachine.getStates().empty());
     ASSERT_EQ(5, stateMachine.getStates().size());
@@ -123,7 +95,7 @@ namespace {
 
   TEST_F(StateMachineTest, hasState)
   {
-    ls_std::StateMachine stateMachine = _createStateMachine();
+    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
 
     ASSERT_TRUE(stateMachine.hasState("A"));
     ASSERT_TRUE(stateMachine.hasState("B"));
@@ -134,13 +106,13 @@ namespace {
 
   TEST_F(StateMachineTest, hasStateNegative)
   {
-    ls_std::StateMachine stateMachine = _createStateMachine();
+    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
     ASSERT_FALSE(stateMachine.hasState("F"));
   }
 
   TEST_F(StateMachineTest, proceed)
   {
-    ls_std::StateMachine stateMachine = _createStateMachine();
+    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
     ASSERT_TRUE(stateMachine.setStartState("A"));
 
