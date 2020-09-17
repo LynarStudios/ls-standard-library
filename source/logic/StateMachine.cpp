@@ -61,6 +61,11 @@ bool ls_std::StateMachine::proceed() {
   return condition;
 }
 
+void ls_std::StateMachine::setMemory(std::vector<ls_std::StateId> _memory)
+{
+  this->memory = std::move(_memory);
+}
+
 void ls_std::StateMachine::setName(std::string _name)
 {
   this->name = std::move(_name);

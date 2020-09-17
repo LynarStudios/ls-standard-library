@@ -161,6 +161,21 @@ namespace {
     ASSERT_STREQ("E", stateMachine.getCurrentState()->getId().c_str());
   }
 
+  TEST_F(StateMachineTest, setMemory)
+  {
+    ls_std::StateMachine stateMachine {"test_machine"};
+    ASSERT_TRUE(stateMachine.getMemory().empty());
+
+    std::vector<ls_std::StateId> memory {"A", "B", "C"};
+    stateMachine.setMemory(memory);
+
+    ASSERT_FALSE(stateMachine.getMemory().empty());
+    ASSERT_EQ(3, stateMachine.getMemory().size());
+    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
+    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
+    ASSERT_STREQ("C", stateMachine.getMemory().at(2).c_str());
+  }
+
   TEST_F(StateMachineTest, setName)
   {
     ls_std::StateMachine stateMachine {"test_machine"};
