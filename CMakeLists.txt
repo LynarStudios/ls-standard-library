@@ -103,8 +103,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONState.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONState.cpp
-#        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.hpp
-#        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.cpp
         )
 
 set(TEST_FILES
@@ -137,7 +137,7 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateConnectionTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateTest.cpp
-#        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateMachineTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateMachineTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp)
 
