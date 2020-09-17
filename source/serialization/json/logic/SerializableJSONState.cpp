@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-09-16
+ * Changed:         2020-09-17
  *
  * */
 
@@ -70,10 +70,10 @@ void ls_std::SerializableJSONState::_update()
 
 void ls_std::SerializableJSONState::_updateStateConnections()
 {
-  ls_std::SerializableJSONStateConnection serializable {nullptr};
+  std::string jsonString {};
 
   for(const auto& connection : this->value->getConnectedStates()) {
-    serializable.setValue(connection.second);
-    this->jsonObject["connectedStates"][connection.first] = nlohmann::json::parse(serializable.marshal());
+    jsonString = ls_std::SerializableJSONStateConnection{connection.second}.marshal();
+    this->jsonObject["connectedStates"][connection.first] = nlohmann::json::parse(jsonString);
   }
 }
