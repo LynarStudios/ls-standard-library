@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2020-09-16
+ * Changed:         2020-09-17
  *
  * */
 
@@ -159,6 +159,15 @@ namespace {
 
     ASSERT_FALSE(stateMachine.proceed());
     ASSERT_STREQ("E", stateMachine.getCurrentState()->getId().c_str());
+  }
+
+  TEST_F(StateMachineTest, setName)
+  {
+    ls_std::StateMachine stateMachine {"test_machine"};
+    ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
+
+    stateMachine.setName("bla");
+    ASSERT_STREQ("bla", stateMachine.getName().c_str());
   }
 
   TEST_F(StateMachineTest, setStartState)

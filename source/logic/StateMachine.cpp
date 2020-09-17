@@ -3,11 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-16
+ * Changed:         2020-09-17
  *
  * */
 
 #include "StateMachine.hpp"
+
+#include <utility>
 
 ls_std::StateMachine::StateMachine(std::string _name) :
 Class("StateMachine"),
@@ -57,6 +59,11 @@ bool ls_std::StateMachine::proceed() {
   }
 
   return condition;
+}
+
+void ls_std::StateMachine::setName(std::string _name)
+{
+  this->name = std::move(_name);
 }
 
 bool ls_std::StateMachine::setStartState(const ls_std::StateId&_id) {
