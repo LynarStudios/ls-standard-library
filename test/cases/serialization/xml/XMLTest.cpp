@@ -12,6 +12,7 @@
 #include "../../../../source/io/File.hpp"
 #include "../../../TestHelper.hpp"
 #include "../../../../source/io/FileReader.hpp"
+#include "../../../../source/boxing/String.hpp"
 
 namespace {
   class XMLTest : public ::testing::Test {
@@ -55,5 +56,16 @@ namespace {
     }
 
     ASSERT_EQ(5, amount);
+  }
+
+  TEST_F(XMLTest, readText)
+  {
+    rapidxml::xml_document<> document {};
+    ls_std::String data {R"(<connection id="test">\n</connection>)"}; // needs to have line break?
+    document.parse<0>(data.getByteData().data());
+
+    rapidxml::xml_node<>* connectionNode = document.first_node("connection");
+    ASSERT_TRUE(connectionNode != nullptr);
+    ASSERT_STREQ("test", connectionNode->first_attribute("id")->value());
   }
 }
