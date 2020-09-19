@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-09-16
+ * Changed:         2020-09-19
  *
  * */
 
@@ -37,6 +37,7 @@ namespace ls_std {
       nlohmann::json jsonObject {};
       std::shared_ptr<ls_std::State> value {};
 
+      void _clear();
       void _unmarshalExistingStateConnection(nlohmann::json _jsonObject);
       void _unmarshalNewStateConnection(nlohmann::json _jsonObject);
       void _unmarshalStateConnections();

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-09-17
+ * Changed:         2020-09-19
  *
  * */
 
@@ -32,6 +32,12 @@ void ls_std::SerializableJSONState::unmarshal(const ls_std::byte_field &_data)
 void ls_std::SerializableJSONState::setValue(std::shared_ptr<State> _value)
 {
   this->value = std::move(_value);
+  this->_clear();
+}
+
+void ls_std::SerializableJSONState::_clear()
+{
+  this->jsonObject.clear();
 }
 
 void ls_std::SerializableJSONState::_unmarshalExistingStateConnection(nlohmann::json _jsonObject)
