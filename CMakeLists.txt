@@ -22,6 +22,7 @@ message("${PROJECT_NAME}: Adding include directories...")
 include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/source/lib/nlohmann_json/include/nlohmann)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/source/lib/rapid_xml/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/source/lib/tiny_xml_2/include)
 
 ######################################################
 # Add Other CMake Dependencies
@@ -108,6 +109,11 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.cpp
         )
 
+set(LIBRARY_SOURCE_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/include/tinyxml2.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/tinyxml2.cpp
+        )
+
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
@@ -150,7 +156,7 @@ set(TEST_FILES
 message("${PROJECT_NAME}: Building...")
 
 add_executable(${PROJECT_NAME}_test ${TEST_FILES})
-add_library(${PROJECT_NAME} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} ${LIBRARY_SOURCE_FILES} ${SOURCE_FILES})
 
 ##########################################################
 # Linking
