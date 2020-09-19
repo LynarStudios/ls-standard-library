@@ -187,6 +187,14 @@ namespace {
     ASSERT_TRUE(text.endsWith("ef"));
   }
 
+  TEST_F(StringTest, endsWithNegative)
+  {
+    ls_std::String text {};
+    text = "abcdef";
+
+    ASSERT_FALSE(text.endsWith("efg"));
+  }
+
   TEST_F(StringTest, equalsIgnoreCase)
   {
     ls_std::String text {"Hello!"};
@@ -196,12 +204,10 @@ namespace {
     ASSERT_TRUE(text.equalsIgnoreCase("HeLLO!"));
   }
 
-  TEST_F(StringTest, endsWithNegative)
+  TEST_F(StringTest, getByteData)
   {
-    ls_std::String text {};
-    text = "abcdef";
-
-    ASSERT_FALSE(text.endsWith("efg"));
+    ls_std::String text {"Hallo!"};
+    ASSERT_STREQ("Hallo!", text.getByteData().data());
   }
 
   TEST_F(StringTest, padLeft)

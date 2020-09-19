@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-09-04
+ * Changed:         2020-09-19
  *
  * */
 
@@ -16,6 +16,7 @@
 #include "../io/IStorable.hpp"
 #include <string>
 #include <memory>
+#include <vector>
 
 namespace ls_std {
   class String : public Class, public IBoxing, public ISerializable, public IStorable {
@@ -70,8 +71,9 @@ namespace ls_std {
       bool endsWith(const std::string& _text);
       bool equalsIgnoreCase(String _string);
       bool equalsIgnoreCase(std::string _text);
-      std::string padLeft(size_t _width, const char _fillCharacter);
-      std::string padRight(size_t _width, const char _fillCharacter);
+      std::vector<ls_std::byte> getByteData();
+      std::string padLeft(size_t _width, char _fillCharacter);
+      std::string padRight(size_t _width, char _fillCharacter);
       std::string reverse();
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
       void setStorable(std::shared_ptr<IStorable> _storable);
@@ -85,8 +87,8 @@ namespace ls_std {
       std::shared_ptr<IStorable> storable {};
       std::string value {};
 
-      static std::string _buildCharacterChain(size_t _amount, const char _fillCharacter);
-      static std::string _createFillContent(const std::string& _text, size_t _width, const char _fillCharacter);
+      static std::string _buildCharacterChain(size_t _amount, char _fillCharacter);
+      static std::string _createFillContent(const std::string& _text, size_t _width, char _fillCharacter);
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-08-30
+ * Changed:         2020-09-19
  *
  * */
 
@@ -141,6 +141,14 @@ bool ls_std::String::equalsIgnoreCase(String _string) {
 
 bool ls_std::String::equalsIgnoreCase(std::string _text) {
   return this->toLowerCase() == ls_std::String{std::move(_text)}.toLowerCase();
+}
+
+std::vector<ls_std::byte> ls_std::String::getByteData()
+{
+  std::vector<ls_std::byte> byteData(this->value.begin(), this->value.end());
+  byteData.push_back('\0');
+
+  return byteData;
 }
 
 std::string ls_std::String::padLeft(size_t _width, const char _fillCharacter) {
