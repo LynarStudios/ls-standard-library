@@ -15,17 +15,17 @@
 #include "../../../../source/boxing/String.hpp"
 
 namespace {
-  class XMLTest : public ::testing::Test {
+  class RapidXMLTest : public ::testing::Test {
     protected:
 
-      XMLTest() = default;
-      ~XMLTest() override = default;
+      RapidXMLTest() = default;
+      ~RapidXMLTest() override = default;
 
       void SetUp() override {}
       void TearDown() override {}
   };
 
-  TEST_F(XMLTest, readDocument)
+  TEST_F(RapidXMLTest, readDocument)
   {
     rapidxml::xml_document<> document {};
 
@@ -58,7 +58,7 @@ namespace {
     ASSERT_EQ(5, amount);
   }
 
-  TEST_F(XMLTest, readText)
+  TEST_F(RapidXMLTest, readText)
   {
     rapidxml::xml_document<> document {};
     ls_std::String data {R"(<connection id="test">\n</connection>)"}; // needs to have line break?
