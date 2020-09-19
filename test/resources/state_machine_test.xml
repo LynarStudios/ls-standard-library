@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<stateMachine name="test_machine">
+    <states>
+        <state id="A">
+            <connections>
+                <connection connectionId="AB" condition="false" id="B" />
+            </connections>
+        </state>
+        <state id="B">
+            <connections>
+                <connection connectionId="BC" condition="false" id="C" />
+                <connection connectionId="BD" condition="false" id="D" />
+            </connections>
+        </state>
+        <state id="C">
+            <connections>
+                <connection connectionId="CE" condition="false" id="E" />
+            </connections>
+        </state>
+        <state id="D">
+            <connections>
+                <connection connectionId="DE" condition="false" id="E" />
+            </connections>
+        </state>
+        <state id="E" />
+    </states>
+    <currentState>A</currentState>
+    <memory>
+        <location>A</location>
+        <location>B</location>
+        <location>C</location>
+    </memory>
+</stateMachine>
