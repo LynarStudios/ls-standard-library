@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-09-15
+ * Changed:         2020-09-19
  *
  * */
 
@@ -47,5 +47,22 @@ namespace {
     ASSERT_STREQ("BC", x->getConnectionId().c_str());
     ASSERT_STREQ("C", x->getStateId().c_str());
     ASSERT_TRUE(x->isPassable());
+  }
+
+  TEST_F(SerializableJSONStateConnectionTest, setValue)
+  {
+    ls_std::StateConnection x {"AB", "B"};
+    ls_std::SerializableJSONStateConnection serializable {std::make_shared<ls_std::StateConnection>(x)};
+    ls_std::String jsonString {serializable.marshal()};
+
+    ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.toString().c_str());
+
+    // set value should now reset json
+
+    ls_std::StateConnection y {"BC", "C"};
+    serializable.setValue(std::make_shared<ls_std::StateConnection>(y));
+    jsonString = serializable.marshal();
+
+    ASSERT_STREQ(R"({"condition":false,"connectionId":"BC","stateId":"C"})", jsonString.toString().c_str());
   }
 }
