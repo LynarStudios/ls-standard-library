@@ -147,7 +147,7 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateMachineTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/XMLTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/RapidXMLTest.cpp)
 
 ##########################################################
 # Build
