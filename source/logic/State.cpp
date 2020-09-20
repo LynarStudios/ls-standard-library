@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-15
+ * Changed:         2020-09-20
  *
  * */
 
@@ -39,6 +39,11 @@ bool ls_std::State::addStateConnection(const std::shared_ptr<StateConnection>& _
   return added;
 }
 
+void ls_std::State::clearConnections()
+{
+  this->_clearConnections();
+}
+
 std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::StateConnection>> ls_std::State::getConnectedStates()
 {
   return this->connectedStates;
@@ -57,6 +62,11 @@ bool ls_std::State::hasConnection(const StateConnectionId &_connectionId)
 void ls_std::State::setId(StateId _id)
 {
   this->id = std::move(_id);
+}
+
+void ls_std::State::_clearConnections()
+{
+  this->connectedStates.clear();
 }
 
 bool ls_std::State::_hasConnection(const StateConnectionId &_connectionId)

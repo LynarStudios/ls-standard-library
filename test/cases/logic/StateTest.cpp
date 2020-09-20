@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-09-15
+ * Changed:         2020-09-20
  *
  * */
 
@@ -52,6 +52,18 @@ namespace {
   {
     ls_std::State stateA {"A"};
     ASSERT_FALSE(stateA.addStateConnection(nullptr));
+  }
+
+  TEST_F(StateTest, clearConnections)
+  {
+    ls_std::State stateA {"A"};
+    stateA.addStateConnection(std::make_shared<ls_std::StateConnection>("AB", "B"));
+    stateA.addStateConnection(std::make_shared<ls_std::StateConnection>("AC", "C"));
+
+    ASSERT_EQ(2, stateA.getConnectedStates().size());
+    stateA.clearConnections();
+    ASSERT_EQ(0, stateA.getConnectedStates().size());
+    ASSERT_TRUE(stateA.getConnectedStates().empty());
   }
 
   TEST_F(StateTest, getConnectedStates)
