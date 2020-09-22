@@ -109,12 +109,13 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLStateConnection.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLStateConnection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLState.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLState.cpp
         )
 
 set(LIBRARY_SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/include/tinyxml2.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/tinyxml2.cpp
-        )
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/tinyxml2.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -151,7 +152,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/RapidXMLTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/TinyXMLTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateConnectionTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateConnectionTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateTest.cpp)
 
 ##########################################################
 # Build
