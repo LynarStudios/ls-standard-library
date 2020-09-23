@@ -111,6 +111,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLStateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLState.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLState.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLAttribute.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLAttribute.cpp
         )
 
 set(LIBRARY_SOURCE_FILES
@@ -153,7 +155,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/RapidXMLTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/TinyXMLTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateConnectionTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLAttributeTest.cpp)
 
 ##########################################################
 # Build
