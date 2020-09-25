@@ -14,6 +14,45 @@ ls_std::XMLNode::XMLNode(std::string _name) : Class("XMLNode"),
 name(std::move(_name))
 {}
 
+bool ls_std::XMLNode::addAttributeAfter(const std::shared_ptr<ls_std::XMLAttribute> &_attribute, const std::string &_name) {
+  bool added {};
+  auto iterator = this->attributes.begin();
+
+  if(!this->_hasAttribute(_attribute->getName())) {
+    while(iterator != this->attributes.end()) {
+      if((*iterator)->getName() == _name) {
+        iterator++;
+        this->attributes.insert(iterator, _attribute);
+        added = true;
+        break;
+      }
+
+      iterator++;
+    }
+  }
+
+  return added;
+}
+
+bool ls_std::XMLNode::addAttributeBefore(const std::shared_ptr<ls_std::XMLAttribute> &_attribute, const std::string &_name) {
+  bool added {};
+  auto iterator = this->attributes.begin();
+
+  if(!this->_hasAttribute(_attribute->getName())) {
+    while(iterator != this->attributes.end()) {
+      if((*iterator)->getName() == _name) {
+        this->attributes.insert(iterator, _attribute);
+        added = true;
+        break;
+      }
+
+      iterator++;
+    }
+  }
+
+  return added;
+}
+
 bool ls_std::XMLNode::addAttributeToBeginning(const std::shared_ptr<ls_std::XMLAttribute> &_attribute)
 {
   bool added {};
