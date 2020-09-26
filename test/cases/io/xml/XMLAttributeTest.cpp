@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2020-09-23
+ * Changed:         2020-09-26
  *
  * */
 
@@ -23,27 +23,27 @@ namespace {
 
   TEST_F(XMLAttributeTest, getName)
   {
-    ls_std::XMLAttribute attribute {};
-    ASSERT_TRUE(attribute.getName().empty());
+    ls_std::XMLAttribute attribute {"id"};
+    ASSERT_STREQ("id", attribute.getName().c_str());
   }
 
   TEST_F(XMLAttributeTest, getValue)
   {
-    ls_std::XMLAttribute attribute {};
+    ls_std::XMLAttribute attribute {"id"};
     ASSERT_TRUE(attribute.getValue().empty());
   }
 
   TEST_F(XMLAttributeTest, setName)
   {
-    ls_std::XMLAttribute attribute {};
-    attribute.setName("id");
+    ls_std::XMLAttribute attribute {"id"};
+    attribute.setName("id2");
 
-    ASSERT_STREQ("id", attribute.getName().c_str());
+    ASSERT_STREQ("id2", attribute.getName().c_str());
   }
 
   TEST_F(XMLAttributeTest, setValue)
   {
-    ls_std::XMLAttribute attribute {};
+    ls_std::XMLAttribute attribute {"id"};
     attribute.setValue("some_content");
 
     ASSERT_STREQ("some_content", attribute.getValue().c_str());
@@ -51,8 +51,7 @@ namespace {
 
   TEST_F(XMLAttributeTest, toXML)
   {
-    ls_std::XMLAttribute attribute {};
-    attribute.setName("id");
+    ls_std::XMLAttribute attribute {"id"};
     attribute.setValue("some_content");
 
     ASSERT_STREQ(R"(id="some_content")", attribute.toXML().c_str());
