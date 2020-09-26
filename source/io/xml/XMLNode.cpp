@@ -187,12 +187,16 @@ bool ls_std::XMLNode::hasChild(const std::shared_ptr<XMLNode> &_child)
 
 void ls_std::XMLNode::removeFirstAttribute()
 {
-  this->attributes.pop_front();
+  if(!this->attributes.empty()) {
+    this->attributes.pop_front();
+  }
 }
 
 void ls_std::XMLNode::removeLastAttribute()
 {
-  this->attributes.pop_back();
+  if(!this->attributes.empty()) {
+    this->attributes.pop_back();
+  }
 }
 
 void ls_std::XMLNode::removeFirstChild()
