@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2020-09-16
+ * Changed:         2020-09-26
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_TEST_DATA_FACTORY_HPP
 
 #include "../source/logic/StateMachine.hpp"
+#include "../source/io/xml/XMLNode.hpp"
 
 namespace ls_std_test {
   class TestDataFactory {
@@ -20,6 +21,7 @@ namespace ls_std_test {
       ~TestDataFactory() = default;
 
       static ls_std::StateMachine createStateMachine();
+      static std::shared_ptr<ls_std::XMLNode> createXMLContent();
   };
 }
 
