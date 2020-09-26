@@ -142,6 +142,11 @@ bool ls_std::XMLNode::addChildToEnd(const std::shared_ptr<XMLNode>& _child)
   return added;
 }
 
+void ls_std::XMLNode::clearValue()
+{
+  this->value.clear();
+}
+
 std::list<std::shared_ptr<ls_std::XMLAttribute>> ls_std::XMLNode::getAttributes()
 {
   return this->attributes;
@@ -168,6 +173,11 @@ std::list<std::shared_ptr<ls_std::XMLNode>> ls_std::XMLNode::getChildren(const s
 std::string ls_std::XMLNode::getName()
 {
   return this->name;
+}
+
+std::string ls_std::XMLNode::getValue()
+{
+  return this->value;
 }
 
 bool ls_std::XMLNode::hasAttribute(const std::string &_name)
@@ -218,6 +228,25 @@ void ls_std::XMLNode::setName(std::string _name)
   this->name = std::move(_name);
 }
 
+void ls_std::XMLNode::setValue(std::string _value)
+{
+  this->value = std::move(_value);
+}
+
+std::string ls_std::XMLNode::toXML()
+{
+  std::string xmlStream {};
+
+  xmlStream += this->_toXMLOpenTag();
+  xmlStream += this->_toXMLAttributes();
+  xmlStream += this->_toXMLOpenTagClose();
+  xmlStream += this->value;
+  xmlStream += this->_toXMLChildren();
+  xmlStream += this->_toXMLCloseTag();
+
+  return xmlStream;
+}
+
 bool ls_std::XMLNode::_hasAttribute(const std::string &_name)
 {
   bool exists {};
@@ -249,4 +278,57 @@ bool ls_std::XMLNode::_hasChild(const std::string &_name)
   }
 
   return exists;
+}
+
+std::string ls_std::XMLNode::_toXMLAttributes()
+{
+  std::string stream {};
+
+  for(const auto& _attribute : this->attributes) {
+    stream += " " + _attribute->toXML();
+  }
+
+  return stream;
+}
+
+std::string ls_std::XMLNode::_toXMLChildren()
+{
+  std::string stream {};
+
+  if(this->value.empty()) {
+    for(const auto& _child : this->children) {
+      stream += _child->toXML();
+    }
+  }
+
+  return stream;
+}
+
+std::string ls_std::XMLNode::_toXMLCloseTag()
+{
+  std::string stream {};
+
+  if(!this->children.empty() || !this->value.empty()) {
+    stream = "</" + this->name + ">";
+  }
+
+  return stream;
+}
+
+std::string ls_std::XMLNode::_toXMLOpenTag()
+{
+  return "<" + this->name;
+}
+
+std::string ls_std::XMLNode::_toXMLOpenTagClose()
+{
+  std::string stream {};
+
+  if(this->children.empty() && this->value.empty()) {
+    stream = "/>";
+  } else {
+    stream = ">";
+  }
+
+  return stream;
 }

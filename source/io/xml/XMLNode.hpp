@@ -30,10 +30,12 @@ namespace ls_std {
       bool addChildBefore(const std::shared_ptr<XMLNode>& _child, const std::shared_ptr<XMLNode>& _search);
       bool addChildToBeginning(const std::shared_ptr<XMLNode>& _child);
       bool addChildToEnd(const std::shared_ptr<XMLNode>& _child);
+      void clearValue();
       std::list<std::shared_ptr<XMLAttribute>> getAttributes();
       std::list<std::shared_ptr<XMLNode>> getChildren();
       std::list<std::shared_ptr<XMLNode>> getChildren(const std::string& _name);
       std::string getName();
+      std::string getValue();
       bool hasAttribute(const std::string& _name);
       bool hasChild(const std::string& _name);
       bool hasChild(const std::shared_ptr<XMLNode>& _child);
@@ -42,6 +44,7 @@ namespace ls_std {
       void removeFirstChild();
       void removeLastChild();
       void setName(std::string _name);
+      void setValue(std::string _value);
       std::string toXML();
 
     private:
@@ -49,10 +52,16 @@ namespace ls_std {
       std::list<std::shared_ptr<XMLAttribute>> attributes {};
       std::list<std::shared_ptr<XMLNode>> children {};
       std::string name {};
+      std::string value {};
 
       bool _hasAttribute(const std::string& _name);
       bool _hasChild(const std::shared_ptr<XMLNode>& _child);
       bool _hasChild(const std::string& _name);
+      std::string _toXMLAttributes();
+      std::string _toXMLChildren();
+      std::string _toXMLCloseTag();
+      std::string _toXMLOpenTag();
+      std::string _toXMLOpenTagClose();
   };
 }
 

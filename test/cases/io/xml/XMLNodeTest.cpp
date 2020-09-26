@@ -9,6 +9,7 @@
 
 #include <gtest/gtest.h>
 #include "../../../../source/io/xml/XMLNode.hpp"
+#include "../../../TestDataFactory.hpp"
 
 namespace {
   class XMLNodeTest : public ::testing::Test {
@@ -338,6 +339,17 @@ namespace {
     ASSERT_STREQ("dialogNodeA", currentNode->getName().c_str());
   }
 
+  TEST_F(XMLNodeTest, clearValue)
+  {
+    ls_std::XMLNode dialogNode {"dialog"};
+    dialogNode.setValue("Something");
+    ASSERT_STREQ("Something", dialogNode.getValue().c_str());
+
+    dialogNode.clearValue();
+    ASSERT_TRUE(dialogNode.getValue().empty());
+    ASSERT_STREQ("", dialogNode.getValue().c_str());
+  }
+
   TEST_F(XMLNodeTest, getAttributes)
   {
     ls_std::XMLNode dialogNode {"dialog"};
@@ -376,6 +388,12 @@ namespace {
   {
     ls_std::XMLNode dialogNode {"dialog"};
     ASSERT_STREQ("dialog", dialogNode.getName().c_str());
+  }
+
+  TEST_F(XMLNodeTest, getValue)
+  {
+    ls_std::XMLNode dialogNode {"dialog"};
+    ASSERT_TRUE(dialogNode.getValue().empty());
   }
 
   TEST_F(XMLNodeTest, hasAttribute)
@@ -603,5 +621,22 @@ namespace {
     dialogNode.setName("dialog2");
 
     ASSERT_STREQ("dialog2", dialogNode.getName().c_str());
+  }
+
+  TEST_F(XMLNodeTest, setValue)
+  {
+    ls_std::XMLNode dialogNode {"dialog"};
+    dialogNode.setValue("Something written");
+
+    ASSERT_STREQ("Something written", dialogNode.getValue().c_str());
+  }
+
+  TEST_F(XMLNodeTest, toXML)
+  {
+    auto root = ls_std_test::TestDataFactory::createXMLContent();
+    std::string xmlContent = root->toXML();
+    std::string expectedXMLContent = R"("<dialog name="dungeon_001"><dialogUnit id="001"><text>Hello!</text></dialogUnit><dialogUnit id="002"><text>Hello again!</text></dialogUnit></dialog>")";
+
+    ASSERT_TRUE(!xmlContent.empty());
   }
 }
