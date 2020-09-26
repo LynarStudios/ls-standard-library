@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-09-24
+ * Changed:         2020-09-26
  *
  * */
 
@@ -197,12 +197,16 @@ void ls_std::XMLNode::removeLastAttribute()
 
 void ls_std::XMLNode::removeFirstChild()
 {
-  this->children.pop_front();
+  if(!this->children.empty()) {
+    this->children.pop_front();
+  }
 }
 
 void ls_std::XMLNode::removeLastChild()
 {
-  this->children.pop_back();
+  if(!this->children.empty()) {
+    this->children.pop_back();
+  }
 }
 
 void ls_std::XMLNode::setName(std::string _name)

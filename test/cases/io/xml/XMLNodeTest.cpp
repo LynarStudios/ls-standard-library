@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2020-09-25
+ * Changed:         2020-09-26
  *
  * */
 
@@ -267,6 +267,15 @@ namespace {
     ASSERT_STREQ("event", currentNode->getName().c_str());
   }
 
+  TEST_F(XMLNodeTest, removeFirstChildNegative)
+  {
+    ls_std::XMLNode dialogsNode {"dialogs"};
+    ASSERT_TRUE(dialogsNode.getChildren().empty());
+
+    dialogsNode.removeFirstChild();
+    ASSERT_TRUE(dialogsNode.getChildren().empty());
+  }
+
   TEST_F(XMLNodeTest, removeLastChild)
   {
     ls_std::XMLNode dialogsNode {"dialogs"};
@@ -303,6 +312,15 @@ namespace {
     ASSERT_STREQ("dialogC", currentNode->getName().c_str());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 3);
     ASSERT_STREQ("additionalInfo", currentNode->getName().c_str());
+  }
+
+  TEST_F(XMLNodeTest, removeLastChildNegative)
+  {
+    ls_std::XMLNode dialogsNode {"dialogs"};
+    ASSERT_TRUE(dialogsNode.getChildren().empty());
+
+    dialogsNode.removeLastChild();
+    ASSERT_TRUE(dialogsNode.getChildren().empty());
   }
 
   TEST_F(XMLNodeTest, setName)
