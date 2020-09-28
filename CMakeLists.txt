@@ -114,7 +114,11 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLAttribute.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLAttribute.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLNode.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLNode.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLNode.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLDocument.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLDeclaration.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Version.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Version.cpp)
 
 set(LIBRARY_SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/include/tinyxml2.h
