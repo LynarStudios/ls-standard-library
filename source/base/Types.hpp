@@ -16,6 +16,7 @@ namespace ls_std {
   using byte = char;
   using byte_field = std::string;
   using long_type = long long int;
+  using version_type = uint16_t;
 }
 
 #endif
