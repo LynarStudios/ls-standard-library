@@ -162,7 +162,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateConnectionTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLAttributeTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLNodeTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLNodeTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/VersionTest.cpp)
 
 ##########################################################
 # Build
