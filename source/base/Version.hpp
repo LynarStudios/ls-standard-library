@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2020-09-27
+ * Changed:         2020-09-29
  *
  * */
 
@@ -18,7 +18,7 @@ namespace ls_std {
   class Version : public ISerializable {
     public:
 
-      explicit Version(version_type _major, version_type _minor, version_type _patch);
+      explicit Version(version_type _majorVersion, version_type _minorVersion, version_type _patchVersion);
       ~Version() = default;
 
       // implementation
@@ -28,19 +28,19 @@ namespace ls_std {
 
       // other functionality
 
-      version_type getMajor() const;
-      version_type getMinor() const;
-      version_type getPatch() const;
+      version_type getMajorVersion() const;
+      version_type getMinorVersion() const;
+      version_type getPatchVersion() const;
       static bool isValid(const std::string& _versionString);
-      void setMajor(version_type _major);
-      void setMinor(version_type _minor);
-      void setPatch(version_type _patch);
+      void setMajorVersion(version_type _major);
+      void setMinorVersion(version_type _minor);
+      void setPatchVersion(version_type _patch);
 
     private:
 
-      version_type major {};
-      version_type minor {};
-      version_type patch {};
+      version_type majorVersion {};
+      version_type minorVersion {};
+      version_type patchVersion {};
 
       static bool _isValid(const std::string& _versionString);
   };

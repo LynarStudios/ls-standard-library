@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2020-09-28
+ * Changed:         2020-09-29
  *
  * */
 
@@ -37,29 +37,29 @@ namespace {
     ls_std::Version version {0, 0, 0};
     version.unmarshal("2020.2.13");
 
-    ASSERT_EQ(2020, version.getMajor());
-    ASSERT_EQ(2, version.getMinor());
-    ASSERT_EQ(13, version.getPatch());
+    ASSERT_EQ(2020, version.getMajorVersion());
+    ASSERT_EQ(2, version.getMinorVersion());
+    ASSERT_EQ(13, version.getPatchVersion());
   }
 
   // other functionality
 
-  TEST_F(VersionTest, getMajor)
+  TEST_F(VersionTest, getMajorVersion)
   {
     ls_std::Version version {13, 2, 4};
-    ASSERT_EQ(13, version.getMajor());
+    ASSERT_EQ(13, version.getMajorVersion());
   }
 
-  TEST_F(VersionTest, getMinor)
+  TEST_F(VersionTest, getMinorVersion)
   {
     ls_std::Version version {13, 2, 4};
-    ASSERT_EQ(2, version.getMinor());
+    ASSERT_EQ(2, version.getMinorVersion());
   }
 
-  TEST_F(VersionTest, getPatch)
+  TEST_F(VersionTest, getPatchVersion)
   {
     ls_std::Version version {13, 2, 4};
-    ASSERT_EQ(4, version.getPatch());
+    ASSERT_EQ(4, version.getPatchVersion());
   }
 
   TEST_F(VersionTest, isValid)
@@ -76,30 +76,30 @@ namespace {
     ASSERT_FALSE(ls_std::Version::isValid("blaaaa"));
   }
 
-  TEST_F(VersionTest, setMajor)
+  TEST_F(VersionTest, setMajorVersion)
   {
     ls_std::Version version {13, 2, 4};
-    ASSERT_EQ(13, version.getMajor());
+    ASSERT_EQ(13, version.getMajorVersion());
 
-    version.setMajor(14);
-    ASSERT_EQ(14, version.getMajor());
+    version.setMajorVersion(14);
+    ASSERT_EQ(14, version.getMajorVersion());
   }
 
-  TEST_F(VersionTest, setMinor)
+  TEST_F(VersionTest, setMinorVersion)
   {
     ls_std::Version version {13, 2, 4};
-    ASSERT_EQ(2, version.getMinor());
+    ASSERT_EQ(2, version.getMinorVersion());
 
-    version.setMinor(3);
-    ASSERT_EQ(3, version.getMinor());
+    version.setMinorVersion(3);
+    ASSERT_EQ(3, version.getMinorVersion());
   }
 
-  TEST_F(VersionTest, setPatch)
+  TEST_F(VersionTest, setPatchVersion)
   {
     ls_std::Version version {13, 2, 4};
-    ASSERT_EQ(4, version.getPatch());
+    ASSERT_EQ(4, version.getPatchVersion());
 
-    version.setPatch(5);
-    ASSERT_EQ(5, version.getPatch());
+    version.setPatchVersion(5);
+    ASSERT_EQ(5, version.getPatchVersion());
   }
 }
