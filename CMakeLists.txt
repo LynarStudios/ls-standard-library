@@ -118,7 +118,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLDocument.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLDeclaration.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Version.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Version.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/base/Version.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLDeclaration.cpp)
 
 set(LIBRARY_SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/include/tinyxml2.h
@@ -163,7 +164,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLAttributeTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLNodeTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/VersionTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/VersionTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLDeclarationTest.cpp)
 
 ##########################################################
 # Build
