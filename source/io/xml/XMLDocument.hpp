@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2020-09-27
+ * Changed:         2020-09-29
  *
  * */
 
@@ -13,6 +13,7 @@
 #include <memory>
 #include "../../base/Class.hpp"
 #include "XMLNode.hpp"
+#include "XMLDeclaration.hpp"
 
 namespace ls_std {
   class XMLDocument : public Class {
@@ -21,18 +22,16 @@ namespace ls_std {
       XMLDocument();
       ~XMLDocument() = default;
 
-      std::string getHeader();
+      std::shared_ptr<ls_std::XMLDeclaration> getDeclaration();
       std::shared_ptr<ls_std::XMLNode> getRootElement();
-      void parse(const std::string& _xmlStream);
+      void setDeclaration(const std::shared_ptr<ls_std::XMLDeclaration>& _declaration);
       void setRootElement(const std::shared_ptr<ls_std::XMLNode>& _root);
       std::string toXML();
 
     private:
 
-      std::string header {};
+      std::shared_ptr<ls_std::XMLDeclaration> declaration {};
       std::shared_ptr<ls_std::XMLNode> rootElement {};
-
-      std::string _getHeader();
   };
 }
 
