@@ -50,7 +50,9 @@ void ls_std::SerializableJSONState::_unmarshalExistingStateConnection(nlohmann::
 
 void ls_std::SerializableJSONState::_unmarshalNewStateConnection(nlohmann::json _jsonObject)
 {
-  std::shared_ptr<ls_std::StateConnection> stateConnection = std::make_shared<ls_std::StateConnection>(_jsonObject["connectionId"], _jsonObject["stateId"]);
+  ls_std::StateConnectionId connectionId = _jsonObject["connectionId"];
+  ls_std::StateId stateId = _jsonObject["stateId"];
+  std::shared_ptr<ls_std::StateConnection> stateConnection = std::make_shared<ls_std::StateConnection>(connectionId, stateId);
   stateConnection->updatePassCondition(_jsonObject["condition"]);
 
   this->value->addStateConnection(stateConnection);
