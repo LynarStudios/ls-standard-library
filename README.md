@@ -3,9 +3,20 @@
 This is a cross-platform standard library written in C++ and provides basic functionality and implementation, like:
  
 - Boxing
-- File
-- Reflection
+- File Operations
+- Basic Reflection
 - Date
+- State Machine
+- Serialization
+- JSON
+- XML
+- Logging
+
+### Testing ###
+
+This project contains unit tests to provide test coverage.  
+To run those unit tests you have to adjust __TestHelper__ class by adding your personal test folder path to __getTestFolderLocation__ method. 
+
 
 ### Naming Convention ###
 
