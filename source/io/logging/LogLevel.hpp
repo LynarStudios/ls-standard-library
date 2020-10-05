@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-09-04
+ * Changed:         2020-10-02
  *
  * */
 
@@ -30,7 +30,7 @@ namespace ls_std {
 
     private:
 
-      std::unordered_map<ls_std::LogLevelValue, std::string> level {};
+      std::unordered_map<uint8_t , std::string> level {};
       ls_std::LogLevelValue value {};
 
       void _init();
