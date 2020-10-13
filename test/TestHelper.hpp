@@ -38,7 +38,7 @@ class TestHelper {
       std::string location {};
 
       #ifdef _WIN32
-        location = R"(C:\Users\drums\CLionProjects\lynar-studios-standard-library\test\)";
+        location = R"(C:\Users\Admin\CLionProjects\lynar-studios-standard-library\test\)";
       #endif
       #ifdef unix
         location = R"(/home/patrick/CLionProjects/lynar-studios-standard-library/test/)";

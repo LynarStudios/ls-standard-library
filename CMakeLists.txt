@@ -122,7 +122,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReader.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReader.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLParseMode.hpp)
 
 set(LIBRARY_SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/include/tinyxml2.h

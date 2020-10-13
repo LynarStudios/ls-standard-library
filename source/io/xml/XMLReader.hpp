@@ -14,6 +14,7 @@
 #include "XMLDocument.hpp"
 #include "../IReader.hpp"
 #include "../File.hpp"
+#include "XMLParseMode.hpp"
 
 namespace ls_std {
   class XMLReader : public Class, IReader {
@@ -34,11 +35,16 @@ namespace ls_std {
     private:
 
       std::shared_ptr<ls_std::XMLDocument> document {};
+      ls_std::XMLParseMode mode {};
       ls_std::File xmlFile;
 
       static void _checkDocumentExistence(const std::shared_ptr<ls_std::XMLDocument>& _document);
       static void _checkFileExistence(ls_std::File _xmlFile);
+      void _isClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
+      void _isDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
+      void _isOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _read(const ls_std::byte_field& _data);
+      static size_t _readDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
   };
 }
 

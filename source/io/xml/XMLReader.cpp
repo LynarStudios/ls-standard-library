@@ -53,29 +53,62 @@ void ls_std::XMLReader::_checkFileExistence(ls_std::File _xmlFile)
   }
 }
 
+void ls_std::XMLReader::_isClosingTag(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  if(this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 2) == "</") {
+    this->mode = XML_PARSE_MODE_CLOSING_TAG;
+  }
+}
+
+void ls_std::XMLReader::_isDeclaration(const ls_std::byte_field& _data, std::string::size_type _index)
+{
+  if(_data.substr(_index, 5) == "<?xml") {
+    this->mode = XML_PARSE_MODE_DECLARATION;
+  }
+}
+
+void ls_std::XMLReader::_isOpeningTag(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  if(this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 1) == "<") {
+    this->mode = XML_PARSE_MODE_OPENING_TAG;
+  }
+}
+
 void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
 {
-  uint8_t mode {};
-
-  for(std::string::size_type i = 0 ; i < _data.size() ; i++) {
-    switch(mode)
-    {
-      case 1: // xml declaration
+  for(std::string::size_type index = 0 ; index < _data.size() ; index++) {
+    switch(this->mode) {
+      case XML_PARSE_MODE_ANALYZE:
+      {
+        this->_isDeclaration(_data, index);
+        this->_isClosingTag(_data, index);
+        this->_isOpeningTag(_data, index);
+      } break;
+      case XML_PARSE_MODE_DECLARATION:
+      {
+        index = ls_std::XMLReader::_readDeclaration(_data, index);
+      } break;
+      case XML_PARSE_MODE_OPENING_TAG:
       {
 
       } break;
-      case 2: // xml opening tag
-      {
-
-      } break;
-      case 3: // xml closing tag
-      {
-
-      } break;
-      case 4: // xml attribute
+      case XML_PARSE_MODE_CLOSING_TAG:
       {
 
       } break;
     }
   }
 }
+
+size_t ls_std::XMLReader::_readDeclaration(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  size_t closingTagPosition = _data.find('>');
+  std::string declarationString {};
+
+  if(closingTagPosition != std::string::npos) {
+    declarationString = _data.substr(_index, closingTagPosition - _index);
+  }
+
+  return (closingTagPosition == std::string::npos) ? _index : closingTagPosition;
+}
+
