@@ -53,6 +53,25 @@ void ls_std::XMLReader::_checkFileExistence(ls_std::File _xmlFile)
   }
 }
 
+std::shared_ptr<ls_std::XMLDeclaration> ls_std::XMLReader::_createDeclaration(const std::unordered_map<std::string, std::string>& _attributes)
+{
+  std::shared_ptr<ls_std::XMLDeclaration> declaration = std::make_shared<ls_std::XMLDeclaration>("1.0");
+
+  if(_attributes.find("version") != _attributes.end()) {
+    declaration->setVersion(_attributes.at("version"));
+  }
+
+  if(_attributes.find("encoding") != _attributes.end()) {
+    declaration->setEncoding(_attributes.at("encoding"));
+  }
+
+  if(_attributes.find("standalone") != _attributes.end()) {
+    declaration->setStandalone(_attributes.at("standalone"));
+  }
+
+  return declaration;
+}
+
 void ls_std::XMLReader::_isClosingTag(const ls_std::byte_field &_data, std::string::size_type _index)
 {
   if(this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 2) == "</") {
@@ -83,10 +102,11 @@ void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
         this->_isDeclaration(_data, index);
         this->_isClosingTag(_data, index);
         this->_isOpeningTag(_data, index);
-      } break;
+      }
       case XML_PARSE_MODE_DECLARATION:
       {
         index = ls_std::XMLReader::_readDeclaration(_data, index);
+        this->mode = XML_PARSE_MODE_ANALYZE;
       } break;
       case XML_PARSE_MODE_OPENING_TAG:
       {
@@ -100,13 +120,44 @@ void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
   }
 }
 
+std::pair<std::string, std::string> ls_std::XMLReader::_readAttribute(const ls_std::byte_field &_data)
+{
+  std::pair<std::string, std::string> parsedAttribute {};
+  parsedAttribute.first = _data.substr(0, _data.find('='));
+  parsedAttribute.second  = _data.substr(_data.find('"') + 1);
+  parsedAttribute.second.pop_back();
+
+  return parsedAttribute;
+}
+
+std::unordered_map<std::string, std::string> ls_std::XMLReader::_readAttributes(ls_std::byte_field _data)
+{
+  std::unordered_map<std::string, std::string> attributes {};
+  size_t attributePosition;
+  _data = _data.substr(5);
+
+  while(!_data.empty()) {
+    do {
+      attributePosition = _data.find(' ') + 1;
+    }
+    while(_data[attributePosition] == ' ');
+
+    std::string attributeString = _data.substr(attributePosition, _data.find(R"(" )"));
+    attributes.insert(ls_std::XMLReader::_readAttribute(attributeString));
+    _data = _data.substr(attributePosition + attributeString.size());
+  }
+
+  return attributes;
+}
+
 size_t ls_std::XMLReader::_readDeclaration(const ls_std::byte_field &_data, std::string::size_type _index)
 {
   size_t closingTagPosition = _data.find('>');
-  std::string declarationString {};
 
   if(closingTagPosition != std::string::npos) {
-    declarationString = _data.substr(_index, closingTagPosition - _index);
+    std::string declarationString = _data.substr(_index, (closingTagPosition - _index) + 1);
+    std::shared_ptr<ls_std::XMLDeclaration> declaration = this->_createDeclaration(ls_std::XMLReader::_readAttributes(declarationString));
+    this->document->setDeclaration(declaration);
   }
 
   return (closingTagPosition == std::string::npos) ? _index : closingTagPosition;
