@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2020-10-10
+ * Changed:         2020-10-16
  *
  * */
 
@@ -15,7 +15,7 @@
 #include "../IReader.hpp"
 #include "../File.hpp"
 #include "XMLParseMode.hpp"
-#include <unordered_map>
+#include <list>
 
 namespace ls_std {
   class XMLReader : public Class, IReader {
@@ -41,13 +41,14 @@ namespace ls_std {
 
       static void _checkDocumentExistence(const std::shared_ptr<ls_std::XMLDocument>& _document);
       static void _checkFileExistence(ls_std::File _xmlFile);
-      static std::shared_ptr<ls_std::XMLDeclaration> _createDeclaration(const std::unordered_map<std::string, std::string>& _attributes);
+      static std::shared_ptr<ls_std::XMLDeclaration> _createDeclaration(const std::list<std::pair<std::string, std::string>>& _attributes);
+      static std::pair<std::string, std::string> _findAttribute(const std::list<std::pair<std::string, std::string>>& _attributes, const std::string& _name);
       void _isClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _read(const ls_std::byte_field& _data);
       static std::pair<std::string, std::string> _readAttribute(const ls_std::byte_field& _data);
-      static std::unordered_map<std::string, std::string> _readAttributes(ls_std::byte_field _data);
+      static std::list<std::pair<std::string, std::string>> _readAttributes(ls_std::byte_field _data);
       size_t _readDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
   };
 }

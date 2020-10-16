@@ -3,13 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-10-10
+ * Changed:         2020-10-16
  *
  * */
 
 #include "XMLReader.hpp"
 #include "../../exception/IllegalArgumentException.hpp"
 #include "../FileReader.hpp"
+#include "../../boxing/String.hpp"
+#include <vector>
 
 ls_std::XMLReader::XMLReader(const std::shared_ptr<ls_std::XMLDocument>& _document, const std::string& _absolutePath) :
 Class("XMLReader"),
@@ -53,23 +55,42 @@ void ls_std::XMLReader::_checkFileExistence(ls_std::File _xmlFile)
   }
 }
 
-std::shared_ptr<ls_std::XMLDeclaration> ls_std::XMLReader::_createDeclaration(const std::unordered_map<std::string, std::string>& _attributes)
+std::shared_ptr<ls_std::XMLDeclaration> ls_std::XMLReader::_createDeclaration(const std::list<std::pair<std::string, std::string>>& _attributes)
 {
   std::shared_ptr<ls_std::XMLDeclaration> declaration = std::make_shared<ls_std::XMLDeclaration>("1.0");
+  std::pair<std::string, std::string> attribute = ls_std::XMLReader::_findAttribute(_attributes, "version");
 
-  if(_attributes.find("version") != _attributes.end()) {
-    declaration->setVersion(_attributes.at("version"));
+  if(!attribute.first.empty()) {
+    declaration->setVersion(attribute.second);
   }
 
-  if(_attributes.find("encoding") != _attributes.end()) {
-    declaration->setEncoding(_attributes.at("encoding"));
+  attribute = ls_std::XMLReader::_findAttribute(_attributes, "encoding");
+
+  if(!attribute.first.empty()) {
+    declaration->setEncoding(attribute.second);
   }
 
-  if(_attributes.find("standalone") != _attributes.end()) {
-    declaration->setStandalone(_attributes.at("standalone"));
+  attribute = ls_std::XMLReader::_findAttribute(_attributes, "standalone");
+
+  if(!attribute.first.empty()) {
+    declaration->setStandalone(attribute.second);
   }
 
   return declaration;
+}
+
+std::pair<std::string, std::string> ls_std::XMLReader::_findAttribute(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name)
+{
+  std::pair<std::string, std::string> attribute {};
+
+  for(const auto& currentAttribute : _attributes) {
+    if(currentAttribute.first == _name) {
+      attribute = currentAttribute;
+      break;
+    }
+  }
+
+  return attribute;
 }
 
 void ls_std::XMLReader::_isClosingTag(const ls_std::byte_field &_data, std::string::size_type _index)
@@ -102,9 +123,10 @@ void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
         this->_isDeclaration(_data, index);
         this->_isClosingTag(_data, index);
         this->_isOpeningTag(_data, index);
-      }
+      } break;
       case XML_PARSE_MODE_DECLARATION:
       {
+        --index;
         index = ls_std::XMLReader::_readDeclaration(_data, index);
         this->mode = XML_PARSE_MODE_ANALYZE;
       } break;
@@ -130,9 +152,9 @@ std::pair<std::string, std::string> ls_std::XMLReader::_readAttribute(const ls_s
   return parsedAttribute;
 }
 
-std::unordered_map<std::string, std::string> ls_std::XMLReader::_readAttributes(ls_std::byte_field _data)
+std::list<std::pair<std::string, std::string>> ls_std::XMLReader::_readAttributes(ls_std::byte_field _data)
 {
-  std::unordered_map<std::string, std::string> attributes {};
+  std::list<std::pair<std::string, std::string>> attributes {};
   size_t attributePosition;
   _data = _data.substr(5);
 
@@ -142,8 +164,12 @@ std::unordered_map<std::string, std::string> ls_std::XMLReader::_readAttributes(
     }
     while(_data[attributePosition] == ' ');
 
+    if(_data.size() <= 3 && ls_std::String {_data}.endsWith(">")) {
+      break;
+    }
+
     std::string attributeString = _data.substr(attributePosition, _data.find(R"(" )"));
-    attributes.insert(ls_std::XMLReader::_readAttribute(attributeString));
+    attributes.push_back(ls_std::XMLReader::_readAttribute(attributeString));
     _data = _data.substr(attributePosition + attributeString.size());
   }
 
