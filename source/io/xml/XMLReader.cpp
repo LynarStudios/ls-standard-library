@@ -25,7 +25,7 @@ document(_document)
 ls_std::byte_field ls_std::XMLReader::read()
 {
   ls_std::byte_field data = ls_std::FileReader {this->xmlFile}.read();
-  this->_read(data);
+  this->_parse(data);
   this->_reset();
 
   return data;
@@ -178,6 +178,36 @@ void ls_std::XMLReader::_isOpeningTag(const ls_std::byte_field &_data, std::stri
   }
 }
 
+void ls_std::XMLReader::_parse(const ls_std::byte_field &_data)
+{
+  for(std::string::size_type index = 0 ; index < _data.size() ; index++) {
+    switch(this->mode) {
+      case XML_PARSE_MODE_ANALYZE:
+      {
+        this->_analyze(_data, index);
+      } break;
+      case XML_PARSE_MODE_DECLARATION:
+      {
+        --index;
+        index = this->_parseDeclaration(_data, index);
+        this->mode = XML_PARSE_MODE_ANALYZE;
+      } break;
+      case XML_PARSE_MODE_OPENING_TAG:
+      {
+        --index;
+        index = ls_std::XMLReader::_parseOpeningTag(_data, index);
+        this->mode = XML_PARSE_MODE_ANALYZE;
+      } break;
+      case XML_PARSE_MODE_CLOSING_TAG:
+      {
+        --index;
+        index = ls_std::XMLReader::_parseClosingTag(_data, index);
+        this->mode = XML_PARSE_MODE_ANALYZE;
+      } break;
+    }
+  }
+}
+
 std::pair<std::string, std::string> ls_std::XMLReader::_parseAttribute(const ls_std::byte_field &_data)
 {
   std::pair<std::string, std::string> parsedAttribute {};
@@ -263,36 +293,6 @@ ls_std::byte_field ls_std::XMLReader::_parseTagName(const ls_std::byte_field &_d
   }
 
   return _data.substr(1, position - 1);
-}
-
-void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
-{
-  for(std::string::size_type index = 0 ; index < _data.size() ; index++) {
-    switch(this->mode) {
-      case XML_PARSE_MODE_ANALYZE:
-      {
-        this->_analyze(_data, index);
-      } break;
-      case XML_PARSE_MODE_DECLARATION:
-      {
-        --index;
-        index = this->_parseDeclaration(_data, index);
-        this->mode = XML_PARSE_MODE_ANALYZE;
-      } break;
-      case XML_PARSE_MODE_OPENING_TAG:
-      {
-        --index;
-        index = ls_std::XMLReader::_parseOpeningTag(_data, index);
-        this->mode = XML_PARSE_MODE_ANALYZE;
-      } break;
-      case XML_PARSE_MODE_CLOSING_TAG:
-      {
-        --index;
-        index = ls_std::XMLReader::_parseClosingTag(_data, index);
-        this->mode = XML_PARSE_MODE_ANALYZE;
-      } break;
-    }
-  }
 }
 
 void ls_std::XMLReader::_reset()

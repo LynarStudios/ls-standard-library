@@ -59,13 +59,13 @@ namespace ls_std {
       void _isClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
+      void _parse(const ls_std::byte_field& _data);
       static std::pair<std::string, std::string> _parseAttribute(const ls_std::byte_field& _data);
       static std::list<std::pair<std::string, std::string>> _parseAttributes(ls_std::byte_field _data);
       size_t _parseClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
       size_t _parseDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
       size_t _parseOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
       static ls_std::byte_field _parseTagName(const ls_std::byte_field& _data);
-      void _read(const ls_std::byte_field& _data);
       void _reset();
       void _setMaxLevel();
   };
