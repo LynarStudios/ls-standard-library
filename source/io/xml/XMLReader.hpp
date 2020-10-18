@@ -51,7 +51,7 @@ namespace ls_std {
       static void _checkDocumentExistence(const std::shared_ptr<ls_std::XMLDocument>& _document);
       static void _checkFileExistence(ls_std::File _xmlFile);
       static std::shared_ptr<ls_std::XMLDeclaration> _createDeclaration(const std::list<std::pair<std::string, std::string>>& _attributes);
-      static std::shared_ptr<ls_std::XMLNode> _createNode(const std::list<std::pair<std::string, std::string>>& _attributes);
+      static std::shared_ptr<ls_std::XMLNode> _createNode(const std::list<std::pair<std::string, std::string>>& _attributes, const std::string& _name);
       static std::pair<std::string, std::string> _findAttribute(const std::list<std::pair<std::string, std::string>>& _attributes, const std::string& _name);
       static size_t _findAttributeEndPosition(const ls_std::byte_field& _data);
       static ls_std::byte_field _getNextTagString(const ls_std::byte_field& _data, std::string::size_type _index);
@@ -63,6 +63,7 @@ namespace ls_std {
       size_t _parseClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
       size_t _parseDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
       size_t _parseOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
+      static ls_std::byte_field _parseTagName(const ls_std::byte_field& _data);
       void _read(const ls_std::byte_field& _data);
       void _reset();
   };

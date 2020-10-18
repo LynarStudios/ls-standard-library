@@ -96,9 +96,9 @@ std::shared_ptr<ls_std::XMLDeclaration> ls_std::XMLReader::_createDeclaration(co
   return declaration;
 }
 
-std::shared_ptr<ls_std::XMLNode> ls_std::XMLReader::_createNode(const std::list<std::pair<std::string, std::string>> &_attributes)
+std::shared_ptr<ls_std::XMLNode> ls_std::XMLReader::_createNode(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string& _name)
 {
-  std::shared_ptr<ls_std::XMLNode> node = std::make_shared<ls_std::XMLNode>("_creation_token_");
+  std::shared_ptr<ls_std::XMLNode> node = std::make_shared<ls_std::XMLNode>(_name);
   std::shared_ptr<ls_std::XMLAttribute> attribute {};
 
   for(const auto& parsedAttribute : _attributes) {
@@ -238,7 +238,7 @@ size_t ls_std::XMLReader::_parseOpeningTag(const ls_std::byte_field &_data, std:
   ls_std::XMLParseData singleParseData {};
 
   if(isValidTagString) {
-    std::shared_ptr<ls_std::XMLNode> node = ls_std::XMLReader::_createNode(ls_std::XMLReader::_parseAttributes(tagString));
+    std::shared_ptr<ls_std::XMLNode> node = ls_std::XMLReader::_createNode(ls_std::XMLReader::_parseAttributes(tagString), ls_std::XMLReader::_parseTagName(tagString));
 
     if(!tagString.endsWith("/>")) {
       this->currentLevel += 1;
@@ -250,6 +250,11 @@ size_t ls_std::XMLReader::_parseOpeningTag(const ls_std::byte_field &_data, std:
   }
 
   return !isValidTagString ? _index : _index + tagString.toString().size();
+}
+
+ls_std::byte_field ls_std::XMLReader::_parseTagName(const ls_std::byte_field &_data)
+{
+  return _data.substr(1, _data.find(' ') - 1);
 }
 
 void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
