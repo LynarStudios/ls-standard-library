@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2020-10-16
+ * Changed:         2020-10-18
  *
  * */
 
@@ -15,6 +15,7 @@
 #include "../IReader.hpp"
 #include "../File.hpp"
 #include "XMLParseMode.hpp"
+#include "XMLParseData.hpp"
 #include <list>
 
 namespace ls_std {
@@ -33,23 +34,37 @@ namespace ls_std {
       std::shared_ptr<ls_std::XMLDocument> getDocument();
       void setFile(const ls_std::File& _xmlFile);
 
+    protected:
+
+      static std::pair<std::string, std::string> _readAttribute_(const ls_std::byte_field& _data);
+      static std::list<std::pair<std::string, std::string>> _readAttributes_(ls_std::byte_field _data);
+
     private:
 
+      uint8_t currentLevel {};
       std::shared_ptr<ls_std::XMLDocument> document {};
       ls_std::XMLParseMode mode {};
+      std::list<ls_std::XMLParseData> parseData {};
       ls_std::File xmlFile;
 
+      void _analyze(const ls_std::byte_field &_data, std::string::size_type _index);
       static void _checkDocumentExistence(const std::shared_ptr<ls_std::XMLDocument>& _document);
       static void _checkFileExistence(ls_std::File _xmlFile);
       static std::shared_ptr<ls_std::XMLDeclaration> _createDeclaration(const std::list<std::pair<std::string, std::string>>& _attributes);
+      static std::shared_ptr<ls_std::XMLNode> _createNode(const std::list<std::pair<std::string, std::string>>& _attributes);
       static std::pair<std::string, std::string> _findAttribute(const std::list<std::pair<std::string, std::string>>& _attributes, const std::string& _name);
+      static size_t _findAttributeEndPosition(const ls_std::byte_field& _data);
       void _isClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _read(const ls_std::byte_field& _data);
       static std::pair<std::string, std::string> _readAttribute(const ls_std::byte_field& _data);
       static std::list<std::pair<std::string, std::string>> _readAttributes(ls_std::byte_field _data);
+      size_t _readClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
       size_t _readDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
+      size_t _readOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
+      static ls_std::byte_field _readTag(const ls_std::byte_field& _data, std::string::size_type _index);
+      void _reset();
   };
 }
 

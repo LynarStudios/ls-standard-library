@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-10-16
+ * Changed:         2020-10-18
  *
  * */
 
@@ -11,7 +11,6 @@
 #include "../../exception/IllegalArgumentException.hpp"
 #include "../FileReader.hpp"
 #include "../../boxing/String.hpp"
-#include <vector>
 
 ls_std::XMLReader::XMLReader(const std::shared_ptr<ls_std::XMLDocument>& _document, const std::string& _absolutePath) :
 Class("XMLReader"),
@@ -26,6 +25,7 @@ ls_std::byte_field ls_std::XMLReader::read()
 {
   ls_std::byte_field data = ls_std::FileReader {this->xmlFile}.read();
   this->_read(data);
+  this->_reset();
 
   return data;
 }
@@ -39,6 +39,23 @@ void ls_std::XMLReader::setFile(const ls_std::File &_xmlFile)
 {
   XMLReader::_checkFileExistence(_xmlFile);
   this->xmlFile = _xmlFile;
+}
+
+std::pair<std::string, std::string> ls_std::XMLReader::_readAttribute_(const ls_std::byte_field &_data)
+{
+  return ls_std::XMLReader::_readAttribute(_data);
+}
+
+std::list<std::pair<std::string, std::string>> ls_std::XMLReader::_readAttributes_(ls_std::byte_field _data)
+{
+  return ls_std::XMLReader::_readAttributes(std::move(_data));
+}
+
+void ls_std::XMLReader::_analyze(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  this->_isDeclaration(_data, _index);
+  this->_isClosingTag(_data, _index);
+  this->_isOpeningTag(_data, _index);
 }
 
 void ls_std::XMLReader::_checkDocumentExistence(const std::shared_ptr<ls_std::XMLDocument>& _document)
@@ -79,6 +96,20 @@ std::shared_ptr<ls_std::XMLDeclaration> ls_std::XMLReader::_createDeclaration(co
   return declaration;
 }
 
+std::shared_ptr<ls_std::XMLNode> ls_std::XMLReader::_createNode(const std::list<std::pair<std::string, std::string>> &_attributes)
+{
+  std::shared_ptr<ls_std::XMLNode> node = std::make_shared<ls_std::XMLNode>("_creation_token_");
+  std::shared_ptr<ls_std::XMLAttribute> attribute {};
+
+  for(const auto& parsedAttribute : _attributes) {
+    attribute = std::make_shared<ls_std::XMLAttribute>(parsedAttribute.first);
+    attribute->setValue(parsedAttribute.second);
+    node->addAttributeToEnd(attribute);
+  }
+
+  return node;
+}
+
 std::pair<std::string, std::string> ls_std::XMLReader::_findAttribute(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name)
 {
   std::pair<std::string, std::string> attribute {};
@@ -91,6 +122,26 @@ std::pair<std::string, std::string> ls_std::XMLReader::_findAttribute(const std:
   }
 
   return attribute;
+}
+
+size_t ls_std::XMLReader::_findAttributeEndPosition(const ls_std::byte_field &_data)
+{
+  std::string::size_type position = std::string::npos;
+  std::string::size_type counter {};
+
+  for(char letter : _data) {
+    if(letter == '"') {
+      counter++;
+    }
+
+    if(counter == 2) {
+      break;
+    }
+
+    position++;
+  }
+
+  return position;
 }
 
 void ls_std::XMLReader::_isClosingTag(const ls_std::byte_field &_data, std::string::size_type _index)
@@ -120,23 +171,25 @@ void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
     switch(this->mode) {
       case XML_PARSE_MODE_ANALYZE:
       {
-        this->_isDeclaration(_data, index);
-        this->_isClosingTag(_data, index);
-        this->_isOpeningTag(_data, index);
+        this->_analyze(_data, index);
       } break;
       case XML_PARSE_MODE_DECLARATION:
       {
         --index;
-        index = ls_std::XMLReader::_readDeclaration(_data, index);
+        index = this->_readDeclaration(_data, index);
         this->mode = XML_PARSE_MODE_ANALYZE;
       } break;
       case XML_PARSE_MODE_OPENING_TAG:
       {
-
+        --index;
+        index = ls_std::XMLReader::_readOpeningTag(_data, index);
+        this->mode = XML_PARSE_MODE_ANALYZE;
       } break;
       case XML_PARSE_MODE_CLOSING_TAG:
       {
-
+        --index;
+        index = ls_std::XMLReader::_readClosingTag(_data, index);
+        this->mode = XML_PARSE_MODE_ANALYZE;
       } break;
     }
   }
@@ -155,37 +208,83 @@ std::pair<std::string, std::string> ls_std::XMLReader::_readAttribute(const ls_s
 std::list<std::pair<std::string, std::string>> ls_std::XMLReader::_readAttributes(ls_std::byte_field _data)
 {
   std::list<std::pair<std::string, std::string>> attributes {};
-  size_t attributePosition;
-  _data = _data.substr(5);
+  size_t position = _data.find(' ');
+  _data = position == std::string::npos ? "" : _data.substr(position);
 
   while(!_data.empty()) {
     do {
-      attributePosition = _data.find(' ') + 1;
+      position = _data.find(' ') + 1;
     }
-    while(_data[attributePosition] == ' ');
+    while(_data[position] == ' ');
 
     if(_data.size() <= 3 && ls_std::String {_data}.endsWith(">")) {
       break;
     }
 
-    std::string attributeString = _data.substr(attributePosition, _data.find(R"(" )"));
+    std::string attributeString = _data.substr(position, ls_std::XMLReader::_findAttributeEndPosition(_data) + 1);
     attributes.push_back(ls_std::XMLReader::_readAttribute(attributeString));
-    _data = _data.substr(attributePosition + attributeString.size());
+    _data = _data.substr(position + attributeString.size());
   }
 
   return attributes;
 }
 
+size_t ls_std::XMLReader::_readClosingTag(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  std::string tagString = ls_std::XMLReader::_readTag(_data, _index);
+  this->currentLevel -= 1;
+  return tagString.empty() ? _index : _index + tagString.size();
+}
+
 size_t ls_std::XMLReader::_readDeclaration(const ls_std::byte_field &_data, std::string::size_type _index)
 {
-  size_t closingTagPosition = _data.find('>');
+  std::string tagString = ls_std::XMLReader::_readTag(_data, _index);
+  bool isValidTagString = !tagString.empty();
 
-  if(closingTagPosition != std::string::npos) {
-    std::string declarationString = _data.substr(_index, (closingTagPosition - _index) + 1);
-    std::shared_ptr<ls_std::XMLDeclaration> declaration = this->_createDeclaration(ls_std::XMLReader::_readAttributes(declarationString));
+  if(isValidTagString) {
+    std::shared_ptr<ls_std::XMLDeclaration> declaration = this->_createDeclaration(ls_std::XMLReader::_readAttributes(tagString));
     this->document->setDeclaration(declaration);
   }
 
-  return (closingTagPosition == std::string::npos) ? _index : closingTagPosition;
+  return !isValidTagString ? _index : _index + tagString.size();
 }
 
+size_t ls_std::XMLReader::_readOpeningTag(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  ls_std::String tagString {ls_std::XMLReader::_readTag(_data, _index)};
+  bool isValidTagString = !tagString.toString().empty();
+  ls_std::XMLParseData singleParseData {};
+
+  if(isValidTagString) {
+    std::shared_ptr<ls_std::XMLNode> node = ls_std::XMLReader::_createNode(ls_std::XMLReader::_readAttributes(tagString));
+
+    if(!tagString.endsWith("/>")) {
+      this->currentLevel += 1;
+    }
+
+    singleParseData.level = this->currentLevel;
+    singleParseData.node = node;
+    this->parseData.push_back(singleParseData);
+  }
+
+  return !isValidTagString ? _index : _index + tagString.toString().size();
+}
+
+ls_std::byte_field ls_std::XMLReader::_readTag(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  ls_std::byte_field tag {};
+  size_t closingCharacterPosition = _index + _data.substr(_index).find('>');
+
+  if(closingCharacterPosition != std::string::npos) {
+    tag = _data.substr(_index, (closingCharacterPosition - _index) + 1);
+  }
+
+  return tag;
+}
+
+void ls_std::XMLReader::_reset()
+{
+  this->currentLevel = 0;
+  this->mode = XML_PARSE_MODE_ANALYZE;
+  this->parseData.clear();
+}

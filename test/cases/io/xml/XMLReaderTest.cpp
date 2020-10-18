@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-10-16
+ * Changed:         2020-10-18
  *
  * */
 
@@ -33,6 +33,7 @@ namespace {
 
     ASSERT_STREQ("UTF-8", xmlReader.getDocument()->getDeclaration()->getEncoding().c_str());
     ASSERT_STREQ("1.0", xmlReader.getDocument()->getDeclaration()->getVersion().c_str());
+    ASSERT_TRUE(xmlReader.getDocument()->getDeclaration()->getStandalone().empty());
   }
 
   TEST_F(XMLReaderTest, getDocument)
