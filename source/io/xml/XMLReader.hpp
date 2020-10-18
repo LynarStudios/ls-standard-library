@@ -54,16 +54,16 @@ namespace ls_std {
       static std::shared_ptr<ls_std::XMLNode> _createNode(const std::list<std::pair<std::string, std::string>>& _attributes);
       static std::pair<std::string, std::string> _findAttribute(const std::list<std::pair<std::string, std::string>>& _attributes, const std::string& _name);
       static size_t _findAttributeEndPosition(const ls_std::byte_field& _data);
+      static ls_std::byte_field _getNextTagString(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
+      static std::pair<std::string, std::string> _parseAttribute(const ls_std::byte_field& _data);
+      static std::list<std::pair<std::string, std::string>> _parseAttributes(ls_std::byte_field _data);
+      size_t _parseClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
+      size_t _parseDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
+      size_t _parseOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _read(const ls_std::byte_field& _data);
-      static std::pair<std::string, std::string> _readAttribute(const ls_std::byte_field& _data);
-      static std::list<std::pair<std::string, std::string>> _readAttributes(ls_std::byte_field _data);
-      size_t _readClosingTag(const ls_std::byte_field& _data, std::string::size_type _index);
-      size_t _readDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
-      size_t _readOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
-      static ls_std::byte_field _readTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _reset();
   };
 }
