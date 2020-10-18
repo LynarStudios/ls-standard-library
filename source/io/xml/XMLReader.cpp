@@ -247,6 +247,7 @@ size_t ls_std::XMLReader::_parseOpeningTag(const ls_std::byte_field &_data, std:
 
     if(!tagString.endsWith("/>")) {
       this->currentLevel += 1;
+      this->_setMaxLevel();
     }
   }
 
@@ -297,6 +298,14 @@ void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
 void ls_std::XMLReader::_reset()
 {
   this->currentLevel = 1;
+  this->maxLevel = 1;
   this->mode = XML_PARSE_MODE_ANALYZE;
   this->parseData.clear();
+}
+
+void ls_std::XMLReader::_setMaxLevel()
+{
+  if(this->currentLevel > this->maxLevel) {
+    this->maxLevel = this->currentLevel;
+  }
 }

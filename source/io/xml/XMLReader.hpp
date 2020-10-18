@@ -43,6 +43,7 @@ namespace ls_std {
 
       uint8_t currentLevel {};
       std::shared_ptr<ls_std::XMLDocument> document {};
+      uint8_t maxLevel {};
       ls_std::XMLParseMode mode {};
       std::list<ls_std::XMLParseData> parseData {};
       ls_std::File xmlFile;
@@ -66,6 +67,7 @@ namespace ls_std {
       static ls_std::byte_field _parseTagName(const ls_std::byte_field& _data);
       void _read(const ls_std::byte_field& _data);
       void _reset();
+      void _setMaxLevel();
   };
 }
 
