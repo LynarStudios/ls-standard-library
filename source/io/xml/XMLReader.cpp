@@ -254,7 +254,13 @@ size_t ls_std::XMLReader::_parseOpeningTag(const ls_std::byte_field &_data, std:
 
 ls_std::byte_field ls_std::XMLReader::_parseTagName(const ls_std::byte_field &_data)
 {
-  return _data.substr(1, _data.find(' ') - 1);
+  std::string::size_type position = _data.find(' ');
+
+  if(position == std::string::npos) {
+    position = _data.find('>');
+  }
+
+  return _data.substr(1, position - 1);
 }
 
 void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
