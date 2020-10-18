@@ -19,6 +19,7 @@ document(_document)
 {
   XMLReader::_checkDocumentExistence(_document);
   XMLReader::_checkFileExistence(this->xmlFile);
+  this->_reset();
 }
 
 ls_std::byte_field ls_std::XMLReader::read()
@@ -240,13 +241,13 @@ size_t ls_std::XMLReader::_parseOpeningTag(const ls_std::byte_field &_data, std:
   if(isValidTagString) {
     std::shared_ptr<ls_std::XMLNode> node = ls_std::XMLReader::_createNode(ls_std::XMLReader::_parseAttributes(tagString), ls_std::XMLReader::_parseTagName(tagString));
 
-    if(!tagString.endsWith("/>")) {
-      this->currentLevel += 1;
-    }
-
     singleParseData.level = this->currentLevel;
     singleParseData.node = node;
     this->parseData.push_back(singleParseData);
+
+    if(!tagString.endsWith("/>")) {
+      this->currentLevel += 1;
+    }
   }
 
   return !isValidTagString ? _index : _index + tagString.toString().size();
@@ -295,7 +296,7 @@ void ls_std::XMLReader::_read(const ls_std::byte_field &_data)
 
 void ls_std::XMLReader::_reset()
 {
-  this->currentLevel = 0;
+  this->currentLevel = 1;
   this->mode = XML_PARSE_MODE_ANALYZE;
   this->parseData.clear();
 }
