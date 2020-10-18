@@ -124,7 +124,9 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLParseMode.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLParseData.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLParseData.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReaderMock.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReaderMock.cpp)
 
 set(LIBRARY_SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/include/tinyxml2.h
@@ -172,7 +174,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/VersionTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLDeclarationTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLDocumentTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLReaderTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLReaderTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLReaderMockTest.cpp)
 
 ##########################################################
 # Build
