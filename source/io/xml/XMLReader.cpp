@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-10-18
+ * Changed:         2020-10-19
  *
  * */
 
@@ -26,6 +26,7 @@ ls_std::byte_field ls_std::XMLReader::read()
 {
   ls_std::byte_field data = ls_std::FileReader {this->xmlFile}.read();
   this->_parse(data);
+  this->_mergeNodes();
   this->_reset();
 
   return data;
@@ -175,6 +176,41 @@ void ls_std::XMLReader::_isOpeningTag(const ls_std::byte_field &_data, std::stri
 {
   if(this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 1) == "<") {
     this->mode = XML_PARSE_MODE_OPENING_TAG;
+  }
+}
+
+void ls_std::XMLReader::_mergeNodes()
+{
+  while(this->maxLevel > 1) {
+    this->_mergeNodesOnCurrentLevel();
+    this->maxLevel -= 1;
+  }
+
+  this->document->setRootElement(this->parseData.front().node);
+}
+
+void ls_std::XMLReader::_mergeNodesOnCurrentLevel() {
+  auto iterator = this->parseData.begin();
+  uint8_t parentLevel {};
+
+  while(iterator != this->parseData.end()) {
+    parentLevel = this->maxLevel - 1;
+
+    if(iterator->level == parentLevel) {
+      std::shared_ptr<ls_std::XMLNode> parent = iterator->node;
+
+      do {
+        iterator++;
+
+        if(iterator != this->parseData.end() && iterator->level == this->maxLevel) {
+          parent->addChildToEnd(iterator->node);
+        }
+      }
+      while(iterator->level == this->maxLevel);
+    }
+    else {
+      iterator++;
+    }
   }
 }
 
