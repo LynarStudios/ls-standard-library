@@ -24,6 +24,25 @@ namespace ls_std {
       static bool contains(container _container, const dataType& _value) {
         return std::find(_container.begin(), _container.end(), _value) != _container.end();
       }
+
+      template<class dataType>
+      static dataType getListElementAt(const std::list<dataType>& _list, size_t _index) {
+        dataType value {};
+        size_t counter {};
+
+        if(_index < _list.size()) {
+          for(const auto& _value : _list) {
+            if(counter == _index) {
+              value = _value;
+              break;
+            }
+
+            counter++;
+          }
+        }
+
+        return value;
+      }
   };
 }
 
