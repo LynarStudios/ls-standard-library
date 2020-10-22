@@ -189,27 +189,30 @@ void ls_std::XMLReader::_mergeNodes()
   this->document->setRootElement(this->parseData.front().node);
 }
 
-void ls_std::XMLReader::_mergeChildrenToParentNode(const std::shared_ptr<ls_std::XMLNode>& _parent, std::list<ls_std::XMLParseData>::iterator& _iterator)
+void ls_std::XMLReader::_mergeChildrenToParentNode(const std::shared_ptr<ls_std::XMLNode>& _parent, std::list<ls_std::XMLParseData>::iterator& _iterator, uint8_t _parentLevel)
 {
   do {
     _iterator++;
 
-    if(_iterator != this->parseData.end() && _iterator->level == this->maxLevel) {
-      _parent->addChildToEnd(_iterator->node);
+    if(_iterator == this->parseData.end()) {
+      break;
+    }
+    else {
+      if(_iterator->level == this->maxLevel) {
+        _parent->addChildToEnd(_iterator->node);
+      }
     }
   }
-  while(_iterator->level == this->maxLevel);
+  while(_iterator->level > _parentLevel);
 }
 
 void ls_std::XMLReader::_mergeNodesOnCurrentLevel() {
   auto iterator = this->parseData.begin();
-  uint8_t parentLevel;
+  uint8_t parentLevel = this->maxLevel - 1;
 
   while(iterator != this->parseData.end()) {
-    parentLevel = this->maxLevel - 1;
-
     if(iterator->level == parentLevel) {
-      this->_mergeChildrenToParentNode(iterator->node, iterator);
+      this->_mergeChildrenToParentNode(iterator->node, iterator, parentLevel);
     }
     else {
       iterator++;
