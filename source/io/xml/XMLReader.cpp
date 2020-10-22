@@ -58,6 +58,7 @@ void ls_std::XMLReader::_analyze(const ls_std::byte_field &_data, std::string::s
   this->_isDeclaration(_data, _index);
   this->_isClosingTag(_data, _index);
   this->_isOpeningTag(_data, _index);
+  this->_isValue(_data, _index);
 }
 
 void ls_std::XMLReader::_checkDocumentExistence(const std::shared_ptr<ls_std::XMLDocument>& _document)
@@ -179,6 +180,22 @@ void ls_std::XMLReader::_isOpeningTag(const ls_std::byte_field &_data, std::stri
   }
 }
 
+void ls_std::XMLReader::_isValue(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  if(this->mode == XML_PARSE_MODE_ANALYZE) {
+    std::string::size_type end = _data.substr(_index).find('<');
+    bool isValue = _data[_index - 1] == '>' && end != std::string::npos && end > 0;
+
+    if(isValue) {
+      ls_std::String value {_data.substr(_index, end)};
+
+      if(!value.contains("\n") && !value.contains("\r\n") ) {
+        this->mode = XML_PARSE_MODE_VALUE;
+      }
+    }
+  }
+}
+
 void ls_std::XMLReader::_mergeNodes()
 {
   while(this->maxLevel > 1) {
@@ -240,6 +257,12 @@ void ls_std::XMLReader::_parse(const ls_std::byte_field &_data)
         index = ls_std::XMLReader::_parseOpeningTag(_data, index);
         this->mode = XML_PARSE_MODE_ANALYZE;
       } break;
+      case XML_PARSE_MODE_VALUE:
+      {
+        --index;
+        index = ls_std::XMLReader::_parseValue(_data, index);
+        this->mode = XML_PARSE_MODE_ANALYZE;
+      } break;
       case XML_PARSE_MODE_CLOSING_TAG:
       {
         --index;
@@ -288,7 +311,7 @@ size_t ls_std::XMLReader::_parseClosingTag(const ls_std::byte_field &_data, std:
 {
   std::string tagString = ls_std::XMLReader::_getNextTagString(_data, _index);
   this->currentLevel -= 1;
-  return tagString.empty() ? _index : _index + tagString.size();
+  return tagString.empty() ? _index : _index + (tagString.size() - 1);
 }
 
 size_t ls_std::XMLReader::_parseDeclaration(const ls_std::byte_field &_data, std::string::size_type _index)
@@ -301,7 +324,7 @@ size_t ls_std::XMLReader::_parseDeclaration(const ls_std::byte_field &_data, std
     this->document->setDeclaration(declaration);
   }
 
-  return !isValidTagString ? _index : _index + tagString.size();
+  return !isValidTagString ? _index : _index + (tagString.size() - 1);
 }
 
 size_t ls_std::XMLReader::_parseOpeningTag(const ls_std::byte_field &_data, std::string::size_type _index)
@@ -323,7 +346,7 @@ size_t ls_std::XMLReader::_parseOpeningTag(const ls_std::byte_field &_data, std:
     }
   }
 
-  return !isValidTagString ? _index : _index + tagString.toString().size();
+  return !isValidTagString ? _index : _index + (tagString.toString().size() - 1);
 }
 
 ls_std::byte_field ls_std::XMLReader::_parseTagName(const ls_std::byte_field &_data)
@@ -335,6 +358,14 @@ ls_std::byte_field ls_std::XMLReader::_parseTagName(const ls_std::byte_field &_d
   }
 
   return _data.substr(1, position - 1);
+}
+
+size_t ls_std::XMLReader::_parseValue(const ls_std::byte_field &_data, std::string::size_type _index)
+{
+  ls_std::byte_field value = _data.substr(_index, _data.substr(_index).find('<'));
+  this->parseData.back().node->setValue(value);
+
+  return _index + (value.size() - 1);
 }
 
 void ls_std::XMLReader::_reset()
