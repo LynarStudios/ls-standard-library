@@ -5,7 +5,8 @@
  * Created:         2020-09-20
  * Changed:         2020-09-20
  *
- * */
+ * *//*
+
 
 #include <gtest/gtest.h>
 #include "../../../../../source/serialization/xml/logic/SerializableXMLState.hpp"
@@ -81,3 +82,4 @@ namespace {
     ASSERT_STREQ("C", serializable.getValue()->getId().c_str());
   }
 }
+*/

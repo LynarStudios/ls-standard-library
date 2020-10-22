@@ -5,7 +5,8 @@
  * Created:         2020-09-20
  * Changed:         2020-09-20
  *
- * */
+ * *//*
+
 
 #include "SerializableXMLState.hpp"
 #include "../../../boxing/String.hpp"
@@ -109,3 +110,4 @@ void ls_std::SerializableXMLState::_updateStates()
 
   stateNode->InsertEndChild(connectionsNode);
 }
+*/

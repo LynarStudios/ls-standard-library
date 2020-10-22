@@ -5,7 +5,8 @@
  * Created:         2020-09-20
  * Changed:         2020-09-20
  *
- * */
+ * *//*
+
 
 #include "SerializableXMLStateConnection.hpp"
 #include "../../../boxing/String.hpp"
@@ -88,3 +89,4 @@ void ls_std::SerializableXMLStateConnection::_update()
   root->ToElement()->SetAttribute("id", this->value->getStateId().c_str());
   root->ToElement()->SetAttribute("condition", this->value->isPassable());
 }
+*/

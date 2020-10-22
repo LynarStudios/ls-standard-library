@@ -128,10 +128,6 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReaderMock.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLReaderMock.cpp)
 
-set(LIBRARY_SOURCE_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/include/tinyxml2.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/lib/tiny_xml_2/tinyxml2.cpp)
-
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
@@ -165,8 +161,6 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateMachineTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/RapidXMLTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/TinyXMLTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateConnectionTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLAttributeTest.cpp
@@ -184,7 +178,7 @@ set(TEST_FILES
 message("${PROJECT_NAME}: Building...")
 
 add_executable(${PROJECT_NAME}_test ${TEST_FILES})
-add_library(${PROJECT_NAME} ${LIBRARY_SOURCE_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
 ##########################################################
 # Linking

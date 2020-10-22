@@ -5,7 +5,8 @@
  * Created:         2020-09-20
  * Changed:         2020-09-20
  *
- * */
+ * *//*
+
 
 #include <gtest/gtest.h>
 #include "../../../../../source/serialization/xml/logic/SerializableXMLStateConnection.hpp"
@@ -70,3 +71,4 @@ namespace {
     ASSERT_FALSE(serializable.getValue()->isPassable());
   }
 }
+*/

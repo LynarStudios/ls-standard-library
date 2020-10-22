@@ -5,7 +5,8 @@
  * Created:         2020-09-20
  * Changed:         2020-09-20
  *
- * */
+ * *//*
+
 
 #ifndef LS_STD_SERIALIZABLE_XML_STATE_HPP
 #define LS_STD_SERIALIZABLE_XML_STATE_HPP
@@ -47,3 +48,4 @@ namespace ls_std {
 }
 
 #endif
+*/
