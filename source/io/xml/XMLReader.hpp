@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2020-10-19
+ * Changed:         2020-10-22
  *
  * */
 
@@ -60,6 +60,7 @@ namespace ls_std {
       void _isDeclaration(const ls_std::byte_field& _data, std::string::size_type _index);
       void _isOpeningTag(const ls_std::byte_field& _data, std::string::size_type _index);
       void _mergeNodes();
+      void _mergeChildrenToParentNode(const std::shared_ptr<ls_std::XMLNode>& _parent, std::list<ls_std::XMLParseData>::iterator& _iterator);
       void _mergeNodesOnCurrentLevel();
       void _parse(const ls_std::byte_field& _data);
       static std::pair<std::string, std::string> _parseAttribute(const ls_std::byte_field& _data);

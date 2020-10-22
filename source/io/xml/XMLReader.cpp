@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-10-19
+ * Changed:         2020-10-22
  *
  * */
 
@@ -189,24 +189,27 @@ void ls_std::XMLReader::_mergeNodes()
   this->document->setRootElement(this->parseData.front().node);
 }
 
+void ls_std::XMLReader::_mergeChildrenToParentNode(const std::shared_ptr<ls_std::XMLNode>& _parent, std::list<ls_std::XMLParseData>::iterator& _iterator)
+{
+  do {
+    _iterator++;
+
+    if(_iterator != this->parseData.end() && _iterator->level == this->maxLevel) {
+      _parent->addChildToEnd(_iterator->node);
+    }
+  }
+  while(_iterator->level == this->maxLevel);
+}
+
 void ls_std::XMLReader::_mergeNodesOnCurrentLevel() {
   auto iterator = this->parseData.begin();
-  uint8_t parentLevel {};
+  uint8_t parentLevel;
 
   while(iterator != this->parseData.end()) {
     parentLevel = this->maxLevel - 1;
 
     if(iterator->level == parentLevel) {
-      std::shared_ptr<ls_std::XMLNode> parent = iterator->node;
-
-      do {
-        iterator++;
-
-        if(iterator != this->parseData.end() && iterator->level == this->maxLevel) {
-          parent->addChildToEnd(iterator->node);
-        }
-      }
-      while(iterator->level == this->maxLevel);
+      this->_mergeChildrenToParentNode(iterator->node, iterator);
     }
     else {
       iterator++;
