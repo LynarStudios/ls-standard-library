@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-08-17
+ * Changed:         2020-10-22
  *
  * */
 
@@ -29,14 +29,14 @@ namespace {
     std::vector<int> values {1, 13, 7, 8};
     std::list<std::string> names {"Tim", "Alex", "Nadine"};
 
-    ASSERT_TRUE((ls_std::STLUtils<std::vector<int>, int>::contains(values, 1)));
-    ASSERT_TRUE((ls_std::STLUtils<std::vector<int>, int>::contains(values, 13)));
-    ASSERT_TRUE((ls_std::STLUtils<std::vector<int>, int>::contains(values, 7)));
-    ASSERT_TRUE((ls_std::STLUtils<std::vector<int>, int>::contains(values, 8)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(values, 1)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(values, 13)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(values, 7)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(values, 8)));
 
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(names, "Tim")));
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(names, "Alex")));
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(names, "Nadine")));
+    ASSERT_TRUE((ls_std::STLUtils::contains(names, "Tim")));
+    ASSERT_TRUE((ls_std::STLUtils::contains(names, "Alex")));
+    ASSERT_TRUE((ls_std::STLUtils::contains(names, "Nadine")));
   }
 
   TEST_F(STLUtilsTest, containsNegative)
@@ -44,10 +44,10 @@ namespace {
     std::vector<int> values{1, 13, 7, 8};
     std::list<std::string> names{"Tim", "Alex", "Nadine"};
 
-    ASSERT_FALSE((ls_std::STLUtils<std::vector<int>, int>::contains(values, 55)));
-    ASSERT_FALSE((ls_std::STLUtils<std::vector<int>, int>::contains(values, 9)));
+    ASSERT_FALSE((ls_std::STLUtils::contains(values, 55)));
+    ASSERT_FALSE((ls_std::STLUtils::contains(values, 9)));
 
-    ASSERT_FALSE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(names, "Lena")));
-    ASSERT_FALSE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(names, "Mirco")));
+    ASSERT_FALSE((ls_std::STLUtils::contains(names, "Lena")));
+    ASSERT_FALSE((ls_std::STLUtils::contains(names, "Mirco")));
   }
 }

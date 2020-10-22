@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-19
+ * Changed:         2020-10-22
  *
  * */
 
@@ -208,19 +208,19 @@ namespace {
     ASSERT_EQ(7, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + ".";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "..";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "list_test_sub";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
   }
 
   TEST_F(FileTest, listFiles)
@@ -234,13 +234,13 @@ namespace {
     ASSERT_EQ(4, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((ls_std::STLUtils<std::list<std::string>, std::string>::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls_std::STLUtils::contains(filesInDirectory, expectedFile)));
   }
 
   TEST_F(FileTest, makeDirectory)

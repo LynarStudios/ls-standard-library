@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-09-26
+ * Changed:         2020-10-22
  *
  * */
 
@@ -263,7 +263,7 @@ bool ls_std::XMLNode::_hasAttribute(const std::string &_name)
 
 bool ls_std::XMLNode::_hasChild(const std::shared_ptr<ls_std::XMLNode> &_child)
 {
-  return ls_std::STLUtils<std::list<std::shared_ptr<ls_std::XMLNode>>, std::shared_ptr<ls_std::XMLNode>>::contains(this->children, _child);
+  return ls_std::STLUtils::contains(this->children, _child);
 }
 
 bool ls_std::XMLNode::_hasChild(const std::string &_name)
