@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-09-25
+ * Changed:         2020-10-25
  *
  * */
 
@@ -52,6 +52,7 @@ namespace ls_std {
       std::list<std::shared_ptr<XMLAttribute>> attributes {};
       std::list<std::shared_ptr<XMLNode>> children {};
       std::string name {};
+      const static uint8_t tabSize {4};
       std::string value {};
 
       bool _hasAttribute(const std::string& _name);
