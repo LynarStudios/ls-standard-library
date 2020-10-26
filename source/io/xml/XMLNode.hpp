@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-10-25
+ * Changed:         2020-10-26
  *
  * */
 
@@ -47,22 +47,28 @@ namespace ls_std {
       void setValue(std::string _value);
       std::string toXML();
 
+    protected:
+
+      std::string _toXML_(uint8_t _tabSize);
+
     private:
 
       std::list<std::shared_ptr<XMLAttribute>> attributes {};
       std::list<std::shared_ptr<XMLNode>> children {};
       std::string name {};
-      const static uint8_t tabSize {4};
+      const static uint8_t TAB_SIZE {4};
       std::string value {};
 
+      static std::string _getTab(uint8_t _tabSize);
       bool _hasAttribute(const std::string& _name);
       bool _hasChild(const std::shared_ptr<XMLNode>& _child);
       bool _hasChild(const std::string& _name);
       std::string _toXMLAttributes();
-      std::string _toXMLChildren();
+      std::string _toXMLChildren(uint8_t _tabSize);
       std::string _toXMLCloseTag();
       std::string _toXMLOpenTag();
       std::string _toXMLOpenTagClose();
+      std::string _toXMLValue();
   };
 }
 

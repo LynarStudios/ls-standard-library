@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2020-09-30
+ * Changed:         2020-10-26
  *
  * */
 
@@ -38,6 +38,10 @@ std::string ls_std::XMLDocument::toXML()
 
   if(this->declaration != nullptr) {
     xmlString = this->declaration->toXML();
+
+    if(!xmlString.empty()) {
+      xmlString += "\n";
+    }
   }
 
   return xmlString + this->rootElement->toXML();

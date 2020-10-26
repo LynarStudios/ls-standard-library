@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-10-22
+ * Changed:         2020-10-26
  *
  * */
 
@@ -235,16 +235,34 @@ void ls_std::XMLNode::setValue(std::string _value)
 
 std::string ls_std::XMLNode::toXML()
 {
+  return this->_toXML_(0);
+}
+
+std::string ls_std::XMLNode::_toXML_(uint8_t _tabSize)
+{
   std::string xmlStream {};
 
+  xmlStream += ls_std::XMLNode::_getTab(_tabSize);
   xmlStream += this->_toXMLOpenTag();
   xmlStream += this->_toXMLAttributes();
   xmlStream += this->_toXMLOpenTagClose();
-  xmlStream += this->value;
-  xmlStream += this->_toXMLChildren();
-  xmlStream += this->_toXMLCloseTag();
+  xmlStream += this->_toXMLValue();
+  xmlStream += this->_toXMLChildren(_tabSize + TAB_SIZE);
+  xmlStream += this->value.empty() ? ls_std::XMLNode::_getTab(_tabSize) : "";
+  xmlStream += this->_toXMLCloseTag() + "\n";
 
   return xmlStream;
+}
+
+std::string ls_std::XMLNode::_getTab(uint8_t _tabSize)
+{
+  std::string tab {};
+
+  for(uint8_t index = 0 ; index < _tabSize ; index++) {
+    tab += " ";
+  }
+
+  return tab;
 }
 
 bool ls_std::XMLNode::_hasAttribute(const std::string &_name)
@@ -291,13 +309,13 @@ std::string ls_std::XMLNode::_toXMLAttributes()
   return stream;
 }
 
-std::string ls_std::XMLNode::_toXMLChildren()
+std::string ls_std::XMLNode::_toXMLChildren(uint8_t _tabSize)
 {
   std::string stream {};
 
   if(this->value.empty()) {
     for(const auto& _child : this->children) {
-      stream += _child->toXML();
+      stream += _child->_toXML_(_tabSize);
     }
   }
 
@@ -331,4 +349,9 @@ std::string ls_std::XMLNode::_toXMLOpenTagClose()
   }
 
   return stream;
+}
+
+std::string ls_std::XMLNode::_toXMLValue()
+{
+  return this->value.empty() ? "\n" : this->value;
 }

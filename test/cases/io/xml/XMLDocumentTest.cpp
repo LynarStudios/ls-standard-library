@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2020-09-30
+ * Changed:         2020-10-26
  *
  * */
 
@@ -69,7 +69,19 @@ namespace {
     std::string xmlStream = document.toXML();
 
     ASSERT_TRUE(!xmlStream.empty());
-    std::string expectedXMLContent = R"(<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><dialog name="dungeon_001"><dialogUnit id="001"><text>Hello!</text></dialogUnit><dialogUnit id="002"><text>Hello again!</text></dialogUnit></dialog>)";
+
+    std::string expectedXMLContent =
+        R"(<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<dialog name="dungeon_001">
+    <dialogUnit id="001">
+        <text>Hello!</text>
+    </dialogUnit>
+    <dialogUnit id="002">
+        <text>Hello again!</text>
+    </dialogUnit>
+</dialog>
+)";
+
     ASSERT_STREQ(expectedXMLContent.c_str(), xmlStream.c_str());
   }
 }
