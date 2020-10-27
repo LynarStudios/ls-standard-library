@@ -109,10 +109,6 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONState.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/json/logic/SerializableJSONStateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLStateConnection.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLStateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLState.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/serialization/xml/logic/SerializableXMLState.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLAttribute.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLAttribute.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/io/xml/XMLNode.hpp
@@ -163,8 +159,6 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateMachineTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateConnectionTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/xml/logic/SerializableXMLStateTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLAttributeTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLNodeTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/VersionTest.cpp
