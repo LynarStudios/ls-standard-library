@@ -4,6 +4,7 @@
 
 cmake_minimum_required(VERSION 3.17)
 set(PROJECT_NAME ls_std)
+set(RELEASE_VERSION 2020.1.0)
 project(${PROJECT_NAME})
 
 ##########################################################
@@ -171,10 +172,11 @@ set(TEST_FILES
 # Build
 ##########################################################
 
-message("${PROJECT_NAME}: Building...")
+message("${PROJECT_NAME}: Building version ${RELEASE_VERSION}...")
 
 add_executable(${PROJECT_NAME}_test ${TEST_FILES})
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}" SHARED ${SOURCE_FILES})
 
 ##########################################################
 # Linking
