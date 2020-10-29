@@ -22,6 +22,27 @@ You can find a detailed documentation on Lynar Studios Website: lynarstudios.com
 
 This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ file inside the project's root directory.
 
+### Building ###
+
+To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__, __MSVC__ or __AppleClang__ installed.  
+Inside project's root directory create the following folder:
+
+```
+cmake_build_release
+```
+
+Open your OS specific command line window and navigate to this new folder and run the following command to configure the project and generate a native build system:  
+
+```
+cmake ../
+```
+
+Inside __cmake_build_release__ folder you will now find cmake generated files. To compile the library now, just run:   
+
+```
+cmake --build . --config Release
+```
+
 ### Testing ###
 
 This project contains unit tests to accomplish test coverage.  
