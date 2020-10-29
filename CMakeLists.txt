@@ -175,7 +175,7 @@ set(TEST_FILES
 message("${PROJECT_NAME}: Building version ${RELEASE_VERSION}...")
 
 add_executable(${PROJECT_NAME}_test ${TEST_FILES})
-add_library(${PROJECT_NAME} ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" ${SOURCE_FILES})
 add_library("${PROJECT_NAME}_${RELEASE_VERSION}" SHARED ${SOURCE_FILES})
 
 ##########################################################
@@ -183,4 +183,4 @@ add_library("${PROJECT_NAME}_${RELEASE_VERSION}" SHARED ${SOURCE_FILES})
 ##########################################################
 
 message("${PROJECT_NAME}: Linking...")
-target_link_libraries(${PROJECT_NAME}_test gtest gtest_main ls_std)
+target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${RELEASE_VERSION}_static")
