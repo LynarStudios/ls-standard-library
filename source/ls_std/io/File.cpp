@@ -11,14 +11,18 @@
 #include "../exception/FileOperationException.hpp"
 #include "FilePathSeparatorMatch.hpp"
 #include <fstream>
-#include <sys/stat.h>
 #include <algorithm>
 #include <sstream>
 #include <vector>
 #include <cstdio>
+#include <sys/stat.h>
 
 #if defined(unix) || defined(__APPLE__)
 #include <unistd.h>
+#endif
+
+#ifdef _WIN32
+#include <direct.h>
 #endif
 
 ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
@@ -183,9 +187,7 @@ void ls_std::File::remove()
   }
 
   if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
-    if(rmdir(this->absoluteFilePath.c_str())) {
-      throw ls_std::FileOperationException{};
-    }
+    ls_std::File::_remove(this->absoluteFilePath);
   }
 }
 
@@ -480,6 +482,30 @@ std::string ls_std::File::_reduceSeparators(const std::string& _path)
 
   return normalizedPath;
 }
+
+void ls_std::File::_remove(const std::string &_path)
+{
+  #if defined(unix) || defined(__APPLE__)
+  ls_std::File::_removeUnix(_path);
+  #endif
+  #ifdef _WIN32
+    ls_std::File::_removeWindows(_path);
+  #endif
+}
+
+#if defined(unix) || defined(__APPLE__)
+void ls_std::File::_removeUnix(const std::string &_path)
+{
+  rmdir(_path.c_str());
+}
+#endif
+
+#ifdef _WIN32
+void ls_std::File::_removeWindows(const std::string &_path)
+{
+  _rmdir(_path.c_str());
+}
+#endif
 
 bool ls_std::File::_renameTo(const std::string &_oldName, const std::string &_newName)
 {

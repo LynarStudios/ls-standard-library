@@ -94,6 +94,13 @@ namespace ls_std {
       static int _mkdir(const std::string& _path);
       static std::string _normalizePath(std::string _path);
       static std::string _reduceSeparators(const std::string& _path);
+      static void _remove(const std::string& _path);
+      #if defined(unix) || defined(__APPLE__)
+        static void _removeUnix(const std::string& _path);
+      #endif
+      #ifdef _WIN32
+        static void _removeWindows(const std::string& _path);
+      #endif
       static bool _renameTo(const std::string& _oldName, const std::string& _newName);
       static std::string _replaceWrongSeparator(std::string _path);
       static std::vector<std::string> _splitIntoSubDirectoryNames(const std::string& _path);
