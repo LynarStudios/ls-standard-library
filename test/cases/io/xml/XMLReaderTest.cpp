@@ -8,9 +8,8 @@
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/io/xml/XMLReader.hpp"
+#include <ls_std/ls_std.hpp>
 #include "../../../TestHelper.hpp"
-#include "../../../../source/utils/STLUtils.hpp"
 
 namespace {
   class XMLReaderTest : public ::testing::Test {

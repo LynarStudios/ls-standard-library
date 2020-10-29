@@ -3,14 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-09-19
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../../source/boxing/String.hpp"
-#include "../../../../../source/logic/StateConnection.hpp"
-#include "../../../../../source/serialization/json/logic/SerializableJSONStateConnection.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class SerializableJSONStateConnectionTest : public ::testing::Test {

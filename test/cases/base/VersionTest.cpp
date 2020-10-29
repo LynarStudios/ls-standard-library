@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2020-09-29
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../source/base/Version.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class VersionTest : public ::testing::Test {

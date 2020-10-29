@@ -8,7 +8,7 @@
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/io/xml/XMLAttribute.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class XMLAttributeTest : public ::testing::Test {

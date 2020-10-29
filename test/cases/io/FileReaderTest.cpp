@@ -3,14 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2020-08-25
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../source/io/FileReader.hpp"
 #include "../../TestHelper.hpp"
-#include "../../../source/io/NewLine.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class FileReaderTest : public ::testing::Test {

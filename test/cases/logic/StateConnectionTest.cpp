@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-09-14
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../source/logic/StateConnection.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class StateConnectionTest : public ::testing::Test {

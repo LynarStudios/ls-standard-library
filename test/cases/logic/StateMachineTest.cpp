@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2020-09-17
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../source/logic/StateMachine.hpp"
+#include <ls_std/ls_std.hpp>
 #include "../../TestDataFactory.hpp"
 
 namespace {

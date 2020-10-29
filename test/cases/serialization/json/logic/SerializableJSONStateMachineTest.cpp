@@ -3,18 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-09-17
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../../source/boxing/String.hpp"
-#include "../../../../../source/logic/StateMachine.hpp"
-#include "../../../../../source/serialization/json/logic/SerializableJSONStateMachine.hpp"
+#include <ls_std/ls_std.hpp>
 #include "../../../../TestDataFactory.hpp"
-#include "../../../../../source/io/File.hpp"
 #include "../../../../TestHelper.hpp"
-#include "../../../../../source/io/FileReader.hpp"
 
 namespace {
   class SerializableJSONStateMachineTest : public ::testing::Test {

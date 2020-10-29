@@ -3,16 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-21
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../source/io/File.hpp"
 #include "../../TestHelper.hpp"
-#include "../../../source/io/FileOutputStream.hpp"
-#include "../../../source/boxing/String.hpp"
-#include "../../../source/io/FileReader.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class FileOutputStreamTest : public ::testing::Test {

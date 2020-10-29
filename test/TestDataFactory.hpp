@@ -3,15 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2020-09-26
+ * Changed:         2020-10-29
  *
  * */
 
 #ifndef LS_STD_TEST_DATA_FACTORY_HPP
 #define LS_STD_TEST_DATA_FACTORY_HPP
 
-#include "../source/logic/StateMachine.hpp"
-#include "../source/io/xml/XMLNode.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace ls_std_test {
   class TestDataFactory {

@@ -3,18 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-09-14
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../source/boxing/Float.hpp"
-#include "../../../source/serialization/json/boxing/SerializableJSONFloat.hpp"
-#include "../../../source/boxing/String.hpp"
+#include <ls_std/ls_std.hpp>
 #include "../../TestHelper.hpp"
-#include "../../../source/io/File.hpp"
-#include "../../../source/io/FileWriter.hpp"
-#include "../../../source/io/StorableFile.hpp"
 
 namespace {
   class FloatTest : public ::testing::Test {

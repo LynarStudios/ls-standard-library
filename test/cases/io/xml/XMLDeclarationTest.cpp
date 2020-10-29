@@ -8,7 +8,7 @@
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/io/xml/XMLDeclaration.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class XMLDeclarationTest : public ::testing::Test {

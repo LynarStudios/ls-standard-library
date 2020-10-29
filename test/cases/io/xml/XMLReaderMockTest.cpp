@@ -8,7 +8,7 @@
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/io/xml/XMLReaderMock.hpp"
+#include <ls_std/ls_std.hpp>
 
 namespace {
   class XMLReaderMockTest : public ::testing::Test {

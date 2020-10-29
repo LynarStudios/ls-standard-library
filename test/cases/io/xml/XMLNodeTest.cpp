@@ -8,7 +8,7 @@
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/io/xml/XMLNode.hpp"
+#include <ls_std/ls_std.hpp>
 #include "../../../TestDataFactory.hpp"
 
 namespace {

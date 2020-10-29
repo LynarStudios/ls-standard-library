@@ -3,15 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-08-20
+ * Changed:         2020-10-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../../../source/io/logging/Logger.hpp"
+#include <ls_std/ls_std.hpp>
 #include "../../../TestHelper.hpp"
-#include "../../../../source/io/FileReader.hpp"
-#include "../../../../source/boxing/String.hpp"
 
 namespace {
   class LoggerTest : public ::testing::Test {
