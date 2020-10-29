@@ -8,13 +8,37 @@ set(RELEASE_VERSION 2020.1.0)
 project(${PROJECT_NAME})
 
 ##########################################################
-# Compiler
+# Compiler Detection
+##########################################################
+
+message("${PROJECT_NAME}: detect compiler...")
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set(MSVC_COMPILER TRUE)
+    message("${PROJECT_NAME}: Microsoft Visual Studio detected...")
+endif()
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(GNU_COMPILER TRUE)
+    message("${PROJECT_NAME}: GNU Compiler Collection detected...")
+endif()
+
+##########################################################
+# Compiler Settings
 ##########################################################
 
 message("${PROJECT_NAME}: Setting compiler flags...")
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+
+if(GNU_COMPILER)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+endif()
+
+if(MSVC_COMPILER)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+endif()
 
 ######################################################
 # Include Directories
