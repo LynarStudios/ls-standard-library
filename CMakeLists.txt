@@ -8,47 +8,13 @@ set(RELEASE_VERSION 2020.1.0)
 project(${PROJECT_NAME})
 
 ##########################################################
-# Compiler Detection
-##########################################################
-
-message("${PROJECT_NAME}: detect compiler...")
-
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    set(MSVC_COMPILER TRUE)
-    message("${PROJECT_NAME}: Microsoft Visual Studio detected...")
-endif()
-
-if (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-    set(APPLE_CLANG_COMPILER TRUE)
-    message("${PROJECT_NAME}: Apple Clang detected...")
-endif()
-
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(GNU_COMPILER TRUE)
-    message("${PROJECT_NAME}: GNU Compiler Collection detected...")
-endif()
-
-##########################################################
 # Compiler Settings
 ##########################################################
 
 message("${PROJECT_NAME}: Setting compiler flags...")
 set(CMAKE_CXX_STANDARD 11)
-
-if(MSVC_COMPILER)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-endif()
-
-if(APPLE_CLANG_COMPILER)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-endif()
-
-if(GNU_COMPILER)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-endif()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 ######################################################
 # Include Directories
