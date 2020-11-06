@@ -12,7 +12,7 @@
 
 #include "../../../../../include/ls_std/base/Class.hpp"
 #include "../../ISerializable.hpp"
-#include "../../../logic/StateConnection.hpp"
+#include "../../../../../include/ls_std/logic/StateConnection.hpp"
 #include <memory>
 #include <json.hpp>
 

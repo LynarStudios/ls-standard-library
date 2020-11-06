@@ -96,13 +96,13 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/State.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateConnection.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachineTypes.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateMachineTypes.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.hpp

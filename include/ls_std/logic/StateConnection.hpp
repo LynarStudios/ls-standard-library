@@ -11,7 +11,7 @@
 #define LS_STD_STATE_CONNECTION_HPP
 
 #include <memory>
-#include "../../../include/ls_std/base/Class.hpp"
+#include "../base/Class.hpp"
 #include "StateMachineTypes.hpp"
 
 namespace ls_std {

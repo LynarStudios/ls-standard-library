@@ -50,10 +50,10 @@
 #include "../../include/ls_std/io/NewLine.hpp"
 #include "../../include/ls_std/io/StorableFile.hpp"
 
-#include "logic/State.hpp"
-#include "logic/StateConnection.hpp"
-#include "logic/StateMachine.hpp"
-#include "logic/StateMachineTypes.hpp"
+#include "../../include/ls_std/logic/State.hpp"
+#include "../../include/ls_std/logic/StateConnection.hpp"
+#include "../../include/ls_std/logic/StateMachine.hpp"
+#include "../../include/ls_std/logic/StateMachineTypes.hpp"
 
 #include "serialization/json/boxing/SerializableJSONBoolean.hpp"
 #include "serialization/json/boxing/SerializableJSONDouble.hpp"

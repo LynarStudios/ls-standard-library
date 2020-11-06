@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "StateMachine.hpp"
+#include "../../../include/ls_std/logic/StateMachine.hpp"
 
 #include <utility>
 

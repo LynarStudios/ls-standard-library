@@ -14,7 +14,7 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include "../../../include/ls_std/base/Class.hpp"
+#include "../base/Class.hpp"
 #include "State.hpp"
 #include "StateMachineTypes.hpp"
 

@@ -12,7 +12,7 @@
 
 #include <memory>
 #include <unordered_map>
-#include "../../../include/ls_std/base/Class.hpp"
+#include "../base/Class.hpp"
 #include "StateMachineTypes.hpp"
 #include "StateConnection.hpp"
 
