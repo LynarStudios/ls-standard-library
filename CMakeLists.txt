@@ -125,7 +125,9 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParseData.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/NullPointerException.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/NullPointerException.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
