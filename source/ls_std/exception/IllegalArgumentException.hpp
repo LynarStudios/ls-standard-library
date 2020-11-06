@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -19,7 +19,7 @@ namespace ls_std {
       IllegalArgumentException() = default;
 
       const char *what() const noexcept override {
-        return "passed argument is not valid!";
+        return "IllegalArgumentException thrown - passed argument is not valid!";
       }
   };
 }

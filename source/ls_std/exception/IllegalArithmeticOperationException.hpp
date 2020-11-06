@@ -19,7 +19,7 @@ namespace ls_std {
       IllegalArithmeticOperationException() = default;
 
       const char *what() const noexcept override {
-        return "arithmetic operation is not valid!";
+        return "IllegalArithmeticOperationException thrown - arithmetic operation is not valid!";
       }
   };
 }

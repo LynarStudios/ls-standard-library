@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls_std {
       FileNotFoundException() = default;
 
       const char *what() const noexcept override {
-        return "file not found!";
+        return "FileNotFoundException thrown - file not found!";
       };
   };
 }

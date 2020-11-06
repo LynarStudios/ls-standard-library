@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std {
       explicit FileOperationException() = default;
 
       const char *what() const noexcept override {
-        return "file operation failed!";
+        return "FileOperationException thrown - file operation failed!";
       }
   };
 }
