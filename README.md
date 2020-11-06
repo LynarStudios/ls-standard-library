@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2020.1.0 #
+# Lynar Studios - Standard Library 2020.2.0 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  
@@ -13,6 +13,15 @@ This is a cross-platform standard library written in C++ which provides basic fu
 - Logger Class
 
 It has been tested on __Windows__, __Linux__ and __MacOS__ systems.
+
+### Change Log ###
+
+- isolated header files by restructuring the project
+- improved Logger class by passing IWriter implementation to constructor
+- improved exceptions by adding exception name to messages
+- added NullPointerException
+- added StandardOutputWriter class, which is an IWriter implementation
+- improved CMakeLists.txt by removing unnecessary header files and also generating static, shared and module libraries now
 
 ### Documentation ###
 

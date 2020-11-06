@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.17)
 set(PROJECT_NAME ls_std)
-set(RELEASE_VERSION 2020.1.0)
+set(RELEASE_VERSION 2020.2.0)
 project(${PROJECT_NAME})
 
 ##########################################################
@@ -23,8 +23,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 message("${PROJECT_NAME}: Adding include directories...")
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/source/ls_std/lib/nlohmann_json/include/nlohmann)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/source)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include/ls_std/lib/nlohmann_json/include/nlohmann)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
 ######################################################
 # Add Other CMake Dependencies
@@ -38,93 +38,41 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
 ##########################################################
 
 set(SOURCE_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/IBoxing.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/IllegalArithmeticOperationException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Types.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/IllegalArgumentException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/FileOperationException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FilePathSeparatorMatch.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FilePathSeparator.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/utils/STLUtils.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IWriter.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/FileNotFoundException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IReader.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/NewLine.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/utils/RegexUtils.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IStorable.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevelValue.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/ISerializable.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONLong.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONLong.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONString.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONString.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONFloat.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONFloat.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachineTypes.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParseMode.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParseData.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -174,8 +122,9 @@ set(TEST_FILES
 message("${PROJECT_NAME}: Building version ${RELEASE_VERSION}...")
 
 add_executable(${PROJECT_NAME}_test ${TEST_FILES})
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" ${SOURCE_FILES})
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}" SHARED ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" STATIC ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}_shared" SHARED ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}_module" MODULE ${SOURCE_FILES})
 
 ##########################################################
 # Linking

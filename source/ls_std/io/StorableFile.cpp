@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "StorableFile.hpp"
-#include "FileReader.hpp"
-#include "FileWriter.hpp"
+#include "../../../include/ls_std/io/StorableFile.hpp"
+#include "../../../include/ls_std/io/FileReader.hpp"
+#include "../../../include/ls_std/io/FileWriter.hpp"
 
 ls_std::StorableFile::StorableFile(const std::string &_path)
 {

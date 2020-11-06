@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "SerializableJSONBoolean.hpp"
+#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONBoolean.hpp"
 
 ls_std::SerializableJSONBoolean::SerializableJSONBoolean(std::shared_ptr<ls_std::Boolean> _value) :
 Class("SerializableJSONBoolean"),

@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "StateConnection.hpp"
+#include "../../../include/ls_std/logic/StateConnection.hpp"
 
 ls_std::StateConnection::StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId) :
 Class("StateConnection"),
