@@ -9,8 +9,6 @@
 
 #include "../../../include/ls_std/logic/StateMachine.hpp"
 
-#include <utility>
-
 ls_std::StateMachine::StateMachine(std::string _name) :
 Class("StateMachine"),
 name(std::move(_name))

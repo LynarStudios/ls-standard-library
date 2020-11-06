@@ -8,7 +8,6 @@
  * */
 
 #include <algorithm>
-#include <utility>
 #include "../../../include/ls_std/boxing/String.hpp"
 
 ls_std::String::String() : Class("String")

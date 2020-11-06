@@ -9,8 +9,6 @@
 
 #include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp"
 
-#include <utility>
-
 ls_std::SerializableJSONStateConnection::SerializableJSONStateConnection(std::shared_ptr<ls_std::StateConnection> _value) :
 Class("SerializableJSONStateConnection"),
 value(std::move(_value))
