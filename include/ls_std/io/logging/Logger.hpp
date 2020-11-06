@@ -12,9 +12,9 @@
 
 #include "../../base/Class.hpp"
 #include "LogLevel.hpp"
-#include "ls_std/io/IWriter.hpp"
-#include "ls_std/io/File.hpp"
-#include "ls_std/io/FileOutputStream.hpp"
+#include "../IWriter.hpp"
+#include "../File.hpp"
+#include "../FileOutputStream.hpp"
 #include <string>
 
 namespace ls_std {

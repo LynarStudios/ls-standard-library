@@ -56,28 +56,28 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/File.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/FileOperationException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FilePathSeparatorMatch.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FilePathSeparator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FilePathSeparatorMatch.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FilePathSeparator.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/utils/STLUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Long.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IWriter.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IWriter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FileWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/FileNotFoundException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IReader.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IReader.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FileReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/NewLine.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/NewLine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/utils/RegexUtils.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IStorable.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IStorable.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/StorableFile.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/LogLevel.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FileOutputStream.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/Logger.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
@@ -126,7 +126,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLReaderMock.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/NullPointerException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/StandardOutputWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp)
 
 set(TEST_FILES

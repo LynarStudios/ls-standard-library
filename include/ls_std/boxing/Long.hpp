@@ -15,7 +15,7 @@
 #include "IBoxing.hpp"
 #include "../base/Types.hpp"
 #include "ls_std/serialization/ISerializable.hpp"
-#include "ls_std/io/IStorable.hpp"
+#include "../io/IStorable.hpp"
 
 namespace ls_std {
   class Long : public Class, public IBoxing, public ISerializable, public IStorable {

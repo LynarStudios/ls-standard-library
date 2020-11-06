@@ -7,7 +7,7 @@
  *
  * */
 
-#include "FileOutputStream.hpp"
+#include "../../../include/ls_std/io/FileOutputStream.hpp"
 #include "../../../include/ls_std/exception/FileNotFoundException.hpp"
 #include "../../../include/ls_std/exception/FileOperationException.hpp"
 

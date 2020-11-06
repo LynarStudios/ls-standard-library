@@ -7,9 +7,9 @@
  *
  * */
 
-#include "File.hpp"
+#include "../../../include/ls_std/io/File.hpp"
 #include "../../../include/ls_std/exception/FileOperationException.hpp"
-#include "FilePathSeparatorMatch.hpp"
+#include "../../../include/ls_std/io/FilePathSeparatorMatch.hpp"
 #include <fstream>
 #include <algorithm>
 #include <sstream>

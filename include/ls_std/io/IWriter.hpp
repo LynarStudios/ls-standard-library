@@ -11,7 +11,7 @@
 #define LS_STD_I_WRITER_HPP
 
 #include <vector>
-#include "../../../include/ls_std/base/Types.hpp"
+#include "../base/Types.hpp"
 
 namespace ls_std {
   class IWriter {

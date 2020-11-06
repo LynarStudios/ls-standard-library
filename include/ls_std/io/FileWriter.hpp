@@ -7,28 +7,28 @@
  *
  * */
 
-#ifndef LS_STD_FILE_READER_HPP
-#define LS_STD_FILE_READER_HPP
+#ifndef LS_STD_FILE_WRITER_HPP
+#define LS_STD_FILE_WRITER_HPP
 
-#include "../../../include/ls_std/base/Class.hpp"
+#include "../base/Class.hpp"
+#include "IWriter.hpp"
 #include "File.hpp"
-#include "IReader.hpp"
 
 namespace ls_std {
-  class FileReader : public Class, IReader {
+  class FileWriter : public Class, IWriter {
     public:
 
-      explicit FileReader(File& _file);
-      ~FileReader() = default;
+      explicit FileWriter(File& _file);
+      ~FileWriter() = default;
 
-      ls_std::byte_field read() override;
       void reset(File& _file);
+      bool write(const ls_std::byte_field& _data) override;
 
     private:
 
       File file;
 
-      static void _init(File &_file);
+      static void _init(File& _file);
   };
 }
 

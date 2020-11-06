@@ -12,8 +12,8 @@
 
 #include "../../base/Class.hpp"
 #include "XMLDocument.hpp"
-#include "ls_std/io/IReader.hpp"
-#include "ls_std/io/File.hpp"
+#include "../IReader.hpp"
+#include "../File.hpp"
 #include "XMLParseMode.hpp"
 #include "XMLParseData.hpp"
 #include <list>
