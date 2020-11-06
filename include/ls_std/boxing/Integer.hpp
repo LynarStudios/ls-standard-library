@@ -13,7 +13,7 @@
 #include <memory>
 #include "../base/Class.hpp"
 #include "IBoxing.hpp"
-#include "ls_std/serialization/ISerializable.hpp"
+#include "../serialization/ISerializable.hpp"
 #include "../io/IStorable.hpp"
 
 namespace ls_std {

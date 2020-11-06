@@ -11,7 +11,7 @@
 #define LS_STD_VERSION_HPP
 
 #include "Class.hpp"
-#include "ls_std/serialization/ISerializable.hpp"
+#include "../serialization/ISerializable.hpp"
 #include "Types.hpp"
 
 namespace ls_std {

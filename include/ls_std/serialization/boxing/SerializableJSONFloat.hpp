@@ -12,9 +12,9 @@
 
 #include <memory>
 #include <json.hpp>
-#include "../../../../../include/ls_std/base/Class.hpp"
-#include "../../ISerializable.hpp"
-#include "../../../../../include/ls_std/boxing/Float.hpp"
+#include "../../base/Class.hpp"
+#include "../ISerializable.hpp"
+#include "../../boxing/Float.hpp"
 
 namespace ls_std {
   class SerializableJSONFloat : public Class, public ISerializable {

@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "SerializableJSONStateMachine.hpp"
-#include "SerializableJSONState.hpp"
+#include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateMachine.hpp"
+#include "../../../../../include/ls_std/serialization/logic/SerializableJSONState.hpp"
 
 ls_std::SerializableJSONStateMachine::SerializableJSONStateMachine(std::shared_ptr<StateMachine> _value) :
 Class("SerializableJSONStateMachine"),

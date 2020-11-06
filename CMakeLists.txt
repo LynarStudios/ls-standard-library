@@ -83,18 +83,18 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/LogLevelValue.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/ISerializable.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/ISerializable.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONInteger.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONLong.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONLong.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONLong.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONString.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONString.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONString.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONFloat.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONFloat.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONFloat.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONDouble.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONBoolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp
@@ -103,11 +103,11 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateConnection.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateMachineTypes.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/logic/SerializableJSONState.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/logic/SerializableJSONStateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLAttribute.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.cpp

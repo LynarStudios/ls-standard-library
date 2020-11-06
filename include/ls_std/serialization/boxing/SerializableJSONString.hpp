@@ -12,7 +12,7 @@
 
 #include <memory>
 #include <json.hpp>
-#include "../../ISerializable.hpp"
+#include "../../../../../include/ls_std/serialization/ISerializable.hpp"
 #include "../../../../../include/ls_std/boxing/String.hpp"
 
 namespace ls_std {

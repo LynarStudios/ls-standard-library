@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "SerializableJSONStateConnection.hpp"
+#include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp"
 
 #include <utility>
 

@@ -10,9 +10,9 @@
 #ifndef LS_STD_SERIALIZABLE_JSON_STATE_CONNECTION_HPP
 #define LS_STD_SERIALIZABLE_JSON_STATE_CONNECTION_HPP
 
-#include "../../../../../include/ls_std/base/Class.hpp"
-#include "../../ISerializable.hpp"
-#include "../../../../../include/ls_std/logic/StateConnection.hpp"
+#include "../../base/Class.hpp"
+#include "../ISerializable.hpp"
+#include "../../logic/StateConnection.hpp"
 #include <memory>
 #include <json.hpp>
 

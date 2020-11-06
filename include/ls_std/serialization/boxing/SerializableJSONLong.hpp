@@ -11,7 +11,7 @@
 #define LS_STD_SERIALIZABLE_JSON_LONG_HPP
 
 #include "../../../../../include/ls_std/base/Class.hpp"
-#include "../../ISerializable.hpp"
+#include "../../../../../include/ls_std/serialization/ISerializable.hpp"
 #include "../../../../../include/ls_std/boxing/Long.hpp"
 #include <json.hpp>
 

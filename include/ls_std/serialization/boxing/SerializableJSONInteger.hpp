@@ -10,9 +10,9 @@
 #ifndef LS_STD_SERIALIZABLE_JSON_INTEGER_HPP
 #define LS_STD_SERIALIZABLE_JSON_INTEGER_HPP
 
-#include "../../../../../include/ls_std/base/Class.hpp"
-#include "../../ISerializable.hpp"
-#include "../../../../../include/ls_std/boxing/Integer.hpp"
+#include "../../base/Class.hpp"
+#include "../ISerializable.hpp"
+#include "../../boxing/Integer.hpp"
 #include <json.hpp>
 
 namespace ls_std {

@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "SerializableJSONInteger.hpp"
+#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONInteger.hpp"
 
 ls_std::SerializableJSONInteger::SerializableJSONInteger(std::shared_ptr<ls_std::Integer> _value) :
 Class("SerializableJSONInteger"),
