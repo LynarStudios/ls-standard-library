@@ -8,9 +8,7 @@
  * */
 
 #include "../../../include/ls_std/boxing/Long.hpp"
-
-#include <utility>
-#include "../exception/IllegalArithmeticOperationException.hpp"
+#include "../../../include/ls_std/exception/IllegalArithmeticOperationException.hpp"
 
 ls_std::Long::Long(ls_std::long_type _value) : Class("Long"),
 value(_value)

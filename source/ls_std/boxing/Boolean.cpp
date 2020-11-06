@@ -9,7 +9,7 @@
 
 #include <algorithm>
 #include "../../../include/ls_std/boxing/Boolean.hpp"
-#include "../exception/IllegalArgumentException.hpp"
+#include "../../../include/ls_std/exception/IllegalArgumentException.hpp"
 
 ls_std::Boolean::Boolean() : Class("Boolean")
 {}

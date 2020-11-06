@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
 #include "FileOutputStream.hpp"
-#include "../exception/FileNotFoundException.hpp"
-#include "../exception/FileOperationException.hpp"
+#include "../../../include/ls_std/exception/FileNotFoundException.hpp"
+#include "../../../include/ls_std/exception/FileOperationException.hpp"
 
 ls_std::FileOutputStream::FileOutputStream(File &_file) : Class("FileOutputStream"),
 file(_file)

@@ -8,7 +8,7 @@
  * */
 
 #include "../../../include/ls_std/boxing/Integer.hpp"
-#include "../exception/IllegalArithmeticOperationException.hpp"
+#include "../../../include/ls_std/exception/IllegalArithmeticOperationException.hpp"
 
 ls_std::Integer::Integer(int _value) : Class("Integer"),
 value(_value)

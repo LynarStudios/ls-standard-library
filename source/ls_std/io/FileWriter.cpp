@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
 #include <fstream>
 #include "FileWriter.hpp"
-#include "../exception/FileNotFoundException.hpp"
-#include "../exception/FileOperationException.hpp"
+#include "../../../include/ls_std/exception/FileNotFoundException.hpp"
+#include "../../../include/ls_std/exception/FileOperationException.hpp"
 
 ls_std::FileWriter::FileWriter(ls_std::File &_file) : Class("FileWriter"),
 file(_file)

@@ -22,10 +22,10 @@
 #include "../../include/ls_std/boxing/Long.hpp"
 #include "../../include/ls_std/boxing/String.hpp"
 
-#include "exception/FileNotFoundException.hpp"
-#include "exception/FileOperationException.hpp"
-#include "exception/IllegalArgumentException.hpp"
-#include "exception/IllegalArithmeticOperationException.hpp"
+#include "../../include/ls_std/exception/FileNotFoundException.hpp"
+#include "../../include/ls_std/exception/FileOperationException.hpp"
+#include "../../include/ls_std/exception/IllegalArgumentException.hpp"
+#include "../../include/ls_std/exception/IllegalArithmeticOperationException.hpp"
 
 #include "io/logging/LogLevel.hpp"
 #include "io/logging/LogLevelValue.hpp"

@@ -8,7 +8,7 @@
  * */
 
 #include "XMLReader.hpp"
-#include "../../exception/IllegalArgumentException.hpp"
+#include "../../../../include/ls_std/exception/IllegalArgumentException.hpp"
 #include "../FileReader.hpp"
 #include "../../../../include/ls_std/boxing/String.hpp"
 
