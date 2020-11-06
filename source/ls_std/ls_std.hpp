@@ -68,7 +68,7 @@
 
 #include "../../include/ls_std/time/Date.hpp"
 
-#include "utils/RegexUtils.hpp"
-#include "utils/STLUtils.hpp"
+#include "../../include/ls_std/utils/RegexUtils.hpp"
+#include "../../include/ls_std/utils/STLUtils.hpp"
 
 #endif

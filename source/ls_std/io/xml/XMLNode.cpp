@@ -8,7 +8,7 @@
  * */
 
 #include "../../../../include/ls_std/io/xml/XMLNode.hpp"
-#include "../../utils/STLUtils.hpp"
+#include "../../../../include/ls_std/utils/STLUtils.hpp"
 
 ls_std::XMLNode::XMLNode(std::string _name) : Class("XMLNode"),
 name(std::move(_name))

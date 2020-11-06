@@ -61,7 +61,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/FileOperationException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FilePathSeparatorMatch.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FilePathSeparator.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/utils/STLUtils.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/utils/STLUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Long.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IWriter.hpp
@@ -72,7 +72,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FileReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/NewLine.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/utils/RegexUtils.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/utils/RegexUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IStorable.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/StorableFile.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp
