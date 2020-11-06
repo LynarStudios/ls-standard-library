@@ -122,8 +122,9 @@ set(TEST_FILES
 message("${PROJECT_NAME}: Building version ${RELEASE_VERSION}...")
 
 add_executable(${PROJECT_NAME}_test ${TEST_FILES})
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" ${SOURCE_FILES})
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}" SHARED ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" STATIC ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}_shared" SHARED ${SOURCE_FILES})
+add_library("${PROJECT_NAME}_${RELEASE_VERSION}_module" MODULE ${SOURCE_FILES})
 
 ##########################################################
 # Linking
