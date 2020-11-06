@@ -16,7 +16,7 @@
 #include <fstream>
 
 namespace ls_std {
-  class FileOutputStream : public Class, IWriter {
+  class FileOutputStream : public Class, public IWriter {
     public:
 
       explicit FileOutputStream(File& _file);
