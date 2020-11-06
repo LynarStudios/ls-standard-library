@@ -11,17 +11,16 @@
 #include "../../../../include/ls_std/time/Date.hpp"
 #include "../../../../include/ls_std/io/NewLine.hpp"
 #include "../../../../include/ls_std/boxing/String.hpp"
+#include "../../../../include/ls_std/exception/NullPointerException.hpp"
 
-ls_std::Logger::Logger(const std::string &_path) : Class("Logger"),
-file(ls_std::File{_path}),
+ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer) : Class("Logger"),
 logLevel(ls_std::LogLevelValue::INFO)
 {
-  this->_init();
-}
+  if(_writer == nullptr) {
+    throw ls_std::NullPointerException {};
+  }
 
-void ls_std::Logger::close()
-{
-  this->outputStream->close();
+  this->writer = _writer;
 }
 
 void ls_std::Logger::debug(const ls_std::byte *_data)
@@ -76,19 +75,8 @@ void ls_std::Logger::warn(const ls_std::byte *_data)
   }
 }
 
-void ls_std::Logger::_init()
-{
-  if(!this->file.exists()) {
-    this->file.createNewFile();
-  }
-}
-
 void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel& _logLevel)
 {
-  if(this->outputStream == nullptr) {
-    this->outputStream = std::make_shared<ls_std::FileOutputStream>(this->file, true);
-  }
-
   ls_std::Date date {};
 
   std::string message = "[" +
@@ -97,5 +85,5 @@ void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel& _lo
       std::string(_data) +
       ls_std::NewLine::getUnixNewLine();
 
-  outputStream->write(message);
+  this->writer->write(message);
 }

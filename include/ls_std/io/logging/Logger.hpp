@@ -21,10 +21,9 @@ namespace ls_std {
   class Logger : public Class {
     public:
 
-      explicit Logger(const std::string& _path);
+      explicit Logger(const std::shared_ptr<ls_std::IWriter>& _writer);
       ~Logger() = default;
 
-      void close();
       void debug(const ls_std::byte* _data);
       void error(const ls_std::byte* _data);
       void fatal(const ls_std::byte* _data);
@@ -36,11 +35,9 @@ namespace ls_std {
 
     private:
 
-      ls_std::File file;
       ls_std::LogLevel logLevel {};
-      std::shared_ptr<ls_std::FileOutputStream> outputStream {};
+      std::shared_ptr<ls_std::IWriter> writer {};
 
-      void _init();
       void _log(const ls_std::byte* _data, const ls_std::LogLevel& _logLevel);
   };
 }
