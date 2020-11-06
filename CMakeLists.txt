@@ -34,99 +34,105 @@ message("${PROJECT_NAME}: Adding additional cmake dependencies...")
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
 
 ##########################################################
-# Source Files
+# Header Files
 ##########################################################
 
-set(SOURCE_FILES
+set(HEADER_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Integer.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/base/Class.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/IBoxing.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/IllegalArithmeticOperationException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/base/Types.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Boolean.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/IllegalArgumentException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Float.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Double.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/String.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/time/Date.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/File.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/FileOperationException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FilePathSeparatorMatch.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FilePathSeparator.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/utils/STLUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Long.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FileWriter.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/FileNotFoundException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FileReader.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/NewLine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/utils/RegexUtils.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/IStorable.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/StorableFile.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/LogLevel.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/FileOutputStream.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/Logger.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/LogLevelValue.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/ISerializable.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONInteger.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONLong.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONLong.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONString.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONString.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONFloat.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONFloat.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONDouble.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/boxing/SerializableJSONBoolean.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateMachine.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/State.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateConnection.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/logic/StateMachineTypes.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/logic/SerializableJSONState.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/serialization/logic/SerializableJSONStateMachine.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLAttribute.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLNode.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLDocument.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLDeclaration.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/base/Version.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLReader.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLParseMode.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLParseData.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLReaderMock.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/NullPointerException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/StandardOutputWriter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/StandardOutputWriter.hpp)
+
+##########################################################
+# Source Files
+##########################################################
+
+set(SOURCE_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONLong.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONString.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONFloat.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp)
 
 set(TEST_FILES
