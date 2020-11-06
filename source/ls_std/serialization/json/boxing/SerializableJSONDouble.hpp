@@ -14,7 +14,7 @@
 #include <json.hpp>
 #include "../../../../../include/ls_std/base/Class.hpp"
 #include "../../ISerializable.hpp"
-#include "../../../boxing/Double.hpp"
+#include "../../../../../include/ls_std/boxing/Double.hpp"
 
 namespace ls_std {
   class SerializableJSONDouble : public Class, public ISerializable {

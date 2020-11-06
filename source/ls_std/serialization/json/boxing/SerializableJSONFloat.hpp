@@ -14,7 +14,7 @@
 #include <json.hpp>
 #include "../../../../../include/ls_std/base/Class.hpp"
 #include "../../ISerializable.hpp"
-#include "../../../boxing/Float.hpp"
+#include "../../../../../include/ls_std/boxing/Float.hpp"
 
 namespace ls_std {
   class SerializableJSONFloat : public Class, public ISerializable {

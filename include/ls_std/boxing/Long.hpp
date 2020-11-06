@@ -11,11 +11,11 @@
 #define LS_STD_LONG_HPP
 
 #include <memory>
-#include "../../../include/ls_std/base/Class.hpp"
+#include "../base/Class.hpp"
 #include "IBoxing.hpp"
-#include "../../../include/ls_std/base/Types.hpp"
-#include "../serialization/ISerializable.hpp"
-#include "../io/IStorable.hpp"
+#include "../base/Types.hpp"
+#include "ls_std/serialization/ISerializable.hpp"
+#include "ls_std/io/IStorable.hpp"
 
 namespace ls_std {
   class Long : public Class, public IBoxing, public ISerializable, public IStorable {

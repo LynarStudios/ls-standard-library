@@ -38,21 +38,21 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
 ##########################################################
 
 set(SOURCE_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Integer.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/base/Class.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/IBoxing.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/IBoxing.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/IllegalArithmeticOperationException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/base/Types.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Boolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/IllegalArgumentException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Float.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Double.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/String.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp
@@ -62,7 +62,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FilePathSeparatorMatch.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FilePathSeparator.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/utils/STLUtils.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/Long.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IWriter.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.hpp

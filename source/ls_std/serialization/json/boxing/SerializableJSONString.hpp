@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <memory>
 #include <json.hpp>
 #include "../../ISerializable.hpp"
-#include "../../../boxing/String.hpp"
+#include "../../../../../include/ls_std/boxing/String.hpp"
 
 namespace ls_std {
   class SerializableJSONString : public Class, public ISerializable {

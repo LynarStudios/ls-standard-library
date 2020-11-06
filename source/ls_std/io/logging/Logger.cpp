@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
 #include "Logger.hpp"
 #include "../../time/Date.hpp"
 #include "../NewLine.hpp"
-#include "../../boxing/String.hpp"
+#include "../../../../include/ls_std/boxing/String.hpp"
 
 ls_std::Logger::Logger(const std::string &_path) : Class("Logger"),
 file(ls_std::File{_path}),

@@ -12,7 +12,7 @@
 
 #include "../../../../../include/ls_std/base/Class.hpp"
 #include "../../ISerializable.hpp"
-#include "../../../boxing/Integer.hpp"
+#include "../../../../../include/ls_std/boxing/Integer.hpp"
 #include <json.hpp>
 
 namespace ls_std {

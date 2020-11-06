@@ -11,10 +11,10 @@
 #define LS_STD_BOOLEAN_HPP
 
 #include <memory>
-#include "../../../include/ls_std/base/Class.hpp"
+#include "../base/Class.hpp"
 #include "IBoxing.hpp"
-#include "../serialization/ISerializable.hpp"
-#include "../io/IStorable.hpp"
+#include "ls_std/serialization/ISerializable.hpp"
+#include "ls_std/io/IStorable.hpp"
 
 namespace ls_std {
   class Boolean : public Class, public IBoxing, public ISerializable, public IStorable {
