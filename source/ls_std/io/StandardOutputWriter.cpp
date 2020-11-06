@@ -12,6 +12,6 @@
 
 bool ls_std::StandardOutputWriter::write(const ls_std::byte_field &_data)
 {
-  std::cout << _data << std::endl;
+  std::cout << _data;
   return !_data.empty();
 }
