@@ -54,7 +54,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/boxing/String.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/time/Date.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/File.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.cpp
