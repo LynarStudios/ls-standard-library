@@ -27,9 +27,9 @@
 #include "../../include/ls_std/exception/IllegalArgumentException.hpp"
 #include "../../include/ls_std/exception/IllegalArithmeticOperationException.hpp"
 
-#include "io/logging/LogLevel.hpp"
-#include "io/logging/LogLevelValue.hpp"
-#include "io/logging/Logger.hpp"
+#include "../../include/ls_std/io/logging/LogLevel.hpp"
+#include "../../include/ls_std/io/logging/LogLevelValue.hpp"
+#include "../../include/ls_std/io/logging/Logger.hpp"
 #include "io/xml/XMLReaderMock.hpp"
 #include "io/xml/XMLReader.hpp"
 #include "io/xml/XMLParseMode.hpp"

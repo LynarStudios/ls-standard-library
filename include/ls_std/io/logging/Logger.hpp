@@ -10,11 +10,11 @@
 #ifndef LS_STD_LOGGER_HPP
 #define LS_STD_LOGGER_HPP
 
-#include "../../../../include/ls_std/base/Class.hpp"
+#include "../../base/Class.hpp"
 #include "LogLevel.hpp"
-#include "../IWriter.hpp"
-#include "../File.hpp"
-#include "../FileOutputStream.hpp"
+#include "ls_std/io/IWriter.hpp"
+#include "ls_std/io/File.hpp"
+#include "ls_std/io/FileOutputStream.hpp"
 #include <string>
 
 namespace ls_std {

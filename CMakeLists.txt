@@ -76,13 +76,13 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/IStorable.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/LogLevel.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/Logger.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevelValue.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/logging/LogLevelValue.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/ISerializable.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.cpp

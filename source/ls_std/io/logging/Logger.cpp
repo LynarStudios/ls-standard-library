@@ -7,7 +7,7 @@
  *
  * */
 
-#include "Logger.hpp"
+#include "../../../../include/ls_std/io/logging/Logger.hpp"
 #include "../../time/Date.hpp"
 #include "../NewLine.hpp"
 #include "../../../../include/ls_std/boxing/String.hpp"

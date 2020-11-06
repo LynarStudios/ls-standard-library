@@ -11,7 +11,7 @@
 #define LS_STD_LOG_LEVEL_HPP
 
 #include <unordered_map>
-#include "../../../../include/ls_std/base/Class.hpp"
+#include "../../base/Class.hpp"
 #include "LogLevelValue.hpp"
 
 namespace ls_std {
