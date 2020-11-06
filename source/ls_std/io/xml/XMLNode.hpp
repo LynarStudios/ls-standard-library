@@ -12,7 +12,7 @@
 
 #include <list>
 #include <memory>
-#include "../../../../include/base/Class.hpp"
+#include "../../../../include/ls_std/base/Class.hpp"
 #include "XMLAttribute.hpp"
 
 namespace ls_std {

@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../include/base/Class.hpp"
+#include "../../../include/ls_std/base/Class.hpp"
 
 ls_std::Class::Class(std::string _name):
 name(std::move(_name))

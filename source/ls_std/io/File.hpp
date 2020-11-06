@@ -10,7 +10,7 @@
 #ifndef LS_STD_FILE_HPP
 #define LS_STD_FILE_HPP
 
-#include "../../../include/base/Class.hpp"
+#include "../../../include/ls_std/base/Class.hpp"
 #include <string>
 #include <vector>
 #include <list>

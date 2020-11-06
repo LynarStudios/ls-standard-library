@@ -8,7 +8,7 @@
  * */
 
 #include <regex>
-#include "../../../include/base/Version.hpp"
+#include "../../../include/ls_std/base/Version.hpp"
 
 ls_std::Version::Version(version_type _majorVersion, version_type _minorVersion, version_type _patchVersion) :
 majorVersion(_majorVersion),

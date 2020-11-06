@@ -12,7 +12,7 @@
 
 #include <memory>
 #include <json.hpp>
-#include "../../../../../include/base/Class.hpp"
+#include "../../../../../include/ls_std/base/Class.hpp"
 #include "../../ISerializable.hpp"
 #include "../../../boxing/Boolean.hpp"
 

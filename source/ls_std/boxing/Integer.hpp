@@ -11,7 +11,7 @@
 #define LS_STD_INTEGER_HPP
 
 #include <memory>
-#include "../../../include/base/Class.hpp"
+#include "../../../include/ls_std/base/Class.hpp"
 #include "IBoxing.hpp"
 #include "../serialization/ISerializable.hpp"
 #include "../io/IStorable.hpp"

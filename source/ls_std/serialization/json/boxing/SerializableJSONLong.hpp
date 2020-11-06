@@ -10,7 +10,7 @@
 #ifndef LS_STD_SERIALIZABLE_JSON_LONG_HPP
 #define LS_STD_SERIALIZABLE_JSON_LONG_HPP
 
-#include "../../../../../include/base/Class.hpp"
+#include "../../../../../include/ls_std/base/Class.hpp"
 #include "../../ISerializable.hpp"
 #include "../../../boxing/Long.hpp"
 #include <json.hpp>

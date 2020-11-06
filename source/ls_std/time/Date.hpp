@@ -10,7 +10,7 @@
 #ifndef LS_STD_DATE_HPP
 #define LS_STD_DATE_HPP
 
-#include "../../../include/base/Class.hpp"
+#include "../../../include/ls_std/base/Class.hpp"
 #include <ctime>
 
 namespace ls_std {

@@ -11,7 +11,7 @@
 #define LS_STD_STRING_HPP
 
 #include "IBoxing.hpp"
-#include "../../../include/base/Class.hpp"
+#include "../../../include/ls_std/base/Class.hpp"
 #include "../serialization/ISerializable.hpp"
 #include "../io/IStorable.hpp"
 #include <string>

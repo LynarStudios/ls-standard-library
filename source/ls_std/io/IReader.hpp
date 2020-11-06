@@ -10,7 +10,7 @@
 #ifndef LS_STD_I_READER_HPP
 #define LS_STD_I_READER_HPP
 
-#include "../../../include/base/Types.hpp"
+#include "../../../include/ls_std/base/Types.hpp"
 
 namespace ls_std {
   class IReader {

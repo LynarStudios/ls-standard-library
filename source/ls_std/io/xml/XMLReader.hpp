@@ -10,7 +10,7 @@
 #ifndef LS_STD_XML_READER_HPP
 #define LS_STD_XML_READER_HPP
 
-#include "../../../../include/base/Class.hpp"
+#include "../../../../include/ls_std/base/Class.hpp"
 #include "XMLDocument.hpp"
 #include "../IReader.hpp"
 #include "../File.hpp"

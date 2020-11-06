@@ -10,7 +10,7 @@
 #ifndef LS_STD_FILE_OUTPUT_STREAM_HPP
 #define LS_STD_FILE_OUTPUT_STREAM_HPP
 
-#include "../../../include/base/Class.hpp"
+#include "../../../include/ls_std/base/Class.hpp"
 #include "File.hpp"
 #include "IWriter.hpp"
 #include <fstream>
