@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
 #ifndef LS_STD_SERIALIZABLE_JSON_STATE_HPP
 #define LS_STD_SERIALIZABLE_JSON_STATE_HPP
 
-#include "../../../base/Class.hpp"
+#include "../../../../../include/base/Class.hpp"
 #include "../../ISerializable.hpp"
 #include "../../../logic/State.hpp"
 #include <memory>

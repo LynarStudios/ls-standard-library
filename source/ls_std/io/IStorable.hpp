@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
 #ifndef LS_STD_I_STORABLE_HPP
 #define LS_STD_I_STORABLE_HPP
 
-#include "../base/Types.hpp"
+#include "../../../include/base/Types.hpp"
 
 namespace ls_std {
   class IStorable {

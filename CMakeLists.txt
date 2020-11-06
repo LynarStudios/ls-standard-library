@@ -39,12 +39,12 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
 
 set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/base/Class.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/IBoxing.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/IllegalArithmeticOperationException.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Types.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/base/Types.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/exception/IllegalArgumentException.hpp
@@ -115,7 +115,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/base/Version.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.cpp

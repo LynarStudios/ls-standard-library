@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_LOG_LEVEL_HPP
 
 #include <unordered_map>
-#include "../../base/Class.hpp"
+#include "../../../../include/base/Class.hpp"
 #include "LogLevelValue.hpp"
 
 namespace ls_std {

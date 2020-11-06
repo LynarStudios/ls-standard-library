@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -11,9 +11,9 @@
 #define LS_STD_LONG_HPP
 
 #include <memory>
-#include "../base/Class.hpp"
+#include "../../../include/base/Class.hpp"
 #include "IBoxing.hpp"
-#include "../base/Types.hpp"
+#include "../../../include/base/Types.hpp"
 #include "../serialization/ISerializable.hpp"
 #include "../io/IStorable.hpp"
 

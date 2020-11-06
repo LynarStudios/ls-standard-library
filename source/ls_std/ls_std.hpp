@@ -3,16 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
 #ifndef LS_STD_LS_STD_HPP
 #define LS_STD_LS_STD_HPP
 
-#include "base/Class.hpp"
-#include "base/Types.hpp"
-#include "base/Version.hpp"
+#include "../../include/base/Class.hpp"
+#include "../../include/base/Types.hpp"
+#include "../../include/base/Version.hpp"
 
 #include "boxing/IBoxing.hpp"
 #include "boxing/Boolean.hpp"

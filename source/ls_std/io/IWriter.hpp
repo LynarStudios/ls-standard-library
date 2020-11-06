@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_I_WRITER_HPP
 
 #include <vector>
-#include "../base/Types.hpp"
+#include "../../../include/base/Types.hpp"
 
 namespace ls_std {
   class IWriter {

@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
 #ifndef LS_STD_DATE_HPP
 #define LS_STD_DATE_HPP
 
-#include "../base/Class.hpp"
+#include "../../../include/base/Class.hpp"
 #include <ctime>
 
 namespace ls_std {

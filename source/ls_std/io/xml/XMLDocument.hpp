@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_XML_DOCUMENT_HPP
 
 #include <memory>
-#include "../../base/Class.hpp"
+#include "../../../../include/base/Class.hpp"
 #include "XMLNode.hpp"
 #include "XMLDeclaration.hpp"
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -14,7 +14,7 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include "../base/Class.hpp"
+#include "../../../include/base/Class.hpp"
 #include "State.hpp"
 #include "StateMachineTypes.hpp"
 

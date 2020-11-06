@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
@@ -11,8 +11,8 @@
 #define LS_STD_VERSION_HPP
 
 #include "Class.hpp"
-#include "../serialization/ISerializable.hpp"
-#include "../base/Types.hpp"
+#include "ls_std/serialization/ISerializable.hpp"
+#include "Types.hpp"
 
 namespace ls_std {
   class Version : public ISerializable {
