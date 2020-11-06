@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "XMLNode.hpp"
+#include "../../../../include/ls_std/io/xml/XMLNode.hpp"
 #include "../../utils/STLUtils.hpp"
 
 ls_std::XMLNode::XMLNode(std::string _name) : Class("XMLNode"),

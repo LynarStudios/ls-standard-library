@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2020-10-29
+ * Changed:         2020-11-06
  *
  * */
 
-#include "XMLDeclaration.hpp"
+#include "../../../../include/ls_std/io/xml/XMLDeclaration.hpp"
 
 ls_std::XMLDeclaration::XMLDeclaration(std::string _version) :
 Class("XMLDeclaration")

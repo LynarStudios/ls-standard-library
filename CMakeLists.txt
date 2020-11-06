@@ -109,21 +109,21 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLAttribute.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLNode.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLDocument.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLDeclaration.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/base/Version.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLReader.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParseMode.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParseData.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLParseMode.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLParseData.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/io/xml/XMLReaderMock.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ls_std/exception/NullPointerException.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.hpp

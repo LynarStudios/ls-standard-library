@@ -11,7 +11,7 @@
 #define LS_STD_XML_DOCUMENT_HPP
 
 #include <memory>
-#include "../../../../include/ls_std/base/Class.hpp"
+#include "../../base/Class.hpp"
 #include "XMLNode.hpp"
 #include "XMLDeclaration.hpp"
 

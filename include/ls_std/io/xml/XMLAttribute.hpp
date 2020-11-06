@@ -10,7 +10,7 @@
 #ifndef LS_STD_XML_ATTRIBUTE_HPP
 #define LS_STD_XML_ATTRIBUTE_HPP
 
-#include "../../../../include/ls_std/base/Class.hpp"
+#include "../../base/Class.hpp"
 #include <string>
 
 namespace ls_std {
