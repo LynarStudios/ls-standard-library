@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls_std {
     public:
 
       explicit SerializableJSONDouble(std::shared_ptr<ls_std::Double> _value);
-      ~SerializableJSONDouble() = default;
+      ~SerializableJSONDouble() override = default;
 
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;

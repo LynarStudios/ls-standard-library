@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls_std {
     public:
 
       explicit XMLReader(const std::shared_ptr<ls_std::XMLDocument>& _document, const std::string& _absolutePath);
-      ~XMLReader() = default;
+      ~XMLReader() override = default;
 
       // implementation
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -17,7 +17,7 @@ namespace ls_std {
     public:
 
       XMLReaderMock();
-      ~XMLReaderMock() = default;
+      ~XMLReaderMock() override = default;
 
       static std::pair<std::string, std::string> readAttribute(const ls_std::byte_field &_data);
       static std::list<std::pair<std::string, std::string>> readAttributes(ls_std::byte_field _data);

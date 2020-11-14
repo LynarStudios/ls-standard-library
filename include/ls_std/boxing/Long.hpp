@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls_std {
 
       explicit Long(ls_std::long_type _value);
       Long();
-      ~Long() = default;
+      ~Long() override = default;
 
       // conversion operator
 

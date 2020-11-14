@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std {
     public:
 
       explicit SerializableJSONString(std::shared_ptr<ls_std::String> _value);
-      ~SerializableJSONString() = default;
+      ~SerializableJSONString() override = default;
 
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;

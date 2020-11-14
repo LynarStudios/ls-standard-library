@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -30,7 +30,7 @@ namespace ls_std {
     public:
 
       explicit File(std::string _absoluteFilePath);
-      ~File() = default;
+      ~File() override = default;
 
       // comparison operators
 

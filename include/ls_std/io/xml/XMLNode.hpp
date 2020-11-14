@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std {
     public:
 
       explicit XMLNode(std::string _name);
-      ~XMLNode() = default;
+      ~XMLNode() override = default;
 
       bool addAttributeAfter(const std::shared_ptr<ls_std::XMLAttribute>& _attribute, const std::string& _name);
       bool addAttributeBefore(const std::shared_ptr<ls_std::XMLAttribute>& _attribute, const std::string& _name);

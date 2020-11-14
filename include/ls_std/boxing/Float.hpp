@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-06
+ * Changed:         2020-11-14
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls_std {
 
       Float();
       explicit Float(float _value);
-      ~Float() = default;
+      ~Float() override = default;
 
       // conversion operator
 
