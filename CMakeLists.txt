@@ -72,7 +72,9 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReaderMock.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/Narrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/IListener.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -113,7 +115,10 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLDeclarationTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLDocumentTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLReaderTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLReaderMockTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLReaderMockTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataCar.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataMercedesCar.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/NarratorTest.cpp)
 
 ##########################################################
 # Build
