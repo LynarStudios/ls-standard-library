@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-11-06
+ * Changed:         2020-11-20
  *
  * */
 
 #ifndef LS_STD_SERIALIZABLE_JSON_STATE_CONNECTION_HPP
 #define LS_STD_SERIALIZABLE_JSON_STATE_CONNECTION_HPP
 
-#include "../../base/Class.hpp"
-#include "../ISerializable.hpp"
-#include "../../logic/StateConnection.hpp"
 #include <memory>
-#include <json.hpp>
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/base/Class.hpp>
+#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/logic/StateConnection.hpp>
 
 namespace ls_std {
   class SerializableJSONStateConnection : public Class, public ISerializable {

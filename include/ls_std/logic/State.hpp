@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-11-06
+ * Changed:         2020-11-20
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <memory>
 #include <unordered_map>
-#include "../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "StateMachineTypes.hpp"
 #include "StateConnection.hpp"
 

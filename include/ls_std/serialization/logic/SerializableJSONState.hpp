@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-06
+ * Changed:         2020-11-20
  *
  * */
 
 #ifndef LS_STD_SERIALIZABLE_JSON_STATE_HPP
 #define LS_STD_SERIALIZABLE_JSON_STATE_HPP
 
-#include "../../base/Class.hpp"
-#include "../ISerializable.hpp"
-#include "../../logic/State.hpp"
 #include <memory>
-#include <json.hpp>
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/logic/State.hpp>
+#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/base/Class.hpp>
 
 namespace ls_std {
   class SerializableJSONState : public Class, public ISerializable {

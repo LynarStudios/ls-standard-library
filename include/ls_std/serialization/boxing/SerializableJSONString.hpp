@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-11-06
+ * Changed:         2020-11-20
  *
  * */
 
@@ -11,9 +11,9 @@
 #define LS_STD_SERIALIZABLE_JSON_STRING_HPP
 
 #include <memory>
-#include <json.hpp>
-#include "../../../../../include/ls_std/serialization/ISerializable.hpp"
-#include "../../../../../include/ls_std/boxing/String.hpp"
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/boxing/String.hpp>
 
 namespace ls_std {
   class SerializableJSONString : public Class, public ISerializable {

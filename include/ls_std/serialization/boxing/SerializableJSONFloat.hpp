@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-11-06
+ * Changed:         2020-11-20
  *
  * */
 
@@ -11,10 +11,10 @@
 #define LS_STD_SERIALIZABLE_JSON_FLOAT_HPP
 
 #include <memory>
-#include <json.hpp>
-#include "../../base/Class.hpp"
-#include "../ISerializable.hpp"
-#include "../../boxing/Float.hpp"
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/base/Class.hpp>
+#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/boxing/Float.hpp>
 
 namespace ls_std {
   class SerializableJSONFloat : public Class, public ISerializable {
