@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2020.2.1 #
+# Lynar Studios - Standard Library 2020.2.2 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  
@@ -16,7 +16,7 @@ It has been tested on __Windows__, __Linux__ and __MacOS__ systems.
 
 ### Change Log ###
 
-- fixed include paths of header files
+- added debug build configuration
 
 ### Documentation ###
 
