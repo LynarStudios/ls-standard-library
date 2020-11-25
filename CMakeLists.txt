@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.17)
 set(PROJECT_NAME ls_std)
-set(RELEASE_VERSION 2020.2.2)
+set(RELEASE_VERSION 2020.2.3)
 project(${PROJECT_NAME})
 
 ##########################################################
