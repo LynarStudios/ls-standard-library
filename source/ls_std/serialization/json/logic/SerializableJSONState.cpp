@@ -51,32 +51,15 @@ void ls_std::SerializableJSONState::_clear()
   this->jsonObject.clear();
 }
 
-void ls_std::SerializableJSONState::_unmarshalExistingStateConnection(nlohmann::json _jsonObject)
-{
-  std::shared_ptr<ls_std::StateConnection> stateConnection = this->value->getConnectedStates().at(_jsonObject["connectionId"]);
-
-  stateConnection->updatePassCondition(_jsonObject["condition"]);
-  stateConnection->setStateId(_jsonObject["stateId"]);
-}
-
-void ls_std::SerializableJSONState::_unmarshalNewStateConnection(nlohmann::json _jsonObject)
-{
-  ls_std::StateConnectionId connectionId = _jsonObject["connectionId"];
-  ls_std::StateId stateId = _jsonObject["stateId"];
-  std::shared_ptr<ls_std::StateConnection> stateConnection = std::make_shared<ls_std::StateConnection>(connectionId, stateId);
-  stateConnection->updatePassCondition(_jsonObject["condition"]);
-
-  this->value->addStateConnection(stateConnection);
-}
-
 void ls_std::SerializableJSONState::_unmarshalStateConnections()
 {
-  for(const auto& connectedState : this->jsonObject["connectedStates"]) {
-    if(this->value->hasConnection(connectedState["connectionId"])) {
-      this->_unmarshalExistingStateConnection(connectedState);
-    }
-    else {
-      this->_unmarshalNewStateConnection(connectedState);
+  if(!this->jsonObject["connectedStates"].empty()) {
+    this->value->clearConnections();
+
+    for(const auto& connectionJSON : this->jsonObject["connectedStates"]) {
+      std::shared_ptr<ls_std::StateConnection> connection = std::make_shared<ls_std::StateConnection>("TMP_ID", "TMP_ID");
+      ls_std::SerializableJSONStateConnection{connection}.unmarshal(connectionJSON.dump());
+      this->value->addStateConnection(connection);
     }
   }
 }

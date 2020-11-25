@@ -39,8 +39,6 @@ namespace ls_std {
 
       void _assignValue(const std::shared_ptr<State>& _value);
       void _clear();
-      void _unmarshalExistingStateConnection(nlohmann::json _jsonObject);
-      void _unmarshalNewStateConnection(nlohmann::json _jsonObject);
       void _unmarshalStateConnections();
       void _update();
       void _updateStateConnections();
