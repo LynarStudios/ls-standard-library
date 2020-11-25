@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
@@ -49,9 +49,12 @@ void ls_std::SerializableJSONStateMachine::_unmarshalStates()
 
 void ls_std::SerializableJSONStateMachine::_update()
 {
+  this->jsonObject = {
+      {"memory", this->value->getMemory()},
+      {"name", this->value->getName()}
+  };
+
   this->_updateCurrentState();
-  this->jsonObject["memory"] = this->value->getMemory();
-  this->jsonObject["name"] = this->value->getName();
   this->_updateStates();
 }
 

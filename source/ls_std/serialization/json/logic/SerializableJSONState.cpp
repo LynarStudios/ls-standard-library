@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
@@ -72,8 +72,11 @@ void ls_std::SerializableJSONState::_unmarshalStateConnections()
 
 void ls_std::SerializableJSONState::_update()
 {
+  this->jsonObject = {
+      {"id", this->value->getId()}
+  };
+
   this->_updateStateConnections();
-  this->jsonObject["id"] = this->value->getId();
 }
 
 void ls_std::SerializableJSONState::_updateStateConnections()
