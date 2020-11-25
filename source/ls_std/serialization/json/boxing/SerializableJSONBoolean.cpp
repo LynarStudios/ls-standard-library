@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONBoolean.hpp"
+#include <ls_std/serialization/boxing/SerializableJSONBoolean.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONBoolean::SerializableJSONBoolean(const std::shared_ptr<ls_std::Boolean>& _value) :

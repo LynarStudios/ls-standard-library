@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
 #include <cmath>
-#include "../../../include/ls_std/boxing/Double.hpp"
+#include <ls_std/boxing/Double.hpp>
 
 ls_std::Double::Double() : Class("Double"),
 epsilon(0.00000001)

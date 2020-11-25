@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONDouble.hpp"
+#include <ls_std/serialization/boxing/SerializableJSONDouble.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONDouble::SerializableJSONDouble(const std::shared_ptr<ls_std::Double>& _value) :

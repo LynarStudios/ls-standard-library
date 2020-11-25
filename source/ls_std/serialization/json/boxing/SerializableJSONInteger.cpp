@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONInteger.hpp"
+#include <ls_std/serialization/boxing/SerializableJSONInteger.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONInteger::SerializableJSONInteger(const std::shared_ptr<ls_std::Integer>& _value) :

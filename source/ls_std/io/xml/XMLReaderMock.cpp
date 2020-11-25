@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../include/ls_std/io/xml/XMLReaderMock.hpp"
+#include <ls_std/io/xml/XMLReaderMock.hpp>
 
 ls_std::XMLReaderMock::XMLReaderMock() : XMLReader(nullptr, "")
 {}

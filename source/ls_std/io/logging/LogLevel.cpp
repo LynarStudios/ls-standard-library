@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../include/ls_std/io/logging/LogLevel.hpp"
+#include <ls_std/io/logging/LogLevel.hpp>
 
 ls_std::LogLevel::LogLevel(const ls_std::LogLevelValue& _value) : Class("LogLevel"),
 value(_value)

@@ -7,8 +7,8 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateMachine.hpp"
-#include "../../../../../include/ls_std/serialization/logic/SerializableJSONState.hpp"
+#include <ls_std/serialization/logic/SerializableJSONStateMachine.hpp>
+#include <ls_std/serialization/logic/SerializableJSONState.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONStateMachine::SerializableJSONStateMachine(const std::shared_ptr<StateMachine>& _value) :

@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONFloat.hpp"
+#include <ls_std/serialization/boxing/SerializableJSONFloat.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONFloat::SerializableJSONFloat(const std::shared_ptr<ls_std::Float>& _value) :

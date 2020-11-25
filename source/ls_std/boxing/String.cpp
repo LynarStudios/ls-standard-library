@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
 #include <algorithm>
-#include "../../../include/ls_std/boxing/String.hpp"
+#include <ls_std/boxing/String.hpp>
 
 ls_std::String::String() : Class("String")
 {}

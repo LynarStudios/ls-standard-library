@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp"
+#include <ls_std/serialization/logic/SerializableJSONStateConnection.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONStateConnection::SerializableJSONStateConnection(const std::shared_ptr<ls_std::StateConnection>& _value) :

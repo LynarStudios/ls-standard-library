@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
 #include <iomanip>
 #include <sstream>
-#include "../../../include/ls_std/time/Date.hpp"
+#include <ls_std/time/Date.hpp>
 
 ls_std::Date::Date() : Class("Date")
 {

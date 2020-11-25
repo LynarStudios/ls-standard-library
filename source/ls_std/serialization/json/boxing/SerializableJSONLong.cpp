@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONLong.hpp"
+#include <ls_std/serialization/boxing/SerializableJSONLong.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONLong::SerializableJSONLong(const std::shared_ptr<ls_std::Long>& _value) :

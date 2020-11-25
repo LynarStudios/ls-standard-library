@@ -7,7 +7,7 @@
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONString.hpp"
+#include <ls_std/serialization/boxing/SerializableJSONString.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONString::SerializableJSONString(const std::shared_ptr<ls_std::String>& _value) :

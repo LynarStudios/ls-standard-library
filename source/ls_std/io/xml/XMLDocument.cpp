@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../include/ls_std/io/xml/XMLDocument.hpp"
+#include <ls_std/io/xml/XMLDocument.hpp>
 
 ls_std::XMLDocument::XMLDocument() : Class("XMLDocument")
 {}

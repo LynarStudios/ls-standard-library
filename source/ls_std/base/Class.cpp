@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../include/ls_std/base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 
 ls_std::Class::Class(std::string _name):
 name(std::move(_name))
