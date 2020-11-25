@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2020.2.2 #
+# Lynar Studios - Standard Library 2020.2.3 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  
@@ -16,7 +16,10 @@ It has been tested on __Windows__, __Linux__ and __MacOS__ systems.
 
 ### Change Log ###
 
-- added debug build configuration
+- added missing nullptr exception handling inside serialization class constructors
+- fixed serialization assignment
+- replaced include directives in source files
+- reduced complexity inside SerializableJSONState class
 
 ### Documentation ###
 
