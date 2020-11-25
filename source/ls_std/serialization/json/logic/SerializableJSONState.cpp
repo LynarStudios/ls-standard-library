@@ -9,11 +9,13 @@
 
 #include "../../../../../include/ls_std/serialization/logic/SerializableJSONState.hpp"
 #include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp"
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONState::SerializableJSONState(std::shared_ptr<State> _value) :
-Class("SerializableJSONState"),
-value(std::move(_value))
-{}
+ls_std::SerializableJSONState::SerializableJSONState(const std::shared_ptr<State>& _value) :
+Class("SerializableJSONState")
+{
+  this->_assignValue(_value);
+}
 
 ls_std::byte_field ls_std::SerializableJSONState::marshal()
 {
@@ -29,10 +31,19 @@ void ls_std::SerializableJSONState::unmarshal(const ls_std::byte_field &_data)
   this->value->setId(this->jsonObject["id"]);
 }
 
-void ls_std::SerializableJSONState::setValue(std::shared_ptr<State> _value)
+void ls_std::SerializableJSONState::setValue(const std::shared_ptr<State>& _value)
 {
-  this->value = std::move(_value);
+  this->_assignValue(_value);
   this->_clear();
+}
+
+void ls_std::SerializableJSONState::_assignValue(const std::shared_ptr<State> &_value)
+{
+  if(_value == nullptr) {
+    throw ls_std::IllegalArgumentException {};
+  }
+
+  this->value = _value;
 }
 
 void ls_std::SerializableJSONState::_clear()

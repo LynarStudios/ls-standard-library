@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-11-20
+ * Changed:         2020-11-25
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std {
   class SerializableJSONStateMachine : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONStateMachine(std::shared_ptr<StateMachine> _value);
+      explicit SerializableJSONStateMachine(const std::shared_ptr<StateMachine>& _value);
       ~SerializableJSONStateMachine() = default;
 
       ls_std::byte_field marshal() override;
@@ -31,6 +31,7 @@ namespace ls_std {
       nlohmann::json jsonObject {};
       std::shared_ptr<ls_std::StateMachine> value {};
 
+      void _assignValue(const std::shared_ptr<StateMachine>& _value);
       void _unmarshalCurrentState();
       void _unmarshalStates();
       void _update();

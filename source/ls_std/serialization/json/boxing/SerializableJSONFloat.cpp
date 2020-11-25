@@ -3,16 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
 #include "../../../../../include/ls_std/serialization/boxing/SerializableJSONFloat.hpp"
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONFloat::SerializableJSONFloat(std::shared_ptr<ls_std::Float> _value) :
-Class("SerializableJSONFloat"),
-value(std::move(_value))
-{}
+ls_std::SerializableJSONFloat::SerializableJSONFloat(const std::shared_ptr<ls_std::Float>& _value) :
+Class("SerializableJSONFloat")
+{
+  this->_assignValue(_value);
+}
 
 ls_std::byte_field ls_std::SerializableJSONFloat::marshal()
 {
@@ -28,6 +30,15 @@ void ls_std::SerializableJSONFloat::unmarshal(const ls_std::byte_field& _data)
   if(this->jsonObject.contains("value")) {
     *this->value = this->jsonObject["value"];
   }
+}
+
+void ls_std::SerializableJSONFloat::_assignValue(const std::shared_ptr<ls_std::Float> &_value)
+{
+  if(_value == nullptr) {
+    throw ls_std::IllegalArgumentException {};
+  }
+
+  this->value = _value;
 }
 
 void ls_std::SerializableJSONFloat::_update()

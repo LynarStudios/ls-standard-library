@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-20
+ * Changed:         2020-11-25
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std {
   class SerializableJSONState : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONState(std::shared_ptr<State> _value);
+      explicit SerializableJSONState(const std::shared_ptr<State>& _value);
       ~SerializableJSONState() = default;
 
       // implementation
@@ -30,13 +30,14 @@ namespace ls_std {
 
       // additional functionality
 
-      void setValue(std::shared_ptr<State> _value);
+      void setValue(const std::shared_ptr<State>& _value);
 
     private:
 
       nlohmann::json jsonObject {};
       std::shared_ptr<ls_std::State> value {};
 
+      void _assignValue(const std::shared_ptr<State>& _value);
       void _clear();
       void _unmarshalExistingStateConnection(nlohmann::json _jsonObject);
       void _unmarshalNewStateConnection(nlohmann::json _jsonObject);

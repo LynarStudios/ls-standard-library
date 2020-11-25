@@ -9,11 +9,13 @@
 
 #include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateMachine.hpp"
 #include "../../../../../include/ls_std/serialization/logic/SerializableJSONState.hpp"
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONStateMachine::SerializableJSONStateMachine(std::shared_ptr<StateMachine> _value) :
-Class("SerializableJSONStateMachine"),
-value(std::move(_value))
-{}
+ls_std::SerializableJSONStateMachine::SerializableJSONStateMachine(const std::shared_ptr<StateMachine>& _value) :
+Class("SerializableJSONStateMachine")
+{
+  this->_assignValue(_value);
+}
 
 ls_std::byte_field ls_std::SerializableJSONStateMachine::marshal()
 {
@@ -29,6 +31,15 @@ void ls_std::SerializableJSONStateMachine::unmarshal(const ls_std::byte_field &_
   this->_unmarshalCurrentState();
   this->value->setMemory(this->jsonObject["memory"]);
   this->value->setName(this->jsonObject["name"]);
+}
+
+void ls_std::SerializableJSONStateMachine::_assignValue(const std::shared_ptr<StateMachine> &_value)
+{
+  if(_value == nullptr) {
+    throw ls_std::IllegalArgumentException {};
+  }
+
+  this->value = _value;
 }
 
 void ls_std::SerializableJSONStateMachine::_unmarshalCurrentState()
