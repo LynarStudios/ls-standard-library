@@ -3,15 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../include/ls_std/io/logging/Logger.hpp"
-#include "../../../../include/ls_std/time/Date.hpp"
-#include "../../../../include/ls_std/io/NewLine.hpp"
-#include "../../../../include/ls_std/boxing/String.hpp"
-#include "../../../../include/ls_std/exception/NullPointerException.hpp"
+#include <ls_std/io/logging/Logger.hpp>
+#include <ls_std/time/Date.hpp>
+#include <ls_std/io/NewLine.hpp>
+#include <ls_std/boxing/String.hpp>
+#include <ls_std/exception/NullPointerException.hpp>
 
 ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer) : Class("Logger"),
 logLevel(ls_std::LogLevelValue::INFO)

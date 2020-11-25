@@ -3,17 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/logic/SerializableJSONState.hpp"
-#include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp"
+#include <ls_std/serialization/logic/SerializableJSONState.hpp>
+#include <ls_std/serialization/logic/SerializableJSONStateConnection.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONState::SerializableJSONState(std::shared_ptr<State> _value) :
-Class("SerializableJSONState"),
-value(std::move(_value))
-{}
+ls_std::SerializableJSONState::SerializableJSONState(const std::shared_ptr<State>& _value) :
+Class("SerializableJSONState")
+{
+  this->_assignValue(_value);
+}
 
 ls_std::byte_field ls_std::SerializableJSONState::marshal()
 {
@@ -29,10 +31,19 @@ void ls_std::SerializableJSONState::unmarshal(const ls_std::byte_field &_data)
   this->value->setId(this->jsonObject["id"]);
 }
 
-void ls_std::SerializableJSONState::setValue(std::shared_ptr<State> _value)
+void ls_std::SerializableJSONState::setValue(const std::shared_ptr<State>& _value)
 {
-  this->value = std::move(_value);
+  this->_assignValue(_value);
   this->_clear();
+}
+
+void ls_std::SerializableJSONState::_assignValue(const std::shared_ptr<State> &_value)
+{
+  if(_value == nullptr) {
+    throw ls_std::IllegalArgumentException {};
+  }
+
+  this->value = _value;
 }
 
 void ls_std::SerializableJSONState::_clear()
@@ -40,40 +51,26 @@ void ls_std::SerializableJSONState::_clear()
   this->jsonObject.clear();
 }
 
-void ls_std::SerializableJSONState::_unmarshalExistingStateConnection(nlohmann::json _jsonObject)
-{
-  std::shared_ptr<ls_std::StateConnection> stateConnection = this->value->getConnectedStates().at(_jsonObject["connectionId"]);
-
-  stateConnection->updatePassCondition(_jsonObject["condition"]);
-  stateConnection->setStateId(_jsonObject["stateId"]);
-}
-
-void ls_std::SerializableJSONState::_unmarshalNewStateConnection(nlohmann::json _jsonObject)
-{
-  ls_std::StateConnectionId connectionId = _jsonObject["connectionId"];
-  ls_std::StateId stateId = _jsonObject["stateId"];
-  std::shared_ptr<ls_std::StateConnection> stateConnection = std::make_shared<ls_std::StateConnection>(connectionId, stateId);
-  stateConnection->updatePassCondition(_jsonObject["condition"]);
-
-  this->value->addStateConnection(stateConnection);
-}
-
 void ls_std::SerializableJSONState::_unmarshalStateConnections()
 {
-  for(const auto& connectedState : this->jsonObject["connectedStates"]) {
-    if(this->value->hasConnection(connectedState["connectionId"])) {
-      this->_unmarshalExistingStateConnection(connectedState);
-    }
-    else {
-      this->_unmarshalNewStateConnection(connectedState);
+  if(!this->jsonObject["connectedStates"].empty()) {
+    this->value->clearConnections();
+
+    for(const auto& connectionJSON : this->jsonObject["connectedStates"]) {
+      std::shared_ptr<ls_std::StateConnection> connection = std::make_shared<ls_std::StateConnection>("TMP_ID", "TMP_ID");
+      ls_std::SerializableJSONStateConnection{connection}.unmarshal(connectionJSON.dump());
+      this->value->addStateConnection(connection);
     }
   }
 }
 
 void ls_std::SerializableJSONState::_update()
 {
+  this->jsonObject = {
+      {"id", this->value->getId()}
+  };
+
   this->_updateStateConnections();
-  this->jsonObject["id"] = this->value->getId();
 }
 
 void ls_std::SerializableJSONState::_updateStateConnections()

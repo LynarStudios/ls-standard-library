@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <list>
 #include <memory>
-#include "../../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "XMLAttribute.hpp"
 
 namespace ls_std {
@@ -20,7 +20,7 @@ namespace ls_std {
     public:
 
       explicit XMLNode(std::string _name);
-      ~XMLNode() override = default;
+      ~XMLNode() = default;
 
       bool addAttributeAfter(const std::shared_ptr<ls_std::XMLAttribute>& _attribute, const std::string& _name);
       bool addAttributeBefore(const std::shared_ptr<ls_std::XMLAttribute>& _attribute, const std::string& _name);

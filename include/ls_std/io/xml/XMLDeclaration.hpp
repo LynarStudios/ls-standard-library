@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
 #ifndef LS_STD_XML_DECLARATION_HPP
 #define LS_STD_XML_DECLARATION_HPP
 
-#include "../../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "XMLAttribute.hpp"
 
 namespace ls_std {
@@ -18,7 +18,7 @@ namespace ls_std {
     public:
 
       explicit XMLDeclaration(std::string _version);
-      ~XMLDeclaration() override = default;
+      ~XMLDeclaration() = default;
 
       std::string getEncoding();
       std::string getStandalone();

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
@@ -14,7 +14,7 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include "../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "State.hpp"
 #include "StateMachineTypes.hpp"
 
@@ -23,7 +23,7 @@ namespace ls_std {
     public:
 
       explicit StateMachine(std::string _name);
-      ~StateMachine() override = default;
+      ~StateMachine() = default;
 
       bool addState(const std::shared_ptr<State>& _state);
       std::shared_ptr<State> getCurrentState();

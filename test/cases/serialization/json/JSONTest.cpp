@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-09-14
+ * Changed:         2020-11-20
  *
  * */
 
 #include <gtest/gtest.h>
-#include <json.hpp>
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
 
 namespace {
   class JSONTest : public ::testing::Test {

@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../include/ls_std/io/xml/XMLReader.hpp"
-#include "../../../../include/ls_std/exception/IllegalArgumentException.hpp"
-#include "../../../../include/ls_std/io/FileReader.hpp"
-#include "../../../../include/ls_std/boxing/String.hpp"
+#include <ls_std/io/xml/XMLReader.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/io/FileReader.hpp>
+#include <ls_std/boxing/String.hpp>
 
 ls_std::XMLReader::XMLReader(const std::shared_ptr<ls_std::XMLDocument>& _document, const std::string& _absolutePath) :
 Class("XMLReader"),

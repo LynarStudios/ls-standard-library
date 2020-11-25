@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.17)
 set(PROJECT_NAME ls_std)
-set(RELEASE_VERSION 2020.2.0)
+set(RELEASE_VERSION 2020.2.3)
 project(${PROJECT_NAME})
 
 ##########################################################
@@ -23,7 +23,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 message("${PROJECT_NAME}: Adding include directories...")
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/include/ls_std/lib/nlohmann_json/include/nlohmann)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
 ######################################################
@@ -127,9 +126,15 @@ set(TEST_FILES
 message("${PROJECT_NAME}: Building version ${RELEASE_VERSION}...")
 
 add_executable(${PROJECT_NAME}_test ${TEST_FILES})
+
 add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" STATIC ${SOURCE_FILES})
+set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
+
 add_library("${PROJECT_NAME}_${RELEASE_VERSION}_shared" SHARED ${SOURCE_FILES})
+set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
+
 add_library("${PROJECT_NAME}_${RELEASE_VERSION}_module" MODULE ${SOURCE_FILES})
+set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
 
 ##########################################################
 # Linking

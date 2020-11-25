@@ -3,16 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/boxing/SerializableJSONInteger.hpp"
+#include <ls_std/serialization/boxing/SerializableJSONInteger.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONInteger::SerializableJSONInteger(std::shared_ptr<ls_std::Integer> _value) :
-Class("SerializableJSONInteger"),
-value(std::move(_value))
-{}
+ls_std::SerializableJSONInteger::SerializableJSONInteger(const std::shared_ptr<ls_std::Integer>& _value) :
+Class("SerializableJSONInteger")
+{
+  this->_assignValue(_value);
+}
 
 ls_std::byte_field ls_std::SerializableJSONInteger::marshal()
 {
@@ -28,6 +30,15 @@ void ls_std::SerializableJSONInteger::unmarshal(const ls_std::byte_field& _data)
   if(this->jsonObject.contains("value")) {
     *this->value = this->jsonObject["value"];
   }
+}
+
+void ls_std::SerializableJSONInteger::_assignValue(const std::shared_ptr<ls_std::Integer> &_value)
+{
+  if(_value == nullptr) {
+    throw ls_std::IllegalArgumentException {};
+  }
+
+  this->value = _value;
 }
 
 void ls_std::SerializableJSONInteger::_update()

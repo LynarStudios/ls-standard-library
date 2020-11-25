@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_LOG_LEVEL_HPP
 
 #include <unordered_map>
-#include "../../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "LogLevelValue.hpp"
 
 namespace ls_std {
@@ -20,7 +20,7 @@ namespace ls_std {
 
       explicit LogLevel(const ls_std::LogLevelValue& _value);
       LogLevel();
-      ~LogLevel() override = default;
+      ~LogLevel() = default;
 
       operator unsigned char() const;
       LogLevel& operator=(const ls_std::LogLevelValue& _value);

@@ -3,25 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-14
+ * Changed:         2020-11-25
  *
  * */
 
 #ifndef LS_STD_SERIALIZABLE_JSON_STATE_HPP
 #define LS_STD_SERIALIZABLE_JSON_STATE_HPP
 
-#include "../../base/Class.hpp"
-#include "../ISerializable.hpp"
-#include "../../logic/State.hpp"
 #include <memory>
-#include <json.hpp>
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/logic/State.hpp>
+#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/base/Class.hpp>
 
 namespace ls_std {
   class SerializableJSONState : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONState(std::shared_ptr<State> _value);
-      ~SerializableJSONState() override = default;
+      explicit SerializableJSONState(const std::shared_ptr<State>& _value);
+      ~SerializableJSONState() = default;
 
       // implementation
 
@@ -30,16 +30,15 @@ namespace ls_std {
 
       // additional functionality
 
-      void setValue(std::shared_ptr<State> _value);
+      void setValue(const std::shared_ptr<State>& _value);
 
     private:
 
       nlohmann::json jsonObject {};
       std::shared_ptr<ls_std::State> value {};
 
+      void _assignValue(const std::shared_ptr<State>& _value);
       void _clear();
-      void _unmarshalExistingStateConnection(nlohmann::json _jsonObject);
-      void _unmarshalNewStateConnection(nlohmann::json _jsonObject);
       void _unmarshalStateConnections();
       void _update();
       void _updateStateConnections();

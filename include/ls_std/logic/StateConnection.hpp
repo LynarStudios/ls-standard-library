@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_STATE_CONNECTION_HPP
 
 #include <memory>
-#include "../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "StateMachineTypes.hpp"
 
 namespace ls_std {
@@ -19,7 +19,7 @@ namespace ls_std {
     public:
 
       explicit StateConnection(StateConnectionId _connectionId, StateId _stateId);
-      ~StateConnection() override = default;
+      ~StateConnection() = default;
 
       StateConnectionId getConnectionId();
       StateId getStateId();

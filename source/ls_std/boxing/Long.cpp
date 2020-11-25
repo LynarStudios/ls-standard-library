@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../include/ls_std/boxing/Long.hpp"
-#include "../../../include/ls_std/exception/IllegalArithmeticOperationException.hpp"
+#include <ls_std/boxing/Long.hpp>
+#include <ls_std/exception/IllegalArithmeticOperationException.hpp>
 
 ls_std::Long::Long(ls_std::long_type _value) : Class("Long"),
 value(_value)

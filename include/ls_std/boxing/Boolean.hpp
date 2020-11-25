@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
@@ -11,10 +11,10 @@
 #define LS_STD_BOOLEAN_HPP
 
 #include <memory>
-#include "../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "IBoxing.hpp"
-#include "../serialization/ISerializable.hpp"
-#include "../io/IStorable.hpp"
+#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/io/IStorable.hpp>
 
 namespace ls_std {
   class Boolean : public Class, public IBoxing, public ISerializable, public IStorable {
@@ -22,7 +22,7 @@ namespace ls_std {
 
       explicit Boolean(bool _value);
       Boolean();
-      ~Boolean() override = default;
+      ~Boolean() = default;
 
       // conversion operator
 

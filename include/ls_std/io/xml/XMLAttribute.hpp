@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
 #ifndef LS_STD_XML_ATTRIBUTE_HPP
 #define LS_STD_XML_ATTRIBUTE_HPP
 
-#include "../../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include <string>
 
 namespace ls_std {
@@ -18,7 +18,7 @@ namespace ls_std {
     public:
 
       explicit XMLAttribute(std::string _name);
-      ~XMLAttribute() override = default;
+      ~XMLAttribute() = default;
 
       std::string getName();
       std::string getValue();

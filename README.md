@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2020.2.0 #
+# Lynar Studios - Standard Library 2020.2.3 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  
@@ -16,12 +16,10 @@ It has been tested on __Windows__, __Linux__ and __MacOS__ systems.
 
 ### Change Log ###
 
-- isolated header files by restructuring the project
-- improved Logger class by passing IWriter implementation to constructor
-- improved exceptions by adding exception name to messages
-- added NullPointerException
-- added StandardOutputWriter class, which is an IWriter implementation
-- improved CMakeLists.txt by removing unnecessary header files and also generating static, shared and module libraries now
+- added missing nullptr exception handling inside serialization class constructors
+- fixed serialization assignment
+- replaced include directives in source files
+- reduced complexity inside SerializableJSONState class
 
 ### Documentation ###
 
@@ -50,6 +48,20 @@ Inside __cmake_build_release__ folder you will now find cmake generated files. T
 
 ```
 cmake --build . --config Release
+```
+
+### Add Library To Your Project ###
+
+If you would like to add this library to your cmake project - to the __CMakeLists.txt__ file - make sure that you add the libraries' include directory:
+
+```
+include_directories(${CMAKE_CURRENT_LIST_DIR}/path/to/this/library/include)
+```
+
+Then link the library binary file inside your __CMakeLists.txt__ file:
+
+```
+target_link_libraries(... "path/to/this/library/../libls_std_YYYY.MAJOR.MINOR.dll")
 ```
 
 ### Testing ###

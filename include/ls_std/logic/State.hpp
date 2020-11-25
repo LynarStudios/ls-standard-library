@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <memory>
 #include <unordered_map>
-#include "../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "StateMachineTypes.hpp"
 #include "StateConnection.hpp"
 
@@ -21,7 +21,7 @@ namespace ls_std {
     public:
 
       explicit State(StateId _id);
-      ~State() override = default;
+      ~State() = default;
 
       bool addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState);
       bool addStateConnection(const std::shared_ptr<StateConnection>& _connection);

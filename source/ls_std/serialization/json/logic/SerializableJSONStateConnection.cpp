@@ -3,16 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-11-06
+ * Changed:         2020-11-25
  *
  * */
 
-#include "../../../../../include/ls_std/serialization/logic/SerializableJSONStateConnection.hpp"
+#include <ls_std/serialization/logic/SerializableJSONStateConnection.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONStateConnection::SerializableJSONStateConnection(std::shared_ptr<ls_std::StateConnection> _value) :
-Class("SerializableJSONStateConnection"),
-value(std::move(_value))
-{}
+ls_std::SerializableJSONStateConnection::SerializableJSONStateConnection(const std::shared_ptr<ls_std::StateConnection>& _value) :
+Class("SerializableJSONStateConnection")
+{
+  this->_assignValue(_value);
+}
 
 ls_std::byte_field ls_std::SerializableJSONStateConnection::marshal()
 {
@@ -30,10 +32,19 @@ void ls_std::SerializableJSONStateConnection::unmarshal(const ls_std::byte_field
   this->value->updatePassCondition(this->jsonObject["condition"]);
 }
 
-void ls_std::SerializableJSONStateConnection::setValue(std::shared_ptr<ls_std::StateConnection> _value)
+void ls_std::SerializableJSONStateConnection::setValue(const std::shared_ptr<ls_std::StateConnection>& _value)
 {
-  this->value = std::move(_value);
+  this->_assignValue(_value);
   this->_clear();
+}
+
+void ls_std::SerializableJSONStateConnection::_assignValue(const std::shared_ptr<ls_std::StateConnection> &_value)
+{
+  if(_value == nullptr) {
+    throw ls_std::IllegalArgumentException {};
+  }
+
+  this->value = _value;
 }
 
 void ls_std::SerializableJSONStateConnection::_clear()

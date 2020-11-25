@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-14
+ * Changed:         2020-11-20
  *
  * */
 
 #ifndef LS_STD_FILE_WRITER_HPP
 #define LS_STD_FILE_WRITER_HPP
 
-#include "../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 #include "IWriter.hpp"
 #include "File.hpp"
 
@@ -19,7 +19,7 @@ namespace ls_std {
     public:
 
       explicit FileWriter(File& _file);
-      ~FileWriter() override = default;
+      ~FileWriter() = default;
 
       void reset(File& _file);
       bool write(const ls_std::byte_field& _data) override;
