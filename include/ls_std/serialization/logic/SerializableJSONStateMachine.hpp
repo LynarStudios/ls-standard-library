@@ -20,18 +20,25 @@ namespace ls_std {
   class SerializableJSONStateMachine : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONStateMachine(const std::shared_ptr<StateMachine>& _value);
+      explicit SerializableJSONStateMachine(const std::shared_ptr<ls_std::StateMachine>& _value);
       ~SerializableJSONStateMachine() override = default;
+
+      // implementation
 
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;
+
+      // additional functionality
+
+      std::shared_ptr<ls_std::StateMachine> getValue();
+      void setValue(const std::shared_ptr<ls_std::StateMachine>& _value);
 
     private:
 
       nlohmann::json jsonObject {};
       std::shared_ptr<ls_std::StateMachine> value {};
 
-      void _assignValue(const std::shared_ptr<StateMachine>& _value);
+      void _assignValue(const std::shared_ptr<ls_std::StateMachine>& _value);
       void _unmarshalCurrentState();
       void _unmarshalStates();
       void _update();

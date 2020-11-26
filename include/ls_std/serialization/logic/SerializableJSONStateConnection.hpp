@@ -30,6 +30,7 @@ namespace ls_std {
 
       // additional functionality
 
+      std::shared_ptr<ls_std::StateConnection> getValue();
       void setValue(const std::shared_ptr<ls_std::StateConnection>& _value);
 
     private:

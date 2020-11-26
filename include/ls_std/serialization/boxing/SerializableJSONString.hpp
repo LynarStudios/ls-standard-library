@@ -22,8 +22,15 @@ namespace ls_std {
       explicit SerializableJSONString(const std::shared_ptr<ls_std::String>& _value);
       ~SerializableJSONString() override = default;
 
+      // implementation
+
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;
+
+      // additional functionality
+
+      std::shared_ptr<ls_std::String> getValue();
+      void setValue(const std::shared_ptr<ls_std::String>& _value);
 
     private:
 

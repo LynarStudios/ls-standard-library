@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-10-29
+ * Changed:         2020-11-26
  *
  * */
 
@@ -40,5 +40,22 @@ namespace {
     serializable.unmarshal(R"({"value":true})");
 
     ASSERT_TRUE(*x);
+  }
+
+  TEST_F(SerializableJSONBooleanTest, getValue) {
+    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>(false);
+    ls_std::SerializableJSONBoolean serializable {x};
+
+    ASSERT_TRUE(serializable.getValue() == x);
+  }
+
+  TEST_F(SerializableJSONBooleanTest, setValue) {
+    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>(false);
+    ls_std::SerializableJSONBoolean serializable {x};
+    ASSERT_TRUE(serializable.getValue() == x);
+
+    x = std::make_shared<ls_std::Boolean>(true);
+    serializable.setValue(x);
+    ASSERT_TRUE(serializable.getValue() == x);
   }
 }

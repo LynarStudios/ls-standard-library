@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-25
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -30,6 +30,16 @@ void ls_std::SerializableJSONLong::unmarshal(const ls_std::byte_field& _data)
   if(this->jsonObject.contains("value")) {
     *this->value = this->jsonObject["value"];
   }
+}
+
+std::shared_ptr<ls_std::Long> ls_std::SerializableJSONLong::getValue()
+{
+  return this->value;
+}
+
+void ls_std::SerializableJSONLong::setValue(const std::shared_ptr<ls_std::Long> &_value)
+{
+  this->_assignValue(_value);
 }
 
 void ls_std::SerializableJSONLong::_assignValue(const std::shared_ptr<ls_std::Long> &_value)

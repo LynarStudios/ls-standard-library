@@ -20,7 +20,7 @@ namespace ls_std {
   class SerializableJSONState : public Class, public ISerializable {
     public:
 
-      explicit SerializableJSONState(const std::shared_ptr<State>& _value);
+      explicit SerializableJSONState(const std::shared_ptr<ls_std::State>& _value);
       ~SerializableJSONState() override = default;
 
       // implementation
@@ -30,14 +30,15 @@ namespace ls_std {
 
       // additional functionality
 
-      void setValue(const std::shared_ptr<State>& _value);
+      std::shared_ptr<ls_std::State> getValue();
+      void setValue(const std::shared_ptr<ls_std::State>& _value);
 
     private:
 
       nlohmann::json jsonObject {};
       std::shared_ptr<ls_std::State> value {};
 
-      void _assignValue(const std::shared_ptr<State>& _value);
+      void _assignValue(const std::shared_ptr<ls_std::State>& _value);
       void _clear();
       void _unmarshalStateConnections();
       void _update();

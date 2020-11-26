@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-10-29
+ * Changed:         2020-11-26
  *
  * */
 
@@ -45,6 +45,13 @@ namespace {
     ASSERT_STREQ("BC", x->getConnectionId().c_str());
     ASSERT_STREQ("C", x->getStateId().c_str());
     ASSERT_TRUE(x->isPassable());
+  }
+
+  TEST_F(SerializableJSONStateConnectionTest, getValue)
+  {
+    std::shared_ptr<ls_std::StateConnection> x = std::make_shared<ls_std::StateConnection>("AB", "B");
+    ls_std::SerializableJSONStateConnection serializable {x};
+    ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJSONStateConnectionTest, setValue)

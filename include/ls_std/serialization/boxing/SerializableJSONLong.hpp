@@ -22,8 +22,15 @@ namespace ls_std {
       explicit SerializableJSONLong(const std::shared_ptr<ls_std::Long>& _value);
       ~SerializableJSONLong() override = default;
 
+      // implementation
+
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;
+
+      // additional functionality
+
+      std::shared_ptr<ls_std::Long> getValue();
+      void setValue(const std::shared_ptr<ls_std::Long>& _value);
 
     private:
 

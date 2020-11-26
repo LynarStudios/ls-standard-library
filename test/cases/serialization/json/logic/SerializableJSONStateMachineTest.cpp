@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-10-29
+ * Changed:         2020-11-26
  *
  * */
 
@@ -96,5 +96,23 @@ namespace {
     state = x->getStates().at("E");
     ASSERT_STREQ("E", state->getId().c_str());
     ASSERT_TRUE(state->getConnectedStates().empty());
+  }
+
+  TEST_F(SerializableJSONStateMachineTest, getValue)
+  {
+    std::shared_ptr<ls_std::StateMachine> x = std::make_shared<ls_std::StateMachine>("bla");
+    ls_std::SerializableJSONStateMachine serializable {x};
+    ASSERT_TRUE(serializable.getValue() == x);
+  }
+
+  TEST_F(SerializableJSONStateMachineTest, setValue)
+  {
+    std::shared_ptr<ls_std::StateMachine> x = std::make_shared<ls_std::StateMachine>("bla");
+    ls_std::SerializableJSONStateMachine serializable {x};
+    ASSERT_TRUE(serializable.getValue() == x);
+
+    x = std::make_shared<ls_std::StateMachine>("bla2");
+    serializable.setValue(x);
+    ASSERT_TRUE(serializable.getValue() == x);
   }
 }
