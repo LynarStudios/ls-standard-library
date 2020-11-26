@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls_std {
 
       explicit Boolean(bool _value);
       Boolean();
-      ~Boolean() = default;
+      ~Boolean() override = default;
 
       // conversion operator
 

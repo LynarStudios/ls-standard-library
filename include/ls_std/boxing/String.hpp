@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls_std {
 
       String();
       explicit String(std::string _value);
-      ~String() = default;
+      ~String() override = default;
 
       // conversion operator
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std {
 
       explicit LogLevel(const ls_std::LogLevelValue& _value);
       LogLevel();
-      ~LogLevel() = default;
+      ~LogLevel() override = default;
 
       operator unsigned char() const;
       LogLevel& operator=(const ls_std::LogLevelValue& _value);

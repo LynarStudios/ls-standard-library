@@ -19,7 +19,7 @@ namespace ls_std {
     public:
 
       explicit FileWriter(File& _file);
-      ~FileWriter() = default;
+      ~FileWriter() override = default;
 
       void reset(File& _file);
       bool write(const ls_std::byte_field& _data) override;

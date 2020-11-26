@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls_std {
     public:
 
       explicit SerializableJSONFloat(const std::shared_ptr<ls_std::Float>& _value);
-      ~SerializableJSONFloat() = default;
+      ~SerializableJSONFloat() override = default;
 
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;

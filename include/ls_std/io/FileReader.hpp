@@ -19,7 +19,7 @@ namespace ls_std {
     public:
 
       explicit FileReader(File& _file);
-      ~FileReader() = default;
+      ~FileReader() override = default;
 
       ls_std::byte_field read() override;
       void reset(File& _file);

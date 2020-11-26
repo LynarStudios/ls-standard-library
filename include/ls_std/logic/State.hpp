@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls_std {
     public:
 
       explicit State(StateId _id);
-      ~State() = default;
+      ~State() override = default;
 
       bool addStateConnection(const StateConnectionId& _connectionId, const std::shared_ptr<State>& _connectedState);
       bool addStateConnection(const std::shared_ptr<StateConnection>& _connection);

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std {
     public:
 
       XMLDocument();
-      ~XMLDocument() = default;
+      ~XMLDocument() override = default;
 
       std::shared_ptr<ls_std::XMLDeclaration> getDeclaration();
       std::shared_ptr<ls_std::XMLNode> getRootElement();

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls_std {
     public:
 
       explicit SerializableJSONStateMachine(const std::shared_ptr<StateMachine>& _value);
-      ~SerializableJSONStateMachine() = default;
+      ~SerializableJSONStateMachine() override = default;
 
       ls_std::byte_field marshal() override;
       void unmarshal(const ls_std::byte_field& _data) override;
