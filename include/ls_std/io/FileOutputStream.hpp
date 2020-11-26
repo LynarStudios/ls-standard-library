@@ -19,8 +19,8 @@ namespace ls_std {
   class FileOutputStream : public Class, public IWriter {
     public:
 
-      explicit FileOutputStream(File& _file);
-      explicit FileOutputStream(File& _file, bool _append);
+      explicit FileOutputStream(ls_std::File& _file);
+      explicit FileOutputStream(ls_std::File& _file, bool _append);
       ~FileOutputStream() override;
 
       void close();
@@ -29,7 +29,7 @@ namespace ls_std {
     private:
 
       bool append {};
-      File file;
+      ls_std::File file;
       std::ofstream outputStream {};
 
       void _close();

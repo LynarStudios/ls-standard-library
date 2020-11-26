@@ -12,7 +12,7 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONStateMachine::SerializableJSONStateMachine(const std::shared_ptr<ls_std::StateMachine>& _value) :
-Class("SerializableJSONStateMachine")
+ls_std::Class("SerializableJSONStateMachine")
 {
   this->_assignValue(_value);
 }

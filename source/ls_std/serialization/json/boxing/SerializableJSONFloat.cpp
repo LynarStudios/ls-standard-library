@@ -11,7 +11,7 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONFloat::SerializableJSONFloat(const std::shared_ptr<ls_std::Float>& _value) :
-Class("SerializableJSONFloat")
+ls_std::Class("SerializableJSONFloat")
 {
   this->_assignValue(_value);
 }

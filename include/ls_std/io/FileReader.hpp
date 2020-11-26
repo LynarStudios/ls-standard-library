@@ -18,17 +18,17 @@ namespace ls_std {
   class FileReader : public Class, public IReader {
     public:
 
-      explicit FileReader(File& _file);
+      explicit FileReader(ls_std::File& _file);
       ~FileReader() override = default;
 
       ls_std::byte_field read() override;
-      void reset(File& _file);
+      void reset(ls_std::File& _file);
 
     private:
 
-      File file;
+      ls_std::File file;
 
-      static void _init(File &_file);
+      static void _init(ls_std::File &_file);
   };
 }
 

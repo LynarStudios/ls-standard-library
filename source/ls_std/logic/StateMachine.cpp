@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <ls_std/logic/StateMachine.hpp>
 
 ls_std::StateMachine::StateMachine(std::string _name) :
-Class("StateMachine"),
+ls_std::Class("StateMachine"),
 name(std::move(_name))
 {}
 
-bool ls_std::StateMachine::addState(const std::shared_ptr<State>& _state) {
+bool ls_std::StateMachine::addState(const std::shared_ptr<ls_std::State>& _state) {
   bool condition = !this->_hasState(_state->getId());
 
   if(condition) {
@@ -42,7 +42,7 @@ std::unordered_map<ls_std::StateId, std::shared_ptr<ls_std::State>> ls_std::Stat
   return this->states;
 }
 
-bool ls_std::StateMachine::hasState(const StateId &_id)
+bool ls_std::StateMachine::hasState(const ls_std::StateId &_id)
 {
   return this->_hasState(_id);
 }

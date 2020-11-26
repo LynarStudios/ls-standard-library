@@ -30,58 +30,58 @@ namespace ls_std {
 
       // assignment operators
 
-      Integer& operator=(int _value);
+      ls_std::Integer& operator=(int _value);
 
       // arithmetic operators
 
       int operator-() const;
-      int operator+(const Integer& _integer) const;
+      int operator+(const ls_std::Integer& _integer) const;
       int operator+(int _value) const;
-      int operator*(const Integer& _integer) const;
+      int operator*(const ls_std::Integer& _integer) const;
       int operator*(int _value) const;
-      int operator-(const Integer& _integer) const;
+      int operator-(const ls_std::Integer& _integer) const;
       int operator-(int _value) const;
-      int operator/(const Integer& _integer) const;
+      int operator/(const ls_std::Integer& _integer) const;
       int operator/(int _value) const;
-      int operator%(const Integer& _integer) const;
+      int operator%(const ls_std::Integer& _integer) const;
       int operator%(int _value) const;
 
       // compound operators
 
-      Integer& operator+=(const Integer& _integer);
-      Integer& operator+=(int _value);
-      Integer& operator-=(const Integer& _integer);
-      Integer& operator-=(int _value);
-      Integer& operator*=(const Integer& _integer);
-      Integer& operator*=(int _value);
-      Integer& operator/=(const Integer& _integer);
-      Integer& operator/=(int _value);
+      ls_std::Integer& operator+=(const ls_std::Integer& _integer);
+      ls_std::Integer& operator+=(int _value);
+      ls_std::Integer& operator-=(const ls_std::Integer& _integer);
+      ls_std::Integer& operator-=(int _value);
+      ls_std::Integer& operator*=(const ls_std::Integer& _integer);
+      ls_std::Integer& operator*=(int _value);
+      ls_std::Integer& operator/=(const ls_std::Integer& _integer);
+      ls_std::Integer& operator/=(int _value);
 
       // comparison operators
 
-      bool operator==(const Integer& _integer) const;
+      bool operator==(const ls_std::Integer& _integer) const;
       bool operator==(int _value) const;
-      bool operator!=(const Integer& _integer) const;
+      bool operator!=(const ls_std::Integer& _integer) const;
       bool operator!=(int _value) const;
-      bool operator>(const Integer& _integer) const;
+      bool operator>(const ls_std::Integer& _integer) const;
       bool operator>(int _value) const;
-      bool operator>=(const Integer& _integer) const;
+      bool operator>=(const ls_std::Integer& _integer) const;
       bool operator>=(int _value) const;
-      bool operator<(const Integer& _integer) const;
+      bool operator<(const ls_std::Integer& _integer) const;
       bool operator<(int _value) const;
-      bool operator<=(const Integer& _integer) const;
+      bool operator<=(const ls_std::Integer& _integer) const;
       bool operator<=(int _value) const;
 
       // logical operators
 
-      friend bool operator!(const Integer& _integer) {
+      friend bool operator!(const ls_std::Integer& _integer) {
         return !_integer.value;
       }
 
-      bool operator&&(const Integer& _integer) const;
+      bool operator&&(const ls_std::Integer& _integer) const;
       bool operator&&(int _value) const;
       bool operator&&(bool _expression) const;
-      bool operator||(const Integer& _integer) const;
+      bool operator||(const ls_std::Integer& _integer) const;
       bool operator||(int _value) const;
       bool operator||(bool _expression) const;
 

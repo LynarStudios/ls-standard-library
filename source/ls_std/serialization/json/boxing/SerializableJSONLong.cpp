@@ -11,7 +11,7 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONLong::SerializableJSONLong(const std::shared_ptr<ls_std::Long>& _value) :
-Class("SerializableJSONLong")
+ls_std::Class("SerializableJSONLong")
 {
   this->_assignValue(_value);
 }

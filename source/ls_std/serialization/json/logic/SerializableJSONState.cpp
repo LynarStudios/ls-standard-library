@@ -11,8 +11,8 @@
 #include <ls_std/serialization/logic/SerializableJSONStateConnection.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONState::SerializableJSONState(const std::shared_ptr<State>& _value) :
-Class("SerializableJSONState")
+ls_std::SerializableJSONState::SerializableJSONState(const std::shared_ptr<ls_std::State>& _value) :
+ls_std::Class("SerializableJSONState")
 {
   this->_assignValue(_value);
 }

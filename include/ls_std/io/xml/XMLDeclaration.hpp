@@ -34,7 +34,7 @@ namespace ls_std {
       ls_std::XMLAttribute standalone {"standalone"};
       ls_std::XMLAttribute version {"version"};
 
-      static std::string _toXMLAttribute(XMLAttribute _attribute);
+      static std::string _toXMLAttribute(ls_std::XMLAttribute _attribute);
   };
 }
 

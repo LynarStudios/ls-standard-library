@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <regex>
 #include <ls_std/base/Version.hpp>
 
-ls_std::Version::Version(version_type _majorVersion, version_type _minorVersion, version_type _patchVersion) :
+ls_std::Version::Version(ls_std::version_type _majorVersion, ls_std::version_type _minorVersion, ls_std::version_type _patchVersion) :
 majorVersion(_majorVersion),
 minorVersion(_minorVersion),
 patchVersion(_patchVersion)
@@ -68,17 +68,17 @@ bool ls_std::Version::isValid(const std::string &_versionString)
   return ls_std::Version::_isValid(_versionString);
 }
 
-void ls_std::Version::setMajorVersion(version_type _major)
+void ls_std::Version::setMajorVersion(ls_std::version_type _major)
 {
   this->majorVersion = _major;
 }
 
-void ls_std::Version::setMinorVersion(version_type _minor)
+void ls_std::Version::setMinorVersion(ls_std::version_type _minor)
 {
   this->minorVersion = _minor;
 }
 
-void ls_std::Version::setPatchVersion(version_type _patch)
+void ls_std::Version::setPatchVersion(ls_std::version_type _patch)
 {
   this->patchVersion = _patch;
 }

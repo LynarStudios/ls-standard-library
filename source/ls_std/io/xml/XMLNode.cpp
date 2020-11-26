@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <ls_std/io/xml/XMLNode.hpp>
 #include <ls_std/utils/STLUtils.hpp>
 
-ls_std::XMLNode::XMLNode(std::string _name) : Class("XMLNode"),
+ls_std::XMLNode::XMLNode(std::string _name) : ls_std::Class("XMLNode"),
 name(std::move(_name))
 {}
 
@@ -118,7 +118,7 @@ bool ls_std::XMLNode::addChildBefore(const std::shared_ptr<ls_std::XMLNode>& _ch
   return added;
 }
 
-bool ls_std::XMLNode::addChildToBeginning(const std::shared_ptr<XMLNode> &_child)
+bool ls_std::XMLNode::addChildToBeginning(const std::shared_ptr<ls_std::XMLNode> &_child)
 {
   bool added {};
 
@@ -130,7 +130,7 @@ bool ls_std::XMLNode::addChildToBeginning(const std::shared_ptr<XMLNode> &_child
   return added;
 }
 
-bool ls_std::XMLNode::addChildToEnd(const std::shared_ptr<XMLNode>& _child)
+bool ls_std::XMLNode::addChildToEnd(const std::shared_ptr<ls_std::XMLNode>& _child)
 {
   bool added {};
 
@@ -190,7 +190,7 @@ bool ls_std::XMLNode::hasChild(const std::string &_name)
   return this->_hasChild(_name);
 }
 
-bool ls_std::XMLNode::hasChild(const std::shared_ptr<XMLNode> &_child)
+bool ls_std::XMLNode::hasChild(const std::shared_ptr<ls_std::XMLNode> &_child)
 {
   return this->_hasChild(_child);
 }

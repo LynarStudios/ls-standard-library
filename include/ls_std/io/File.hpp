@@ -34,8 +34,8 @@ namespace ls_std {
 
       // comparison operators
 
-      bool operator==(File& _file);
-      bool operator!=(File& _file);
+      bool operator==(ls_std::File& _file);
+      bool operator!=(ls_std::File& _file);
 
       // additional functionality
 
@@ -69,7 +69,7 @@ namespace ls_std {
       #ifdef _WIN32
         static void _addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list);
       #endif
-      static bool _equals(File& _file, File& _foreignFile);
+      static bool _equals(ls_std::File& _file, ls_std::File& _foreignFile);
       static bool _exists(const std::string& _path);
       static std::string _getParent(const std::string& _path);
       static bool _isDirectory(const std::string& _path);

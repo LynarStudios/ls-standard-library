@@ -11,7 +11,7 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONInteger::SerializableJSONInteger(const std::shared_ptr<ls_std::Integer>& _value) :
-Class("SerializableJSONInteger")
+ls_std::Class("SerializableJSONInteger")
 {
   this->_assignValue(_value);
 }

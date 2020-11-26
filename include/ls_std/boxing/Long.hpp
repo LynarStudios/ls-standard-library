@@ -31,58 +31,58 @@ namespace ls_std {
 
       // assignment operators
 
-      Long& operator=(ls_std::long_type _value);
+      ls_std::Long& operator=(ls_std::long_type _value);
 
       // arithmetic operators
 
       ls_std::long_type operator-() const;
-      ls_std::long_type operator+(const Long& _long) const;
+      ls_std::long_type operator+(const ls_std::Long& _long) const;
       ls_std::long_type operator+(ls_std::long_type _value) const;
-      ls_std::long_type operator*(const Long& _long) const;
+      ls_std::long_type operator*(const ls_std::Long& _long) const;
       ls_std::long_type operator*(ls_std::long_type _value) const;
-      ls_std::long_type operator-(const Long& _long) const;
+      ls_std::long_type operator-(const ls_std::Long& _long) const;
       ls_std::long_type operator-(ls_std::long_type _value) const;
-      ls_std::long_type operator/(const Long& _long) const;
+      ls_std::long_type operator/(const ls_std::Long& _long) const;
       ls_std::long_type operator/(ls_std::long_type _value) const;
-      ls_std::long_type operator%(const Long& _long) const;
+      ls_std::long_type operator%(const ls_std::Long& _long) const;
       ls_std::long_type operator%(ls_std::long_type _value) const;
 
       // compound operators
 
-      Long& operator+=(const Long& _long);
-      Long& operator+=(ls_std::long_type _value);
-      Long& operator-=(const Long& _long);
-      Long& operator-=(ls_std::long_type _value);
-      Long& operator*=(const Long& _long);
-      Long& operator*=(ls_std::long_type _value);
-      Long& operator/=(const Long& _long);
-      Long& operator/=(ls_std::long_type _value);
+      ls_std::Long& operator+=(const ls_std::Long& _long);
+      ls_std::Long& operator+=(ls_std::long_type _value);
+      ls_std::Long& operator-=(const ls_std::Long& _long);
+      ls_std::Long& operator-=(ls_std::long_type _value);
+      ls_std::Long& operator*=(const ls_std::Long& _long);
+      ls_std::Long& operator*=(ls_std::long_type _value);
+      ls_std::Long& operator/=(const ls_std::Long& _long);
+      ls_std::Long& operator/=(ls_std::long_type _value);
 
       // comparison operators
 
-      bool operator==(const Long& _long) const;
+      bool operator==(const ls_std::Long& _long) const;
       bool operator==(ls_std::long_type _value) const;
-      bool operator!=(const Long& _long) const;
+      bool operator!=(const ls_std::Long& _long) const;
       bool operator!=(ls_std::long_type _value) const;
-      bool operator>(const Long& _long) const;
+      bool operator>(const ls_std::Long& _long) const;
       bool operator>(ls_std::long_type _value) const;
-      bool operator>=(const Long& _long) const;
+      bool operator>=(const ls_std::Long& _long) const;
       bool operator>=(ls_std::long_type _value) const;
-      bool operator<(const Long& _long) const;
+      bool operator<(const ls_std::Long& _long) const;
       bool operator<(ls_std::long_type _value) const;
-      bool operator<=(const Long& _long) const;
+      bool operator<=(const ls_std::Long& _long) const;
       bool operator<=(ls_std::long_type _value) const;
 
       // logical operators
 
-      friend bool operator!(const Long& _long) {
+      friend bool operator!(const ls_std::Long& _long) {
         return !_long.value;
       }
 
-      bool operator&&(const Long& _long) const;
+      bool operator&&(const ls_std::Long& _long) const;
       bool operator&&(ls_std::long_type _value) const;
       bool operator&&(bool _expression) const;
-      bool operator||(const Long& _long) const;
+      bool operator||(const ls_std::Long& _long) const;
       bool operator||(ls_std::long_type _value) const;
       bool operator||(bool _expression) const;
 

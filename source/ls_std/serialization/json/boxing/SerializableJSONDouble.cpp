@@ -11,7 +11,7 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONDouble::SerializableJSONDouble(const std::shared_ptr<ls_std::Double>& _value) :
-Class("SerializableJSONDouble")
+ls_std::Class("SerializableJSONDouble")
 {
   this->_assignValue(_value);
 }

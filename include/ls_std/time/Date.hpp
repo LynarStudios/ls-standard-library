@@ -22,13 +22,13 @@ namespace ls_std {
 
       // arithmetic operators
 
-      Date& operator+(int _value);
-      Date& operator-(int _value);
+      ls_std::Date& operator+(int _value);
+      ls_std::Date& operator-(int _value);
 
       // additional functionality
 
-      bool after(const Date& _foreignDate) const;
-      bool before(const Date& _foreignDate) const;
+      bool after(const ls_std::Date& _foreignDate) const;
+      bool before(const ls_std::Date& _foreignDate) const;
       int getDay();
       int getHour();
       int getMinute();

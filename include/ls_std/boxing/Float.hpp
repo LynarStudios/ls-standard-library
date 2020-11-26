@@ -30,44 +30,44 @@ namespace ls_std {
 
       // assignment operators
 
-      Float& operator=(float _value);
+      ls_std::Float& operator=(float _value);
 
       // arithmetic operators
 
       float operator-() const;
-      float operator+(const Float& _float) const;
+      float operator+(const ls_std::Float& _float) const;
       float operator+(float _value) const;
-      float operator*(const Float& _float) const;
+      float operator*(const ls_std::Float& _float) const;
       float operator*(float _value) const;
-      float operator-(const Float& _float) const;
+      float operator-(const ls_std::Float& _float) const;
       float operator-(float _value) const;
-      float operator/(const Float& _float) const;
+      float operator/(const ls_std::Float& _float) const;
       float operator/(float _value) const;
 
       // compound operators
 
-      Float& operator+=(const Float& _float);
-      Float& operator+=(float _value);
-      Float& operator-=(const Float& _float);
-      Float& operator-=(float _value);
-      Float& operator*=(const Float& _float);
-      Float& operator*=(float _value);
-      Float& operator/=(const Float& _float);
-      Float& operator/=(float _value);
+      ls_std::Float& operator+=(const ls_std::Float& _float);
+      ls_std::Float& operator+=(float _value);
+      ls_std::Float& operator-=(const ls_std::Float& _float);
+      ls_std::Float& operator-=(float _value);
+      ls_std::Float& operator*=(const ls_std::Float& _float);
+      ls_std::Float& operator*=(float _value);
+      ls_std::Float& operator/=(const ls_std::Float& _float);
+      ls_std::Float& operator/=(float _value);
 
       // comparison operators
 
-      bool operator==(const Float& _float) const;
+      bool operator==(const ls_std::Float& _float) const;
       bool operator==(float _value) const;
-      bool operator!=(const Float& _float) const;
+      bool operator!=(const ls_std::Float& _float) const;
       bool operator!=(float _value) const;
-      bool operator>(const Float& _float) const;
+      bool operator>(const ls_std::Float& _float) const;
       bool operator>(float _value) const;
-      bool operator>=(const Float& _float) const;
+      bool operator>=(const ls_std::Float& _float) const;
       bool operator>=(float _value) const;
-      bool operator<(const Float& _float) const;
+      bool operator<(const ls_std::Float& _float) const;
       bool operator<(float _value) const;
-      bool operator<=(const Float& _float) const;
+      bool operator<=(const ls_std::Float& _float) const;
       bool operator<=(float _value) const;
 
       // increment / decrement operator

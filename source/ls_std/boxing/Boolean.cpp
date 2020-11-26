@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -11,10 +11,10 @@
 #include <ls_std/boxing/Boolean.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::Boolean::Boolean() : Class("Boolean")
+ls_std::Boolean::Boolean() : ls_std::Class("Boolean")
 {}
 
-ls_std::Boolean::Boolean(bool _value) : Class("Boolean"),
+ls_std::Boolean::Boolean(bool _value) : ls_std::Class("Boolean"),
 value(_value)
 {}
 
@@ -35,7 +35,7 @@ ls_std::Boolean & ls_std::Boolean::operator=(bool _value)
   return *this;
 }
 
-bool ls_std::Boolean::operator&&(const Boolean &_boolean) const
+bool ls_std::Boolean::operator&&(const ls_std::Boolean &_boolean) const
 {
   return this->value && _boolean;
 }
@@ -50,7 +50,7 @@ bool ls_std::Boolean::operator&&(int _value) const
   return this->value && _value;
 }
 
-bool ls_std::Boolean::operator||(const Boolean &_boolean) const
+bool ls_std::Boolean::operator||(const ls_std::Boolean &_boolean) const
 {
   return this->value || _boolean;
 }
@@ -136,15 +136,15 @@ void ls_std::Boolean::setStorable(std::shared_ptr<IStorable> _storable) {
   this->storable = std::move(_storable);
 }
 
-bool ls_std::Boolean::XOR(const Boolean &_leftExpression, const Boolean &_rightExpression) {
+bool ls_std::Boolean::XOR(const ls_std::Boolean &_leftExpression, const ls_std::Boolean &_rightExpression) {
   return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
 }
 
-bool ls_std::Boolean::XOR(const Boolean &_leftExpression, bool _rightExpression) {
+bool ls_std::Boolean::XOR(const ls_std::Boolean &_leftExpression, bool _rightExpression) {
   return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
 }
 
-bool ls_std::Boolean::XOR(bool _leftExpression, const Boolean &_rightExpression) {
+bool ls_std::Boolean::XOR(bool _leftExpression, const ls_std::Boolean &_rightExpression) {
   return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
 }
 

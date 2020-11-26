@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -11,13 +11,13 @@
 #include <ls_std/exception/FileNotFoundException.hpp>
 #include <ls_std/exception/FileOperationException.hpp>
 
-ls_std::FileOutputStream::FileOutputStream(File &_file) : Class("FileOutputStream"),
+ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file) : ls_std::Class("FileOutputStream"),
 file(_file)
 {
   this->_init();
 }
 
-ls_std::FileOutputStream::FileOutputStream(File &_file, bool _append) : Class("FileOutputStream"),
+ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file, bool _append) : ls_std::Class("FileOutputStream"),
 append(_append),
 file(_file)
 {

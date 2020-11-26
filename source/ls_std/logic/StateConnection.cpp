@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <ls_std/logic/StateConnection.hpp>
 
 ls_std::StateConnection::StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId) :
-Class("StateConnection"),
+ls_std::Class("StateConnection"),
 connectionId(std::move(_connectionId)),
 stateId(std::move(_stateId))
 {}
@@ -27,12 +27,12 @@ bool ls_std::StateConnection::isPassable() const {
   return this->condition;
 }
 
-void ls_std::StateConnection::setConnectionId(StateConnectionId _connectionId)
+void ls_std::StateConnection::setConnectionId(ls_std::StateConnectionId _connectionId)
 {
   this->connectionId = std::move(_connectionId);
 }
 
-void ls_std::StateConnection::setStateId(StateId _stateId)
+void ls_std::StateConnection::setStateId(ls_std::StateId _stateId)
 {
   this->stateId = std::move(_stateId);
 }

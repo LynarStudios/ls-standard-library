@@ -11,7 +11,7 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONBoolean::SerializableJSONBoolean(const std::shared_ptr<ls_std::Boolean>& _value) :
-Class("SerializableJSONBoolean")
+ls_std::Class("SerializableJSONBoolean")
 {
   this->_assignValue(_value);
 }

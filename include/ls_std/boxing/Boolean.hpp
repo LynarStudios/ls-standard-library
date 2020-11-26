@@ -30,26 +30,26 @@ namespace ls_std {
 
       // assignment operators
 
-      Boolean& operator=(int _value);
-      Boolean& operator=(bool _value);
+      ls_std::Boolean& operator=(int _value);
+      ls_std::Boolean& operator=(bool _value);
 
       // stream operators
 
-      friend std::ostream& operator<<(std::ostream& _outputStream, const Boolean& _boolean) {
+      friend std::ostream& operator<<(std::ostream& _outputStream, const ls_std::Boolean& _boolean) {
         _outputStream << _boolean._toString();
         return _outputStream;
       }
 
       // logical operators
 
-      friend bool operator!(const Boolean& _boolean) {
+      friend bool operator!(const ls_std::Boolean& _boolean) {
         return !_boolean.value;
       }
 
-      bool operator&&(const Boolean& _boolean) const;
+      bool operator&&(const ls_std::Boolean& _boolean) const;
       bool operator&&(bool _value) const;
       bool operator&&(int _value) const;
-      bool operator||(const Boolean& _boolean) const;
+      bool operator||(const ls_std::Boolean& _boolean) const;
       bool operator||(bool _value) const;
       bool operator||(int _value) const;
       // INFO: operator ^ can not be taken for XOR, since it's not possible to implement it respecting commutative law
@@ -68,9 +68,9 @@ namespace ls_std {
       bool getValue() const;
       void setSerializable(std::shared_ptr<ISerializable> _serializable);
       void setStorable(std::shared_ptr<IStorable> _storable);
-      static bool XOR(const Boolean& _leftExpression, const Boolean& _rightExpression);
-      static bool XOR(const Boolean& _leftExpression, bool _rightExpression);
-      static bool XOR(bool _leftExpression, const Boolean& _rightExpression);
+      static bool XOR(const ls_std::Boolean& _leftExpression, const ls_std::Boolean& _rightExpression);
+      static bool XOR(const ls_std::Boolean& _leftExpression, bool _rightExpression);
+      static bool XOR(bool _leftExpression, const ls_std::Boolean& _rightExpression);
       static bool XOR(bool _leftExpression, bool _rightExpression);
 
     private:

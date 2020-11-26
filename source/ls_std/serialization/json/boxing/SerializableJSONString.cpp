@@ -11,7 +11,7 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONString::SerializableJSONString(const std::shared_ptr<ls_std::String>& _value) :
-Class("SerializableJSONString")
+ls_std::Class("SerializableJSONString")
 {
   this->_assignValue(_value);
 }

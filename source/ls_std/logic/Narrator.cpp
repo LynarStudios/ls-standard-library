@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2020-11-14
+ * Changed:         2020-11-26
  *
  * */
 
 #include <ls_std/utils/STLUtils.hpp>
 #include "../../../include/ls_std/logic/Narrator.hpp"
 
-ls_std::Narrator::Narrator() : Class("Narrator")
+ls_std::Narrator::Narrator() : ls_std::Class("Narrator")
 {}
 
 void ls_std::Narrator::addListener(const std::shared_ptr<ls_std::IListener>& _listener)
