@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -15,7 +15,7 @@
 #include "File.hpp"
 
 namespace ls_std {
-  class FileWriter : public Class, IWriter {
+  class FileWriter : public Class, public IWriter {
     public:
 
       explicit FileWriter(File& _file);

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -15,7 +15,7 @@
 #include "IReader.hpp"
 
 namespace ls_std {
-  class FileReader : public Class, IReader {
+  class FileReader : public Class, public IReader {
     public:
 
       explicit FileReader(File& _file);
