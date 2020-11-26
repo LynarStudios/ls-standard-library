@@ -2,7 +2,7 @@
  * Author:          Patrick-Christopher Mattulat
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
- * Created:         2020-10-10
+ * Created:         2020-11-26
  * Changed:         2020-11-26
  *
  * */
@@ -12,34 +12,42 @@
 #include "../../../TestHelper.hpp"
 
 namespace {
-  class XMLReaderTest : public ::testing::Test {
+  class XMLParserTest : public ::testing::Test {
     protected:
 
-      XMLReaderTest() = default;
-      ~XMLReaderTest() override = default;
+      XMLParserTest() = default;
+      ~XMLParserTest() override = default;
+
+      static ls_std::byte_field readXMLStateMachine() {
+        std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+        ls_std::File file {xmlPath};
+        ls_std::byte_field data = ls_std::FileReader {file}.read();
+
+        return data;
+      }
 
       void SetUp() override {}
       void TearDown() override {}
   };
 
-  TEST_F(XMLReaderTest, read)
+  TEST_F(XMLParserTest, read)
   {
-    std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls_std::XMLReader xmlReader {std::make_shared<ls_std::XMLDocument>(), xmlPath};
+    ls_std::XMLParser xmlParser {std::make_shared<ls_std::XMLDocument>()};
     std::list<std::shared_ptr<ls_std::XMLNode>> children, statesChildren, memoryChildren, connectionChildren {};
     std::list<std::shared_ptr<ls_std::XMLAttribute>> attributes {};
 
-    ASSERT_TRUE(!xmlReader.read().empty());
+    ls_std::byte_field data = readXMLStateMachine();
+    xmlParser.parse(data);
 
     // check declaration
 
-    ASSERT_STREQ("UTF-8", xmlReader.getDocument()->getDeclaration()->getEncoding().c_str());
-    ASSERT_STREQ("1.0", xmlReader.getDocument()->getDeclaration()->getVersion().c_str());
-    ASSERT_TRUE(xmlReader.getDocument()->getDeclaration()->getStandalone().empty());
+    ASSERT_STREQ("UTF-8", xmlParser.getDocument()->getDeclaration()->getEncoding().c_str());
+    ASSERT_STREQ("1.0", xmlParser.getDocument()->getDeclaration()->getVersion().c_str());
+    ASSERT_TRUE(xmlParser.getDocument()->getDeclaration()->getStandalone().empty());
 
     // check root element
 
-    std::shared_ptr<ls_std::XMLNode> root = xmlReader.getDocument()->getRootElement();
+    std::shared_ptr<ls_std::XMLNode> root = xmlParser.getDocument()->getRootElement();
     ASSERT_STREQ("stateMachine", root->getName().c_str());
     ASSERT_STREQ("name", root->getAttributes().front()->getName().c_str());
     ASSERT_EQ(1, root->getAttributes().size());
@@ -189,33 +197,23 @@ namespace {
     ASSERT_TRUE(ls_std::STLUtils::getListElementAt(memoryChildren, 2)->getAttributes().empty());
   }
 
-  TEST_F(XMLReaderTest, getDocument)
+  TEST_F(XMLParserTest, getDocument)
   {
     std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls_std::XMLReader xmlReader {std::make_shared<ls_std::XMLDocument>(), xmlPath};
+    ls_std::XMLParser xmlParser {std::make_shared<ls_std::XMLDocument>()};
 
-    ASSERT_TRUE(xmlReader.getDocument() != nullptr);
+    ASSERT_TRUE(xmlParser.getDocument() != nullptr);
   }
 
-  TEST_F(XMLReaderTest, setDocument)
+  TEST_F(XMLParserTest, setDocument)
   {
     std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     std::shared_ptr<ls_std::XMLDocument> document = std::make_shared<ls_std::XMLDocument>();
-    ls_std::XMLReader xmlReader {document, xmlPath};
-    ASSERT_TRUE(xmlReader.getDocument() == document);
+    ls_std::XMLParser xmlParser {document};
+    ASSERT_TRUE(xmlParser.getDocument() == document);
 
-    document = std::make_shared<ls_std::XMLDocument>();
-    xmlReader.setDocument(document);
-    ASSERT_TRUE(xmlReader.getDocument() == document);
-  }
-
-  TEST_F(XMLReaderTest, setFile)
-  {
-    std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls_std::XMLReader xmlReader {std::make_shared<ls_std::XMLDocument>(), xmlPath};
-    ls_std::File xmlFile {xmlPath};
-    xmlReader.setFile(xmlFile);
-
-    ASSERT_TRUE(true);
+    document =std::make_shared<ls_std::XMLDocument>();
+    xmlParser.setDocument(document);
+    ASSERT_TRUE(xmlParser.getDocument() == document);
   }
 }

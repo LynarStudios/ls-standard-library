@@ -3,41 +3,41 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2020-10-18
+ * Changed:         2020-11-26
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/io/xml/XMLParserMock.hpp>
 
 namespace {
-  class XMLReaderMockTest : public ::testing::Test {
+  class XMLParserMockTest : public ::testing::Test {
     protected:
 
-      XMLReaderMockTest() = default;
-      ~XMLReaderMockTest() override = default;
+      XMLParserMockTest() = default;
+      ~XMLParserMockTest() override = default;
 
       void SetUp() override {}
       void TearDown() override {}
   };
 
-  TEST_F(XMLReaderMockTest, readAttribute)
+  TEST_F(XMLParserMockTest, readAttribute)
   {
-    std::pair<std::string, std::string> attribute = ls_std::XMLReaderMock::readAttribute(R"(name="tim")");
+    std::pair<std::string, std::string> attribute = ls_std::XMLParserMock::readAttribute(R"(name="tim")");
     ASSERT_TRUE(attribute.first == "name");
     ASSERT_TRUE(attribute.second == "tim");
 
-    attribute = ls_std::XMLReaderMock::readAttribute(R"(id="dialog_001")");
+    attribute = ls_std::XMLParserMock::readAttribute(R"(id="dialog_001")");
     ASSERT_TRUE(attribute.first == "id");
     ASSERT_TRUE(attribute.second == "dialog_001");
   }
 
-  TEST_F(XMLReaderMockTest, readAttributes)
+  TEST_F(XMLParserMockTest, readAttributes)
   {
     // first case
 
     std::string tag = R"(<?xml version="1.0" encoding="UTF-8" ?>)";
-    std::list<std::pair<std::string, std::string>> attributes = ls_std::XMLReaderMock::readAttributes(tag);
+    std::list<std::pair<std::string, std::string>> attributes = ls_std::XMLParserMock::readAttributes(tag);
 
     ASSERT_EQ(2, attributes.size());
 
@@ -52,7 +52,7 @@ namespace {
     // second case
 
     tag = R"(<stateMachine name="test_machine">)";
-    attributes = ls_std::XMLReaderMock::readAttributes(tag);
+    attributes = ls_std::XMLParserMock::readAttributes(tag);
 
     ASSERT_EQ(1, attributes.size());
 
