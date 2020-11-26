@@ -71,4 +71,7 @@
 #include "utils/RegexUtils.hpp"
 #include "utils/STLUtils.hpp"
 
+#include "event/Event.hpp"
+#include "event/EventTypes.hpp"
+
 #endif
