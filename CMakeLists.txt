@@ -22,6 +22,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 message("${PROJECT_NAME}: Adding include directories...")
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
@@ -75,7 +76,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/Narrator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/IListener.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -121,7 +123,13 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataMercedesCar.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/NarratorTest.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLParserTest.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/NewsAgency.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/DailyNewsAgency.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/SeriousNewsEvent.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsEvent.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp)
 
 ##########################################################
 # Build
