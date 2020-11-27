@@ -77,7 +77,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/IListener.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp)
 
 set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
@@ -129,7 +130,8 @@ set(TEST_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/SeriousNewsEvent.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsEvent.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp)
 
 ##########################################################
 # Build

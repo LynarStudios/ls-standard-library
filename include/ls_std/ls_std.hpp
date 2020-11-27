@@ -75,5 +75,6 @@
 #include "event/EventTypes.hpp"
 #include "event/EventHandler.hpp"
 #include "event/IEventSubscriber.hpp"
+#include "event/EventManager.hpp"
 
 #endif
