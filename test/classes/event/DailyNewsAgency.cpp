@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-27
+ * Changed:         2020-11-28
  *
  * */
 
@@ -36,14 +36,14 @@ void ls_std_test::DailyNewsAgency::subscribe(const ls_std::event_id &_id)
   // TODO: check event handler existence
 
 //  std::shared_ptr<ls_std_test::DailyNewsAgency> listener = this->shared_from_this();
-  this->eventHandlers.at(_id)->subscribe(this->shared_from_this());
+  this->eventHandlers.at(_id)->addListener(this->shared_from_this());
 }
 
 void ls_std_test::DailyNewsAgency::unsubscribe(const ls_std::event_id &_id)
 {
   // TODO: check event handler existence
 
-  this->eventHandlers.at(_id)->unsubscribe(this->shared_from_this());
+  this->eventHandlers.at(_id)->removeListener(this->shared_from_this());
 }
 
 void ls_std_test::DailyNewsAgency::addEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler)

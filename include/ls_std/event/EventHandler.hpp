@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-27
+ * Changed:         2020-11-28
  *
  * */
 
@@ -23,10 +23,10 @@ namespace ls_std {
       explicit EventHandler(ls_std::event_id  _id);
       ~EventHandler() override = default;
 
+      void addListener(const std::shared_ptr<ls_std::IListener>& _listener);
       ls_std::event_id getId();
       void notify(const ls_std::Event& _event);
-      void subscribe(const std::shared_ptr<ls_std::IListener>& _listener);
-      void unsubscribe(const std::shared_ptr<ls_std::IListener>& _listener);
+      void removeListener(const std::shared_ptr<ls_std::IListener>& _listener);
 
     private:
 

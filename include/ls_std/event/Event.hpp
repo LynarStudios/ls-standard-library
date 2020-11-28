@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2020-11-26
+ * Changed:         2020-11-28
  *
  * */
 
@@ -28,7 +28,7 @@ namespace ls_std {
     private:
 
       ls_std::event_id id {};
-      ls_std::event_parameter_list eventParameterList {};
+      ls_std::event_parameter_list parameterList {};
 
       bool _hasParameter(const ls_std::event_id&  _id);
   };

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2020-11-26
+ * Changed:         2020-11-28
  *
  * */
 
@@ -16,7 +16,7 @@ id(std::move(_id))
 void ls_std::Event::addParameter(const ls_std::event_parameter &_eventParameter)
 {
   if(!this->_hasParameter(_eventParameter.first)) {
-    this->eventParameterList.insert(_eventParameter);
+    this->parameterList.insert(_eventParameter);
   }
 }
 
@@ -27,17 +27,17 @@ ls_std::event_id ls_std::Event::getId()
 
 ls_std::event_parameter_list ls_std::Event::getParameterList()
 {
-  return this->eventParameterList;
+  return this->parameterList;
 }
 
 void ls_std::Event::removeParameter(const ls_std::event_id &_id)
 {
   if(this->_hasParameter(_id)) {
-    this->eventParameterList.erase(_id);
+    this->parameterList.erase(_id);
   }
 }
 
 bool ls_std::Event::_hasParameter(const ls_std::event_id &_id)
 {
-  return this->eventParameterList.find(_id) != this->eventParameterList.end();
+  return this->parameterList.find(_id) != this->parameterList.end();
 }
