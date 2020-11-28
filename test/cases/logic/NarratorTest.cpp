@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2020-11-14
+ * Changed:         2020-11-28
  *
  * */
 
@@ -68,26 +68,6 @@ namespace {
     ASSERT_TRUE(narrator.getListeners().empty());
   }
 
-  TEST_F(NarratorTest, notifyListeners)
-  {
-    this->createCars();
-    ls_std::Narrator paintingMachine {};
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3));
-
-    ASSERT_STREQ("pink", this->mercedes1->getColor().c_str());
-    ASSERT_STREQ("blue", this->mercedes2->getColor().c_str());
-    ASSERT_STREQ("red", this->mercedes3->getColor().c_str());
-
-    ls_std::String newColor {"black"};
-    paintingMachine.notifyListeners(static_cast<const ls_std::Class&>(newColor));
-
-    ASSERT_STREQ("black", this->mercedes1->getColor().c_str());
-    ASSERT_STREQ("black", this->mercedes2->getColor().c_str());
-    ASSERT_STREQ("black", this->mercedes3->getColor().c_str());
-  }
-
   TEST_F(NarratorTest, removeListener)
   {
     this->createCars();
@@ -108,5 +88,25 @@ namespace {
     paintingMachine.removeListener(nullptr);
     ASSERT_EQ(0, paintingMachine.getListeners().size());
     ASSERT_TRUE(paintingMachine.getListeners().empty());
+  }
+
+  TEST_F(NarratorTest, tell)
+  {
+    this->createCars();
+    ls_std::Narrator paintingMachine {};
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3));
+
+    ASSERT_STREQ("pink", this->mercedes1->getColor().c_str());
+    ASSERT_STREQ("blue", this->mercedes2->getColor().c_str());
+    ASSERT_STREQ("red", this->mercedes3->getColor().c_str());
+
+    ls_std::String newColor {"black"};
+    paintingMachine.tell(static_cast<const ls_std::Class &>(newColor));
+
+    ASSERT_STREQ("black", this->mercedes1->getColor().c_str());
+    ASSERT_STREQ("black", this->mercedes2->getColor().c_str());
+    ASSERT_STREQ("black", this->mercedes3->getColor().c_str());
   }
 }
