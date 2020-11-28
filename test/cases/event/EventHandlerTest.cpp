@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-27
+ * Changed:         2020-11-28
  *
  * */
 
@@ -24,12 +24,6 @@ namespace {
       void TearDown() override
       {}
   };
-
-  TEST_F(EventHandlerTest, getClassName)
-  {
-    ls_std::EventHandler eventHandler {"EventId"};
-    ASSERT_STREQ("EventHandler", eventHandler.getClassName().c_str());
-  }
 
   TEST_F(EventHandlerTest, getId)
   {
@@ -63,7 +57,7 @@ namespace {
 
     // fire SeriousNewsEvent event with no effect
 
-    seriousNewsEventHandler->notify(ls_std_test::SeriousNewsEvent(news)); // event call
+    seriousNewsEventHandler->tell(ls_std_test::SeriousNewsEvent(news)); // event call
     ASSERT_TRUE(dailyNews->getNews().empty());
     ASSERT_TRUE(gossipNews->getNews().empty());
 
@@ -72,7 +66,7 @@ namespace {
     dailyNews->subscribe(seriousNewsEventId);
     gossipNews->subscribe(seriousNewsEventId);
     news = "COVID-19 is still going on!";
-    seriousNewsEventHandler->notify(ls_std_test::SeriousNewsEvent(news)); // event call
+    seriousNewsEventHandler->tell(ls_std_test::SeriousNewsEvent(news)); // event call
 
     expectedNews = "DailyNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), dailyNews->getNews().c_str());
@@ -85,7 +79,7 @@ namespace {
     // unsubscribe SeriousNewsEvent from GossipNewsAgency
 
     gossipNews->unsubscribe(seriousNewsEventId);
-    seriousNewsEventHandler->notify(ls_std_test::SeriousNewsEvent(news)); // event call
+    seriousNewsEventHandler->tell(ls_std_test::SeriousNewsEvent(news)); // event call
 
     expectedNews = "DailyNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), dailyNews->getNews().c_str());
@@ -100,12 +94,12 @@ namespace {
     gossipNews->subscribe(seriousNewsEventId);
 
     news = "COVID-19 is still going on!";
-    seriousNewsEventHandler->notify(ls_std_test::SeriousNewsEvent(news));
+    seriousNewsEventHandler->tell(ls_std_test::SeriousNewsEvent(news));
     expectedNews = "GossipNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), gossipNews->getNews().c_str());
 
     news = "ape likes banana!";
-    seriousNewsEventHandler->notify(ls_std_test::GossipNewsEvent(news));
+    seriousNewsEventHandler->tell(ls_std_test::GossipNewsEvent(news));
     expectedNews = "GossipNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), gossipNews->getNews().c_str());
   }

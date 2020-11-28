@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-27
+ * Changed:         2020-11-28
  *
  * */
 
@@ -23,7 +23,7 @@ void ls_std::EventManager::addEventHandler(const std::shared_ptr<ls_std::EventHa
 void ls_std::EventManager::fire(ls_std::Event _event)
 {
   if(this->_hasEventHandler(_event.getId())) {
-    this->eventHandlers.at(_event.getId())->notify(_event);
+    this->eventHandlers.at(_event.getId())->tell(_event);
   }
 }
 
