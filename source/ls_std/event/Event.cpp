@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2020-11-28
+ * Changed:         2020-11-29
  *
  * */
 
@@ -30,7 +30,7 @@ ls_std::event_parameter_list ls_std::Event::getParameterList()
   return this->parameterList;
 }
 
-void ls_std::Event::removeParameter(const ls_std::event_id &_id)
+void ls_std::Event::removeParameter(const ls_std::event_parameter_id &_id)
 {
   if(this->_hasParameter(_id)) {
     this->parameterList.erase(_id);
