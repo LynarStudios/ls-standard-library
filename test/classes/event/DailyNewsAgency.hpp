@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-27
+ * Changed:         2020-11-29
  *
  * */
 
@@ -17,7 +17,7 @@
 #include "NewsAgency.hpp"
 
 namespace ls_std_test {
-  class DailyNewsAgency : public ls_std_test::NewsAgency, public ls_std::IEventSubscriber, public ls_std::IListener, public std::enable_shared_from_this<ls_std_test::DailyNewsAgency> {
+  class DailyNewsAgency : public ls_std_test::NewsAgency, public ls_std::IListener {
     public:
 
       DailyNewsAgency();
@@ -28,8 +28,6 @@ namespace ls_std_test {
       void clear();
       std::string getNews();
       void listen(const ls_std::Class& _info) override;
-      void subscribe(const ls_std::event_id& _id) override;
-      void unsubscribe(const ls_std::event_id& _id) override;
 
       // additional functionality
 

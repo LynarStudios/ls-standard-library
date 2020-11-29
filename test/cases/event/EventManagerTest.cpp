@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-27
+ * Changed:         2020-11-29
  *
  * */
 
@@ -69,8 +69,8 @@ namespace {
 
     // now subscribe to SeriousNewsEvent and fire SeriousNewsEvent event
 
-    dailyNews->subscribe(seriousNewsEventId);
-    gossipNews->subscribe(seriousNewsEventId);
+    eventManager->subscribe(seriousNewsEventId, dailyNews);
+    eventManager->subscribe(seriousNewsEventId, gossipNews);
     news = "COVID-19 is still going on!";
     eventManager->fire(ls_std_test::SeriousNewsEvent(news)); // event call
 
@@ -84,7 +84,7 @@ namespace {
 
     // unsubscribe SeriousNewsEvent from GossipNewsAgency
 
-    gossipNews->unsubscribe(seriousNewsEventId);
+    eventManager->unsubscribe(seriousNewsEventId, gossipNews);
     eventManager->fire(ls_std_test::SeriousNewsEvent(news)); // event call
 
     expectedNews = "DailyNewsAgency: " + news;
@@ -96,8 +96,8 @@ namespace {
 
     // now let GossipNewsAgency subscribe to SeriousNewsEvent + GossipNewsEvent and fire both of them
 
-    gossipNews->subscribe(gossipNewsEventId);
-    gossipNews->subscribe(seriousNewsEventId);
+    eventManager->subscribe(gossipNewsEventId, gossipNews);
+    eventManager->subscribe(seriousNewsEventId, gossipNews);
 
     news = "COVID-19 is still going on!";
     eventManager->fire(ls_std_test::SeriousNewsEvent(news)); // event call
