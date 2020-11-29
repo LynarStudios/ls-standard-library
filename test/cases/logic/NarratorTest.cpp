@@ -3,14 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2020-11-28
+ * Changed:         2020-11-29
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
-#include <ls_std/logic/Narrator.hpp>
-#include "../../classes/observer/TestDataMercedesCar.hpp"
+#include <classes/observer/TestDataMercedesCar.hpp>
 
 namespace {
   class NarratorTest : public ::testing::Test {

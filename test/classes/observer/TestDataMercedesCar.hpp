@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2020-11-14
+ * Changed:         2020-11-29
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_TEST_DATA_MERCEDES_CAR_HPP
 
 #include "TestDataCar.hpp"
-#include "../../../include/ls_std/logic/IListener.hpp"
+#include <ls_std/logic/IListener.hpp>
 
 namespace ls_std_test {
   class TestDataMercedesCar : public TestDataCar, public ls_std::IListener {

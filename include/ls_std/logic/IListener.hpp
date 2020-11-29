@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2020-11-26
+ * Changed:         2020-11-29
  *
  * */
 
 #ifndef LS_STD_I_LISTENER_HPP
 #define LS_STD_I_LISTENER_HPP
 
-#include "../base/Class.hpp"
+#include <ls_std/base/Class.hpp>
 
 namespace ls_std {
   class IListener : public Class {

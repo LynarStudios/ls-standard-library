@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-10-29
+ * Changed:         2020-11-29
  *
  * */
 
 #include <gtest/gtest.h>
-#include "../../TestHelper.hpp"
+#include <TestHelper.hpp>
 #include <ls_std/ls_std.hpp>
 
 namespace {
