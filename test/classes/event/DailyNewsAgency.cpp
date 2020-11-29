@@ -12,16 +12,6 @@
 ls_std_test::DailyNewsAgency::DailyNewsAgency() : ls_std_test::NewsAgency("DailyNewsAgency")
 {}
 
-void ls_std_test::DailyNewsAgency::clear()
-{
-  this->news.clear();
-}
-
-std::string ls_std_test::DailyNewsAgency::getNews()
-{
-  return this->news;
-}
-
 void ls_std_test::DailyNewsAgency::listen(const ls_std::Class &_info)
 {
   ls_std::Event event = dynamic_cast<const ls_std::Event&>(_info);
@@ -31,10 +21,12 @@ void ls_std_test::DailyNewsAgency::listen(const ls_std::Class &_info)
   }
 }
 
-void ls_std_test::DailyNewsAgency::addEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler)
+void ls_std_test::DailyNewsAgency::clear()
 {
-  // TODO: check event handler existence
+  this->news.clear();
+}
 
-  std::pair<ls_std::event_id, std::shared_ptr<ls_std::EventHandler>> entry = std::make_pair(_eventHandler->getId(), _eventHandler);
-  this->eventHandlers.insert(entry);
+std::string ls_std_test::DailyNewsAgency::getNews()
+{
+  return this->news;
 }

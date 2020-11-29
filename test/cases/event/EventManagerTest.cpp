@@ -42,7 +42,7 @@ namespace {
     std::shared_ptr<ls_std::EventHandler> seriousNewsEventHandler = std::make_shared<ls_std::EventHandler>(seriousNewsEventId);   // event id
     std::shared_ptr<ls_std::EventHandler> gossipNewsEventHandler = std::make_shared<ls_std::EventHandler>(gossipNewsEventId);     // event id
 
-    // create and fill event manger with handler
+    // create and fill event manager with handler
 
     std::shared_ptr<ls_std::EventManager> eventManager = std::make_shared<ls_std::EventManager>();
     eventManager->addEventHandler(seriousNewsEventHandler);
@@ -52,14 +52,6 @@ namespace {
 
     std::shared_ptr<ls_std_test::DailyNewsAgency> dailyNews = std::make_shared<ls_std_test::DailyNewsAgency>();
     std::shared_ptr<ls_std_test::GossipNewsAgency> gossipNews = std::make_shared<ls_std_test::GossipNewsAgency>();
-
-    // add handler of those events, every news agency should know
-    // this is how agencies know about events
-
-    dailyNews->addEventHandler(seriousNewsEventHandler);
-
-    gossipNews->addEventHandler(seriousNewsEventHandler);
-    gossipNews->addEventHandler(gossipNewsEventHandler);
 
     // fire SeriousNewsEvent event with no effect
 

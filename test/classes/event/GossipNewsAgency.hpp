@@ -25,17 +25,15 @@ namespace ls_std_test {
 
       // implementation
 
-      void clear();
-      std::string getNews();
       void listen(const ls_std::Class& _info) override;
 
       // additional functionality
 
-      void addEventHandler(const std::shared_ptr<ls_std::EventHandler>& _eventHandler);
+      void clear();
+      std::string getNews();
 
     private:
 
-      std::map<ls_std::event_id, std::shared_ptr<ls_std::EventHandler>> eventHandlers {};
       std::string news {};
   };
 }
