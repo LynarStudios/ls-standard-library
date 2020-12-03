@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -12,7 +12,7 @@
 #include <ls_std/exception/FileNotFoundException.hpp>
 #include <ls_std/exception/FileOperationException.hpp>
 
-ls_std::FileReader::FileReader(File &_file) : Class("FileReader"),
+ls_std::FileReader::FileReader(ls_std::File &_file) : ls_std::Class("FileReader"),
 file(_file)
 {
   ls_std::FileReader::_init(_file);
@@ -37,13 +37,13 @@ ls_std::byte_field ls_std::FileReader::read()
   return readData;
 }
 
-void ls_std::FileReader::reset(File &_file)
+void ls_std::FileReader::reset(ls_std::File &_file)
 {
   ls_std::FileReader::_init(_file);
   this->file = _file;
 }
 
-void ls_std::FileReader::_init(File &_file)
+void ls_std::FileReader::_init(ls_std::File &_file)
 {
   if(!_file.exists()) {
     throw ls_std::FileNotFoundException {};

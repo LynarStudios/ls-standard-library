@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -11,8 +11,8 @@
 #include <ls_std/serialization/logic/SerializableJSONStateConnection.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONState::SerializableJSONState(const std::shared_ptr<State>& _value) :
-Class("SerializableJSONState")
+ls_std::SerializableJSONState::SerializableJSONState(const std::shared_ptr<ls_std::State>& _value) :
+ls_std::Class("SerializableJSONState")
 {
   this->_assignValue(_value);
 }
@@ -31,13 +31,18 @@ void ls_std::SerializableJSONState::unmarshal(const ls_std::byte_field &_data)
   this->value->setId(this->jsonObject["id"]);
 }
 
-void ls_std::SerializableJSONState::setValue(const std::shared_ptr<State>& _value)
+std::shared_ptr<ls_std::State> ls_std::SerializableJSONState::getValue()
+{
+  return this->value;
+}
+
+void ls_std::SerializableJSONState::setValue(const std::shared_ptr<ls_std::State>& _value)
 {
   this->_assignValue(_value);
   this->_clear();
 }
 
-void ls_std::SerializableJSONState::_assignValue(const std::shared_ptr<State> &_value)
+void ls_std::SerializableJSONState::_assignValue(const std::shared_ptr<ls_std::State> &_value)
 {
   if(_value == nullptr) {
     throw ls_std::IllegalArgumentException {};

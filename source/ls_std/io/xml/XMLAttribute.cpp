@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <ls_std/io/xml/XMLAttribute.hpp>
 
-ls_std::XMLAttribute::XMLAttribute(std::string _name) : Class("XMLAttribute"),
+ls_std::XMLAttribute::XMLAttribute(std::string _name) : ls_std::Class("XMLAttribute"),
 name(std::move(_name))
 {}
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-10-29
+ * Changed:         2020-11-26
  *
  * */
 
@@ -39,5 +39,23 @@ namespace {
     serializable.unmarshal(R"({"value":3.14159})");
 
     ASSERT_FLOAT_EQ(3.14159f, *x);
+  }
+
+  TEST_F(SerializableJSONFloatTest, getValue)
+  {
+    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>(14.2234f);
+    ls_std::SerializableJSONFloat serializable {x};
+    ASSERT_TRUE(serializable.getValue() == x);
+  }
+
+  TEST_F(SerializableJSONFloatTest, setValue)
+  {
+    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>(14.2234f);
+    ls_std::SerializableJSONFloat serializable {x};
+    ASSERT_TRUE(serializable.getValue() == x);
+
+    x = std::make_shared<ls_std::Float>(3.134f);
+    serializable.setValue(x);
+    ASSERT_TRUE(serializable.getValue() == x);
   }
 }

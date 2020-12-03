@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/exception/NullPointerException.hpp>
 
-ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer) : Class("Logger"),
+ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer) : ls_std::Class("Logger"),
 logLevel(ls_std::LogLevelValue::INFO)
 {
   if(_writer == nullptr) {

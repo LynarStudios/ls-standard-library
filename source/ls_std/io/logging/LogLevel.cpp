@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <ls_std/io/logging/LogLevel.hpp>
 
-ls_std::LogLevel::LogLevel(const ls_std::LogLevelValue& _value) : Class("LogLevel"),
+ls_std::LogLevel::LogLevel(const ls_std::LogLevelValue& _value) : ls_std::Class("LogLevel"),
 value(_value)
 {
   this->_init();

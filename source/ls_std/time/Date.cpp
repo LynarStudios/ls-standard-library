@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -11,7 +11,7 @@
 #include <sstream>
 #include <ls_std/time/Date.hpp>
 
-ls_std::Date::Date() : Class("Date")
+ls_std::Date::Date() : ls_std::Class("Date")
 {
   this->timestamp = std::time(nullptr);
   this->_init();
@@ -27,11 +27,11 @@ ls_std::Date & ls_std::Date::operator-(int _value) {
   return *this;
 }
 
-bool ls_std::Date::after(const Date& _foreignDate) const {
+bool ls_std::Date::after(const ls_std::Date& _foreignDate) const {
   return this->timestamp > _foreignDate.getTime();
 }
 
-bool ls_std::Date::before(const Date& _foreignDate) const {
+bool ls_std::Date::before(const ls_std::Date& _foreignDate) const {
   return this->timestamp < _foreignDate.getTime();
 }
 

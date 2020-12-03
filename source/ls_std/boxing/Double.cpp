@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <cmath>
 #include <ls_std/boxing/Double.hpp>
 
-ls_std::Double::Double() : Class("Double"),
+ls_std::Double::Double() : ls_std::Class("Double"),
 epsilon(0.00000001)
 {}
 
-ls_std::Double::Double(double _value) : Class("Double"),
+ls_std::Double::Double(double _value) : ls_std::Class("Double"),
 epsilon(0.00000001),
 value(_value)
 {}
@@ -32,7 +32,7 @@ double ls_std::Double::operator-() const {
   return -this->value;
 }
 
-double ls_std::Double::operator+(const Double &_double) const {
+double ls_std::Double::operator+(const ls_std::Double &_double) const {
   return this->value + _double;
 }
 
@@ -40,7 +40,7 @@ double ls_std::Double::operator+(double _value) const {
   return this->value + _value;
 }
 
-double ls_std::Double::operator*(const Double &_double) const {
+double ls_std::Double::operator*(const ls_std::Double &_double) const {
   return this->value * _double;
 }
 
@@ -48,7 +48,7 @@ double ls_std::Double::operator*(double _value) const {
   return this->value * _value;
 }
 
-double ls_std::Double::operator-(const Double &_double) const {
+double ls_std::Double::operator-(const ls_std::Double &_double) const {
   return this->value - _double;
 }
 
@@ -56,7 +56,7 @@ double ls_std::Double::operator-(double _value) const {
   return this->value - _value;
 }
 
-double ls_std::Double::operator/(const Double &_double) const {
+double ls_std::Double::operator/(const ls_std::Double &_double) const {
   return this->value / _double;
 }
 
@@ -64,7 +64,7 @@ double ls_std::Double::operator/(double _value) const {
   return this->value / _value;
 }
 
-ls_std::Double & ls_std::Double::operator+=(const Double &_double) {
+ls_std::Double & ls_std::Double::operator+=(const ls_std::Double &_double) {
   this->value += _double;
   return *this;
 }
@@ -74,7 +74,7 @@ ls_std::Double & ls_std::Double::operator+=(double _value) {
   return *this;
 }
 
-ls_std::Double & ls_std::Double::operator-=(const Double &_double) {
+ls_std::Double & ls_std::Double::operator-=(const ls_std::Double &_double) {
   this->value -= _double;
   return *this;
 }
@@ -84,7 +84,7 @@ ls_std::Double & ls_std::Double::operator-=(double _value) {
   return *this;
 }
 
-ls_std::Double & ls_std::Double::operator*=(const Double &_double) {
+ls_std::Double & ls_std::Double::operator*=(const ls_std::Double &_double) {
   this->value *= _double;
   return *this;
 }
@@ -94,7 +94,7 @@ ls_std::Double & ls_std::Double::operator*=(double _value) {
   return *this;
 }
 
-ls_std::Double & ls_std::Double::operator/=(const Double &_double) {
+ls_std::Double & ls_std::Double::operator/=(const ls_std::Double &_double) {
   this->value /= _double;
   return *this;
 }
@@ -104,7 +104,7 @@ ls_std::Double & ls_std::Double::operator/=(double _value) {
   return *this;
 }
 
-bool ls_std::Double::operator==(const Double &_double) const {
+bool ls_std::Double::operator==(const ls_std::Double &_double) const {
   return std::fabs(this->value - _double) < this->epsilon;
 }
 
@@ -112,7 +112,7 @@ bool ls_std::Double::operator==(double _value) const {
   return std::fabs(this->value - _value) < this->epsilon;
 }
 
-bool ls_std::Double::operator!=(const Double &_double) const {
+bool ls_std::Double::operator!=(const ls_std::Double &_double) const {
   return std::fabs(this->value - _double) >= this->epsilon;
 }
 
@@ -120,7 +120,7 @@ bool ls_std::Double::operator!=(double _value) const {
   return std::fabs(this->value - _value) >= this->epsilon;
 }
 
-bool ls_std::Double::operator>(const Double &_double) const {
+bool ls_std::Double::operator>(const ls_std::Double &_double) const {
   return this->value > _double;
 }
 
@@ -128,7 +128,7 @@ bool ls_std::Double::operator>(double _value) const {
   return this->value > _value;
 }
 
-bool ls_std::Double::operator>=(const Double &_double) const {
+bool ls_std::Double::operator>=(const ls_std::Double &_double) const {
   return this->value >= _double;
 }
 
@@ -136,7 +136,7 @@ bool ls_std::Double::operator>=(double _value) const {
   return this->value >= _value;
 }
 
-bool ls_std::Double::operator<(const Double &_double) const {
+bool ls_std::Double::operator<(const ls_std::Double &_double) const {
   return this->value < _double;
 }
 
@@ -144,7 +144,7 @@ bool ls_std::Double::operator<(double _value) const {
   return this->value < _value;
 }
 
-bool ls_std::Double::operator<=(const Double &_double) const {
+bool ls_std::Double::operator<=(const ls_std::Double &_double) const {
   return this->value <= _double;
 }
 

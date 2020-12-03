@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-10-22
+ * Changed:         2020-11-29
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
-#include "../../../TestHelper.hpp"
+#include <TestHelper.hpp>
 
 namespace {
   class XMLReaderTest : public ::testing::Test {
@@ -195,6 +195,18 @@ namespace {
     ls_std::XMLReader xmlReader {std::make_shared<ls_std::XMLDocument>(), xmlPath};
 
     ASSERT_TRUE(xmlReader.getDocument() != nullptr);
+  }
+
+  TEST_F(XMLReaderTest, setDocument)
+  {
+    std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::shared_ptr<ls_std::XMLDocument> document = std::make_shared<ls_std::XMLDocument>();
+    ls_std::XMLReader xmlReader {document, xmlPath};
+    ASSERT_TRUE(xmlReader.getDocument() == document);
+
+    document = std::make_shared<ls_std::XMLDocument>();
+    xmlReader.setDocument(document);
+    ASSERT_TRUE(xmlReader.getDocument() == document);
   }
 
   TEST_F(XMLReaderTest, setFile)

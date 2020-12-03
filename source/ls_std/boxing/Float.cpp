@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <cmath>
 #include <ls_std/boxing/Float.hpp>
 
-ls_std::Float::Float() : Class("Float"),
+ls_std::Float::Float() : ls_std::Class("Float"),
 epsilon(0.00001f)
 {}
 
-ls_std::Float::Float(float _value) : Class("Float"),
+ls_std::Float::Float(float _value) : ls_std::Class("Float"),
 epsilon(0.00001f),
 value(_value)
 {}
@@ -32,7 +32,7 @@ float ls_std::Float::operator-() const {
   return -this->value;
 }
 
-float ls_std::Float::operator+(const Float &_float) const {
+float ls_std::Float::operator+(const ls_std::Float &_float) const {
   return this->value + _float;
 }
 
@@ -40,7 +40,7 @@ float ls_std::Float::operator+(float _value) const {
   return this->value + _value;
 }
 
-float ls_std::Float::operator*(const Float &_float) const {
+float ls_std::Float::operator*(const ls_std::Float &_float) const {
   return this->value * _float;
 }
 
@@ -48,7 +48,7 @@ float ls_std::Float::operator*(float _value) const {
   return this->value * _value;
 }
 
-float ls_std::Float::operator-(const Float &_float) const {
+float ls_std::Float::operator-(const ls_std::Float &_float) const {
   return this->value - _float;
 }
 
@@ -56,7 +56,7 @@ float ls_std::Float::operator-(float _value) const {
   return this->value - _value;
 }
 
-float ls_std::Float::operator/(const Float &_float) const {
+float ls_std::Float::operator/(const ls_std::Float &_float) const {
   return this->value / _float;
 }
 
@@ -64,7 +64,7 @@ float ls_std::Float::operator/(float _value) const {
   return this->value / _value;
 }
 
-ls_std::Float & ls_std::Float::operator+=(const Float &_float) {
+ls_std::Float & ls_std::Float::operator+=(const ls_std::Float &_float) {
   this->value += _float;
   return *this;
 }
@@ -74,7 +74,7 @@ ls_std::Float & ls_std::Float::operator+=(float _value) {
   return *this;
 }
 
-ls_std::Float & ls_std::Float::operator-=(const Float &_float) {
+ls_std::Float & ls_std::Float::operator-=(const ls_std::Float &_float) {
   this->value -= _float;
   return *this;
 }
@@ -84,7 +84,7 @@ ls_std::Float & ls_std::Float::operator-=(float _value) {
   return *this;
 }
 
-ls_std::Float & ls_std::Float::operator*=(const Float &_float) {
+ls_std::Float & ls_std::Float::operator*=(const ls_std::Float &_float) {
   this->value *= _float;
   return *this;
 }
@@ -94,7 +94,7 @@ ls_std::Float & ls_std::Float::operator*=(float _value) {
   return *this;
 }
 
-ls_std::Float & ls_std::Float::operator/=(const Float &_float) {
+ls_std::Float & ls_std::Float::operator/=(const ls_std::Float &_float) {
   this->value /= _float;
   return *this;
 }
@@ -104,7 +104,7 @@ ls_std::Float & ls_std::Float::operator/=(float _value) {
   return *this;
 }
 
-bool ls_std::Float::operator==(const Float &_float) const {
+bool ls_std::Float::operator==(const ls_std::Float &_float) const {
   return std::fabs(this->value - _float) < this->epsilon;
 }
 
@@ -112,7 +112,7 @@ bool ls_std::Float::operator==(float _value) const {
   return std::fabs(this->value - _value) < this->epsilon;
 }
 
-bool ls_std::Float::operator!=(const Float &_float) const {
+bool ls_std::Float::operator!=(const ls_std::Float &_float) const {
   return std::fabs(this->value - _float) >= this->epsilon;
 }
 
@@ -120,7 +120,7 @@ bool ls_std::Float::operator!=(float _value) const {
   return std::fabs(this->value - _value) >= this->epsilon;
 }
 
-bool ls_std::Float::operator>(const Float &_float) const {
+bool ls_std::Float::operator>(const ls_std::Float &_float) const {
   return this->value > _float;
 }
 
@@ -128,7 +128,7 @@ bool ls_std::Float::operator>(float _value) const {
   return this->value > _value;
 }
 
-bool ls_std::Float::operator>=(const Float &_float) const {
+bool ls_std::Float::operator>=(const ls_std::Float &_float) const {
   return this->value >= _float;
 }
 
@@ -136,7 +136,7 @@ bool ls_std::Float::operator>=(float _value) const {
   return this->value >= _value;
 }
 
-bool ls_std::Float::operator<(const Float &_float) const {
+bool ls_std::Float::operator<(const ls_std::Float &_float) const {
   return this->value < _float;
 }
 
@@ -144,7 +144,7 @@ bool ls_std::Float::operator<(float _value) const {
   return this->value < _value;
 }
 
-bool ls_std::Float::operator<=(const Float &_float) const {
+bool ls_std::Float::operator<=(const ls_std::Float &_float) const {
   return this->value <= _float;
 }
 

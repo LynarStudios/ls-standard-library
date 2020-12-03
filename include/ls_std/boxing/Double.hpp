@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls_std {
 
       Double();
       explicit Double(double _value);
-      ~Double() = default;
+      ~Double() override = default;
 
       // conversion operator
 
@@ -30,44 +30,44 @@ namespace ls_std {
 
       // assignment operators
 
-      Double& operator=(double _value);
+      ls_std::Double& operator=(double _value);
 
       // arithmetic operators
 
       double operator-() const;
-      double operator+(const Double& _double) const;
+      double operator+(const ls_std::Double& _double) const;
       double operator+(double _value) const;
-      double operator*(const Double& _double) const;
+      double operator*(const ls_std::Double& _double) const;
       double operator*(double _value) const;
-      double operator-(const Double& _double) const;
+      double operator-(const ls_std::Double& _double) const;
       double operator-(double _value) const;
-      double operator/(const Double& _double) const;
+      double operator/(const ls_std::Double& _double) const;
       double operator/(double _value) const;
 
       // compound operators
 
-      Double& operator+=(const Double& _double);
-      Double& operator+=(double _value);
-      Double& operator-=(const Double& _double);
-      Double& operator-=(double _value);
-      Double& operator*=(const Double& _double);
-      Double& operator*=(double _value);
-      Double& operator/=(const Double& _double);
-      Double& operator/=(double _value);
+      ls_std::Double& operator+=(const ls_std::Double& _double);
+      ls_std::Double& operator+=(double _value);
+      ls_std::Double& operator-=(const ls_std::Double& _double);
+      ls_std::Double& operator-=(double _value);
+      ls_std::Double& operator*=(const ls_std::Double& _double);
+      ls_std::Double& operator*=(double _value);
+      ls_std::Double& operator/=(const ls_std::Double& _double);
+      ls_std::Double& operator/=(double _value);
 
       // comparison operators
 
-      bool operator==(const Double& _double) const;
+      bool operator==(const ls_std::Double& _double) const;
       bool operator==(double _value) const;
-      bool operator!=(const Double& _double) const;
+      bool operator!=(const ls_std::Double& _double) const;
       bool operator!=(double _value) const;
-      bool operator>(const Double& _double) const;
+      bool operator>(const ls_std::Double& _double) const;
       bool operator>(double _value) const;
-      bool operator>=(const Double& _double) const;
+      bool operator>=(const ls_std::Double& _double) const;
       bool operator>=(double _value) const;
-      bool operator<(const Double& _double) const;
+      bool operator<(const ls_std::Double& _double) const;
       bool operator<(double _value) const;
-      bool operator<=(const Double& _double) const;
+      bool operator<=(const ls_std::Double& _double) const;
       bool operator<=(double _value) const;
 
       // increment / decrement operator

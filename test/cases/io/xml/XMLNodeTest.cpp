@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2020-09-26
+ * Changed:         2020-11-29
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
-#include "../../../TestDataFactory.hpp"
+#include <TestDataFactory.hpp>
 
 namespace {
   class XMLNodeTest : public ::testing::Test {

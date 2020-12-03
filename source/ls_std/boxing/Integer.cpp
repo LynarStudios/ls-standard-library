@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <ls_std/boxing/Integer.hpp>
 #include <ls_std/exception/IllegalArithmeticOperationException.hpp>
 
-ls_std::Integer::Integer(int _value) : Class("Integer"),
+ls_std::Integer::Integer(int _value) : ls_std::Class("Integer"),
 value(_value)
 {}
 
-ls_std::Integer::Integer() : Class("Integer")
+ls_std::Integer::Integer() : ls_std::Class("Integer")
 {}
 
 ls_std::Integer::operator int() const
@@ -33,7 +33,7 @@ int ls_std::Integer::operator-() const
   return -this->value;
 }
 
-int ls_std::Integer::operator+(const Integer &_integer) const
+int ls_std::Integer::operator+(const ls_std::Integer &_integer) const
 {
   return this->value + _integer;
 }
@@ -43,7 +43,7 @@ int ls_std::Integer::operator+(int _value) const
   return this->value + _value;
 }
 
-int ls_std::Integer::operator*(const Integer &_integer) const
+int ls_std::Integer::operator*(const ls_std::Integer &_integer) const
 {
   return this->value * _integer;
 }
@@ -53,7 +53,7 @@ int ls_std::Integer::operator*(int _value) const
   return this->value * _value;
 }
 
-int ls_std::Integer::operator-(const Integer &_integer) const
+int ls_std::Integer::operator-(const ls_std::Integer &_integer) const
 {
   return this->value - _integer;
 }
@@ -63,7 +63,7 @@ int ls_std::Integer::operator-(int _value) const
   return this->value - _value;
 }
 
-int ls_std::Integer::operator/(const Integer &_integer) const
+int ls_std::Integer::operator/(const ls_std::Integer &_integer) const
 {
   if(_integer == 0) {
     throw ls_std::IllegalArithmeticOperationException {};
@@ -81,7 +81,7 @@ int ls_std::Integer::operator/(int _value) const
   return this->value / _value;
 }
 
-int ls_std::Integer::operator%(const Integer &_integer) const
+int ls_std::Integer::operator%(const ls_std::Integer &_integer) const
 {
   return this->value % _integer;
 }
@@ -91,7 +91,7 @@ int ls_std::Integer::operator%(int _value) const
   return this->value % _value;
 }
 
-ls_std::Integer & ls_std::Integer::operator+=(const Integer &_integer)
+ls_std::Integer & ls_std::Integer::operator+=(const ls_std::Integer &_integer)
 {
   this->value += _integer;
   return *this;
@@ -103,7 +103,7 @@ ls_std::Integer & ls_std::Integer::operator+=(int _value)
   return *this;
 }
 
-ls_std::Integer & ls_std::Integer::operator-=(const Integer &_integer)
+ls_std::Integer & ls_std::Integer::operator-=(const ls_std::Integer &_integer)
 {
   this->value -= _integer;
   return *this;
@@ -115,7 +115,7 @@ ls_std::Integer & ls_std::Integer::operator-=(int _value)
   return *this;
 }
 
-ls_std::Integer & ls_std::Integer::operator*=(const Integer &_integer)
+ls_std::Integer & ls_std::Integer::operator*=(const ls_std::Integer &_integer)
 {
   this->value *= _integer;
   return *this;
@@ -127,7 +127,7 @@ ls_std::Integer & ls_std::Integer::operator*=(int _value)
   return *this;
 }
 
-ls_std::Integer & ls_std::Integer::operator/=(const Integer &_integer)
+ls_std::Integer & ls_std::Integer::operator/=(const ls_std::Integer &_integer)
 {
   if(_integer == 0) {
     throw ls_std::IllegalArithmeticOperationException {};
@@ -147,7 +147,7 @@ ls_std::Integer & ls_std::Integer::operator/=(int _value)
   return *this;
 }
 
-bool ls_std::Integer::operator==(const Integer &_integer) const
+bool ls_std::Integer::operator==(const ls_std::Integer &_integer) const
 {
   return this->value == _integer;
 }
@@ -157,7 +157,7 @@ bool ls_std::Integer::operator==(int _value) const
   return this->value == _value;
 }
 
-bool ls_std::Integer::operator!=(const Integer &_integer) const
+bool ls_std::Integer::operator!=(const ls_std::Integer &_integer) const
 {
   return this->value != _integer;
 }
@@ -167,7 +167,7 @@ bool ls_std::Integer::operator!=(int _value) const
   return this->value != _value;
 }
 
-bool ls_std::Integer::operator>(const Integer &_integer) const
+bool ls_std::Integer::operator>(const ls_std::Integer &_integer) const
 {
   return this->value > _integer;
 }
@@ -177,7 +177,7 @@ bool ls_std::Integer::operator>(int _value) const
   return this->value > _value;
 }
 
-bool ls_std::Integer::operator>=(const Integer &_integer) const
+bool ls_std::Integer::operator>=(const ls_std::Integer &_integer) const
 {
   return this->value >= _integer;
 }
@@ -187,7 +187,7 @@ bool ls_std::Integer::operator>=(int _value) const
   return this->value >= _value;
 }
 
-bool ls_std::Integer::operator<(const Integer &_integer) const
+bool ls_std::Integer::operator<(const ls_std::Integer &_integer) const
 {
   return this->value < _integer;
 }
@@ -197,7 +197,7 @@ bool ls_std::Integer::operator<(int _value) const
   return this->value < _value;
 }
 
-bool ls_std::Integer::operator<=(const Integer &_integer) const
+bool ls_std::Integer::operator<=(const ls_std::Integer &_integer) const
 {
   return this->value <= _integer;
 }
@@ -207,7 +207,7 @@ bool ls_std::Integer::operator<=(int _value) const
   return this->value <= _value;
 }
 
-bool ls_std::Integer::operator&&(const Integer &_integer) const
+bool ls_std::Integer::operator&&(const ls_std::Integer &_integer) const
 {
   return this->value && _integer;
 }
@@ -222,7 +222,7 @@ bool ls_std::Integer::operator&&(bool _expression) const
   return this->value && _expression;
 }
 
-bool ls_std::Integer::operator||(const Integer &_integer) const
+bool ls_std::Integer::operator||(const ls_std::Integer &_integer) const
 {
   return this->value || _integer;
 }

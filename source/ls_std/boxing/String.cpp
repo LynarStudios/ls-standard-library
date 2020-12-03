@@ -3,17 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
 #include <algorithm>
 #include <ls_std/boxing/String.hpp>
 
-ls_std::String::String() : Class("String")
+ls_std::String::String() : ls_std::Class("String")
 {}
 
-ls_std::String::String(std::string _value) : Class("String"),
+ls_std::String::String(std::string _value) : ls_std::Class("String"),
 value(std::move(_value))
 {}
 
@@ -30,7 +30,7 @@ ls_std::String & ls_std::String::operator=(std::string _value) {
   return *this;
 }
 
-std::string ls_std::String::operator+(String _string) const {
+std::string ls_std::String::operator+(ls_std::String _string) const {
   return this->value + _string.toString();
 }
 
@@ -47,7 +47,7 @@ std::string ls_std::String::operator-(int _number) {
   return copy.substr(0, copy.size() - _number);
 }
 
-ls_std::String & ls_std::String::operator+=(String _string) {
+ls_std::String & ls_std::String::operator+=(ls_std::String _string) {
   this->value = this->value + _string.toString();
   return *this;
 }
@@ -57,7 +57,7 @@ ls_std::String & ls_std::String::operator+=(const std::string &_text) {
   return *this;
 }
 
-bool ls_std::String::operator==(String _string) {
+bool ls_std::String::operator==(ls_std::String _string) {
   return this->value == _string.toString();
 }
 
@@ -69,7 +69,7 @@ bool ls_std::String::operator==(const char *_value) {
   return this->value == _value;
 }
 
-bool ls_std::String::operator!=(String _string) {
+bool ls_std::String::operator!=(ls_std::String _string) {
   return this->value != _string.toString();
 }
 
@@ -134,7 +134,7 @@ bool ls_std::String::endsWith(const std::string &_text) {
   return this->value.rfind(_text) == (this->value.size() - _text.size());
 }
 
-bool ls_std::String::equalsIgnoreCase(String _string) {
+bool ls_std::String::equalsIgnoreCase(ls_std::String _string) {
   return this->toLowerCase() == _string.toLowerCase();
 }
 

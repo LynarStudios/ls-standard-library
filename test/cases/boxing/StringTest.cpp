@@ -9,7 +9,7 @@
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
-#include "../../TestHelper.hpp"
+#include <TestHelper.hpp>
 
 namespace {
   class StringTest : public ::testing::Test {

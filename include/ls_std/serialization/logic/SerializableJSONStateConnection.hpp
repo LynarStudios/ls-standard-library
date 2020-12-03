@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls_std {
     public:
 
       explicit SerializableJSONStateConnection(const std::shared_ptr<ls_std::StateConnection>& _value);
-      ~SerializableJSONStateConnection() = default;
+      ~SerializableJSONStateConnection() override = default;
 
       // implementation
 
@@ -30,6 +30,7 @@ namespace ls_std {
 
       // additional functionality
 
+      std::shared_ptr<ls_std::StateConnection> getValue();
       void setValue(const std::shared_ptr<ls_std::StateConnection>& _value);
 
     private:

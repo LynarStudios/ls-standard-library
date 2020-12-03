@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2020-11-06
+ * Changed:         2020-11-27
  *
  * */
 
@@ -30,7 +30,6 @@
 #include "io/logging/LogLevel.hpp"
 #include "io/logging/LogLevelValue.hpp"
 #include "io/logging/Logger.hpp"
-#include "io/xml/XMLReaderMock.hpp"
 #include "io/xml/XMLReader.hpp"
 #include "io/xml/XMLParseMode.hpp"
 #include "io/xml/XMLParseData.hpp"
@@ -38,6 +37,7 @@
 #include "io/xml/XMLDocument.hpp"
 #include "io/xml/XMLDeclaration.hpp"
 #include "io/xml/XMLAttribute.hpp"
+#include "io/xml/XMLParser.hpp"
 #include "io/File.hpp"
 #include "io/FileOutputStream.hpp"
 #include "io/FilePathSeparator.hpp"
@@ -70,5 +70,11 @@
 
 #include "utils/RegexUtils.hpp"
 #include "utils/STLUtils.hpp"
+
+#include "event/Event.hpp"
+#include "event/EventTypes.hpp"
+#include "event/EventHandler.hpp"
+#include "event/IEventSubscriber.hpp"
+#include "event/EventManager.hpp"
 
 #endif

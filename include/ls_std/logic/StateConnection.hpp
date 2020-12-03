@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -18,21 +18,21 @@ namespace ls_std {
   class StateConnection : public Class {
     public:
 
-      explicit StateConnection(StateConnectionId _connectionId, StateId _stateId);
-      ~StateConnection() = default;
+      explicit StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId);
+      ~StateConnection() override = default;
 
       StateConnectionId getConnectionId();
-      StateId getStateId();
+      ls_std::StateId getStateId();
       bool isPassable() const;
-      void setConnectionId(StateConnectionId _connectionId);
-      void setStateId(StateId _stateId);
+      void setConnectionId(ls_std::StateConnectionId _connectionId);
+      void setStateId(ls_std::StateId _stateId);
       void updatePassCondition(bool _condition);
 
     private:
 
       bool condition {};
-      StateConnectionId connectionId {};
-      StateId stateId {};
+      ls_std::StateConnectionId connectionId {};
+      ls_std::StateId stateId {};
   };
 }
 

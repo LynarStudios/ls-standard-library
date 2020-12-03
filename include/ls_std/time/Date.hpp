@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -18,17 +18,17 @@ namespace ls_std {
     public:
 
       Date();
-      ~Date() = default;
+      ~Date() override = default;
 
       // arithmetic operators
 
-      Date& operator+(int _value);
-      Date& operator-(int _value);
+      ls_std::Date& operator+(int _value);
+      ls_std::Date& operator-(int _value);
 
       // additional functionality
 
-      bool after(const Date& _foreignDate) const;
-      bool before(const Date& _foreignDate) const;
+      bool after(const ls_std::Date& _foreignDate) const;
+      bool before(const ls_std::Date& _foreignDate) const;
       int getDay();
       int getHour();
       int getMinute();

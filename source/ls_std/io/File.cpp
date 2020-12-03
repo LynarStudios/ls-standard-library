@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-11-25
+ * Changed:         2020-11-26
  *
  * */
 
@@ -25,16 +25,16 @@
 #include <direct.h>
 #endif
 
-ls_std::File::File(std::string _absoluteFilePath) : Class("File"),
+ls_std::File::File(std::string _absoluteFilePath) : ls_std::Class("File"),
 absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
 {}
 
-bool ls_std::File::operator==(File &_file)
+bool ls_std::File::operator==(ls_std::File &_file)
 {
   return ls_std::File::_equals(*this, _file);
 }
 
-bool ls_std::File::operator!=(File &_file)
+bool ls_std::File::operator!=(ls_std::File &_file)
 {
   return !ls_std::File::_equals(*this, _file);
 }
@@ -239,7 +239,7 @@ void ls_std::File::_addToFileListUnix(const std::string& _path, bool _withDirect
 }
 #endif
 
-bool ls_std::File::_equals(File &_file, File &_foreignFile)
+bool ls_std::File::_equals(ls_std::File &_file, ls_std::File &_foreignFile)
 {
   bool isEqual = _file.getAbsoluteFilePath() == _foreignFile.getAbsoluteFilePath();
 

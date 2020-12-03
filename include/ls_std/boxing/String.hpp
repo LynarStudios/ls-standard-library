@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-20
+ * Changed:         2020-11-26
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls_std {
 
       String();
       explicit String(std::string _value);
-      ~String() = default;
+      ~String() override = default;
 
       // conversion operator
 
@@ -33,26 +33,26 @@ namespace ls_std {
 
       // assignment operators
 
-      String& operator=(std::string _value);
+      ls_std::String& operator=(std::string _value);
 
       // arithmetic operators
 
-      std::string operator+(String _string) const;
+      std::string operator+(ls_std::String _string) const;
       std::string operator+(const std::string& _string) const;
       std::string operator+(const char* _string) const;
       std::string operator-(int _number);
 
       // compound operators
 
-      String& operator+=(String _string);
-      String& operator+=(const std::string& _text);
+      ls_std::String& operator+=(ls_std::String _string);
+      ls_std::String& operator+=(const std::string& _text);
 
       // comparison operators
 
-      bool operator==(String _string);
+      bool operator==(ls_std::String _string);
       bool operator==(const std::string& _value);
       bool operator==(const char* _value);
-      bool operator!=(String _string);
+      bool operator!=(ls_std::String _string);
       bool operator!=(const std::string& _value);
       bool operator!=(const char* _value);
 
@@ -69,7 +69,7 @@ namespace ls_std {
 
       bool contains(const std::string& _text);
       bool endsWith(const std::string& _text);
-      bool equalsIgnoreCase(String _string);
+      bool equalsIgnoreCase(ls_std::String _string);
       bool equalsIgnoreCase(std::string _text);
       std::vector<ls_std::byte> getByteData();
       std::string padLeft(size_t _width, char _fillCharacter);
