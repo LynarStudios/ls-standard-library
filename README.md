@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2020.2.3 #
+# Lynar Studios - Standard Library 2020.3.0 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  
@@ -11,15 +11,18 @@ This is a cross-platform standard library written in C++ which provides basic fu
 - JSON
 - XML
 - Logger Class
+- Event Handling
 
 It has been tested on __Windows__, __Linux__ and __MacOS__ systems.
 
-### Change Log ###
+### Changelog ###
 
-- added missing nullptr exception handling inside serialization class constructors
-- fixed serialization assignment
-- replaced include directives in source files
-- reduced complexity inside SerializableJSONState class
+- added event handling functionality
+- added observer pattern classes
+- added xml parser class by reducing complexity of xml reader class
+- ls_std::Class is now polymorphic
+- fixed some include directives 
+- made existing serialization classes flyweight classes
 
 ### Documentation ###
 
