@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2020.3.0 #
+# Lynar Studios - Standard Library 2020.3.1 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  
@@ -17,12 +17,7 @@ It has been tested on __Windows__, __Linux__ and __MacOS__ systems.
 
 ### Changelog ###
 
-- added event handling functionality
-- added observer pattern classes
-- added xml parser class by reducing complexity of xml reader class
-- ls_std::Class is now polymorphic
-- fixed some include directives 
-- made existing serialization classes flyweight classes
+- improved CMakeLists.txt file by adding functionality to build project with or without tests
 
 ### Documentation ###
 

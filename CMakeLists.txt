@@ -4,8 +4,8 @@
 
 cmake_minimum_required(VERSION 3.17)
 set(PROJECT_NAME ls_std)
-set(RELEASE_VERSION 2020.3.0)
-set(BUILD_WITH_TESTS TRUE)
+set(RELEASE_VERSION 2020.3.1)
+set(BUILD_WITH_TESTS FALSE)
 project(${PROJECT_NAME})
 
 ##########################################################
