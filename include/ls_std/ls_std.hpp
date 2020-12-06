@@ -74,6 +74,9 @@
 
 #include "utils/RegexUtils.hpp"
 #include "utils/STLUtils.hpp"
+#if _WIN32
+#include "utils/WindowsUtils.hpp"
+#endif
 
 #include "event/Event.hpp"
 #include "event/EventTypes.hpp"
