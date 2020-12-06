@@ -9,7 +9,7 @@ project(ls_std VERSION 2020.3.1)
 # Options
 ##########################################################
 
-option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
+option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." ON)
 option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
 option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
 option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)
@@ -91,7 +91,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/Socket.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
@@ -145,7 +146,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsEvent.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/SocketTest.cpp)
 endif ()
 
 ##########################################################
