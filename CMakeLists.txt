@@ -10,6 +10,9 @@ project(ls_std VERSION 2020.3.1)
 ##########################################################
 
 option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
+option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
+option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
+option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)
 
 ##########################################################
 # Compiler Settings
@@ -160,14 +163,20 @@ endif ()
 
 message("${PROJECT_NAME}: Building library version ${PROJECT_VERSION}...")
 
-add_library("${PROJECT_NAME}_${PROJECT_VERSION}_static" STATIC ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
+if (${LS_STD_BUILD_STATIC})
+    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_static" STATIC ${SOURCE_FILES})
+    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
 
-add_library("${PROJECT_NAME}_${PROJECT_VERSION}_shared" SHARED ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
+if (${LS_STD_BUILD_SHARED})
+    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_shared" SHARED ${SOURCE_FILES})
+    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
 
-add_library("${PROJECT_NAME}_${PROJECT_VERSION}_module" MODULE ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
+if (${LS_STD_BUILD_MODULE})
+    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_module" MODULE ${SOURCE_FILES})
+    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
 
 ##########################################################
 # Linking
