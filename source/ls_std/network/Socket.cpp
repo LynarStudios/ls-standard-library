@@ -12,6 +12,7 @@
 #if defined(unix) || defined(__APPLE__)
 #include <sys/socket.h>
 #include <resolv.h>
+#include <unistd.h>
 #endif
 #ifdef _WIN32
 #include <http.h>
@@ -19,6 +20,18 @@
 
 ls_std::Socket::Socket() : ls_std::Class("Socket")
 {}
+
+bool ls_std::Socket::close() const
+{
+  bool closed;
+
+  #if defined(unix) || defined(__APPLE__)
+    int result = ::close(this->descriptor);
+    closed = result == 0;
+  #endif
+
+  return closed;
+}
 
 bool ls_std::Socket::create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol)
 {

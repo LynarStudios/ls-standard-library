@@ -31,6 +31,7 @@ namespace ls_std {
       Socket();
       ~Socket() override = default;
 
+      bool close() const;
       bool create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol);
 
     private:

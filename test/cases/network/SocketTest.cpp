@@ -21,6 +21,16 @@ namespace {
       void TearDown() override {}
   };
 
+  TEST_F(SocketTest, close)
+  {
+    ls_std::Socket socket {};
+    ASSERT_TRUE(socket.create(ls_std::ADDRESS_FAMILY_IP_V4, ls_std::SOCKET_TYPE_STREAM, ls_std::NETWORK_PROTOCOL_TCP_IP));
+    ASSERT_TRUE(socket.close());
+
+    ls_std::Socket anotherSocket {};
+    ASSERT_TRUE(anotherSocket.close());
+  }
+
   TEST_F(SocketTest, create)
   {
     ls_std::Socket socket {};
