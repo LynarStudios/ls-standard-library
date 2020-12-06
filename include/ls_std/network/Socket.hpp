@@ -29,9 +29,9 @@ namespace ls_std {
     public:
 
       Socket();
-      ~Socket() override = default;
+      ~Socket() override;
 
-      bool close() const;
+      bool close();
       bool create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol);
 
     private:
@@ -43,10 +43,13 @@ namespace ls_std {
         SOCKET descriptor {};
       #endif
 
+      bool _close();
+      #ifdef _WIN32
+        bool _closeOnWindows() const;
+      #endif
       static int _convertAddressFamily(ls_std::AddressFamily _addressFamily);
       static int _convertNetworkProtocol(ls_std::NetworkProtocol _networkProtocol);
       static int _convertSocketType(ls_std::SocketType _socketType);
-
       #if defined(unix) || defined(__APPLE__)
         static int _create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol);
       #endif

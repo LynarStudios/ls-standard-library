@@ -8,6 +8,7 @@
  * */
 
 #include <ls_std/network/Socket.hpp>
+#include <ls_std/base/Types.hpp>
 
 #if defined(unix) || defined(__APPLE__)
 #include <sys/socket.h>
@@ -16,18 +17,28 @@
 #endif
 #ifdef _WIN32
 #include <http.h>
+#include <iostream>
+#include <ls_std/utils/WindowsUtils.hpp>
 #endif
 
 ls_std::Socket::Socket() : ls_std::Class("Socket")
 {}
 
-bool ls_std::Socket::close() const
+ls_std::Socket::~Socket()
+{
+  this->_close();
+}
+
+bool ls_std::Socket::close()
 {
   bool closed;
 
   #if defined(unix) || defined(__APPLE__)
     int result = ::close(this->descriptor);
     closed = result == 0;
+  #endif
+  #ifdef _WIN32
+    closed = this->_close();
   #endif
 
   return closed;
@@ -47,6 +58,29 @@ bool ls_std::Socket::create(ls_std::AddressFamily _addressFamily, ls_std::Socket
   #endif
 
   return created;
+}
+
+bool ls_std::Socket::_close()
+{
+  bool closed;
+
+  #ifdef _WIN32
+    closed = this->_closeOnWindows();
+  #endif
+
+  return closed;
+}
+
+bool ls_std::Socket::_closeOnWindows() const
+{
+  int result = closesocket(this->descriptor);
+  bool closed = result == 0;
+
+  if(!closed) {
+    std::cout << ls_std::WindowsUtils::getMessageFromErrorCode(WSAGetLastError()) << std::endl; // TODO: use logger
+  }
+
+  return closed;
 }
 
 int ls_std::Socket::_convertAddressFamily(ls_std::AddressFamily _addressFamily)
