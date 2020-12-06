@@ -3,9 +3,7 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-set(PROJECT_NAME ls_std)
-set(RELEASE_VERSION 2020.3.1)
-project(${PROJECT_NAME})
+project(ls_std VERSION 2020.3.1)
 
 ##########################################################
 # Options
@@ -160,16 +158,16 @@ endif ()
 # Build Library
 ##########################################################
 
-message("${PROJECT_NAME}: Building library version ${RELEASE_VERSION}...")
+message("${PROJECT_NAME}: Building library version ${PROJECT_VERSION}...")
 
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" STATIC ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
+add_library("${PROJECT_NAME}_${PROJECT_VERSION}_static" STATIC ${SOURCE_FILES})
+set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
 
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_shared" SHARED ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
+add_library("${PROJECT_NAME}_${PROJECT_VERSION}_shared" SHARED ${SOURCE_FILES})
+set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
 
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_module" MODULE ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
+add_library("${PROJECT_NAME}_${PROJECT_VERSION}_module" MODULE ${SOURCE_FILES})
+set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
 
 ##########################################################
 # Linking
@@ -177,5 +175,5 @@ set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_module" PROPERTIES DEB
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
-    target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${RELEASE_VERSION}_static")
+    target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${PROJECT_VERSION}_static")
 endif ()
