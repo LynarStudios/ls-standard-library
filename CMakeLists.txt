@@ -5,8 +5,13 @@
 cmake_minimum_required(VERSION 3.17)
 set(PROJECT_NAME ls_std)
 set(RELEASE_VERSION 2020.3.1)
-set(BUILD_WITH_TESTS FALSE)
 project(${PROJECT_NAME})
+
+##########################################################
+# Options
+##########################################################
+
+option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
 
 ##########################################################
 # Compiler Settings
@@ -23,7 +28,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 message("${PROJECT_NAME}: Adding include directories...")
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
     include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
 endif ()
@@ -36,7 +41,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
 message("${PROJECT_NAME}: Adding additional cmake dependencies...")
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
 endif ()
 
@@ -87,7 +92,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp)
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
@@ -146,7 +151,7 @@ endif ()
 # Build Tests
 ##########################################################
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Building tests...")
     add_executable(${PROJECT_NAME}_test ${TEST_FILES})
 endif ()
@@ -170,7 +175,7 @@ set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_module" PROPERTIES DEB
 # Linking
 ##########################################################
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
     target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${RELEASE_VERSION}_static")
 endif ()
