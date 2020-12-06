@@ -13,16 +13,23 @@
 #include <sys/socket.h>
 #include <resolv.h>
 #endif
+#ifdef _WIN32
+#include <http.h>
+#endif
 
 ls_std::Socket::Socket() : ls_std::Class("Socket")
 {}
 
-bool ls_std::Socket::create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _protocol)
+bool ls_std::Socket::create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol)
 {
   bool created;
 
   #if defined(unix) || defined(__APPLE__)
-    this->descriptor = ls_std::Socket::_create(_addressFamily, _socketType, _protocol);
+    this->descriptor = ls_std::Socket::_create(_addressFamily, _socketType, _networkProtocol);
+    created = this->descriptor >= 0;
+  #endif
+  #ifdef _WIN32
+    this->descriptor = ls_std::Socket::_create(_addressFamily, _socketType, _networkProtocol);
     created = this->descriptor >= 0;
   #endif
 
@@ -88,6 +95,17 @@ int ls_std::Socket::_convertSocketType(ls_std::SocketType _socketType)
 
 #if defined(unix) || defined(__APPLE__)
   int ls_std::Socket::_create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol)
+  {
+    int addressFamily = ls_std::Socket::_convertAddressFamily(_addressFamily);
+    int socketType = ls_std::Socket::_convertSocketType(_socketType);
+    int networkProtocol = ls_std::Socket::_convertNetworkProtocol(_networkProtocol);
+
+    return socket(addressFamily, socketType, networkProtocol);
+  }
+#endif
+
+#ifdef _WIN32
+  SOCKET ls_std::Socket::_create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol)
   {
     int addressFamily = ls_std::Socket::_convertAddressFamily(_addressFamily);
     int socketType = ls_std::Socket::_convertSocketType(_socketType);

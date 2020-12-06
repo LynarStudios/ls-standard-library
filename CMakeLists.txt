@@ -186,5 +186,20 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
-    target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+
+    if (WIN32)
+        SET(CMAKE_FIND_LIBRARY_PREFIXES "")
+        SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib" ".dll")
+
+        find_library(WSOCK32_LIBRARY wsock32)
+        find_library(WS2_32_LIBRARY ws2_32)
+        message("${PROJECT_NAME}: library search - ${WSOCK32_LIBRARY}...")
+        message("${PROJECT_NAME}: library search - ${WS2_32_LIBRARY}...")
+
+        target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${WSOCK32_LIBRARY}" "${WS2_32_LIBRARY}" "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+    endif ()
+
+    if (UNIX)
+        target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+    endif ()
 endif ()

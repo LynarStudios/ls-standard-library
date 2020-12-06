@@ -10,6 +10,10 @@
 #ifndef LS_STD_LS_STD_HPP
 #define LS_STD_LS_STD_HPP
 
+#if _WIN32
+#include <winsock2.h>
+#endif
+
 #include "base/Class.hpp"
 #include "base/Types.hpp"
 #include "base/Version.hpp"

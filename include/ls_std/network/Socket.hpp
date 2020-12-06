@@ -20,6 +20,10 @@
 #include <sys/socket.h>
 #endif
 
+#ifdef _WIN32
+#include <winsock2.h>
+#endif
+
 namespace ls_std {
   class Socket : public ls_std::Class {
     public:
@@ -27,12 +31,15 @@ namespace ls_std {
       Socket();
       ~Socket() override = default;
 
-      bool create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _protocol);
+      bool create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol);
 
     private:
 
       #if defined(unix) || defined(__APPLE__)
         int descriptor {};
+      #endif
+      #ifdef _WIN32
+        SOCKET descriptor {};
       #endif
 
       static int _convertAddressFamily(ls_std::AddressFamily _addressFamily);
@@ -41,6 +48,9 @@ namespace ls_std {
 
       #if defined(unix) || defined(__APPLE__)
         static int _create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol);
+      #endif
+      #ifdef _WIN32
+        static SOCKET _create(ls_std::AddressFamily _addressFamily, ls_std::SocketType _socketType, ls_std::NetworkProtocol _networkProtocol);
       #endif
   };
 }
