@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2020-11-26
+ * Changed:         2020-12-20
  *
  * */
 
@@ -45,6 +45,18 @@ namespace {
     ASSERT_STREQ("yes", parameterList.at("facing_door").c_str());
   }
 
+  TEST_F(EventTest, clearParameterList)
+  {
+    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    event.addParameter(ls_std::event_parameter("key", "yes"));
+    event.addParameter(ls_std::event_parameter("facing_door", "yes"));
+    ASSERT_EQ(2, event.getParameterList().size());
+
+    event.clearParameterList();
+    ASSERT_TRUE(event.getParameterList().empty());
+    ASSERT_EQ(0, event.getParameterList().size());
+  }
+
   TEST_F(EventTest, getId)
   {
     ls_std::Event event {"OPEN_DOOR_EVENT"};
@@ -72,5 +84,14 @@ namespace {
     event.removeParameter("facing_door");
     ASSERT_EQ(0, event.getParameterList().size());
     ASSERT_TRUE(event.getParameterList().empty());
+  }
+
+  TEST_F(EventTest, setId)
+  {
+    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ASSERT_STREQ("OPEN_DOOR_EVENT", event.getId().c_str());
+
+    event.setId("ANOTHER_EVENT");
+    ASSERT_STREQ("ANOTHER_EVENT", event.getId().c_str());
   }
 }

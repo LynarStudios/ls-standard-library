@@ -92,7 +92,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/Socket.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/Socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/event/SerializableJSONEvent.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
@@ -147,7 +148,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/SocketTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/SocketTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/event/SerializableJSONEventTest.cpp)
 endif ()
 
 ##########################################################

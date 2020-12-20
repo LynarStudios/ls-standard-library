@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2020-11-29
+ * Changed:         2020-12-20
  *
  * */
 
@@ -21,15 +21,18 @@ namespace ls_std {
       ~Event() override = default;
 
       void addParameter(const ls_std::event_parameter& _eventParameter);
+      void clearParameterList();
       ls_std::event_id getId();
       ls_std::event_parameter_list getParameterList();
       void removeParameter(const ls_std::event_parameter_id& _id);
+      void setId(ls_std::event_id  _id);
 
     private:
 
       ls_std::event_id id {};
       ls_std::event_parameter_list parameterList {};
 
+      void _assignId(ls_std::event_id _id);
       bool _hasParameter(const ls_std::event_id&  _id);
   };
 }

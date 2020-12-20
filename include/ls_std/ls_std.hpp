@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2020-12-06
+ * Changed:         2020-12-20
  *
  * */
 
@@ -68,6 +68,7 @@
 #include "serialization/logic/SerializableJSONState.hpp"
 #include "serialization/logic/SerializableJSONStateConnection.hpp"
 #include "serialization/logic/SerializableJSONStateMachine.hpp"
+#include "serialization/event/SerializableJSONEvent.hpp"
 #include "serialization/ISerializable.hpp"
 
 #include "time/Date.hpp"
