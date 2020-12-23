@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-06
- * Changed:         2020-12-06
+ * Changed:         2020-12-21
  *
  * */
 
@@ -71,6 +71,7 @@ bool ls_std::Socket::_close()
   return closed;
 }
 
+#ifdef _WIN32
 bool ls_std::Socket::_closeOnWindows() const
 {
   int result = closesocket(this->descriptor);
@@ -82,6 +83,7 @@ bool ls_std::Socket::_closeOnWindows() const
 
   return closed;
 }
+#endif
 
 int ls_std::Socket::_convertAddressFamily(ls_std::AddressFamily _addressFamily)
 {
