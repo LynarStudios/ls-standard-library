@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2020-12-20
+ * Changed:         2020-12-25
  *
  * */
 
@@ -84,7 +84,5 @@
 #include "event/EventHandler.hpp"
 #include "event/IEventSubscriber.hpp"
 #include "event/EventManager.hpp"
-
-#include "network/Socket.hpp"
 
 #endif
