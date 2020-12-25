@@ -92,5 +92,5 @@ void ls_std::KVParser::_readLineWithUnixLineBreak(ls_std::KVParseData& _parseDat
 void ls_std::KVParser::_readLineWithWindowsLineBreak(ls_std::KVParseData &_parseData)
 {
   size_t newLinePosition = _parseData.line.toString().find(ls_std::NewLine::getWindowsNewLine());
-  _parseData.line = _parseData.line.toString().substr(0, newLinePosition);
+  _parseData.line = _parseData.line.toString().substr(0, newLinePosition + 1);
 }
