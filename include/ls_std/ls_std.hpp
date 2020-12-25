@@ -55,6 +55,7 @@
 #include "io/StorableFile.hpp"
 #include "io/kv/KVPair.hpp"
 #include "io/kv/KVDocument.hpp"
+#include "io/kv/KVParser.hpp"
 
 #include "logic/State.hpp"
 #include "logic/StateConnection.hpp"
