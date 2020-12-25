@@ -11,25 +11,25 @@
 #define LS_STD_KV_PAIR_HPP
 
 #include <ls_std/base/Class.hpp>
-#include <string>
+#include "KVTypes.hpp"
 
 namespace ls_std {
   class KVPair : public ls_std::Class {
     public:
 
-      explicit KVPair(const std::string& _key, std::string _value);
+      explicit KVPair(const ls_std::kv_key& _key, ls_std::kv_value _value);
       ~KVPair() override = default;
 
-      std::string getKey();
-      std::string getValue();
-      void setValue(const std::string& _value);
+      ls_std::kv_key getKey();
+      ls_std::kv_value getValue();
+      void setValue(const ls_std::kv_value& _value);
 
     private:
 
-      std::string key {};
-      std::string value {};
+      ls_std::kv_key key {};
+      ls_std::kv_value value {};
 
-      void _assignKey(const std::string& _key);
+      void _assignKey(const ls_std::kv_key& _key);
   };
 }
 
