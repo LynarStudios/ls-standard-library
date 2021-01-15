@@ -3,7 +3,7 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-project(ls_std VERSION 2020.3.1)
+project(ls_std VERSION 2021.1.0)
 
 ##########################################################
 # Options
