@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-30
- * Changed:         2020-11-26
+ * Changed:         2020-12-20
  *
  * */
 
@@ -24,8 +24,7 @@ ls_std::byte_field ls_std::SerializableJSONString::marshal()
 
 void ls_std::SerializableJSONString::unmarshal(const ls_std::byte_field& _data)
 {
-  std::string jsonString = std::string(_data);
-  this->jsonObject = nlohmann::json::parse(jsonString);
+  this->jsonObject = nlohmann::json::parse(_data);
 
   if(this->jsonObject.contains("value")) {
     *this->value = this->jsonObject["value"];

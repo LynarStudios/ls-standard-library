@@ -3,10 +3,16 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-set(PROJECT_NAME ls_std)
-set(RELEASE_VERSION 2020.3.1)
-set(BUILD_WITH_TESTS FALSE)
-project(${PROJECT_NAME})
+project(ls_std VERSION 2021.1.0)
+
+##########################################################
+# Options
+##########################################################
+
+option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
+option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
+option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
+option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)
 
 ##########################################################
 # Compiler Settings
@@ -23,7 +29,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 message("${PROJECT_NAME}: Adding include directories...")
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
     include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
 endif ()
@@ -36,7 +42,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
 message("${PROJECT_NAME}: Adding additional cmake dependencies...")
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
 endif ()
 
@@ -85,9 +91,14 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/event/SerializableJSONEvent.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVPair.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVParser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp)
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/IntegerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
@@ -139,14 +150,19 @@ if (${BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsEvent.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/event/SerializableJSONEventTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVPairTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVDocumentTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVParserTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVReaderTest.cpp)
 endif ()
 
 ##########################################################
 # Build Tests
 ##########################################################
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Building tests...")
     add_executable(${PROJECT_NAME}_test ${TEST_FILES})
 endif ()
@@ -155,22 +171,43 @@ endif ()
 # Build Library
 ##########################################################
 
-message("${PROJECT_NAME}: Building library version ${RELEASE_VERSION}...")
+message("${PROJECT_NAME}: Building library version ${PROJECT_VERSION}...")
 
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_static" STATIC ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
+if (${LS_STD_BUILD_STATIC})
+    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_static" STATIC ${SOURCE_FILES})
+    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
 
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_shared" SHARED ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
+if (${LS_STD_BUILD_SHARED})
+    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_shared" SHARED ${SOURCE_FILES})
+    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
 
-add_library("${PROJECT_NAME}_${RELEASE_VERSION}_module" MODULE ${SOURCE_FILES})
-set_target_properties("${PROJECT_NAME}_${RELEASE_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
+if (${LS_STD_BUILD_MODULE})
+    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_module" MODULE ${SOURCE_FILES})
+    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
 
 ##########################################################
 # Linking
 ##########################################################
 
-if (${BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
-    target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${RELEASE_VERSION}_static")
+
+    if (WIN32)
+        SET(CMAKE_FIND_LIBRARY_PREFIXES "")
+        SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib" ".dll")
+
+        find_library(WSOCK32_LIBRARY wsock32)
+        find_library(WS2_32_LIBRARY ws2_32)
+        message("${PROJECT_NAME}: library search - ${WSOCK32_LIBRARY}...")
+        message("${PROJECT_NAME}: library search - ${WS2_32_LIBRARY}...")
+
+        target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${WSOCK32_LIBRARY}" "${WS2_32_LIBRARY}" "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+    endif ()
+
+    if (UNIX)
+        target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+    endif ()
 endif ()

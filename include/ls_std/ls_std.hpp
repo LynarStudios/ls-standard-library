@@ -3,12 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2020-11-27
+ * Changed:         2020-12-25
  *
  * */
 
 #ifndef LS_STD_LS_STD_HPP
 #define LS_STD_LS_STD_HPP
+
+#if _WIN32
+#include <winsock2.h>
+#endif
 
 #include "base/Class.hpp"
 #include "base/Types.hpp"
@@ -49,6 +53,10 @@
 #include "io/IWriter.hpp"
 #include "io/NewLine.hpp"
 #include "io/StorableFile.hpp"
+#include "io/kv/KVPair.hpp"
+#include "io/kv/KVDocument.hpp"
+#include "io/kv/KVParser.hpp"
+#include "io/kv/KVReader.hpp"
 
 #include "logic/State.hpp"
 #include "logic/StateConnection.hpp"
@@ -64,12 +72,16 @@
 #include "serialization/logic/SerializableJSONState.hpp"
 #include "serialization/logic/SerializableJSONStateConnection.hpp"
 #include "serialization/logic/SerializableJSONStateMachine.hpp"
+#include "serialization/event/SerializableJSONEvent.hpp"
 #include "serialization/ISerializable.hpp"
 
 #include "time/Date.hpp"
 
 #include "utils/RegexUtils.hpp"
 #include "utils/STLUtils.hpp"
+#if _WIN32
+#include "utils/WindowsUtils.hpp"
+#endif
 
 #include "event/Event.hpp"
 #include "event/EventTypes.hpp"

@@ -1,23 +1,63 @@
-# Lynar Studios - Standard Library 2020.3.1 #
+# Lynar Studios - Standard Library 2021.1.0 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  
-- Boxing Classes
-- File Operations
-- Minimal Reflection
-- Date Class
-- State Machine Class
+- Boxing  
+  - Double
+  - Float
+  - String
+  - Integer 
+  - Long
+  - Boolean  
+- File
+  - IReader (interface)
+  - IWriter (interface)  
+  - IStorable (interface)  
+  - Model
+  - Reader
+  - Writer
+- Minimal Reflection  
+  - Class (base)
+- Time
+  - Date
+- Logic
+  - State Machine (Model, State, Connection)
+  - IListener (Interface)
+  - Narrator  
 - Serialization
+  - ISerializable (Interface)
+  - JSON Boxing (Double, Float, String, Integer, Long, Boolean)
+  - JSON State Machine (Model, State, Connection)  
+  - JSON Event
 - JSON
+  - Marshalling
+  - Unmarshalling
 - XML
-- Logger Class
+  - Model (Document, Declaration, Node, Attribute)
+  - Reader
+  - Writer
+  - Parser  
+- Logger
+  - Model
+  - Log Level
 - Event Handling
+  - IEventSubscriber (Interface)
+  - Model
+  - Event Handler
+  - Event Manager
+- Exception
+- KV
+  - Document
+  - KV Pair
+  - Parser
+  - Reader  
 
 It has been tested on __Windows__, __Linux__ and __MacOS__ systems.
 
 ### Changelog ###
 
-- improved CMakeLists.txt file by adding functionality to build project with or without tests
+- Made Event class serializable
+- Added Key Value File Functionality
 
 ### Documentation ###
 
