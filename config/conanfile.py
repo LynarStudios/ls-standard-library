@@ -14,7 +14,7 @@ class LsStdConan(ConanFile):
     generators = "cmake"
 
     def source(self):
-        self.run("git clone https://vcs.lynarstudios.de/public/ls-standard-library.git")
+        self.run("git clone https://vcs.lynarstudios.de/public/ls-standard-library.git --branch v" + self.version + " --single-branch")
 
     def build(self):
         cmake = CMake(self)
