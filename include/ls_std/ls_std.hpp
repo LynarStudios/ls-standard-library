@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2020-12-25
+ * Changed:         2021-04-22
  *
  * */
 
@@ -30,6 +30,7 @@
 #include "exception/FileOperationException.hpp"
 #include "exception/IllegalArgumentException.hpp"
 #include "exception/IllegalArithmeticOperationException.hpp"
+#include "exception/NullPointerException.hpp"
 
 #include "io/logging/LogLevel.hpp"
 #include "io/logging/LogLevelValue.hpp"
