@@ -3,15 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
 #include <ls_std/serialization/boxing/SerializableJSONBoolean.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONBoolean::SerializableJSONBoolean(const std::shared_ptr<ls_std::Boolean>& _value) :
-ls_std::Class("SerializableJSONBoolean")
+ls_std::SerializableJSONBoolean::SerializableJSONBoolean(const std::shared_ptr<ls_std::Boolean> &_value) : ls_std::Class("SerializableJSONBoolean")
 {
   this->_assignValue(_value);
 }
@@ -22,11 +21,12 @@ ls_std::byte_field ls_std::SerializableJSONBoolean::marshal()
   return this->jsonObject.dump();
 }
 
-void ls_std::SerializableJSONBoolean::unmarshal(const ls_std::byte_field& _data)
+void ls_std::SerializableJSONBoolean::unmarshal(const ls_std::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
-  if(this->jsonObject.contains("value")) {
+  if (this->jsonObject.contains("value"))
+  {
     *this->value = (bool) this->jsonObject["value"];
   }
 }
@@ -43,8 +43,9 @@ void ls_std::SerializableJSONBoolean::setValue(const std::shared_ptr<ls_std::Boo
 
 void ls_std::SerializableJSONBoolean::_assignValue(const std::shared_ptr<ls_std::Boolean> &_value)
 {
-  if(_value == nullptr) {
-    throw ls_std::IllegalArgumentException {};
+  if (_value == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
   }
 
   this->value = _value;
@@ -52,7 +53,5 @@ void ls_std::SerializableJSONBoolean::_assignValue(const std::shared_ptr<ls_std:
 
 void ls_std::SerializableJSONBoolean::_update()
 {
-  this->jsonObject = {
-      {"value", this->value->getValue()}
-  };
+  this->jsonObject = {{"value", this->value->getValue()}};
 }

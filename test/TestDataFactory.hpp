@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2020-10-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,8 +12,10 @@
 
 #include <ls_std/ls_std.hpp>
 
-namespace ls_std_test {
-  class TestDataFactory {
+namespace ls_std_test
+{
+  class TestDataFactory
+  {
     public:
 
       TestDataFactory() = default;

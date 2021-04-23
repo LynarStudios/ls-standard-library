@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -15,30 +15,32 @@
 #include <ls_std/base/Class.hpp>
 #include "XMLAttribute.hpp"
 
-namespace ls_std {
-  class XMLNode : public Class {
+namespace ls_std
+{
+  class XMLNode : public Class
+  {
     public:
 
       explicit XMLNode(std::string _name);
       ~XMLNode() override = default;
 
-      bool addAttributeAfter(const std::shared_ptr<ls_std::XMLAttribute>& _attribute, const std::string& _name);
-      bool addAttributeBefore(const std::shared_ptr<ls_std::XMLAttribute>& _attribute, const std::string& _name);
-      bool addAttributeToBeginning(const std::shared_ptr<ls_std::XMLAttribute>& _attribute);
-      bool addAttributeToEnd(const std::shared_ptr<ls_std::XMLAttribute>& _attribute);
-      bool addChildAfter(const std::shared_ptr<ls_std::XMLNode>& _child, const std::shared_ptr<ls_std::XMLNode>& _search);
-      bool addChildBefore(const std::shared_ptr<ls_std::XMLNode>& _child, const std::shared_ptr<ls_std::XMLNode>& _search);
-      bool addChildToBeginning(const std::shared_ptr<ls_std::XMLNode>& _child);
-      bool addChildToEnd(const std::shared_ptr<ls_std::XMLNode>& _child);
+      bool addAttributeAfter(const std::shared_ptr<ls_std::XMLAttribute> &_attribute, const std::string &_name);
+      bool addAttributeBefore(const std::shared_ptr<ls_std::XMLAttribute> &_attribute, const std::string &_name);
+      bool addAttributeToBeginning(const std::shared_ptr<ls_std::XMLAttribute> &_attribute);
+      bool addAttributeToEnd(const std::shared_ptr<ls_std::XMLAttribute> &_attribute);
+      bool addChildAfter(const std::shared_ptr<ls_std::XMLNode> &_child, const std::shared_ptr<ls_std::XMLNode> &_search);
+      bool addChildBefore(const std::shared_ptr<ls_std::XMLNode> &_child, const std::shared_ptr<ls_std::XMLNode> &_search);
+      bool addChildToBeginning(const std::shared_ptr<ls_std::XMLNode> &_child);
+      bool addChildToEnd(const std::shared_ptr<ls_std::XMLNode> &_child);
       void clearValue();
       std::list<std::shared_ptr<ls_std::XMLAttribute>> getAttributes();
       std::list<std::shared_ptr<ls_std::XMLNode>> getChildren();
-      std::list<std::shared_ptr<ls_std::XMLNode>> getChildren(const std::string& _name);
+      std::list<std::shared_ptr<ls_std::XMLNode>> getChildren(const std::string &_name);
       std::string getName();
       std::string getValue();
-      bool hasAttribute(const std::string& _name);
-      bool hasChild(const std::string& _name);
-      bool hasChild(const std::shared_ptr<ls_std::XMLNode>& _child);
+      bool hasAttribute(const std::string &_name);
+      bool hasChild(const std::string &_name);
+      bool hasChild(const std::shared_ptr<ls_std::XMLNode> &_child);
       void removeFirstAttribute();
       void removeLastAttribute();
       void removeFirstChild();
@@ -53,16 +55,16 @@ namespace ls_std {
 
     private:
 
-      std::list<std::shared_ptr<ls_std::XMLAttribute>> attributes {};
-      std::list<std::shared_ptr<ls_std::XMLNode>> children {};
-      std::string name {};
-      const static uint8_t TAB_SIZE {4};
-      std::string value {};
+      std::list<std::shared_ptr<ls_std::XMLAttribute>> attributes{};
+      std::list<std::shared_ptr<ls_std::XMLNode>> children{};
+      std::string name{};
+      const static uint8_t TAB_SIZE{4};
+      std::string value{};
 
       static std::string _getTab(uint8_t _tabSize);
-      bool _hasAttribute(const std::string& _name);
-      bool _hasChild(const std::shared_ptr<ls_std::XMLNode>& _child);
-      bool _hasChild(const std::string& _name);
+      bool _hasAttribute(const std::string &_name);
+      bool _hasChild(const std::shared_ptr<ls_std::XMLNode> &_child);
+      bool _hasChild(const std::string &_name);
       std::string _toXMLAttributes();
       std::string _toXMLChildren(uint8_t _tabSize);
       std::string _toXMLCloseTag();

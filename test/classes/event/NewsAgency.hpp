@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-27
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,8 +12,10 @@
 
 #include <string>
 
-namespace ls_std_test {
-  class NewsAgency {
+namespace ls_std_test
+{
+  class NewsAgency
+  {
     public:
 
       explicit NewsAgency(std::string _agencyName);
@@ -23,7 +25,7 @@ namespace ls_std_test {
 
     private:
 
-      std::string agencyName {};
+      std::string agencyName{};
   };
 }
 

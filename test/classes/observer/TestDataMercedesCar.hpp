@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2020-11-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -13,14 +13,16 @@
 #include "TestDataCar.hpp"
 #include <ls_std/logic/IListener.hpp>
 
-namespace ls_std_test {
-  class TestDataMercedesCar : public TestDataCar, public ls_std::IListener {
+namespace ls_std_test
+{
+  class TestDataMercedesCar : public TestDataCar, public ls_std::IListener
+  {
     public:
 
       TestDataMercedesCar();
       ~TestDataMercedesCar() override = default;
 
-      void listen(const Class& _info) override;
+      void listen(const Class &_info) override;
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-11-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,15 +12,20 @@
 #include <TestDataFactory.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class SerializableJSONStateMachineTest : public ::testing::Test {
+namespace
+{
+  class SerializableJSONStateMachineTest : public ::testing::Test
+  {
     protected:
 
       SerializableJSONStateMachineTest() = default;
       ~SerializableJSONStateMachineTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   // implementation
@@ -30,24 +35,24 @@ namespace {
     ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
     stateMachine.setStartState("A");
     stateMachine.setMemory({"A", "B", "C"});
-    ls_std::SerializableJSONStateMachine serializable {std::make_shared<ls_std::StateMachine>(stateMachine)};
+    ls_std::SerializableJSONStateMachine serializable{std::make_shared<ls_std::StateMachine>(stateMachine)};
 
     std::string jsonString = serializable.marshal();
     ASSERT_TRUE(!jsonString.empty());
 
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls_std::FileReader reader {file};
-    ls_std::String data {reader.read()};
+    ls_std::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls_std::FileReader reader{file};
+    ls_std::String data{reader.read()};
 
     ASSERT_TRUE(data.contains(jsonString));
   }
 
   TEST_F(SerializableJSONStateMachineTest, unmarshal)
   {
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls_std::FileReader reader {file};
+    ls_std::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls_std::FileReader reader{file};
     std::shared_ptr<ls_std::StateMachine> x = std::make_shared<ls_std::StateMachine>("bla");
-    ls_std::SerializableJSONStateMachine serializable {x};
+    ls_std::SerializableJSONStateMachine serializable{x};
 
     serializable.unmarshal(reader.read());
 
@@ -101,14 +106,14 @@ namespace {
   TEST_F(SerializableJSONStateMachineTest, getValue)
   {
     std::shared_ptr<ls_std::StateMachine> x = std::make_shared<ls_std::StateMachine>("bla");
-    ls_std::SerializableJSONStateMachine serializable {x};
+    ls_std::SerializableJSONStateMachine serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJSONStateMachineTest, setValue)
   {
     std::shared_ptr<ls_std::StateMachine> x = std::make_shared<ls_std::StateMachine>("bla");
-    ls_std::SerializableJSONStateMachine serializable {x};
+    ls_std::SerializableJSONStateMachine serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
 
     x = std::make_shared<ls_std::StateMachine>("bla2");

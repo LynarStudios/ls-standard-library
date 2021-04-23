@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-28
+ * Changed:         2021-04-23
  *
  * */
 
@@ -17,18 +17,20 @@
 #include "Event.hpp"
 #include <ls_std/logic/Narrator.hpp>
 
-namespace ls_std {
-  class EventHandler : public ls_std::Narrator {
+namespace ls_std
+{
+  class EventHandler : public ls_std::Narrator
+  {
     public:
 
-      explicit EventHandler(ls_std::event_id  _id);
+      explicit EventHandler(ls_std::event_id _id);
       ~EventHandler() override = default;
 
       ls_std::event_id getId();
 
     private:
 
-      ls_std::event_id id {};
+      ls_std::event_id id{};
   };
 }
 

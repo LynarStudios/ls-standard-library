@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-04-22
+ * Changed:         2021-04-23
  *
  * */
 
@@ -80,6 +80,7 @@
 
 #include "utils/RegexUtils.hpp"
 #include "utils/STLUtils.hpp"
+
 #if _WIN32
 #include "utils/WindowsUtils.hpp"
 #endif

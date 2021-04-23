@@ -3,22 +3,24 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
 #include <ls_std/logic/State.hpp>
 
-ls_std::State::State(ls_std::StateId _id) : ls_std::Class("State"),
-id(std::move(_id))
+ls_std::State::State(ls_std::StateId _id)
+    : ls_std::Class("State"),
+      id(std::move(_id))
 {}
 
-bool ls_std::State::addStateConnection(const ls_std::StateConnectionId& _connectionId, const std::shared_ptr<ls_std::State>& _connectedState)
+bool ls_std::State::addStateConnection(const ls_std::StateConnectionId &_connectionId, const std::shared_ptr<ls_std::State> &_connectedState)
 {
-  bool added {};
-  std::shared_ptr<ls_std::StateConnection> connection {};
+  bool added{};
+  std::shared_ptr<ls_std::StateConnection> connection{};
 
-  if(_connectedState != nullptr && !this->_hasConnection(_connectionId)) {
+  if (_connectedState != nullptr && !this->_hasConnection(_connectionId))
+  {
     connection = std::make_shared<ls_std::StateConnection>(_connectionId, _connectedState->getId());
     this->connectedStates.insert({_connectionId, connection});
     added = true;
@@ -27,11 +29,12 @@ bool ls_std::State::addStateConnection(const ls_std::StateConnectionId& _connect
   return added;
 }
 
-bool ls_std::State::addStateConnection(const std::shared_ptr<ls_std::StateConnection>& _connection)
+bool ls_std::State::addStateConnection(const std::shared_ptr<ls_std::StateConnection> &_connection)
 {
-  bool added {};
+  bool added{};
 
-  if(_connection != nullptr) {
+  if (_connection != nullptr)
+  {
     this->connectedStates.insert({_connection->getConnectionId(), _connection});
     added = this->_hasConnection(_connection->getConnectionId());
   }

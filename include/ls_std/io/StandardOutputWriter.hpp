@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2020-11-06
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,14 +12,16 @@
 
 #include "IWriter.hpp"
 
-namespace ls_std {
-  class StandardOutputWriter : public IWriter {
+namespace ls_std
+{
+  class StandardOutputWriter : public IWriter
+  {
     public:
 
       StandardOutputWriter() = default;
       ~StandardOutputWriter() = default;
 
-      bool write(const ls_std::byte_field& _data) override;
+      bool write(const ls_std::byte_field &_data) override;
   };
 }
 

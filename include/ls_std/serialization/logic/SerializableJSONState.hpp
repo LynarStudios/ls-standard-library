@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -16,29 +16,31 @@
 #include <ls_std/serialization/ISerializable.hpp>
 #include <ls_std/base/Class.hpp>
 
-namespace ls_std {
-  class SerializableJSONState : public Class, public ISerializable {
+namespace ls_std
+{
+  class SerializableJSONState : public Class, public ISerializable
+  {
     public:
 
-      explicit SerializableJSONState(const std::shared_ptr<ls_std::State>& _value);
+      explicit SerializableJSONState(const std::shared_ptr<ls_std::State> &_value);
       ~SerializableJSONState() override = default;
 
       // implementation
 
       ls_std::byte_field marshal() override;
-      void unmarshal(const ls_std::byte_field& _data) override;
+      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
       std::shared_ptr<ls_std::State> getValue();
-      void setValue(const std::shared_ptr<ls_std::State>& _value);
+      void setValue(const std::shared_ptr<ls_std::State> &_value);
 
     private:
 
-      nlohmann::json jsonObject {};
-      std::shared_ptr<ls_std::State> value {};
+      nlohmann::json jsonObject{};
+      std::shared_ptr<ls_std::State> value{};
 
-      void _assignValue(const std::shared_ptr<ls_std::State>& _value);
+      void _assignValue(const std::shared_ptr<ls_std::State> &_value);
       void _clear();
       void _unmarshalStateConnections();
       void _update();

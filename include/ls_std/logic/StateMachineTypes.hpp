@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-11-06
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,7 +12,8 @@
 
 #include <string>
 
-namespace ls_std {
+namespace ls_std
+{
   using StateConnectionId = std::string;
   using StateId = std::string;
 }

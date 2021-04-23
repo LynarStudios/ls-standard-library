@@ -3,15 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2020-12-23
+ * Changed:         2021-04-23
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
 
-namespace {
-  class EventTest : public ::testing::Test {
+namespace
+{
+  class EventTest : public ::testing::Test
+  {
     protected:
 
       EventTest() = default;
@@ -28,7 +30,7 @@ namespace {
 
   TEST_F(EventTest, marshal)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     event.addParameter(ls_std::event_parameter{"key_available", "true"});
     event.addParameter(ls_std::event_parameter{"door_id", "16675"});
 
@@ -43,7 +45,7 @@ namespace {
 
   TEST_F(EventTest, unmarshal)
   {
-    std::shared_ptr<ls_std::Event> event =  std::make_shared<ls_std::Event>("TMP_EVENT");
+    std::shared_ptr<ls_std::Event> event = std::make_shared<ls_std::Event>("TMP_EVENT");
     std::shared_ptr<ls_std::SerializableJSONEvent> serializable = std::make_shared<ls_std::SerializableJSONEvent>(event);
     event->setSerializable(serializable);
 
@@ -62,13 +64,13 @@ namespace {
 
   TEST_F(EventTest, getClassName)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     ASSERT_STREQ("Event", event.getClassName().c_str());
   }
 
   TEST_F(EventTest, addParameter)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     ASSERT_TRUE(event.getParameterList().empty());
 
     event.addParameter(ls_std::event_parameter("key", "yes"));
@@ -83,7 +85,7 @@ namespace {
 
   TEST_F(EventTest, clearParameterList)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     event.addParameter(ls_std::event_parameter("key", "yes"));
     event.addParameter(ls_std::event_parameter("facing_door", "yes"));
     ASSERT_EQ(2, event.getParameterList().size());
@@ -95,19 +97,19 @@ namespace {
 
   TEST_F(EventTest, getId)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     ASSERT_STREQ("OPEN_DOOR_EVENT", event.getId().c_str());
   }
 
   TEST_F(EventTest, getParameterList)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     ASSERT_TRUE(event.getParameterList().empty());
   }
 
   TEST_F(EventTest, removeParameter)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     ASSERT_TRUE(event.getParameterList().empty());
 
     event.addParameter(ls_std::event_parameter("key", "yes"));
@@ -124,7 +126,7 @@ namespace {
 
   TEST_F(EventTest, setId)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     ASSERT_STREQ("OPEN_DOOR_EVENT", event.getId().c_str());
 
     event.setId("ANOTHER_EVENT");

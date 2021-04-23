@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -14,8 +14,10 @@
 #include <ls_std/base/Class.hpp>
 #include "StateMachineTypes.hpp"
 
-namespace ls_std {
-  class StateConnection : public Class {
+namespace ls_std
+{
+  class StateConnection : public Class
+  {
     public:
 
       explicit StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId);
@@ -30,9 +32,9 @@ namespace ls_std {
 
     private:
 
-      bool condition {};
-      ls_std::StateConnectionId connectionId {};
-      ls_std::StateId stateId {};
+      bool condition{};
+      ls_std::StateConnectionId connectionId{};
+      ls_std::StateId stateId{};
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -16,8 +16,10 @@
 #include <ls_std/serialization/ISerializable.hpp>
 #include <ls_std/io/IStorable.hpp>
 
-namespace ls_std {
-  class Double : public Class, public IBoxing, public ISerializable, public IStorable {
+namespace ls_std
+{
+  class Double : public Class, public IBoxing, public ISerializable, public IStorable
+  {
     public:
 
       Double();
@@ -30,44 +32,44 @@ namespace ls_std {
 
       // assignment operators
 
-      ls_std::Double& operator=(double _value);
+      ls_std::Double &operator=(double _value);
 
       // arithmetic operators
 
       double operator-() const;
-      double operator+(const ls_std::Double& _double) const;
+      double operator+(const ls_std::Double &_double) const;
       double operator+(double _value) const;
-      double operator*(const ls_std::Double& _double) const;
+      double operator*(const ls_std::Double &_double) const;
       double operator*(double _value) const;
-      double operator-(const ls_std::Double& _double) const;
+      double operator-(const ls_std::Double &_double) const;
       double operator-(double _value) const;
-      double operator/(const ls_std::Double& _double) const;
+      double operator/(const ls_std::Double &_double) const;
       double operator/(double _value) const;
 
       // compound operators
 
-      ls_std::Double& operator+=(const ls_std::Double& _double);
-      ls_std::Double& operator+=(double _value);
-      ls_std::Double& operator-=(const ls_std::Double& _double);
-      ls_std::Double& operator-=(double _value);
-      ls_std::Double& operator*=(const ls_std::Double& _double);
-      ls_std::Double& operator*=(double _value);
-      ls_std::Double& operator/=(const ls_std::Double& _double);
-      ls_std::Double& operator/=(double _value);
+      ls_std::Double &operator+=(const ls_std::Double &_double);
+      ls_std::Double &operator+=(double _value);
+      ls_std::Double &operator-=(const ls_std::Double &_double);
+      ls_std::Double &operator-=(double _value);
+      ls_std::Double &operator*=(const ls_std::Double &_double);
+      ls_std::Double &operator*=(double _value);
+      ls_std::Double &operator/=(const ls_std::Double &_double);
+      ls_std::Double &operator/=(double _value);
 
       // comparison operators
 
-      bool operator==(const ls_std::Double& _double) const;
+      bool operator==(const ls_std::Double &_double) const;
       bool operator==(double _value) const;
-      bool operator!=(const ls_std::Double& _double) const;
+      bool operator!=(const ls_std::Double &_double) const;
       bool operator!=(double _value) const;
-      bool operator>(const ls_std::Double& _double) const;
+      bool operator>(const ls_std::Double &_double) const;
       bool operator>(double _value) const;
-      bool operator>=(const ls_std::Double& _double) const;
+      bool operator>=(const ls_std::Double &_double) const;
       bool operator>=(double _value) const;
-      bool operator<(const ls_std::Double& _double) const;
+      bool operator<(const ls_std::Double &_double) const;
       bool operator<(double _value) const;
-      bool operator<=(const ls_std::Double& _double) const;
+      bool operator<=(const ls_std::Double &_double) const;
       bool operator<=(double _value) const;
 
       // increment / decrement operator
@@ -80,9 +82,9 @@ namespace ls_std {
       ls_std::byte_field load() override;
       ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
-      void save(const ls_std::byte_field& _data) override;
+      void save(const ls_std::byte_field &_data) override;
       std::string toString() override;
-      void unmarshal(const ls_std::byte_field& _data) override;
+      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
@@ -94,10 +96,10 @@ namespace ls_std {
 
     private:
 
-      double epsilon {};
-      std::shared_ptr<ISerializable> serializable {};
-      std::shared_ptr<IStorable> storable {};
-      double value {};
+      double epsilon{};
+      std::shared_ptr<ISerializable> serializable{};
+      std::shared_ptr<IStorable> storable{};
+      double value{};
   };
 }
 

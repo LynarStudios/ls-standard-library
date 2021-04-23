@@ -3,34 +3,39 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2020-12-25
+ * Changed:         2021-04-23
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
 
-namespace {
-  class KVParserTest : public ::testing::Test {
+namespace
+{
+  class KVParserTest : public ::testing::Test
+  {
     protected:
 
       KVParserTest() = default;
       ~KVParserTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(KVParserTest, getDocument)
   {
-    ls_std::KVParser parser {std::make_shared<ls_std::KVDocument>()};
+    ls_std::KVParser parser{std::make_shared<ls_std::KVDocument>()};
     ASSERT_TRUE(parser.getDocument() != nullptr);
   }
 
   TEST_F(KVParserTest, parse)
   {
     std::shared_ptr<ls_std::KVDocument> document = std::make_shared<ls_std::KVDocument>();
-    ls_std::KVParser parser {document};
+    ls_std::KVParser parser{document};
     ls_std::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
     parser.parse(data);
 
@@ -49,7 +54,7 @@ namespace {
     std::shared_ptr<ls_std::KVDocument> document1 = std::make_shared<ls_std::KVDocument>();
     std::shared_ptr<ls_std::KVDocument> document2 = std::make_shared<ls_std::KVDocument>();
 
-    ls_std::KVParser parser {document1};
+    ls_std::KVParser parser{document1};
     ASSERT_TRUE(parser.getDocument() == document1);
 
     parser.setDocument(document2);

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -16,8 +16,10 @@
 #include <ls_std/serialization/ISerializable.hpp>
 #include <ls_std/io/IStorable.hpp>
 
-namespace ls_std {
-  class Integer : public Class, public IBoxing, public ISerializable, public IStorable {
+namespace ls_std
+{
+  class Integer : public Class, public IBoxing, public ISerializable, public IStorable
+  {
     public:
 
       explicit Integer(int _value);
@@ -30,58 +32,59 @@ namespace ls_std {
 
       // assignment operators
 
-      ls_std::Integer& operator=(int _value);
+      ls_std::Integer &operator=(int _value);
 
       // arithmetic operators
 
       int operator-() const;
-      int operator+(const ls_std::Integer& _integer) const;
+      int operator+(const ls_std::Integer &_integer) const;
       int operator+(int _value) const;
-      int operator*(const ls_std::Integer& _integer) const;
+      int operator*(const ls_std::Integer &_integer) const;
       int operator*(int _value) const;
-      int operator-(const ls_std::Integer& _integer) const;
+      int operator-(const ls_std::Integer &_integer) const;
       int operator-(int _value) const;
-      int operator/(const ls_std::Integer& _integer) const;
+      int operator/(const ls_std::Integer &_integer) const;
       int operator/(int _value) const;
-      int operator%(const ls_std::Integer& _integer) const;
+      int operator%(const ls_std::Integer &_integer) const;
       int operator%(int _value) const;
 
       // compound operators
 
-      ls_std::Integer& operator+=(const ls_std::Integer& _integer);
-      ls_std::Integer& operator+=(int _value);
-      ls_std::Integer& operator-=(const ls_std::Integer& _integer);
-      ls_std::Integer& operator-=(int _value);
-      ls_std::Integer& operator*=(const ls_std::Integer& _integer);
-      ls_std::Integer& operator*=(int _value);
-      ls_std::Integer& operator/=(const ls_std::Integer& _integer);
-      ls_std::Integer& operator/=(int _value);
+      ls_std::Integer &operator+=(const ls_std::Integer &_integer);
+      ls_std::Integer &operator+=(int _value);
+      ls_std::Integer &operator-=(const ls_std::Integer &_integer);
+      ls_std::Integer &operator-=(int _value);
+      ls_std::Integer &operator*=(const ls_std::Integer &_integer);
+      ls_std::Integer &operator*=(int _value);
+      ls_std::Integer &operator/=(const ls_std::Integer &_integer);
+      ls_std::Integer &operator/=(int _value);
 
       // comparison operators
 
-      bool operator==(const ls_std::Integer& _integer) const;
+      bool operator==(const ls_std::Integer &_integer) const;
       bool operator==(int _value) const;
-      bool operator!=(const ls_std::Integer& _integer) const;
+      bool operator!=(const ls_std::Integer &_integer) const;
       bool operator!=(int _value) const;
-      bool operator>(const ls_std::Integer& _integer) const;
+      bool operator>(const ls_std::Integer &_integer) const;
       bool operator>(int _value) const;
-      bool operator>=(const ls_std::Integer& _integer) const;
+      bool operator>=(const ls_std::Integer &_integer) const;
       bool operator>=(int _value) const;
-      bool operator<(const ls_std::Integer& _integer) const;
+      bool operator<(const ls_std::Integer &_integer) const;
       bool operator<(int _value) const;
-      bool operator<=(const ls_std::Integer& _integer) const;
+      bool operator<=(const ls_std::Integer &_integer) const;
       bool operator<=(int _value) const;
 
       // logical operators
 
-      friend bool operator!(const ls_std::Integer& _integer) {
+      friend bool operator!(const ls_std::Integer &_integer)
+      {
         return !_integer.value;
       }
 
-      bool operator&&(const ls_std::Integer& _integer) const;
+      bool operator&&(const ls_std::Integer &_integer) const;
       bool operator&&(int _value) const;
       bool operator&&(bool _expression) const;
-      bool operator||(const ls_std::Integer& _integer) const;
+      bool operator||(const ls_std::Integer &_integer) const;
       bool operator||(int _value) const;
       bool operator||(bool _expression) const;
 
@@ -95,9 +98,9 @@ namespace ls_std {
       ls_std::byte_field load() override;
       ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
-      void save(const ls_std::byte_field& _data) override;
+      void save(const ls_std::byte_field &_data) override;
       std::string toString() override;
-      void unmarshal(const ls_std::byte_field& _data) override;
+      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
@@ -107,9 +110,9 @@ namespace ls_std {
 
     private:
 
-      std::shared_ptr<ISerializable> serializable {};
-      std::shared_ptr<IStorable> storable {};
-      int value {};
+      std::shared_ptr<ISerializable> serializable{};
+      std::shared_ptr<IStorable> storable{};
+      int value{};
   };
 }
 

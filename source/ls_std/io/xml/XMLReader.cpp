@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -13,17 +13,18 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/io/xml/XMLParser.hpp>
 
-ls_std::XMLReader::XMLReader(const std::shared_ptr<ls_std::XMLDocument>& _document, const std::string& _absolutePath) : ls_std::Class("XMLReader"),
-xmlFile(ls_std::File {""})
+ls_std::XMLReader::XMLReader(const std::shared_ptr<ls_std::XMLDocument> &_document, const std::string &_absolutePath)
+    : ls_std::Class("XMLReader"),
+      xmlFile(ls_std::File{""})
 {
   this->_assignDocument(_document);
-  this->_assignFile(ls_std::File {_absolutePath});
+  this->_assignFile(ls_std::File{_absolutePath});
 }
 
 ls_std::byte_field ls_std::XMLReader::read()
 {
-  ls_std::byte_field data = ls_std::FileReader {this->xmlFile}.read();
-  ls_std::XMLParser {this->document}.parse(data);
+  ls_std::byte_field data = ls_std::FileReader{this->xmlFile}.read();
+  ls_std::XMLParser{this->document}.parse(data);
 
   return data;
 }
@@ -45,8 +46,9 @@ void ls_std::XMLReader::setFile(const ls_std::File &_xmlFile)
 
 void ls_std::XMLReader::_assignDocument(const std::shared_ptr<ls_std::XMLDocument> &_document)
 {
-  if(_document == nullptr) {
-    throw ls_std::IllegalArgumentException {};
+  if (_document == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
   }
 
   this->document = _document;
@@ -54,8 +56,9 @@ void ls_std::XMLReader::_assignDocument(const std::shared_ptr<ls_std::XMLDocumen
 
 void ls_std::XMLReader::_assignFile(ls_std::File _xmlFile)
 {
-  if(!_xmlFile.exists()) {
-    throw ls_std::IllegalArgumentException {};
+  if (!_xmlFile.exists())
+  {
+    throw ls_std::IllegalArgumentException{};
   }
 
   this->xmlFile = _xmlFile;

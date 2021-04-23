@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2020-11-14
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,8 +12,10 @@
 
 #include <string>
 
-namespace ls_std {
-  class Class {
+namespace ls_std
+{
+  class Class
+  {
     public:
 
       explicit Class(std::string _name);
@@ -23,7 +25,7 @@ namespace ls_std {
 
     private:
 
-      std::string name {};
+      std::string name{};
   };
 }
 

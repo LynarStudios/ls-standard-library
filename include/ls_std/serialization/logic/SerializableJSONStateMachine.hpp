@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -16,29 +16,31 @@
 #include <memory>
 #include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
 
-namespace ls_std {
-  class SerializableJSONStateMachine : public Class, public ISerializable {
+namespace ls_std
+{
+  class SerializableJSONStateMachine : public Class, public ISerializable
+  {
     public:
 
-      explicit SerializableJSONStateMachine(const std::shared_ptr<ls_std::StateMachine>& _value);
+      explicit SerializableJSONStateMachine(const std::shared_ptr<ls_std::StateMachine> &_value);
       ~SerializableJSONStateMachine() override = default;
 
       // implementation
 
       ls_std::byte_field marshal() override;
-      void unmarshal(const ls_std::byte_field& _data) override;
+      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
       std::shared_ptr<ls_std::StateMachine> getValue();
-      void setValue(const std::shared_ptr<ls_std::StateMachine>& _value);
+      void setValue(const std::shared_ptr<ls_std::StateMachine> &_value);
 
     private:
 
-      nlohmann::json jsonObject {};
-      std::shared_ptr<ls_std::StateMachine> value {};
+      nlohmann::json jsonObject{};
+      std::shared_ptr<ls_std::StateMachine> value{};
 
-      void _assignValue(const std::shared_ptr<ls_std::StateMachine>& _value);
+      void _assignValue(const std::shared_ptr<ls_std::StateMachine> &_value);
       void _unmarshalCurrentState();
       void _unmarshalStates();
       void _update();

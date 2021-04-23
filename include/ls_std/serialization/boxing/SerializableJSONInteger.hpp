@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -15,29 +15,31 @@
 #include <ls_std/boxing/Integer.hpp>
 #include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
 
-namespace ls_std {
-  class SerializableJSONInteger : public Class, public ISerializable {
+namespace ls_std
+{
+  class SerializableJSONInteger : public Class, public ISerializable
+  {
     public:
 
-      explicit SerializableJSONInteger(const std::shared_ptr<ls_std::Integer>& _value);
+      explicit SerializableJSONInteger(const std::shared_ptr<ls_std::Integer> &_value);
       ~SerializableJSONInteger() override = default;
 
       // implementation
 
       ls_std::byte_field marshal() override;
-      void unmarshal(const ls_std::byte_field& _data) override;
+      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
       std::shared_ptr<ls_std::Integer> getValue();
-      void setValue(const std::shared_ptr<ls_std::Integer>& _value);
+      void setValue(const std::shared_ptr<ls_std::Integer> &_value);
 
     private:
 
-      std::shared_ptr<ls_std::Integer> value {};
-      nlohmann::json jsonObject {};
+      std::shared_ptr<ls_std::Integer> value{};
+      nlohmann::json jsonObject{};
 
-      void _assignValue(const std::shared_ptr<ls_std::Integer>& _value);
+      void _assignValue(const std::shared_ptr<ls_std::Integer> &_value);
       void _update();
   };
 }

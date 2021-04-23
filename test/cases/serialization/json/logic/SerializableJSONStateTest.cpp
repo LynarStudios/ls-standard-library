@@ -3,22 +3,27 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
 
-namespace {
-  class SerializableJSONStateTest : public ::testing::Test {
+namespace
+{
+  class SerializableJSONStateTest : public ::testing::Test
+  {
     protected:
 
       SerializableJSONStateTest() = default;
       ~SerializableJSONStateTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(SerializableJSONStateTest, marshal)
@@ -27,7 +32,7 @@ namespace {
     x->addStateConnection(std::make_shared<ls_std::StateConnection>("AB", "B"));
     x->addStateConnection(std::make_shared<ls_std::StateConnection>("AC", "C"));
 
-    ls_std::SerializableJSONState serializable {x};
+    ls_std::SerializableJSONState serializable{x};
     ls_std::byte_field jsonString = serializable.marshal();
 
     ASSERT_TRUE(!jsonString.empty());
@@ -38,7 +43,7 @@ namespace {
   TEST_F(SerializableJSONStateTest, unmarshal)
   {
     std::shared_ptr<ls_std::State> x = std::make_shared<ls_std::State>("A");
-    ls_std::SerializableJSONState serializable {x};
+    ls_std::SerializableJSONState serializable{x};
 
     // before
 
@@ -60,7 +65,7 @@ namespace {
   TEST_F(SerializableJSONStateTest, getValue)
   {
     std::shared_ptr<ls_std::State> x = std::make_shared<ls_std::State>("A");
-    ls_std::SerializableJSONState serializable {x};
+    ls_std::SerializableJSONState serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
@@ -70,7 +75,7 @@ namespace {
     x->addStateConnection(std::make_shared<ls_std::StateConnection>("AB", "B"));
     x->addStateConnection(std::make_shared<ls_std::StateConnection>("AC", "C"));
 
-    ls_std::SerializableJSONState serializable {x};
+    ls_std::SerializableJSONState serializable{x};
     ls_std::byte_field jsonString = serializable.marshal();
 
     std::string expectedJSONString = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
