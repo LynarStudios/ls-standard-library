@@ -91,4 +91,7 @@
 #include "event/IEventSubscriber.hpp"
 #include "event/EventManager.hpp"
 
+#include "factory/IFactory.hpp"
+#include "factory/serialization/boxing/SerializableJSONBooleanFactory.hpp"
+
 #endif

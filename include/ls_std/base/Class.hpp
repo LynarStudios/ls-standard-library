@@ -19,6 +19,7 @@ namespace ls_std
     public:
 
       explicit Class(std::string _name);
+      Class();
       virtual ~Class() = default;
 
       std::string getClassName();

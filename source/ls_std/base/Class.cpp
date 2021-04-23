@@ -17,3 +17,6 @@ std::string ls_std::Class::getClassName()
 {
   return this->name;
 }
+
+ls_std::Class::Class()
+{}

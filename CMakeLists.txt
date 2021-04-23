@@ -96,7 +96,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVPair.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONBooleanFactory.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
@@ -155,7 +156,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVPairTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVParserTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVReaderTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVReaderTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/boxing/SerializableJSONBooleanFactoryTest.cpp)
 endif ()
 
 ##########################################################
