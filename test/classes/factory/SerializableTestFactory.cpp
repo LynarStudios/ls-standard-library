@@ -11,5 +11,5 @@
 
 std::shared_ptr<ls_std::Class> ls_std_test::SerializableTestFactory::build()
 {
-  return std::make_shared<ls_std::Class>();
+  return std::make_shared<ls_std::Class>("TestClass");
 }

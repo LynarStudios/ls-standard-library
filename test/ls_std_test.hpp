@@ -10,6 +10,8 @@
 #ifndef LS_STD_LS_STD_TEST_HPP
 #define LS_STD_LS_STD_TEST_HPP
 
+#include "classes/base/ClassMock.hpp"
+
 #include "classes/event/NewsAgency.hpp"
 #include "classes/event/DailyNewsAgency.hpp"
 #include "classes/event/GossipNewsAgency.hpp"
