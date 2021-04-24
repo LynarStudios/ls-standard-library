@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2021-04-23
+ * Changed:         2021-04-24
  *
  * */
 
@@ -70,7 +70,12 @@ namespace
     ASSERT_TRUE(ls_std::Version::isValid("2.5.1"));
   }
 
-  TEST_F(VersionTest, isValidNegative)
+  TEST_F(VersionTest, isValid_emptyString)
+  {
+    ASSERT_FALSE(ls_std::Version::isValid(""));
+  }
+
+  TEST_F(VersionTest, isValid_noValidVersionString)
   {
     ASSERT_FALSE(ls_std::Version::isValid("v2020.1.2"));
     ASSERT_FALSE(ls_std::Version::isValid("2.5"));
