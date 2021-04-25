@@ -98,7 +98,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/SerializableFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/SerializableJSONFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONBooleanFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONDoubleFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONFloatFactory.cpp

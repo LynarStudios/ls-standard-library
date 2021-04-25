@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-04-24
+ * Changed:         2021-04-25
  *
  * */
 
-#include <ls_std/factory/serialization/SerializableFactory.hpp>
+#include <ls_std/factory/serialization/SerializableJSONFactory.hpp>
 #include <ls_std/boxing/Boolean.hpp>
 #include <ls_std/boxing/Double.hpp>
 #include <ls_std/boxing/Float.hpp>
@@ -23,12 +23,12 @@
 #include <ls_std/exception/IllegalArgumentException.hpp>
 #include <ls_std/exception/NullPointerException.hpp>
 
-ls_std::SerializableFactory::SerializableFactory() : ls_std::Class("SerializableFactory")
+ls_std::SerializableJSONFactory::SerializableJSONFactory() : ls_std::Class("SerializableJSONFactory")
 {
   this->_init();
 }
 
-bool ls_std::SerializableFactory::addFactory(const std::pair<std::string, std::shared_ptr<ls_std::IFactory>> &_factoryInsertion)
+bool ls_std::SerializableJSONFactory::addFactory(const std::pair<std::string, std::shared_ptr<ls_std::IFactory>> &_factoryInsertion)
 {
   bool hasFactory{};
 
@@ -50,7 +50,7 @@ bool ls_std::SerializableFactory::addFactory(const std::pair<std::string, std::s
   return hasFactory;
 }
 
-std::shared_ptr<ls_std::Class> ls_std::SerializableFactory::build(const std::string &_relatedObjectName)
+std::shared_ptr<ls_std::Class> ls_std::SerializableJSONFactory::build(const std::string &_relatedObjectName)
 {
   std::shared_ptr<ls_std::Class> requestedObject{};
 
@@ -62,18 +62,18 @@ std::shared_ptr<ls_std::Class> ls_std::SerializableFactory::build(const std::str
   return requestedObject;
 }
 
-bool ls_std::SerializableFactory::clear()
+bool ls_std::SerializableJSONFactory::clear()
 {
   this->factories.clear();
   return factories.empty();
 }
 
-bool ls_std::SerializableFactory::hasFactory(const std::string &_relatedObjectName)
+bool ls_std::SerializableJSONFactory::hasFactory(const std::string &_relatedObjectName)
 {
   return this->_hasFactory(_relatedObjectName);
 }
 
-bool ls_std::SerializableFactory::removeFactory(const std::string &_relatedObjectName)
+bool ls_std::SerializableJSONFactory::removeFactory(const std::string &_relatedObjectName)
 {
   bool wasRemoved{};
 
@@ -86,12 +86,12 @@ bool ls_std::SerializableFactory::removeFactory(const std::string &_relatedObjec
   return wasRemoved;
 }
 
-bool ls_std::SerializableFactory::_hasFactory(const std::string &_relatedObjectName)
+bool ls_std::SerializableJSONFactory::_hasFactory(const std::string &_relatedObjectName)
 {
   return this->factories.find(_relatedObjectName) != this->factories.end();
 }
 
-void ls_std::SerializableFactory::_init()
+void ls_std::SerializableJSONFactory::_init()
 {
   this->factories.insert({ls_std::Boolean{}.getClassName(), std::make_shared<ls_std::SerializableJSONBooleanFactory>()});
   this->factories.insert({ls_std::Double{}.getClassName(), std::make_shared<ls_std::SerializableJSONDoubleFactory>()});
