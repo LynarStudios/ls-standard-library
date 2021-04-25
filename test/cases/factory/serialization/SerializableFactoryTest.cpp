@@ -103,10 +103,15 @@ namespace
     ASSERT_TRUE(serializableFactory.clear());
   }
 
-  TEST_F(SerializableFactoryTest, hasFactory)
+  TEST_F(SerializableFactoryTest, hasFactory_ofBoxingPackage)
   {
     ls_std::SerializableFactory serializableFactory{};
     ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Boolean{}.getClassName()));
+    ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Double{}.getClassName()));
+    ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Float{}.getClassName()));
+    ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Integer{}.getClassName()));
+    ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Long{}.getClassName()));
+    ASSERT_TRUE(serializableFactory.hasFactory(ls_std::String{}.getClassName()));
   }
 
   TEST_F(SerializableFactoryTest, hasFactory_factoryNotAvailable)

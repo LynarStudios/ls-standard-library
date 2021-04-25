@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-23
- * Changed:         2021-04-23
+ * Changed:         2021-04-25
  *
  * */
 
@@ -30,5 +30,6 @@ namespace
   {
     std::shared_ptr<ls_std::Boolean> value = std::dynamic_pointer_cast<ls_std::Boolean>(ls_std::SerializableJSONBooleanFactory{}.build());
     ASSERT_TRUE(value != nullptr);
+    ASSERT_STREQ("Boolean", value->getClassName().c_str());
   }
 }

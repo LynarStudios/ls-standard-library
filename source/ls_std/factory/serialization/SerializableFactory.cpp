@@ -9,7 +9,17 @@
 
 #include <ls_std/factory/serialization/SerializableFactory.hpp>
 #include <ls_std/boxing/Boolean.hpp>
+#include <ls_std/boxing/Double.hpp>
+#include <ls_std/boxing/Float.hpp>
+#include <ls_std/boxing/Integer.hpp>
+#include <ls_std/boxing/Long.hpp>
+#include <ls_std/boxing/String.hpp>
 #include <ls_std/factory/serialization/boxing/SerializableJSONBooleanFactory.hpp>
+#include <ls_std/factory/serialization/boxing/SerializableJSONDoubleFactory.hpp>
+#include <ls_std/factory/serialization/boxing/SerializableJSONFloatFactory.hpp>
+#include <ls_std/factory/serialization/boxing/SerializableJSONIntegerFactory.hpp>
+#include <ls_std/factory/serialization/boxing/SerializableJSONLongFactory.hpp>
+#include <ls_std/factory/serialization/boxing/SerializableJSONStringFactory.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 #include <ls_std/exception/NullPointerException.hpp>
 
@@ -84,4 +94,9 @@ bool ls_std::SerializableFactory::_hasFactory(const std::string &_relatedObjectN
 void ls_std::SerializableFactory::_init()
 {
   this->factories.insert({ls_std::Boolean{}.getClassName(), std::make_shared<ls_std::SerializableJSONBooleanFactory>()});
+  this->factories.insert({ls_std::Double{}.getClassName(), std::make_shared<ls_std::SerializableJSONDoubleFactory>()});
+  this->factories.insert({ls_std::Float{}.getClassName(), std::make_shared<ls_std::SerializableJSONFloatFactory>()});
+  this->factories.insert({ls_std::Integer{}.getClassName(), std::make_shared<ls_std::SerializableJSONIntegerFactory>()});
+  this->factories.insert({ls_std::Long{}.getClassName(), std::make_shared<ls_std::SerializableJSONLongFactory>()});
+  this->factories.insert({ls_std::String{}.getClassName(), std::make_shared<ls_std::SerializableJSONStringFactory>()});
 }

@@ -94,5 +94,10 @@
 #include "factory/IFactory.hpp"
 #include "factory/serialization/SerializableFactory.hpp"
 #include "factory/serialization/boxing/SerializableJSONBooleanFactory.hpp"
+#include "factory/serialization/boxing/SerializableJSONDoubleFactory.hpp"
+#include "factory/serialization/boxing/SerializableJSONFloatFactory.hpp"
+#include "factory/serialization/boxing/SerializableJSONIntegerFactory.hpp"
+#include "factory/serialization/boxing/SerializableJSONLongFactory.hpp"
+#include "factory/serialization/boxing/SerializableJSONStringFactory.hpp"
 
 #endif
