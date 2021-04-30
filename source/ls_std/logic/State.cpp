@@ -3,16 +3,46 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-04-23
+ * Changed:         2021-04-30
  *
  * */
 
 #include <ls_std/logic/State.hpp>
+#include <ls_std/exception/NullPointerException.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::State::State(ls_std::StateId _id)
     : ls_std::Class("State"),
       id(std::move(_id))
 {}
+
+ls_std::byte_field ls_std::State::marshal()
+{
+  ls_std::byte_field data{};
+
+  if (this->serializable != nullptr)
+  {
+    data = this->serializable->marshal();
+  }
+  else
+  {
+    throw ls_std::NullPointerException{};
+  }
+
+  return data;
+}
+
+void ls_std::State::unmarshal(const ls_std::byte_field &_data)
+{
+  if (this->serializable != nullptr)
+  {
+    this->serializable->unmarshal(_data);
+  }
+  else
+  {
+    throw ls_std::NullPointerException{};
+  }
+}
 
 bool ls_std::State::addStateConnection(const ls_std::StateConnectionId &_connectionId, const std::shared_ptr<ls_std::State> &_connectedState)
 {
@@ -65,6 +95,16 @@ bool ls_std::State::hasConnection(const ls_std::StateConnectionId &_connectionId
 void ls_std::State::setId(ls_std::StateId _id)
 {
   this->id = std::move(_id);
+}
+
+void ls_std::State::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
+{
+  if (_serializable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->serializable = std::move(_serializable);
 }
 
 void ls_std::State::_clearConnections()

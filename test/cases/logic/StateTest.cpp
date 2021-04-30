@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-04-23
+ * Changed:         2021-04-30
  *
  * */
 
@@ -26,6 +26,63 @@ namespace
       void TearDown() override
       {}
   };
+
+  // implementation
+
+  TEST_F(StateTest, marshal)
+  {
+    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("A");
+    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONState>(state);
+    state->setSerializable(serializable);
+
+    ASSERT_FALSE(state->marshal().empty());
+  }
+
+  TEST_F(StateTest, marshal_noSerializableReference)
+  {
+    ls_std::State state{"A"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     state.marshal();
+                   }
+                   catch (const ls_std::NullPointerException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::NullPointerException);
+  }
+
+  TEST_F(StateTest, unmarshal)
+  {
+    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
+    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONState>(state);
+    state->setSerializable(serializable);
+    std::string jsonString = R"({"id":"A","connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"}}})";
+    state->unmarshal(jsonString);
+
+    ASSERT_STREQ("A", state->getId().c_str());
+  }
+
+  TEST_F(StateTest, unmarshal_noSerializableReference)
+  {
+    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
+    std::string jsonString = R"({"id":"A","connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"}}})";
+
+    EXPECT_THROW({
+                   try
+                   {
+                     state->unmarshal(jsonString);
+                   }
+                   catch (const ls_std::NullPointerException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::NullPointerException);
+  }
+
+  // additional functionality
 
   TEST_F(StateTest, addStateConnection)
   {
@@ -121,5 +178,22 @@ namespace
     ls_std::State stateA{"A"};
     ASSERT_FALSE(stateA.hasConnection("AB"));
     ASSERT_FALSE(stateA.hasConnection("AC"));
+  }
+
+  TEST_F(StateTest, setSerializable_noSerializableReference)
+  {
+    ls_std::State state{"A"};
+    std::shared_ptr<ls_std::ISerializable> serializable{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     state.setSerializable(serializable);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }
