@@ -104,7 +104,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONFloatFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONIntegerFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONLongFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONStringFactory.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/boxing/SerializableJSONStringFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/event/SerializableJSONEventFactory.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
@@ -171,6 +172,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/boxing/SerializableJSONIntegerFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/boxing/SerializableJSONLongFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/boxing/SerializableJSONStringFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/event/SerializableJSONEventFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/factory/SerializableTestFactory.cpp)
 endif ()
 
