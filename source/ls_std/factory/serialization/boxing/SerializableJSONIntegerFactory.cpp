@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-25
- * Changed:         2021-04-25
+ * Changed:         2021-04-30
  *
  * */
 
@@ -16,9 +16,9 @@ ls_std::SerializableJSONIntegerFactory::SerializableJSONIntegerFactory() : ls_st
 
 std::shared_ptr<ls_std::Class> ls_std::SerializableJSONIntegerFactory::build()
 {
-  std::shared_ptr<ls_std::Integer> value = std::make_shared<ls_std::Integer>();
-  std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONInteger>(value);
-  value->setSerializable(serializable);
+  std::shared_ptr<ls_std::Integer> requestedObject = std::make_shared<ls_std::Integer>();
+  std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONInteger>(requestedObject);
+  requestedObject->setSerializable(serializable);
 
-  return std::dynamic_pointer_cast<ls_std::Class>(value);
+  return std::dynamic_pointer_cast<ls_std::Class>(requestedObject);
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-04-25
+ * Changed:         2021-04-30
  *
  * */
 
@@ -30,7 +30,7 @@ ls_std::SerializableJSONFactory::SerializableJSONFactory() : ls_std::Class("Seri
 
 bool ls_std::SerializableJSONFactory::addFactory(const std::pair<std::string, std::shared_ptr<ls_std::IFactory>> &_factoryInsertion)
 {
-  bool hasFactory{};
+  bool factoryAdded{};
 
   if (_factoryInsertion.first.empty())
   {
@@ -44,22 +44,22 @@ bool ls_std::SerializableJSONFactory::addFactory(const std::pair<std::string, st
 
   if (!this->_hasFactory(_factoryInsertion.first))
   {
-    hasFactory = this->factories.insert(_factoryInsertion).second;
+    factoryAdded = this->factories.insert(_factoryInsertion).second;
   }
 
-  return hasFactory;
+  return factoryAdded;
 }
 
 std::shared_ptr<ls_std::Class> ls_std::SerializableJSONFactory::build(const std::string &_relatedObjectName)
 {
-  std::shared_ptr<ls_std::Class> requestedObject{};
+  std::shared_ptr<ls_std::Class> requestedBuiltObject{};
 
   if (this->_hasFactory(_relatedObjectName))
   {
-    requestedObject = this->factories.at(_relatedObjectName)->build();
+    requestedBuiltObject = this->factories.at(_relatedObjectName)->build();
   }
 
-  return requestedObject;
+  return requestedBuiltObject;
 }
 
 bool ls_std::SerializableJSONFactory::clear()

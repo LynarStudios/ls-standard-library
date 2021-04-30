@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-04-24
+ * Changed:         2021-04-30
  *
  * */
 
@@ -16,9 +16,9 @@ ls_std::SerializableJSONDoubleFactory::SerializableJSONDoubleFactory() : ls_std:
 
 std::shared_ptr<ls_std::Class> ls_std::SerializableJSONDoubleFactory::build()
 {
-  std::shared_ptr<ls_std::Double> value = std::make_shared<ls_std::Double>();
-  std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONDouble>(value);
-  value->setSerializable(serializable);
+  std::shared_ptr<ls_std::Double> requestedObject = std::make_shared<ls_std::Double>();
+  std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONDouble>(requestedObject);
+  requestedObject->setSerializable(serializable);
 
-  return std::dynamic_pointer_cast<ls_std::Class>(value);
+  return std::dynamic_pointer_cast<ls_std::Class>(requestedObject);
 }
