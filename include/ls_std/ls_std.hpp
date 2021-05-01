@@ -93,13 +93,13 @@
 #include "event/EventManager.hpp"
 
 #include "factory/IFactory.hpp"
-#include "factory/serialization/SerializableJSONFactory.hpp"
-#include "factory/serialization/boxing/SerializableJSONBooleanFactory.hpp"
-#include "factory/serialization/boxing/SerializableJSONDoubleFactory.hpp"
-#include "factory/serialization/boxing/SerializableJSONFloatFactory.hpp"
-#include "factory/serialization/boxing/SerializableJSONIntegerFactory.hpp"
-#include "factory/serialization/boxing/SerializableJSONLongFactory.hpp"
-#include "factory/serialization/boxing/SerializableJSONStringFactory.hpp"
-#include "factory/serialization/event/SerializableJSONEventFactory.hpp"
+#include "ls_std/factory/serialization/json/SerializableJSONFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONBooleanFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONDoubleFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONFloatFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONIntegerFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONLongFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONStringFactory.hpp"
+#include "factory/serialization/json/event/SerializableJSONEventFactory.hpp"
 
 #endif

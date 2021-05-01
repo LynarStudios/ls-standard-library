@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls_std/factory/serialization/boxing/SerializableJSONDoubleFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONDoubleFactory.hpp>
 #include <ls_std/boxing/Double.hpp>
 #include <ls_std/serialization/json/boxing/SerializableJSONDouble.hpp>
 

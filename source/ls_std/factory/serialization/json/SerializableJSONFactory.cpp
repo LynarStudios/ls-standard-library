@@ -3,23 +3,23 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
-#include <ls_std/factory/serialization/SerializableJSONFactory.hpp>
+#include <ls_std/factory/serialization/json/SerializableJSONFactory.hpp>
 #include <ls_std/boxing/Boolean.hpp>
 #include <ls_std/boxing/Double.hpp>
 #include <ls_std/boxing/Float.hpp>
 #include <ls_std/boxing/Integer.hpp>
 #include <ls_std/boxing/Long.hpp>
 #include <ls_std/boxing/String.hpp>
-#include <ls_std/factory/serialization/boxing/SerializableJSONBooleanFactory.hpp>
-#include <ls_std/factory/serialization/boxing/SerializableJSONDoubleFactory.hpp>
-#include <ls_std/factory/serialization/boxing/SerializableJSONFloatFactory.hpp>
-#include <ls_std/factory/serialization/boxing/SerializableJSONIntegerFactory.hpp>
-#include <ls_std/factory/serialization/boxing/SerializableJSONLongFactory.hpp>
-#include <ls_std/factory/serialization/boxing/SerializableJSONStringFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONBooleanFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONDoubleFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONFloatFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONIntegerFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONLongFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONStringFactory.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 #include <ls_std/exception/NullPointerException.hpp>
 

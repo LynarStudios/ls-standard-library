@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls_std/factory/serialization/boxing/SerializableJSONBooleanFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONBooleanFactory.hpp>
 #include <ls_std/boxing/Boolean.hpp>
 #include <ls_std/serialization/json/boxing/SerializableJSONBoolean.hpp>
 

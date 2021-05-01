@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls_std/factory/serialization/boxing/SerializableJSONIntegerFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONIntegerFactory.hpp>
 #include <ls_std/boxing/Integer.hpp>
 #include <ls_std/serialization/json/boxing/SerializableJSONInteger.hpp>
 

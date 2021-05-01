@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls_std/factory/serialization/event/SerializableJSONEventFactory.hpp>
+#include <ls_std/factory/serialization/json/event/SerializableJSONEventFactory.hpp>
 #include <ls_std/event/Event.hpp>
 #include <ls_std/serialization/json/event/SerializableJSONEvent.hpp>
 

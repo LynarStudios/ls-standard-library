@@ -3,24 +3,24 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-04-24
+ * Changed:         2021-05-01
  *
  * */
 
-#ifndef LS_STD_SERIALIZABLE_JSON_LONG_FACTORY_HPP
-#define LS_STD_SERIALIZABLE_JSON_LONG_FACTORY_HPP
+#ifndef LS_STD_SERIALIZABLE_JSON_STRING_FACTORY_HPP
+#define LS_STD_SERIALIZABLE_JSON_STRING_FACTORY_HPP
 
 #include <ls_std/factory/IFactory.hpp>
 #include <memory>
 
 namespace ls_std
 {
-  class SerializableJSONLongFactory : public ls_std::Class, public ls_std::IFactory
+  class SerializableJSONStringFactory : public ls_std::Class, public ls_std::IFactory
   {
     public:
 
-      SerializableJSONLongFactory();
-      ~SerializableJSONLongFactory() override = default;
+      SerializableJSONStringFactory();
+      ~SerializableJSONStringFactory() override = default;
 
       std::shared_ptr<ls_std::Class> build() override;
   };

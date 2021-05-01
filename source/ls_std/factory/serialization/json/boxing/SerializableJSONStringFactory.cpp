@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls_std/factory/serialization/boxing/SerializableJSONStringFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONStringFactory.hpp>
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/serialization/json/boxing/SerializableJSONString.hpp>
 

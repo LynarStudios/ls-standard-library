@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls_std/factory/serialization/boxing/SerializableJSONFloatFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONFloatFactory.hpp>
 #include <ls_std/boxing/Float.hpp>
 #include <ls_std/serialization/json/boxing/SerializableJSONFloat.hpp>
 

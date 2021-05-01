@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls_std/factory/serialization/boxing/SerializableJSONLongFactory.hpp>
+#include <ls_std/factory/serialization/json/boxing/SerializableJSONLongFactory.hpp>
 #include <ls_std/boxing/Long.hpp>
 #include <ls_std/serialization/json/boxing/SerializableJSONLong.hpp>
 
