@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-25
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
 #include <ls_std/factory/serialization/boxing/SerializableJSONFloatFactory.hpp>
 #include <ls_std/boxing/Float.hpp>
-#include <ls_std/serialization/boxing/SerializableJSONFloat.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONFloat.hpp>
 
 ls_std::SerializableJSONFloatFactory::SerializableJSONFloatFactory() : ls_std::Class("SerializableJSONFloatFactory")
 {}

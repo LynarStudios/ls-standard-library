@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-04
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
-#include <ls_std/serialization/boxing/SerializableJSONFloat.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONFloat.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONFloat::SerializableJSONFloat(const std::shared_ptr<ls_std::Float> &_value) : ls_std::Class("SerializableJSONFloat")

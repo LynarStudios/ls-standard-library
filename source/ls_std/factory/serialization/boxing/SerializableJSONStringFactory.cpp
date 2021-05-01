@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-25
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
 #include <ls_std/factory/serialization/boxing/SerializableJSONStringFactory.hpp>
 #include <ls_std/boxing/String.hpp>
-#include <ls_std/serialization/boxing/SerializableJSONString.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONString.hpp>
 
 ls_std::SerializableJSONStringFactory::SerializableJSONStringFactory() : ls_std::Class("SerializableJSONStringFactory")
 {}

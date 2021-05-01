@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
 #include <ls_std/factory/serialization/boxing/SerializableJSONDoubleFactory.hpp>
 #include <ls_std/boxing/Double.hpp>
-#include <ls_std/serialization/boxing/SerializableJSONDouble.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONDouble.hpp>
 
 ls_std::SerializableJSONDoubleFactory::SerializableJSONDoubleFactory() : ls_std::Class("SerializableJSONDoubleFactory")
 {}

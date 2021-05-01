@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-25
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
 #include <ls_std/factory/serialization/boxing/SerializableJSONLongFactory.hpp>
 #include <ls_std/boxing/Long.hpp>
-#include <ls_std/serialization/boxing/SerializableJSONLong.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONLong.hpp>
 
 ls_std::SerializableJSONLongFactory::SerializableJSONLongFactory() : ls_std::Class("SerializableJSONLongFactory")
 {}

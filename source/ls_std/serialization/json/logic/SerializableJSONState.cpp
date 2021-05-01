@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
-#include <ls_std/serialization/logic/SerializableJSONState.hpp>
-#include <ls_std/serialization/logic/SerializableJSONStateConnection.hpp>
+#include <ls_std/serialization/json/logic/SerializableJSONState.hpp>
+#include <ls_std/serialization/json/logic/SerializableJSONStateConnection.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONState::SerializableJSONState(const std::shared_ptr<ls_std::State> &_value) : ls_std::Class("SerializableJSONState")

@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-30
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
 #include <ls_std/factory/serialization/event/SerializableJSONEventFactory.hpp>
 #include <ls_std/event/Event.hpp>
-#include <ls_std/serialization/event/SerializableJSONEvent.hpp>
+#include <ls_std/serialization/json/event/SerializableJSONEvent.hpp>
 
 ls_std::SerializableJSONEventFactory::SerializableJSONEventFactory() : ls_std::Class("SerializableJSONEventFactory")
 {}

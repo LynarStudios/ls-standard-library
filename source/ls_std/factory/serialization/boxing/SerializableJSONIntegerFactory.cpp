@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-25
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
 #include <ls_std/factory/serialization/boxing/SerializableJSONIntegerFactory.hpp>
 #include <ls_std/boxing/Integer.hpp>
-#include <ls_std/serialization/boxing/SerializableJSONInteger.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONInteger.hpp>
 
 ls_std::SerializableJSONIntegerFactory::SerializableJSONIntegerFactory() : ls_std::Class("SerializableJSONIntegerFactory")
 {}

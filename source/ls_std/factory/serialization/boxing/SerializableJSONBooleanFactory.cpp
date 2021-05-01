@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-23
- * Changed:         2021-04-30
+ * Changed:         2021-05-01
  *
  * */
 
 #include <ls_std/factory/serialization/boxing/SerializableJSONBooleanFactory.hpp>
 #include <ls_std/boxing/Boolean.hpp>
-#include <ls_std/serialization/boxing/SerializableJSONBoolean.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONBoolean.hpp>
 
 ls_std::SerializableJSONBooleanFactory::SerializableJSONBooleanFactory() : ls_std::Class("SerializableJSONBooleanFactory")
 {}

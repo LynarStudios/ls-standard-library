@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
-#include <ls_std/serialization/event/SerializableJSONEvent.hpp>
+#include <ls_std/serialization/json/event/SerializableJSONEvent.hpp>
 #include <ls_std/exception/NullPointerException.hpp>
 
 ls_std::SerializableJSONEvent::SerializableJSONEvent(const std::shared_ptr<ls_std::Event> &_value) : ls_std::Class("SerializableJSONEvent")

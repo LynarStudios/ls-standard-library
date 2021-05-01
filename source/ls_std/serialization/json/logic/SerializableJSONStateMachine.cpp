@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
-#include <ls_std/serialization/logic/SerializableJSONStateMachine.hpp>
-#include <ls_std/serialization/logic/SerializableJSONState.hpp>
+#include <ls_std/serialization/json/logic/SerializableJSONStateMachine.hpp>
+#include <ls_std/serialization/json/logic/SerializableJSONState.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONStateMachine::SerializableJSONStateMachine(const std::shared_ptr<ls_std::StateMachine> &_value) : ls_std::Class("SerializableJSONStateMachine")

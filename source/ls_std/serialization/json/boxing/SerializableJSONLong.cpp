@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-25
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
-#include <ls_std/serialization/boxing/SerializableJSONLong.hpp>
+#include <ls_std/serialization/json/boxing/SerializableJSONLong.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJSONLong::SerializableJSONLong(const std::shared_ptr<ls_std::Long> &_value) : ls_std::Class("SerializableJSONLong")
