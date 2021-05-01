@@ -12,12 +12,12 @@
 
 namespace
 {
-  class IncompleteJsonExceptionTest : public ::testing::Test
+  class IllegalArgumentExceptionTest : public ::testing::Test
   {
     protected:
 
-      IncompleteJsonExceptionTest() = default;
-      ~IncompleteJsonExceptionTest() override = default;
+      IllegalArgumentExceptionTest() = default;
+      ~IllegalArgumentExceptionTest() override = default;
 
       void SetUp() override
       {}
@@ -26,18 +26,18 @@ namespace
       {}
   };
 
-  TEST_F(IncompleteJsonExceptionTest, constructor)
+  TEST_F(IllegalArgumentExceptionTest, constructor)
   {
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::IncompleteJsonException{};
+                     throw ls_std::IllegalArgumentException{};
                    }
-                   catch (const ls_std::IncompleteJsonException &_exception)
+                   catch (const ls_std::IllegalArgumentException &_exception)
                    {
-                     EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", _exception.what());
+                     EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
                      throw;
                    }
-                 }, ls_std::IncompleteJsonException);
+                 }, ls_std::IllegalArgumentException);
   }
 }

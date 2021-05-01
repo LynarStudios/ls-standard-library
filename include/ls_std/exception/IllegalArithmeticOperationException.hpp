@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls_std
 
       const char *what() const noexcept override
       {
-        return "IllegalArithmeticOperationException thrown - arithmetic operation is not valid!";
+        return "IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!";
       }
   };
 }

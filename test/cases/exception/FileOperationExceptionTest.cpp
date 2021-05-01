@@ -12,12 +12,12 @@
 
 namespace
 {
-  class IncompleteJsonExceptionTest : public ::testing::Test
+  class FileOperationExceptionTest : public ::testing::Test
   {
     protected:
 
-      IncompleteJsonExceptionTest() = default;
-      ~IncompleteJsonExceptionTest() override = default;
+      FileOperationExceptionTest() = default;
+      ~FileOperationExceptionTest() override = default;
 
       void SetUp() override
       {}
@@ -26,18 +26,18 @@ namespace
       {}
   };
 
-  TEST_F(IncompleteJsonExceptionTest, constructor)
+  TEST_F(FileOperationExceptionTest, constructor)
   {
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::IncompleteJsonException{};
+                     throw ls_std::FileOperationException{};
                    }
-                   catch (const ls_std::IncompleteJsonException &_exception)
+                   catch (const ls_std::FileOperationException &_exception)
                    {
-                     EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", _exception.what());
+                     EXPECT_STREQ("FileOperationException thrown - file operation failed!", _exception.what());
                      throw;
                    }
-                 }, ls_std::IncompleteJsonException);
+                 }, ls_std::FileOperationException);
   }
 }

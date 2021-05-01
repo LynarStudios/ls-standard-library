@@ -12,12 +12,12 @@
 
 namespace
 {
-  class IncompleteJsonExceptionTest : public ::testing::Test
+  class NullPointerExceptionTest : public ::testing::Test
   {
     protected:
 
-      IncompleteJsonExceptionTest() = default;
-      ~IncompleteJsonExceptionTest() override = default;
+      NullPointerExceptionTest() = default;
+      ~NullPointerExceptionTest() override = default;
 
       void SetUp() override
       {}
@@ -26,18 +26,18 @@ namespace
       {}
   };
 
-  TEST_F(IncompleteJsonExceptionTest, constructor)
+  TEST_F(NullPointerExceptionTest, constructor)
   {
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::IncompleteJsonException{};
+                     throw ls_std::NullPointerException{};
                    }
-                   catch (const ls_std::IncompleteJsonException &_exception)
+                   catch (const ls_std::NullPointerException &_exception)
                    {
-                     EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", _exception.what());
+                     EXPECT_STREQ("NullPointerException thrown - reference is null!", _exception.what());
                      throw;
                    }
-                 }, ls_std::IncompleteJsonException);
+                 }, ls_std::NullPointerException);
   }
 }
