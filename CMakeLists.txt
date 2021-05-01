@@ -173,7 +173,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/boxing/SerializableJSONLongFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/boxing/SerializableJSONStringFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/event/SerializableJSONEventFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/factory/SerializableTestFactory.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/factory/SerializableTestFactory.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IncompleteJsonExceptionTest.cpp)
 endif ()
 
 ##########################################################
