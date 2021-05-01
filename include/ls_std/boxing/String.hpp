@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -20,7 +20,7 @@
 
 namespace ls_std
 {
-  class String : public Class, public IBoxing, public ISerializable, public IStorable
+  class String : public ls_std::Class, public ls_std::IBoxing, public ls_std::ISerializable, public ls_std::IStorable
   {
     public:
 
@@ -77,16 +77,16 @@ namespace ls_std
       std::string padLeft(size_t _width, char _fillCharacter);
       std::string padRight(size_t _width, char _fillCharacter);
       std::string reverse();
-      void setSerializable(std::shared_ptr<ISerializable> _serializable);
-      void setStorable(std::shared_ptr<IStorable> _storable);
+      void setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable);
+      void setStorable(std::shared_ptr<ls_std::IStorable> _storable);
       bool startsWith(const std::string &_text);
       std::string toLowerCase();
       std::string toUpperCase();
 
     private:
 
-      std::shared_ptr<ISerializable> serializable{};
-      std::shared_ptr<IStorable> storable{};
+      std::shared_ptr<ls_std::ISerializable> serializable{};
+      std::shared_ptr<ls_std::IStorable> storable{};
       std::string value{};
 
       static std::string _buildCharacterChain(size_t _amount, char _fillCharacter);

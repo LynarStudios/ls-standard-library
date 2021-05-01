@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -17,7 +17,7 @@
 
 namespace ls_std
 {
-  class StorableFile : public IStorable
+  class StorableFile : public ls_std::IStorable
   {
     public:
 

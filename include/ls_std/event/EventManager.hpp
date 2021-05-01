@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -28,8 +28,8 @@ namespace ls_std
 
       // implementation
 
-      void subscribe(const ls_std::event_id &_id, const std::shared_ptr<IListener> &_listener) override;
-      void unsubscribe(const ls_std::event_id &_id, const std::shared_ptr<IListener> &_listener) override;
+      void subscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener) override;
+      void unsubscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener) override;
 
       // additional functionality
 

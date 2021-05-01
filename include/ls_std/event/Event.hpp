@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -17,7 +17,7 @@
 
 namespace ls_std
 {
-  class Event : public ls_std::Class, public ISerializable
+  class Event : public ls_std::Class, public ls_std::ISerializable
   {
     public:
 
@@ -37,13 +37,13 @@ namespace ls_std
       ls_std::event_parameter_list getParameterList();
       void removeParameter(const ls_std::event_parameter_id &_id);
       void setId(const ls_std::event_id &_id);
-      void setSerializable(std::shared_ptr<ISerializable> _serializable);
+      void setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable);
 
     private:
 
       ls_std::event_id id{};
       ls_std::event_parameter_list parameterList{};
-      std::shared_ptr<ISerializable> serializable{};
+      std::shared_ptr<ls_std::ISerializable> serializable{};
 
       void _assignId(const ls_std::event_id &_id);
       bool _hasParameter(const ls_std::event_id &_id);

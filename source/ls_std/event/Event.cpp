@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -86,7 +86,7 @@ bool ls_std::Event::_hasParameter(const ls_std::event_id &_id)
   return this->parameterList.find(_id) != this->parameterList.end();
 }
 
-void ls_std::Event::setSerializable(std::shared_ptr<ISerializable> _serializable)
+void ls_std::Event::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
 {
   this->serializable = std::move(_serializable);
 }

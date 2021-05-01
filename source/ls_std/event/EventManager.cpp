@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -12,7 +12,7 @@
 ls_std::EventManager::EventManager() : ls_std::Class("EventManager")
 {}
 
-void ls_std::EventManager::subscribe(const ls_std::event_id &_id, const std::shared_ptr<IListener> &_listener)
+void ls_std::EventManager::subscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener)
 {
   if (this->_hasEventHandler(_id))
   {
@@ -20,7 +20,7 @@ void ls_std::EventManager::subscribe(const ls_std::event_id &_id, const std::sha
   }
 }
 
-void ls_std::EventManager::unsubscribe(const ls_std::event_id &_id, const std::shared_ptr<IListener> &_listener)
+void ls_std::EventManager::unsubscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener)
 {
   if (this->_hasEventHandler(_id))
   {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -17,7 +17,7 @@
 
 namespace ls_std
 {
-  class XMLDocument : public Class
+  class XMLDocument : public ls_std::Class
   {
     public:
 

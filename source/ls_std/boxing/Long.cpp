@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -315,12 +315,12 @@ ls_std::long_type ls_std::Long::getValue() const
   return this->value;
 }
 
-void ls_std::Long::setSerializable(std::shared_ptr<ISerializable> _serializable)
+void ls_std::Long::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
 {
   this->serializable = std::move(_serializable);
 }
 
-void ls_std::Long::setStorable(std::shared_ptr<IStorable> _storable)
+void ls_std::Long::setStorable(std::shared_ptr<ls_std::IStorable> _storable)
 {
   this->storable = std::move(_storable);
 }

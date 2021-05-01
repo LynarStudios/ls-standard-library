@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -268,12 +268,12 @@ void ls_std::Float::setEpsilon(float _epsilon)
   this->epsilon = _epsilon;
 }
 
-void ls_std::Float::setSerializable(std::shared_ptr<ISerializable> _serializable)
+void ls_std::Float::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
 {
   this->serializable = std::move(_serializable);
 }
 
-void ls_std::Float::setStorable(std::shared_ptr<IStorable> _storable)
+void ls_std::Float::setStorable(std::shared_ptr<ls_std::IStorable> _storable)
 {
   this->storable = std::move(_storable);
 }

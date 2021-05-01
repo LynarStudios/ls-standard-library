@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-04-23
+ * Changed:         2021-05-01
  *
  * */
 
@@ -29,7 +29,7 @@
 
 namespace ls_std
 {
-  class File : public Class
+  class File : public ls_std::Class
   {
     public:
 
