@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-04-25
+ * Changed:         2021-05-01
  *
  * */
 
@@ -47,7 +47,6 @@ namespace
                    }
                    catch (const ls_std::IllegalArgumentException &_exception)
                    {
-                     EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
                      throw;
                    }
                  }, ls_std::IllegalArgumentException);
@@ -65,7 +64,6 @@ namespace
                    }
                    catch (const ls_std::NullPointerException &_exception)
                    {
-                     EXPECT_STREQ("NullPointerException thrown - reference is null!", _exception.what());
                      throw;
                    }
                  }, ls_std::NullPointerException);
