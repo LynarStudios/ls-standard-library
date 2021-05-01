@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2020-11-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,30 +11,36 @@
 #include <ls_std/ls_std.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class XMLParserTest : public ::testing::Test {
+namespace
+{
+  class XMLParserTest : public ::testing::Test
+  {
     protected:
 
       XMLParserTest() = default;
       ~XMLParserTest() override = default;
 
-      static ls_std::byte_field readXMLStateMachine() {
+      static ls_std::byte_field readXMLStateMachine()
+      {
         std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-        ls_std::File file {xmlPath};
-        ls_std::byte_field data = ls_std::FileReader {file}.read();
+        ls_std::File file{xmlPath};
+        ls_std::byte_field data = ls_std::FileReader{file}.read();
 
         return data;
       }
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(XMLParserTest, read)
   {
-    ls_std::XMLParser xmlParser {std::make_shared<ls_std::XMLDocument>()};
-    std::list<std::shared_ptr<ls_std::XMLNode>> children, statesChildren, memoryChildren, connectionChildren {};
-    std::list<std::shared_ptr<ls_std::XMLAttribute>> attributes {};
+    ls_std::XMLParser xmlParser{std::make_shared<ls_std::XMLDocument>()};
+    std::list<std::shared_ptr<ls_std::XMLNode>> children, statesChildren, memoryChildren, connectionChildren{};
+    std::list<std::shared_ptr<ls_std::XMLAttribute>> attributes{};
 
     ls_std::byte_field data = readXMLStateMachine();
     xmlParser.parse(data);
@@ -200,7 +206,7 @@ namespace {
   TEST_F(XMLParserTest, getDocument)
   {
     std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls_std::XMLParser xmlParser {std::make_shared<ls_std::XMLDocument>()};
+    ls_std::XMLParser xmlParser{std::make_shared<ls_std::XMLDocument>()};
 
     ASSERT_TRUE(xmlParser.getDocument() != nullptr);
   }
@@ -209,10 +215,10 @@ namespace {
   {
     std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     std::shared_ptr<ls_std::XMLDocument> document = std::make_shared<ls_std::XMLDocument>();
-    ls_std::XMLParser xmlParser {document};
+    ls_std::XMLParser xmlParser{document};
     ASSERT_TRUE(xmlParser.getDocument() == document);
 
-    document =std::make_shared<ls_std::XMLDocument>();
+    document = std::make_shared<ls_std::XMLDocument>();
     xmlParser.setDocument(document);
     ASSERT_TRUE(xmlParser.getDocument() == document);
   }

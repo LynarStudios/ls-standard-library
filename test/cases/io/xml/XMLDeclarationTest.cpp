@@ -3,46 +3,51 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2020-09-29
+ * Changed:         2021-04-23
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
 
-namespace {
-  class XMLDeclarationTest : public ::testing::Test {
+namespace
+{
+  class XMLDeclarationTest : public ::testing::Test
+  {
     protected:
 
       XMLDeclarationTest() = default;
       ~XMLDeclarationTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(XMLDeclarationTest, getEncoding)
   {
-    ls_std::XMLDeclaration declaration {"1.0"};
+    ls_std::XMLDeclaration declaration{"1.0"};
     ASSERT_TRUE(declaration.getEncoding().empty());
   }
 
   TEST_F(XMLDeclarationTest, getStandalone)
   {
-    ls_std::XMLDeclaration declaration {"1.0"};
+    ls_std::XMLDeclaration declaration{"1.0"};
     ASSERT_TRUE(declaration.getStandalone().empty());
   }
 
   TEST_F(XMLDeclarationTest, getVersion)
   {
-    ls_std::XMLDeclaration declaration {"1.0"};
+    ls_std::XMLDeclaration declaration{"1.0"};
     ASSERT_FALSE(declaration.getVersion().empty());
     ASSERT_STREQ("1.0", declaration.getVersion().c_str());
   }
 
   TEST_F(XMLDeclarationTest, setEncoding)
   {
-    ls_std::XMLDeclaration declaration {"1.0"};
+    ls_std::XMLDeclaration declaration{"1.0"};
 
     ASSERT_TRUE(declaration.getEncoding().empty());
 
@@ -52,7 +57,7 @@ namespace {
 
   TEST_F(XMLDeclarationTest, setStandalone)
   {
-    ls_std::XMLDeclaration declaration {"1.0"};
+    ls_std::XMLDeclaration declaration{"1.0"};
 
     ASSERT_TRUE(declaration.getStandalone().empty());
 
@@ -62,7 +67,7 @@ namespace {
 
   TEST_F(XMLDeclarationTest, setVersion)
   {
-    ls_std::XMLDeclaration declaration {"1.0"};
+    ls_std::XMLDeclaration declaration{"1.0"};
 
     ASSERT_FALSE(declaration.getVersion().empty());
     ASSERT_STREQ("1.0", declaration.getVersion().c_str());
@@ -73,7 +78,7 @@ namespace {
 
   TEST_F(XMLDeclarationTest, toXML)
   {
-    ls_std::XMLDeclaration declaration {"1.0"};
+    ls_std::XMLDeclaration declaration{"1.0"};
     ASSERT_STREQ(R"(<?xml version="1.0" ?>)", declaration.toXML().c_str());
 
     declaration.setStandalone("yes");

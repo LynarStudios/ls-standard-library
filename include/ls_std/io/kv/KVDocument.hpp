@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2020-12-25
+ * Changed:         2021-04-23
  *
  * */
 
@@ -15,8 +15,10 @@
 #include "KVTypes.hpp"
 #include <map>
 
-namespace ls_std {
-  class KVDocument : public ls_std::Class {
+namespace ls_std
+{
+  class KVDocument : public ls_std::Class
+  {
     public:
 
       KVDocument();
@@ -25,14 +27,14 @@ namespace ls_std {
       bool addPair(ls_std::KVPair _pair);
       void clear();
       std::map<ls_std::kv_key, ls_std::KVPair> getPairs();
-      bool hasPair(const ls_std::kv_key& _key);
-      void removePair(const ls_std::kv_key& _key);
+      bool hasPair(const ls_std::kv_key &_key);
+      void removePair(const ls_std::kv_key &_key);
 
     private:
 
-      std::map<ls_std::kv_key, ls_std::KVPair> pairs {};
+      std::map<ls_std::kv_key, ls_std::KVPair> pairs{};
 
-      bool _hasPair(const ls_std::kv_key& _key);
+      bool _hasPair(const ls_std::kv_key &_key);
   };
 }
 

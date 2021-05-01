@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2020-12-25
+ * Changed:         2021-05-01
  *
  * */
 
@@ -30,6 +30,8 @@
 #include "exception/FileOperationException.hpp"
 #include "exception/IllegalArgumentException.hpp"
 #include "exception/IllegalArithmeticOperationException.hpp"
+#include "exception/IncompleteJsonException.hpp"
+#include "exception/NullPointerException.hpp"
 
 #include "io/logging/LogLevel.hpp"
 #include "io/logging/LogLevelValue.hpp"
@@ -63,22 +65,23 @@
 #include "logic/StateMachine.hpp"
 #include "logic/StateMachineTypes.hpp"
 
-#include "serialization/boxing/SerializableJSONBoolean.hpp"
-#include "serialization/boxing/SerializableJSONDouble.hpp"
-#include "serialization/boxing/SerializableJSONFloat.hpp"
-#include "serialization/boxing/SerializableJSONInteger.hpp"
-#include "serialization/boxing/SerializableJSONLong.hpp"
-#include "serialization/boxing/SerializableJSONString.hpp"
-#include "serialization/logic/SerializableJSONState.hpp"
-#include "serialization/logic/SerializableJSONStateConnection.hpp"
-#include "serialization/logic/SerializableJSONStateMachine.hpp"
-#include "serialization/event/SerializableJSONEvent.hpp"
+#include "serialization/json/boxing/SerializableJSONBoolean.hpp"
+#include "serialization/json/boxing/SerializableJSONDouble.hpp"
+#include "serialization/json/boxing/SerializableJSONFloat.hpp"
+#include "serialization/json/boxing/SerializableJSONInteger.hpp"
+#include "serialization/json/boxing/SerializableJSONLong.hpp"
+#include "serialization/json/boxing/SerializableJSONString.hpp"
+#include "serialization/json/logic/SerializableJSONState.hpp"
+#include "serialization/json/logic/SerializableJSONStateConnection.hpp"
+#include "serialization/json/logic/SerializableJSONStateMachine.hpp"
+#include "serialization/json/event/SerializableJSONEvent.hpp"
 #include "serialization/ISerializable.hpp"
 
 #include "time/Date.hpp"
 
 #include "utils/RegexUtils.hpp"
 #include "utils/STLUtils.hpp"
+
 #if _WIN32
 #include "utils/WindowsUtils.hpp"
 #endif
@@ -88,5 +91,15 @@
 #include "event/EventHandler.hpp"
 #include "event/IEventSubscriber.hpp"
 #include "event/EventManager.hpp"
+
+#include "factory/IFactory.hpp"
+#include "ls_std/factory/serialization/json/SerializableJSONFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONBooleanFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONDoubleFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONFloatFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONIntegerFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONLongFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJSONStringFactory.hpp"
+#include "factory/serialization/json/event/SerializableJSONEventFactory.hpp"
 
 #endif

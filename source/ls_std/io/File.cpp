@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -18,15 +18,18 @@
 #include <sys/stat.h>
 
 #if defined(unix) || defined(__APPLE__)
+
 #include <unistd.h>
+
 #endif
 
 #ifdef _WIN32
 #include <direct.h>
 #endif
 
-ls_std::File::File(std::string _absoluteFilePath) : ls_std::Class("File"),
-absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
+ls_std::File::File(std::string _absoluteFilePath)
+    : ls_std::Class("File"),
+      absoluteFilePath(ls_std::File::_normalizePath(std::move(_absoluteFilePath)))
 {}
 
 bool ls_std::File::operator==(ls_std::File &_file)
@@ -49,10 +52,10 @@ bool ls_std::File::canRead()
   bool readable;
 
   #if defined(unix) || defined(__APPLE__)
-    readable = ls_std::File::_isReadableUnix(this->absoluteFilePath);
+  readable = ls_std::File::_isReadableUnix(this->absoluteFilePath);
   #endif
   #ifdef _WIN32
-    readable = ls_std::File::_isReadableWindows(this->absoluteFilePath);
+  readable = ls_std::File::_isReadableWindows(this->absoluteFilePath);
   #endif
 
   return readable;
@@ -65,10 +68,13 @@ bool ls_std::File::canWrite()
 
 void ls_std::File::createNewFile()
 {
-  if(!ls_std::File::_exists(this->absoluteFilePath)) {
-    std::ofstream file {this->absoluteFilePath};
+  if (!ls_std::File::_exists(this->absoluteFilePath))
+  {
+    std::ofstream file{this->absoluteFilePath};
     file.close();
-  } else {
+  }
+  else
+  {
     throw ls_std::FileOperationException{};
   }
 }
@@ -78,7 +84,8 @@ bool ls_std::File::exists()
   return ls_std::File::_exists(this->absoluteFilePath);
 }
 
-std::string ls_std::File::getAbsoluteFilePath() {
+std::string ls_std::File::getAbsoluteFilePath()
+{
   return this->absoluteFilePath;
 }
 
@@ -88,7 +95,8 @@ std::string ls_std::File::getName()
 
   // if it's a directory, remove separator from end, if it does exist
 
-  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
+  if (ls_std::File::_isDirectory(this->absoluteFilePath))
+  {
     copy.erase(std::remove_if(copy.end() - 1, copy.end(), ls_std::FilePathSeparatorMatch()), copy.end());
   }
 
@@ -105,9 +113,10 @@ std::string ls_std::File::getParent()
 
 long ls_std::File::getSize()
 {
-  std::streampos fileSize {};
+  std::streampos fileSize{};
 
-  if(ls_std::File::_exists(this->absoluteFilePath)) {
+  if (ls_std::File::_exists(this->absoluteFilePath))
+  {
     std::ifstream fileHandler{this->absoluteFilePath, std::ios::in};
     fileSize = fileHandler.tellg();
     fileHandler.seekg(0, std::ios::end);
@@ -135,9 +144,10 @@ time_t ls_std::File::lastModified()
 
 std::list<std::string> ls_std::File::list()
 {
-  std::list<std::string> fileList {};
+  std::list<std::string> fileList{};
 
-  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
+  if (ls_std::File::_isDirectory(this->absoluteFilePath))
+  {
     fileList = ls_std::File::_list(this->absoluteFilePath);
   }
 
@@ -146,9 +156,10 @@ std::list<std::string> ls_std::File::list()
 
 std::list<std::string> ls_std::File::listFiles()
 {
-  std::list<std::string> fileList {};
+  std::list<std::string> fileList{};
 
-  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
+  if (ls_std::File::_isDirectory(this->absoluteFilePath))
+  {
     fileList = ls_std::File::_listFiles(this->absoluteFilePath);
   }
 
@@ -157,20 +168,24 @@ std::list<std::string> ls_std::File::listFiles()
 
 void ls_std::File::makeDirectory()
 {
-  if(ls_std::File::_mkdir(this->absoluteFilePath)) {
-    throw ls_std::FileOperationException {};
+  if (ls_std::File::_mkdir(this->absoluteFilePath))
+  {
+    throw ls_std::FileOperationException{};
   }
 }
 
-void ls_std::File::makeDirectories() {
+void ls_std::File::makeDirectories()
+{
   std::vector<std::string> subDirectories = ls_std::File::_splitIntoSubDirectoryNames(this->absoluteFilePath);
   const char separator = ls_std::FilePathSeparator::get();
-  std::string currentHierarchy {};
+  std::string currentHierarchy{};
 
-  for(const auto& subDirectory : subDirectories) {
+  for (const auto &subDirectory : subDirectories)
+  {
     currentHierarchy += subDirectory;
 
-    if(!ls_std::File::_exists(currentHierarchy)) {
+    if (!ls_std::File::_exists(currentHierarchy))
+    {
       ls_std::File::_mkdir(currentHierarchy);
     }
 
@@ -180,13 +195,16 @@ void ls_std::File::makeDirectories() {
 
 void ls_std::File::remove()
 {
-  if(ls_std::File::_isFile(this->absoluteFilePath)) {
-    if(std::remove(this->absoluteFilePath.c_str())) {
+  if (ls_std::File::_isFile(this->absoluteFilePath))
+  {
+    if (std::remove(this->absoluteFilePath.c_str()))
+    {
       throw ls_std::FileOperationException{};
     }
   }
 
-  if(ls_std::File::_isDirectory(this->absoluteFilePath)) {
+  if (ls_std::File::_isDirectory(this->absoluteFilePath))
+  {
     ls_std::File::_remove(this->absoluteFilePath);
   }
 }
@@ -195,7 +213,8 @@ bool ls_std::File::renameTo(const std::string &_newName)
 {
   bool renamed = ls_std::File::_renameTo(this->absoluteFilePath, _newName);
 
-  if(renamed) {
+  if (renamed)
+  {
     this->absoluteFilePath = _newName;
   }
 
@@ -224,26 +243,33 @@ void ls_std::File::_addToFileListWindows(const std::string& _path, bool _withDir
 #endif
 
 #if defined(unix) || defined(__APPLE__)
-void ls_std::File::_addToFileListUnix(const std::string& _path, bool _withDirectories, dirent* directoryEntity, std::list<std::string>& _list)
+
+void ls_std::File::_addToFileListUnix(const std::string &_path, bool _withDirectories, dirent *directoryEntity, std::list<std::string> &_list)
 {
   const char separator = ls_std::FilePathSeparator::get();
   std::string absolutePath = _path + separator + directoryEntity->d_name;
 
-  if(_withDirectories) {
+  if (_withDirectories)
+  {
     _list.emplace_back(absolutePath);
-  } else {
-    if(ls_std::File::_isFile(absolutePath)) {
+  }
+  else
+  {
+    if (ls_std::File::_isFile(absolutePath))
+    {
       _list.emplace_back(absolutePath);
     }
   }
 }
+
 #endif
 
 bool ls_std::File::_equals(ls_std::File &_file, ls_std::File &_foreignFile)
 {
   bool isEqual = _file.getAbsoluteFilePath() == _foreignFile.getAbsoluteFilePath();
 
-  if(_file.exists() && _foreignFile.exists()) {
+  if (_file.exists() && _foreignFile.exists())
+  {
     isEqual = isEqual && _file.canRead() == _foreignFile.canRead();
     isEqual = isEqual && _file.canWrite() == _foreignFile.canWrite();
     isEqual = isEqual && _file.canExecute() == _foreignFile.canExecute();
@@ -252,32 +278,34 @@ bool ls_std::File::_equals(ls_std::File &_file, ls_std::File &_foreignFile)
   return isEqual;
 }
 
-bool ls_std::File::_exists(const std::string& _path)
+bool ls_std::File::_exists(const std::string &_path)
 {
-  struct stat _stat {};
+  struct stat _stat{};
   return (stat(_path.c_str(), &_stat) == 0);
 }
 
 std::string ls_std::File::_getParent(const std::string &_path)
 {
-  std::string parent {};
+  std::string parent{};
   std::vector<std::string> subDirectoryNames = ls_std::File::_splitIntoSubDirectoryNames(_path);
   const char separator = ls_std::FilePathSeparator::get();
   subDirectoryNames.pop_back();
 
-  for(auto const& subDirectoryName : subDirectoryNames) {
+  for (auto const &subDirectoryName : subDirectoryNames)
+  {
     parent += subDirectoryName + separator;
   }
 
   return parent;
 }
 
-bool ls_std::File::_isDirectory(const std::string& _path)
+bool ls_std::File::_isDirectory(const std::string &_path)
 {
-  bool match {};
-  struct stat _stat {};
+  bool match{};
+  struct stat _stat{};
 
-  if(stat(_path.c_str(), &_stat) == 0) {
+  if (stat(_path.c_str(), &_stat) == 0)
+  {
     match = _stat.st_mode & (unsigned short) S_IFDIR;
   }
 
@@ -286,12 +314,14 @@ bool ls_std::File::_isDirectory(const std::string& _path)
 
 bool ls_std::File::_isExecutable(const std::string &_path)
 {
-  bool executable {};
+  bool executable{};
 
-  if(ls_std::File::_exists(_path)) {
-    struct stat _stat {};
+  if (ls_std::File::_exists(_path))
+  {
+    struct stat _stat{};
 
-    if(stat(_path.c_str(), &_stat) == 0) {
+    if (stat(_path.c_str(), &_stat) == 0)
+    {
       executable = (_stat.st_mode & (unsigned short) S_IEXEC) != 0;
     }
   }
@@ -299,12 +329,13 @@ bool ls_std::File::_isExecutable(const std::string &_path)
   return executable;
 }
 
-bool ls_std::File::_isFile(const std::string& _path)
+bool ls_std::File::_isFile(const std::string &_path)
 {
-  bool match {};
-  struct stat _stat {};
+  bool match{};
+  struct stat _stat{};
 
-  if(stat(_path.c_str(), &_stat) == 0) {
+  if (stat(_path.c_str(), &_stat) == 0)
+  {
     match = _stat.st_mode & (unsigned) S_IFREG;
   }
 
@@ -312,20 +343,24 @@ bool ls_std::File::_isFile(const std::string& _path)
 }
 
 #if defined(unix) || defined(__APPLE__)
+
 bool ls_std::File::_isReadableUnix(const std::string &_path)
 {
-  bool readable {};
+  bool readable{};
 
-  if(ls_std::File::_exists(_path)) {
-    struct stat _stat {};
+  if (ls_std::File::_exists(_path))
+  {
+    struct stat _stat{};
 
-    if(stat(_path.c_str(), &_stat) == 0) {
+    if (stat(_path.c_str(), &_stat) == 0)
+    {
       readable = (_stat.st_mode & (unsigned) S_IREAD) != 0;
     }
   }
 
   return readable;
 }
+
 #endif
 
 #ifdef _WIN32
@@ -347,12 +382,14 @@ bool ls_std::File::_isReadableWindows(const std::string &_path)
 
 bool ls_std::File::_isWritable(const std::string &_path)
 {
-  bool writable {};
+  bool writable{};
 
-  if(ls_std::File::_exists(_path)) {
-    struct stat _stat {};
+  if (ls_std::File::_exists(_path))
+  {
+    struct stat _stat{};
 
-    if(stat(_path.c_str(), &_stat) == 0) {
+    if (stat(_path.c_str(), &_stat) == 0)
+    {
       writable = (_stat.st_mode & (unsigned) S_IWRITE) != 0;
     }
   }
@@ -362,10 +399,11 @@ bool ls_std::File::_isWritable(const std::string &_path)
 
 time_t ls_std::File::_lastModified(const std::string &_path)
 {
-  time_t lastModifiedTimeStamp {};
-  struct stat _stat {};
+  time_t lastModifiedTimeStamp{};
+  struct stat _stat{};
 
-  if(stat(_path.c_str(), &_stat) == 0) {
+  if (stat(_path.c_str(), &_stat) == 0)
+  {
     lastModifiedTimeStamp = _stat.st_mtime;
   }
 
@@ -374,13 +412,13 @@ time_t ls_std::File::_lastModified(const std::string &_path)
 
 std::list<std::string> ls_std::File::_list(const std::string &_path)
 {
-  std::list<std::string> filesInDirectory {};
+  std::list<std::string> filesInDirectory{};
 
   #if defined(unix) || defined(__APPLE__)
-    filesInDirectory = ls_std::File::_listUnix(_path, true);
+  filesInDirectory = ls_std::File::_listUnix(_path, true);
   #endif
   #ifdef _WIN32
-    filesInDirectory = ls_std::File::_listWindows(_path, true);
+  filesInDirectory = ls_std::File::_listWindows(_path, true);
   #endif
 
   return filesInDirectory;
@@ -388,33 +426,36 @@ std::list<std::string> ls_std::File::_list(const std::string &_path)
 
 std::list<std::string> ls_std::File::_listFiles(const std::string &_path)
 {
-  std::list<std::string> filesInDirectory {};
+  std::list<std::string> filesInDirectory{};
 
   #if defined(unix) || defined(__APPLE__)
-    filesInDirectory = ls_std::File::_listUnix(_path, false);
+  filesInDirectory = ls_std::File::_listUnix(_path, false);
   #endif
   #ifdef _WIN32
-    filesInDirectory = ls_std::File::_listWindows(_path, false);
+  filesInDirectory = ls_std::File::_listWindows(_path, false);
   #endif
 
   return filesInDirectory;
 }
 
 #if defined(unix) || defined(__APPLE__)
+
 std::list<std::string> ls_std::File::_listUnix(const std::string &_path, bool withDirectories)
 {
-  std::list<std::string> filesInDirectory {};
-  DIR* directory = opendir(_path.c_str());
-  struct dirent* directoryEntity;
-  std::string absolutePath {};
+  std::list<std::string> filesInDirectory{};
+  DIR *directory = opendir(_path.c_str());
+  struct dirent *directoryEntity;
+  std::string absolutePath{};
 
-  while((directoryEntity = readdir(directory)) != nullptr) {
+  while ((directoryEntity = readdir(directory)) != nullptr)
+  {
     ls_std::File::_addToFileListUnix(_path, withDirectories, directoryEntity, filesInDirectory);
   }
 
   closedir(directory);
   return filesInDirectory;
 }
+
 #endif
 
 #ifdef _WIN32
@@ -438,15 +479,16 @@ std::list<std::string> ls_std::File::_listWindows(const std::string &_path, bool
 }
 #endif
 
-int ls_std::File::_mkdir(const std::string& _path) {
+int ls_std::File::_mkdir(const std::string &_path)
+{
   int result;
 
   #ifdef _WIN32
-    result = mkdir(_path.c_str());
+  result = mkdir(_path.c_str());
   #endif
 
   #if defined(unix) || defined(__APPLE__)
-    result = mkdir(_path.c_str(), 0777);
+  result = mkdir(_path.c_str(), 0777);
   #endif
 
   return result;
@@ -460,21 +502,25 @@ std::string ls_std::File::_normalizePath(std::string _path)
   return _path;
 }
 
-std::string ls_std::File::_reduceSeparators(const std::string& _path)
+std::string ls_std::File::_reduceSeparators(const std::string &_path)
 {
   static const char separator = {ls_std::FilePathSeparator::get()};
-  std::string normalizedPath {};
-  int index {};
+  std::string normalizedPath{};
+  int index{};
 
-  while(index  < _path.size()) {
-    if(_path[index] == separator) {
+  while (index < _path.size())
+  {
+    if (_path[index] == separator)
+    {
       normalizedPath += _path[index];
 
-      do {
+      do
+      {
         index++;
-      }
-      while(_path[index] == separator);
-    } else {
+      } while (_path[index] == separator);
+    }
+    else
+    {
       normalizedPath += _path[index];
       index++;
     }
@@ -489,15 +535,17 @@ void ls_std::File::_remove(const std::string &_path)
   ls_std::File::_removeUnix(_path);
   #endif
   #ifdef _WIN32
-    ls_std::File::_removeWindows(_path);
+  ls_std::File::_removeWindows(_path);
   #endif
 }
 
 #if defined(unix) || defined(__APPLE__)
+
 void ls_std::File::_removeUnix(const std::string &_path)
 {
   rmdir(_path.c_str());
 }
+
 #endif
 
 #ifdef _WIN32
@@ -518,23 +566,25 @@ std::string ls_std::File::_replaceWrongSeparator(std::string _path)
   static const char windowsSeparator = ls_std::FilePathSeparator::getWindowsFilePathSeparator();
 
   #if defined(unix) || defined(__APPLE__)
-    std::replace(_path.begin(), _path.end(), windowsSeparator, unixSeparator);
+  std::replace(_path.begin(), _path.end(), windowsSeparator, unixSeparator);
   #endif
 
   #ifdef _WIN32
-    std::replace(_path.begin(), _path.end(), unixSeparator, windowsSeparator);
+  std::replace(_path.begin(), _path.end(), unixSeparator, windowsSeparator);
   #endif
 
   return _path;
 }
 
-std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::string& _path) {
-  std::vector<std::string> subDirectoryNames {};
-  std::stringstream _stream {_path};
-  std::string subDirectoryName {};
+std::vector<std::string> ls_std::File::_splitIntoSubDirectoryNames(const std::string &_path)
+{
+  std::vector<std::string> subDirectoryNames{};
+  std::stringstream _stream{_path};
+  std::string subDirectoryName{};
   const char separator = ls_std::FilePathSeparator::get();
 
-  while(std::getline(_stream, subDirectoryName, separator)) {
+  while (std::getline(_stream, subDirectoryName, separator))
+  {
     subDirectoryNames.push_back(subDirectoryName);
   }
 

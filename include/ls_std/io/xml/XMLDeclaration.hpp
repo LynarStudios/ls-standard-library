@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2020-11-26
+ * Changed:         2021-05-01
  *
  * */
 
@@ -13,8 +13,10 @@
 #include <ls_std/base/Class.hpp>
 #include "XMLAttribute.hpp"
 
-namespace ls_std {
-  class XMLDeclaration : public Class {
+namespace ls_std
+{
+  class XMLDeclaration : public ls_std::Class
+  {
     public:
 
       explicit XMLDeclaration(std::string _version);
@@ -30,9 +32,9 @@ namespace ls_std {
 
     private:
 
-      ls_std::XMLAttribute encoding {"encoding"};
-      ls_std::XMLAttribute standalone {"standalone"};
-      ls_std::XMLAttribute version {"version"};
+      ls_std::XMLAttribute encoding{"encoding"};
+      ls_std::XMLAttribute standalone{"standalone"};
+      ls_std::XMLAttribute version{"version"};
 
       static std::string _toXMLAttribute(ls_std::XMLAttribute _attribute);
   };

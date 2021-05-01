@@ -32,6 +32,7 @@ message("${PROJECT_NAME}: Adding include directories...")
 if (${LS_STD_BUILD_WITH_TESTS})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
     include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
+    include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googlemock/include)
 endif ()
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
@@ -96,7 +97,15 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVPair.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/SerializableJSONFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONBooleanFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONDoubleFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONFloatFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONIntegerFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONLongFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONStringFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/event/SerializableJSONEventFactory.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
@@ -155,7 +164,22 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVPairTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVParserTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVReaderTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVReaderTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/SerializableFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONBooleanFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONDoubleFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONFloatFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONIntegerFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONLongFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONStringFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/event/SerializableJSONEventFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/factory/SerializableTestFactory.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/FileNotFoundExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/FileOperationExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IllegalArgumentExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IllegalArithmeticOperationExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IncompleteJsonExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/NullPointerExceptionTest.cpp)
 endif ()
 
 ##########################################################
@@ -204,10 +228,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
         message("${PROJECT_NAME}: library search - ${WSOCK32_LIBRARY}...")
         message("${PROJECT_NAME}: library search - ${WS2_32_LIBRARY}...")
 
-        target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${WSOCK32_LIBRARY}" "${WS2_32_LIBRARY}" "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+        target_link_libraries(${PROJECT_NAME}_test gtest gmock gtest_main "${WSOCK32_LIBRARY}" "${WS2_32_LIBRARY}" "${PROJECT_NAME}_${PROJECT_VERSION}_static")
     endif ()
 
     if (UNIX)
-        target_link_libraries(${PROJECT_NAME}_test gtest gtest_main "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+        target_link_libraries(${PROJECT_NAME}_test gtest gmock gtest_main "${PROJECT_NAME}_${PROJECT_VERSION}_static")
     endif ()
 endif ()

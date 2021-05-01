@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2020-11-26
+ * Changed:         2021-05-01
  *
  * */
 
@@ -12,8 +12,10 @@
 
 #include "XMLParser.hpp"
 
-namespace ls_std {
-  class XMLParserMock : public XMLParser {
+namespace ls_std
+{
+  class XMLParserMock : public ls_std::XMLParser
+  {
     public:
 
       XMLParserMock();

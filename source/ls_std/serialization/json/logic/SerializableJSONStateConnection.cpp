@@ -3,15 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2020-11-26
+ * Changed:         2021-05-01
  *
  * */
 
-#include <ls_std/serialization/logic/SerializableJSONStateConnection.hpp>
+#include <ls_std/serialization/json/logic/SerializableJSONStateConnection.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJSONStateConnection::SerializableJSONStateConnection(const std::shared_ptr<ls_std::StateConnection>& _value) :
-ls_std::Class("SerializableJSONStateConnection")
+ls_std::SerializableJSONStateConnection::SerializableJSONStateConnection(const std::shared_ptr<ls_std::StateConnection> &_value) : ls_std::Class("SerializableJSONStateConnection")
 {
   this->_assignValue(_value);
 }
@@ -37,7 +36,7 @@ std::shared_ptr<ls_std::StateConnection> ls_std::SerializableJSONStateConnection
   return this->value;
 }
 
-void ls_std::SerializableJSONStateConnection::setValue(const std::shared_ptr<ls_std::StateConnection>& _value)
+void ls_std::SerializableJSONStateConnection::setValue(const std::shared_ptr<ls_std::StateConnection> &_value)
 {
   this->_assignValue(_value);
   this->_clear();
@@ -45,8 +44,9 @@ void ls_std::SerializableJSONStateConnection::setValue(const std::shared_ptr<ls_
 
 void ls_std::SerializableJSONStateConnection::_assignValue(const std::shared_ptr<ls_std::StateConnection> &_value)
 {
-  if(_value == nullptr) {
-    throw ls_std::IllegalArgumentException {};
+  if (_value == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
   }
 
   this->value = _value;
@@ -59,9 +59,7 @@ void ls_std::SerializableJSONStateConnection::_clear()
 
 void ls_std::SerializableJSONStateConnection::_update()
 {
-  this->jsonObject = {
-      {"condition", this->value->isPassable()},
-      {"connectionId", this->value->getConnectionId()},
-      {"stateId", this->value->getStateId()}
-  };
+  this->jsonObject = {{"condition",    this->value->isPassable()},
+                      {"connectionId", this->value->getConnectionId()},
+                      {"stateId",      this->value->getStateId()}};
 }

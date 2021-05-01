@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2020-12-20
+ * Changed:         2021-05-01
  *
  * */
 
@@ -16,29 +16,31 @@
 #include <memory>
 #include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
 
-namespace ls_std {
-  class SerializableJSONEvent : public ls_std::Class, public ls_std::ISerializable {
+namespace ls_std
+{
+  class SerializableJSONEvent : public ls_std::Class, public ls_std::ISerializable
+  {
     public:
 
-      explicit SerializableJSONEvent(const std::shared_ptr<ls_std::Event>& _value);
+      explicit SerializableJSONEvent(const std::shared_ptr<ls_std::Event> &_value);
       ~SerializableJSONEvent() override = default;
 
       // implementation
 
       ls_std::byte_field marshal() override;
-      void unmarshal(const ls_std::byte_field& _data) override;
+      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
       std::shared_ptr<ls_std::Event> getValue();
-      void setValue(const std::shared_ptr<ls_std::Event>& _value);
+      void setValue(const std::shared_ptr<ls_std::Event> &_value);
 
     private:
 
-      nlohmann::json jsonObject {};
-      std::shared_ptr<ls_std::Event> value {};
+      nlohmann::json jsonObject{};
+      std::shared_ptr<ls_std::Event> value{};
 
-      void _assignValue(const std::shared_ptr<ls_std::Event>& _value);
+      void _assignValue(const std::shared_ptr<ls_std::Event> &_value);
       void _unmarshalParameterList();
       void _update();
       void _updateEventParameterList();

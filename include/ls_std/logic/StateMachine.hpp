@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2020-11-26
+ * Changed:         2021-05-01
  *
  * */
 
@@ -18,34 +18,36 @@
 #include "State.hpp"
 #include "StateMachineTypes.hpp"
 
-namespace ls_std {
-  class StateMachine : public Class {
+namespace ls_std
+{
+  class StateMachine : public ls_std::Class
+  {
     public:
 
       explicit StateMachine(std::string _name);
       ~StateMachine() override = default;
 
-      bool addState(const std::shared_ptr<ls_std::State>& _state);
+      bool addState(const std::shared_ptr<ls_std::State> &_state);
       std::shared_ptr<ls_std::State> getCurrentState();
       std::vector<ls_std::StateId> getMemory();
       std::string getName();
       std::unordered_map<StateId, std::shared_ptr<ls_std::State>> getStates();
-      bool hasState(const ls_std::StateId& _id);
+      bool hasState(const ls_std::StateId &_id);
       bool proceed();
       void setMemory(std::vector<ls_std::StateId> _memory);
       void setName(std::string _name);
-      bool setStartState(const ls_std::StateId& _id);
+      bool setStartState(const ls_std::StateId &_id);
 
     private:
 
-      std::shared_ptr<State> currentState {};
-      std::vector<ls_std::StateId> memory {};
-      std::string name {};
-      std::unordered_map<ls_std::StateId, std::shared_ptr<ls_std::State>> states {};
+      std::shared_ptr<State> currentState{};
+      std::vector<ls_std::StateId> memory{};
+      std::string name{};
+      std::unordered_map<ls_std::StateId, std::shared_ptr<ls_std::State>> states{};
 
       std::vector<ls_std::StateId> _getNextValidStates();
-      void _remember(const ls_std::StateId& _id);
-      bool _hasState(const ls_std::StateId& _id);
+      void _remember(const ls_std::StateId &_id);
+      bool _hasState(const ls_std::StateId &_id);
   };
 }
 

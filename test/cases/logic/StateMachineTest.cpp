@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2020-11-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,33 +11,38 @@
 #include <ls_std/ls_std.hpp>
 #include <TestDataFactory.hpp>
 
-namespace {
-  class StateMachineTest : public ::testing::Test {
+namespace
+{
+  class StateMachineTest : public ::testing::Test
+  {
     protected:
 
       StateMachineTest() = default;
       ~StateMachineTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(StateMachineTest, addStateConnection)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
   }
 
   TEST_F(StateMachineTest, addStateConnectionNegative)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
     ASSERT_FALSE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
   }
 
   TEST_F(StateMachineTest, getCurrentState)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
 
     ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
@@ -81,7 +86,7 @@ namespace {
 
   TEST_F(StateMachineTest, getName)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
   }
 
@@ -163,10 +168,10 @@ namespace {
 
   TEST_F(StateMachineTest, setMemory)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.getMemory().empty());
 
-    std::vector<ls_std::StateId> memory {"A", "B", "C"};
+    std::vector<ls_std::StateId> memory{"A", "B", "C"};
     stateMachine.setMemory(memory);
 
     ASSERT_FALSE(stateMachine.getMemory().empty());
@@ -178,7 +183,7 @@ namespace {
 
   TEST_F(StateMachineTest, setName)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
 
     stateMachine.setName("bla");
@@ -187,7 +192,7 @@ namespace {
 
   TEST_F(StateMachineTest, setStartState)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_FALSE(stateMachine.getCurrentState() != nullptr);
 
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-11-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,8 +11,10 @@
 #include <ls_std/ls_std.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class IntegerTest : public ::testing::Test {
+namespace
+{
+  class IntegerTest : public ::testing::Test
+  {
     protected:
 
       IntegerTest() = default;
@@ -29,13 +31,13 @@ namespace {
 
   TEST_F(IntegerTest, operatorAssignment)
   {
-    ls_std::Integer x {13};
+    ls_std::Integer x{13};
     ASSERT_EQ(13, x);
 
     x = 44;
     ASSERT_EQ(44, x);
 
-    ls_std::Integer y {3};
+    ls_std::Integer y{3};
     x = y;
     ASSERT_EQ(3, x);
   }
@@ -44,8 +46,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorHyphen)
   {
-    ls_std::Integer x {13};
-    ls_std::Integer y {-13};
+    ls_std::Integer x{13};
+    ls_std::Integer y{-13};
 
     ASSERT_EQ(-13, -x);
     ASSERT_EQ(13, -y);
@@ -53,9 +55,9 @@ namespace {
 
   TEST_F(IntegerTest, operatorAddition)
   {
-    ls_std::Integer x {13};
-    ls_std::Integer y {7};
-    ls_std::Integer z {-15};
+    ls_std::Integer x{13};
+    ls_std::Integer y{7};
+    ls_std::Integer z{-15};
 
     ASSERT_EQ(20, x + y);
     ASSERT_EQ(8, 1 + y);
@@ -66,9 +68,9 @@ namespace {
 
   TEST_F(IntegerTest, operatorMultiplication)
   {
-    ls_std::Integer x {3};
-    ls_std::Integer y {7};
-    ls_std::Integer z {5};
+    ls_std::Integer x{3};
+    ls_std::Integer y{7};
+    ls_std::Integer z{5};
 
     ASSERT_EQ(21, x * y);
     ASSERT_EQ(105, x * y * z);
@@ -78,8 +80,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorSubtraction)
   {
-    ls_std::Integer x {51};
-    ls_std::Integer y {17};
+    ls_std::Integer x{51};
+    ls_std::Integer y{17};
 
     ASSERT_EQ(34, x - y);
     ASSERT_EQ(30, x - 21);
@@ -88,8 +90,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorDivision)
   {
-    ls_std::Integer x {81};
-    ls_std::Integer y {9};
+    ls_std::Integer x{81};
+    ls_std::Integer y{9};
 
     ASSERT_EQ(9, x / y);
     ASSERT_EQ(3, 9 / 3);
@@ -99,8 +101,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorModulus)
   {
-    ls_std::Integer x {85};
-    ls_std::Integer y {9};
+    ls_std::Integer x{85};
+    ls_std::Integer y{9};
 
     ASSERT_EQ(4, x % y);
     ASSERT_EQ(1, x % 3);
@@ -110,8 +112,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorAddEqual)
   {
-    ls_std::Integer x {4};
-    ls_std::Integer y {2};
+    ls_std::Integer x{4};
+    ls_std::Integer y{2};
     ASSERT_EQ(4, x);
 
     x += y;
@@ -126,8 +128,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorSubEqual)
   {
-    ls_std::Integer x {14};
-    ls_std::Integer y {2};
+    ls_std::Integer x{14};
+    ls_std::Integer y{2};
     ASSERT_EQ(14, x);
 
     x -= y;
@@ -142,8 +144,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorMulEqual)
   {
-    ls_std::Integer x {6};
-    ls_std::Integer y {3};
+    ls_std::Integer x{6};
+    ls_std::Integer y{3};
     ASSERT_EQ(6, x);
 
     x *= y;
@@ -155,8 +157,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorDivEqual)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
     ASSERT_EQ(12, x);
 
     x /= y;
@@ -170,9 +172,9 @@ namespace {
 
   TEST_F(IntegerTest, operatorEqual)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
-    ls_std::Integer z {3};
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
+    ls_std::Integer z{3};
 
     ASSERT_TRUE(x == 12);
     ASSERT_TRUE(y == z);
@@ -181,9 +183,9 @@ namespace {
 
   TEST_F(IntegerTest, operatorNotEqual)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
-    ls_std::Integer z {3};
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
+    ls_std::Integer z{3};
 
     ASSERT_TRUE(x != 14);
     ASSERT_TRUE(y != x);
@@ -192,8 +194,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorGreaterThan)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
 
     ASSERT_TRUE(x > 4);
     ASSERT_TRUE(x > y);
@@ -201,8 +203,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorGreaterThanNegative)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
 
     ASSERT_FALSE(x > 14);
     ASSERT_FALSE(x > (y + 20));
@@ -210,8 +212,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorGreaterThanEqual)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {12};
+    ls_std::Integer x{12};
+    ls_std::Integer y{12};
 
     ASSERT_TRUE(x >= 12);
     ASSERT_TRUE(x >= y);
@@ -219,8 +221,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorGreaterThanEqualNegative)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {13};
+    ls_std::Integer x{12};
+    ls_std::Integer y{13};
 
     ASSERT_FALSE(x >= 13);
     ASSERT_FALSE(x >= y);
@@ -228,8 +230,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorLessThan)
   {
-    ls_std::Integer x {10};
-    ls_std::Integer y {12};
+    ls_std::Integer x{10};
+    ls_std::Integer y{12};
 
     ASSERT_TRUE(x < 12);
     ASSERT_TRUE(x < y);
@@ -237,8 +239,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorLessThanNegative)
   {
-    ls_std::Integer x {10};
-    ls_std::Integer y {10};
+    ls_std::Integer x{10};
+    ls_std::Integer y{10};
 
     ASSERT_FALSE(x < 10);
     ASSERT_FALSE(x < y);
@@ -246,8 +248,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorLessThanEqual)
   {
-    ls_std::Integer x {10};
-    ls_std::Integer y {10};
+    ls_std::Integer x{10};
+    ls_std::Integer y{10};
 
     ASSERT_TRUE(x <= 11);
     ASSERT_TRUE(x <= y);
@@ -255,8 +257,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorLessThanEqualNegative)
   {
-    ls_std::Integer x {11};
-    ls_std::Integer y {10};
+    ls_std::Integer x{11};
+    ls_std::Integer y{10};
 
     ASSERT_FALSE(x <= 10);
     ASSERT_FALSE(x <= y);
@@ -266,20 +268,20 @@ namespace {
 
   TEST_F(IntegerTest, operatorNot)
   {
-    ls_std::Integer x {};
+    ls_std::Integer x{};
     ASSERT_TRUE(!x);
   }
 
   TEST_F(IntegerTest, operatorNotNegative)
   {
-    ls_std::Integer x {10};
+    ls_std::Integer x{10};
     ASSERT_FALSE(!x);
   }
 
   TEST_F(IntegerTest, operatorAnd)
   {
-    ls_std::Integer x {1};
-    ls_std::Integer y {1};
+    ls_std::Integer x{1};
+    ls_std::Integer y{1};
     ASSERT_TRUE(x && 1);
     ASSERT_TRUE(x && true);
     ASSERT_TRUE(x && y);
@@ -287,8 +289,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorAndNegative)
   {
-    ls_std::Integer x {};
-    ls_std::Integer y {1};
+    ls_std::Integer x{};
+    ls_std::Integer y{1};
     ASSERT_FALSE(x && 1);
     ASSERT_FALSE(x && true);
     ASSERT_FALSE(x && y);
@@ -296,8 +298,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorOr)
   {
-    ls_std::Integer x {};
-    ls_std::Integer y {1};
+    ls_std::Integer x{};
+    ls_std::Integer y{1};
     ASSERT_TRUE(x || 1);
     ASSERT_TRUE(x || true);
     ASSERT_TRUE(x || y);
@@ -305,8 +307,8 @@ namespace {
 
   TEST_F(IntegerTest, operatorOrNegative)
   {
-    ls_std::Integer x {};
-    ls_std::Integer y {};
+    ls_std::Integer x{};
+    ls_std::Integer y{};
     ASSERT_FALSE(x || 0);
     ASSERT_FALSE(x || false);
     ASSERT_FALSE(x || y);
@@ -316,7 +318,7 @@ namespace {
 
   TEST_F(IntegerTest, operatorIncrement)
   {
-    ls_std::Integer x {};
+    ls_std::Integer x{};
 
     ++x;
     ASSERT_EQ(1, x);
@@ -327,7 +329,7 @@ namespace {
 
   TEST_F(IntegerTest, operatorDecrement)
   {
-    ls_std::Integer x {};
+    ls_std::Integer x{};
 
     --x;
     ASSERT_EQ(-1, x);
@@ -344,9 +346,9 @@ namespace {
 
     std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>();
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_integer.json";
-    ls_std::File file {path};
+    ls_std::File file{path};
     file.createNewFile();
-    ls_std::FileWriter writer {file};
+    ls_std::FileWriter writer{file};
     writer.write(R"({"value":1990})");
 
     auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
@@ -378,7 +380,7 @@ namespace {
 
   TEST_F(IntegerTest, parse)
   {
-    ls_std::Integer x {};
+    ls_std::Integer x{};
 
     x.parse("1989");
     ASSERT_EQ(1989, x);
@@ -389,7 +391,7 @@ namespace {
 
   TEST_F(IntegerTest, toString)
   {
-    ls_std::Integer x {112};
+    ls_std::Integer x{112};
     ASSERT_STREQ("112", x.toString().c_str());
   }
 
@@ -410,7 +412,7 @@ namespace {
 
   TEST_F(IntegerTest, getValue)
   {
-    ls_std::Integer x {3};
+    ls_std::Integer x{3};
     ASSERT_EQ(3, x.getValue());
   }
 
@@ -418,7 +420,7 @@ namespace {
 
   TEST_F(IntegerTest, constApproach)
   {
-    const ls_std::Integer x {3};
+    const ls_std::Integer x{3};
     ASSERT_EQ(3, x);
 
 //     x = 4; // wouldn't work

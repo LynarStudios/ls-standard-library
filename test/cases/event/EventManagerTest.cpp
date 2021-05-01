@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,8 +11,10 @@
 #include <ls_std/ls_std.hpp>
 #include <ls_std_test.hpp>
 
-namespace {
-  class EventManagerTest : public ::testing::Test {
+namespace
+{
+  class EventManagerTest : public ::testing::Test
+  {
     protected:
 
       EventManagerTest() = default;
@@ -27,15 +29,15 @@ namespace {
 
   TEST_F(EventManagerTest, getClassName)
   {
-    ls_std::EventManager eventManager {};
+    ls_std::EventManager eventManager{};
     ASSERT_STREQ("EventManager", eventManager.getClassName().c_str());
   }
 
   TEST_F(EventManagerTest, production_example)
   {
-    std::string news, expectedNews {};
-    ls_std::event_id seriousNewsEventId = ls_std_test::SeriousNewsEvent {""}.getId();
-    ls_std::event_id gossipNewsEventId = ls_std_test::GossipNewsEvent {""}.getId();
+    std::string news, expectedNews{};
+    ls_std::event_id seriousNewsEventId = ls_std_test::SeriousNewsEvent{""}.getId();
+    ls_std::event_id gossipNewsEventId = ls_std_test::GossipNewsEvent{""}.getId();
 
     // create event handler
 

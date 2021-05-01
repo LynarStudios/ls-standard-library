@@ -3,22 +3,27 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/io/xml/XMLParserMock.hpp>
 
-namespace {
-  class XMLParserMockTest : public ::testing::Test {
+namespace
+{
+  class XMLParserMockTest : public ::testing::Test
+  {
     protected:
 
       XMLParserMockTest() = default;
       ~XMLParserMockTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(XMLParserMockTest, readAttribute)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2020-11-26
+ * Changed:         2021-05-01
  *
  * */
 
@@ -13,8 +13,10 @@
 #include <ls_std/base/Class.hpp>
 #include <string>
 
-namespace ls_std {
-  class XMLAttribute : public Class {
+namespace ls_std
+{
+  class XMLAttribute : public ls_std::Class
+  {
     public:
 
       explicit XMLAttribute(std::string _name);
@@ -28,8 +30,8 @@ namespace ls_std {
 
     private:
 
-      std::string name {};
-      std::string value {};
+      std::string name{};
+      std::string value{};
   };
 }
 

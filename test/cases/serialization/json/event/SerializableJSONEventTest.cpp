@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-20
- * Changed:         2020-12-20
+ * Changed:         2021-04-23
  *
  * */
 
@@ -19,17 +19,20 @@ namespace
       SerializableJSONEventTest() = default;
       ~SerializableJSONEventTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(SerializableJSONEventTest, marshal)
   {
-    ls_std::Event event {"OPEN_DOOR_EVENT"};
+    ls_std::Event event{"OPEN_DOOR_EVENT"};
     event.addParameter(ls_std::event_parameter{"key_available", "true"});
     event.addParameter(ls_std::event_parameter{"door_id", "16675"});
 
-    ls_std::SerializableJSONEvent serializable {std::make_shared<ls_std::Event>(event)};
+    ls_std::SerializableJSONEvent serializable{std::make_shared<ls_std::Event>(event)};
 
     ls_std::byte_field data = serializable.marshal();
     ASSERT_FALSE(data.empty());
@@ -39,8 +42,8 @@ namespace
 
   TEST_F(SerializableJSONEventTest, unmarshal)
   {
-    ls_std::Event event {"TMP_EVENT"};
-    ls_std::SerializableJSONEvent serializable {std::make_shared<ls_std::Event>(event)};
+    ls_std::Event event{"TMP_EVENT"};
+    ls_std::SerializableJSONEvent serializable{std::make_shared<ls_std::Event>(event)};
     std::string jsonString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
 
     serializable.unmarshal(jsonString);

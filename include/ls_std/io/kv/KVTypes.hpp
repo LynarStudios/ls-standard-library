@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2020-12-25
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,9 +12,10 @@
 
 #include <string>
 
-namespace ls_std {
-  using kv_key    = std::string;
-  using kv_value  = std::string;
+namespace ls_std
+{
+  using kv_key = std::string;
+  using kv_value = std::string;
 }
 
 #endif

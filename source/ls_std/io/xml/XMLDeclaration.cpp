@@ -3,14 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
 #include <ls_std/io/xml/XMLDeclaration.hpp>
 
-ls_std::XMLDeclaration::XMLDeclaration(std::string _version) :
-ls_std::Class("XMLDeclaration")
+ls_std::XMLDeclaration::XMLDeclaration(std::string _version) : ls_std::Class("XMLDeclaration")
 {
   this->version.setValue(std::move(_version));
 }
@@ -58,9 +57,10 @@ std::string ls_std::XMLDeclaration::toXML()
 
 std::string ls_std::XMLDeclaration::_toXMLAttribute(ls_std::XMLAttribute _attribute)
 {
-  std::string xmlString {};
+  std::string xmlString{};
 
-  if(!_attribute.getValue().empty()) {
+  if (!_attribute.getValue().empty())
+  {
     xmlString = " " + _attribute.toXML();
   }
 

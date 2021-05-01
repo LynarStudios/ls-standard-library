@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-10-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,22 +11,27 @@
 #include <ls_std/ls_std.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class StringTest : public ::testing::Test {
+namespace
+{
+  class StringTest : public ::testing::Test
+  {
     protected:
 
       StringTest() = default;
       ~StringTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   // assignment operators
 
   TEST_F(StringTest, operatorAssignment)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "Hi!";
 
     ASSERT_STREQ("Hi!", text.toString().c_str());
@@ -36,8 +41,8 @@ namespace {
 
   TEST_F(StringTest, operatorAdd)
   {
-    ls_std::String text {"Hello! "};
-    ls_std::String end {"How are you? "};
+    ls_std::String text{"Hello! "};
+    ls_std::String end{"How are you? "};
     text = text + end + "I'm good by the way!";
 
     ASSERT_STREQ("Hello! How are you? I'm good by the way!", text.toString().c_str());
@@ -45,7 +50,7 @@ namespace {
 
   TEST_F(StringTest, operatorHyphen)
   {
-    ls_std::String text {"abcdefghij"};
+    ls_std::String text{"abcdefghij"};
     text = text - 5;
 
     ASSERT_STREQ("abcde", text.toString().c_str());
@@ -55,8 +60,8 @@ namespace {
 
   TEST_F(StringTest, operatorAddEqual)
   {
-    ls_std::String text {};
-    ls_std::String hello {"Hi! "};
+    ls_std::String text{};
+    ls_std::String hello{"Hi! "};
     ASSERT_STREQ("", text.toString().c_str());
 
     text += hello;
@@ -70,8 +75,8 @@ namespace {
 
   TEST_F(StringTest, operatorEqual)
   {
-    ls_std::String text {"Hi!"};
-    ls_std::String hello {"Hi!"};
+    ls_std::String text{"Hi!"};
+    ls_std::String hello{"Hi!"};
 
     ASSERT_TRUE(text == hello);
     ASSERT_TRUE(hello == text);
@@ -81,8 +86,8 @@ namespace {
 
   TEST_F(StringTest, operatorNotEqual)
   {
-    ls_std::String text {"Hi!"};
-    ls_std::String hello {"Hello!"};
+    ls_std::String text{"Hi!"};
+    ls_std::String hello{"Hello!"};
 
     ASSERT_TRUE(text != hello);
     ASSERT_TRUE(hello != text);
@@ -98,9 +103,9 @@ namespace {
 
     std::shared_ptr<ls_std::String> x = std::make_shared<ls_std::String>();
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_string.json";
-    ls_std::File file {path};
+    ls_std::File file{path};
     file.createNewFile();
-    ls_std::FileWriter writer {file};
+    ls_std::FileWriter writer{file};
     writer.write(R"({"value":"Hello!"})");
 
     auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
@@ -132,7 +137,7 @@ namespace {
 
   TEST_F(StringTest, parse)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text.parse("Hello!");
 
     ASSERT_STREQ("Hello!", text.toString().c_str());
@@ -140,7 +145,7 @@ namespace {
 
   TEST_F(StringTest, toString)
   {
-    ls_std::String text {"Hello!"};
+    ls_std::String text{"Hello!"};
 
     ASSERT_STREQ("Hello!", text.toString().c_str());
   }
@@ -162,7 +167,7 @@ namespace {
 
   TEST_F(StringTest, contains)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "Hey, I'm searching for the keyword 'cake'!";
 
     ASSERT_TRUE(text.contains("cake"));
@@ -170,7 +175,7 @@ namespace {
 
   TEST_F(StringTest, containsNegative)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "Hey, I'm searching for the keyword 'cake'!";
 
     ASSERT_FALSE(text.contains("butter"));
@@ -178,7 +183,7 @@ namespace {
 
   TEST_F(StringTest, endsWith)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "abcdef";
 
     ASSERT_TRUE(text.endsWith("ef"));
@@ -186,7 +191,7 @@ namespace {
 
   TEST_F(StringTest, endsWithNegative)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "abcdef";
 
     ASSERT_FALSE(text.endsWith("efg"));
@@ -194,8 +199,8 @@ namespace {
 
   TEST_F(StringTest, equalsIgnoreCase)
   {
-    ls_std::String text {"Hello!"};
-    ls_std::String hello {"HeLLo!"};
+    ls_std::String text{"Hello!"};
+    ls_std::String hello{"HeLLo!"};
 
     ASSERT_TRUE(text.equalsIgnoreCase(hello));
     ASSERT_TRUE(text.equalsIgnoreCase("HeLLO!"));
@@ -203,16 +208,16 @@ namespace {
 
   TEST_F(StringTest, getByteData)
   {
-    ls_std::String text {"Hallo!"};
+    ls_std::String text{"Hallo!"};
     ASSERT_STREQ("Hallo!", text.getByteData().data());
   }
 
   TEST_F(StringTest, padLeft)
   {
-    ls_std::String text {"abcdef"};
-    ls_std::String anotherText {"ab"};
-    ls_std::String emptyText {};
-    ls_std::String longText {"This text is too long to fill!"};
+    ls_std::String text{"abcdef"};
+    ls_std::String anotherText{"ab"};
+    ls_std::String emptyText{};
+    ls_std::String longText{"This text is too long to fill!"};
 
     ASSERT_STREQ("    abcdef", text.padLeft(10, ' ').c_str());
     ASSERT_STREQ("        ab", anotherText.padLeft(10, ' ').c_str());
@@ -222,10 +227,10 @@ namespace {
 
   TEST_F(StringTest, padRight)
   {
-    ls_std::String text {"abcdef"};
-    ls_std::String anotherText {"ab"};
-    ls_std::String emptyText {};
-    ls_std::String longText {"This text is too long to fill!"};
+    ls_std::String text{"abcdef"};
+    ls_std::String anotherText{"ab"};
+    ls_std::String emptyText{};
+    ls_std::String longText{"This text is too long to fill!"};
 
     ASSERT_STREQ("abcdef    ", text.padRight(10, ' ').c_str());
     ASSERT_STREQ("ab        ", anotherText.padRight(10, ' ').c_str());
@@ -235,7 +240,7 @@ namespace {
 
   TEST_F(StringTest, reverse)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "abcdef";
 
     ASSERT_STREQ("fedcba", text.reverse().c_str());
@@ -244,7 +249,7 @@ namespace {
 
   TEST_F(StringTest, startsWith)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "abcdef";
 
     ASSERT_TRUE(text.startsWith("abc"));
@@ -252,7 +257,7 @@ namespace {
 
   TEST_F(StringTest, startsWithNegative)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "abcdef";
 
     ASSERT_FALSE(text.startsWith("bc"));
@@ -260,7 +265,7 @@ namespace {
 
   TEST_F(StringTest, toLowerCase)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("abcdefghijklmn", text.toLowerCase().c_str());
@@ -269,7 +274,7 @@ namespace {
 
   TEST_F(StringTest, toUpperCase)
   {
-    ls_std::String text {};
+    ls_std::String text{};
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("ABCDEFGHIJKLMN", text.toUpperCase().c_str());

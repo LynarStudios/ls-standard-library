@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2020-12-25
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,21 +11,26 @@
 #include <ls_std/ls_std.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class KVReaderTest : public ::testing::Test {
+namespace
+{
+  class KVReaderTest : public ::testing::Test
+  {
     protected:
 
       KVReaderTest() = default;
       ~KVReaderTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(KVReaderTest, getDocument)
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    ls_std::KVReader reader {std::make_shared<ls_std::KVDocument>(), kvPath};
+    ls_std::KVReader reader{std::make_shared<ls_std::KVDocument>(), kvPath};
 
     ASSERT_TRUE(reader.getDocument() != nullptr);
   }
@@ -34,7 +39,7 @@ namespace {
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
     std::shared_ptr<ls_std::KVDocument> document = std::make_shared<ls_std::KVDocument>();
-    ls_std::KVReader reader {document, kvPath};
+    ls_std::KVReader reader{document, kvPath};
 
     reader.read();
     ASSERT_EQ(3, document->getPairs().size());
@@ -53,7 +58,7 @@ namespace {
     std::shared_ptr<ls_std::KVDocument> document1 = std::make_shared<ls_std::KVDocument>();
     std::shared_ptr<ls_std::KVDocument> document2 = std::make_shared<ls_std::KVDocument>();
 
-    ls_std::KVReader reader {document1, kvPath};
+    ls_std::KVReader reader{document1, kvPath};
     ASSERT_TRUE(reader.getDocument() == document1);
 
     reader.setDocument(document2);

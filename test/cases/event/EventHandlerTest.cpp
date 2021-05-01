@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,8 +11,10 @@
 #include <ls_std/ls_std.hpp>
 #include <ls_std_test.hpp>
 
-namespace {
-  class EventHandlerTest : public ::testing::Test {
+namespace
+{
+  class EventHandlerTest : public ::testing::Test
+  {
     protected:
 
       EventHandlerTest() = default;
@@ -27,7 +29,7 @@ namespace {
 
   TEST_F(EventHandlerTest, getId)
   {
-    ls_std::EventHandler eventHandler {"EventId"};
+    ls_std::EventHandler eventHandler{"EventId"};
     ASSERT_STREQ("EventId", eventHandler.getId().c_str());
   }
 }

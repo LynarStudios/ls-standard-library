@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2020-11-06
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,13 +12,16 @@
 
 #include <exception>
 
-namespace ls_std {
-  class NullPointerException : public std::exception {
+namespace ls_std
+{
+  class NullPointerException : public std::exception
+  {
     public:
 
       explicit NullPointerException() = default;
 
-      const char *what() const noexcept override {
+      const char *what() const noexcept override
+      {
         return "NullPointerException thrown - reference is null!";
       }
   };

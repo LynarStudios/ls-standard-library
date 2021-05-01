@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -34,12 +34,14 @@ void ls_std::XMLDocument::setRootElement(const std::shared_ptr<ls_std::XMLNode> 
 
 std::string ls_std::XMLDocument::toXML()
 {
-  std::string xmlString {};
+  std::string xmlString{};
 
-  if(this->declaration != nullptr) {
+  if (this->declaration != nullptr)
+  {
     xmlString = this->declaration->toXML();
 
-    if(!xmlString.empty()) {
+    if (!xmlString.empty())
+    {
       xmlString += "\n";
     }
   }

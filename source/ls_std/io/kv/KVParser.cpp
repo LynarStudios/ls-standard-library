@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2020-12-25
+ * Changed:         2021-04-23
  *
  * */
 
@@ -33,8 +33,9 @@ void ls_std::KVParser::setDocument(const std::shared_ptr<ls_std::KVDocument> &_d
 
 void ls_std::KVParser::_assignDocument(const std::shared_ptr<ls_std::KVDocument> &_document)
 {
-  if(_document == nullptr) {
-    throw ls_std::NullPointerException {};
+  if (_document == nullptr)
+  {
+    throw ls_std::NullPointerException{};
   }
 
   this->document = _document;
@@ -47,7 +48,8 @@ bool ls_std::KVParser::_lineHasPair(ls_std::KVParseData _parseData)
 
 void ls_std::KVParser::_parse(const ls_std::byte_field &_data)
 {
-  for(std::string::size_type index = 0 ; index < _data.size() ; index++) {
+  for (std::string::size_type index = 0; index < _data.size(); index++)
+  {
     ls_std::KVParseData parseData = ls_std::KVParser::_readLine(_data, index);
     this->_parsePair(parseData);
     index = parseData.index;
@@ -56,25 +58,30 @@ void ls_std::KVParser::_parse(const ls_std::byte_field &_data)
 
 void ls_std::KVParser::_parsePair(ls_std::KVParseData _parseData)
 {
-  if(ls_std::KVParser::_lineHasPair(_parseData)) {
+  if (ls_std::KVParser::_lineHasPair(_parseData))
+  {
     size_t equalSignPosition = _parseData.line.toString().find('=');
     ls_std::kv_key key = _parseData.line.toString().substr(0, equalSignPosition);
     ls_std::kv_value value = _parseData.line.toString().substr(equalSignPosition + 1);
     value = value.substr(0, value.find(';'));
 
-    this->document->addPair(ls_std::KVPair {key, value});
+    this->document->addPair(ls_std::KVPair{key, value});
   }
 }
 
 ls_std::KVParseData ls_std::KVParser::_readLine(const ls_std::byte_field &_data, std::string::size_type _index)
 {
-  ls_std::KVParseData parseData {};
+  ls_std::KVParseData parseData{};
   parseData.line = _data.substr(_index);
 
-  if(parseData.line.contains(ls_std::NewLine::getWindowsNewLine())) {
+  if (parseData.line.contains(ls_std::NewLine::getWindowsNewLine()))
+  {
     ls_std::KVParser::_readLineWithWindowsLineBreak(parseData);
-  } else {
-    if(parseData.line.contains(ls_std::NewLine::getUnixNewLine())) {
+  }
+  else
+  {
+    if (parseData.line.contains(ls_std::NewLine::getUnixNewLine()))
+    {
       ls_std::KVParser::_readLineWithUnixLineBreak(parseData);
     }
   }
@@ -83,7 +90,7 @@ ls_std::KVParseData ls_std::KVParser::_readLine(const ls_std::byte_field &_data,
   return parseData;
 }
 
-void ls_std::KVParser::_readLineWithUnixLineBreak(ls_std::KVParseData& _parseData)
+void ls_std::KVParser::_readLineWithUnixLineBreak(ls_std::KVParseData &_parseData)
 {
   size_t newLinePosition = _parseData.line.toString().find(ls_std::NewLine::getUnixNewLine());
   _parseData.line = _parseData.line.toString().substr(0, newLinePosition);
