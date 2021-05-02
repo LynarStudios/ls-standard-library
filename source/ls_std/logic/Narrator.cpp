@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
 #include <ls_std/utils/STLUtils.hpp>
-#include "../../../include/ls_std/logic/Narrator.hpp"
+#include <ls_std/logic/Narrator.hpp>
 
 ls_std::Narrator::Narrator() : ls_std::Class("Narrator")
 {}
