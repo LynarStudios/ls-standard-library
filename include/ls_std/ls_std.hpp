@@ -17,6 +17,7 @@
 #include "base/Class.hpp"
 #include "base/Types.hpp"
 #include "base/Version.hpp"
+#include "base/LibraryVersion.hpp"
 
 #include "boxing/IBoxing.hpp"
 #include "boxing/Boolean.hpp"
