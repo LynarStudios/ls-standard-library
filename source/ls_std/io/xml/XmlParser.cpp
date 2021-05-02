@@ -207,16 +207,16 @@ void ls_std::XmlParser::_mergeNodes()
     this->maxLevel -= 1;
   }
 
-  this->document->setRootElement(this->parseData.front().node);
+  this->document->setRootElement(this->parseParameters.front().node);
 }
 
-void ls_std::XmlParser::_mergeChildrenToParentNode(const std::shared_ptr<ls_std::XmlNode> &_parent, std::list<ls_std::XmlParseData>::iterator &_iterator, uint8_t _parentLevel)
+void ls_std::XmlParser::_mergeChildrenToParentNode(const std::shared_ptr<ls_std::XmlNode> &_parent, std::list<ls_std::XmlParseParameter>::iterator &_iterator, uint8_t _parentLevel)
 {
   do
   {
     _iterator++;
 
-    if (_iterator == this->parseData.end())
+    if (_iterator == this->parseParameters.end())
     {
       break;
     }
@@ -232,10 +232,10 @@ void ls_std::XmlParser::_mergeChildrenToParentNode(const std::shared_ptr<ls_std:
 
 void ls_std::XmlParser::_mergeNodesOnCurrentLevel()
 {
-  auto iterator = this->parseData.begin();
+  auto iterator = this->parseParameters.begin();
   uint8_t parentLevel = this->maxLevel - 1;
 
-  while (iterator != this->parseData.end())
+  while (iterator != this->parseParameters.end())
   {
     if (iterator->level == parentLevel)
     {
@@ -352,15 +352,15 @@ size_t ls_std::XmlParser::_parseOpeningTag(const ls_std::byte_field &_data, std:
 {
   ls_std::String tagString{ls_std::XmlParser::_getNextTagString(_data, _index)};
   bool isValidTagString = !tagString.toString().empty();
-  ls_std::XmlParseData singleParseData{};
+  ls_std::XmlParseParameter singleParseParameter{};
 
   if (isValidTagString)
   {
     std::shared_ptr<ls_std::XmlNode> node = ls_std::XmlParser::_createNode(ls_std::XmlParser::_parseAttributes(tagString), ls_std::XmlParser::_parseTagName(tagString));
 
-    singleParseData.level = this->currentLevel;
-    singleParseData.node = node;
-    this->parseData.push_back(singleParseData);
+    singleParseParameter.level = this->currentLevel;
+    singleParseParameter.node = node;
+    this->parseParameters.push_back(singleParseParameter);
 
     if (!tagString.endsWith("/>"))
     {
@@ -387,7 +387,7 @@ ls_std::byte_field ls_std::XmlParser::_parseTagName(const ls_std::byte_field &_d
 size_t ls_std::XmlParser::_parseValue(const ls_std::byte_field &_data, std::string::size_type _index)
 {
   ls_std::byte_field value = _data.substr(_index, _data.substr(_index).find('<'));
-  this->parseData.back().node->setValue(value);
+  this->parseParameters.back().node->setValue(value);
 
   return _index + (value.size() - 1);
 }
@@ -397,7 +397,7 @@ void ls_std::XmlParser::_reset()
   this->currentLevel = 1;
   this->maxLevel = 1;
   this->mode = XML_PARSE_MODE_ANALYZE;
-  this->parseData.clear();
+  this->parseParameters.clear();
 }
 
 void ls_std::XmlParser::_setMaxLevel()

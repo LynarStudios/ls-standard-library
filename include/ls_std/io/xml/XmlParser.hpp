@@ -14,7 +14,7 @@
 #include <ls_std/base/Types.hpp>
 #include "XmlDocument.hpp"
 #include "XmlParseMode.hpp"
-#include "XmlParseData.hpp"
+#include "XmlParseParameter.hpp"
 #include <list>
 
 namespace ls_std
@@ -41,7 +41,7 @@ namespace ls_std
       std::shared_ptr<ls_std::XmlDocument> document{};
       uint8_t maxLevel{};
       ls_std::XmlParseMode mode{};
-      std::list<ls_std::XmlParseData> parseData{};
+      std::list<ls_std::XmlParseParameter> parseParameters{};
 
       void _analyze(const ls_std::byte_field &_data, std::string::size_type _index);
       void _assignDocument(const std::shared_ptr<ls_std::XmlDocument> &_document);
@@ -55,7 +55,7 @@ namespace ls_std
       void _isOpeningTag(const ls_std::byte_field &_data, std::string::size_type _index);
       void _isValue(const ls_std::byte_field &_data, std::string::size_type _index);
       void _mergeNodes();
-      void _mergeChildrenToParentNode(const std::shared_ptr<ls_std::XmlNode> &_parent, std::list<ls_std::XmlParseData>::iterator &_iterator, uint8_t _parentLevel);
+      void _mergeChildrenToParentNode(const std::shared_ptr<ls_std::XmlNode> &_parent, std::list<ls_std::XmlParseParameter>::iterator &_iterator, uint8_t _parentLevel);
       void _mergeNodesOnCurrentLevel();
       void _parse(const ls_std::byte_field &_data);
       static std::pair<std::string, std::string> _parseAttribute(const ls_std::byte_field &_data);

@@ -38,7 +38,7 @@
 #include "io/logging/Logger.hpp"
 #include "io/xml/XmlReader.hpp"
 #include "io/xml/XmlParseMode.hpp"
-#include "io/xml/XmlParseData.hpp"
+#include "io/xml/XmlParseParameter.hpp"
 #include "io/xml/XmlNode.hpp"
 #include "io/xml/XmlDocument.hpp"
 #include "io/xml/XmlDeclaration.hpp"

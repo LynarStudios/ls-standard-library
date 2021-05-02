@@ -16,7 +16,7 @@
 
 namespace ls_std
 {
-  struct XmlParseData
+  struct XmlParseParameter
   {
     uint8_t level{};
     std::shared_ptr<ls_std::XmlNode> node{};

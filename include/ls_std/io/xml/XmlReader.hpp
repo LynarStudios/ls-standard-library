@@ -15,7 +15,7 @@
 #include <ls_std/io/IReader.hpp>
 #include <ls_std/io/File.hpp>
 #include "XmlParseMode.hpp"
-#include "XmlParseData.hpp"
+#include "XmlParseParameter.hpp"
 #include <list>
 
 namespace ls_std
