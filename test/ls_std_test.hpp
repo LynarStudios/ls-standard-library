@@ -20,4 +20,6 @@
 
 #include "classes/factory/SerializableTestFactory.hpp"
 
+#include "classes/io/xml/XmlParserTestWrapper.hpp"
+
 #endif

@@ -8,7 +8,7 @@
  * */
 
 #include <gtest/gtest.h>
-#include <classes/io/xml/XmlParserTestWrapper.hpp>
+#include <ls_std_test.hpp>
 
 namespace
 {
