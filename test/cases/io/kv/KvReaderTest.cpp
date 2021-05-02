@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -13,12 +13,12 @@
 
 namespace
 {
-  class KVReaderTest : public ::testing::Test
+  class KvReaderTest : public ::testing::Test
   {
     protected:
 
-      KVReaderTest() = default;
-      ~KVReaderTest() override = default;
+      KvReaderTest() = default;
+      ~KvReaderTest() override = default;
 
       void SetUp() override
       {}
@@ -27,19 +27,19 @@ namespace
       {}
   };
 
-  TEST_F(KVReaderTest, getDocument)
+  TEST_F(KvReaderTest, getDocument)
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    ls_std::KVReader reader{std::make_shared<ls_std::KVDocument>(), kvPath};
+    ls_std::KvReader reader{std::make_shared<ls_std::KvDocument>(), kvPath};
 
     ASSERT_TRUE(reader.getDocument() != nullptr);
   }
 
-  TEST_F(KVReaderTest, read)
+  TEST_F(KvReaderTest, read)
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    std::shared_ptr<ls_std::KVDocument> document = std::make_shared<ls_std::KVDocument>();
-    ls_std::KVReader reader{document, kvPath};
+    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
+    ls_std::KvReader reader{document, kvPath};
 
     reader.read();
     ASSERT_EQ(3, document->getPairs().size());
@@ -52,13 +52,13 @@ namespace
     ASSERT_STREQ("deamon", document->getPairs().at("service-name").getValue().c_str());
   }
 
-  TEST_F(KVReaderTest, setDocument)
+  TEST_F(KvReaderTest, setDocument)
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    std::shared_ptr<ls_std::KVDocument> document1 = std::make_shared<ls_std::KVDocument>();
-    std::shared_ptr<ls_std::KVDocument> document2 = std::make_shared<ls_std::KVDocument>();
+    std::shared_ptr<ls_std::KvDocument> document1 = std::make_shared<ls_std::KvDocument>();
+    std::shared_ptr<ls_std::KvDocument> document2 = std::make_shared<ls_std::KvDocument>();
 
-    ls_std::KVReader reader{document1, kvPath};
+    ls_std::KvReader reader{document1, kvPath};
     ASSERT_TRUE(reader.getDocument() == document1);
 
     reader.setDocument(document2);

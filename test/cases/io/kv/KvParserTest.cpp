@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -12,12 +12,12 @@
 
 namespace
 {
-  class KVParserTest : public ::testing::Test
+  class KvParserTest : public ::testing::Test
   {
     protected:
 
-      KVParserTest() = default;
-      ~KVParserTest() override = default;
+      KvParserTest() = default;
+      ~KvParserTest() override = default;
 
       void SetUp() override
       {}
@@ -26,16 +26,16 @@ namespace
       {}
   };
 
-  TEST_F(KVParserTest, getDocument)
+  TEST_F(KvParserTest, getDocument)
   {
-    ls_std::KVParser parser{std::make_shared<ls_std::KVDocument>()};
+    ls_std::KvParser parser{std::make_shared<ls_std::KvDocument>()};
     ASSERT_TRUE(parser.getDocument() != nullptr);
   }
 
-  TEST_F(KVParserTest, parse)
+  TEST_F(KvParserTest, parse)
   {
-    std::shared_ptr<ls_std::KVDocument> document = std::make_shared<ls_std::KVDocument>();
-    ls_std::KVParser parser{document};
+    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
+    ls_std::KvParser parser{document};
     ls_std::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
     parser.parse(data);
 
@@ -49,12 +49,12 @@ namespace
     ASSERT_STREQ("deamon", document->getPairs().at("service-name").getValue().c_str());
   }
 
-  TEST_F(KVParserTest, setDocument)
+  TEST_F(KvParserTest, setDocument)
   {
-    std::shared_ptr<ls_std::KVDocument> document1 = std::make_shared<ls_std::KVDocument>();
-    std::shared_ptr<ls_std::KVDocument> document2 = std::make_shared<ls_std::KVDocument>();
+    std::shared_ptr<ls_std::KvDocument> document1 = std::make_shared<ls_std::KvDocument>();
+    std::shared_ptr<ls_std::KvDocument> document2 = std::make_shared<ls_std::KvDocument>();
 
-    ls_std::KVParser parser{document1};
+    ls_std::KvParser parser{document1};
     ASSERT_TRUE(parser.getDocument() == document1);
 
     parser.setDocument(document2);

@@ -94,10 +94,10 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/event/SerializableJsonEvent.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVPair.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvPair.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvParser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/SerializableJsonFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonBooleanFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonDoubleFactory.cpp
@@ -161,10 +161,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/event/SerializableJsonEventTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVPairTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVDocumentTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVParserTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVReaderTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvPairTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvDocumentTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParserTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvReaderTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/SerializableFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonBooleanFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonDoubleFactoryTest.cpp

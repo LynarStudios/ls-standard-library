@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -15,7 +15,7 @@
 
 namespace ls_std
 {
-  struct KVParseData
+  struct KvParseData
   {
     std::string::size_type index{};
     ls_std::String line{};

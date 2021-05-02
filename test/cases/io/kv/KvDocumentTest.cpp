@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -12,12 +12,12 @@
 
 namespace
 {
-  class KVDocumentTest : public ::testing::Test
+  class KvDocumentTest : public ::testing::Test
   {
     protected:
 
-      KVDocumentTest() = default;
-      ~KVDocumentTest() override = default;
+      KvDocumentTest() = default;
+      ~KvDocumentTest() override = default;
 
       void SetUp() override
       {}
@@ -26,20 +26,20 @@ namespace
       {}
   };
 
-  TEST_F(KVDocumentTest, addPair)
+  TEST_F(KvDocumentTest, addPair)
   {
-    ls_std::KVDocument document{};
-    ls_std::KVPair pair{"port", "13088"};
+    ls_std::KvDocument document{};
+    ls_std::KvPair pair{"port", "13088"};
 
     ASSERT_TRUE(document.getPairs().empty());
     ASSERT_TRUE(document.addPair(pair));
     ASSERT_EQ(1, document.getPairs().size());
   }
 
-  TEST_F(KVDocumentTest, addPairNegative)
+  TEST_F(KvDocumentTest, addPairNegative)
   {
-    ls_std::KVDocument document{};
-    ls_std::KVPair pair{"port", "13088"};
+    ls_std::KvDocument document{};
+    ls_std::KvPair pair{"port", "13088"};
 
     ASSERT_TRUE(document.getPairs().empty());
     ASSERT_TRUE(document.addPair(pair));
@@ -48,10 +48,10 @@ namespace
     ASSERT_FALSE(document.addPair(pair));
   }
 
-  TEST_F(KVDocumentTest, clear)
+  TEST_F(KvDocumentTest, clear)
   {
-    ls_std::KVDocument document{};
-    ls_std::KVPair pair{"port", "13088"};
+    ls_std::KvDocument document{};
+    ls_std::KvPair pair{"port", "13088"};
 
     ASSERT_TRUE(document.getPairs().empty());
     ASSERT_TRUE(document.addPair(pair));
@@ -63,33 +63,33 @@ namespace
     ASSERT_EQ(0, document.getPairs().size());
   }
 
-  TEST_F(KVDocumentTest, getPairs)
+  TEST_F(KvDocumentTest, getPairs)
   {
-    ls_std::KVDocument document{};
+    ls_std::KvDocument document{};
     ASSERT_TRUE(document.getPairs().empty());
   }
 
-  TEST_F(KVDocumentTest, hasPair)
+  TEST_F(KvDocumentTest, hasPair)
   {
-    ls_std::KVDocument document{};
+    ls_std::KvDocument document{};
     ASSERT_TRUE(document.getPairs().empty());
-    ASSERT_TRUE(document.addPair(ls_std::KVPair{"port", "80"}));
+    ASSERT_TRUE(document.addPair(ls_std::KvPair{"port", "80"}));
     ASSERT_TRUE(document.hasPair("port"));
   }
 
-  TEST_F(KVDocumentTest, hasPairNegative)
+  TEST_F(KvDocumentTest, hasPairNegative)
   {
-    ls_std::KVDocument document{};
+    ls_std::KvDocument document{};
     ASSERT_TRUE(document.getPairs().empty());
     ASSERT_FALSE(document.hasPair("port"));
   }
 
-  TEST_F(KVDocumentTest, removePair)
+  TEST_F(KvDocumentTest, removePair)
   {
-    ls_std::KVDocument document{};
-    ASSERT_TRUE(document.addPair(ls_std::KVPair{"port", "80"}));
-    ASSERT_TRUE(document.addPair(ls_std::KVPair{"host", "localhost"}));
-    ASSERT_TRUE(document.addPair(ls_std::KVPair{"protocol", "TCP"}));
+    ls_std::KvDocument document{};
+    ASSERT_TRUE(document.addPair(ls_std::KvPair{"port", "80"}));
+    ASSERT_TRUE(document.addPair(ls_std::KvPair{"host", "localhost"}));
+    ASSERT_TRUE(document.addPair(ls_std::KvPair{"protocol", "TCP"}));
     ASSERT_EQ(3, document.getPairs().size());
 
     document.removePair("protocol");

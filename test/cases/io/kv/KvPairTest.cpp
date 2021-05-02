@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -12,12 +12,12 @@
 
 namespace
 {
-  class KVPairTest : public ::testing::Test
+  class KvPairTest : public ::testing::Test
   {
     protected:
 
-      KVPairTest() = default;
-      ~KVPairTest() override = default;
+      KvPairTest() = default;
+      ~KvPairTest() override = default;
 
       void SetUp() override
       {}
@@ -26,21 +26,21 @@ namespace
       {}
   };
 
-  TEST_F(KVPairTest, getKey)
+  TEST_F(KvPairTest, getKey)
   {
-    ls_std::KVPair pair{"port", "13088"};
+    ls_std::KvPair pair{"port", "13088"};
     ASSERT_STREQ("port", pair.getKey().c_str());
   }
 
-  TEST_F(KVPairTest, getValue)
+  TEST_F(KvPairTest, getValue)
   {
-    ls_std::KVPair pair{"port", "13088"};
+    ls_std::KvPair pair{"port", "13088"};
     ASSERT_STREQ("13088", pair.getValue().c_str());
   }
 
-  TEST_F(KVPairTest, setValue)
+  TEST_F(KvPairTest, setValue)
   {
-    ls_std::KVPair pair{"port", "13088"};
+    ls_std::KvPair pair{"port", "13088"};
     ASSERT_STREQ("13088", pair.getValue().c_str());
 
     pair.setValue("8080");
