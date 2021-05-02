@@ -87,7 +87,6 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/Narrator.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/IListener.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp

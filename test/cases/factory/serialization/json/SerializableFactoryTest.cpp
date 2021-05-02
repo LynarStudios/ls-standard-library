@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-05-01
+ * Changed:         2021-05-02
  *
  * */
 
@@ -90,7 +90,7 @@ namespace
   TEST_F(SerializableFactoryTest, build_factoryNotAvailable)
   {
     ls_std::SerializableJsonFactory serializableFactory{};
-    std::shared_ptr<ls_std::Class> serializable = serializableFactory.build(ls_std_test::GossipNewsAgency{}.getClassName());
+    std::shared_ptr<ls_std::Class> serializable = serializableFactory.build(ls_std_test::GossipNewsAgency{}.getName());
 
     ASSERT_FALSE(serializable != nullptr);
   }
@@ -115,7 +115,7 @@ namespace
   TEST_F(SerializableFactoryTest, hasFactory_factoryNotAvailable)
   {
     ls_std::SerializableJsonFactory serializableFactory{};
-    ASSERT_FALSE(serializableFactory.hasFactory(ls_std_test::GossipNewsAgency{}.getClassName()));
+    ASSERT_FALSE(serializableFactory.hasFactory(ls_std_test::GossipNewsAgency{}.getName()));
   }
 
   TEST_F(SerializableFactoryTest, removeFactory)
@@ -127,6 +127,6 @@ namespace
   TEST_F(SerializableFactoryTest, removeFactory_factoryNotAvailable)
   {
     ls_std::SerializableJsonFactory serializableFactory{};
-    ASSERT_FALSE(serializableFactory.removeFactory(ls_std_test::GossipNewsAgency{}.getClassName()));
+    ASSERT_FALSE(serializableFactory.removeFactory(ls_std_test::GossipNewsAgency{}.getName()));
   }
 }
