@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2021-04-24
+ * Changed:         2021-05-02
  *
  * */
 
@@ -29,7 +29,7 @@ namespace
 
   TEST_F(ClassTest, Destructor)
   {
-    std::shared_ptr<ls_std_test::ClassMock> object = std::make_shared<ls_std_test::ClassMock>();
+    std::shared_ptr<ls_std_test::ClassWrapper> object = std::make_shared<ls_std_test::ClassWrapper>();
     EXPECT_CALL(*object, Die());
   }
 
