@@ -15,7 +15,7 @@
 
 namespace ls_std
 {
-  struct KvParseData
+  struct KvParseParameter
   {
     std::string::size_type index{};
     ls_std::String line{};

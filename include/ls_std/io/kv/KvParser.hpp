@@ -13,7 +13,7 @@
 #include <ls_std/base/Class.hpp>
 #include <ls_std/base/Types.hpp>
 #include "KvDocument.hpp"
-#include "KvParseData.hpp"
+#include "KvParseParameter.hpp"
 #include <memory>
 
 namespace ls_std
@@ -34,12 +34,12 @@ namespace ls_std
       std::shared_ptr<ls_std::KvDocument> document{};
 
       void _assignDocument(const std::shared_ptr<ls_std::KvDocument> &_document);
-      static bool _lineHasPair(ls_std::KvParseData _parseData);
+      static bool _lineHasPair(ls_std::KvParseParameter _parseParameter);
       void _parse(const ls_std::byte_field &_data);
-      void _parsePair(ls_std::KvParseData _parseData);
-      static ls_std::KvParseData _readLine(const ls_std::byte_field &_data, std::string::size_type _index);
-      static void _readLineWithUnixLineBreak(ls_std::KvParseData &_parseData);
-      static void _readLineWithWindowsLineBreak(ls_std::KvParseData &_parseData);
+      void _parsePair(ls_std::KvParseParameter _parseParameter);
+      static ls_std::KvParseParameter _readLine(const ls_std::byte_field &_data, std::string::size_type _index);
+      static void _readLineWithUnixLineBreak(ls_std::KvParseParameter &_parseParameter);
+      static void _readLineWithWindowsLineBreak(ls_std::KvParseParameter &_parseParameter);
   };
 }
 
