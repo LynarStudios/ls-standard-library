@@ -10,16 +10,16 @@
 #ifndef LS_STD_XML_PARSER_MOCK_HPP
 #define LS_STD_XML_PARSER_MOCK_HPP
 
-#include "XmlParser.hpp"
+#include <ls_std/io/xml/XmlParser.hpp>
 
-namespace ls_std
+namespace ls_std_test
 {
-  class XmlParserMock : public ls_std::XmlParser
+  class XmlParserTestWrapper : public ls_std::XmlParser
   {
     public:
 
-      XmlParserMock();
-      ~XmlParserMock() override = default;
+      XmlParserTestWrapper();
+      ~XmlParserTestWrapper() override = default;
 
       static std::pair<std::string, std::string> readAttribute(const ls_std::byte_field &_data);
       static std::list<std::pair<std::string, std::string>> readAttributes(ls_std::byte_field _data);

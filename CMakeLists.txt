@@ -85,7 +85,6 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlParserMock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/Narrator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/IListener.cpp
@@ -147,7 +146,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDeclarationTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlReaderTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserMockTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTestWrapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataCar.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataMercedesCar.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/NarratorTest.cpp
@@ -179,7 +178,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IllegalArgumentExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IllegalArithmeticOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IncompleteJsonExceptionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/NullPointerExceptionTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/NullPointerExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 endif ()
 
 ##########################################################
