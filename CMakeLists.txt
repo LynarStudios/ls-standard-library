@@ -79,17 +79,17 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJsonStateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJsonState.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJsonStateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlAttribute.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlNode.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDeclaration.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParserMock.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDeclaration.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlParserMock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/Narrator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/IListener.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLParser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
@@ -141,17 +141,17 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJsonStateMachineTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLAttributeTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLNodeTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlAttributeTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlNodeTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/VersionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLDeclarationTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLDocumentTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLReaderTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLParserMockTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDeclarationTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDocumentTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlReaderTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserMockTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataCar.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataMercedesCar.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/NarratorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLParserTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/NewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/DailyNewsAgency.cpp

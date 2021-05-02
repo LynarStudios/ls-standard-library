@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-25
- * Changed:         2021-05-01
+ * Changed:         2021-05-02
  *
  * */
 
@@ -12,23 +12,23 @@
 
 #include <ls_std/base/Class.hpp>
 #include <ls_std/base/Types.hpp>
-#include "XMLDocument.hpp"
-#include "XMLParseMode.hpp"
-#include "XMLParseData.hpp"
+#include "XmlDocument.hpp"
+#include "XmlParseMode.hpp"
+#include "XmlParseData.hpp"
 #include <list>
 
 namespace ls_std
 {
-  class XMLParser : public ls_std::Class
+  class XmlParser : public ls_std::Class
   {
     public:
 
-      explicit XMLParser(const std::shared_ptr<ls_std::XMLDocument> &_document);
-      ~XMLParser() override = default;
+      explicit XmlParser(const std::shared_ptr<ls_std::XmlDocument> &_document);
+      ~XmlParser() override = default;
 
-      std::shared_ptr<ls_std::XMLDocument> getDocument();
+      std::shared_ptr<ls_std::XmlDocument> getDocument();
       void parse(const ls_std::byte_field &_data);
-      void setDocument(const std::shared_ptr<ls_std::XMLDocument> &_document);
+      void setDocument(const std::shared_ptr<ls_std::XmlDocument> &_document);
 
     protected:
 
@@ -38,15 +38,15 @@ namespace ls_std
     private:
 
       uint8_t currentLevel{};
-      std::shared_ptr<ls_std::XMLDocument> document{};
+      std::shared_ptr<ls_std::XmlDocument> document{};
       uint8_t maxLevel{};
-      ls_std::XMLParseMode mode{};
-      std::list<ls_std::XMLParseData> parseData{};
+      ls_std::XmlParseMode mode{};
+      std::list<ls_std::XmlParseData> parseData{};
 
       void _analyze(const ls_std::byte_field &_data, std::string::size_type _index);
-      void _assignDocument(const std::shared_ptr<ls_std::XMLDocument> &_document);
-      static std::shared_ptr<ls_std::XMLDeclaration> _createDeclaration(const std::list<std::pair<std::string, std::string>> &_attributes);
-      static std::shared_ptr<ls_std::XMLNode> _createNode(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name);
+      void _assignDocument(const std::shared_ptr<ls_std::XmlDocument> &_document);
+      static std::shared_ptr<ls_std::XmlDeclaration> _createDeclaration(const std::list<std::pair<std::string, std::string>> &_attributes);
+      static std::shared_ptr<ls_std::XmlNode> _createNode(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name);
       static std::pair<std::string, std::string> _findAttribute(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name);
       static size_t _findAttributeEndPosition(const ls_std::byte_field &_data);
       static ls_std::byte_field _getNextTagString(const ls_std::byte_field &_data, std::string::size_type _index);
@@ -55,7 +55,7 @@ namespace ls_std
       void _isOpeningTag(const ls_std::byte_field &_data, std::string::size_type _index);
       void _isValue(const ls_std::byte_field &_data, std::string::size_type _index);
       void _mergeNodes();
-      void _mergeChildrenToParentNode(const std::shared_ptr<ls_std::XMLNode> &_parent, std::list<ls_std::XMLParseData>::iterator &_iterator, uint8_t _parentLevel);
+      void _mergeChildrenToParentNode(const std::shared_ptr<ls_std::XmlNode> &_parent, std::list<ls_std::XmlParseData>::iterator &_iterator, uint8_t _parentLevel);
       void _mergeNodesOnCurrentLevel();
       void _parse(const ls_std::byte_field &_data);
       static std::pair<std::string, std::string> _parseAttribute(const ls_std::byte_field &_data);

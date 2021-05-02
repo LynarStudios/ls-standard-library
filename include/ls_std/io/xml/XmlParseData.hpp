@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-17
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -12,14 +12,14 @@
 
 #include <cstdint>
 #include <memory>
-#include "XMLNode.hpp"
+#include "XmlNode.hpp"
 
 namespace ls_std
 {
-  struct XMLParseData
+  struct XmlParseData
   {
     uint8_t level{};
-    std::shared_ptr<ls_std::XMLNode> node{};
+    std::shared_ptr<ls_std::XmlNode> node{};
   };
 }
 

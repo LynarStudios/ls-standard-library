@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -39,31 +39,31 @@ ls_std::StateMachine ls_std_test::TestDataFactory::createStateMachine()
   return stateMachine;
 }
 
-std::shared_ptr<ls_std::XMLNode> ls_std_test::TestDataFactory::createXMLContent()
+std::shared_ptr<ls_std::XmlNode> ls_std_test::TestDataFactory::createXmlContent()
 {
-  std::shared_ptr<ls_std::XMLNode> root = std::make_shared<ls_std::XMLNode>("dialog");
-  std::shared_ptr<ls_std::XMLAttribute> attribute{};
-  std::shared_ptr<ls_std::XMLNode> child{};
-  std::shared_ptr<ls_std::XMLNode> text{};
+  std::shared_ptr<ls_std::XmlNode> root = std::make_shared<ls_std::XmlNode>("dialog");
+  std::shared_ptr<ls_std::XmlAttribute> attribute{};
+  std::shared_ptr<ls_std::XmlNode> child{};
+  std::shared_ptr<ls_std::XmlNode> text{};
 
-  attribute = std::make_shared<ls_std::XMLAttribute>("name");
+  attribute = std::make_shared<ls_std::XmlAttribute>("name");
   attribute->setValue("dungeon_001");
   root->addAttributeToEnd(attribute);
 
-  child = std::make_shared<ls_std::XMLNode>("dialogUnit");
-  attribute = std::make_shared<ls_std::XMLAttribute>("id");
+  child = std::make_shared<ls_std::XmlNode>("dialogUnit");
+  attribute = std::make_shared<ls_std::XmlAttribute>("id");
   attribute->setValue("001");
   child->addAttributeToEnd(attribute);
-  text = std::make_shared<ls_std::XMLNode>("text");
+  text = std::make_shared<ls_std::XmlNode>("text");
   text->setValue("Hello!");
   child->addChildToEnd(text);
   root->addChildToEnd(child);
 
-  child = std::make_shared<ls_std::XMLNode>("dialogUnit");
-  attribute = std::make_shared<ls_std::XMLAttribute>("id");
+  child = std::make_shared<ls_std::XmlNode>("dialogUnit");
+  attribute = std::make_shared<ls_std::XmlAttribute>("id");
   attribute->setValue("002");
   child->addAttributeToEnd(attribute);
-  text = std::make_shared<ls_std::XMLNode>("text");
+  text = std::make_shared<ls_std::XmlNode>("text");
   text->setValue("Hello again!");
   child->addChildToEnd(text);
   root->addChildToEnd(child);

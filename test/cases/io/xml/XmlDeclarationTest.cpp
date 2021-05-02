@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -12,12 +12,12 @@
 
 namespace
 {
-  class XMLDeclarationTest : public ::testing::Test
+  class XmlDeclarationTest : public ::testing::Test
   {
     protected:
 
-      XMLDeclarationTest() = default;
-      ~XMLDeclarationTest() override = default;
+      XmlDeclarationTest() = default;
+      ~XmlDeclarationTest() override = default;
 
       void SetUp() override
       {}
@@ -26,28 +26,28 @@ namespace
       {}
   };
 
-  TEST_F(XMLDeclarationTest, getEncoding)
+  TEST_F(XmlDeclarationTest, getEncoding)
   {
-    ls_std::XMLDeclaration declaration{"1.0"};
+    ls_std::XmlDeclaration declaration{"1.0"};
     ASSERT_TRUE(declaration.getEncoding().empty());
   }
 
-  TEST_F(XMLDeclarationTest, getStandalone)
+  TEST_F(XmlDeclarationTest, getStandalone)
   {
-    ls_std::XMLDeclaration declaration{"1.0"};
+    ls_std::XmlDeclaration declaration{"1.0"};
     ASSERT_TRUE(declaration.getStandalone().empty());
   }
 
-  TEST_F(XMLDeclarationTest, getVersion)
+  TEST_F(XmlDeclarationTest, getVersion)
   {
-    ls_std::XMLDeclaration declaration{"1.0"};
+    ls_std::XmlDeclaration declaration{"1.0"};
     ASSERT_FALSE(declaration.getVersion().empty());
     ASSERT_STREQ("1.0", declaration.getVersion().c_str());
   }
 
-  TEST_F(XMLDeclarationTest, setEncoding)
+  TEST_F(XmlDeclarationTest, setEncoding)
   {
-    ls_std::XMLDeclaration declaration{"1.0"};
+    ls_std::XmlDeclaration declaration{"1.0"};
 
     ASSERT_TRUE(declaration.getEncoding().empty());
 
@@ -55,9 +55,9 @@ namespace
     ASSERT_STREQ("iso-8859-1", declaration.getEncoding().c_str());
   }
 
-  TEST_F(XMLDeclarationTest, setStandalone)
+  TEST_F(XmlDeclarationTest, setStandalone)
   {
-    ls_std::XMLDeclaration declaration{"1.0"};
+    ls_std::XmlDeclaration declaration{"1.0"};
 
     ASSERT_TRUE(declaration.getStandalone().empty());
 
@@ -65,9 +65,9 @@ namespace
     ASSERT_STREQ("no", declaration.getStandalone().c_str());
   }
 
-  TEST_F(XMLDeclarationTest, setVersion)
+  TEST_F(XmlDeclarationTest, setVersion)
   {
-    ls_std::XMLDeclaration declaration{"1.0"};
+    ls_std::XmlDeclaration declaration{"1.0"};
 
     ASSERT_FALSE(declaration.getVersion().empty());
     ASSERT_STREQ("1.0", declaration.getVersion().c_str());
@@ -76,15 +76,15 @@ namespace
     ASSERT_STREQ("1.1", declaration.getVersion().c_str());
   }
 
-  TEST_F(XMLDeclarationTest, toXML)
+  TEST_F(XmlDeclarationTest, toXml)
   {
-    ls_std::XMLDeclaration declaration{"1.0"};
-    ASSERT_STREQ(R"(<?xml version="1.0" ?>)", declaration.toXML().c_str());
+    ls_std::XmlDeclaration declaration{"1.0"};
+    ASSERT_STREQ(R"(<?xml version="1.0" ?>)", declaration.toXml().c_str());
 
     declaration.setStandalone("yes");
-    ASSERT_STREQ(R"(<?xml version="1.0" standalone="yes" ?>)", declaration.toXML().c_str());
+    ASSERT_STREQ(R"(<?xml version="1.0" standalone="yes" ?>)", declaration.toXml().c_str());
 
     declaration.setEncoding("UTF-8");
-    ASSERT_STREQ(R"(<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>)", declaration.toXML().c_str());
+    ASSERT_STREQ(R"(<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>)", declaration.toXml().c_str());
   }
 }

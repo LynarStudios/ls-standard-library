@@ -3,21 +3,21 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/io/xml/XMLParserMock.hpp>
+#include <ls_std/io/xml/XmlParserMock.hpp>
 
 namespace
 {
-  class XMLParserMockTest : public ::testing::Test
+  class XmlParserMockTest : public ::testing::Test
   {
     protected:
 
-      XMLParserMockTest() = default;
-      ~XMLParserMockTest() override = default;
+      XmlParserMockTest() = default;
+      ~XmlParserMockTest() override = default;
 
       void SetUp() override
       {}
@@ -26,23 +26,23 @@ namespace
       {}
   };
 
-  TEST_F(XMLParserMockTest, readAttribute)
+  TEST_F(XmlParserMockTest, readAttribute)
   {
-    std::pair<std::string, std::string> attribute = ls_std::XMLParserMock::readAttribute(R"(name="tim")");
+    std::pair<std::string, std::string> attribute = ls_std::XmlParserMock::readAttribute(R"(name="tim")");
     ASSERT_TRUE(attribute.first == "name");
     ASSERT_TRUE(attribute.second == "tim");
 
-    attribute = ls_std::XMLParserMock::readAttribute(R"(id="dialog_001")");
+    attribute = ls_std::XmlParserMock::readAttribute(R"(id="dialog_001")");
     ASSERT_TRUE(attribute.first == "id");
     ASSERT_TRUE(attribute.second == "dialog_001");
   }
 
-  TEST_F(XMLParserMockTest, readAttributes)
+  TEST_F(XmlParserMockTest, readAttributes)
   {
     // first case
 
     std::string tag = R"(<?xml version="1.0" encoding="UTF-8" ?>)";
-    std::list<std::pair<std::string, std::string>> attributes = ls_std::XMLParserMock::readAttributes(tag);
+    std::list<std::pair<std::string, std::string>> attributes = ls_std::XmlParserMock::readAttributes(tag);
 
     ASSERT_EQ(2, attributes.size());
 
@@ -57,7 +57,7 @@ namespace
     // second case
 
     tag = R"(<stateMachine name="test_machine">)";
-    attributes = ls_std::XMLParserMock::readAttributes(tag);
+    attributes = ls_std::XmlParserMock::readAttributes(tag);
 
     ASSERT_EQ(1, attributes.size());
 

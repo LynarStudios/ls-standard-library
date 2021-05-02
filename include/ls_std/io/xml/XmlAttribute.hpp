@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2021-05-01
+ * Changed:         2021-05-02
  *
  * */
 
@@ -15,18 +15,18 @@
 
 namespace ls_std
 {
-  class XMLAttribute : public ls_std::Class
+  class XmlAttribute : public ls_std::Class
   {
     public:
 
-      explicit XMLAttribute(std::string _name);
-      ~XMLAttribute() override = default;
+      explicit XmlAttribute(std::string _name);
+      ~XmlAttribute() override = default;
 
       std::string getName();
       std::string getValue();
       void setName(std::string _name);
       void setValue(std::string _value);
-      std::string toXML();
+      std::string toXml();
 
     private:
 

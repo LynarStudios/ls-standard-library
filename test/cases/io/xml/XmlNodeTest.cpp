@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -13,12 +13,12 @@
 
 namespace
 {
-  class XMLNodeTest : public ::testing::Test
+  class XmlNodeTest : public ::testing::Test
   {
     protected:
 
-      XMLNodeTest() = default;
-      ~XMLNodeTest() override = default;
+      XmlNodeTest() = default;
+      ~XmlNodeTest() override = default;
 
       void SetUp() override
       {}
@@ -27,12 +27,12 @@ namespace
       {}
   };
 
-  TEST_F(XMLNodeTest, addAttributeAfter)
+  TEST_F(XmlNodeTest, addAttributeAfter)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    std::shared_ptr<ls_std::XMLAttribute> currentAttribute{};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("assets"));
+    ls_std::XmlNode dialogNode{"dialog"};
+    std::shared_ptr<ls_std::XmlAttribute> currentAttribute{};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
 
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
@@ -41,7 +41,7 @@ namespace
 
     // add id after events
 
-    ASSERT_TRUE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XMLAttribute>("id"), "events"));
+    ASSERT_TRUE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XmlAttribute>("id"), "events"));
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 1);
@@ -51,7 +51,7 @@ namespace
 
     // add tasks after assets
 
-    ASSERT_TRUE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XMLAttribute>("tasks"), "assets"));
+    ASSERT_TRUE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XmlAttribute>("tasks"), "assets"));
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 1);
@@ -62,20 +62,20 @@ namespace
     ASSERT_STREQ("tasks", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, addAttributeAfterNegative)
+  TEST_F(XmlNodeTest, addAttributeAfterNegative)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
+    ls_std::XmlNode dialogNode{"dialog"};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
 
-    ASSERT_FALSE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XMLAttribute>("id"), "assets"));
+    ASSERT_FALSE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XmlAttribute>("id"), "assets"));
   }
 
-  TEST_F(XMLNodeTest, addAttributeBefore)
+  TEST_F(XmlNodeTest, addAttributeBefore)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    std::shared_ptr<ls_std::XMLAttribute> currentAttribute{};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("assets"));
+    ls_std::XmlNode dialogNode{"dialog"};
+    std::shared_ptr<ls_std::XmlAttribute> currentAttribute{};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
 
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
@@ -84,7 +84,7 @@ namespace
 
     // add id before events
 
-    ASSERT_TRUE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XMLAttribute>("id"), "events"));
+    ASSERT_TRUE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XmlAttribute>("id"), "events"));
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 1);
@@ -94,7 +94,7 @@ namespace
 
     // add tasks before assets
 
-    ASSERT_TRUE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XMLAttribute>("tasks"), "assets"));
+    ASSERT_TRUE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XmlAttribute>("tasks"), "assets"));
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 1);
@@ -105,32 +105,32 @@ namespace
     ASSERT_STREQ("assets", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, addAttributeBeforeNegative)
+  TEST_F(XmlNodeTest, addAttributeBeforeNegative)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
+    ls_std::XmlNode dialogNode{"dialog"};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
 
-    ASSERT_FALSE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XMLAttribute>("id"), "assets"));
+    ASSERT_FALSE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XmlAttribute>("id"), "assets"));
   }
 
-  TEST_F(XMLNodeTest, addAttributeToBeginning)
+  TEST_F(XmlNodeTest, addAttributeToBeginning)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    std::shared_ptr<ls_std::XMLAttribute> currentAttribute{};
+    ls_std::XmlNode dialogNode{"dialog"};
+    std::shared_ptr<ls_std::XmlAttribute> currentAttribute{};
 
-    dialogNode.addAttributeToBeginning(std::make_shared<ls_std::XMLAttribute>("id"));
+    dialogNode.addAttributeToBeginning(std::make_shared<ls_std::XmlAttribute>("id"));
     ASSERT_EQ(1, dialogNode.getAttributes().size());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
 
-    dialogNode.addAttributeToBeginning(std::make_shared<ls_std::XMLAttribute>("assets"));
+    dialogNode.addAttributeToBeginning(std::make_shared<ls_std::XmlAttribute>("assets"));
     ASSERT_EQ(2, dialogNode.getAttributes().size());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("assets", currentAttribute->getName().c_str());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 1);
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
 
-    dialogNode.addAttributeToBeginning(std::make_shared<ls_std::XMLAttribute>("events"));
+    dialogNode.addAttributeToBeginning(std::make_shared<ls_std::XmlAttribute>("events"));
     ASSERT_EQ(3, dialogNode.getAttributes().size());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
@@ -140,24 +140,24 @@ namespace
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, addAttributeToEnd)
+  TEST_F(XmlNodeTest, addAttributeToEnd)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    std::shared_ptr<ls_std::XMLAttribute> currentAttribute{};
+    ls_std::XmlNode dialogNode{"dialog"};
+    std::shared_ptr<ls_std::XmlAttribute> currentAttribute{};
 
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("id"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("id"));
     ASSERT_EQ(1, dialogNode.getAttributes().size());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
 
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("assets"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
     ASSERT_EQ(2, dialogNode.getAttributes().size());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 1);
     ASSERT_STREQ("assets", currentAttribute->getName().c_str());
 
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
     ASSERT_EQ(3, dialogNode.getAttributes().size());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
@@ -167,14 +167,14 @@ namespace
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, addChildAfter)
+  TEST_F(XmlNodeTest, addChildAfter)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XMLNode> currentNode{};
-    std::shared_ptr<ls_std::XMLNode> dialogNodeA = std::make_shared<ls_std::XMLNode>("dialogNodeA");
-    std::shared_ptr<ls_std::XMLNode> dialogNodeB = std::make_shared<ls_std::XMLNode>("dialogNodeB");
-    std::shared_ptr<ls_std::XMLNode> dialogNodeC = std::make_shared<ls_std::XMLNode>("dialogNodeC");
-    std::shared_ptr<ls_std::XMLNode> dialogNodeD = std::make_shared<ls_std::XMLNode>("dialogNodeD");
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> currentNode{};
+    std::shared_ptr<ls_std::XmlNode> dialogNodeA = std::make_shared<ls_std::XmlNode>("dialogNodeA");
+    std::shared_ptr<ls_std::XmlNode> dialogNodeB = std::make_shared<ls_std::XmlNode>("dialogNodeB");
+    std::shared_ptr<ls_std::XmlNode> dialogNodeC = std::make_shared<ls_std::XmlNode>("dialogNodeC");
+    std::shared_ptr<ls_std::XmlNode> dialogNodeD = std::make_shared<ls_std::XmlNode>("dialogNodeD");
 
     ASSERT_TRUE(dialogsNode.addChildToEnd(dialogNodeB));
     ASSERT_TRUE(dialogsNode.addChildToEnd(dialogNodeC));
@@ -209,23 +209,23 @@ namespace
     ASSERT_STREQ("dialogNodeD", currentNode->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, addChildAfterNegative)
+  TEST_F(XmlNodeTest, addChildAfterNegative)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XMLNode> dialogNodeA = std::make_shared<ls_std::XMLNode>("dialogNodeA");
-    std::shared_ptr<ls_std::XMLNode> dialogNodeB = std::make_shared<ls_std::XMLNode>("dialogNodeB");
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> dialogNodeA = std::make_shared<ls_std::XmlNode>("dialogNodeA");
+    std::shared_ptr<ls_std::XmlNode> dialogNodeB = std::make_shared<ls_std::XmlNode>("dialogNodeB");
 
     ASSERT_FALSE(dialogsNode.addChildAfter(dialogNodeA, dialogNodeB));
   }
 
-  TEST_F(XMLNodeTest, addChildBefore)
+  TEST_F(XmlNodeTest, addChildBefore)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XMLNode> currentNode{};
-    std::shared_ptr<ls_std::XMLNode> dialogNodeA = std::make_shared<ls_std::XMLNode>("dialogNodeA");
-    std::shared_ptr<ls_std::XMLNode> dialogNodeB = std::make_shared<ls_std::XMLNode>("dialogNodeB");
-    std::shared_ptr<ls_std::XMLNode> dialogNodeC = std::make_shared<ls_std::XMLNode>("dialogNodeC");
-    std::shared_ptr<ls_std::XMLNode> dialogNodeD = std::make_shared<ls_std::XMLNode>("dialogNodeD");
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> currentNode{};
+    std::shared_ptr<ls_std::XmlNode> dialogNodeA = std::make_shared<ls_std::XmlNode>("dialogNodeA");
+    std::shared_ptr<ls_std::XmlNode> dialogNodeB = std::make_shared<ls_std::XmlNode>("dialogNodeB");
+    std::shared_ptr<ls_std::XmlNode> dialogNodeC = std::make_shared<ls_std::XmlNode>("dialogNodeC");
+    std::shared_ptr<ls_std::XmlNode> dialogNodeD = std::make_shared<ls_std::XmlNode>("dialogNodeD");
 
     ASSERT_TRUE(dialogsNode.addChildToEnd(dialogNodeB));
     ASSERT_TRUE(dialogsNode.addChildToEnd(dialogNodeC));
@@ -260,21 +260,21 @@ namespace
     ASSERT_STREQ("dialogNodeC", currentNode->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, addChildToBeginning)
+  TEST_F(XmlNodeTest, addChildToBeginning)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XMLNode> currentNode{};
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> currentNode{};
 
-    ls_std::XMLNode dialogNodeA{"dialogNodeA"};
-    ls_std::XMLNode dialogNodeB{"dialogNodeB"};
-    ls_std::XMLNode dialogNodeC{"dialogNodeC"};
+    ls_std::XmlNode dialogNodeA{"dialogNodeA"};
+    ls_std::XmlNode dialogNodeB{"dialogNodeB"};
+    ls_std::XmlNode dialogNodeC{"dialogNodeC"};
 
     ASSERT_TRUE(dialogsNode.getChildren().empty());
     ASSERT_EQ(0, dialogsNode.getChildren().size());
 
     // adding C
 
-    ASSERT_TRUE(dialogsNode.addChildToBeginning(std::make_shared<ls_std::XMLNode>(dialogNodeC)));
+    ASSERT_TRUE(dialogsNode.addChildToBeginning(std::make_shared<ls_std::XmlNode>(dialogNodeC)));
     ASSERT_TRUE(!dialogsNode.getChildren().empty());
     ASSERT_EQ(1, dialogsNode.getChildren().size());
 
@@ -283,7 +283,7 @@ namespace
 
     // adding B
 
-    ASSERT_TRUE(dialogsNode.addChildToBeginning(std::make_shared<ls_std::XMLNode>(dialogNodeB)));
+    ASSERT_TRUE(dialogsNode.addChildToBeginning(std::make_shared<ls_std::XmlNode>(dialogNodeB)));
     ASSERT_EQ(2, dialogsNode.getChildren().size());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
     ASSERT_STREQ("dialogNodeB", currentNode->getName().c_str());
@@ -292,7 +292,7 @@ namespace
 
     // adding A
 
-    ASSERT_TRUE(dialogsNode.addChildToBeginning(std::make_shared<ls_std::XMLNode>(dialogNodeA)));
+    ASSERT_TRUE(dialogsNode.addChildToBeginning(std::make_shared<ls_std::XmlNode>(dialogNodeA)));
     ASSERT_EQ(3, dialogsNode.getChildren().size());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
     ASSERT_STREQ("dialogNodeA", currentNode->getName().c_str());
@@ -302,21 +302,21 @@ namespace
     ASSERT_STREQ("dialogNodeC", currentNode->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, addChildToEnd)
+  TEST_F(XmlNodeTest, addChildToEnd)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XMLNode> currentNode{};
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> currentNode{};
 
-    ls_std::XMLNode dialogNodeA{"dialogNodeA"};
-    ls_std::XMLNode dialogNodeB{"dialogNodeB"};
-    ls_std::XMLNode dialogNodeC{"dialogNodeC"};
+    ls_std::XmlNode dialogNodeA{"dialogNodeA"};
+    ls_std::XmlNode dialogNodeB{"dialogNodeB"};
+    ls_std::XmlNode dialogNodeC{"dialogNodeC"};
 
     ASSERT_TRUE(dialogsNode.getChildren().empty());
     ASSERT_EQ(0, dialogsNode.getChildren().size());
 
     // adding C
 
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(dialogNodeC)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(dialogNodeC)));
     ASSERT_TRUE(!dialogsNode.getChildren().empty());
     ASSERT_EQ(1, dialogsNode.getChildren().size());
 
@@ -325,7 +325,7 @@ namespace
 
     // adding B
 
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(dialogNodeB)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(dialogNodeB)));
     ASSERT_EQ(2, dialogsNode.getChildren().size());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
     ASSERT_STREQ("dialogNodeC", currentNode->getName().c_str());
@@ -334,7 +334,7 @@ namespace
 
     // adding A
 
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(dialogNodeA)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(dialogNodeA)));
     ASSERT_EQ(3, dialogsNode.getChildren().size());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
     ASSERT_STREQ("dialogNodeC", currentNode->getName().c_str());
@@ -344,9 +344,9 @@ namespace
     ASSERT_STREQ("dialogNodeA", currentNode->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, clearValue)
+  TEST_F(XmlNodeTest, clearValue)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     dialogNode.setValue("Something");
     ASSERT_STREQ("Something", dialogNode.getValue().c_str());
 
@@ -355,31 +355,31 @@ namespace
     ASSERT_STREQ("", dialogNode.getValue().c_str());
   }
 
-  TEST_F(XMLNodeTest, getAttributes)
+  TEST_F(XmlNodeTest, getAttributes)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     ASSERT_TRUE(dialogNode.getAttributes().empty());
   }
 
-  TEST_F(XMLNodeTest, getChildren)
+  TEST_F(XmlNodeTest, getChildren)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     ASSERT_TRUE(dialogNode.getChildren().empty());
   }
 
-  TEST_F(XMLNodeTest, getChildrenV2)
+  TEST_F(XmlNodeTest, getChildrenV2)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    ls_std::XMLNode dialogNode{"dialog"};
-    ls_std::XMLNode otherNode{"something"};
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    ls_std::XmlNode dialogNode{"dialog"};
+    ls_std::XmlNode otherNode{"something"};
 
     // preparation
 
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(dialogNode)));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(otherNode)));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(otherNode)));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(dialogNode)));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>(otherNode)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(dialogNode)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(otherNode)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(otherNode)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(dialogNode)));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>(otherNode)));
 
     // check
 
@@ -389,92 +389,92 @@ namespace
     ASSERT_EQ(3, dialogsNode.getChildren("something").size());
   }
 
-  TEST_F(XMLNodeTest, getName)
+  TEST_F(XmlNodeTest, getName)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     ASSERT_STREQ("dialog", dialogNode.getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, getValue)
+  TEST_F(XmlNodeTest, getValue)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     ASSERT_TRUE(dialogNode.getValue().empty());
   }
 
-  TEST_F(XMLNodeTest, hasAttribute)
+  TEST_F(XmlNodeTest, hasAttribute)
   {
-    ls_std::XMLNode dialogNode{"dialogNode"};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("id"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("assets"));
+    ls_std::XmlNode dialogNode{"dialogNode"};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("id"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
 
     ASSERT_TRUE(dialogNode.hasAttribute("id"));
     ASSERT_TRUE(dialogNode.hasAttribute("events"));
     ASSERT_TRUE(dialogNode.hasAttribute("assets"));
   }
 
-  TEST_F(XMLNodeTest, hasAttributeNegative)
+  TEST_F(XmlNodeTest, hasAttributeNegative)
   {
-    ls_std::XMLNode dialogNode{"dialogNode"};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("id"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("assets"));
+    ls_std::XmlNode dialogNode{"dialogNode"};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("id"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
 
     ASSERT_FALSE(dialogNode.hasAttribute("fields"));
   }
 
-  TEST_F(XMLNodeTest, hasChild)
+  TEST_F(XmlNodeTest, hasChild)
   {
-    ls_std::XMLNode dialogsNode{"dialogsNode"};
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogA"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogB"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogC"));
+    ls_std::XmlNode dialogsNode{"dialogsNode"};
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA"));
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogB"));
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC"));
 
     ASSERT_TRUE(dialogsNode.hasChild("dialogA"));
     ASSERT_TRUE(dialogsNode.hasChild("dialogB"));
     ASSERT_TRUE(dialogsNode.hasChild("dialogC"));
   }
 
-  TEST_F(XMLNodeTest, hasChildNegative)
+  TEST_F(XmlNodeTest, hasChildNegative)
   {
-    ls_std::XMLNode dialogsNode{"dialogsNode"};
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogA"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogB"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogC"));
+    ls_std::XmlNode dialogsNode{"dialogsNode"};
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA"));
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogB"));
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC"));
 
     ASSERT_FALSE(dialogsNode.hasChild("dialogD"));
     ASSERT_FALSE(dialogsNode.hasChild("dialogE"));
     ASSERT_FALSE(dialogsNode.hasChild("dialogF"));
   }
 
-  TEST_F(XMLNodeTest, hasChildV2)
+  TEST_F(XmlNodeTest, hasChildV2)
   {
-    ls_std::XMLNode dialogsNode{"dialogsNode"};
-    std::shared_ptr<ls_std::XMLNode> searchNode = std::make_shared<ls_std::XMLNode>("dialogB");
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogA"));
+    ls_std::XmlNode dialogsNode{"dialogsNode"};
+    std::shared_ptr<ls_std::XmlNode> searchNode = std::make_shared<ls_std::XmlNode>("dialogB");
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA"));
     dialogsNode.addChildToEnd(searchNode);
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogC"));
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC"));
 
     ASSERT_TRUE(dialogsNode.hasChild(searchNode));
   }
 
-  TEST_F(XMLNodeTest, hasChildV2Negative)
+  TEST_F(XmlNodeTest, hasChildV2Negative)
   {
-    ls_std::XMLNode dialogsNode{"dialogsNode"};
-    std::shared_ptr<ls_std::XMLNode> searchNode = std::make_shared<ls_std::XMLNode>("dialogB");
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogA"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogC"));
+    ls_std::XmlNode dialogsNode{"dialogsNode"};
+    std::shared_ptr<ls_std::XmlNode> searchNode = std::make_shared<ls_std::XmlNode>("dialogB");
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA"));
+    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC"));
 
     ASSERT_FALSE(dialogsNode.hasChild(searchNode));
   }
 
-  TEST_F(XMLNodeTest, removeFirstAttribute)
+  TEST_F(XmlNodeTest, removeFirstAttribute)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    std::shared_ptr<ls_std::XMLAttribute> currentAttribute{};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("id"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("assets"));
+    ls_std::XmlNode dialogNode{"dialog"};
+    std::shared_ptr<ls_std::XmlAttribute> currentAttribute{};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("id"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
 
     ASSERT_TRUE(!dialogNode.getAttributes().empty());
     ASSERT_EQ(3, dialogNode.getAttributes().size());
@@ -488,22 +488,22 @@ namespace
     ASSERT_STREQ("assets", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, removeFirstAttributeNegative)
+  TEST_F(XmlNodeTest, removeFirstAttributeNegative)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     ASSERT_TRUE(dialogNode.getAttributes().empty());
 
     dialogNode.removeFirstAttribute();
     ASSERT_TRUE(dialogNode.getAttributes().empty());
   }
 
-  TEST_F(XMLNodeTest, removeLastAttribute)
+  TEST_F(XmlNodeTest, removeLastAttribute)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
-    std::shared_ptr<ls_std::XMLAttribute> currentAttribute{};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("id"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("events"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XMLAttribute>("assets"));
+    ls_std::XmlNode dialogNode{"dialog"};
+    std::shared_ptr<ls_std::XmlAttribute> currentAttribute{};
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("id"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
 
     ASSERT_TRUE(!dialogNode.getAttributes().empty());
     ASSERT_EQ(3, dialogNode.getAttributes().size());
@@ -517,27 +517,27 @@ namespace
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, removeLastAttributeNegative)
+  TEST_F(XmlNodeTest, removeLastAttributeNegative)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     ASSERT_TRUE(dialogNode.getAttributes().empty());
 
     dialogNode.removeLastAttribute();
     ASSERT_TRUE(dialogNode.getAttributes().empty());
   }
 
-  TEST_F(XMLNodeTest, removeFirstChild)
+  TEST_F(XmlNodeTest, removeFirstChild)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XMLNode> currentNode{};
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> currentNode{};
 
     // preparation
 
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogA")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogB")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogC")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("additionalInfo")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("event")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogB")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("additionalInfo")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("event")));
 
     ASSERT_EQ(5, dialogsNode.getChildren().size());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
@@ -564,27 +564,27 @@ namespace
     ASSERT_STREQ("event", currentNode->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, removeFirstChildNegative)
+  TEST_F(XmlNodeTest, removeFirstChildNegative)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
+    ls_std::XmlNode dialogsNode{"dialogs"};
     ASSERT_TRUE(dialogsNode.getChildren().empty());
 
     dialogsNode.removeFirstChild();
     ASSERT_TRUE(dialogsNode.getChildren().empty());
   }
 
-  TEST_F(XMLNodeTest, removeLastChild)
+  TEST_F(XmlNodeTest, removeLastChild)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XMLNode> currentNode{};
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> currentNode{};
 
     // preparation
 
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogA")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogB")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("dialogC")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("additionalInfo")));
-    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XMLNode>("event")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogB")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("additionalInfo")));
+    ASSERT_TRUE(dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("event")));
 
     ASSERT_EQ(5, dialogsNode.getChildren().size());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
@@ -611,36 +611,36 @@ namespace
     ASSERT_STREQ("additionalInfo", currentNode->getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, removeLastChildNegative)
+  TEST_F(XmlNodeTest, removeLastChildNegative)
   {
-    ls_std::XMLNode dialogsNode{"dialogs"};
+    ls_std::XmlNode dialogsNode{"dialogs"};
     ASSERT_TRUE(dialogsNode.getChildren().empty());
 
     dialogsNode.removeLastChild();
     ASSERT_TRUE(dialogsNode.getChildren().empty());
   }
 
-  TEST_F(XMLNodeTest, setName)
+  TEST_F(XmlNodeTest, setName)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     dialogNode.setName("dialog2");
 
     ASSERT_STREQ("dialog2", dialogNode.getName().c_str());
   }
 
-  TEST_F(XMLNodeTest, setValue)
+  TEST_F(XmlNodeTest, setValue)
   {
-    ls_std::XMLNode dialogNode{"dialog"};
+    ls_std::XmlNode dialogNode{"dialog"};
     dialogNode.setValue("Something written");
 
     ASSERT_STREQ("Something written", dialogNode.getValue().c_str());
   }
 
-  TEST_F(XMLNodeTest, toXML)
+  TEST_F(XmlNodeTest, toXml)
   {
-    auto root = ls_std_test::TestDataFactory::createXMLContent();
-    std::string xmlContent = root->toXML();
-    std::string expectedXMLContent = R"("<dialog name="dungeon_001"><dialogUnit id="001"><text>Hello!</text></dialogUnit><dialogUnit id="002"><text>Hello again!</text></dialogUnit></dialog>")";
+    auto root = ls_std_test::TestDataFactory::createXmlContent();
+    std::string xmlContent = root->toXml();
+    std::string expectedXmlString = R"("<dialog name="dungeon_001"><dialogUnit id="001"><text>Hello!</text></dialogUnit><dialogUnit id="002"><text>Hello again!</text></dialogUnit></dialog>")";
 
     ASSERT_TRUE(!xmlContent.empty());
   }
