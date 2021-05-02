@@ -67,18 +67,18 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONInteger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONLong.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONString.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONFloat.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONDouble.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJSONBoolean.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJsonInteger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJsonLong.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJsonString.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJsonFloat.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJsonDouble.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/boxing/SerializableJsonBoolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONState.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJSONStateMachine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJsonStateConnection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJsonState.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJsonStateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLAttribute.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XMLNode.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
@@ -93,19 +93,19 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/event/SerializableJSONEvent.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/event/SerializableJsonEvent.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVPair.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KVReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/SerializableJSONFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONBooleanFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONDoubleFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONFloatFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONIntegerFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONLongFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJSONStringFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/event/SerializableJSONEventFactory.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/SerializableJsonFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonBooleanFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonDoubleFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonFloatFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonIntegerFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonLongFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonStringFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/event/SerializableJsonEventFactory.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
@@ -126,19 +126,19 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileOutputStreamTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/JSONTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONIntegerTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONLongTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONStringTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONFloatTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONDoubleTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJSONBooleanTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/JsonTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJsonIntegerTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJsonLongTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJsonStringTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJsonFloatTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJsonDoubleTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/boxing/SerializableJsonBooleanTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateConnectionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJSONStateMachineTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJsonStateConnectionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJsonStateTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/logic/SerializableJsonStateMachineTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XMLAttributeTest.cpp
@@ -160,19 +160,19 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/event/SerializableJSONEventTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/json/event/SerializableJsonEventTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVPairTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KVReaderTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/SerializableFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONBooleanFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONDoubleFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONFloatFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONIntegerFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONLongFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJSONStringFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/event/SerializableJSONEventFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonBooleanFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonDoubleFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonFloatFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonIntegerFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonLongFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonStringFactoryTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/event/SerializableJsonEventFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/factory/SerializableTestFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/FileNotFoundExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/FileOperationExceptionTest.cpp

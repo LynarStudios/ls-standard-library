@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-05-01
+ * Changed:         2021-05-02
  *
  * */
 
@@ -65,16 +65,16 @@
 #include "logic/StateMachine.hpp"
 #include "logic/StateMachineTypes.hpp"
 
-#include "serialization/json/boxing/SerializableJSONBoolean.hpp"
-#include "serialization/json/boxing/SerializableJSONDouble.hpp"
-#include "serialization/json/boxing/SerializableJSONFloat.hpp"
-#include "serialization/json/boxing/SerializableJSONInteger.hpp"
-#include "serialization/json/boxing/SerializableJSONLong.hpp"
-#include "serialization/json/boxing/SerializableJSONString.hpp"
-#include "serialization/json/logic/SerializableJSONState.hpp"
-#include "serialization/json/logic/SerializableJSONStateConnection.hpp"
-#include "serialization/json/logic/SerializableJSONStateMachine.hpp"
-#include "serialization/json/event/SerializableJSONEvent.hpp"
+#include "serialization/json/boxing/SerializableJsonBoolean.hpp"
+#include "serialization/json/boxing/SerializableJsonDouble.hpp"
+#include "serialization/json/boxing/SerializableJsonFloat.hpp"
+#include "serialization/json/boxing/SerializableJsonInteger.hpp"
+#include "serialization/json/boxing/SerializableJsonLong.hpp"
+#include "serialization/json/boxing/SerializableJsonString.hpp"
+#include "serialization/json/logic/SerializableJsonState.hpp"
+#include "serialization/json/logic/SerializableJsonStateConnection.hpp"
+#include "serialization/json/logic/SerializableJsonStateMachine.hpp"
+#include "serialization/json/event/SerializableJsonEvent.hpp"
 #include "serialization/ISerializable.hpp"
 
 #include "time/Date.hpp"
@@ -93,13 +93,13 @@
 #include "event/EventManager.hpp"
 
 #include "factory/IFactory.hpp"
-#include "ls_std/factory/serialization/json/SerializableJSONFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJSONBooleanFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJSONDoubleFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJSONFloatFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJSONIntegerFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJSONLongFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJSONStringFactory.hpp"
-#include "factory/serialization/json/event/SerializableJSONEventFactory.hpp"
+#include "ls_std/factory/serialization/json/SerializableJsonFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJsonBooleanFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJsonDoubleFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJsonFloatFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJsonIntegerFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJsonLongFactory.hpp"
+#include "factory/serialization/json/boxing/SerializableJsonStringFactory.hpp"
+#include "factory/serialization/json/event/SerializableJsonEventFactory.hpp"
 
 #endif

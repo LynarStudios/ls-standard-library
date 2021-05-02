@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -108,7 +108,7 @@ namespace
     ls_std::FileWriter writer{file};
     writer.write(R"({"value":"Hello!"})");
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonString>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     auto storable = std::make_shared<ls_std::StorableFile>(path);
@@ -126,7 +126,7 @@ namespace
   {
     std::shared_ptr<ls_std::String> x = std::make_shared<ls_std::String>("Hello!");
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonString>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     ASSERT_STREQ(R"({"value":"Hello!"})", x->marshal().c_str());
@@ -155,7 +155,7 @@ namespace
     std::shared_ptr<ls_std::String> x = std::make_shared<ls_std::String>("Hello!");
     ASSERT_STREQ("Hello!", *x);
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONString>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonString>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     x->unmarshal(R"({"value":"Test!"})");

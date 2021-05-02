@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -285,7 +285,7 @@ namespace
     ls_std::FileWriter writer{file};
     writer.write(R"({"value":3.14159})");
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONDouble>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonDouble>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     auto storable = std::make_shared<ls_std::StorableFile>(path);
@@ -303,7 +303,7 @@ namespace
   {
     std::shared_ptr<ls_std::Double> x = std::make_shared<ls_std::Double>(3.14159);
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONDouble>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonDouble>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
     ls_std::String jsonString{x->marshal()};
 
@@ -337,7 +337,7 @@ namespace
 
     ASSERT_DOUBLE_EQ(3.14159, *x);
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONDouble>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonDouble>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
     x->unmarshal(R"({"value":17.4132})");
 

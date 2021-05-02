@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -34,7 +34,7 @@ namespace
     event.addParameter(ls_std::event_parameter{"key_available", "true"});
     event.addParameter(ls_std::event_parameter{"door_id", "16675"});
 
-    std::shared_ptr<ls_std::SerializableJSONEvent> serializable = std::make_shared<ls_std::SerializableJSONEvent>(std::make_shared<ls_std::Event>(event));
+    std::shared_ptr<ls_std::SerializableJsonEvent> serializable = std::make_shared<ls_std::SerializableJsonEvent>(std::make_shared<ls_std::Event>(event));
     event.setSerializable(serializable);
 
     ls_std::byte_field data = event.marshal();
@@ -46,7 +46,7 @@ namespace
   TEST_F(EventTest, unmarshal)
   {
     std::shared_ptr<ls_std::Event> event = std::make_shared<ls_std::Event>("TMP_EVENT");
-    std::shared_ptr<ls_std::SerializableJSONEvent> serializable = std::make_shared<ls_std::SerializableJSONEvent>(event);
+    std::shared_ptr<ls_std::SerializableJsonEvent> serializable = std::make_shared<ls_std::SerializableJsonEvent>(event);
     event->setSerializable(serializable);
 
     std::string jsonString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";

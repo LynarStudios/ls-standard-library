@@ -30,7 +30,7 @@ namespace
   TEST_F(SerializableFactoryTest, addFactory)
   {
     std::shared_ptr<ls_std_test::SerializableTestFactory> serializableTestFactory = std::make_shared<ls_std_test::SerializableTestFactory>();
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
 
     ASSERT_TRUE(serializableFactory.addFactory({"TestClass", serializableTestFactory}));
   }
@@ -38,7 +38,7 @@ namespace
   TEST_F(SerializableFactoryTest, addFactory_emptyKey)
   {
     std::shared_ptr<ls_std_test::SerializableTestFactory> serializableTestFactory = std::make_shared<ls_std_test::SerializableTestFactory>();
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
 
     EXPECT_THROW({
                    try
@@ -55,7 +55,7 @@ namespace
   TEST_F(SerializableFactoryTest, addFactory_nullPointerValueForFactory)
   {
     std::shared_ptr<ls_std_test::SerializableTestFactory> serializableTestFactory{};
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
 
     EXPECT_THROW({
                    try
@@ -72,7 +72,7 @@ namespace
   TEST_F(SerializableFactoryTest, addFactory_dublicatedElement)
   {
     std::shared_ptr<ls_std_test::SerializableTestFactory> serializableTestFactory = std::make_shared<ls_std_test::SerializableTestFactory>();
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
 
     ASSERT_TRUE(serializableFactory.addFactory({"TestClass", serializableTestFactory}));
     ASSERT_FALSE(serializableFactory.addFactory({"TestClass", serializableTestFactory}));
@@ -80,7 +80,7 @@ namespace
 
   TEST_F(SerializableFactoryTest, build)
   {
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
     std::shared_ptr<ls_std::Class> serializable = serializableFactory.build(ls_std::Boolean{}.getClassName());
 
     ASSERT_TRUE(serializable != nullptr);
@@ -89,7 +89,7 @@ namespace
 
   TEST_F(SerializableFactoryTest, build_factoryNotAvailable)
   {
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
     std::shared_ptr<ls_std::Class> serializable = serializableFactory.build(ls_std_test::GossipNewsAgency{}.getClassName());
 
     ASSERT_FALSE(serializable != nullptr);
@@ -97,13 +97,13 @@ namespace
 
   TEST_F(SerializableFactoryTest, clear)
   {
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
     ASSERT_TRUE(serializableFactory.clear());
   }
 
   TEST_F(SerializableFactoryTest, hasFactory_ofBoxingPackage)
   {
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
     ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Boolean{}.getClassName()));
     ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Double{}.getClassName()));
     ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Float{}.getClassName()));
@@ -114,19 +114,19 @@ namespace
 
   TEST_F(SerializableFactoryTest, hasFactory_factoryNotAvailable)
   {
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
     ASSERT_FALSE(serializableFactory.hasFactory(ls_std_test::GossipNewsAgency{}.getClassName()));
   }
 
   TEST_F(SerializableFactoryTest, removeFactory)
   {
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
     ASSERT_TRUE(serializableFactory.removeFactory(ls_std::Boolean{}.getClassName()));
   }
 
   TEST_F(SerializableFactoryTest, removeFactory_factoryNotAvailable)
   {
-    ls_std::SerializableJSONFactory serializableFactory{};
+    ls_std::SerializableJsonFactory serializableFactory{};
     ASSERT_FALSE(serializableFactory.removeFactory(ls_std_test::GossipNewsAgency{}.getClassName()));
   }
 }
