@@ -65,6 +65,46 @@ namespace
     ASSERT_EQ(timestamp + 86400, date.getTime());
   }
 
+  TEST_F(DateTest, operator_plus_equals)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date += 2;
+    time_t expectedTimestamp = timestamp + 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_plus_equals_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date += -2;
+    time_t expectedTimestamp = timestamp - 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_minus_equals)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date -= 2;
+    time_t expectedTimestamp = timestamp - 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_minus_equals_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date -= -2;
+    time_t expectedTimestamp = timestamp + 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
   // additional functionality
 
   TEST_F(DateTest, after)

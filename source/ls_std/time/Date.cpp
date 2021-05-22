@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-22
  *
  * */
 
@@ -19,13 +19,25 @@ ls_std::Date::Date() : ls_std::Class("Date")
 
 ls_std::Date &ls_std::Date::operator+(int _value)
 {
-  this->timestamp += (_value * 86400);
+  this->_incrementByDays(_value);
   return *this;
 }
 
 ls_std::Date &ls_std::Date::operator-(int _value)
 {
-  this->timestamp -= (_value * 86400);
+  this->_decrementByDays(_value);
+  return *this;
+}
+
+ls_std::Date &ls_std::Date::operator+=(int _value)
+{
+  this->_incrementByDays(_value);
+  return *this;
+}
+
+ls_std::Date &ls_std::Date::operator-=(int _value)
+{
+  this->_decrementByDays(_value);
   return *this;
 }
 
@@ -86,6 +98,16 @@ std::string ls_std::Date::toString()
   _stream << std::put_time(this->localTime, "%Y-%m-%d %H:%M:%S");
 
   return _stream.str();
+}
+
+void ls_std::Date::_decrementByDays(int _value)
+{
+  this->timestamp -= (_value * 86400);
+}
+
+void ls_std::Date::_incrementByDays(int _value)
+{
+  this->timestamp += (_value * 86400);
 }
 
 void ls_std::Date::_init()
