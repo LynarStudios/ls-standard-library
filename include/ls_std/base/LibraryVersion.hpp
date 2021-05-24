@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2021-05-02
+ * Changed:         2021-05-24
  *
  * */
 
@@ -16,7 +16,7 @@ namespace ls_std
 {
   static std::string getVersion()
   {
-    return "2021.1.0";
+    return "1.0.0";
   }
 }
 
