@@ -27,19 +27,7 @@ namespace
       {}
   };
 
-  TEST_F(ClassTest, destructor)
-  {
-    std::shared_ptr<ls_std_test::ClassWrapper> object = std::make_shared<ls_std_test::ClassWrapper>();
-    EXPECT_CALL(*object, Die());
-  }
-
-  TEST_F(ClassTest, getClassName)
-  {
-    ls_std::Class object{"Class"};
-    ASSERT_STREQ("Class", object.getClassName().c_str());
-  }
-
-  TEST_F(ClassTest, getClassName_emptyName)
+  TEST_F(ClassTest, constructor_emoty_parameter)
   {
     EXPECT_THROW({
                    try
@@ -52,4 +40,17 @@ namespace
                    }
                  }, ls_std::IllegalArgumentException);
   }
+
+  TEST_F(ClassTest, destructor)
+  {
+    std::shared_ptr<ls_std_test::ClassWrapper> object = std::make_shared<ls_std_test::ClassWrapper>();
+    EXPECT_CALL(*object, Die());
+  }
+
+  TEST_F(ClassTest, getClassName)
+  {
+    ls_std::Class object{"Class"};
+    ASSERT_STREQ("Class", object.getClassName().c_str());
+  }
+
 }
