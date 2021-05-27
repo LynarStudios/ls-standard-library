@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-27
  *
  * */
 
@@ -45,13 +45,34 @@ namespace
   {
     this->createCars();
     ls_std::Narrator paintingMachine{};
-    ASSERT_TRUE(paintingMachine.getListeners().empty());
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1));
-    ASSERT_EQ(1, paintingMachine.getListeners().size());
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2));
-    ASSERT_EQ(2, paintingMachine.getListeners().size());
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3));
-    ASSERT_EQ(3, paintingMachine.getListeners().size());
+
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1)));
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2)));
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3)));
+  }
+
+  TEST_F(NarratorTest, addListener_listener_already_exists)
+  {
+    this->createCars();
+    ls_std::Narrator paintingMachine{};
+
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1)));
+    ASSERT_FALSE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1)));
+  }
+
+  TEST_F(NarratorTest, addListener_no_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Narrator paintingMachine{};
+                     paintingMachine.addListener(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, clear)
@@ -80,19 +101,33 @@ namespace
     paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3));
-    ASSERT_EQ(3, paintingMachine.getListeners().size());
 
-    paintingMachine.removeListener(this->mercedes2);
-    ASSERT_EQ(2, paintingMachine.getListeners().size());
-    paintingMachine.removeListener(this->mercedes1);
-    ASSERT_EQ(1, paintingMachine.getListeners().size());
-    paintingMachine.removeListener(this->mercedes3);
-    ASSERT_EQ(0, paintingMachine.getListeners().size());
+    ASSERT_TRUE(paintingMachine.removeListener(this->mercedes2));
+    ASSERT_TRUE(paintingMachine.removeListener(this->mercedes1));
+    ASSERT_TRUE(paintingMachine.removeListener(this->mercedes3));
     ASSERT_TRUE(paintingMachine.getListeners().empty());
+  }
 
-    paintingMachine.removeListener(nullptr);
-    ASSERT_EQ(0, paintingMachine.getListeners().size());
-    ASSERT_TRUE(paintingMachine.getListeners().empty());
+  TEST_F(NarratorTest, removeListener_no_listener_available)
+  {
+    this->createCars();
+    ls_std::Narrator paintingMachine{};
+    ASSERT_FALSE(paintingMachine.removeListener(this->mercedes2));
+  }
+
+  TEST_F(NarratorTest, removeListener_no_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Narrator paintingMachine{};
+                     paintingMachine.removeListener(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, tell)

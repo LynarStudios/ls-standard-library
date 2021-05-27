@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-04-23
+ * Changed:         2021-05-27
  *
  * */
 
@@ -26,6 +26,20 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(EventHandlerTest, constructor_empty_parameter)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::EventHandler eventHandler{""};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
 
   TEST_F(EventHandlerTest, getId)
   {

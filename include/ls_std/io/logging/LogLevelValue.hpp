@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -14,7 +14,7 @@ namespace ls_std
 {
   enum LogLevelValue
   {
-    FATAL = 0, ERR, WARN, INFO, DEBUG, TRACE, OFF
+    FATAL = 0, ERR, WARN, INFO, DEBUG, TRACE
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-04-30
+ * Changed:         2021-05-02
  *
  * */
 
@@ -32,7 +32,7 @@ namespace
   TEST_F(StateTest, marshal)
   {
     std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("A");
-    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONState>(state);
+    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJsonState>(state);
     state->setSerializable(serializable);
 
     ASSERT_FALSE(state->marshal().empty());
@@ -57,7 +57,7 @@ namespace
   TEST_F(StateTest, unmarshal)
   {
     std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
-    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJSONState>(state);
+    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJsonState>(state);
     state->setSerializable(serializable);
     std::string jsonString = R"({"id":"A","connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"}}})";
     state->unmarshal(jsonString);

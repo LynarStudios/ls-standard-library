@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-05-01
+ * Changed:         2021-05-24
  *
  * */
 
@@ -35,12 +35,16 @@ void ls_std::Event::unmarshal(const ls_std::byte_field &_data)
   }
 }
 
-void ls_std::Event::addParameter(const ls_std::event_parameter &_eventParameter)
+bool ls_std::Event::addParameter(const ls_std::event_parameter &_eventParameter)
 {
+  bool wasAdded{};
+
   if (!this->_hasParameter(_eventParameter.first))
   {
-    this->parameterList.insert(_eventParameter);
+    wasAdded = this->parameterList.insert(_eventParameter).second;
   }
+
+  return wasAdded;
 }
 
 void ls_std::Event::clearParameterList()
@@ -58,17 +62,19 @@ ls_std::event_parameter_list ls_std::Event::getParameterList()
   return this->parameterList;
 }
 
-void ls_std::Event::removeParameter(const ls_std::event_parameter_id &_id)
+bool ls_std::Event::removeParameter(const ls_std::event_parameter_id &_id)
 {
-  if (this->_hasParameter(_id))
-  {
-    this->parameterList.erase(_id);
-  }
+  return this->parameterList.erase(_id) == 1;
 }
 
 void ls_std::Event::setId(const ls_std::event_id &_id)
 {
   this->_assignId(_id);
+}
+
+void ls_std::Event::setSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
+{
+  this->_assignSerializable(_serializable);
 }
 
 void ls_std::Event::_assignId(const ls_std::event_id &_id)
@@ -81,12 +87,17 @@ void ls_std::Event::_assignId(const ls_std::event_id &_id)
   this->id = _id;
 }
 
+void ls_std::Event::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
+{
+  if (_serializable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->serializable = _serializable;
+}
+
 bool ls_std::Event::_hasParameter(const ls_std::event_id &_id)
 {
   return this->parameterList.find(_id) != this->parameterList.end();
-}
-
-void ls_std::Event::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
-{
-  this->serializable = std::move(_serializable);
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-04-23
+ * Changed:         2021-05-22
  *
  * */
 
@@ -29,7 +29,7 @@ namespace
 
   // arithmetic operators
 
-  TEST_F(DateTest, operatorAdd)
+  TEST_F(DateTest, operator_add)
   {
     ls_std::Date date{};
     time_t timestamp = date.getTime();
@@ -38,7 +38,16 @@ namespace
     ASSERT_EQ(timestamp + 86400, date.getTime());
   }
 
-  TEST_F(DateTest, operatorSub)
+  TEST_F(DateTest, operator_add_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date = date + (-1);
+    ASSERT_EQ(timestamp - 86400, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_subtraction)
   {
     ls_std::Date date{};
     time_t timestamp = date.getTime();
@@ -47,26 +56,95 @@ namespace
     ASSERT_EQ(timestamp - 86400, date.getTime());
   }
 
+  TEST_F(DateTest, operator_subtraction_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date = date - (-1);
+    ASSERT_EQ(timestamp + 86400, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_plus_equals)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date += 2;
+    time_t expectedTimestamp = timestamp + 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_plus_equals_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date += -2;
+    time_t expectedTimestamp = timestamp - 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_minus_equals)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date -= 2;
+    time_t expectedTimestamp = timestamp - 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_minus_equals_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date -= -2;
+    time_t expectedTimestamp = timestamp + 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
   // additional functionality
 
   TEST_F(DateTest, after)
   {
-    ls_std::Date date{};
+    ls_std::Date date{}; // today
 
-    ls_std::Date date2{};
-    date2.setTime(1000000);
+    ls_std::Date referenceDate{};
+    referenceDate = referenceDate - 1; // yesterday
 
-    ASSERT_TRUE(date.after(date2));
+    ASSERT_TRUE(date.after(referenceDate));
+  }
+
+  TEST_F(DateTest, after_is_before_refernce_date)
+  {
+    ls_std::Date date{}; // is today
+    ls_std::Date referenceDate{};
+
+    referenceDate = referenceDate + 1; // is tomorrow
+
+    ASSERT_FALSE(date.after(referenceDate));
   }
 
   TEST_F(DateTest, before)
   {
     ls_std::Date date{};
-    date.setTime(1000000);
+    date = date - 1; // yesterday
 
-    ls_std::Date date2{};
+    ls_std::Date referenceDate{}; // today
 
-    ASSERT_TRUE(date.before(date2));
+    ASSERT_TRUE(date.before(referenceDate));
+  }
+
+  TEST_F(DateTest, before_is_after_reference_date)
+  {
+    ls_std::Date date{}; // today
+    ls_std::Date referenceDate{};
+
+    referenceDate = referenceDate - 1; // yesterday
+
+    ASSERT_FALSE(date.before(referenceDate));
   }
 
   TEST_F(DateTest, getDay)

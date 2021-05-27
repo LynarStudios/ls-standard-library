@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -126,7 +126,7 @@ namespace
     ls_std::FileWriter writer{file};
     writer.write(R"({"value":true})");
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonBoolean>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     auto storable = std::make_shared<ls_std::StorableFile>(path);
@@ -144,7 +144,7 @@ namespace
   {
     std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>(true);
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonBoolean>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     ASSERT_STREQ(R"({"value":true})", x->marshal().c_str());
@@ -196,7 +196,7 @@ namespace
 
     ASSERT_FALSE(*x);
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonBoolean>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
     x->unmarshal(R"({"value":true})");
 

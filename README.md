@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2021.1.0 #
+# Lynar Studios - Standard Library 1.0.0 #
 
 This is a cross-platform standard library written in C++ which provides basic functionality and implementation, like:
  

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-01
+ * Changed:         2021-05-22
  *
  * */
 
@@ -26,6 +26,8 @@ namespace ls_std
 
       ls_std::Date &operator+(int _value);
       ls_std::Date &operator-(int _value);
+      ls_std::Date &operator+=(int _value);
+      ls_std::Date &operator-=(int _value);
 
       // additional functionality
 
@@ -46,6 +48,8 @@ namespace ls_std
       time_t timestamp{};
       tm *localTime{};
 
+      void _decrementByDays(int _value);
+      void _incrementByDays(int _value);
       void _init();
   };
 }

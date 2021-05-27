@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-04-23
+ * Changed:         2021-05-02
  *
  * */
 
@@ -351,7 +351,7 @@ namespace
     ls_std::FileWriter writer{file};
     writer.write(R"({"value":1990})");
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonInteger>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     auto storable = std::make_shared<ls_std::StorableFile>(path);
@@ -369,7 +369,7 @@ namespace
   {
     std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(3);
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonInteger>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     ASSERT_STREQ(R"({"value":3})", x->marshal().c_str());
@@ -400,7 +400,7 @@ namespace
     std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(13);
     ASSERT_EQ(13, *x);
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonInteger>(x);
     x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
     x->unmarshal(R"({"value":1989})");

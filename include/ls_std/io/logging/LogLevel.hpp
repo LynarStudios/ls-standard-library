@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-05-01
+ * Changed:         2021-05-02
  *
  * */
 
@@ -26,8 +26,14 @@ namespace ls_std
 
       operator unsigned char() const;
       ls_std::LogLevel &operator=(const ls_std::LogLevelValue &_value);
+      bool operator<(const ls_std::LogLevelValue &_value);
       bool operator<=(const ls_std::LogLevelValue &_value);
+      bool operator>(const ls_std::LogLevelValue &_value);
+      bool operator>=(const ls_std::LogLevelValue &_value);
+      bool operator==(const ls_std::LogLevelValue &_value);
 
+      void setLogLevel(const ls_std::LogLevelValue &_value);
+      void setLogLevel(const std::string &_value);
       std::string toString() const;
 
     private:
@@ -35,7 +41,9 @@ namespace ls_std
       std::unordered_map<uint8_t, std::string> level{};
       ls_std::LogLevelValue value{};
 
+      ls_std::LogLevelValue _getValueFromString(const std::string &_value);
       void _init();
+      bool _isValidLogLevelString(const std::string &_value);
   };
 }
 
