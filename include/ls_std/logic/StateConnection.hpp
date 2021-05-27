@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2021-05-01
+ * Changed:         2021-05-27
  *
  * */
 
@@ -20,14 +20,14 @@ namespace ls_std
   {
     public:
 
-      explicit StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId);
+      explicit StateConnection(const ls_std::StateConnectionId& _connectionId, const ls_std::StateId& _stateId);
       ~StateConnection() override = default;
 
       StateConnectionId getConnectionId();
       ls_std::StateId getStateId();
       bool isPassable() const;
-      void setConnectionId(ls_std::StateConnectionId _connectionId);
-      void setStateId(ls_std::StateId _stateId);
+      void setConnectionId(const ls_std::StateConnectionId& _connectionId);
+      void setStateId(const ls_std::StateId& _stateId);
       void updatePassCondition(bool _condition);
 
     private:
@@ -35,6 +35,9 @@ namespace ls_std
       bool condition{};
       ls_std::StateConnectionId connectionId{};
       ls_std::StateId stateId{};
+
+      void _assignConnectionId(const ls_std::StateConnectionId& _connectionId);
+      void _assignStateId(const ls_std::StateId& _stateId);
   };
 }
 

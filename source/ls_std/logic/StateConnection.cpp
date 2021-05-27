@@ -3,17 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2021-04-23
+ * Changed:         2021-05-27
  *
  * */
 
 #include <ls_std/logic/StateConnection.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::StateConnection::StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId)
-    : ls_std::Class("StateConnection"),
-      connectionId(std::move(_connectionId)),
-      stateId(std::move(_stateId))
-{}
+ls_std::StateConnection::StateConnection(const ls_std::StateConnectionId& _connectionId, const ls_std::StateId& _stateId) : ls_std::Class("StateConnection")
+{
+  this->_assignConnectionId(_connectionId);
+  this->_assignStateId(_stateId);
+}
 
 ls_std::StateConnectionId ls_std::StateConnection::getConnectionId()
 {
@@ -30,17 +31,37 @@ bool ls_std::StateConnection::isPassable() const
   return this->condition;
 }
 
-void ls_std::StateConnection::setConnectionId(ls_std::StateConnectionId _connectionId)
+void ls_std::StateConnection::setConnectionId(const ls_std::StateConnectionId& _connectionId)
 {
-  this->connectionId = std::move(_connectionId);
+  this->_assignConnectionId(_connectionId);
 }
 
-void ls_std::StateConnection::setStateId(ls_std::StateId _stateId)
+void ls_std::StateConnection::setStateId(const ls_std::StateId& _stateId)
 {
-  this->stateId = std::move(_stateId);
+  this->_assignStateId(_stateId);
 }
 
 void ls_std::StateConnection::updatePassCondition(bool _condition)
 {
   this->condition = _condition;
+}
+
+void ls_std::StateConnection::_assignConnectionId(const ls_std::StateConnectionId &_connectionId)
+{
+  if (_connectionId.empty())
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->connectionId = _connectionId;
+}
+
+void ls_std::StateConnection::_assignStateId(const ls_std::StateId &_stateId)
+{
+  if (_stateId.empty())
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->stateId = _stateId;
 }
