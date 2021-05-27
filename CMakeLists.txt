@@ -172,6 +172,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonStringFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/event/SerializableJsonEventFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/factory/SerializableTestFactory.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/EventNotSubscribedExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/FileNotFoundExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/FileOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/IllegalArgumentExceptionTest.cpp

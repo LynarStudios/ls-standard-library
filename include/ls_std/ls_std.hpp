@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-05-02
+ * Changed:         2021-05-27
  *
  * */
 
@@ -27,6 +27,7 @@
 #include "boxing/Long.hpp"
 #include "boxing/String.hpp"
 
+#include "exception/EventNotSubscribedException.hpp"
 #include "exception/FileNotFoundException.hpp"
 #include "exception/FileOperationException.hpp"
 #include "exception/IllegalArgumentException.hpp"
