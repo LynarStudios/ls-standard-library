@@ -35,6 +35,7 @@ namespace ls_std
 
       bool addEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler);
       void fire(ls_std::Event _event);
+      bool hasEventHandler(const ls_std::event_id &_id);
       bool removeEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler);
 
     private:

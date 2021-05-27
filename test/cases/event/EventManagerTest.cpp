@@ -151,6 +151,34 @@ namespace
                  }, ls_std::EventNotHandledException);
   }
 
+  TEST_F(EventManagerTest, hasEventHandler)
+  {
+    ls_std::EventManager eventManager{};
+    eventManager.addEventHandler(std::make_shared<ls_std::EventHandler>("TMP_ID"));
+    ASSERT_TRUE(eventManager.hasEventHandler("TMP_ID"));
+  }
+
+  TEST_F(EventManagerTest, hasEventHandler_no_event_handler_available)
+  {
+    ls_std::EventManager eventManager{};
+    ASSERT_FALSE(eventManager.hasEventHandler("TMP_ID"));
+  }
+
+  TEST_F(EventManagerTest, hasEventHandler_empty_id)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::EventManager eventManager{};
+                     eventManager.hasEventHandler("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(EventManagerTest, removeEventHandler)
   {
     ls_std::EventManager eventManager{};

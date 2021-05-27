@@ -75,6 +75,16 @@ void ls_std::EventManager::fire(ls_std::Event _event)
   }
 }
 
+bool ls_std::EventManager::hasEventHandler(const ls_std::event_id &_id)
+{
+  if (_id.empty())
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  return this->_hasEventHandler(_id);
+}
+
 bool ls_std::EventManager::removeEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler)
 {
   if (_eventHandler == nullptr)
