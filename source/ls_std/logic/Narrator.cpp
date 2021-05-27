@@ -3,22 +3,35 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2021-05-02
+ * Changed:         2021-05-27
  *
  * */
 
 #include <ls_std/utils/STLUtils.hpp>
 #include <ls_std/logic/Narrator.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::Narrator::Narrator() : ls_std::Class("Narrator")
 {}
 
-void ls_std::Narrator::addListener(const std::shared_ptr<ls_std::IListener> &_listener)
+bool ls_std::Narrator::addListener(const std::shared_ptr<ls_std::IListener> &_listener)
 {
-  if (!ls_std::STLUtils::contains(this->listeners, _listener))
+  bool wasAdded{};
+
+  if (_listener == nullptr)
   {
-    this->listeners.push_back(_listener);
+    throw ls_std::IllegalArgumentException{};
   }
+  else
+  {
+    if (!ls_std::STLUtils::contains(this->listeners, _listener))
+    {
+      this->listeners.push_back(_listener);
+      wasAdded = true;
+    }
+  }
+
+  return wasAdded;
 }
 
 void ls_std::Narrator::clear()
@@ -31,12 +44,24 @@ std::list<std::shared_ptr<ls_std::IListener>> ls_std::Narrator::getListeners()
   return this->listeners;
 }
 
-void ls_std::Narrator::removeListener(const std::shared_ptr<ls_std::IListener> &_listener)
+bool ls_std::Narrator::removeListener(const std::shared_ptr<ls_std::IListener> &_listener)
 {
-  if (ls_std::STLUtils::contains(this->listeners, _listener))
+  bool wasRemoved{};
+
+  if (_listener == nullptr)
   {
-    this->listeners.remove(_listener);
+    throw ls_std::IllegalArgumentException{};
   }
+  else
+  {
+    if (ls_std::STLUtils::contains(this->listeners, _listener))
+    {
+      this->listeners.remove(_listener);
+      wasRemoved = true;
+    }
+  }
+
+  return wasRemoved;
 }
 
 void ls_std::Narrator::tell(const ls_std::Class &_info)
