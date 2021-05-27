@@ -27,6 +27,7 @@
 #include "boxing/Long.hpp"
 #include "boxing/String.hpp"
 
+#include "exception/EventNotHandledException.hpp"
 #include "exception/EventNotSubscribedException.hpp"
 #include "exception/FileNotFoundException.hpp"
 #include "exception/FileOperationException.hpp"
