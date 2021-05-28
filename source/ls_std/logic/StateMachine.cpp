@@ -8,23 +8,30 @@
  * */
 
 #include <ls_std/logic/StateMachine.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::StateMachine::StateMachine(std::string _name)
-    : ls_std::Class("StateMachine"),
-      name(std::move(_name))
-{}
+ls_std::StateMachine::StateMachine(const std::string& _name) : ls_std::Class("StateMachine")
+{
+  this->_assignName(_name);
+}
 
 bool ls_std::StateMachine::addState(const std::shared_ptr<ls_std::State> &_state)
 {
-  bool condition = !this->_hasState(_state->getId());
+  bool wasAdded{};
 
-  if (condition)
+  if (_state == nullptr)
   {
-    this->states.insert({_state->getId(), _state});
-    condition = this->_hasState(_state->getId());
+    throw ls_std::IllegalArgumentException{};
+  }
+  else
+  {
+    if (!this->_hasState(_state->getId()))
+    {
+      wasAdded = this->states.insert({_state->getId(), _state}).second;
+    }
   }
 
-  return condition;
+  return wasAdded;
 }
 
 std::shared_ptr<ls_std::State> ls_std::StateMachine::getCurrentState()
@@ -55,38 +62,66 @@ bool ls_std::StateMachine::hasState(const ls_std::StateId &_id)
 bool ls_std::StateMachine::proceed()
 {
   std::vector<ls_std::StateId> nextValidStates = this->_getNextValidStates();
-  bool condition = nextValidStates.size() == 1;
+  bool onlyOneWayToGo = nextValidStates.size() == 1;
 
-  if (condition)
+  if (onlyOneWayToGo)
   {
     this->currentState = this->states[nextValidStates.at(0)];
     this->_remember(nextValidStates.at(0));
   }
 
-  return condition;
+  return onlyOneWayToGo;
 }
 
-void ls_std::StateMachine::setMemory(std::vector<ls_std::StateId> _memory)
+void ls_std::StateMachine::setMemory(const std::vector<ls_std::StateId>& _memory)
 {
-  this->memory = std::move(_memory);
+  this->_assignMemory(_memory);
 }
 
-void ls_std::StateMachine::setName(std::string _name)
+void ls_std::StateMachine::setName(const std::string& _name)
 {
-  this->name = std::move(_name);
+  this->_assignName(_name);
 }
 
 bool ls_std::StateMachine::setStartState(const ls_std::StateId &_id)
 {
-  bool exists = this->_hasState(_id);
+  bool startStateSet{};
 
-  if (exists)
+  if (_id.empty())
   {
-    this->currentState = this->states[_id];
-    this->_remember(_id);
+    throw ls_std::IllegalArgumentException{};
+  }
+  else
+  {
+    if (this->_hasState(_id))
+    {
+      this->currentState = this->states[_id];
+      this->_remember(_id);
+      startStateSet = true;
+    }
   }
 
-  return exists;
+  return startStateSet;
+}
+
+void ls_std::StateMachine::_assignMemory(const std::vector<ls_std::StateId> &_memory)
+{
+  if (_memory.empty())
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->memory = _memory;
+}
+
+void ls_std::StateMachine::_assignName(const std::string &_name)
+{
+  if (_name.empty())
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->name = _name;
 }
 
 std::vector<ls_std::StateId> ls_std::StateMachine::_getNextValidStates()
