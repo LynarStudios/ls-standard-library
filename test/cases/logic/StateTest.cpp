@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-05-02
+ * Changed:         2021-05-28
  *
  * */
 
@@ -27,6 +27,26 @@ namespace
       {}
   };
 
+  TEST_F(StateTest, getClassName)
+  {
+    ls_std::State state{"A"};
+    ASSERT_STREQ("State", state.getClassName().c_str());
+  }
+
+  TEST_F(StateTest, constructor_empty_id)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::State state = ls_std::State("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   // implementation
 
   TEST_F(StateTest, marshal)
@@ -38,7 +58,7 @@ namespace
     ASSERT_FALSE(state->marshal().empty());
   }
 
-  TEST_F(StateTest, marshal_noSerializableReference)
+  TEST_F(StateTest, marshal_no_serializable_reference)
   {
     ls_std::State state{"A"};
 
@@ -65,7 +85,7 @@ namespace
     ASSERT_STREQ("A", state->getId().c_str());
   }
 
-  TEST_F(StateTest, unmarshal_noSerializableReference)
+  TEST_F(StateTest, unmarshal_no_serializable_reference)
   {
     std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
     std::string jsonString = R"({"id":"A","connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"}}})";
@@ -84,7 +104,7 @@ namespace
 
   // additional functionality
 
-  TEST_F(StateTest, addStateConnection)
+  TEST_F(StateTest, addStateConnection_v1)
   {
     ls_std::State stateA{"A"};
     ls_std::State stateB{"B"};
@@ -92,17 +112,48 @@ namespace
     ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls_std::State>(stateB)));
   }
 
-  TEST_F(StateTest, addStateConnectionNegative)
+  TEST_F(StateTest, addStateConnection_v1_connection_already_exists)
   {
     ls_std::State stateA{"A"};
     ls_std::State stateB{"B"};
 
     ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls_std::State>(stateB)));
     ASSERT_FALSE(stateA.addStateConnection("AB", std::make_shared<ls_std::State>(stateB)));
-    ASSERT_FALSE(stateA.addStateConnection("XX", nullptr));
   }
 
-  TEST_F(StateTest, addStateConnectionV2)
+  TEST_F(StateTest, addStateConnection_v1_empty_connection_id)
+  {
+    ls_std::State state{"A"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     state.addStateConnection("", std::make_shared<ls_std::State>("B"));
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(StateTest, addStateConnection_v1_no_reference)
+  {
+    ls_std::State state{"A"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     state.addStateConnection("AB", nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(StateTest, addStateConnection_v2)
   {
     ls_std::State stateA{"A"};
     ls_std::State stateB{"B"};
@@ -110,10 +161,20 @@ namespace
     ASSERT_TRUE(stateA.addStateConnection(std::make_shared<ls_std::StateConnection>("AB", stateB.getId())));
   }
 
-  TEST_F(StateTest, addStateConnectionV2Negative)
+  TEST_F(StateTest, addStateConnection_v2_no_reference)
   {
     ls_std::State stateA{"A"};
-    ASSERT_FALSE(stateA.addStateConnection(nullptr));
+
+    EXPECT_THROW({
+                   try
+                   {
+                     stateA.addStateConnection(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(StateTest, clearConnections)
@@ -122,28 +183,15 @@ namespace
     stateA.addStateConnection(std::make_shared<ls_std::StateConnection>("AB", "B"));
     stateA.addStateConnection(std::make_shared<ls_std::StateConnection>("AC", "C"));
 
-    ASSERT_EQ(2, stateA.getConnectedStates().size());
+    ASSERT_FALSE(stateA.getConnectedStates().empty());
     stateA.clearConnections();
-    ASSERT_EQ(0, stateA.getConnectedStates().size());
     ASSERT_TRUE(stateA.getConnectedStates().empty());
   }
 
   TEST_F(StateTest, getConnectedStates)
   {
     ls_std::State stateA{"A"};
-    ls_std::State stateB{"B"};
-
-    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls_std::State>(stateB)));
-    ASSERT_FALSE(stateA.getConnectedStates().empty());
-    ASSERT_EQ(1, stateA.getConnectedStates().size());
-  }
-
-  TEST_F(StateTest, getConnectedStatesNegative)
-  {
-    ls_std::State stateA{"A"};
-
     ASSERT_TRUE(stateA.getConnectedStates().empty());
-    ASSERT_EQ(0, stateA.getConnectedStates().size());
   }
 
   TEST_F(StateTest, getId)
@@ -161,6 +209,22 @@ namespace
     ASSERT_STREQ("B", stateA.getId().c_str());
   }
 
+  TEST_F(StateTest, setId_empty_id)
+  {
+    ls_std::State stateA{"A"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     stateA.setId("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(StateTest, hasConnection)
   {
     ls_std::State stateA{"A"};
@@ -173,22 +237,20 @@ namespace
     ASSERT_TRUE(stateA.hasConnection("AC"));
   }
 
-  TEST_F(StateTest, hasConnectionNegative)
+  TEST_F(StateTest, hasConnection_no_connections_available)
   {
     ls_std::State stateA{"A"};
     ASSERT_FALSE(stateA.hasConnection("AB"));
-    ASSERT_FALSE(stateA.hasConnection("AC"));
   }
 
-  TEST_F(StateTest, setSerializable_noSerializableReference)
+  TEST_F(StateTest, setSerializable_no_reference)
   {
     ls_std::State state{"A"};
-    std::shared_ptr<ls_std::ISerializable> serializable{};
 
     EXPECT_THROW({
                    try
                    {
-                     state.setSerializable(serializable);
+                     state.setSerializable(nullptr);
                    }
                    catch (const ls_std::IllegalArgumentException &_exception)
                    {

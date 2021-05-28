@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2021-05-02
+ * Changed:         2021-05-28
  *
  * */
 
@@ -64,7 +64,7 @@ void ls_std::SerializableJsonStateMachine::_unmarshalStates()
 {
   for (const auto &serializedState : this->jsonObject["states"])
   {
-    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("");
+    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
     ls_std::SerializableJsonState{state}.unmarshal(serializedState.dump());
     this->value->addState(state);
   }

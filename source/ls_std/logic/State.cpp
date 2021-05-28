@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-04-30
+ * Changed:         2021-05-28
  *
  * */
 
@@ -11,10 +11,10 @@
 #include <ls_std/exception/NullPointerException.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::State::State(ls_std::StateId _id)
-    : ls_std::Class("State"),
-      id(std::move(_id))
-{}
+ls_std::State::State(const ls_std::StateId& _id) : ls_std::Class("State")
+{
+  this->_assignStateId(_id);
+}
 
 ls_std::byte_field ls_std::State::marshal()
 {
@@ -49,11 +49,17 @@ bool ls_std::State::addStateConnection(const ls_std::StateConnectionId &_connect
   bool added{};
   std::shared_ptr<ls_std::StateConnection> connection{};
 
-  if (_connectedState != nullptr && !this->_hasConnection(_connectionId))
+  if (_connectionId.empty() || _connectedState == nullptr)
   {
-    connection = std::make_shared<ls_std::StateConnection>(_connectionId, _connectedState->getId());
-    this->connectedStates.insert({_connectionId, connection});
-    added = true;
+    throw ls_std::IllegalArgumentException{};
+  }
+  else
+  {
+    if (!this->_hasConnection(_connectionId))
+    {
+      connection = std::make_shared<ls_std::StateConnection>(_connectionId, _connectedState->getId());
+      added = this->connectedStates.insert({_connectionId, connection}).second;
+    }
   }
 
   return added;
@@ -65,8 +71,11 @@ bool ls_std::State::addStateConnection(const std::shared_ptr<ls_std::StateConnec
 
   if (_connection != nullptr)
   {
-    this->connectedStates.insert({_connection->getConnectionId(), _connection});
-    added = this->_hasConnection(_connection->getConnectionId());
+    added = this->connectedStates.insert({_connection->getConnectionId(), _connection}).second;
+  }
+  else
+  {
+    throw ls_std::IllegalArgumentException{};
   }
 
   return added;
@@ -92,19 +101,34 @@ bool ls_std::State::hasConnection(const ls_std::StateConnectionId &_connectionId
   return this->_hasConnection(_connectionId);
 }
 
-void ls_std::State::setId(ls_std::StateId _id)
+void ls_std::State::setId(const ls_std::StateId& _id)
 {
-  this->id = std::move(_id);
+  this->_assignStateId(_id);
 }
 
-void ls_std::State::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
+void ls_std::State::setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
+{
+  this->_assignSerializable(_serializable);
+}
+
+void ls_std::State::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
 {
   if (_serializable == nullptr)
   {
     throw ls_std::IllegalArgumentException{};
   }
 
-  this->serializable = std::move(_serializable);
+  this->serializable = _serializable;
+}
+
+void ls_std::State::_assignStateId(const ls_std::StateId &_id)
+{
+  if (_id.empty())
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->id = _id;
 }
 
 void ls_std::State::_clearConnections()
