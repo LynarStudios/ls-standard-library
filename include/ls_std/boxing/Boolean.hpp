@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-05-01
+ * Changed:         2021-05-30
  *
  * */
 
@@ -70,8 +70,8 @@ namespace ls_std
       // additional functionality
 
       bool getValue() const;
-      void setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable);
-      void setStorable(std::shared_ptr<ls_std::IStorable> _storable);
+      void setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
+      void setStorable(const std::shared_ptr<ls_std::IStorable>& _storable);
       static bool XOR(const ls_std::Boolean &_leftExpression, const ls_std::Boolean &_rightExpression);
       static bool XOR(const ls_std::Boolean &_leftExpression, bool _rightExpression);
       static bool XOR(bool _leftExpression, const ls_std::Boolean &_rightExpression);
@@ -86,6 +86,8 @@ namespace ls_std
       const std::string FALSE_STRING = "false";
       const std::string TRUE_STRING = "true";
 
+      void _assignSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
+      void _assignStorable(const std::shared_ptr<ls_std::IStorable>& _storable);
       std::string _toString() const;
   };
 }
