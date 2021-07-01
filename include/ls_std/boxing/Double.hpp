@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-01
+ * Changed:         2021-07-01
  *
  * */
 
@@ -91,8 +91,8 @@ namespace ls_std
       double getEpsilon();
       double getValue();
       void setEpsilon(double _epsilon);
-      void setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable);
-      void setStorable(std::shared_ptr<ls_std::IStorable> _storable);
+      void setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
+      void setStorable(const std::shared_ptr<ls_std::IStorable>& _storable);
 
     private:
 
@@ -100,6 +100,10 @@ namespace ls_std
       std::shared_ptr<ls_std::ISerializable> serializable{};
       std::shared_ptr<ls_std::IStorable> storable{};
       double value{};
+
+      void _assignEpsilon(double _epsilon);
+      void _assignSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
+      void _assignStorable(const std::shared_ptr<ls_std::IStorable>& _storable);
   };
 }
 

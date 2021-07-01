@@ -3,23 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-01
+ * Changed:         2021-07-01
  *
  * */
 
 #include <cmath>
 #include <ls_std/boxing/Double.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::Double::Double()
-    : ls_std::Class("Double"),
-      epsilon(0.00000001)
-{}
+ls_std::Double::Double() : ls_std::Class("Double")
+{
+  this->_assignEpsilon(0.00000001);
+}
 
 ls_std::Double::Double(double _value)
     : ls_std::Class("Double"),
-      epsilon(0.00000001),
       value(_value)
-{}
+{
+  this->_assignEpsilon(0.00000001);
+}
 
 ls_std::Double::operator double() const
 {
@@ -265,15 +267,45 @@ double ls_std::Double::getValue()
 
 void ls_std::Double::setEpsilon(double _epsilon)
 {
+  this->_assignEpsilon(_epsilon);
+}
+
+void ls_std::Double::setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
+{
+  this->_assignSerializable(_serializable);
+}
+
+void ls_std::Double::setStorable(const std::shared_ptr<ls_std::IStorable>& _storable)
+{
+  this->_assignStorable(_storable);
+}
+
+void ls_std::Double::_assignEpsilon(double _epsilon)
+{
+  if (_epsilon <= 0.0)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
   this->epsilon = _epsilon;
 }
 
-void ls_std::Double::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
+void ls_std::Double::_assignSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
 {
-  this->serializable = std::move(_serializable);
+  if (_serializable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->serializable = _serializable;
 }
 
-void ls_std::Double::setStorable(std::shared_ptr<ls_std::IStorable> _storable)
+void ls_std::Double::_assignStorable(const std::shared_ptr<ls_std::IStorable>& _storable)
 {
-  this->storable = std::move(_storable);
+  if (_storable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->storable = _storable;
 }
