@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-05-01
+ * Changed:         2021-05-30
  *
  * */
 
@@ -146,14 +146,14 @@ bool ls_std::Boolean::getValue() const
   return this->value;
 }
 
-void ls_std::Boolean::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
+void ls_std::Boolean::setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
 {
-  this->serializable = std::move(_serializable);
+  this->_assignSerializable(_serializable);
 }
 
-void ls_std::Boolean::setStorable(std::shared_ptr<ls_std::IStorable> _storable)
+void ls_std::Boolean::setStorable(const std::shared_ptr<ls_std::IStorable>& _storable)
 {
-  this->storable = std::move(_storable);
+  this->_assignStorable(_storable);
 }
 
 bool ls_std::Boolean::XOR(const ls_std::Boolean &_leftExpression, const ls_std::Boolean &_rightExpression)
@@ -174,6 +174,26 @@ bool ls_std::Boolean::XOR(bool _leftExpression, const ls_std::Boolean &_rightExp
 bool ls_std::Boolean::XOR(bool _leftExpression, bool _rightExpression)
 {
   return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
+}
+
+void ls_std::Boolean::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
+{
+  if (_serializable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->serializable = _serializable;
+}
+
+void ls_std::Boolean::_assignStorable(const std::shared_ptr<ls_std::IStorable> &_storable)
+{
+  if (_storable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->storable = _storable;
 }
 
 std::string ls_std::Boolean::_toString() const

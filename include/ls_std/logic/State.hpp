@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-04-30
+ * Changed:         2021-05-28
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls_std
   {
     public:
 
-      explicit State(ls_std::StateId _id);
+      explicit State(const ls_std::StateId& _id);
       ~State() override = default;
 
       // implementation
@@ -39,8 +39,8 @@ namespace ls_std
       std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::StateConnection>> getConnectedStates();
       ls_std::StateId getId();
       bool hasConnection(const ls_std::StateConnectionId &_connectionId);
-      void setId(ls_std::StateId _id);
-      void setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable);
+      void setId(const ls_std::StateId& _id);
+      void setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
 
     private:
 
@@ -48,6 +48,8 @@ namespace ls_std
       ls_std::StateId id{};
       std::shared_ptr<ISerializable> serializable{};
 
+      void _assignSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
+      void _assignStateId(const ls_std::StateId& _id);
       void _clearConnections();
       bool _hasConnection(const ls_std::StateConnectionId &_connectionId);
   };
