@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-01
+ * Changed:         2021-07-08
  *
  * */
 
 #include <cmath>
 #include <ls_std/boxing/Float.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::Float::Float()
     : ls_std::Class("Float"),
@@ -265,15 +266,45 @@ float ls_std::Float::getValue()
 
 void ls_std::Float::setEpsilon(float _epsilon)
 {
+  this->_assignEpsilon(_epsilon);
+}
+
+void ls_std::Float::setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
+{
+  this->_assignSerializable(_serializable);
+}
+
+void ls_std::Float::setStorable(const std::shared_ptr<ls_std::IStorable>& _storable)
+{
+  this->_assignStorable(_storable);
+}
+
+void ls_std::Float::_assignEpsilon(float _epsilon)
+{
+  if (_epsilon <= 0.0)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
   this->epsilon = _epsilon;
 }
 
-void ls_std::Float::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
+void ls_std::Float::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
 {
-  this->serializable = std::move(_serializable);
+  if (_serializable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->serializable = _serializable;
 }
 
-void ls_std::Float::setStorable(std::shared_ptr<ls_std::IStorable> _storable)
+void ls_std::Float::_assignStorable(const std::shared_ptr<ls_std::IStorable> &_storable)
 {
-  this->storable = std::move(_storable);
+  if (_storable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->storable = _storable;
 }

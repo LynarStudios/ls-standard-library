@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-02
+ * Changed:         2021-07-08
  *
  * */
 
@@ -25,150 +25,207 @@ namespace
 
       void TearDown() override
       {}
+
+      static std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::Float>> createPersistentTestFloat()
+      {
+        std::shared_ptr<ls_std::Float> number = std::make_shared<ls_std::Float>();
+        std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_float.json";
+        std::shared_ptr<ls_std::File> file = std::make_shared<ls_std::File>(path);
+        file->createNewFile();
+        ls_std::FileWriter writer{*file};
+        writer.write(R"({"value":3.14159})");
+
+        auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(number);
+        number->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+        auto storable = std::make_shared<ls_std::StorableFile>(path);
+        number->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+        return std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::Float>>(file, number);
+      }
   };
 
   // assignment operators
 
-  TEST_F(FloatTest, operatorAssignment)
+  TEST_F(FloatTest, operator_assignment)
   {
     ls_std::Float x{13.023f};
-    ASSERT_EQ(13.023f, x);
 
     x = 44.22f;
     ASSERT_EQ(44.22f, x);
-
-    ls_std::Float y{3.0f};
-    x = y;
-    ASSERT_EQ(3.0f, x);
   }
 
   // arithmetic operators
 
-  TEST_F(FloatTest, operatorHyphen)
+  TEST_F(FloatTest, operator_negative)
   {
     ls_std::Float x{3.25f};
     ASSERT_FLOAT_EQ(-3.25f, -x);
   }
 
-  TEST_F(FloatTest, operatorAddition)
+  TEST_F(FloatTest, operator_addition_with_reference)
   {
     ls_std::Float x{3.1415f};
     ls_std::Float y{2.223f};
     ls_std::Float z{x + y};
 
     ASSERT_FLOAT_EQ(5.3645f, z);
+  }
+
+  TEST_F(FloatTest, operator_addition_with_value)
+  {
+    ls_std::Float x{3.1415f};
     ASSERT_FLOAT_EQ(5.3645f, x + 2.223f);
   }
 
-  TEST_F(FloatTest, operatorMultiplication)
+  TEST_F(FloatTest, operator_multiplication_with_reference)
   {
     ls_std::Float x{3.14f};
     ls_std::Float y{2.22f};
     ls_std::Float z{x * y};
 
     ASSERT_FLOAT_EQ(6.9708f, z);
+  }
+
+  TEST_F(FloatTest, operator_multiplication_with_value)
+  {
+    ls_std::Float x{3.14f};
     ASSERT_FLOAT_EQ(6.9708f, x * 2.22f);
   }
 
-  TEST_F(FloatTest, operatorSubstraction)
+  TEST_F(FloatTest, operator_substraction_with_reference)
   {
     ls_std::Float x{3.1415f};
     ls_std::Float y{2.225f};
     ls_std::Float z{x - y};
 
     ASSERT_FLOAT_EQ(0.9165f, z);
+  }
+
+  TEST_F(FloatTest, operator_substraction_with_value)
+  {
+    ls_std::Float x{3.1415f};
     ASSERT_FLOAT_EQ(0.9165f, x - 2.225f);
   }
 
-  TEST_F(FloatTest, operatorDivision)
+  TEST_F(FloatTest, operator_division_with_reference)
   {
     ls_std::Float x{2.25f};
     ls_std::Float y{0.5f};
     ls_std::Float z{x / y};
 
     ASSERT_FLOAT_EQ(4.5f, z);
+  }
+
+  TEST_F(FloatTest, operator_division_with_value)
+  {
+    ls_std::Float x{2.25f};
     ASSERT_FLOAT_EQ(4.5f, x / 0.5f);
   }
 
   // compound operators
 
-  TEST_F(FloatTest, operatorAddEqual)
+  TEST_F(FloatTest, operator_add_assign_with_reference)
   {
     ls_std::Float x{2.25f};
-    ls_std::Float y{-0.39f};
-    ASSERT_FLOAT_EQ(2.25f, x);
-
-    x += 3.14f;
-    ASSERT_FLOAT_EQ(5.39f, x);
-
+    ls_std::Float y{3.14f};
     x += y;
-    ASSERT_FLOAT_EQ(5.0f, x);
+
+    ASSERT_FLOAT_EQ(5.39f, x);
   }
 
-  TEST_F(FloatTest, operatorSubEqual)
+  TEST_F(FloatTest, operator_add_assign_with_value)
   {
     ls_std::Float x{2.25f};
-    ls_std::Float y{-0.04f};
-    ASSERT_FLOAT_EQ(2.25f, x);
+    x += 3.14f;
 
-    x -= 1.14f;
-    ASSERT_FLOAT_EQ(1.11f, x);
-
-    x -= y;
-    ASSERT_FLOAT_EQ(1.15f, x);
+    ASSERT_FLOAT_EQ(5.39f, x);
   }
 
-  TEST_F(FloatTest, operatorMulEqual)
+  TEST_F(FloatTest, operator_sub_assign_with_reference)
+  {
+    ls_std::Float x{2.25f};
+    ls_std::Float y{1.14f};
+    x -= y;
+
+    ASSERT_FLOAT_EQ(1.11f, x);
+  }
+
+  TEST_F(FloatTest, operator_sub_assign_with_value)
+  {
+    ls_std::Float x{2.25f};
+    x -= 1.14f;
+
+    ASSERT_FLOAT_EQ(1.11f, x);
+  }
+
+  TEST_F(FloatTest, operator_mul_assign_with_reference)
   {
     ls_std::Float x{2.25f};
     ls_std::Float y{0.04f};
-    ASSERT_FLOAT_EQ(2.25f, x);
-
-    x *= 1.14f;
-    ASSERT_FLOAT_EQ(2.565f, x);
-
     x *= y;
-    ASSERT_FLOAT_EQ(0.1026f, x);
+
+    ASSERT_FLOAT_EQ(0.09f, x);
   }
 
-  TEST_F(FloatTest, operatorDivEqual)
+  TEST_F(FloatTest, operator_mul_assign_with_value)
+  {
+    ls_std::Float x{2.25f};
+    x *= 1.14f;
+
+    ASSERT_FLOAT_EQ(2.565f, x);
+  }
+
+  TEST_F(FloatTest, operator_division_assign_with_reference)
   {
     ls_std::Float x{2.25f};
     ls_std::Float y{1.5f};
-    ASSERT_FLOAT_EQ(2.25f, x);
-
-    x /= 0.05f;
-    ASSERT_FLOAT_EQ(45.0f, x);
-
     x /= y;
-    ASSERT_FLOAT_EQ(30.0f, x);
+
+    ASSERT_FLOAT_EQ(1.5f, x);
+  }
+
+  TEST_F(FloatTest, operator_division_assign_with_value)
+  {
+    ls_std::Float x{2.25f};
+    x /= 0.05f;
+
+    ASSERT_FLOAT_EQ(45.0f, x);
   }
 
   // comparison operators
 
-  TEST_F(FloatTest, operatorEqual)
+  TEST_F(FloatTest, operator_equals_with_reference)
   {
     ls_std::Float x{3.14159f};
     ls_std::Float y{3.14159f};
 
     ASSERT_TRUE(x == y);
     ASSERT_TRUE(y == x);
-    ASSERT_TRUE(x == 3.14159f);
-    ASSERT_TRUE(3.14159f == x);
   }
 
-  TEST_F(FloatTest, operatorNotEqual)
+  TEST_F(FloatTest, operator_equals_with_value)
+  {
+    ls_std::Float x{3.14159f};
+    ASSERT_TRUE(x == 3.14159f);
+  }
+
+  TEST_F(FloatTest, operator_not_equals_with_reference)
   {
     ls_std::Float x{3.1415f};
     ls_std::Float y{3.1414f};
 
     ASSERT_TRUE(x != y);
     ASSERT_TRUE(y != x);
-    ASSERT_TRUE(x != 3.1414f);
-    ASSERT_TRUE(3.1414 != x);
   }
 
-  TEST_F(FloatTest, operatorGreaterThan)
+  TEST_F(FloatTest, operator_not_equals_with_value)
+  {
+    ls_std::Float x{3.1415f};
+    ASSERT_TRUE(x != 3.1414f);
+  }
+
+  TEST_F(FloatTest, operator_greater_than_with_reference)
   {
     ls_std::Float x{3.1415f};
     ls_std::Float y{3.1414f};
@@ -177,16 +234,13 @@ namespace
     ASSERT_TRUE(x > 3.1414f);
   }
 
-  TEST_F(FloatTest, operatorGreaterThanNegative)
+  TEST_F(FloatTest, operator_greater_than_with_value)
   {
-    ls_std::Float x{3.1414f};
-    ls_std::Float y{3.1414f};
-
-    ASSERT_FALSE(x > y);
-    ASSERT_FALSE(x > 3.1414f);
+    ls_std::Float x{3.1415f};
+    ASSERT_TRUE(x > 3.1414f);
   }
 
-  TEST_F(FloatTest, operatorGreaterThanEqual)
+  TEST_F(FloatTest, operator_greater_than_equals_with_reference)
   {
     ls_std::Float x{3.1414f};
     ls_std::Float y{3.1414f};
@@ -194,38 +248,32 @@ namespace
 
     ASSERT_TRUE(x >= y);
     ASSERT_TRUE(z >= y);
+  }
+
+  TEST_F(FloatTest, operator_greater_than_equals_with_value)
+  {
+    ls_std::Float x{3.1414f};
+    ls_std::Float z{3.1415f};
+
     ASSERT_TRUE(x >= 3.1414f);
     ASSERT_TRUE(z >= 3.1414f);
   }
 
-  TEST_F(FloatTest, operatorGreaterThanEqualNegative)
-  {
-    ls_std::Float x{3.1414f};
-    ls_std::Float y{3.1415f};
-
-    ASSERT_FALSE(x >= y);
-    ASSERT_FALSE(x >= 3.1415f);
-  }
-
-  TEST_F(FloatTest, operatorLessThan)
+  TEST_F(FloatTest, operator_less_than_with_reference)
   {
     ls_std::Float x{3.1413f};
     ls_std::Float y{3.1414f};
 
     ASSERT_TRUE(x < y);
+  }
+
+  TEST_F(FloatTest, operator_less_than_with_value)
+  {
+    ls_std::Float x{3.1413f};
     ASSERT_TRUE(x < 3.1414f);
   }
 
-  TEST_F(FloatTest, operatorLessThanNegative)
-  {
-    ls_std::Float x{3.1414f};
-    ls_std::Float y{3.1414f};
-
-    ASSERT_FALSE(x < y);
-    ASSERT_FALSE(x < 3.1414f);
-  }
-
-  TEST_F(FloatTest, operatorLessThanEqual)
+  TEST_F(FloatTest, operator_less_than_equals_with_reference)
   {
     ls_std::Float x{3.1414f};
     ls_std::Float y{3.1414f};
@@ -233,43 +281,32 @@ namespace
 
     ASSERT_TRUE(x <= y);
     ASSERT_TRUE(x <= z);
+  }
+
+  TEST_F(FloatTest, operator_less_than_equals_with_value)
+  {
+    ls_std::Float x{3.1414f};
+
     ASSERT_TRUE(x <= 3.1414f);
     ASSERT_TRUE(x <= 3.1415f);
   }
 
-  TEST_F(FloatTest, operatorLessThanEqualNegative)
-  {
-    ls_std::Float x{3.1415f};
-    ls_std::Float y{3.1414f};
-
-    ASSERT_FALSE(x <= y);
-    ASSERT_FALSE(x <= 3.1414f);
-  }
-
   // increment / decrement operator
 
-  TEST_F(FloatTest, operatorIncrement)
+  TEST_F(FloatTest, operator_increment)
   {
     ls_std::Float x{3.1415f};
-    ASSERT_FLOAT_EQ(3.1415f, x);
-
     ++x;
+
     ASSERT_FLOAT_EQ(4.1415f, x);
-
-    ++x;
-    ASSERT_FLOAT_EQ(5.1415f, x);
   }
 
-  TEST_F(FloatTest, operatorDecrement)
+  TEST_F(FloatTest, operator_decrement)
   {
     ls_std::Float x{3.1415f};
-    ASSERT_FLOAT_EQ(3.1415f, x);
-
     --x;
+
     ASSERT_FLOAT_EQ(2.1415f, x);
-
-    --x;
-    ASSERT_FLOAT_EQ(1.1415f, x);
   }
 
   // implementation
@@ -278,51 +315,33 @@ namespace
   {
     // preparation
 
-    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>();
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_float.json";
-    ls_std::File file{path};
-    file.createNewFile();
-    ls_std::FileWriter writer{file};
-    writer.write(R"({"value":3.14159})");
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    auto storable = std::make_shared<ls_std::StorableFile>(path);
-    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+    auto storableFloat = createPersistentTestFloat();
 
     // check
 
-    x->load();
-    ASSERT_FLOAT_EQ(3.14159f, *x);
+    storableFloat.second->load();
+    ASSERT_FLOAT_EQ(3.14159f, *storableFloat.second);
 
-    file.remove();
+    storableFloat.first->remove();
   }
 
   TEST_F(FloatTest, marshal)
   {
-    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>(3.14159f);
+    std::shared_ptr<ls_std::Float> number = std::make_shared<ls_std::Float>(3.14159f);
 
-    auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-    ls_std::String jsonString{x->marshal()};
+    auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(number);
+    number->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    ls_std::String jsonString{number->marshal()};
 
     ASSERT_TRUE(jsonString.contains(R"({"value":3.14159)"));
-
-    *x = 17.13149f;
-    jsonString = x->marshal();
-    ASSERT_TRUE(jsonString.contains(R"({"value":17.1314)"));
   }
 
   TEST_F(FloatTest, parse)
   {
-    ls_std::Float x{};
+    ls_std::Float number{};
 
-    x.parse("3.1415f");
-    ASSERT_FLOAT_EQ(3.1415f, x);
-
-    x.parse("-2.1415f");
-    ASSERT_FLOAT_EQ(-2.1415f, x);
+    number.parse("3.1415f");
+    ASSERT_FLOAT_EQ(3.1415f, number);
   }
 
   TEST_F(FloatTest, toString)
@@ -333,15 +352,13 @@ namespace
 
   TEST_F(FloatTest, unmarshal)
   {
-    std::shared_ptr<ls_std::Float> x = std::make_shared<ls_std::Float>(3.14159f);
+    std::shared_ptr<ls_std::Float> number = std::make_shared<ls_std::Float>(3.14159f);
 
-    ASSERT_FLOAT_EQ(3.14159f, *x);
+    auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(number);
+    number->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    number->unmarshal(R"({"value":17.4132})");
 
-    auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-    x->unmarshal(R"({"value":17.4132})");
-
-    ASSERT_FLOAT_EQ(17.4132, *x);
+    ASSERT_FLOAT_EQ(17.4132, *number);
   }
 
   // additional functionality
@@ -362,6 +379,55 @@ namespace
   {
     ls_std::Float x{};
     x.setEpsilon(0.01f);
+
     ASSERT_FLOAT_EQ(0.01f, x.getEpsilon());
+  }
+
+  TEST_F(FloatTest, setEpsilon_invalid_value)
+  {
+    ls_std::Float x{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     x.setEpsilon(0.0f);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(FloatTest, setSerializable_no_reference)
+  {
+    ls_std::Float x{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     x.setSerializable(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(FloatTest, setStorable_no_reference)
+  {
+    ls_std::Float x{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     x.setStorable(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }
