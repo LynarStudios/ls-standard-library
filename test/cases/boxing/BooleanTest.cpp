@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-05-30
+ * Changed:         2021-07-08
  *
  * */
 
@@ -25,24 +25,6 @@ namespace
 
       void TearDown() override
       {}
-
-      static std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::Boolean>> createTestExpression()
-      {
-        std::shared_ptr<ls_std::Boolean> expression = std::make_shared<ls_std::Boolean>();
-        std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_bool.json";
-        std::shared_ptr<ls_std::File> file = std::make_shared<ls_std::File>(path);
-        file->createNewFile();
-        ls_std::FileWriter writer{*file};
-        writer.write(R"({"value":true})");
-
-        auto serializable = std::make_shared<ls_std::SerializableJsonBoolean>(expression);
-        expression->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-        auto storable = std::make_shared<ls_std::StorableFile>(path);
-        expression->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
-
-        return std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::Boolean>>(file, expression);
-      }
   };
 
   // assignment operators
@@ -138,40 +120,6 @@ namespace
 
   // implementation
 
-  TEST_F(BooleanTest, load)
-  {
-    // preparation
-
-    auto storableExpression = createTestExpression();
-
-    // check
-
-    storableExpression.second->load();
-    ASSERT_TRUE(*storableExpression.second);
-
-    storableExpression.first->remove();
-  }
-
-  TEST_F(BooleanTest, marshal_positive_value)
-  {
-    std::shared_ptr<ls_std::Boolean> expression = std::make_shared<ls_std::Boolean>(true);
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonBoolean>(expression);
-    expression->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    ASSERT_STREQ(R"({"value":true})", expression->marshal().c_str());
-  }
-
-  TEST_F(BooleanTest, marshal_negative_value)
-  {
-    std::shared_ptr<ls_std::Boolean> expression = std::make_shared<ls_std::Boolean>(false);
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonBoolean>(expression);
-    expression->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    ASSERT_STREQ(R"({"value":false})", expression->marshal().c_str());
-  }
-
   TEST_F(BooleanTest, parse_true_value)
   {
     ls_std::Boolean expression{};
@@ -212,54 +160,12 @@ namespace
     ASSERT_STREQ("false", expression.toString().c_str());
   }
 
-  TEST_F(BooleanTest, unmarshal)
-  {
-    std::shared_ptr<ls_std::Boolean> expression = std::make_shared<ls_std::Boolean>(false);
-    auto serializable = std::make_shared<ls_std::SerializableJsonBoolean>(expression);
-    expression->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-    expression->unmarshal(R"({"value":true})");
-
-    ASSERT_TRUE(*expression);
-  }
-
   // additional functionality
 
   TEST_F(BooleanTest, getValue)
   {
     ls_std::Boolean x{2 < 3};
     ASSERT_TRUE(x.getValue());
-  }
-
-  TEST_F(BooleanTest, setSerialiable_no_reference)
-  {
-    ls_std::Boolean expression{};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     expression.setSerializable(nullptr);
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
-  }
-
-  TEST_F(BooleanTest, setStorable_no_reference)
-  {
-    ls_std::Boolean expression{};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     expression.setStorable(nullptr);
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(BooleanTest, XOR_with_positive_result)

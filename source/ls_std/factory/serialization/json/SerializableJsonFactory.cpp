@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-05-02
+ * Changed:         2021-07-08
  *
  * */
 
@@ -93,7 +93,6 @@ bool ls_std::SerializableJsonFactory::_hasFactory(const std::string &_relatedObj
 
 void ls_std::SerializableJsonFactory::_init()
 {
-  this->factories.insert({ls_std::Boolean{}.getClassName(), std::make_shared<ls_std::SerializableJsonBooleanFactory>()});
   this->factories.insert({ls_std::Double{}.getClassName(), std::make_shared<ls_std::SerializableJsonDoubleFactory>()});
   this->factories.insert({ls_std::Float{}.getClassName(), std::make_shared<ls_std::SerializableJsonFloatFactory>()});
   this->factories.insert({ls_std::Integer{}.getClassName(), std::make_shared<ls_std::SerializableJsonIntegerFactory>()});

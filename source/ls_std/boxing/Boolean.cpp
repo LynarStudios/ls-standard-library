@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-05-30
+ * Changed:         2021-07-08
  *
  * */
 
@@ -66,31 +66,6 @@ bool ls_std::Boolean::operator||(int _value) const
   return this->value || _value;
 }
 
-ls_std::byte_field ls_std::Boolean::load()
-{
-  ls_std::byte_field data{};
-
-  if (this->storable != nullptr && this->serializable != nullptr)
-  {
-    data = this->storable->load();
-    this->serializable->unmarshal(data);
-  }
-
-  return data;
-}
-
-ls_std::byte_field ls_std::Boolean::marshal()
-{
-  ls_std::byte_field data{};
-
-  if (this->serializable != nullptr)
-  {
-    data = this->serializable->marshal();
-  }
-
-  return data;
-}
-
 void ls_std::Boolean::parse(std::string _parseText)
 {
   std::transform(_parseText.begin(), _parseText.end(), _parseText.begin(), ::tolower);
@@ -113,47 +88,14 @@ void ls_std::Boolean::parse(std::string _parseText)
   }
 }
 
-void ls_std::Boolean::save(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    if (_data.empty())
-    {
-      this->storable->save(this->serializable->marshal());
-    }
-    else
-    {
-      this->storable->save(_data);
-    }
-  }
-}
-
 std::string ls_std::Boolean::toString()
 {
   return this->_toString();
 }
 
-void ls_std::Boolean::unmarshal(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    this->serializable->unmarshal(_data);
-  }
-}
-
 bool ls_std::Boolean::getValue() const
 {
   return this->value;
-}
-
-void ls_std::Boolean::setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
-{
-  this->_assignSerializable(_serializable);
-}
-
-void ls_std::Boolean::setStorable(const std::shared_ptr<ls_std::IStorable>& _storable)
-{
-  this->_assignStorable(_storable);
 }
 
 bool ls_std::Boolean::XOR(const ls_std::Boolean &_leftExpression, const ls_std::Boolean &_rightExpression)
@@ -174,26 +116,6 @@ bool ls_std::Boolean::XOR(bool _leftExpression, const ls_std::Boolean &_rightExp
 bool ls_std::Boolean::XOR(bool _leftExpression, bool _rightExpression)
 {
   return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
-}
-
-void ls_std::Boolean::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
-{
-  if (_serializable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->serializable = _serializable;
-}
-
-void ls_std::Boolean::_assignStorable(const std::shared_ptr<ls_std::IStorable> &_storable)
-{
-  if (_storable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->storable = _storable;
 }
 
 std::string ls_std::Boolean::_toString() const
