@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-02
+ * Changed:         2021-07-08
  *
  * */
 
@@ -25,11 +25,29 @@ namespace
 
       void TearDown() override
       {}
+
+      static std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::String>> createPersistentTestString()
+      {
+        std::shared_ptr<ls_std::String> sentence = std::make_shared<ls_std::String>();
+        std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_string.json";
+        std::shared_ptr<ls_std::File> file = std::make_shared<ls_std::File>(path);
+        file->createNewFile();
+        ls_std::FileWriter writer{*file};
+        writer.write(R"({"value":"Hello!"})");
+
+        auto serializable = std::make_shared<ls_std::SerializableJsonString>(sentence);
+        sentence->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+
+        auto storable = std::make_shared<ls_std::StorableFile>(path);
+        sentence->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+
+        return std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::String>>(file, sentence);
+      }
   };
 
   // assignment operators
 
-  TEST_F(StringTest, operatorAssignment)
+  TEST_F(StringTest, operator_assignment)
   {
     ls_std::String text{};
     text = "Hi!";
@@ -39,16 +57,18 @@ namespace
 
   // arithmetic operators
 
-  TEST_F(StringTest, operatorAdd)
+  TEST_F(StringTest, operator_add)
   {
-    ls_std::String text{"Hello! "};
-    ls_std::String end{"How are you? "};
-    text = text + end + "I'm good by the way!";
+    ls_std::String greetings{"Hello! "};
+    ls_std::String question{"How are you? "};
+    const std::string& answer = "I'm good by the way!";
 
-    ASSERT_STREQ("Hello! How are you? I'm good by the way!", text.toString().c_str());
+    greetings = greetings + question + answer;
+
+    ASSERT_STREQ("Hello! How are you? I'm good by the way!", greetings.toString().c_str());
   }
 
-  TEST_F(StringTest, operatorHyphen)
+  TEST_F(StringTest, operator_minus)
   {
     ls_std::String text{"abcdefghij"};
     text = text - 5;
@@ -58,40 +78,51 @@ namespace
 
   // compound operators
 
-  TEST_F(StringTest, operatorAddEqual)
+  TEST_F(StringTest, operator_add_assign_with_reference)
   {
     ls_std::String text{};
-    ls_std::String hello{"Hi! "};
-    ASSERT_STREQ("", text.toString().c_str());
+    ls_std::String hello{"Hi!"};
 
     text += hello;
-    ASSERT_STREQ("Hi! ", text.toString().c_str());
+    ASSERT_STREQ("Hi!", text.toString().c_str());
+  }
 
-    text += "Bye!";
-    ASSERT_STREQ("Hi! Bye!", text.toString().c_str());
+  TEST_F(StringTest, operator_add_assign_with_value)
+  {
+    ls_std::String text{};
+
+    text += "Hi!";
+    ASSERT_STREQ("Hi!", text.toString().c_str());
   }
 
   // comparison operators
 
-  TEST_F(StringTest, operatorEqual)
+  TEST_F(StringTest, operator_equals_with_reference)
   {
     ls_std::String text{"Hi!"};
     ls_std::String hello{"Hi!"};
 
     ASSERT_TRUE(text == hello);
     ASSERT_TRUE(hello == text);
-    ASSERT_TRUE(hello == std::string("Hi!"));
+  }
+
+  TEST_F(StringTest, operator_equals_with_value)
+  {
+    ls_std::String hello{"Hi!"};
     ASSERT_TRUE(hello == "Hi!");
   }
 
-  TEST_F(StringTest, operatorNotEqual)
+  TEST_F(StringTest, operator_not_equals_with_reference)
   {
     ls_std::String text{"Hi!"};
     ls_std::String hello{"Hello!"};
 
     ASSERT_TRUE(text != hello);
-    ASSERT_TRUE(hello != text);
-    ASSERT_TRUE(text != std::string("Hello!"));
+  }
+
+  TEST_F(StringTest, operator_not_equals_with_value)
+  {
+    ls_std::String text{"Hi!"};
     ASSERT_TRUE(text != "Hello!");
   }
 
@@ -101,38 +132,24 @@ namespace
   {
     // preparation
 
-    std::shared_ptr<ls_std::String> x = std::make_shared<ls_std::String>();
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_string.json";
-    ls_std::File file{path};
-    file.createNewFile();
-    ls_std::FileWriter writer{file};
-    writer.write(R"({"value":"Hello!"})");
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonString>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    auto storable = std::make_shared<ls_std::StorableFile>(path);
-    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
+    auto storableString = createPersistentTestString();
 
     // check
 
-    x->load();
-    ASSERT_STREQ("Hello!", *x);
+    storableString.second->load();
+    ASSERT_STREQ("Hello!", *storableString.second);
 
-    file.remove();
+    storableString.first->remove();
   }
 
   TEST_F(StringTest, marshal)
   {
-    std::shared_ptr<ls_std::String> x = std::make_shared<ls_std::String>("Hello!");
+    std::shared_ptr<ls_std::String> sentence = std::make_shared<ls_std::String>("Hello!");
 
-    auto serializable = std::make_shared<ls_std::SerializableJsonString>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    auto serializable = std::make_shared<ls_std::SerializableJsonString>(sentence);
+    sentence->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
-    ASSERT_STREQ(R"({"value":"Hello!"})", x->marshal().c_str());
-
-    *x = "Test!";
-    ASSERT_STREQ(R"({"value":"Test!"})", x->marshal().c_str());
+    ASSERT_STREQ(R"({"value":"Hello!"})", sentence->marshal().c_str());
   }
 
   TEST_F(StringTest, parse)
@@ -146,21 +163,19 @@ namespace
   TEST_F(StringTest, toString)
   {
     ls_std::String text{"Hello!"};
-
     ASSERT_STREQ("Hello!", text.toString().c_str());
   }
 
   TEST_F(StringTest, unmarshal)
   {
-    std::shared_ptr<ls_std::String> x = std::make_shared<ls_std::String>("Hello!");
-    ASSERT_STREQ("Hello!", *x);
+    std::shared_ptr<ls_std::String> sentence = std::make_shared<ls_std::String>("Hello!");
 
-    auto serializable = std::make_shared<ls_std::SerializableJsonString>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
+    auto serializable = std::make_shared<ls_std::SerializableJsonString>(sentence);
+    sentence->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
 
-    x->unmarshal(R"({"value":"Test!"})");
+    sentence->unmarshal(R"({"value":"Test!"})");
 
-    ASSERT_STREQ("Test!", *x);
+    ASSERT_STREQ("Test!", *sentence);
   }
 
   // additional functionality
@@ -173,7 +188,7 @@ namespace
     ASSERT_TRUE(text.contains("cake"));
   }
 
-  TEST_F(StringTest, containsNegative)
+  TEST_F(StringTest, contains_does_not_contain_search_word)
   {
     ls_std::String text{};
     text = "Hey, I'm searching for the keyword 'cake'!";
@@ -189,7 +204,7 @@ namespace
     ASSERT_TRUE(text.endsWith("ef"));
   }
 
-  TEST_F(StringTest, endsWithNegative)
+  TEST_F(StringTest, endsWith_does_not_end_with_pattern)
   {
     ls_std::String text{};
     text = "abcdef";
@@ -244,7 +259,7 @@ namespace
     text = "abcdef";
 
     ASSERT_STREQ("fedcba", text.reverse().c_str());
-    ASSERT_STREQ("abcdef", text);
+    ASSERT_STREQ("abcdef", text); // verify, that original string didn't change
   }
 
   TEST_F(StringTest, startsWith)
@@ -255,7 +270,7 @@ namespace
     ASSERT_TRUE(text.startsWith("abc"));
   }
 
-  TEST_F(StringTest, startsWithNegative)
+  TEST_F(StringTest, startsWith_does_not_start_with_pattern)
   {
     ls_std::String text{};
     text = "abcdef";
@@ -269,7 +284,7 @@ namespace
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("abcdefghijklmn", text.toLowerCase().c_str());
-    ASSERT_STREQ("aBCdeFgHIJKLmn", text);
+    ASSERT_STREQ("aBCdeFgHIJKLmn", text); // verify, that original String didn't change
   }
 
   TEST_F(StringTest, toUpperCase)
@@ -278,6 +293,38 @@ namespace
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("ABCDEFGHIJKLMN", text.toUpperCase().c_str());
-    ASSERT_STREQ("aBCdeFgHIJKLmn", text);
+    ASSERT_STREQ("aBCdeFgHIJKLmn", text); // verify, that original String didn't change
+  }
+
+  TEST_F(StringTest, setSerializable_no_reference)
+  {
+    ls_std::String x{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     x.setSerializable(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(StringTest, setStorable_no_reference)
+  {
+    ls_std::String x{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     x.setStorable(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }

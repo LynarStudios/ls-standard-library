@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-01
+ * Changed:         2021-07-08
  *
  * */
 
 #include <algorithm>
 #include <ls_std/boxing/String.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::String::String() : ls_std::Class("String")
 {}
@@ -203,12 +204,12 @@ std::string ls_std::String::reverse()
 
 void ls_std::String::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
 {
-  this->serializable = std::move(_serializable);
+  this->_assignSerializable(_serializable);
 }
 
 void ls_std::String::setStorable(std::shared_ptr<ls_std::IStorable> _storable)
 {
-  this->storable = std::move(_storable);
+  this->_assignStorable(_storable);
 }
 
 bool ls_std::String::startsWith(const std::string &_text)
@@ -230,6 +231,26 @@ std::string ls_std::String::toUpperCase()
   std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
 
   return copy;
+}
+
+void ls_std::String::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
+{
+  if (_serializable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->serializable = _serializable;
+}
+
+void ls_std::String::_assignStorable(const std::shared_ptr<ls_std::IStorable> &_storable)
+{
+  if (_storable == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->storable = _storable;
 }
 
 std::string ls_std::String::_buildCharacterChain(size_t _amount, const char _fillCharacter)

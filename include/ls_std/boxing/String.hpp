@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-01
+ * Changed:         2021-07-08
  *
  * */
 
@@ -89,6 +89,8 @@ namespace ls_std
       std::shared_ptr<ls_std::IStorable> storable{};
       std::string value{};
 
+      void _assignSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
+      void _assignStorable(const std::shared_ptr<ls_std::IStorable>& _storable);
       static std::string _buildCharacterChain(size_t _amount, char _fillCharacter);
       static std::string _createFillContent(const std::string &_text, size_t _width, char _fillCharacter);
   };
