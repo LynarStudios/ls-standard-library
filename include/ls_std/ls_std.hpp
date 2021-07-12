@@ -97,7 +97,6 @@
 
 #include "factory/IFactory.hpp"
 #include "ls_std/factory/serialization/json/SerializableJsonFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJsonFloatFactory.hpp"
 #include "factory/serialization/json/boxing/SerializableJsonIntegerFactory.hpp"
 #include "factory/serialization/json/boxing/SerializableJsonLongFactory.hpp"
 #include "factory/serialization/json/boxing/SerializableJsonStringFactory.hpp"

@@ -97,7 +97,6 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/SerializableJsonFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonFloatFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonIntegerFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonLongFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonStringFactory.cpp
@@ -162,7 +161,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvReaderTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/SerializableFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonFloatFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonIntegerFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonLongFactoryTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonStringFactoryTest.cpp

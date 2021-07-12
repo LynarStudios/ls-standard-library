@@ -104,7 +104,6 @@ namespace
   TEST_F(SerializableFactoryTest, hasFactory_ofBoxingPackage)
   {
     ls_std::SerializableJsonFactory serializableFactory{};
-    ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Float{}.getClassName()));
     ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Integer{}.getClassName()));
     ASSERT_TRUE(serializableFactory.hasFactory(ls_std::Long{}.getClassName()));
     ASSERT_TRUE(serializableFactory.hasFactory(ls_std::String{}.getClassName()));

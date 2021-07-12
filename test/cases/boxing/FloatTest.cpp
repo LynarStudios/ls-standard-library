@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-08
+ * Changed:         2021-07-12
  *
  * */
 
@@ -25,24 +25,6 @@ namespace
 
       void TearDown() override
       {}
-
-      static std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::Float>> createPersistentTestFloat()
-      {
-        std::shared_ptr<ls_std::Float> number = std::make_shared<ls_std::Float>();
-        std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_float.json";
-        std::shared_ptr<ls_std::File> file = std::make_shared<ls_std::File>(path);
-        file->createNewFile();
-        ls_std::FileWriter writer{*file};
-        writer.write(R"({"value":3.14159})");
-
-        auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(number);
-        number->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-        auto storable = std::make_shared<ls_std::StorableFile>(path);
-        number->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
-
-        return std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::Float>>(file, number);
-      }
   };
 
   // assignment operators
@@ -311,31 +293,6 @@ namespace
 
   // implementation
 
-  TEST_F(FloatTest, load)
-  {
-    // preparation
-
-    auto storableFloat = createPersistentTestFloat();
-
-    // check
-
-    storableFloat.second->load();
-    ASSERT_FLOAT_EQ(3.14159f, *storableFloat.second);
-
-    storableFloat.first->remove();
-  }
-
-  TEST_F(FloatTest, marshal)
-  {
-    std::shared_ptr<ls_std::Float> number = std::make_shared<ls_std::Float>(3.14159f);
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(number);
-    number->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-    ls_std::String jsonString{number->marshal()};
-
-    ASSERT_TRUE(jsonString.contains(R"({"value":3.14159)"));
-  }
-
   TEST_F(FloatTest, parse)
   {
     ls_std::Float number{};
@@ -348,17 +305,6 @@ namespace
   {
     ls_std::Float x{13.1543f};
     ASSERT_TRUE(x.toString().find("13.1543") != std::string::npos);
-  }
-
-  TEST_F(FloatTest, unmarshal)
-  {
-    std::shared_ptr<ls_std::Float> number = std::make_shared<ls_std::Float>(3.14159f);
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonFloat>(number);
-    number->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-    number->unmarshal(R"({"value":17.4132})");
-
-    ASSERT_FLOAT_EQ(17.4132, *number);
   }
 
   // additional functionality
@@ -391,38 +337,6 @@ namespace
                    try
                    {
                      x.setEpsilon(0.0f);
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
-  }
-
-  TEST_F(FloatTest, setSerializable_no_reference)
-  {
-    ls_std::Float x{};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     x.setSerializable(nullptr);
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
-  }
-
-  TEST_F(FloatTest, setStorable_no_reference)
-  {
-    ls_std::Float x{};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     x.setStorable(nullptr);
                    }
                    catch (const ls_std::IllegalArgumentException &_exception)
                    {

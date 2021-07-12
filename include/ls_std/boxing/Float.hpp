@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-08
+ * Changed:         2021-07-12
  *
  * */
 
@@ -13,12 +13,10 @@
 #include <memory>
 #include <ls_std/base/Class.hpp>
 #include "IBoxing.hpp"
-#include <ls_std/serialization/ISerializable.hpp>
-#include <ls_std/io/IStorable.hpp>
 
 namespace ls_std
 {
-  class Float : public ls_std::Class, public ls_std::IBoxing, public ls_std::ISerializable, public ls_std::IStorable
+  class Float : public ls_std::Class, public ls_std::IBoxing
   {
     public:
 
@@ -79,31 +77,21 @@ namespace ls_std
 
       // implementation
 
-      ls_std::byte_field load() override;
-      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
-      void save(const ls_std::byte_field &_data) override;
       std::string toString() override;
-      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
       float getEpsilon();
       float getValue();
       void setEpsilon(float _epsilon);
-      void setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
-      void setStorable(const std::shared_ptr<ls_std::IStorable>& _storable);
 
     private:
 
       float epsilon{};
-      std::shared_ptr<ls_std::ISerializable> serializable{};
-      std::shared_ptr<ls_std::IStorable> storable{};
       float value{};
 
       void _assignEpsilon(float _epsilon);
-      void _assignSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable);
-      void _assignStorable(const std::shared_ptr<ls_std::IStorable>& _storable);
   };
 }
 
