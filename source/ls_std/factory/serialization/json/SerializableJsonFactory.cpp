@@ -11,10 +11,8 @@
 #include <ls_std/boxing/Float.hpp>
 #include <ls_std/boxing/Integer.hpp>
 #include <ls_std/boxing/Long.hpp>
-#include <ls_std/boxing/String.hpp>
 #include <ls_std/factory/serialization/json/boxing/SerializableJsonIntegerFactory.hpp>
 #include <ls_std/factory/serialization/json/boxing/SerializableJsonLongFactory.hpp>
-#include <ls_std/factory/serialization/json/boxing/SerializableJsonStringFactory.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 #include <ls_std/exception/NullPointerException.hpp>
 
@@ -90,5 +88,4 @@ void ls_std::SerializableJsonFactory::_init()
 {
   this->factories.insert({ls_std::Integer{}.getClassName(), std::make_shared<ls_std::SerializableJsonIntegerFactory>()});
   this->factories.insert({ls_std::Long{}.getClassName(), std::make_shared<ls_std::SerializableJsonLongFactory>()});
-  this->factories.insert({ls_std::String{}.getClassName(), std::make_shared<ls_std::SerializableJsonStringFactory>()});
 }

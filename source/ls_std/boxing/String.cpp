@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-08
+ * Changed:         2021-07-12
  *
  * */
 
@@ -98,62 +98,14 @@ bool ls_std::String::operator!=(const char *_value)
   return this->value != _value;
 }
 
-ls_std::byte_field ls_std::String::load()
-{
-  ls_std::byte_field data{};
-
-  if (this->storable != nullptr && this->serializable != nullptr)
-  {
-    data = this->storable->load();
-    this->serializable->unmarshal(data);
-  }
-
-  return data;
-}
-
-ls_std::byte_field ls_std::String::marshal()
-{
-  ls_std::byte_field data{};
-
-  if (this->serializable != nullptr)
-  {
-    data = this->serializable->marshal();
-  }
-
-  return data;
-}
-
 void ls_std::String::parse(std::string _parseText)
 {
   this->value = std::move(_parseText);
 }
 
-void ls_std::String::save(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    if (_data.empty())
-    {
-      this->storable->save(this->serializable->marshal());
-    }
-    else
-    {
-      this->storable->save(_data);
-    }
-  }
-}
-
 std::string ls_std::String::toString()
 {
   return this->value;
-}
-
-void ls_std::String::unmarshal(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    this->serializable->unmarshal(_data);
-  }
 }
 
 bool ls_std::String::contains(const std::string &_text)
@@ -202,16 +154,6 @@ std::string ls_std::String::reverse()
   return copy;
 }
 
-void ls_std::String::setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable)
-{
-  this->_assignSerializable(_serializable);
-}
-
-void ls_std::String::setStorable(std::shared_ptr<ls_std::IStorable> _storable)
-{
-  this->_assignStorable(_storable);
-}
-
 bool ls_std::String::startsWith(const std::string &_text)
 {
   return this->value.rfind(_text, 0) == 0;
@@ -231,26 +173,6 @@ std::string ls_std::String::toUpperCase()
   std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
 
   return copy;
-}
-
-void ls_std::String::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
-{
-  if (_serializable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->serializable = _serializable;
-}
-
-void ls_std::String::_assignStorable(const std::shared_ptr<ls_std::IStorable> &_storable)
-{
-  if (_storable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->storable = _storable;
 }
 
 std::string ls_std::String::_buildCharacterChain(size_t _amount, const char _fillCharacter)

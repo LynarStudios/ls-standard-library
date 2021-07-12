@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-08
+ * Changed:         2021-07-12
  *
  * */
 
@@ -25,24 +25,6 @@ namespace
 
       void TearDown() override
       {}
-
-      static std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::String>> createPersistentTestString()
-      {
-        std::shared_ptr<ls_std::String> sentence = std::make_shared<ls_std::String>();
-        std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_string.json";
-        std::shared_ptr<ls_std::File> file = std::make_shared<ls_std::File>(path);
-        file->createNewFile();
-        ls_std::FileWriter writer{*file};
-        writer.write(R"({"value":"Hello!"})");
-
-        auto serializable = std::make_shared<ls_std::SerializableJsonString>(sentence);
-        sentence->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-        auto storable = std::make_shared<ls_std::StorableFile>(path);
-        sentence->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
-
-        return std::pair<std::shared_ptr<ls_std::File>, std::shared_ptr<ls_std::String>>(file, sentence);
-      }
   };
 
   // assignment operators
@@ -128,30 +110,6 @@ namespace
 
   // implementation
 
-  TEST_F(StringTest, load)
-  {
-    // preparation
-
-    auto storableString = createPersistentTestString();
-
-    // check
-
-    storableString.second->load();
-    ASSERT_STREQ("Hello!", *storableString.second);
-
-    storableString.first->remove();
-  }
-
-  TEST_F(StringTest, marshal)
-  {
-    std::shared_ptr<ls_std::String> sentence = std::make_shared<ls_std::String>("Hello!");
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonString>(sentence);
-    sentence->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    ASSERT_STREQ(R"({"value":"Hello!"})", sentence->marshal().c_str());
-  }
-
   TEST_F(StringTest, parse)
   {
     ls_std::String text{};
@@ -164,18 +122,6 @@ namespace
   {
     ls_std::String text{"Hello!"};
     ASSERT_STREQ("Hello!", text.toString().c_str());
-  }
-
-  TEST_F(StringTest, unmarshal)
-  {
-    std::shared_ptr<ls_std::String> sentence = std::make_shared<ls_std::String>("Hello!");
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonString>(sentence);
-    sentence->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    sentence->unmarshal(R"({"value":"Test!"})");
-
-    ASSERT_STREQ("Test!", *sentence);
   }
 
   // additional functionality
@@ -294,37 +240,5 @@ namespace
 
     ASSERT_STREQ("ABCDEFGHIJKLMN", text.toUpperCase().c_str());
     ASSERT_STREQ("aBCdeFgHIJKLmn", text); // verify, that original String didn't change
-  }
-
-  TEST_F(StringTest, setSerializable_no_reference)
-  {
-    ls_std::String x{};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     x.setSerializable(nullptr);
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
-  }
-
-  TEST_F(StringTest, setStorable_no_reference)
-  {
-    ls_std::String x{};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     x.setStorable(nullptr);
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
   }
 }
