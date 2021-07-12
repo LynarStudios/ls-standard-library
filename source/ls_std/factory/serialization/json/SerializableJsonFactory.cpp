@@ -3,19 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-07-08
+ * Changed:         2021-07-12
  *
  * */
 
 #include <ls_std/factory/serialization/json/SerializableJsonFactory.hpp>
-#include <ls_std/boxing/Boolean.hpp>
-#include <ls_std/boxing/Double.hpp>
 #include <ls_std/boxing/Float.hpp>
 #include <ls_std/boxing/Integer.hpp>
 #include <ls_std/boxing/Long.hpp>
 #include <ls_std/boxing/String.hpp>
-#include <ls_std/factory/serialization/json/boxing/SerializableJsonBooleanFactory.hpp>
-#include <ls_std/factory/serialization/json/boxing/SerializableJsonDoubleFactory.hpp>
 #include <ls_std/factory/serialization/json/boxing/SerializableJsonFloatFactory.hpp>
 #include <ls_std/factory/serialization/json/boxing/SerializableJsonIntegerFactory.hpp>
 #include <ls_std/factory/serialization/json/boxing/SerializableJsonLongFactory.hpp>
@@ -93,7 +89,6 @@ bool ls_std::SerializableJsonFactory::_hasFactory(const std::string &_relatedObj
 
 void ls_std::SerializableJsonFactory::_init()
 {
-  this->factories.insert({ls_std::Double{}.getClassName(), std::make_shared<ls_std::SerializableJsonDoubleFactory>()});
   this->factories.insert({ls_std::Float{}.getClassName(), std::make_shared<ls_std::SerializableJsonFloatFactory>()});
   this->factories.insert({ls_std::Integer{}.getClassName(), std::make_shared<ls_std::SerializableJsonIntegerFactory>()});
   this->factories.insert({ls_std::Long{}.getClassName(), std::make_shared<ls_std::SerializableJsonLongFactory>()});

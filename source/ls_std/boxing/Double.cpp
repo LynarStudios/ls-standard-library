@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-01
+ * Changed:         2021-07-12
  *
  * */
 
@@ -197,62 +197,14 @@ void ls_std::Double::operator--()
   this->value -= 1.0f;
 }
 
-ls_std::byte_field ls_std::Double::load()
-{
-  ls_std::byte_field data{};
-
-  if (this->storable != nullptr && this->serializable != nullptr)
-  {
-    data = this->storable->load();
-    this->serializable->unmarshal(data);
-  }
-
-  return data;
-}
-
-ls_std::byte_field ls_std::Double::marshal()
-{
-  ls_std::byte_field data{};
-
-  if (this->serializable != nullptr)
-  {
-    data = this->serializable->marshal();
-  }
-
-  return data;
-}
-
 void ls_std::Double::parse(std::string _parseText)
 {
   this->value = std::stod(_parseText);
 }
 
-void ls_std::Double::save(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    if (_data.empty())
-    {
-      this->storable->save(this->serializable->marshal());
-    }
-    else
-    {
-      this->storable->save(_data);
-    }
-  }
-}
-
 std::string ls_std::Double::toString()
 {
   return std::to_string(this->value);
-}
-
-void ls_std::Double::unmarshal(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    this->serializable->unmarshal(_data);
-  }
 }
 
 double ls_std::Double::getEpsilon()
@@ -270,16 +222,6 @@ void ls_std::Double::setEpsilon(double _epsilon)
   this->_assignEpsilon(_epsilon);
 }
 
-void ls_std::Double::setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
-{
-  this->_assignSerializable(_serializable);
-}
-
-void ls_std::Double::setStorable(const std::shared_ptr<ls_std::IStorable>& _storable)
-{
-  this->_assignStorable(_storable);
-}
-
 void ls_std::Double::_assignEpsilon(double _epsilon)
 {
   if (_epsilon <= 0.0)
@@ -288,24 +230,4 @@ void ls_std::Double::_assignEpsilon(double _epsilon)
   }
 
   this->epsilon = _epsilon;
-}
-
-void ls_std::Double::_assignSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
-{
-  if (_serializable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->serializable = _serializable;
-}
-
-void ls_std::Double::_assignStorable(const std::shared_ptr<ls_std::IStorable>& _storable)
-{
-  if (_storable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->storable = _storable;
 }

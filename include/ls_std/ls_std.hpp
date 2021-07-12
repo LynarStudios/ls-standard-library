@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-05-27
+ * Changed:         2021-07-12
  *
  * */
 
@@ -97,8 +97,6 @@
 
 #include "factory/IFactory.hpp"
 #include "ls_std/factory/serialization/json/SerializableJsonFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJsonBooleanFactory.hpp"
-#include "factory/serialization/json/boxing/SerializableJsonDoubleFactory.hpp"
 #include "factory/serialization/json/boxing/SerializableJsonFloatFactory.hpp"
 #include "factory/serialization/json/boxing/SerializableJsonIntegerFactory.hpp"
 #include "factory/serialization/json/boxing/SerializableJsonLongFactory.hpp"
