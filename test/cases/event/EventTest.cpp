@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-05-24
+ * Changed:         2021-07-14
  *
  * */
 
@@ -24,48 +24,7 @@ namespace
 
       void TearDown() override
       {}
-
-      static ls_std::Event createSerializableTestEvent()
-      {
-        ls_std::Event event{"OPEN_DOOR_EVENT"};
-        event.addParameter(ls_std::event_parameter{"key_available", "true"});
-        event.addParameter(ls_std::event_parameter{"door_id", "16675"});
-
-        std::shared_ptr<ls_std::SerializableJsonEvent> serializable = std::make_shared<ls_std::SerializableJsonEvent>(std::make_shared<ls_std::Event>(event));
-        event.setSerializable(serializable);
-
-        return event;
-      }
   };
-
-  // implementation
-
-  TEST_F(EventTest, marshal)
-  {
-    ls_std::Event event = createSerializableTestEvent();
-
-    ls_std::byte_field data = event.marshal();
-    ASSERT_FALSE(data.empty());
-    std::string expectedString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
-    ASSERT_STREQ(expectedString.c_str(), data.c_str());
-  }
-
-  TEST_F(EventTest, unmarshal)
-  {
-    std::shared_ptr<ls_std::Event> event = std::make_shared<ls_std::Event>("TMP_EVENT");
-    std::shared_ptr<ls_std::SerializableJsonEvent> serializable = std::make_shared<ls_std::SerializableJsonEvent>(event);
-    event->setSerializable(serializable);
-
-    std::string jsonString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
-    event->unmarshal(jsonString);
-    ASSERT_STREQ("OPEN_DOOR_EVENT", event->getId().c_str());
-    ls_std::event_parameter_list parameterList = event->getParameterList();
-
-    ASSERT_FALSE(parameterList.empty());
-    ASSERT_EQ(2, parameterList.size());
-    ASSERT_STREQ("16675", parameterList.at("door_id").c_str());
-    ASSERT_STREQ("true", parameterList.at("key_available").c_str());
-  }
 
   // additional functionality
 
@@ -167,21 +126,6 @@ namespace
                    {
                      ls_std::Event event{"TMP_ID"};
                      event.setId("");
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
-  }
-
-  TEST_F(EventTest, setSerializable_no_reference)
-  {
-    EXPECT_THROW({
-                   try
-                   {
-                     ls_std::Event event{"TMP_ID"};
-                     event.setSerializable(nullptr);
                    }
                    catch (const ls_std::IllegalArgumentException &_exception)
                    {

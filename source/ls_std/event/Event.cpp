@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-05-24
+ * Changed:         2021-07-14
  *
  * */
 
@@ -13,26 +13,6 @@
 ls_std::Event::Event(const ls_std::event_id &_id) : ls_std::Class("Event")
 {
   this->_assignId(_id);
-}
-
-ls_std::byte_field ls_std::Event::marshal()
-{
-  ls_std::byte_field data{};
-
-  if (this->serializable != nullptr)
-  {
-    data = this->serializable->marshal();
-  }
-
-  return data;
-}
-
-void ls_std::Event::unmarshal(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    this->serializable->unmarshal(_data);
-  }
 }
 
 bool ls_std::Event::addParameter(const ls_std::event_parameter &_eventParameter)
@@ -72,11 +52,6 @@ void ls_std::Event::setId(const ls_std::event_id &_id)
   this->_assignId(_id);
 }
 
-void ls_std::Event::setSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
-{
-  this->_assignSerializable(_serializable);
-}
-
 void ls_std::Event::_assignId(const ls_std::event_id &_id)
 {
   if (_id.empty())
@@ -85,16 +60,6 @@ void ls_std::Event::_assignId(const ls_std::event_id &_id)
   }
 
   this->id = _id;
-}
-
-void ls_std::Event::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
-{
-  if (_serializable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->serializable = _serializable;
 }
 
 bool ls_std::Event::_hasParameter(const ls_std::event_id &_id)
