@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-05-02
+ * Changed:         2021-07-14
  *
  * */
 
@@ -340,44 +340,6 @@ namespace
 
   // implementation
 
-  TEST_F(IntegerTest, load)
-  {
-    // preparation
-
-    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>();
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_integer.json";
-    ls_std::File file{path};
-    file.createNewFile();
-    ls_std::FileWriter writer{file};
-    writer.write(R"({"value":1990})");
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonInteger>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    auto storable = std::make_shared<ls_std::StorableFile>(path);
-    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
-
-    // check
-
-    x->load();
-    ASSERT_EQ(1990, *x);
-
-    file.remove();
-  }
-
-  TEST_F(IntegerTest, marshal)
-  {
-    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(3);
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonInteger>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    ASSERT_STREQ(R"({"value":3})", x->marshal().c_str());
-
-    *x = 17;
-    ASSERT_STREQ(R"({"value":17})", x->marshal().c_str());
-  }
-
   TEST_F(IntegerTest, parse)
   {
     ls_std::Integer x{};
@@ -393,19 +355,6 @@ namespace
   {
     ls_std::Integer x{112};
     ASSERT_STREQ("112", x.toString().c_str());
-  }
-
-  TEST_F(IntegerTest, unmarshal)
-  {
-    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(13);
-    ASSERT_EQ(13, *x);
-
-    auto serializable = std::make_shared<ls_std::SerializableJsonInteger>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    x->unmarshal(R"({"value":1989})");
-
-    ASSERT_EQ(1989, *x);
   }
 
   // additional functionality
