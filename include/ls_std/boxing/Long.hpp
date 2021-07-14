@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-05-01
+ * Changed:         2021-07-14
  *
  * */
 
@@ -19,7 +19,7 @@
 
 namespace ls_std
 {
-  class Long : public ls_std::Class, public ls_std::IBoxing, public ls_std::ISerializable, public ls_std::IStorable
+  class Long : public ls_std::Class, public ls_std::IBoxing
   {
     public:
 
@@ -96,23 +96,15 @@ namespace ls_std
 
       // implementation
 
-      ls_std::byte_field load() override;
-      ls_std::byte_field marshal() override;
       void parse(std::string _parseText) override;
-      void save(const ls_std::byte_field &_data) override;
       std::string toString() override;
-      void unmarshal(const ls_std::byte_field &_data) override;
 
       // additional functionality
 
       ls_std::long_type getValue() const;
-      void setSerializable(std::shared_ptr<ls_std::ISerializable> _serializable);
-      void setStorable(std::shared_ptr<ls_std::IStorable> _storable);
 
     private:
 
-      std::shared_ptr<ls_std::ISerializable> serializable{};
-      std::shared_ptr<ls_std::IStorable> storable{};
       ls_std::long_type value{};
   };
 }
