@@ -95,11 +95,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvPair.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/SerializableJsonFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonIntegerFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/boxing/SerializableJsonLongFactory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/factory/serialization/json/event/SerializableJsonEventFactory.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvReader.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
@@ -159,11 +155,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvReaderTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/SerializableFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonIntegerFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/boxing/SerializableJsonLongFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/factory/serialization/json/event/SerializableJsonEventFactoryTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/factory/SerializableTestFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/EventNotHandledExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/EventNotSubscribedExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/FileNotFoundExceptionTest.cpp

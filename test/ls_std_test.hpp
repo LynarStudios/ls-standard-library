@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-02
+ * Changed:         2021-07-14
  *
  * */
 
@@ -17,8 +17,6 @@
 #include "classes/event/GossipNewsAgency.hpp"
 #include "classes/event/GossipNewsEvent.hpp"
 #include "classes/event/SeriousNewsEvent.hpp"
-
-#include "classes/factory/SerializableTestFactory.hpp"
 
 #include "classes/io/xml/XmlParserTestWrapper.hpp"
 
