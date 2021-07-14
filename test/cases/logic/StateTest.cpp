@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-05-28
+ * Changed:         2021-07-14
  *
  * */
 
@@ -45,61 +45,6 @@ namespace
                      throw;
                    }
                  }, ls_std::IllegalArgumentException);
-  }
-
-  // implementation
-
-  TEST_F(StateTest, marshal)
-  {
-    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("A");
-    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJsonState>(state);
-    state->setSerializable(serializable);
-
-    ASSERT_FALSE(state->marshal().empty());
-  }
-
-  TEST_F(StateTest, marshal_no_serializable_reference)
-  {
-    ls_std::State state{"A"};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     state.marshal();
-                   }
-                   catch (const ls_std::NullPointerException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::NullPointerException);
-  }
-
-  TEST_F(StateTest, unmarshal)
-  {
-    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
-    std::shared_ptr<ls_std::ISerializable> serializable = std::make_shared<ls_std::SerializableJsonState>(state);
-    state->setSerializable(serializable);
-    std::string jsonString = R"({"id":"A","connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"}}})";
-    state->unmarshal(jsonString);
-
-    ASSERT_STREQ("A", state->getId().c_str());
-  }
-
-  TEST_F(StateTest, unmarshal_no_serializable_reference)
-  {
-    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
-    std::string jsonString = R"({"id":"A","connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"}}})";
-
-    EXPECT_THROW({
-                   try
-                   {
-                     state->unmarshal(jsonString);
-                   }
-                   catch (const ls_std::NullPointerException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::NullPointerException);
   }
 
   // additional functionality
@@ -241,21 +186,5 @@ namespace
   {
     ls_std::State stateA{"A"};
     ASSERT_FALSE(stateA.hasConnection("AB"));
-  }
-
-  TEST_F(StateTest, setSerializable_no_reference)
-  {
-    ls_std::State state{"A"};
-
-    EXPECT_THROW({
-                   try
-                   {
-                     state.setSerializable(nullptr);
-                   }
-                   catch (const ls_std::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls_std::IllegalArgumentException);
   }
 }

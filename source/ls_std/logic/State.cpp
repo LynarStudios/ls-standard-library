@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-05-28
+ * Changed:         2021-07-14
  *
  * */
 
@@ -14,34 +14,6 @@
 ls_std::State::State(const ls_std::StateId& _id) : ls_std::Class("State")
 {
   this->_assignStateId(_id);
-}
-
-ls_std::byte_field ls_std::State::marshal()
-{
-  ls_std::byte_field data{};
-
-  if (this->serializable != nullptr)
-  {
-    data = this->serializable->marshal();
-  }
-  else
-  {
-    throw ls_std::NullPointerException{};
-  }
-
-  return data;
-}
-
-void ls_std::State::unmarshal(const ls_std::byte_field &_data)
-{
-  if (this->serializable != nullptr)
-  {
-    this->serializable->unmarshal(_data);
-  }
-  else
-  {
-    throw ls_std::NullPointerException{};
-  }
 }
 
 bool ls_std::State::addStateConnection(const ls_std::StateConnectionId &_connectionId, const std::shared_ptr<ls_std::State> &_connectedState)
@@ -104,21 +76,6 @@ bool ls_std::State::hasConnection(const ls_std::StateConnectionId &_connectionId
 void ls_std::State::setId(const ls_std::StateId& _id)
 {
   this->_assignStateId(_id);
-}
-
-void ls_std::State::setSerializable(const std::shared_ptr<ls_std::ISerializable>& _serializable)
-{
-  this->_assignSerializable(_serializable);
-}
-
-void ls_std::State::_assignSerializable(const std::shared_ptr<ls_std::ISerializable> &_serializable)
-{
-  if (_serializable == nullptr)
-  {
-    throw ls_std::IllegalArgumentException{};
-  }
-
-  this->serializable = _serializable;
 }
 
 void ls_std::State::_assignStateId(const ls_std::StateId &_id)
