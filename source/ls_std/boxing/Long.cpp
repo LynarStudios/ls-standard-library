@@ -254,7 +254,7 @@ void ls_std::Long::operator--()
 
 void ls_std::Long::parse(std::string _parseText)
 {
-  this->value = std::stoi(_parseText);
+  this->value = std::stoll(_parseText);
 }
 
 std::string ls_std::Long::toString()
