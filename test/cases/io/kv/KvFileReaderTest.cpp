@@ -25,23 +25,62 @@ namespace
 
       void TearDown() override
       {}
+
+      static std::shared_ptr<ls_std::KvFileReader> createTestKVFileReader()
+      {
+        std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+        std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
+
+        return std::make_shared<ls_std::KvFileReader>(document, kvPath);
+      }
   };
+
+  TEST_F(KvFileReaderTest, constructor_no_document_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+                     ls_std::KvFileReader reader = ls_std::KvFileReader(nullptr, kvPath);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(KvFileReaderTest, constructor_invalid_file_path)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::KvFileReader reader = ls_std::KvFileReader(std::make_shared<ls_std::KvDocument>(), "invalid_path");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
 
   TEST_F(KvFileReaderTest, getDocument)
   {
-    std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    ls_std::KvFileReader reader{std::make_shared<ls_std::KvDocument>(), kvPath};
-
-    ASSERT_TRUE(reader.getDocument() != nullptr);
+    const std::shared_ptr<ls_std::KvFileReader> &reader = createTestKVFileReader();
+    ASSERT_TRUE(reader->getDocument() != nullptr);
   }
 
   TEST_F(KvFileReaderTest, read)
   {
-    std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
-    ls_std::KvFileReader reader{document, kvPath};
+    // preparation
 
-    reader.read();
+    const std::shared_ptr<ls_std::KvFileReader> &reader = createTestKVFileReader();
+
+    // read file and check
+
+    reader->read();
+    const std::shared_ptr<ls_std::KvDocument> &document = reader->getDocument();
+
     ASSERT_EQ(3, document->getPairs().size());
     ASSERT_TRUE(document->hasPair("port"));
     ASSERT_TRUE(document->hasPair("host"));
@@ -52,16 +91,48 @@ namespace
     ASSERT_STREQ("deamon", document->getPairs().at("service-name").getValue().c_str());
   }
 
+  TEST_F(KvFileReaderTest, setFile_no_existing_file)
+  {
+    const std::shared_ptr<ls_std::KvFileReader> &reader = createTestKVFileReader();
+
+    EXPECT_THROW({
+                   try
+                   {
+                     reader->setFile(ls_std::File{"invalid_path"});
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(KvFileReaderTest, setDocument)
   {
-    std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    std::shared_ptr<ls_std::KvDocument> document1 = std::make_shared<ls_std::KvDocument>();
-    std::shared_ptr<ls_std::KvDocument> document2 = std::make_shared<ls_std::KvDocument>();
+    // preparation
 
-    ls_std::KvFileReader reader{document1, kvPath};
-    ASSERT_TRUE(reader.getDocument() == document1);
+    const std::shared_ptr<ls_std::KvFileReader> &reader = createTestKVFileReader();
 
-    reader.setDocument(document2);
-    ASSERT_TRUE(reader.getDocument() == document2);
+    // set new document and check
+
+    std::shared_ptr<ls_std::KvDocument> newDocument = std::make_shared<ls_std::KvDocument>();
+    reader->setDocument(newDocument);
+    ASSERT_TRUE(reader->getDocument() == newDocument);
+  }
+
+  TEST_F(KvFileReaderTest, setDocument_no_reference)
+  {
+    const std::shared_ptr<ls_std::KvFileReader> &reader = createTestKVFileReader();
+
+    EXPECT_THROW({
+                   try
+                   {
+                     reader->setDocument(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }
