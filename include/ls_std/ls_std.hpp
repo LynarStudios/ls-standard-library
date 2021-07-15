@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-07-14
+ * Changed:         2021-07-15
  *
  * */
 
@@ -68,12 +68,6 @@
 #include "logic/StateMachine.hpp"
 #include "logic/StateMachineTypes.hpp"
 
-#include "serialization/json/boxing/SerializableJsonBoolean.hpp"
-#include "serialization/json/boxing/SerializableJsonDouble.hpp"
-#include "serialization/json/boxing/SerializableJsonFloat.hpp"
-#include "serialization/json/boxing/SerializableJsonInteger.hpp"
-#include "serialization/json/boxing/SerializableJsonLong.hpp"
-#include "serialization/json/boxing/SerializableJsonString.hpp"
 #include "serialization/json/logic/SerializableJsonState.hpp"
 #include "serialization/json/logic/SerializableJsonStateConnection.hpp"
 #include "serialization/json/logic/SerializableJsonStateMachine.hpp"
