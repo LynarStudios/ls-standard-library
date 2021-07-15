@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-15
  *
  * */
 
@@ -17,6 +17,7 @@ namespace
     protected:
 
       KvPairTest() = default;
+
       ~KvPairTest() override = default;
 
       void SetUp() override
@@ -25,6 +26,20 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(KvPairTest, constructor_with_empty_key)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::KvPair pair = ls_std::KvPair("", "1989");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
 
   TEST_F(KvPairTest, getKey)
   {
