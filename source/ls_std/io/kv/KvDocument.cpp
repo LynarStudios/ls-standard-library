@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-15
  *
  * */
 
@@ -40,12 +40,9 @@ bool ls_std::KvDocument::hasPair(const ls_std::kv_key &_key)
   return this->_hasPair(_key);
 }
 
-void ls_std::KvDocument::removePair(const ls_std::kv_key &_key)
+bool ls_std::KvDocument::removePair(const ls_std::kv_key &_key)
 {
-  if (_hasPair(_key))
-  {
-    this->pairs.erase(_key);
-  }
+  return this->pairs.erase(_key) == 1;
 }
 
 bool ls_std::KvDocument::_hasPair(const ls_std::kv_key &_key)

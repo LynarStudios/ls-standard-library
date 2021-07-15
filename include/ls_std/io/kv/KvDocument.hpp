@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-15
  *
  * */
 
@@ -28,7 +28,7 @@ namespace ls_std
       void clear();
       std::map<ls_std::kv_key, ls_std::KvPair> getPairs();
       bool hasPair(const ls_std::kv_key &_key);
-      void removePair(const ls_std::kv_key &_key);
+      bool removePair(const ls_std::kv_key &_key);
 
     private:
 
