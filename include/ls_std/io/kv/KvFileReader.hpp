@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-15
  *
  * */
 
-#ifndef LS_STD_KV_READER_HPP
-#define LS_STD_KV_READER_HPP
+#ifndef LS_STD_KV_FILE_READER_HPP
+#define LS_STD_KV_FILE_READER_HPP
 
 #include <ls_std/base/Class.hpp>
 #include <ls_std/io/IReader.hpp>
@@ -18,12 +18,12 @@
 
 namespace ls_std
 {
-  class KvReader : public ls_std::Class, public ls_std::IReader
+  class KvFileReader : public ls_std::Class, public ls_std::IReader
   {
     public:
 
-      explicit KvReader(const std::shared_ptr<ls_std::KvDocument> &_document, const std::string &_absolutePath);
-      ~KvReader() override = default;
+      explicit KvFileReader(const std::shared_ptr<ls_std::KvDocument> &_document, const std::string &_absolutePath);
+      ~KvFileReader() override = default;
 
       // implementation
 

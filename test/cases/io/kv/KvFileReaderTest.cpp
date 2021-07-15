@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-15
  *
  * */
 
@@ -13,12 +13,12 @@
 
 namespace
 {
-  class KvReaderTest : public ::testing::Test
+  class KvFileReaderTest : public ::testing::Test
   {
     protected:
 
-      KvReaderTest() = default;
-      ~KvReaderTest() override = default;
+      KvFileReaderTest() = default;
+      ~KvFileReaderTest() override = default;
 
       void SetUp() override
       {}
@@ -27,19 +27,19 @@ namespace
       {}
   };
 
-  TEST_F(KvReaderTest, getDocument)
+  TEST_F(KvFileReaderTest, getDocument)
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-    ls_std::KvReader reader{std::make_shared<ls_std::KvDocument>(), kvPath};
+    ls_std::KvFileReader reader{std::make_shared<ls_std::KvDocument>(), kvPath};
 
     ASSERT_TRUE(reader.getDocument() != nullptr);
   }
 
-  TEST_F(KvReaderTest, read)
+  TEST_F(KvFileReaderTest, read)
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
     std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
-    ls_std::KvReader reader{document, kvPath};
+    ls_std::KvFileReader reader{document, kvPath};
 
     reader.read();
     ASSERT_EQ(3, document->getPairs().size());
@@ -52,13 +52,13 @@ namespace
     ASSERT_STREQ("deamon", document->getPairs().at("service-name").getValue().c_str());
   }
 
-  TEST_F(KvReaderTest, setDocument)
+  TEST_F(KvFileReaderTest, setDocument)
   {
     std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
     std::shared_ptr<ls_std::KvDocument> document1 = std::make_shared<ls_std::KvDocument>();
     std::shared_ptr<ls_std::KvDocument> document2 = std::make_shared<ls_std::KvDocument>();
 
-    ls_std::KvReader reader{document1, kvPath};
+    ls_std::KvFileReader reader{document1, kvPath};
     ASSERT_TRUE(reader.getDocument() == document1);
 
     reader.setDocument(document2);

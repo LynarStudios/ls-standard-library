@@ -61,7 +61,7 @@
 #include "io/kv/KvPair.hpp"
 #include "io/kv/KvDocument.hpp"
 #include "io/kv/KvParser.hpp"
-#include "io/kv/KvReader.hpp"
+#include "io/kv/KvFileReader.hpp"
 
 #include "logic/State.hpp"
 #include "logic/StateConnection.hpp"
