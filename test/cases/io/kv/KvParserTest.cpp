@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-15
  *
  * */
 
@@ -25,6 +25,20 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(KvParserTest, constructor_no_document_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::KvParser parser{nullptr};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
 
   TEST_F(KvParserTest, getDocument)
   {
@@ -51,13 +65,32 @@ namespace
 
   TEST_F(KvParserTest, setDocument)
   {
-    std::shared_ptr<ls_std::KvDocument> document1 = std::make_shared<ls_std::KvDocument>();
-    std::shared_ptr<ls_std::KvDocument> document2 = std::make_shared<ls_std::KvDocument>();
+    // preparation
 
-    ls_std::KvParser parser{document1};
-    ASSERT_TRUE(parser.getDocument() == document1);
+    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
+    ls_std::KvParser parser{document};
 
-    parser.setDocument(document2);
-    ASSERT_TRUE(parser.getDocument() == document2);
+    // set and check
+
+    std::shared_ptr<ls_std::KvDocument> newDocument = std::make_shared<ls_std::KvDocument>();
+    parser.setDocument(newDocument);
+    ASSERT_TRUE(parser.getDocument() == newDocument);
+  }
+
+  TEST_F(KvParserTest, setDocument_no_reference)
+  {
+    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
+    ls_std::KvParser parser{document};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     parser.setDocument(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }

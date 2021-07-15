@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-15
  *
  * */
 
 #include <ls_std/io/kv/KvParser.hpp>
-#include <ls_std/exception/NullPointerException.hpp>
 #include <ls_std/io/NewLine.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::KvParser::KvParser(const std::shared_ptr<ls_std::KvDocument> &_document) : ls_std::Class("KvParser")
 {
@@ -35,7 +35,7 @@ void ls_std::KvParser::_assignDocument(const std::shared_ptr<ls_std::KvDocument>
 {
   if (_document == nullptr)
   {
-    throw ls_std::NullPointerException{};
+    throw ls_std::IllegalArgumentException{};
   }
 
   this->document = _document;
