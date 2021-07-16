@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2021-05-02
+ * Changed:         2021-07-16
  *
  * */
 
@@ -26,6 +26,20 @@ namespace
       {}
   };
 
+  TEST_F(XmlDeclarationTest, constructor_empty_version)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::XmlDeclaration declaration{""};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlDeclarationTest, getEncoding)
   {
     ls_std::XmlDeclaration declaration{"1.0"};
@@ -41,7 +55,6 @@ namespace
   TEST_F(XmlDeclarationTest, getVersion)
   {
     ls_std::XmlDeclaration declaration{"1.0"};
-    ASSERT_FALSE(declaration.getVersion().empty());
     ASSERT_STREQ("1.0", declaration.getVersion().c_str());
   }
 
@@ -55,6 +68,22 @@ namespace
     ASSERT_STREQ("iso-8859-1", declaration.getEncoding().c_str());
   }
 
+  TEST_F(XmlDeclarationTest, setEncoding_empty_encoding)
+  {
+    ls_std::XmlDeclaration declaration{"1.0"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     declaration.setEncoding("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlDeclarationTest, setStandalone)
   {
     ls_std::XmlDeclaration declaration{"1.0"};
@@ -63,6 +92,22 @@ namespace
 
     declaration.setStandalone("no");
     ASSERT_STREQ("no", declaration.getStandalone().c_str());
+  }
+
+  TEST_F(XmlDeclarationTest, setStandalone_empty_standalone)
+  {
+    ls_std::XmlDeclaration declaration{"1.0"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     declaration.setStandalone("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, setVersion)
@@ -74,6 +119,22 @@ namespace
 
     declaration.setVersion("1.1");
     ASSERT_STREQ("1.1", declaration.getVersion().c_str());
+  }
+
+  TEST_F(XmlDeclarationTest, setVersion_empty_version)
+  {
+    ls_std::XmlDeclaration declaration{"1.0"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     declaration.setVersion("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, toXml)

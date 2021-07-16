@@ -3,15 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2021-05-02
+ * Changed:         2021-07-16
  *
  * */
 
 #include <ls_std/io/xml/XmlDeclaration.hpp>
 
-ls_std::XmlDeclaration::XmlDeclaration(std::string _version) : ls_std::Class("XmlDeclaration")
+ls_std::XmlDeclaration::XmlDeclaration(const std::string& _version) : ls_std::Class("XmlDeclaration")
 {
-  this->version.setValue(std::move(_version));
+  this->version.setValue(_version);
 }
 
 std::string ls_std::XmlDeclaration::getEncoding()
@@ -29,19 +29,19 @@ std::string ls_std::XmlDeclaration::getVersion()
   return this->version.getValue();
 }
 
-void ls_std::XmlDeclaration::setEncoding(std::string _encoding)
+void ls_std::XmlDeclaration::setEncoding(const std::string& _encoding)
 {
-  this->encoding.setValue(std::move(_encoding));
+  this->encoding.setValue(_encoding);
 }
 
-void ls_std::XmlDeclaration::setStandalone(std::string _standalone)
+void ls_std::XmlDeclaration::setStandalone(const std::string& _standalone)
 {
-  this->standalone.setValue(std::move(_standalone));
+  this->standalone.setValue(_standalone);
 }
 
-void ls_std::XmlDeclaration::setVersion(std::string _version)
+void ls_std::XmlDeclaration::setVersion(const std::string& _version)
 {
-  this->version.setValue(std::move(_version));
+  this->version.setValue(_version);
 }
 
 std::string ls_std::XmlDeclaration::toXml()
