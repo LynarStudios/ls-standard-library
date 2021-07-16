@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-04-23
+ * Changed:         2021-07-16
  *
  * */
 
@@ -11,18 +11,13 @@
 #include <ls_std/time/Date.hpp>
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/boxing/String.hpp>
-#include <ls_std/exception/NullPointerException.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer)
     : ls_std::Class("Logger"),
       logLevel(ls_std::LogLevelValue::INFO)
 {
-  if (_writer == nullptr)
-  {
-    throw ls_std::NullPointerException{};
-  }
-
-  this->writer = _writer;
+  this->_assignWriter(_writer);
 }
 
 void ls_std::Logger::debug(const ls_std::byte *_data)
@@ -81,6 +76,16 @@ void ls_std::Logger::warn(const ls_std::byte *_data)
   {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::WARN));
   }
+}
+
+void ls_std::Logger::_assignWriter(const std::shared_ptr<ls_std::IWriter> &_writer)
+{
+  if (_writer == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
+
+  this->writer = _writer;
 }
 
 void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel &_logLevel)

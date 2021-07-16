@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-05-01
+ * Changed:         2021-07-16
  *
  * */
 
@@ -40,6 +40,7 @@ namespace ls_std
       ls_std::LogLevel logLevel{};
       std::shared_ptr<ls_std::IWriter> writer{};
 
+      void _assignWriter(const std::shared_ptr<ls_std::IWriter> &_writer);
       void _log(const ls_std::byte *_data, const ls_std::LogLevel &_logLevel);
   };
 }
