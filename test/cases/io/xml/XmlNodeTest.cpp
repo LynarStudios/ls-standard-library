@@ -905,7 +905,7 @@ namespace
     attribute->setValue("important");
     singleLineElement->addAttributeToEnd(attribute);
 
-    ls_std::String xmlContent {singleLineElement->toXml()};
+    ls_std::String xmlContent{singleLineElement->toXml()};
     std::string expectedXmlString = R"(<info id="important" />)";
 
     ASSERT_TRUE(xmlContent.contains(expectedXmlString));
