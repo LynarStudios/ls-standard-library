@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2021-05-02
+ * Changed:         2021-07-16
  *
  * */
 
@@ -26,6 +26,20 @@ namespace
       {}
   };
 
+  TEST_F(XmlAttributeTest, constructor_empty_name)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::XmlAttribute attribute{""};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlAttributeTest, getName)
   {
     ls_std::XmlAttribute attribute{"id"};
@@ -46,12 +60,42 @@ namespace
     ASSERT_STREQ("id2", attribute.getName().c_str());
   }
 
+  TEST_F(XmlAttributeTest, setName_empty_name)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::XmlAttribute attribute{"id"};
+                     attribute.setName("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlAttributeTest, setValue)
   {
     ls_std::XmlAttribute attribute{"id"};
     attribute.setValue("some_content");
 
     ASSERT_STREQ("some_content", attribute.getValue().c_str());
+  }
+
+  TEST_F(XmlAttributeTest, setValue_empty_value)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::XmlAttribute attribute{"id"};
+                     attribute.setValue("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlAttributeTest, toXml)
