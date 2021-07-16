@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2021-05-02
+ * Changed:         2021-07-16
  *
  * */
 
@@ -62,12 +62,42 @@ namespace
     ASSERT_STREQ("tasks", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XmlNodeTest, addAttributeAfterNegative)
+  TEST_F(XmlNodeTest, addAttributeAfter_name_not_found)
   {
     ls_std::XmlNode dialogNode{"dialog"};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    ASSERT_FALSE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XmlAttribute>("id"), "events"));
+  }
 
-    ASSERT_FALSE(dialogNode.addAttributeAfter(std::make_shared<ls_std::XmlAttribute>("id"), "assets"));
+  TEST_F(XmlNodeTest, addAttributeAfter_no_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addAttributeAfter(nullptr, "assets");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(XmlNodeTest, addAttributeAfter_empty_name)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addAttributeAfter(std::make_shared<ls_std::XmlAttribute>("id"), "");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeBefore)
@@ -105,12 +135,42 @@ namespace
     ASSERT_STREQ("assets", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XmlNodeTest, addAttributeBeforeNegative)
+  TEST_F(XmlNodeTest, addAttributeBefore_name_not_found)
   {
     ls_std::XmlNode dialogNode{"dialog"};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
+    ASSERT_FALSE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XmlAttribute>("tasks"), "assets"));
+  }
 
-    ASSERT_FALSE(dialogNode.addAttributeBefore(std::make_shared<ls_std::XmlAttribute>("id"), "assets"));
+  TEST_F(XmlNodeTest, addAttributeBefore_no_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addAttributeBefore(nullptr, "assets");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(XmlNodeTest, addAttributeBefore_empty_name)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addAttributeBefore(std::make_shared<ls_std::XmlAttribute>("id"), "");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeToBeginning)
@@ -140,6 +200,22 @@ namespace
     ASSERT_STREQ("id", currentAttribute->getName().c_str());
   }
 
+  TEST_F(XmlNodeTest, addAttributeToBeginning_no_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addAttributeToBeginning(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlNodeTest, addAttributeToEnd)
   {
     ls_std::XmlNode dialogNode{"dialog"};
@@ -165,6 +241,22 @@ namespace
     ASSERT_STREQ("assets", currentAttribute->getName().c_str());
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 2);
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
+  }
+
+  TEST_F(XmlNodeTest, addAttributeToEnd_no_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addAttributeToEnd(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildAfter)
@@ -209,13 +301,45 @@ namespace
     ASSERT_STREQ("dialogNodeD", currentNode->getName().c_str());
   }
 
-  TEST_F(XmlNodeTest, addChildAfterNegative)
+  TEST_F(XmlNodeTest, addChildAfter_no_search_node_available)
   {
     ls_std::XmlNode dialogsNode{"dialogs"};
-    std::shared_ptr<ls_std::XmlNode> dialogNodeA = std::make_shared<ls_std::XmlNode>("dialogNodeA");
-    std::shared_ptr<ls_std::XmlNode> dialogNodeB = std::make_shared<ls_std::XmlNode>("dialogNodeB");
+    std::shared_ptr<ls_std::XmlNode> newChild = std::make_shared<ls_std::XmlNode>("newChild");
+    std::shared_ptr<ls_std::XmlNode> searchNode = std::make_shared<ls_std::XmlNode>("searchNode");
 
-    ASSERT_FALSE(dialogsNode.addChildAfter(dialogNodeA, dialogNodeB));
+    ASSERT_FALSE(dialogsNode.addChildAfter(newChild, searchNode));
+  }
+
+  TEST_F(XmlNodeTest, addChildAfter_no_child_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addChildAfter(nullptr, std::make_shared<ls_std::XmlNode>("children"));
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(XmlNodeTest, addChildAfter_no_search_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addChildAfter(std::make_shared<ls_std::XmlNode>("newChild"), nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildBefore)
@@ -260,6 +384,47 @@ namespace
     ASSERT_STREQ("dialogNodeC", currentNode->getName().c_str());
   }
 
+  TEST_F(XmlNodeTest, addChildBefore_no_search_node_available)
+  {
+    ls_std::XmlNode dialogsNode{"dialogs"};
+    std::shared_ptr<ls_std::XmlNode> newChild = std::make_shared<ls_std::XmlNode>("newChild");
+    std::shared_ptr<ls_std::XmlNode> searchNode = std::make_shared<ls_std::XmlNode>("searchNode");
+
+    ASSERT_FALSE(dialogsNode.addChildBefore(newChild, searchNode));
+  }
+
+  TEST_F(XmlNodeTest, addChildBefore_no_child_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addChildBefore(nullptr, std::make_shared<ls_std::XmlNode>("children"));
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(XmlNodeTest, addChildBefore_no_search_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addChildBefore(std::make_shared<ls_std::XmlNode>("newChild"), nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlNodeTest, addChildToBeginning)
   {
     ls_std::XmlNode dialogsNode{"dialogs"};
@@ -302,6 +467,22 @@ namespace
     ASSERT_STREQ("dialogNodeC", currentNode->getName().c_str());
   }
 
+  TEST_F(XmlNodeTest, addChildToBeginning_no_child_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addChildToBeginning(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlNodeTest, addChildToEnd)
   {
     ls_std::XmlNode dialogsNode{"dialogs"};
@@ -342,6 +523,22 @@ namespace
     ASSERT_STREQ("dialogNodeB", currentNode->getName().c_str());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 2);
     ASSERT_STREQ("dialogNodeA", currentNode->getName().c_str());
+  }
+
+  TEST_F(XmlNodeTest, addChildToEnd_no_child_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.addChildToEnd(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, clearValue)
@@ -413,14 +610,26 @@ namespace
     ASSERT_TRUE(dialogNode.hasAttribute("assets"));
   }
 
-  TEST_F(XmlNodeTest, hasAttributeNegative)
+  TEST_F(XmlNodeTest, hasAttribute_attribute_not_available)
   {
     ls_std::XmlNode dialogNode{"dialogNode"};
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("id"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("events"));
-    dialogNode.addAttributeToEnd(std::make_shared<ls_std::XmlAttribute>("assets"));
-
     ASSERT_FALSE(dialogNode.hasAttribute("fields"));
+  }
+
+  TEST_F(XmlNodeTest, hasAttribute_empty_name)
+  {
+    ls_std::XmlNode dialogNode{"dialogNode"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.hasAttribute("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, hasChild)
@@ -435,16 +644,26 @@ namespace
     ASSERT_TRUE(dialogsNode.hasChild("dialogC"));
   }
 
-  TEST_F(XmlNodeTest, hasChildNegative)
+  TEST_F(XmlNodeTest, hasChild_child_not_available)
   {
     ls_std::XmlNode dialogsNode{"dialogsNode"};
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogB"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC"));
-
     ASSERT_FALSE(dialogsNode.hasChild("dialogD"));
-    ASSERT_FALSE(dialogsNode.hasChild("dialogE"));
-    ASSERT_FALSE(dialogsNode.hasChild("dialogF"));
+  }
+
+  TEST_F(XmlNodeTest, hasChild_empty_name)
+  {
+    ls_std::XmlNode dialogNode{"dialogNode"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.hasChild("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, hasChildV2)
@@ -458,14 +677,29 @@ namespace
     ASSERT_TRUE(dialogsNode.hasChild(searchNode));
   }
 
-  TEST_F(XmlNodeTest, hasChildV2Negative)
+  TEST_F(XmlNodeTest, hasChildV2_child_not_available)
   {
     ls_std::XmlNode dialogsNode{"dialogsNode"};
     std::shared_ptr<ls_std::XmlNode> searchNode = std::make_shared<ls_std::XmlNode>("dialogB");
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogA"));
-    dialogsNode.addChildToEnd(std::make_shared<ls_std::XmlNode>("dialogC"));
 
     ASSERT_FALSE(dialogsNode.hasChild(searchNode));
+  }
+
+  TEST_F(XmlNodeTest, hasChildV2_no_child_reference)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+    std::shared_ptr<ls_std::XmlNode> searchNode{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.hasChild(searchNode);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, removeFirstAttribute)
@@ -479,7 +713,7 @@ namespace
     ASSERT_TRUE(!dialogNode.getAttributes().empty());
     ASSERT_EQ(3, dialogNode.getAttributes().size());
 
-    dialogNode.removeFirstAttribute();
+    ASSERT_TRUE(dialogNode.removeFirstAttribute());
     ASSERT_EQ(2, dialogNode.getAttributes().size());
 
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
@@ -488,13 +722,10 @@ namespace
     ASSERT_STREQ("assets", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XmlNodeTest, removeFirstAttributeNegative)
+  TEST_F(XmlNodeTest, removeFirstAttribute_no_attributes_available)
   {
     ls_std::XmlNode dialogNode{"dialog"};
-    ASSERT_TRUE(dialogNode.getAttributes().empty());
-
-    dialogNode.removeFirstAttribute();
-    ASSERT_TRUE(dialogNode.getAttributes().empty());
+    ASSERT_FALSE(dialogNode.removeFirstAttribute());
   }
 
   TEST_F(XmlNodeTest, removeLastAttribute)
@@ -508,7 +739,7 @@ namespace
     ASSERT_TRUE(!dialogNode.getAttributes().empty());
     ASSERT_EQ(3, dialogNode.getAttributes().size());
 
-    dialogNode.removeLastAttribute();
+    ASSERT_TRUE(dialogNode.removeLastAttribute());
     ASSERT_EQ(2, dialogNode.getAttributes().size());
 
     currentAttribute = *std::next(dialogNode.getAttributes().begin(), 0);
@@ -517,13 +748,10 @@ namespace
     ASSERT_STREQ("events", currentAttribute->getName().c_str());
   }
 
-  TEST_F(XmlNodeTest, removeLastAttributeNegative)
+  TEST_F(XmlNodeTest, removeLastAttribute_no_attributes_available)
   {
     ls_std::XmlNode dialogNode{"dialog"};
-    ASSERT_TRUE(dialogNode.getAttributes().empty());
-
-    dialogNode.removeLastAttribute();
-    ASSERT_TRUE(dialogNode.getAttributes().empty());
+    ASSERT_FALSE(dialogNode.removeLastAttribute());
   }
 
   TEST_F(XmlNodeTest, removeFirstChild)
@@ -553,7 +781,7 @@ namespace
 
     // check
 
-    dialogsNode.removeFirstChild();
+    ASSERT_TRUE(dialogsNode.removeFirstChild());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
     ASSERT_STREQ("dialogB", currentNode->getName().c_str());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 1);
@@ -564,13 +792,10 @@ namespace
     ASSERT_STREQ("event", currentNode->getName().c_str());
   }
 
-  TEST_F(XmlNodeTest, removeFirstChildNegative)
+  TEST_F(XmlNodeTest, removeFirstChild_no_children_available)
   {
     ls_std::XmlNode dialogsNode{"dialogs"};
-    ASSERT_TRUE(dialogsNode.getChildren().empty());
-
-    dialogsNode.removeFirstChild();
-    ASSERT_TRUE(dialogsNode.getChildren().empty());
+    ASSERT_FALSE(dialogsNode.removeFirstChild());
   }
 
   TEST_F(XmlNodeTest, removeLastChild)
@@ -600,7 +825,7 @@ namespace
 
     // check
 
-    dialogsNode.removeLastChild();
+    ASSERT_TRUE(dialogsNode.removeLastChild());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 0);
     ASSERT_STREQ("dialogA", currentNode->getName().c_str());
     currentNode = *std::next(dialogsNode.getChildren().begin(), 1);
@@ -611,13 +836,10 @@ namespace
     ASSERT_STREQ("additionalInfo", currentNode->getName().c_str());
   }
 
-  TEST_F(XmlNodeTest, removeLastChildNegative)
+  TEST_F(XmlNodeTest, removeLastChild_no_children_available)
   {
     ls_std::XmlNode dialogsNode{"dialogs"};
-    ASSERT_TRUE(dialogsNode.getChildren().empty());
-
-    dialogsNode.removeLastChild();
-    ASSERT_TRUE(dialogsNode.getChildren().empty());
+    ASSERT_FALSE(dialogsNode.removeLastChild());
   }
 
   TEST_F(XmlNodeTest, setName)
@@ -628,6 +850,22 @@ namespace
     ASSERT_STREQ("dialog2", dialogNode.getName().c_str());
   }
 
+  TEST_F(XmlNodeTest, setName_empty_name)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.setName("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlNodeTest, setValue)
   {
     ls_std::XmlNode dialogNode{"dialog"};
@@ -636,12 +874,40 @@ namespace
     ASSERT_STREQ("Something written", dialogNode.getValue().c_str());
   }
 
+  TEST_F(XmlNodeTest, setValue_empty_value)
+  {
+    ls_std::XmlNode dialogNode{"dialog"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     dialogNode.setValue("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlNodeTest, toXml)
   {
     auto root = ls_std_test::TestDataFactory::createXmlContent();
     std::string xmlContent = root->toXml();
-    std::string expectedXmlString = R"("<dialog name="dungeon_001"><dialogUnit id="001"><text>Hello!</text></dialogUnit><dialogUnit id="002"><text>Hello again!</text></dialogUnit></dialog>")";
 
     ASSERT_TRUE(!xmlContent.empty());
+  }
+
+  TEST_F(XmlNodeTest, toXml_no_value)
+  {
+    std::shared_ptr<ls_std::XmlNode> singleLineElement = std::make_shared<ls_std::XmlNode>("info");
+    std::shared_ptr<ls_std::XmlAttribute> attribute = std::make_shared<ls_std::XmlAttribute>("id");
+    attribute->setValue("important");
+    singleLineElement->addAttributeToEnd(attribute);
+
+    ls_std::String xmlContent {singleLineElement->toXml()};
+    std::string expectedXmlString = R"(<info id="important" />)";
+
+    ASSERT_TRUE(xmlContent.contains(expectedXmlString));
   }
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2021-05-02
+ * Changed:         2021-07-16
  *
  * */
 
@@ -41,12 +41,12 @@ namespace ls_std
       bool hasAttribute(const std::string &_name);
       bool hasChild(const std::string &_name);
       bool hasChild(const std::shared_ptr<ls_std::XmlNode> &_child);
-      void removeFirstAttribute();
-      void removeLastAttribute();
-      void removeFirstChild();
-      void removeLastChild();
-      void setName(std::string _name);
-      void setValue(std::string _value);
+      bool removeFirstAttribute();
+      bool removeLastAttribute();
+      bool removeFirstChild();
+      bool removeLastChild();
+      void setName(const std::string& _name);
+      void setValue(const std::string& _value);
       std::string toXml();
 
     protected:
@@ -61,6 +61,11 @@ namespace ls_std
       const static uint8_t TAB_SIZE{4};
       std::string value{};
 
+      void _assignName(const std::string& _name);
+      void _assignValue(const std::string& _value);
+      static void _checkIfAttributeReferenceIsValid(const std::shared_ptr<ls_std::XmlAttribute> &_attribute);
+      static void _checkIfNameIsNotEmpty(const std::string& _name);
+      static void _checkIfNodeReferenceIsValid(const std::shared_ptr<ls_std::XmlNode> &_child);
       static std::string _getTab(uint8_t _tabSize);
       bool _hasAttribute(const std::string &_name);
       bool _hasChild(const std::shared_ptr<ls_std::XmlNode> &_child);
