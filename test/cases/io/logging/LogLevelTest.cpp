@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2021-05-02
+ * Changed:         2021-07-16
  *
  * */
 
@@ -26,7 +26,7 @@ namespace
       {}
   };
 
-  TEST_F(LogLevelTest, constructor_withLogLevelValueParameter)
+  TEST_F(LogLevelTest, constructor_with_log_level_value_parameter)
   {
     ls_std::LogLevel logLevel{ls_std::LogLevelValue::INFO};
     ASSERT_EQ(ls_std::LogLevelValue::INFO, logLevel);
@@ -57,13 +57,13 @@ namespace
     ASSERT_TRUE(logLevel < ls_std::LogLevelValue::TRACE);
   }
 
-  TEST_F(LogLevelTest, operator_lessThan_notLessThan)
+  TEST_F(LogLevelTest, operator_lessThan_not_less_than)
   {
     ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
     ASSERT_FALSE(logLevel < ls_std::LogLevelValue::ERR);
   }
 
-  TEST_F(LogLevelTest, operator_lessThanEqual)
+  TEST_F(LogLevelTest, operator_less_than_equals)
   {
     ls_std::LogLevel logLevel{}; // default is FATAL
 
@@ -75,31 +75,31 @@ namespace
     ASSERT_TRUE(logLevel <= ls_std::LogLevelValue::TRACE);
   }
 
-  TEST_F(LogLevelTest, operator_lessThanEqual_notLessThanEqual)
+  TEST_F(LogLevelTest, operator_less_than_equals_not_less_than_equals)
   {
     ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
     ASSERT_FALSE(logLevel <= ls_std::LogLevelValue::ERR);
   }
 
-  TEST_F(LogLevelTest, operator_greaterThan)
+  TEST_F(LogLevelTest, operator_greater_than)
   {
     ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
     ASSERT_TRUE(logLevel > ls_std::LogLevelValue::ERR);
   }
 
-  TEST_F(LogLevelTest, operator_greaterThan_notGreaterThan)
+  TEST_F(LogLevelTest, operator_greater_than_not_greater_than)
   {
     ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
     ASSERT_FALSE(logLevel > ls_std::LogLevelValue::DEBUG);
   }
 
-  TEST_F(LogLevelTest, operator_greaterThanEqual)
+  TEST_F(LogLevelTest, operator_greater_than_equals)
   {
     ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
     ASSERT_TRUE(logLevel >= ls_std::LogLevelValue::ERR);
   }
 
-  TEST_F(LogLevelTest, operator_greaterThanEqual_notGreaterThanEqual)
+  TEST_F(LogLevelTest, operator_greater_than_equals_not_greater_than_equals)
   {
     ls_std::LogLevel logLevel{};
     ASSERT_FALSE(logLevel >= ls_std::LogLevelValue::ERR);
@@ -111,13 +111,13 @@ namespace
     ASSERT_TRUE(logLevel == ls_std::LogLevelValue::DEBUG);
   }
 
-  TEST_F(LogLevelTest, operator_equals_notEquals)
+  TEST_F(LogLevelTest, operator_equals_not_equals)
   {
     ls_std::LogLevel logLevel{ls_std::LogLevelValue::TRACE};
     ASSERT_FALSE(logLevel == ls_std::LogLevelValue::DEBUG);
   }
 
-  TEST_F(LogLevelTest, setLogLevel_logLevelValue)
+  TEST_F(LogLevelTest, setLogLevel_with_log_level_value)
   {
     ls_std::LogLevel logLevel{};
     logLevel.setLogLevel(ls_std::LogLevelValue::INFO);
@@ -125,7 +125,7 @@ namespace
     ASSERT_EQ(ls_std::LogLevelValue::INFO, logLevel);
   }
 
-  TEST_F(LogLevelTest, setLogLevel_string)
+  TEST_F(LogLevelTest, setLogLevel_with_string)
   {
     ls_std::LogLevel logLevel{};
 
@@ -143,7 +143,7 @@ namespace
     ASSERT_EQ(ls_std::LogLevelValue::TRACE, logLevel);
   }
 
-  TEST_F(LogLevelTest, setLogLevel_string_noValidString)
+  TEST_F(LogLevelTest, setLogLevel_string_no_valid_string)
   {
     ls_std::LogLevel logLevel{};
 
