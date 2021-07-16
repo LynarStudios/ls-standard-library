@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2021-05-02
+ * Changed:         2021-07-16
  *
  * */
 
@@ -27,13 +27,16 @@ namespace ls_std
       std::shared_ptr<ls_std::XmlDeclaration> getDeclaration();
       std::shared_ptr<ls_std::XmlNode> getRootElement();
       void setDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration);
-      void setRootElement(const std::shared_ptr<ls_std::XmlNode> &_root);
+      void setRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement);
       std::string toXml();
 
     private:
 
       std::shared_ptr<ls_std::XmlDeclaration> declaration{};
       std::shared_ptr<ls_std::XmlNode> rootElement{};
+
+      void _assignDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration);
+      void _assignRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement);
   };
 }
 
