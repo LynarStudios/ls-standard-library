@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-05-02
+ * Changed:         2021-09-17
  *
  * */
 
@@ -36,6 +36,22 @@ namespace
       {}
   };
 
+  TEST_F(XmlParserTest, constructor)
+  {
+    std::shared_ptr<ls_std::XmlDocument> document{};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::XmlParser xmlParser{document};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(XmlParserTest, read)
   {
     ls_std::XmlParser xmlParser{std::make_shared<ls_std::XmlDocument>()};
@@ -49,7 +65,7 @@ namespace
 
     ASSERT_STREQ("UTF-8", xmlParser.getDocument()->getDeclaration()->getEncoding().c_str());
     ASSERT_STREQ("1.0", xmlParser.getDocument()->getDeclaration()->getVersion().c_str());
-    ASSERT_TRUE(xmlParser.getDocument()->getDeclaration()->getStandalone().empty());
+    ASSERT_STREQ("yes", xmlParser.getDocument()->getDeclaration()->getStandalone().c_str());
 
     // check root element
 
@@ -221,5 +237,22 @@ namespace
     document = std::make_shared<ls_std::XmlDocument>();
     xmlParser.setDocument(document);
     ASSERT_TRUE(xmlParser.getDocument() == document);
+  }
+
+  TEST_F(XmlParserTest, setDocument_no_reference)
+  {
+    std::shared_ptr<ls_std::XmlDocument> document = std::make_shared<ls_std::XmlDocument>();
+    ls_std::XmlParser xmlParser{document};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     xmlParser.setDocument(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }
