@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-04-23
+ * Changed:         2021-09-17
  *
  * */
 
@@ -31,7 +31,7 @@ namespace
 
   // comparison operators
 
-  TEST_F(FileTest, operatorEqual)
+  TEST_F(FileTest, operator_equals)
   {
     ls_std::File file{this->fileLocation};
     ls_std::File file2{this->fileLocation};
@@ -44,7 +44,7 @@ namespace
     ASSERT_TRUE(file4 == file3);
   }
 
-  TEST_F(FileTest, operatorNotEqual)
+  TEST_F(FileTest, operator_not_equals)
   {
     ls_std::File file{this->fileLocation};
     ls_std::File file2{TestHelper::getResourcesFolderLocation() + "app.exe"};
@@ -58,7 +58,7 @@ namespace
   TEST_F(FileTest, canExecute)
   {
     #ifdef _WIN32
-    ls_std::File executableFile {TestHelper::getResourcesFolderLocation() + "app.exe"};
+    ls_std::File executableFile{TestHelper::getResourcesFolderLocation() + "app.exe"};
     #endif
     #if defined(unix) || defined(__APPLE__)
     ls_std::File executableFile{TestHelper::getResourcesFolderLocation() + "app"};
@@ -67,7 +67,7 @@ namespace
     ASSERT_TRUE(executableFile.canExecute());
   }
 
-  TEST_F(FileTest, canExecuteNegative)
+  TEST_F(FileTest, canExecute_not_executable)
   {
     ls_std::File file{this->fileLocation};
     ASSERT_FALSE(file.canExecute());
@@ -79,25 +79,41 @@ namespace
     ASSERT_TRUE(readableFile.canRead());
   }
 
+  TEST_F(FileTest, canRead_file_does_not_exist)
+  {
+    ls_std::File file{""};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     file.canRead();
+                   }
+                   catch (const ls_std::FileOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileOperationException);
+  }
+
   TEST_F(FileTest, canWrite)
   {
     ls_std::File readableFile{this->fileLocation};
     ASSERT_TRUE(readableFile.canWrite());
   }
 
-  TEST_F(FileTest, canWriteNegative)
+  TEST_F(FileTest, canWrite_not_writable)
   {
     #if defined(unix) || defined(__APPLE__)
     ls_std::File noWritableFile{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
     #endif
     #ifdef _WIN32
-    ls_std::File noWritableFile {TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    ls_std::File noWritableFile{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
     #endif
   }
 
-  TEST_F(FileTest, createNewFileAndRemove)
+  TEST_F(FileTest, createNewFile)
   {
     ls_std::File file{TestHelper::getResourcesFolderLocation() + "tmp.txt"};
     ASSERT_FALSE(file.exists());
@@ -109,6 +125,22 @@ namespace
     ASSERT_FALSE(file.exists());
   }
 
+  TEST_F(FileTest, createNewFile_file_does_already_exist)
+  {
+    ls_std::File file{TestHelper::getResourcesFolderLocation() + "simple.txt"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     file.createNewFile();
+                   }
+                   catch (const ls_std::FileOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileOperationException);
+  }
+
   TEST_F(FileTest, exists)
   {
     ls_std::File file{this->fileLocation};
@@ -118,7 +150,7 @@ namespace
     ASSERT_TRUE(directory.exists());
   }
 
-  TEST_F(FileTest, existsNegative)
+  TEST_F(FileTest, exists_does_not_exist)
   {
     ls_std::File file{TestHelper::getResourcesFolderLocation() + "bla.txt"};
     ASSERT_FALSE(file.exists());
@@ -169,7 +201,7 @@ namespace
     ASSERT_TRUE(directory.isDirectory());
   }
 
-  TEST_F(FileTest, isDirectoryNegative)
+  TEST_F(FileTest, isDirectory_is_a_file)
   {
     ls_std::File file{this->fileLocation};
     ASSERT_FALSE(file.isDirectory());
@@ -186,7 +218,7 @@ namespace
     ASSERT_TRUE(file2.isFile());
   }
 
-  TEST_F(FileTest, isFileNegative)
+  TEST_F(FileTest, isFile_is_a_directory)
   {
     ls_std::File directory{TestHelper::getResourcesFolderLocation()};
     ASSERT_FALSE(directory.isFile());
@@ -258,6 +290,22 @@ namespace
     ASSERT_FALSE(directory.exists());
   }
 
+  TEST_F(FileTest, makeDirectory_directory_already_exists)
+  {
+    ls_std::File directory{TestHelper::getResourcesFolderLocation() + "list_test"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     directory.makeDirectory();
+                   }
+                   catch (const ls_std::FileOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileOperationException);
+  }
+
   TEST_F(FileTest, makeDirectories)
   {
     ls_std::File directory{TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp/bla"};
@@ -275,6 +323,18 @@ namespace
     directory.remove();
     directory = ls_std::File(TestHelper::getResourcesFolderLocation() + "testDir");
     directory.remove();
+  }
+
+  TEST_F(FileTest, remove)
+  {
+    std::string fileName = TestHelper::getResourcesFolderLocation() + "removable_file.txt";
+    ls_std::File file{fileName};
+    file.createNewFile();
+
+    ASSERT_TRUE(file.exists());
+
+    file.remove();
+    ASSERT_FALSE(file.exists());
   }
 
   TEST_F(FileTest, renameTo)
