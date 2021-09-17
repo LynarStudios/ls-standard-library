@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-04-23
+ * Changed:         2021-09-17
  *
  * */
 
@@ -27,6 +27,23 @@ namespace
       {}
   };
 
+  TEST_F(FileOutputStreamTest, constructor_file_does_not_exist)
+  {
+    std::string path = TestHelper::getResourcesFolderLocation() + "not_existing.txt";
+    ls_std::File file{path};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::FileOutputStream outputStream{file};
+                   }
+                   catch (const ls_std::FileNotFoundException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileNotFoundException);
+  }
+
   TEST_F(FileOutputStreamTest, write)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
@@ -43,7 +60,7 @@ namespace
     ASSERT_FALSE(file.exists());
   }
 
-  TEST_F(FileOutputStreamTest, append)
+  TEST_F(FileOutputStreamTest, write_with_another_appending_stream)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
     ls_std::File file{path};
@@ -69,5 +86,28 @@ namespace
 
     file.remove();
     ASSERT_FALSE(file.exists());
+  }
+
+  TEST_F(FileOutputStreamTest, write_no_permission_to_write)
+  {
+    #if defined(unix) || defined(__APPLE__)
+    ls_std::File file{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    #endif
+    #ifdef _WIN32
+    ls_std::File file{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    #endif
+
+    ls_std::FileOutputStream outputStream{file};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     outputStream.write("something");
+                   }
+                   catch (const ls_std::FileOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileOperationException);
   }
 }
