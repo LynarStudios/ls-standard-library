@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2020-11-25
+ * Changed:         2021-09-18
  *
  * */
 
@@ -13,5 +13,5 @@
 bool ls_std::StandardOutputWriter::write(const ls_std::byte_field &_data)
 {
   std::cout << _data;
-  return !_data.empty();
+  return !std::cout.fail();
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-07-15
+ * Changed:         2021-09-18
  *
  * */
 
@@ -58,6 +58,7 @@
 #include "io/IWriter.hpp"
 #include "io/NewLine.hpp"
 #include "io/StorableFile.hpp"
+#include "io/StandardOutputWriter.hpp"
 #include "io/kv/KvPair.hpp"
 #include "io/kv/KvDocument.hpp"
 #include "io/kv/KvParser.hpp"

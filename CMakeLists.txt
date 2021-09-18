@@ -153,7 +153,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/exception/NullPointerExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/base/LibraryVersionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LogLevelTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LogLevelTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StandardOutputWriterTest.cpp)
 endif ()
 
 ##########################################################
