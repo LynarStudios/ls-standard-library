@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-04-23
+ * Changed:         2021-09-18
  *
  * */
 
@@ -26,6 +26,23 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(FileWriterTest, constructor_file_does_not_exist)
+  {
+    std::string path = TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
+    ls_std::File file{path};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::FileWriter writer{file};
+                   }
+                   catch (const ls_std::FileNotFoundException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileNotFoundException);
+  }
 
   TEST_F(FileWriterTest, reset)
   {

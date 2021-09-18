@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-04-23
+ * Changed:         2021-09-18
  *
  * */
 
@@ -29,19 +29,9 @@ bool ls_std::FileWriter::write(const ls_std::byte_field &_data)
 {
   std::ofstream outputStream{};
   outputStream.open(this->file.getAbsoluteFilePath());
-  bool succeeded;
+  outputStream << _data;
 
-  if (outputStream << _data)
-  {
-    succeeded = true;
-  }
-  else
-  {
-    throw ls_std::FileOperationException{};
-  }
-
-  outputStream.close();
-  return succeeded;
+  return !outputStream.fail();
 }
 
 void ls_std::FileWriter::_init(ls_std::File &_file)
