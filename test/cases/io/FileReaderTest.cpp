@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2021-04-23
+ * Changed:         2021-09-17
  *
  * */
 
@@ -27,6 +27,22 @@ namespace
       {}
   };
 
+  TEST_F(FileReaderTest, constructor_file_does_not_exist)
+  {
+    ls_std::File file{TestHelper::getResourcesFolderLocation() + "does_not_exist.txt"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::FileReader reader{file};
+                   }
+                   catch (const ls_std::FileNotFoundException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileNotFoundException);
+  }
+
   TEST_F(FileReaderTest, read)
   {
     ls_std::File file{TestHelper::getResourcesFolderLocation() + "simple.txt"};
@@ -36,6 +52,25 @@ namespace
 
     ls_std::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
+  }
+
+  TEST_F(FileReaderTest, read_file_gets_lost_in_between)
+  {
+    ls_std::File file{TestHelper::getResourcesFolderLocation() + "lost_readable_file.txt"};
+    file.createNewFile();
+    ls_std::FileReader reader{file};
+    file.remove();
+
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::byte_field content = reader.read();
+                   }
+                   catch (const ls_std::FileOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::FileOperationException);
   }
 
   TEST_F(FileReaderTest, reset)

@@ -27,7 +27,7 @@ ls_std::byte_field ls_std::FileReader::read()
   data = new ls_std::byte[length];
   inputStream.read(data, length);
 
-  if (!inputStream)
+  if (inputStream.fail())
   {
     throw ls_std::FileOperationException{};
   }
