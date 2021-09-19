@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2021-05-28
+ * Changed:         2021-09-19
  *
  * */
 
@@ -27,6 +27,20 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(SerializableJsonStateMachineTest, constructor_no_parameter_set)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::SerializableJsonStateMachine serializable{nullptr};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
 
   // implementation
 
@@ -119,5 +133,22 @@ namespace
     x = std::make_shared<ls_std::StateMachine>("bla2");
     serializable.setValue(x);
     ASSERT_TRUE(serializable.getValue() == x);
+  }
+
+  TEST_F(SerializableJsonStateMachineTest, setValue_no_parameter_set)
+  {
+    std::shared_ptr<ls_std::StateMachine> stateMachine = std::make_shared<ls_std::StateMachine>("bla");
+    ls_std::SerializableJsonStateMachine serializable{stateMachine};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     serializable.setValue(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }
