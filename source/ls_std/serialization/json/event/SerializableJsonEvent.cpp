@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2021-05-02
+ * Changed:         2021-09-19
  *
  * */
 
 #include <ls_std/serialization/json/event/SerializableJsonEvent.hpp>
-#include <ls_std/exception/NullPointerException.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJsonEvent::SerializableJsonEvent(const std::shared_ptr<ls_std::Event> &_value) : ls_std::Class("SerializableJsonEvent")
 {
@@ -43,7 +43,7 @@ void ls_std::SerializableJsonEvent::_assignValue(const std::shared_ptr<ls_std::E
 {
   if (_value == nullptr)
   {
-    throw ls_std::NullPointerException{};
+    throw ls_std::IllegalArgumentException{};
   }
 
   this->value = _value;

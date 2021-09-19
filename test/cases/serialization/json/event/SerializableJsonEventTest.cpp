@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-20
- * Changed:         2021-05-02
+ * Changed:         2021-09-19
  *
  * */
 
@@ -25,6 +25,20 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(SerializableJsonEventTest, constructor_parameter_not_set)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::SerializableJsonEvent serializable{nullptr};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
 
   TEST_F(SerializableJsonEventTest, marshal)
   {
@@ -54,5 +68,22 @@ namespace
     ASSERT_EQ(2, parameterList.size());
     ASSERT_STREQ("16675", parameterList.at("door_id").c_str());
     ASSERT_STREQ("true", parameterList.at("key_available").c_str());
+  }
+
+  TEST_F(SerializableJsonEventTest, setValue_parameter_not_set)
+  {
+    ls_std::Event event{"TMP_EVENT"};
+    ls_std::SerializableJsonEvent serializable{std::make_shared<ls_std::Event>(event)};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     serializable.setValue(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }
