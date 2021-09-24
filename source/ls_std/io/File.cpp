@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-09-17
+ * Changed:         2021-09-24
  *
  * */
 
@@ -361,6 +361,10 @@ bool ls_std::File::_isReadableUnix(const std::string &_path)
     {
       readable = (_stat.st_mode & (unsigned) S_IREAD) != 0;
     }
+  }
+  else
+  {
+    throw ls_std::FileOperationException{};
   }
 
   return readable;
