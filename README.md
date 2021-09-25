@@ -2,7 +2,7 @@
 
 This is a cross-platform standard library written in C++ offering functionalities you'd usually miss in C++ standard library, especially if you'd search for cross-platform implementations. This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
  
-#### Boxing ####  
+#### Boxing ####
 
 This library provides boxing classes for primitive data types (e.g. string, int, long, float...) to add additional functionalities for each one of them.
  
@@ -10,7 +10,7 @@ This library provides boxing classes for primitive data types (e.g. string, int,
 
 To handle file operations - or to receive information of a file - this library provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.
 
-#### Base ####  
+#### Base ####
 
 This is a collection of very basic functionalities like a base __Class__ which provides minimal reflection like class name. Also, you have the possibility with this collection to fetch this libraries version or even handle own versions for your project.
 
