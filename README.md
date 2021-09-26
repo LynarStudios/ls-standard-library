@@ -118,6 +118,5 @@ target_link_libraries(... "path/to/this/library/../libls_std_YYYY.MAJOR.MINOR.dl
 
 ### Testing ###
 
-This project contains unit tests to accomplish test coverage.  
-To run those unit tests you have to adjust __TestHelper__ class by adding your personal test folder path to __getTestFolderLocation__ method.  
-There you have to adjust __location__ variable based on the operating system you're using.
+This project contains unit tests to provide test coverage.  
+To run those tests you have to build this project with option __LS_STD_BUILD_WITH_TESTS__ set to __ON__.
