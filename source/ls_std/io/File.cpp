@@ -119,6 +119,7 @@ std::string ls_std::File::getWorkingDirectory()
   std::string workingDirectory{};
 
   #if defined(unix) || defined(__APPLE__)
+  workingDirectory = ls_std::File::_getWorkingDirectoryUnix();
   #endif
   #ifdef _WIN32
   workingDirectory = ls_std::File::_getWorkingDirectoryWindows();
@@ -317,6 +318,27 @@ std::string ls_std::File::_getParent(const std::string &_path)
 
   return parent;
 }
+
+#if defined(unix) || defined(__APPLE__)
+
+std::string ls_std::File::_getWorkingDirectoryUnix()
+{
+  std::string workingDirectory{};
+  char buffer[PATH_MAX];
+
+  if (getcwd(buffer, sizeof(buffer)) == nullptr)
+  {
+    throw ls_std::FileOperationException{};
+  }
+  else
+  {
+    workingDirectory = std::string(buffer);
+  }
+
+  return workingDirectory;
+}
+
+#endif
 
 #ifdef _WIN32
 

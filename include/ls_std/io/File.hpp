@@ -79,6 +79,9 @@ namespace ls_std
       static bool _equals(ls_std::File &_file, ls_std::File &_foreignFile);
       static bool _exists(const std::string &_path);
       static std::string _getParent(const std::string &_path);
+      #if defined(unix) || defined(__APPLE__)
+      static std::string _getWorkingDirectoryUnix();
+      #endif
       #ifdef _WIN32
       static std::string _getWorkingDirectoryWindows();
       #endif
