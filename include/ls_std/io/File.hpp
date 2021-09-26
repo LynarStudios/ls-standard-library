@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-05-01
+ * Changed:         2021-09-26
  *
  * */
 
@@ -24,7 +24,9 @@
 #endif
 
 #ifdef _WIN32
+
 #include <windows.h>
+
 #endif
 
 namespace ls_std
@@ -51,6 +53,7 @@ namespace ls_std
       std::string getAbsoluteFilePath();
       std::string getName();
       std::string getParent();
+      static std::string getWorkingDirectory();
       long getSize();
       bool isDirectory();
       bool isFile();
@@ -71,11 +74,14 @@ namespace ls_std
       static void _addToFileListUnix(const std::string &_path, bool _withDirectories, dirent *directoryEntity, std::list<std::string> &_list);
       #endif
       #ifdef _WIN32
-      static void _addToFileListWindows(const std::string& _path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string>& _list);
+      static void _addToFileListWindows(const std::string &_path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string> &_list);
       #endif
       static bool _equals(ls_std::File &_file, ls_std::File &_foreignFile);
       static bool _exists(const std::string &_path);
       static std::string _getParent(const std::string &_path);
+      #ifdef _WIN32
+      static std::string _getWorkingDirectoryWindows();
+      #endif
       static bool _isDirectory(const std::string &_path);
       static bool _isExecutable(const std::string &_path);
       static bool _isFile(const std::string &_path);
@@ -83,7 +89,7 @@ namespace ls_std
       static bool _isReadableUnix(const std::string &_path);
       #endif
       #ifdef _WIN32
-      static bool _isReadableWindows(const std::string& _path);
+      static bool _isReadableWindows(const std::string &_path);
       #endif
       static bool _isWritable(const std::string &_path);
       static time_t _lastModified(const std::string &_path);
@@ -93,7 +99,7 @@ namespace ls_std
       static std::list<std::string> _listUnix(const std::string &_path, bool withDirectories);
       #endif
       #ifdef _WIN32
-      static std::list<std::string> _listWindows(const std::string& _path, bool withDirectories);
+      static std::list<std::string> _listWindows(const std::string &_path, bool withDirectories);
       #endif
       static int _mkdir(const std::string &_path);
       static std::string _normalizePath(std::string _path);
@@ -103,7 +109,7 @@ namespace ls_std
       static void _removeUnix(const std::string &_path);
       #endif
       #ifdef _WIN32
-      static void _removeWindows(const std::string& _path);
+      static void _removeWindows(const std::string &_path);
       #endif
       static bool _renameTo(const std::string &_oldName, const std::string &_newName);
       static std::string _replaceWrongSeparator(std::string _path);

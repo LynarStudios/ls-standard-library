@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-09-24
+ * Changed:         2021-09-26
  *
  * */
 
@@ -26,6 +26,7 @@
 #ifdef _WIN32
 
 #include <direct.h>
+#include <tchar.h>
 
 #endif
 
@@ -111,6 +112,19 @@ std::string ls_std::File::getName()
 std::string ls_std::File::getParent()
 {
   return ls_std::File::_getParent(this->absoluteFilePath);
+}
+
+std::string ls_std::File::getWorkingDirectory()
+{
+  std::string workingDirectory{};
+
+  #if defined(unix) || defined(__APPLE__)
+  #endif
+  #ifdef _WIN32
+  workingDirectory = ls_std::File::_getWorkingDirectoryWindows();
+  #endif
+
+  return workingDirectory;
 }
 
 long ls_std::File::getSize()
@@ -303,6 +317,27 @@ std::string ls_std::File::_getParent(const std::string &_path)
 
   return parent;
 }
+
+#ifdef _WIN32
+
+std::string ls_std::File::_getWorkingDirectoryWindows()
+{
+  std::string workingDirectory{};
+  TCHAR buffer[MAX_PATH];
+
+  if (!GetCurrentDirectory(MAX_PATH, buffer))
+  {
+    throw ls_std::FileOperationException{};
+  }
+  else
+  {
+    workingDirectory = std::string(buffer);
+  }
+
+  return workingDirectory;
+}
+
+#endif
 
 bool ls_std::File::_isDirectory(const std::string &_path)
 {

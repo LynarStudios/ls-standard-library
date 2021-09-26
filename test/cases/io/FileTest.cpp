@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-09-17
+ * Changed:         2021-09-26
  *
  * */
 
@@ -185,6 +185,12 @@ namespace
   {
     ls_std::File file{this->fileLocation};
     ASSERT_STREQ(TestHelper::getResourcesFolderLocation().c_str(), file.getParent().c_str());
+  }
+
+  TEST_F(FileTest, getWorkingDirectory)
+  {
+    std::string workingDirectory = ls_std::File::getWorkingDirectory();
+    ASSERT_FALSE(workingDirectory.empty());
   }
 
   TEST_F(FileTest, getSize)
