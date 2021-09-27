@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2020-11-06
+ * Changed:         2021-04-23
  *
  * */
 
@@ -12,31 +12,36 @@
 
 #include <string>
 
-namespace ls_std {
-  class NewLine {
+namespace ls_std
+{
+  class NewLine
+  {
     public:
 
       NewLine() = default;
       ~NewLine() = default;
 
-      static std::string get() {
-        std::string newLine {};
+      static std::string get()
+      {
+        std::string newLine{};
 
         #if defined(unix) || defined(__APPLE__)
-          newLine = ls_std::NewLine::getUnixNewLine();
+        newLine = ls_std::NewLine::getUnixNewLine();
         #endif
         #ifdef _WIN32
-          newLine = ls_std::NewLine::getWindowsNewLine();
+        newLine = ls_std::NewLine::getWindowsNewLine();
         #endif
 
         return newLine;
       }
 
-      static std::string getUnixNewLine() {
+      static std::string getUnixNewLine()
+      {
         return "\n";
       }
 
-      static std::string getWindowsNewLine() {
+      static std::string getWindowsNewLine()
+      {
         return "\r\n";
       }
   };

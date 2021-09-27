@@ -3,22 +3,22 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2020-11-26
+ * Changed:         2021-04-24
  *
  * */
 
 #include <regex>
 #include <ls_std/base/Version.hpp>
 
-ls_std::Version::Version(ls_std::version_type _majorVersion, ls_std::version_type _minorVersion, ls_std::version_type _patchVersion) :
-majorVersion(_majorVersion),
-minorVersion(_minorVersion),
-patchVersion(_patchVersion)
+ls_std::Version::Version(ls_std::version_type _majorVersion, ls_std::version_type _minorVersion, ls_std::version_type _patchVersion)
+    : majorVersion(_majorVersion),
+      minorVersion(_minorVersion),
+      patchVersion(_patchVersion)
 {}
 
 ls_std::byte_field ls_std::Version::marshal()
 {
-  ls_std::byte_field data {};
+  ls_std::byte_field data{};
 
   data += std::to_string(this->majorVersion) + ".";
   data += std::to_string(this->minorVersion) + ".";
@@ -30,12 +30,11 @@ ls_std::byte_field ls_std::Version::marshal()
 void ls_std::Version::unmarshal(const ls_std::byte_field &_data)
 {
   std::string field = _data;
-  std::string subSequence {};
-  size_t position;
 
-  if(ls_std::Version::_isValid(_data)) {
-    position = field.find('.');
-    subSequence = field.substr(0, position);
+  if (ls_std::Version::_isValid(_data))
+  {
+    size_t position = field.find('.');
+    std::string subSequence = field.substr(0, position);
     this->majorVersion = std::stoi(subSequence);
     field.erase(0, position + 1);
 
@@ -85,6 +84,13 @@ void ls_std::Version::setPatchVersion(ls_std::version_type _patch)
 
 bool ls_std::Version::_isValid(const std::string &_versionString)
 {
-  static std::regex versionRegex {R"(\d+[.]\d+[.]\d+)"};
-  return std::regex_match(_versionString.begin(), _versionString.end(), versionRegex);
+  bool isValidVersionString{};
+  static std::regex versionRegex{R"(\d+[.]\d+[.]\d+)"};
+
+  if (!_versionString.empty())
+  {
+    isValidVersionString = std::regex_match(_versionString.begin(), _versionString.end(), versionRegex);
+  }
+
+  return isValidVersionString;
 }

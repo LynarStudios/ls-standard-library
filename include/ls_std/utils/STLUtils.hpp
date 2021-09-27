@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-06
+ * Changed:         2021-04-23
  *
  * */
 
@@ -13,26 +13,33 @@
 #include <algorithm>
 #include <list>
 
-namespace ls_std {
-  class STLUtils {
+namespace ls_std
+{
+  class STLUtils
+  {
     public:
 
       STLUtils() = default;
       ~STLUtils() = default;
 
       template<class container, class dataType>
-      static bool contains(container _container, const dataType& _value) {
+      static bool contains(container _container, const dataType &_value)
+      {
         return std::find(_container.begin(), _container.end(), _value) != _container.end();
       }
 
       template<class dataType>
-      static dataType getListElementAt(const std::list<dataType>& _list, size_t _index) {
-        dataType value {};
-        size_t counter {};
+      static dataType getListElementAt(const std::list<dataType> &_list, size_t _index)
+      {
+        dataType value{};
+        size_t counter{};
 
-        if(_index < _list.size()) {
-          for(const auto& _value : _list) {
-            if(counter == _index) {
+        if (_index < _list.size())
+        {
+          for (const auto &_value : _list)
+          {
+            if (counter == _index)
+            {
               value = _value;
               break;
             }

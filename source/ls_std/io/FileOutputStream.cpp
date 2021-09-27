@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-26
+ * Changed:         2021-04-23
  *
  * */
 
@@ -11,15 +11,17 @@
 #include <ls_std/exception/FileNotFoundException.hpp>
 #include <ls_std/exception/FileOperationException.hpp>
 
-ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file) : ls_std::Class("FileOutputStream"),
-file(_file)
+ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file)
+    : ls_std::Class("FileOutputStream"),
+      file(_file)
 {
   this->_init();
 }
 
-ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file, bool _append) : ls_std::Class("FileOutputStream"),
-append(_append),
-file(_file)
+ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file, bool _append)
+    : ls_std::Class("FileOutputStream"),
+      append(_append),
+      file(_file)
 {
   this->_init();
 }
@@ -34,16 +36,20 @@ void ls_std::FileOutputStream::close()
   this->_close();
 }
 
-bool ls_std::FileOutputStream::write(const ls_std::byte_field& _data)
+bool ls_std::FileOutputStream::write(const ls_std::byte_field &_data)
 {
-  bool succeeded {};
+  bool succeeded{};
 
-  if(this->outputStream.is_open()) {
-    if (this->outputStream << _data) {
+  if (this->outputStream.is_open())
+  {
+    if (this->outputStream << _data)
+    {
       succeeded = true;
     }
-  } else {
-    throw ls_std::FileOperationException {};
+  }
+  else
+  {
+    throw ls_std::FileOperationException{};
   }
 
   return succeeded;
@@ -51,19 +57,26 @@ bool ls_std::FileOutputStream::write(const ls_std::byte_field& _data)
 
 void ls_std::FileOutputStream::_close()
 {
-  if(this->outputStream.is_open()) {
+  if (this->outputStream.is_open())
+  {
     this->outputStream.close();
   }
 }
 
 void ls_std::FileOutputStream::_init()
 {
-  if(!this->file.exists()) {
-    throw ls_std::FileNotFoundException {};
-  } else {
-    if(this->append) {
+  if (!this->file.exists())
+  {
+    throw ls_std::FileNotFoundException{};
+  }
+  else
+  {
+    if (this->append)
+    {
       this->outputStream.open(this->file.getAbsoluteFilePath(), std::ios::out | std::ios::app);
-    } else {
+    }
+    else
+    {
       this->outputStream.open(this->file.getAbsoluteFilePath());
     }
   }

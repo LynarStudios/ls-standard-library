@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2020-11-29
+ * Changed:         2021-09-18
  *
  * */
 
@@ -11,8 +11,10 @@
 #include <TestHelper.hpp>
 #include <ls_std/ls_std.hpp>
 
-namespace {
-  class StorableFileTest : public ::testing::Test {
+namespace
+{
+  class StorableFileTest : public ::testing::Test
+  {
     protected:
 
       StorableFileTest() = default;
@@ -20,19 +22,22 @@ namespace {
 
       std::string fileLocation = TestHelper::getResourcesFolderLocation() + "simple.txt";
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(StorableFileTest, getFile)
   {
-    ls_std::StorableFile storableFile {this->fileLocation};
+    ls_std::StorableFile storableFile{this->fileLocation};
     ASSERT_STREQ(this->fileLocation.c_str(), storableFile.getFile()->getAbsoluteFilePath().c_str());
   }
 
   TEST_F(StorableFileTest, load)
   {
-    ls_std::StorableFile storableFile {this->fileLocation};
+    ls_std::StorableFile storableFile{this->fileLocation};
     ls_std::byte_field content = storableFile.load();
 
     std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
@@ -43,7 +48,7 @@ namespace {
 
   TEST_F(StorableFileTest, reset)
   {
-    ls_std::StorableFile storableFile {this->fileLocation};
+    ls_std::StorableFile storableFile{this->fileLocation};
     ls_std::byte_field content = storableFile.load();
 
     std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
@@ -66,10 +71,10 @@ namespace {
   TEST_F(StorableFileTest, save)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
-    ls_std::File file {path};
+    ls_std::File file{path};
     file.createNewFile();
 
-    ls_std::StorableFile storableFile {path};
+    ls_std::StorableFile storableFile{path};
     ls_std::byte_field textUnix = "Testing save method!" + ls_std::NewLine::getUnixNewLine();
     ls_std::byte_field textWindows = "Testing save method!" + ls_std::NewLine::getWindowsNewLine();
 

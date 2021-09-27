@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2020-11-06
+ * Changed:         2021-04-23
  *
  * */
 
@@ -13,8 +13,10 @@
 #include <string>
 #include <regex>
 
-namespace ls_std {
-  class RegexUtils {
+namespace ls_std
+{
+  class RegexUtils
+  {
     public:
 
       RegexUtils() = default;

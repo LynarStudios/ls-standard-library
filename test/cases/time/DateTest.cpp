@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2020-10-29
+ * Changed:         2021-05-22
  *
  * */
 
@@ -11,62 +11,145 @@
 #include <regex>
 #include <ls_std/ls_std.hpp>
 
-namespace {
-  class DateTest : public ::testing::Test {
+namespace
+{
+  class DateTest : public ::testing::Test
+  {
     protected:
 
       DateTest() = default;
       ~DateTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   // arithmetic operators
 
-  TEST_F(DateTest, operatorAdd)
+  TEST_F(DateTest, operator_add)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     time_t timestamp = date.getTime();
 
     date = date + 1;
     ASSERT_EQ(timestamp + 86400, date.getTime());
   }
 
-  TEST_F(DateTest, operatorSub)
+  TEST_F(DateTest, operator_add_with_negative_value)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date = date + (-1);
+    ASSERT_EQ(timestamp - 86400, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_subtraction)
+  {
+    ls_std::Date date{};
     time_t timestamp = date.getTime();
 
     date = date - 1;
     ASSERT_EQ(timestamp - 86400, date.getTime());
   }
 
+  TEST_F(DateTest, operator_subtraction_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date = date - (-1);
+    ASSERT_EQ(timestamp + 86400, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_plus_equals)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date += 2;
+    time_t expectedTimestamp = timestamp + 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_plus_equals_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date += -2;
+    time_t expectedTimestamp = timestamp - 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_minus_equals)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date -= 2;
+    time_t expectedTimestamp = timestamp - 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
+  TEST_F(DateTest, operator_minus_equals_with_negative_value)
+  {
+    ls_std::Date date{};
+    time_t timestamp = date.getTime();
+
+    date -= -2;
+    time_t expectedTimestamp = timestamp + 86400 * 2;
+    ASSERT_EQ(expectedTimestamp, date.getTime());
+  }
+
   // additional functionality
 
   TEST_F(DateTest, after)
   {
-    ls_std::Date date {};
+    ls_std::Date date{}; // today
 
-    ls_std::Date date2 {};
-    date2.setTime(1000000);
+    ls_std::Date referenceDate{};
+    referenceDate = referenceDate - 1; // yesterday
 
-    ASSERT_TRUE(date.after(date2));
+    ASSERT_TRUE(date.after(referenceDate));
+  }
+
+  TEST_F(DateTest, after_is_before_refernce_date)
+  {
+    ls_std::Date date{}; // is today
+    ls_std::Date referenceDate{};
+
+    referenceDate = referenceDate + 1; // is tomorrow
+
+    ASSERT_FALSE(date.after(referenceDate));
   }
 
   TEST_F(DateTest, before)
   {
-    ls_std::Date date {};
-    date.setTime(1000000);
+    ls_std::Date date{};
+    date = date - 1; // yesterday
 
-    ls_std::Date date2 {};
+    ls_std::Date referenceDate{}; // today
 
-    ASSERT_TRUE(date.before(date2));
+    ASSERT_TRUE(date.before(referenceDate));
+  }
+
+  TEST_F(DateTest, before_is_after_reference_date)
+  {
+    ls_std::Date date{}; // today
+    ls_std::Date referenceDate{};
+
+    referenceDate = referenceDate - 1; // yesterday
+
+    ASSERT_FALSE(date.before(referenceDate));
   }
 
   TEST_F(DateTest, getDay)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(14, date.getDay());
@@ -74,7 +157,7 @@ namespace {
 
   TEST_F(DateTest, getHour)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(21, date.getHour());
@@ -82,7 +165,7 @@ namespace {
 
   TEST_F(DateTest, getMinute)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(34, date.getMinute());
@@ -90,7 +173,7 @@ namespace {
 
   TEST_F(DateTest, getMonth)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(8, date.getMonth());
@@ -98,7 +181,7 @@ namespace {
 
   TEST_F(DateTest, getSecond)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(53, date.getSecond());
@@ -106,13 +189,13 @@ namespace {
 
   TEST_F(DateTest, getTime)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     ASSERT_TRUE(date.getTime() > 0);
   }
 
   TEST_F(DateTest, getYear)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(2020, date.getYear());
@@ -120,7 +203,7 @@ namespace {
 
   TEST_F(DateTest, setTime)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     ASSERT_TRUE(date.getTime() > 1000000);
 
     date.setTime(1000);
@@ -129,9 +212,9 @@ namespace {
 
   TEST_F(DateTest, toString)
   {
-    ls_std::Date date {};
+    ls_std::Date date{};
     std::string regexSearchString = R"((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}))";
-    std::regex _regex {regexSearchString};
+    std::regex _regex{regexSearchString};
     std::string dateString = date.toString();
 
     ASSERT_TRUE(std::regex_match(dateString, _regex));

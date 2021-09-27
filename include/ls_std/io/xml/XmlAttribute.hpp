@@ -1,0 +1,41 @@
+/*
+ * Author:          Patrick-Christopher Mattulat
+ * Company:         Lynar Studios
+ * E-Mail:          webmaster@lynarstudios.com
+ * Created:         2020-09-23
+ * Changed:         2021-07-16
+ *
+ * */
+
+#ifndef LS_STD_XML_ATTRIBUTE_HPP
+#define LS_STD_XML_ATTRIBUTE_HPP
+
+#include <ls_std/base/Class.hpp>
+#include <string>
+
+namespace ls_std
+{
+  class XmlAttribute : public ls_std::Class
+  {
+    public:
+
+      explicit XmlAttribute(const std::string& _name);
+      ~XmlAttribute() override = default;
+
+      std::string getName();
+      std::string getValue();
+      void setName(const std::string& _name);
+      void setValue(const std::string& _value);
+      std::string toXml();
+
+    private:
+
+      std::string name{};
+      std::string value{};
+
+      void _assignName(const std::string& _name);
+      void _assignValue(const std::string& _value);
+  };
+}
+
+#endif

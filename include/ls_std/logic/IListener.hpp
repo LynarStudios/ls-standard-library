@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2020-11-29
+ * Changed:         2021-05-02
  *
  * */
 
@@ -12,14 +12,16 @@
 
 #include <ls_std/base/Class.hpp>
 
-namespace ls_std {
-  class IListener : public Class {
+namespace ls_std
+{
+  class IListener
+  {
     public:
 
-      IListener();
-      ~IListener() override = default;
+      IListener() = default;
+      ~IListener() = default;
 
-      virtual void listen(const ls_std::Class& _info) = 0;
+      virtual void listen(const ls_std::Class &_info) = 0;
   };
 }
 

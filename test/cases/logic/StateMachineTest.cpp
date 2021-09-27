@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2020-11-29
+ * Changed:         2021-05-28
  *
  * */
 
@@ -11,33 +11,73 @@
 #include <ls_std/ls_std.hpp>
 #include <TestDataFactory.hpp>
 
-namespace {
-  class StateMachineTest : public ::testing::Test {
+namespace
+{
+  class StateMachineTest : public ::testing::Test
+  {
     protected:
 
       StateMachineTest() = default;
       ~StateMachineTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
-  TEST_F(StateMachineTest, addStateConnection)
+  TEST_F(StateMachineTest, getClassName)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine {"machine"};
+    ASSERT_STREQ("StateMachine", stateMachine.getClassName().c_str());
+  }
+
+  TEST_F(StateMachineTest, constructor_empty_name)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::StateMachine stateMachine {""};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
+  TEST_F(StateMachineTest, addState)
+  {
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
   }
 
-  TEST_F(StateMachineTest, addStateConnectionNegative)
+  TEST_F(StateMachineTest, addState_state_already_exists)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
     ASSERT_FALSE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
   }
 
+  TEST_F(StateMachineTest, addState_no_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::StateMachine stateMachine{"test_machine"};
+                     stateMachine.addState(nullptr);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(StateMachineTest, getCurrentState)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
 
     ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
@@ -45,52 +85,20 @@ namespace {
 
   TEST_F(StateMachineTest, getMemory)
   {
-    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
-    ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
-    ASSERT_EQ(0, stateMachine.getMemory().size());
-
-    stateMachine.setStartState("A");
-    ASSERT_EQ(1, stateMachine.getMemory().size());
-    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
-
-    ASSERT_FALSE(stateMachine.proceed());
-    ASSERT_EQ(1, stateMachine.getMemory().size());
-    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
-
-    stateMachine.getCurrentState()->getConnectedStates().at("AB")->updatePassCondition(true);
-    ASSERT_TRUE(stateMachine.proceed());
-    ASSERT_EQ(2, stateMachine.getMemory().size());
-    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
-    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
-
-    stateMachine.getCurrentState()->getConnectedStates().at("BC")->updatePassCondition(true);
-    ASSERT_TRUE(stateMachine.proceed());
-    ASSERT_EQ(3, stateMachine.getMemory().size());
-    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
-    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
-    ASSERT_STREQ("C", stateMachine.getMemory().at(2).c_str());
-
-    stateMachine.getCurrentState()->getConnectedStates().at("CB")->updatePassCondition(true);
-    ASSERT_TRUE(stateMachine.proceed());
-    ASSERT_EQ(4, stateMachine.getMemory().size());
-    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
-    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
-    ASSERT_STREQ("C", stateMachine.getMemory().at(2).c_str());
-    ASSERT_STREQ("B", stateMachine.getMemory().at(3).c_str());
+    ls_std::StateMachine stateMachine {"machine"};
+    ASSERT_TRUE(stateMachine.getMemory().empty());
   }
 
   TEST_F(StateMachineTest, getName)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
   }
 
   TEST_F(StateMachineTest, getStates)
   {
-    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
-
-    ASSERT_TRUE(!stateMachine.getStates().empty());
-    ASSERT_EQ(5, stateMachine.getStates().size());
+    ls_std::StateMachine stateMachine {"machine"};
+    ASSERT_TRUE(stateMachine.getStates().empty());
   }
 
   TEST_F(StateMachineTest, hasState)
@@ -104,9 +112,9 @@ namespace {
     ASSERT_TRUE(stateMachine.hasState("E"));
   }
 
-  TEST_F(StateMachineTest, hasStateNegative)
+  TEST_F(StateMachineTest, hasState_no_state_available)
   {
-    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls_std::StateMachine stateMachine {"machine"};
     ASSERT_FALSE(stateMachine.hasState("F"));
   }
 
@@ -161,37 +169,76 @@ namespace {
     ASSERT_STREQ("E", stateMachine.getCurrentState()->getId().c_str());
   }
 
-  TEST_F(StateMachineTest, setMemory)
+  TEST_F(StateMachineTest, setMemory_no_memory)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
-    ASSERT_TRUE(stateMachine.getMemory().empty());
+    ls_std::StateMachine stateMachine{"test_machine"};
+    std::vector<ls_std::StateId> memory{};
 
-    std::vector<ls_std::StateId> memory {"A", "B", "C"};
-    stateMachine.setMemory(memory);
-
-    ASSERT_FALSE(stateMachine.getMemory().empty());
-    ASSERT_EQ(3, stateMachine.getMemory().size());
-    ASSERT_STREQ("A", stateMachine.getMemory().at(0).c_str());
-    ASSERT_STREQ("B", stateMachine.getMemory().at(1).c_str());
-    ASSERT_STREQ("C", stateMachine.getMemory().at(2).c_str());
+    EXPECT_THROW({
+                   try
+                   {
+                     stateMachine.setMemory(memory);
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
   TEST_F(StateMachineTest, setName)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
+    ls_std::StateMachine stateMachine{"test_machine"};
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
 
     stateMachine.setName("bla");
     ASSERT_STREQ("bla", stateMachine.getName().c_str());
   }
 
+  TEST_F(StateMachineTest, setName_empty_name)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::StateMachine stateMachine {"machine"};
+                     stateMachine.setName("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
+
   TEST_F(StateMachineTest, setStartState)
   {
-    ls_std::StateMachine stateMachine {"test_machine"};
-    ASSERT_FALSE(stateMachine.getCurrentState() != nullptr);
+    ls_std::StateMachine stateMachine{"test_machine"};
+    ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
+    stateMachine.addState(std::make_shared<ls_std::State>("A"));
 
-    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls_std::State>("A")));
     ASSERT_TRUE(stateMachine.setStartState("A"));
-    ASSERT_TRUE(stateMachine.getCurrentState() != nullptr);
+    ASSERT_FALSE(stateMachine.getCurrentState() == nullptr);
+  }
+
+  TEST_F(StateMachineTest, setStartState_state_does_not_exist)
+  {
+    ls_std::StateMachine stateMachine{"test_machine"};
+    ASSERT_FALSE(stateMachine.setStartState("A"));
+  }
+
+  TEST_F(StateMachineTest, setStartState_empty_id)
+  {
+    ls_std::StateMachine stateMachine{"test_machine"};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     stateMachine.setStartState("");
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-11-29
+ * Changed:         2021-07-14
  *
  * */
 
@@ -11,8 +11,10 @@
 #include <ls_std/ls_std.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class BooleanTest : public ::testing::Test {
+namespace
+{
+  class BooleanTest : public ::testing::Test
+  {
     protected:
 
       BooleanTest() = default;
@@ -27,23 +29,28 @@ namespace {
 
   // assignment operators
 
-  TEST_F(BooleanTest, operatorAssignment)
+  TEST_F(BooleanTest, operator_assignment_boolean)
   {
-    ls_std::Boolean expression {};
-
+    ls_std::Boolean expression{};
     expression = true;
-    ASSERT_TRUE(expression);
 
+    ASSERT_TRUE(expression);
+  }
+
+  TEST_F(BooleanTest, operator_assignment_integer)
+  {
+    ls_std::Boolean expression{};
     expression = 1;
+
     ASSERT_TRUE(expression);
   }
 
   // stream operators
 
-  TEST_F(BooleanTest, operatorOutputStream)
+  TEST_F(BooleanTest, operator_output_stream)
   {
-    ls_std::Boolean expression {true};
-    std::ostringstream _stream {};
+    ls_std::Boolean expression{true};
+    std::ostringstream _stream{};
     _stream << expression;
 
     ASSERT_STREQ("true", _stream.str().c_str());
@@ -51,19 +58,22 @@ namespace {
 
   // logical operators
 
-  TEST_F(BooleanTest, operatorNot) {
-    ls_std::Boolean expression {};
+  TEST_F(BooleanTest, operator_negation_negative_value)
+  {
+    ls_std::Boolean expression{};
     ASSERT_TRUE(!expression);
   }
 
-  TEST_F(BooleanTest, operatorNotNegative) {
-    ls_std::Boolean expression {true};
+  TEST_F(BooleanTest, operator_negation_positive_value)
+  {
+    ls_std::Boolean expression{true};
     ASSERT_FALSE(!expression);
   }
 
-  TEST_F(BooleanTest, operatorAnd) {
-    ls_std::Boolean expressionA {true};
-    ls_std::Boolean expressionB {3 == 3};
+  TEST_F(BooleanTest, operator_and)
+  {
+    ls_std::Boolean expressionA{true};
+    ls_std::Boolean expressionB{3 == 3};
 
     ASSERT_TRUE(expressionA && expressionB);
     ASSERT_TRUE(expressionB && expressionA);
@@ -72,9 +82,10 @@ namespace {
     ASSERT_TRUE(1 && expressionB);
   }
 
-  TEST_F(BooleanTest, operatorAndNegative) {
-    ls_std::Boolean expressionA {true};
-    ls_std::Boolean expressionB {3 == 4};
+  TEST_F(BooleanTest, operator_and_with_false_result)
+  {
+    ls_std::Boolean expressionA{true};
+    ls_std::Boolean expressionB{3 == 4};
 
     ASSERT_FALSE(expressionA && expressionB);
     ASSERT_FALSE(expressionB && expressionA);
@@ -83,9 +94,10 @@ namespace {
     ASSERT_FALSE(expressionB && false);
   }
 
-  TEST_F(BooleanTest, operatorOr) {
-    ls_std::Boolean expressionA {false};
-    ls_std::Boolean expressionB {3 == 3};
+  TEST_F(BooleanTest, operator_or)
+  {
+    ls_std::Boolean expressionA{false};
+    ls_std::Boolean expressionB{3 == 3};
 
     ASSERT_TRUE(expressionA || expressionB);
     ASSERT_TRUE(expressionB || expressionA);
@@ -94,9 +106,10 @@ namespace {
     ASSERT_TRUE(1 || expressionA);
   }
 
-  TEST_F(BooleanTest, operatorOrNegative) {
-    ls_std::Boolean expressionA {false};
-    ls_std::Boolean expressionB {3 == 4};
+  TEST_F(BooleanTest, operator_or_with_false_result)
+  {
+    ls_std::Boolean expressionA{false};
+    ls_std::Boolean expressionB{3 == 4};
 
     ASSERT_FALSE(expressionA || expressionB);
     ASSERT_FALSE(expressionB || expressionA);
@@ -107,47 +120,9 @@ namespace {
 
   // implementation
 
-  TEST_F(BooleanTest, load)
+  TEST_F(BooleanTest, parse_true_value)
   {
-    // preparation
-
-    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>();
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_bool.json";
-    ls_std::File file {path};
-    file.createNewFile();
-    ls_std::FileWriter writer {file};
-    writer.write(R"({"value":true})");
-
-    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    auto storable = std::make_shared<ls_std::StorableFile>(path);
-    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
-
-    // check
-
-    x->load();
-    ASSERT_TRUE(*x);
-
-    file.remove();
-  }
-
-  TEST_F(BooleanTest, marshal)
-  {
-    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>(true);
-
-    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    ASSERT_STREQ(R"({"value":true})", x->marshal().c_str());
-
-    *x = false;
-    ASSERT_STREQ(R"({"value":false})", x->marshal().c_str());
-  }
-
-  TEST_F(BooleanTest, parse)
-  {
-    ls_std::Boolean expression {};
+    ls_std::Boolean expression{};
 
     expression.parse("true");
     ASSERT_TRUE(expression);
@@ -159,9 +134,9 @@ namespace {
     ASSERT_TRUE(expression);
   }
 
-  TEST_F(BooleanTest, parseNegative)
+  TEST_F(BooleanTest, parse_false_value)
   {
-    ls_std::Boolean expression {};
+    ls_std::Boolean expression{};
 
     expression.parse("false");
     ASSERT_FALSE(expression);
@@ -173,40 +148,44 @@ namespace {
     ASSERT_FALSE(expression);
   }
 
-  TEST_F(BooleanTest, toString)
+  TEST_F(BooleanTest, parse_with_invalid_parameter)
   {
-    ls_std::Boolean expression { 2 < 3};
-    ASSERT_STREQ("true", expression.toString().c_str());
-
-    expression = 4 < 3;
-    ASSERT_STREQ("false", expression.toString().c_str());
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Boolean expression{};
+                     expression.parse("hello");
+                   } catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
   }
 
-  TEST_F(BooleanTest, unmarshal)
+  TEST_F(BooleanTest, toString_true)
   {
-    std::shared_ptr<ls_std::Boolean> x = std::make_shared<ls_std::Boolean>(false);
+    ls_std::Boolean expression{2 < 3};
+    ASSERT_STREQ("true", expression.toString().c_str());
+  }
 
-    ASSERT_FALSE(*x);
-
-    auto serializable = std::make_shared<ls_std::SerializableJSONBoolean>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-    x->unmarshal(R"({"value":true})");
-
-    ASSERT_TRUE(*x);
+  TEST_F(BooleanTest, toString_false)
+  {
+    ls_std::Boolean expression{4 < 3};
+    ASSERT_STREQ("false", expression.toString().c_str());
   }
 
   // additional functionality
 
   TEST_F(BooleanTest, getValue)
   {
-    ls_std::Boolean x {2 < 3};
+    ls_std::Boolean x{2 < 3};
     ASSERT_TRUE(x.getValue());
   }
 
-  TEST_F(BooleanTest, XOR)
+  TEST_F(BooleanTest, XOR_with_positive_result)
   {
-    ls_std::Boolean x {2 < 3};
-    ls_std::Boolean y {4 < 3};
+    ls_std::Boolean x{2 < 3};
+    ls_std::Boolean y{4 < 3};
 
     ASSERT_TRUE(ls_std::Boolean::XOR(x, y));
     ASSERT_TRUE(ls_std::Boolean::XOR(y, x));
@@ -216,12 +195,12 @@ namespace {
     ASSERT_TRUE(ls_std::Boolean::XOR(false, true));
   }
 
-  TEST_F(BooleanTest, XORNegative)
+  TEST_F(BooleanTest, XOR_with_negative_result)
   {
-    ls_std::Boolean w {};
-    ls_std::Boolean x {true};
-    ls_std::Boolean y {};
-    ls_std::Boolean z {true};
+    ls_std::Boolean w{};
+    ls_std::Boolean x{true};
+    ls_std::Boolean y{};
+    ls_std::Boolean z{true};
 
     ASSERT_FALSE(ls_std::Boolean::XOR(x, z));
     ASSERT_FALSE(ls_std::Boolean::XOR(w, y));

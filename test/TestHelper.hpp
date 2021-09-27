@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2020-08-16
+ * Changed:         2021-09-26
  *
  * */
 
@@ -11,43 +11,24 @@
 #define TEST_HELPER_HPP
 
 #include <string>
+#include <ls_std/ls_std.hpp>
 
-class TestHelper {
+class TestHelper
+{
   public:
 
     TestHelper() = default;
     ~TestHelper() = default;
 
-    static std::string getResourcesFolderLocation() {
-      std::string location {};
-
-      #ifdef _WIN32
-        location = TestHelper::getTestFolderLocation() + R"(resources\)";
-      #endif
-      #ifdef unix
-        location = TestHelper::getTestFolderLocation() + R"(resources/)";
-      #endif
-      #ifdef __APPLE__
-        location = TestHelper::getTestFolderLocation() + R"(resources/)";
-      #endif
-
-      return location;
+    static std::string getResourcesFolderLocation()
+    {
+      return TestHelper::getTestFolderLocation() + "resources" + ls_std::FilePathSeparator::get();
     }
 
-    static std::string getTestFolderLocation() {
-      std::string location {};
-
-      #ifdef _WIN32
-        location = R"(C:\Users\drums\CLionProjects\lynar-studios-standard-library\test\)";
-      #endif
-      #ifdef unix
-        location = R"(/home/patrick/CLionProjects/lynar-studios-standard-library/test/)";
-      #endif
-      #ifdef __APPLE__
-        location = R"(/Users/patrickmattulat/CLionProjects/lynar-studios-standard-library/test/)";
-      #endif
-
-      return location;
+    static std::string getTestFolderLocation()
+    {
+      ls_std::File buildDirectory{ls_std::File::getWorkingDirectory()};
+      return buildDirectory.getParent() + "test" + ls_std::FilePathSeparator::get();
     }
 };
 

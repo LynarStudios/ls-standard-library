@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-26
+ * Changed:         2021-07-16
  *
  * */
 
@@ -11,35 +11,35 @@
 #include <ls_std/time/Date.hpp>
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/boxing/String.hpp>
-#include <ls_std/exception/NullPointerException.hpp>
+#include <ls_std/exception/IllegalArgumentException.hpp>
 
-ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer) : ls_std::Class("Logger"),
-logLevel(ls_std::LogLevelValue::INFO)
+ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer)
+    : ls_std::Class("Logger"),
+      logLevel(ls_std::LogLevelValue::INFO)
 {
-  if(_writer == nullptr) {
-    throw ls_std::NullPointerException {};
-  }
-
-  this->writer = _writer;
+  this->_assignWriter(_writer);
 }
 
 void ls_std::Logger::debug(const ls_std::byte *_data)
 {
-  if(this->logLevel >= ls_std::LogLevelValue::DEBUG) {
+  if (this->logLevel >= ls_std::LogLevelValue::DEBUG)
+  {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::DEBUG));
   }
 }
 
 void ls_std::Logger::error(const ls_std::byte *_data)
 {
-  if(this->logLevel >= ls_std::LogLevelValue::ERR) {
+  if (this->logLevel >= ls_std::LogLevelValue::ERR)
+  {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::ERR));
   }
 }
 
 void ls_std::Logger::fatal(const ls_std::byte *_data)
 {
-  if(this->logLevel >= ls_std::LogLevelValue::FATAL) {
+  if (this->logLevel >= ls_std::LogLevelValue::FATAL)
+  {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::FATAL));
   }
 }
@@ -51,7 +51,8 @@ ls_std::LogLevel ls_std::Logger::getLogLevel()
 
 void ls_std::Logger::info(const ls_std::byte *_data)
 {
-  if(this->logLevel >= ls_std::LogLevelValue::INFO) {
+  if (this->logLevel >= ls_std::LogLevelValue::INFO)
+  {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::INFO));
   }
 }
@@ -63,27 +64,33 @@ void ls_std::Logger::setLogLevel(const ls_std::LogLevelValue &_logLevelValue)
 
 void ls_std::Logger::trace(const ls_std::byte *_data)
 {
-  if(this->logLevel >= ls_std::LogLevelValue::TRACE) {
+  if (this->logLevel >= ls_std::LogLevelValue::TRACE)
+  {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::TRACE));
   }
 }
 
 void ls_std::Logger::warn(const ls_std::byte *_data)
 {
-  if(this->logLevel >= ls_std::LogLevelValue::WARN) {
+  if (this->logLevel >= ls_std::LogLevelValue::WARN)
+  {
     this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::WARN));
   }
 }
 
-void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel& _logLevel)
+void ls_std::Logger::_assignWriter(const std::shared_ptr<ls_std::IWriter> &_writer)
 {
-  ls_std::Date date {};
+  if (_writer == nullptr)
+  {
+    throw ls_std::IllegalArgumentException{};
+  }
 
-  std::string message = "[" +
-      date.toString() + "] " +
-      ls_std::String {_logLevel.toString() + ":"}.padRight(10, ' ') +
-      std::string(_data) +
-      ls_std::NewLine::getUnixNewLine();
+  this->writer = _writer;
+}
 
+void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel &_logLevel)
+{
+  ls_std::Date date{};
+  std::string message = "[" + date.toString() + "] " + ls_std::String{_logLevel.toString() + ":"}.padRight(10, ' ') + std::string(_data) + ls_std::NewLine::getUnixNewLine();
   this->writer->write(message);
 }

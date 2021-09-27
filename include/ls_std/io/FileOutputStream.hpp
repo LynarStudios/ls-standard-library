@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-26
+ * Changed:         2021-05-01
  *
  * */
 
@@ -15,22 +15,24 @@
 #include "IWriter.hpp"
 #include <fstream>
 
-namespace ls_std {
-  class FileOutputStream : public Class, public IWriter {
+namespace ls_std
+{
+  class FileOutputStream : public ls_std::Class, public ls_std::IWriter
+  {
     public:
 
-      explicit FileOutputStream(ls_std::File& _file);
-      explicit FileOutputStream(ls_std::File& _file, bool _append);
+      explicit FileOutputStream(ls_std::File &_file);
+      explicit FileOutputStream(ls_std::File &_file, bool _append);
       ~FileOutputStream() override;
 
       void close();
-      bool write(const ls_std::byte_field& _data) override;
+      bool write(const ls_std::byte_field &_data) override;
 
     private:
 
-      bool append {};
+      bool append{};
       ls_std::File file;
-      std::ofstream outputStream {};
+      std::ofstream outputStream{};
 
       void _close();
       void _init();

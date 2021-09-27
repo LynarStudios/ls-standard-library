@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2020-11-29
+ * Changed:         2021-07-14
  *
  * */
 
@@ -11,11 +11,14 @@
 #include <ls_std/ls_std.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class IntegerTest : public ::testing::Test {
+namespace
+{
+  class IntegerTest : public ::testing::Test
+  {
     protected:
 
       IntegerTest() = default;
+
       ~IntegerTest() override = default;
 
       void SetUp() override
@@ -27,390 +30,416 @@ namespace {
 
   // assignment operators
 
-  TEST_F(IntegerTest, operatorAssignment)
+  TEST_F(IntegerTest, operator_assignment_with_reference)
   {
-    ls_std::Integer x {13};
-    ASSERT_EQ(13, x);
-
-    x = 44;
-    ASSERT_EQ(44, x);
-
-    ls_std::Integer y {3};
+    ls_std::Integer x{};
+    ls_std::Integer y{3};
     x = y;
+
     ASSERT_EQ(3, x);
+  }
+
+  TEST_F(IntegerTest, operator_assignment_with_value)
+  {
+    ls_std::Integer x{};
+    x = 44;
+
+    ASSERT_EQ(44, x);
   }
 
   // arithmetic operators
 
-  TEST_F(IntegerTest, operatorHyphen)
+  TEST_F(IntegerTest, operator_negative)
   {
-    ls_std::Integer x {13};
-    ls_std::Integer y {-13};
+    ls_std::Integer x{13};
+    ls_std::Integer y{-13};
 
     ASSERT_EQ(-13, -x);
     ASSERT_EQ(13, -y);
   }
 
-  TEST_F(IntegerTest, operatorAddition)
+  TEST_F(IntegerTest, operator_add_with_reference)
   {
-    ls_std::Integer x {13};
-    ls_std::Integer y {7};
-    ls_std::Integer z {-15};
+    ls_std::Integer x{13};
+    ls_std::Integer y{7};
 
     ASSERT_EQ(20, x + y);
-    ASSERT_EQ(8, 1 + y);
-    ASSERT_EQ(5, x + y + z);
-    ASSERT_EQ(15, x + 2);
-    ASSERT_EQ(0, x + 2 + z);
   }
 
-  TEST_F(IntegerTest, operatorMultiplication)
+  TEST_F(IntegerTest, operator_add_with_value)
   {
-    ls_std::Integer x {3};
-    ls_std::Integer y {7};
-    ls_std::Integer z {5};
+    ls_std::Integer x{13};
+    ASSERT_EQ(20, x + 7);
+  }
+
+  TEST_F(IntegerTest, operator_mul_with_reference)
+  {
+    ls_std::Integer x{3};
+    ls_std::Integer y{7};
 
     ASSERT_EQ(21, x * y);
-    ASSERT_EQ(105, x * y * z);
-    ASSERT_EQ(6, x * 2);
-    ASSERT_EQ(71, 1 + y * 2 * z);
   }
 
-  TEST_F(IntegerTest, operatorSubtraction)
+  TEST_F(IntegerTest, operator_mul_with_value)
   {
-    ls_std::Integer x {51};
-    ls_std::Integer y {17};
+    ls_std::Integer x{3};
+    ASSERT_EQ(21, x * 7);
+  }
+
+  TEST_F(IntegerTest, operator_sub_with_reference)
+  {
+    ls_std::Integer x{51};
+    ls_std::Integer y{17};
 
     ASSERT_EQ(34, x - y);
-    ASSERT_EQ(30, x - 21);
-    ASSERT_EQ(13, x - 21 - y);
   }
 
-  TEST_F(IntegerTest, operatorDivision)
+  TEST_F(IntegerTest, operator_sub_with_value)
   {
-    ls_std::Integer x {81};
-    ls_std::Integer y {9};
+    ls_std::Integer x{51};
+    ASSERT_EQ(34, x - 17);
+  }
+
+  TEST_F(IntegerTest, operator_div_with_reference)
+  {
+    ls_std::Integer x{81};
+    ls_std::Integer y{9};
 
     ASSERT_EQ(9, x / y);
-    ASSERT_EQ(3, 9 / 3);
-    ASSERT_EQ(3, x / y / 3);
-    ASSERT_EQ(1, 19 / 10);
   }
 
-  TEST_F(IntegerTest, operatorModulus)
+  TEST_F(IntegerTest, operator_div_with_value)
   {
-    ls_std::Integer x {85};
-    ls_std::Integer y {9};
+    ls_std::Integer x{81};
+    ASSERT_EQ(9, x / 9);
+  }
+
+  TEST_F(IntegerTest, operator_div_by_zero_with_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Integer x{9};
+                     ls_std::Integer y{0};
+
+                     x = x / y;
+                   } catch (const ls_std::IllegalArithmeticOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArithmeticOperationException);
+  }
+
+  TEST_F(IntegerTest, operator_div_by_zero_with_value)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Integer x{9};
+                     x = x / 0;
+                   } catch (const ls_std::IllegalArithmeticOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArithmeticOperationException);
+  }
+
+  TEST_F(IntegerTest, operator_mod_with_reference)
+  {
+    ls_std::Integer x{85};
+    ls_std::Integer y{9};
 
     ASSERT_EQ(4, x % y);
-    ASSERT_EQ(1, x % 3);
+  }
+
+  TEST_F(IntegerTest, operator_mod_with_value)
+  {
+    ls_std::Integer x{85};
+    ASSERT_EQ(4, x % 9);
   }
 
   // compound operators
 
-  TEST_F(IntegerTest, operatorAddEqual)
+  TEST_F(IntegerTest, operator_add_assign_with_reference)
   {
-    ls_std::Integer x {4};
-    ls_std::Integer y {2};
-    ASSERT_EQ(4, x);
-
+    ls_std::Integer x{4};
+    ls_std::Integer y{2};
     x += y;
+
     ASSERT_EQ(6, x);
-
-    x += 4;
-    ASSERT_EQ(10, x);
-
-    x += -5;
-    ASSERT_EQ(5, x);
   }
 
-  TEST_F(IntegerTest, operatorSubEqual)
+  TEST_F(IntegerTest, operator_add_assign_with_value)
   {
-    ls_std::Integer x {14};
-    ls_std::Integer y {2};
-    ASSERT_EQ(14, x);
+    ls_std::Integer x{4};
+    x += 2;
 
+    ASSERT_EQ(6, x);
+  }
+
+  TEST_F(IntegerTest, operator_sub_assign_with_reference)
+  {
+    ls_std::Integer x{14};
+    ls_std::Integer y{2};
     x -= y;
+
     ASSERT_EQ(12, x);
-
-    x -= 6;
-    ASSERT_EQ(6, x);
-
-    x -= -3;
-    ASSERT_EQ(9, x);
   }
 
-  TEST_F(IntegerTest, operatorMulEqual)
+  TEST_F(IntegerTest, operator_sub_assign_with_value)
   {
-    ls_std::Integer x {6};
-    ls_std::Integer y {3};
-    ASSERT_EQ(6, x);
+    ls_std::Integer x{14};
+    x -= 2;
 
+    ASSERT_EQ(12, x);
+  }
+
+  TEST_F(IntegerTest, operator_mul_assign_with_reference)
+  {
+    ls_std::Integer x{6};
+    ls_std::Integer y{3};
     x *= y;
-    ASSERT_EQ(18, x);
 
-    x *= 2;
-    ASSERT_EQ(36, x);
+    ASSERT_EQ(18, x);
   }
 
-  TEST_F(IntegerTest, operatorDivEqual)
+  TEST_F(IntegerTest, operator_mul_assign_with_value)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
-    ASSERT_EQ(12, x);
+    ls_std::Integer x{6};
+    x *= 3;
 
+    ASSERT_EQ(18, x);
+  }
+
+  TEST_F(IntegerTest, operator_div_assign_with_reference)
+  {
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
     x /= y;
-    ASSERT_EQ(4, x);
 
-    x /= 2;
-    ASSERT_EQ(2, x);
+    ASSERT_EQ(4, x);
+  }
+
+  TEST_F(IntegerTest, operator_div_assign_with_value)
+  {
+    ls_std::Integer x{12};
+    x /= 3;
+
+    ASSERT_EQ(4, x);
+  }
+
+  TEST_F(IntegerTest, operator_div_assign_by_zero_with_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Integer x{9};
+                     ls_std::Integer y{0};
+
+                     x = x /= y;
+                   } catch (const ls_std::IllegalArithmeticOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArithmeticOperationException);
+  }
+
+  TEST_F(IntegerTest, operator_div_assign_by_zero_with_value)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Integer x{9};
+                     x = x /= 0;
+                   } catch (const ls_std::IllegalArithmeticOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArithmeticOperationException);
   }
 
   // comparison operators
 
-  TEST_F(IntegerTest, operatorEqual)
+  TEST_F(IntegerTest, operator_equals_with_reference)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
-    ls_std::Integer z {3};
+    ls_std::Integer x{12};
+    ls_std::Integer y{12};
+
+    ASSERT_TRUE(x == y);
+  }
+
+  TEST_F(IntegerTest, operator_equals_with_value)
+  {
+    ls_std::Integer x{12};
 
     ASSERT_TRUE(x == 12);
-    ASSERT_TRUE(y == z);
-    ASSERT_TRUE(z == y);
   }
 
-  TEST_F(IntegerTest, operatorNotEqual)
+  TEST_F(IntegerTest, operator_not_equals_with_reference)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
-    ls_std::Integer z {3};
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
 
-    ASSERT_TRUE(x != 14);
-    ASSERT_TRUE(y != x);
-    ASSERT_TRUE(z != x);
+    ASSERT_TRUE(x != y);
   }
 
-  TEST_F(IntegerTest, operatorGreaterThan)
+  TEST_F(IntegerTest, operator_not_equals_with_value)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
+    ls_std::Integer x{12};
+    ASSERT_TRUE(x != 3);
+  }
 
-    ASSERT_TRUE(x > 4);
+  TEST_F(IntegerTest, operator_greater_than_with_reference)
+  {
+    ls_std::Integer x{12};
+    ls_std::Integer y{3};
+
     ASSERT_TRUE(x > y);
   }
 
-  TEST_F(IntegerTest, operatorGreaterThanNegative)
+  TEST_F(IntegerTest, operator_greater_than_with_value)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {3};
-
-    ASSERT_FALSE(x > 14);
-    ASSERT_FALSE(x > (y + 20));
+    ls_std::Integer x{12};
+    ASSERT_TRUE(x > 3);
   }
 
-  TEST_F(IntegerTest, operatorGreaterThanEqual)
+  TEST_F(IntegerTest, operator_greater_than_equals_with_reference)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {12};
+    ls_std::Integer x{12};
+    ls_std::Integer y{12};
 
-    ASSERT_TRUE(x >= 12);
     ASSERT_TRUE(x >= y);
   }
 
-  TEST_F(IntegerTest, operatorGreaterThanEqualNegative)
+  TEST_F(IntegerTest, operator_greater_than_equals_with_value)
   {
-    ls_std::Integer x {12};
-    ls_std::Integer y {13};
-
-    ASSERT_FALSE(x >= 13);
-    ASSERT_FALSE(x >= y);
+    ls_std::Integer x{12};
+    ASSERT_TRUE(x >= 12);
   }
 
-  TEST_F(IntegerTest, operatorLessThan)
+  TEST_F(IntegerTest, operator_less_than_with_reference)
   {
-    ls_std::Integer x {10};
-    ls_std::Integer y {12};
+    ls_std::Integer x{10};
+    ls_std::Integer y{12};
 
-    ASSERT_TRUE(x < 12);
     ASSERT_TRUE(x < y);
   }
 
-  TEST_F(IntegerTest, operatorLessThanNegative)
+  TEST_F(IntegerTest, operator_less_than_with_value)
   {
-    ls_std::Integer x {10};
-    ls_std::Integer y {10};
-
-    ASSERT_FALSE(x < 10);
-    ASSERT_FALSE(x < y);
+    ls_std::Integer x{10};
+    ASSERT_TRUE(x < 12);
   }
 
-  TEST_F(IntegerTest, operatorLessThanEqual)
+  TEST_F(IntegerTest, operator_less_than_equals_with_reference)
   {
-    ls_std::Integer x {10};
-    ls_std::Integer y {10};
+    ls_std::Integer x{10};
+    ls_std::Integer y{10};
 
-    ASSERT_TRUE(x <= 11);
     ASSERT_TRUE(x <= y);
   }
 
-  TEST_F(IntegerTest, operatorLessThanEqualNegative)
+  TEST_F(IntegerTest, operator_less_than_equals_with_value)
   {
-    ls_std::Integer x {11};
-    ls_std::Integer y {10};
-
-    ASSERT_FALSE(x <= 10);
-    ASSERT_FALSE(x <= y);
+    ls_std::Integer x{10};
+    ASSERT_TRUE(x <= 10);
   }
 
   // logical operators
 
-  TEST_F(IntegerTest, operatorNot)
+  TEST_F(IntegerTest, operator_negation)
   {
-    ls_std::Integer x {};
+    ls_std::Integer x{};
     ASSERT_TRUE(!x);
   }
 
-  TEST_F(IntegerTest, operatorNotNegative)
+  TEST_F(IntegerTest, operator_and_with_reference)
   {
-    ls_std::Integer x {10};
-    ASSERT_FALSE(!x);
-  }
+    ls_std::Integer x{1};
+    ls_std::Integer y{1};
 
-  TEST_F(IntegerTest, operatorAnd)
-  {
-    ls_std::Integer x {1};
-    ls_std::Integer y {1};
-    ASSERT_TRUE(x && 1);
-    ASSERT_TRUE(x && true);
     ASSERT_TRUE(x && y);
   }
 
-  TEST_F(IntegerTest, operatorAndNegative)
+  TEST_F(IntegerTest, operator_and_with_value)
   {
-    ls_std::Integer x {};
-    ls_std::Integer y {1};
-    ASSERT_FALSE(x && 1);
-    ASSERT_FALSE(x && true);
-    ASSERT_FALSE(x && y);
+    ls_std::Integer x{1};
+    ASSERT_TRUE(x && 1);
   }
 
-  TEST_F(IntegerTest, operatorOr)
+  TEST_F(IntegerTest, operator_and_with_boolean)
   {
-    ls_std::Integer x {};
-    ls_std::Integer y {1};
-    ASSERT_TRUE(x || 1);
-    ASSERT_TRUE(x || true);
+    ls_std::Integer x{1};
+    ASSERT_TRUE(x && true);
+  }
+
+  TEST_F(IntegerTest, operator_or_with_reference)
+  {
+    ls_std::Integer x{};
+    ls_std::Integer y{1};
+
     ASSERT_TRUE(x || y);
   }
 
-  TEST_F(IntegerTest, operatorOrNegative)
+  TEST_F(IntegerTest, operator_or_with_value)
   {
-    ls_std::Integer x {};
-    ls_std::Integer y {};
-    ASSERT_FALSE(x || 0);
-    ASSERT_FALSE(x || false);
-    ASSERT_FALSE(x || y);
+    ls_std::Integer x{};
+    ASSERT_TRUE(x || 1);
+  }
+
+  TEST_F(IntegerTest, operator_or_with_boolean)
+  {
+    ls_std::Integer x{};
+    ASSERT_TRUE(x || true);
   }
 
   // increment / decrement operator
 
-  TEST_F(IntegerTest, operatorIncrement)
+  TEST_F(IntegerTest, operator_increment)
   {
-    ls_std::Integer x {};
-
+    ls_std::Integer x{};
     ++x;
+
     ASSERT_EQ(1, x);
-
-    ++x;
-    ASSERT_EQ(2, x);
   }
 
-  TEST_F(IntegerTest, operatorDecrement)
+  TEST_F(IntegerTest, operator_decrement)
   {
-    ls_std::Integer x {};
+    ls_std::Integer x{};
 
     --x;
     ASSERT_EQ(-1, x);
-
-    --x;
-    ASSERT_EQ(-2, x);
   }
 
   // implementation
 
-  TEST_F(IntegerTest, load)
+  TEST_F(IntegerTest, parse_with_positive_value)
   {
-    // preparation
+    ls_std::Integer number{};
 
-    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>();
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_integer.json";
-    ls_std::File file {path};
-    file.createNewFile();
-    ls_std::FileWriter writer {file};
-    writer.write(R"({"value":1990})");
-
-    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    auto storable = std::make_shared<ls_std::StorableFile>(path);
-    x->setStorable(std::dynamic_pointer_cast<ls_std::IStorable>(storable));
-
-    // check
-
-    x->load();
-    ASSERT_EQ(1990, *x);
-
-    file.remove();
+    number.parse("1989");
+    ASSERT_EQ(1989, number);
   }
 
-  TEST_F(IntegerTest, marshal)
+  TEST_F(IntegerTest, parse_with_negative_value)
   {
-    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(3);
+    ls_std::Integer number{};
 
-    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    ASSERT_STREQ(R"({"value":3})", x->marshal().c_str());
-
-    *x = 17;
-    ASSERT_STREQ(R"({"value":17})", x->marshal().c_str());
-  }
-
-  TEST_F(IntegerTest, parse)
-  {
-    ls_std::Integer x {};
-
-    x.parse("1989");
-    ASSERT_EQ(1989, x);
-
-    x.parse("-17");
-    ASSERT_EQ(-17, x);
+    number.parse("-13");
+    ASSERT_EQ(-13, number);
   }
 
   TEST_F(IntegerTest, toString)
   {
-    ls_std::Integer x {112};
-    ASSERT_STREQ("112", x.toString().c_str());
-  }
-
-  TEST_F(IntegerTest, unmarshal)
-  {
-    std::shared_ptr<ls_std::Integer> x = std::make_shared<ls_std::Integer>(13);
-    ASSERT_EQ(13, *x);
-
-    auto serializable = std::make_shared<ls_std::SerializableJSONInteger>(x);
-    x->setSerializable(std::dynamic_pointer_cast<ls_std::ISerializable>(serializable));
-
-    x->unmarshal(R"({"value":1989})");
-
-    ASSERT_EQ(1989, *x);
+    ls_std::Integer number{112};
+    ASSERT_STREQ("112", number.toString().c_str());
   }
 
   // additional functionality
 
   TEST_F(IntegerTest, getValue)
   {
-    ls_std::Integer x {3};
+    ls_std::Integer x{3};
     ASSERT_EQ(3, x.getValue());
   }
 
@@ -418,9 +447,9 @@ namespace {
 
   TEST_F(IntegerTest, constApproach)
   {
-    const ls_std::Integer x {3};
+    const ls_std::Integer x{3};
     ASSERT_EQ(3, x);
 
-//     x = 4; // wouldn't work
+    // x = 4; // wouldn't work
   }
 }

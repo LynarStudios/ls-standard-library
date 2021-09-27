@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2020-11-29
+ * Changed:         2021-05-02
  *
  * */
 
@@ -16,16 +16,18 @@
 #include <ls_std/ls_std.hpp>
 #include "NewsAgency.hpp"
 
-namespace ls_std_test {
-  class GossipNewsAgency : public ls_std_test::NewsAgency, public ls_std::IListener {
+namespace ls_std_test
+{
+  class GossipNewsAgency : public ls_std_test::NewsAgency, public ls_std::IListener
+  {
     public:
 
       GossipNewsAgency();
-      ~GossipNewsAgency() override = default;
+      ~GossipNewsAgency() = default;
 
       // implementation
 
-      void listen(const ls_std::Class& _info) override;
+      void listen(const ls_std::Class &_info) override;
 
       // additional functionality
 
@@ -34,7 +36,7 @@ namespace ls_std_test {
 
     private:
 
-      std::string news {};
+      std::string news{};
   };
 }
 

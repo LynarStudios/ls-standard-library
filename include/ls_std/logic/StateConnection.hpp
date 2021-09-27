@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2020-11-26
+ * Changed:         2021-05-27
  *
  * */
 
@@ -14,25 +14,30 @@
 #include <ls_std/base/Class.hpp>
 #include "StateMachineTypes.hpp"
 
-namespace ls_std {
-  class StateConnection : public Class {
+namespace ls_std
+{
+  class StateConnection : public ls_std::Class
+  {
     public:
 
-      explicit StateConnection(ls_std::StateConnectionId _connectionId, ls_std::StateId _stateId);
+      explicit StateConnection(const ls_std::StateConnectionId& _connectionId, const ls_std::StateId& _stateId);
       ~StateConnection() override = default;
 
       StateConnectionId getConnectionId();
       ls_std::StateId getStateId();
       bool isPassable() const;
-      void setConnectionId(ls_std::StateConnectionId _connectionId);
-      void setStateId(ls_std::StateId _stateId);
+      void setConnectionId(const ls_std::StateConnectionId& _connectionId);
+      void setStateId(const ls_std::StateId& _stateId);
       void updatePassCondition(bool _condition);
 
     private:
 
-      bool condition {};
-      ls_std::StateConnectionId connectionId {};
-      ls_std::StateId stateId {};
+      bool condition{};
+      ls_std::StateConnectionId connectionId{};
+      ls_std::StateId stateId{};
+
+      void _assignConnectionId(const ls_std::StateConnectionId& _connectionId);
+      void _assignStateId(const ls_std::StateId& _stateId);
   };
 }
 

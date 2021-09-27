@@ -3,15 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2020-10-29
+ * Changed:         2021-04-24
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
 
-namespace {
-  class VersionTest : public ::testing::Test {
+namespace
+{
+  class VersionTest : public ::testing::Test
+  {
     protected:
 
       VersionTest() = default;
@@ -28,13 +30,13 @@ namespace {
 
   TEST_F(VersionTest, marshal)
   {
-    ls_std::Version version {2020, 2, 0};
+    ls_std::Version version{2020, 2, 0};
     ASSERT_STREQ("2020.2.0", version.marshal().c_str());
   }
 
   TEST_F(VersionTest, unmarshal)
   {
-    ls_std::Version version {0, 0, 0};
+    ls_std::Version version{0, 0, 0};
     version.unmarshal("2020.2.13");
 
     ASSERT_EQ(2020, version.getMajorVersion());
@@ -46,19 +48,19 @@ namespace {
 
   TEST_F(VersionTest, getMajorVersion)
   {
-    ls_std::Version version {13, 2, 4};
+    ls_std::Version version{13, 2, 4};
     ASSERT_EQ(13, version.getMajorVersion());
   }
 
   TEST_F(VersionTest, getMinorVersion)
   {
-    ls_std::Version version {13, 2, 4};
+    ls_std::Version version{13, 2, 4};
     ASSERT_EQ(2, version.getMinorVersion());
   }
 
   TEST_F(VersionTest, getPatchVersion)
   {
-    ls_std::Version version {13, 2, 4};
+    ls_std::Version version{13, 2, 4};
     ASSERT_EQ(4, version.getPatchVersion());
   }
 
@@ -68,7 +70,12 @@ namespace {
     ASSERT_TRUE(ls_std::Version::isValid("2.5.1"));
   }
 
-  TEST_F(VersionTest, isValidNegative)
+  TEST_F(VersionTest, isValid_emptyString)
+  {
+    ASSERT_FALSE(ls_std::Version::isValid(""));
+  }
+
+  TEST_F(VersionTest, isValid_noValidVersionString)
   {
     ASSERT_FALSE(ls_std::Version::isValid("v2020.1.2"));
     ASSERT_FALSE(ls_std::Version::isValid("2.5"));
@@ -78,7 +85,7 @@ namespace {
 
   TEST_F(VersionTest, setMajorVersion)
   {
-    ls_std::Version version {13, 2, 4};
+    ls_std::Version version{13, 2, 4};
     ASSERT_EQ(13, version.getMajorVersion());
 
     version.setMajorVersion(14);
@@ -87,7 +94,7 @@ namespace {
 
   TEST_F(VersionTest, setMinorVersion)
   {
-    ls_std::Version version {13, 2, 4};
+    ls_std::Version version{13, 2, 4};
     ASSERT_EQ(2, version.getMinorVersion());
 
     version.setMinorVersion(3);
@@ -96,7 +103,7 @@ namespace {
 
   TEST_F(VersionTest, setPatchVersion)
   {
-    ls_std::Version version {13, 2, 4};
+    ls_std::Version version{13, 2, 4};
     ASSERT_EQ(4, version.getPatchVersion());
 
     version.setPatchVersion(5);

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-10-29
+ * Changed:         2021-04-23
  *
  * */
 
@@ -13,21 +13,26 @@
 #include <list>
 #include <string>
 
-namespace {
-  class STLUtilsTest : public ::testing::Test {
+namespace
+{
+  class STLUtilsTest : public ::testing::Test
+  {
     protected:
 
       STLUtilsTest() = default;
       ~STLUtilsTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
+
+      void TearDown() override
+      {}
   };
 
   TEST_F(STLUtilsTest, contains)
   {
-    std::vector<int> values {1, 13, 7, 8};
-    std::list<std::string> names {"Tim", "Alex", "Nadine"};
+    std::vector<int> values{1, 13, 7, 8};
+    std::list<std::string> names{"Tim", "Alex", "Nadine"};
 
     ASSERT_TRUE((ls_std::STLUtils::contains(values, 1)));
     ASSERT_TRUE((ls_std::STLUtils::contains(values, 13)));

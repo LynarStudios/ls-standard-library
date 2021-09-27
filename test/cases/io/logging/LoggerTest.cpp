@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2020-11-29
+ * Changed:         2021-07-16
  *
  * */
 
@@ -11,21 +11,28 @@
 #include <ls_std/ls_std.hpp>
 #include <TestHelper.hpp>
 
-namespace {
-  class LoggerTest : public ::testing::Test {
+namespace
+{
+  class LoggerTest : public ::testing::Test
+  {
     protected:
 
       LoggerTest() = default;
       ~LoggerTest() override = default;
 
-      void SetUp() override {}
-      void TearDown() override {}
+      void SetUp() override
+      {}
 
-      static std::shared_ptr<ls_std::IWriter> createFileLogger(const std::string& _logName) {
+      void TearDown() override
+      {}
+
+      static std::shared_ptr<ls_std::IWriter> createFileLogger(const std::string &_logName)
+      {
         std::string path = TestHelper::getResourcesFolderLocation() + _logName;
-        ls_std::File file {path};
+        ls_std::File file{path};
 
-        if(!file.exists()) {
+        if (!file.exists())
+        {
           file.createNewFile();
         }
 
@@ -33,13 +40,40 @@ namespace {
 
         return writer;
       }
+
+      static ls_std::String getContentFromLogFile(const std::string &_logName)
+      {
+        ls_std::File file{TestHelper::getResourcesFolderLocation() + _logName};
+        ls_std::FileReader reader{file};
+        ls_std::String content{reader.read()};
+        file.remove();
+
+        return content;
+      }
   };
+
+  TEST_F(LoggerTest, constructor_no_writer_reference)
+  {
+    EXPECT_THROW({
+                   try
+                   {
+                     ls_std::Logger logger{nullptr};
+                   }
+                   catch (const ls_std::IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, ls_std::IllegalArgumentException);
+  }
 
   TEST_F(LoggerTest, debug)
   {
-    std::shared_ptr<ls_std::IWriter> writer = createFileLogger("output_debug.log");
+    // write to log file
 
-    ls_std::Logger logger {writer};
+    std::string logName = "output_debug.log";
+    std::shared_ptr<ls_std::IWriter> writer = createFileLogger(logName);
+
+    ls_std::Logger logger{writer};
     logger.setLogLevel(ls_std::LogLevelValue::DEBUG);
     logger.debug("1. line!");
     logger.info("2. line!");
@@ -48,12 +82,10 @@ namespace {
     logger.warn("5. line!");
     logger.trace("6. line!");
 
-    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    // get content and check
 
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "output_debug.log"};
-    ls_std::FileReader reader {file};
-    ls_std::String content {reader.read()};
-    file.remove();
+    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    ls_std::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
@@ -65,9 +97,12 @@ namespace {
 
   TEST_F(LoggerTest, error)
   {
-    std::shared_ptr<ls_std::IWriter> writer = createFileLogger("output_error.log");
+    // write to log file
 
-    ls_std::Logger logger {writer};
+    std::string logName = "output_error.log";
+    std::shared_ptr<ls_std::IWriter> writer = createFileLogger(logName);
+
+    ls_std::Logger logger{writer};
     logger.setLogLevel(ls_std::LogLevelValue::ERR);
     logger.debug("1. line!");
     logger.info("2. line!");
@@ -76,11 +111,10 @@ namespace {
     logger.warn("5. line!");
     logger.trace("6. line!");
 
-    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    // get content and check
 
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "output_error.log"};
-    ls_std::FileReader reader {file};
-    ls_std::String content {reader.read()};
+    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    ls_std::String content = getContentFromLogFile(logName);
 
     ASSERT_FALSE(content.contains("1. line!"));
     ASSERT_FALSE(content.contains("2. line!"));
@@ -88,15 +122,16 @@ namespace {
     ASSERT_TRUE(content.contains("4. line!"));
     ASSERT_FALSE(content.contains("5. line!"));
     ASSERT_FALSE(content.contains("6. line!"));
-
-    file.remove();
   }
 
   TEST_F(LoggerTest, fatal)
   {
-    std::shared_ptr<ls_std::IWriter> writer = createFileLogger("output_fatal.log");
+    // write to log file
 
-    ls_std::Logger logger {writer};
+    std::string logName = "output_fatal.log";
+    std::shared_ptr<ls_std::IWriter> writer = createFileLogger(logName);
+
+    ls_std::Logger logger{writer};
     logger.setLogLevel(ls_std::LogLevelValue::FATAL);
     logger.debug("1. line!");
     logger.info("2. line!");
@@ -105,11 +140,10 @@ namespace {
     logger.warn("5. line!");
     logger.trace("6. line!");
 
-    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "output_fatal.log"};
+    // get content and check
 
-    ls_std::FileReader reader {file};
-    ls_std::String content {reader.read()};
+    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    ls_std::String content = getContentFromLogFile(logName);
 
     ASSERT_FALSE(content.contains("1. line!"));
     ASSERT_FALSE(content.contains("2. line!"));
@@ -117,21 +151,22 @@ namespace {
     ASSERT_TRUE(content.contains("4. line!"));
     ASSERT_FALSE(content.contains("5. line!"));
     ASSERT_FALSE(content.contains("6. line!"));
-
-    file.remove();
   }
 
   TEST_F(LoggerTest, getLogLevel)
   {
-    ls_std::Logger logger {createFileLogger("output.log")};
+    ls_std::Logger logger{createFileLogger("output.log")};
     ASSERT_EQ(ls_std::LogLevelValue::INFO, logger.getLogLevel());
   }
 
   TEST_F(LoggerTest, info)
   {
-    std::shared_ptr<ls_std::IWriter> writer = createFileLogger("output_info.log");
+    // write to log file
 
-    ls_std::Logger logger {writer};
+    std::string logName = "output_info.log";
+    std::shared_ptr<ls_std::IWriter> writer = createFileLogger(logName);
+
+    ls_std::Logger logger{writer};
     logger.setLogLevel(ls_std::LogLevelValue::INFO);
     logger.fatal("1. line!");
     logger.error("2. line!");
@@ -140,11 +175,10 @@ namespace {
     logger.debug("5. line!");
     logger.trace("6. line!");
 
-    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "output_info.log"};
+    // get content and check
 
-    ls_std::FileReader reader {file};
-    ls_std::String content {reader.read()};
+    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    ls_std::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
@@ -152,13 +186,11 @@ namespace {
     ASSERT_TRUE(content.contains("4. line!"));
     ASSERT_FALSE(content.contains("5. line!"));
     ASSERT_FALSE(content.contains("6. line!"));
-
-    file.remove();
   }
 
   TEST_F(LoggerTest, setLogLevel)
   {
-    ls_std::Logger logger {createFileLogger("output.log")};
+    ls_std::Logger logger{createFileLogger("output.log")};
     logger.setLogLevel(ls_std::LogLevelValue::ERR);
 
     ASSERT_EQ(ls_std::LogLevelValue::ERR, logger.getLogLevel());
@@ -166,9 +198,12 @@ namespace {
 
   TEST_F(LoggerTest, trace)
   {
-    std::shared_ptr<ls_std::IWriter> writer = createFileLogger("output_trace.log");
+    // write to log file
 
-    ls_std::Logger logger {writer};
+    std::string logName = "output_trace.log";
+    std::shared_ptr<ls_std::IWriter> writer = createFileLogger(logName);
+
+    ls_std::Logger logger{writer};
     logger.setLogLevel(ls_std::LogLevelValue::TRACE);
     logger.fatal("1. line!");
     logger.error("2. line!");
@@ -177,11 +212,10 @@ namespace {
     logger.debug("5. line!");
     logger.trace("6. line!");
 
-    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "output_trace.log"};
+    // get content and check
 
-    ls_std::FileReader reader {file};
-    ls_std::String content {reader.read()};
+    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    ls_std::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
@@ -189,15 +223,16 @@ namespace {
     ASSERT_TRUE(content.contains("4. line!"));
     ASSERT_TRUE(content.contains("5. line!"));
     ASSERT_TRUE(content.contains("6. line!"));
-
-    file.remove();
   }
 
   TEST_F(LoggerTest, warn)
   {
-    std::shared_ptr<ls_std::IWriter> writer = createFileLogger("output_warn.log");
+    // write to log file
 
-    ls_std::Logger logger {writer};
+    std::string logName = "output_warn.log";
+    std::shared_ptr<ls_std::IWriter> writer = createFileLogger(logName);
+
+    ls_std::Logger logger{writer};
     logger.setLogLevel(ls_std::LogLevelValue::WARN);
     logger.fatal("1. line!");
     logger.error("2. line!");
@@ -206,11 +241,10 @@ namespace {
     logger.debug("5. line!");
     logger.trace("6. line!");
 
-    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
-    ls_std::File file {TestHelper::getResourcesFolderLocation() + "output_warn.log"};
+    // get content and check
 
-    ls_std::FileReader reader {file};
-    ls_std::String content {reader.read()};
+    std::dynamic_pointer_cast<ls_std::FileOutputStream>(writer)->close();
+    ls_std::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
@@ -218,7 +252,5 @@ namespace {
     ASSERT_FALSE(content.contains("4. line!"));
     ASSERT_FALSE(content.contains("5. line!"));
     ASSERT_FALSE(content.contains("6. line!"));
-
-    file.remove();
   }
 }

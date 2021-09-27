@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2020-11-06
+ * Changed:         2021-04-23
  *
  * */
 
@@ -15,13 +15,16 @@
 #include <cstring>
 
 // TODO: pass parameters, use class, show class name
-namespace ls_std {
-  class FileNotFoundException : public std::exception {
+namespace ls_std
+{
+  class FileNotFoundException : public std::exception
+  {
     public:
 
       FileNotFoundException() = default;
 
-      const char *what() const noexcept override {
+      const char *what() const noexcept override
+      {
         return "FileNotFoundException thrown - file not found!";
       };
   };
