@@ -61,6 +61,7 @@ A key value file offers the possibility to store simple information pairs in a f
 - it's now possible to retrieve library version
 - added more operators to __LogLevel__ class
 - added factory interface
+- added "current working directory" detection implementation for __File__ class
 
 #### Improvements ####
 
@@ -71,7 +72,7 @@ A key value file offers the possibility to store simple information pairs in a f
 
 #### Fixes ####
 
-- add missing header files to main header file
+- added missing header files to main header file
 
 ### Documentation ###
 
