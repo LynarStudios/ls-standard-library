@@ -89,7 +89,8 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvPair.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvFileReader.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvFileReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/base64/Base64.cpp)
 
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES
