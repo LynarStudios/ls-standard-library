@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2022-01-03
+ * Changed:         2022-01-08
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_BASE64_HPP
 
 #include <ls_std/encoding/IEncoding.hpp>
+#include <bitset>
 #include <vector>
 
 namespace ls_std
@@ -21,6 +22,8 @@ namespace ls_std
 
       Base64() = default;
       ~Base64() = default;
+
+      // implementation
 
       std::string encode(const std::string &_sequence) override;
       std::string decode(const std::string &_sequence) override;
@@ -39,7 +42,9 @@ namespace ls_std
         '4','5','6','7','8','9','+','/'
       };
 
-      static std::string _getSubSequence(const std::string& _sequence, size_t index);
+      static std::bitset<24> _getBitSequenceFromSequence(const std::string &basicString);
+      static std::string _getEncodingFromSubSequence(const std::string& basicString);
+      static std::string _getNextByteTriple(const std::string& _sequence, size_t index);
   };
 }
 

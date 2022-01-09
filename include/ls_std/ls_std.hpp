@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-09-18
+ * Changed:         2022-01-08
  *
  * */
 
@@ -27,6 +27,15 @@
 #include "boxing/Long.hpp"
 #include "boxing/String.hpp"
 
+#include "encoding/base64/Base64.hpp"
+#include "encoding/IEncoding.hpp"
+
+#include "event/Event.hpp"
+#include "event/EventTypes.hpp"
+#include "event/EventHandler.hpp"
+#include "event/IEventSubscriber.hpp"
+#include "event/EventManager.hpp"
+
 #include "exception/EventNotHandledException.hpp"
 #include "exception/EventNotSubscribedException.hpp"
 #include "exception/FileNotFoundException.hpp"
@@ -35,6 +44,8 @@
 #include "exception/IllegalArithmeticOperationException.hpp"
 #include "exception/IncompleteJsonException.hpp"
 #include "exception/NullPointerException.hpp"
+
+#include "factory/IFactory.hpp"
 
 #include "io/logging/LogLevel.hpp"
 #include "io/logging/LogLevelValue.hpp"
@@ -83,13 +94,5 @@
 #if _WIN32
 #include "utils/WindowsUtils.hpp"
 #endif
-
-#include "event/Event.hpp"
-#include "event/EventTypes.hpp"
-#include "event/EventHandler.hpp"
-#include "event/IEventSubscriber.hpp"
-#include "event/EventManager.hpp"
-
-#include "factory/IFactory.hpp"
 
 #endif
