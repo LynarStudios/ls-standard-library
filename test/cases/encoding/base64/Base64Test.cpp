@@ -26,6 +26,9 @@ namespace
       {}
   };
 
+  /*
+   * abc -> 01100001 01100010 01100011 -> 6382179
+   * */
   TEST_F(Base64Test, encode)
   {
     ls_std::Base64 base64{};

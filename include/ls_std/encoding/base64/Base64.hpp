@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2022-01-08
+ * Changed:         2022-01-16
  *
  * */
 
@@ -42,8 +42,11 @@ namespace ls_std
         '4','5','6','7','8','9','+','/'
       };
 
-      static std::bitset<24> _getBitSequenceFromSequence(const std::string &basicString);
-      static std::string _getEncodingFromSubSequence(const std::string& basicString);
+      static uint8_t _detectInitialShiftNumber(size_t size);
+      std::string _getEncodingFromBitSequence(uint32_t bitSequence, size_t characterSequenceSize);
+      static uint32_t _getBitSequenceFromCharacterSequence(const std::string &basicString);
+      char _getCharacterFromLookUpTable(uint8_t byteBuffer, uint8_t shiftByBits);
+      std::string _getEncodingFromCharacterSequence(const std::string& characterSequence);
       static std::string _getNextByteTriple(const std::string& _sequence, size_t index);
   };
 }
