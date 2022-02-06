@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-08
- * Changed:         2022-01-08
+ * Changed:         2022-02-06
  *
  * */
 
@@ -35,5 +35,13 @@ namespace
     std::string sequence = "abc";
 
     ASSERT_STREQ("YWJj", base64.encode(sequence).c_str());
+  }
+
+  TEST_F(Base64Test, decode)
+  {
+    ls_std::Base64 base64{};
+    std::string base64Sequence = "YWJjZA==";
+
+    ASSERT_STREQ("abcd", base64.decode(base64Sequence).c_str());
   }
 }
