@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-08
- * Changed:         2022-02-06
+ * Changed:         2022-02-27
  *
  * */
 
@@ -26,9 +26,6 @@ namespace
       {}
   };
 
-  /*
-   * abc -> 01100001 01100010 01100011 -> 6382179
-   * */
   TEST_F(Base64Test, encode)
   {
     ls_std::Base64 base64{};
@@ -40,8 +37,9 @@ namespace
   TEST_F(Base64Test, decode)
   {
     ls_std::Base64 base64{};
-    std::string base64Sequence = "YWJjZA==";
 
-    ASSERT_STREQ("abcd", base64.decode(base64Sequence).c_str());
+    ASSERT_STREQ("abc", base64.decode("YWJj").c_str());
+    ASSERT_STREQ("abcde", base64.decode("YWJjZGU=").c_str());
+    ASSERT_STREQ("Hello C++!", base64.decode("SGVsbG8gQysrIQ==").c_str());
   }
 }
