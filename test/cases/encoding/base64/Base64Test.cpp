@@ -29,9 +29,8 @@ namespace
   TEST_F(Base64Test, encode)
   {
     ls_std::Base64 base64{};
-    std::string sequence = "abc";
 
-    ASSERT_STREQ("YWJj", base64.encode(sequence).c_str());
+    ASSERT_STREQ("YWJj", base64.encode("abc").c_str());
   }
 
   TEST_F(Base64Test, decode)
