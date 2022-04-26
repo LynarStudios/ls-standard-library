@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2021-09-24
+ * Changed:         2022-04-26
  *
  * */
 
@@ -28,6 +28,6 @@ namespace
 
   TEST_F(LibraryVersionTest, getVersion)
   {
-    ASSERT_STREQ("2021.2.0", ls_std::getVersion().c_str());
+    ASSERT_STREQ("2022.1.0", ls_std::getVersion().c_str());
   }
 }
