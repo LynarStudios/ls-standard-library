@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2021-04-24
+ * Changed:         2022-04-29
  *
  * */
 
 #include <regex>
-#include <ls_std/base/Version.hpp>
+#include <ls_std/core/Version.hpp>
 
 ls_std::Version::Version(ls_std::version_type _majorVersion, ls_std::version_type _minorVersion, ls_std::version_type _patchVersion)
     : majorVersion(_majorVersion),

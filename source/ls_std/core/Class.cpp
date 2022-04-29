@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2021-04-24
+ * Changed:         2022-04-29
  *
  * */
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include <ls_std/exception/IllegalArgumentException.hpp>
 
 ls_std::Class::Class(const std::string &_name)

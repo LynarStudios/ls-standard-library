@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-05-01
+ * Changed:         2022-04-29
  *
  * */
 
 #ifndef LS_STD_FILE_OUTPUT_STREAM_HPP
 #define LS_STD_FILE_OUTPUT_STREAM_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "File.hpp"
 #include "IWriter.hpp"
 #include <fstream>

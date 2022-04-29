@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2021-07-16
+ * Changed:         2022-04-29
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <list>
 #include <memory>
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "XmlAttribute.hpp"
 
 namespace ls_std

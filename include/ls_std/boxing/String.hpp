@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-12
+ * Changed:         2022-04-29
  *
  * */
 
@@ -11,8 +11,8 @@
 #define LS_STD_STRING_HPP
 
 #include "IBoxing.hpp"
-#include <ls_std/base/Class.hpp>
-#include <ls_std/base/Types.hpp>
+#include <ls_std/core/Class.hpp>
+#include <ls_std/core/Types.hpp>
 #include <string>
 #include <memory>
 #include <vector>

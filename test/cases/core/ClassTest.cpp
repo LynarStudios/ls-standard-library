@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2021-05-24
+ * Changed:         2022-04-29
  *
  * */
 
@@ -27,7 +27,7 @@ namespace
       {}
   };
 
-  TEST_F(ClassTest, constructor_emoty_parameter)
+  TEST_F(ClassTest, constructor_empty_parameter)
   {
     EXPECT_THROW({
                    try

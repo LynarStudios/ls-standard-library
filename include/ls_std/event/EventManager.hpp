@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-27
+ * Changed:         2022-04-29
  *
  * */
 
 #ifndef LS_STD_EVENT_MANAGER_HPP
 #define LS_STD_EVENT_MANAGER_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include <map>
 #include <ls_std/event/EventTypes.hpp>
 #include <memory>

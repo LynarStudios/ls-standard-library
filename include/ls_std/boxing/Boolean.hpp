@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-07-08
+ * Changed:         2022-04-29
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_BOOLEAN_HPP
 
 #include <memory>
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "IBoxing.hpp"
 
 namespace ls_std

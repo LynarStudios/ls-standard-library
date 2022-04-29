@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2021-05-02
+ * Changed:         2022-04-29
  *
  * */
 
 #ifndef LS_STD_XML_READER_HPP
 #define LS_STD_XML_READER_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "XmlDocument.hpp"
 #include <ls_std/io/IReader.hpp>
 #include <ls_std/io/File.hpp>

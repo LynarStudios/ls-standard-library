@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-07-15
+ * Changed:         2022-04-29
  *
  * */
 
 #ifndef LS_STD_KV_DOCUMENT_HPP
 #define LS_STD_KV_DOCUMENT_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "KvPair.hpp"
 #include "KvTypes.hpp"
 #include <map>

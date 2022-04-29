@@ -52,7 +52,7 @@ endif ()
 ##########################################################
 
 set(SOURCE_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Class.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.cpp
@@ -75,7 +75,7 @@ set(SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/serialization/json/logic/SerializableJsonStateMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlAttribute.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlNode.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/base/Version.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlReader.cpp

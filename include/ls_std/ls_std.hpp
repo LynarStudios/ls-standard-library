@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2021-09-18
+ * Changed:         2022-04-29
  *
  * */
 
@@ -14,11 +14,6 @@
 #include <winsock2.h>
 #endif
 
-#include "base/Class.hpp"
-#include "base/Types.hpp"
-#include "base/Version.hpp"
-#include "base/LibraryVersion.hpp"
-
 #include "boxing/IBoxing.hpp"
 #include "boxing/Boolean.hpp"
 #include "boxing/Double.hpp"
@@ -26,6 +21,11 @@
 #include "boxing/Integer.hpp"
 #include "boxing/Long.hpp"
 #include "boxing/String.hpp"
+
+#include "core/Class.hpp"
+#include "core/Types.hpp"
+#include "core/Version.hpp"
+#include "core/LibraryVersion.hpp"
 
 #include "exception/EventNotHandledException.hpp"
 #include "exception/EventNotSubscribedException.hpp"

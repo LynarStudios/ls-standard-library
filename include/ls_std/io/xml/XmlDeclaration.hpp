@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2021-07-16
+ * Changed:         2022-04-29
  *
  * */
 
 #ifndef LS_STD_XML_DECLARATION_HPP
 #define LS_STD_XML_DECLARATION_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "XmlAttribute.hpp"
 
 namespace ls_std
