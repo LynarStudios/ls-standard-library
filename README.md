@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2021.2.0 #
+# Lynar Studios - Standard Library 2022.1.0 #
 
 This is a cross-platform standard library written in C++ offering functionalities you'd usually miss in C++ standard library, especially if you'd search for cross-platform implementations. This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
  
@@ -55,24 +55,15 @@ A key value file offers the possibility to store simple information pairs in a f
 
 #### Features ####
 
-- extended EventManager class by adding EventHandler availability check method
-- added exceptions for event management
-- extended Date class by introducing __+=__ and __-=__ operators
-- it's now possible to retrieve library version
-- added more operators to __LogLevel__ class
-- added factory interface
-- added "current working directory" detection implementation for __File__ class
+- TBA
 
 #### Improvements ####
 
-- increased test coverage by adding more unit tests
-- improved overall error handling by adding more error checks
-- reduced overall unnecessary complexity of public classes 
-- improved naming of certain classes
+- TBA
 
 #### Fixes ####
 
-- added missing header files to main header file
+- TBA
 
 ### Documentation ###
 
