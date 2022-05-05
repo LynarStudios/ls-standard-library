@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-12
+ * Changed:         2022-05-05
  *
  * */
 
 #include <cmath>
 #include <ls_std/boxing/Float.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::Float::Float()
     : ls_std::Class("Float"),

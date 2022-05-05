@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-04-23
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/logic/StateMachine.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::StateMachine::StateMachine(const std::string& _name) : ls_std::Class("StateMachine")
 {

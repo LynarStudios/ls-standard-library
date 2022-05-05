@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2021-07-08
+ * Changed:         2022-05-05
  *
  * */
 
 #include <algorithm>
 #include <ls_std/boxing/Boolean.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::Boolean::Boolean() : ls_std::Class("Boolean")
 {}

@@ -7,8 +7,8 @@
  *
  * */
 
-#include <ls_std/serialization/json/event/SerializableJsonEvent.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include "ls_std/event/serialization/SerializableJsonEvent.hpp"
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJsonEvent::SerializableJsonEvent(const std::shared_ptr<ls_std::Event> &_value) : ls_std::Class("SerializableJsonEvent")
 {

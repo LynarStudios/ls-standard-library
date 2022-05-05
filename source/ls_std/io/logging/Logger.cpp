@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-07-16
+ * Changed:         2022-05-05
  *
  * */
 
@@ -11,7 +11,7 @@
 #include <ls_std/time/Date.hpp>
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/boxing/String.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer)
     : ls_std::Class("Logger"),

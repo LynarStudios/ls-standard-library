@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2021-07-14
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/boxing/Integer.hpp>
-#include <ls_std/exception/IllegalArithmeticOperationException.hpp>
+#include <ls_std/core/exception/IllegalArithmeticOperationException.hpp>
 
 ls_std::Integer::Integer(int _value)
     : ls_std::Class("Integer"),

@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2021-05-27
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/logic/StateConnection.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::StateConnection::StateConnection(const ls_std::StateConnectionId& _connectionId, const ls_std::StateId& _stateId) : ls_std::Class("StateConnection")
 {

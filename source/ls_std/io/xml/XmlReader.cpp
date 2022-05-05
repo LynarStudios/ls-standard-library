@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2021-05-02
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/xml/XmlReader.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/io/FileReader.hpp>
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/io/xml/XmlParser.hpp>

@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-04-23
+ * Changed:         2022-05-05
  *
  * */
 
 #include <fstream>
 #include <ls_std/io/FileReader.hpp>
-#include <ls_std/exception/FileNotFoundException.hpp>
-#include <ls_std/exception/FileOperationException.hpp>
+#include <ls_std/core/exception/FileNotFoundException.hpp>
+#include <ls_std/core/exception/FileOperationException.hpp>
 
 ls_std::FileReader::FileReader(ls_std::File &_file)
     : ls_std::Class("FileReader"),

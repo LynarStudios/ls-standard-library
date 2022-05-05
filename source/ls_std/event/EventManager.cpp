@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-27
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/event/EventManager.hpp>
-#include <ls_std/exception/EventNotSubscribedException.hpp>
-#include <ls_std/exception/EventNotHandledException.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/EventNotSubscribedException.hpp>
+#include <ls_std/core/exception/EventNotHandledException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::EventManager::EventManager() : ls_std::Class("EventManager")
 {}

@@ -9,7 +9,7 @@ project(ls_std VERSION 2022.1.0)
 # Options
 ##########################################################
 
-option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." ON)
+option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
 option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
 option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
 option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)

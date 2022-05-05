@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2021-07-16
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/xml/XmlNode.hpp>
-#include <ls_std/utils/STLUtils.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/utils/STLUtils.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::XmlNode::XmlNode(std::string _name)
     : ls_std::Class("XmlNode"),

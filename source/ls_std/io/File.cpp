@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-09-26
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/File.hpp>
-#include <ls_std/exception/FileOperationException.hpp>
+#include <ls_std/core/exception/FileOperationException.hpp>
 #include <ls_std/io/FilePathSeparatorMatch.hpp>
 #include <fstream>
 #include <algorithm>

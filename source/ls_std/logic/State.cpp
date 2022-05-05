@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-07-14
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/logic/State.hpp>
-#include <ls_std/exception/NullPointerException.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/NullPointerException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::State::State(const ls_std::StateId& _id) : ls_std::Class("State")
 {

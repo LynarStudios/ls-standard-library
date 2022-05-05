@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-23
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_I_FACTORY_HPP
 
 #include <memory>
-#include <ls_std/core/Class.hpp>
+#include "ls_std/core/Class.hpp"
 
 namespace ls_std
 {

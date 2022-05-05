@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-07-14
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/event/Event.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::Event::Event(const ls_std::event_id &_id) : ls_std::Class("Event")
 {

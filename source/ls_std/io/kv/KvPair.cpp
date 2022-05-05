@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/kv/KvPair.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::KvPair::KvPair(const ls_std::kv_key &_key, ls_std::kv_value _value)
     : ls_std::Class("KvPair"),

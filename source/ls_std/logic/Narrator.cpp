@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2021-05-27
+ * Changed:         2022-05-05
  *
  * */
 
-#include <ls_std/utils/STLUtils.hpp>
+#include <ls_std/core/utils/STLUtils.hpp>
 #include <ls_std/logic/Narrator.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::Narrator::Narrator() : ls_std::Class("Narrator")
 {}

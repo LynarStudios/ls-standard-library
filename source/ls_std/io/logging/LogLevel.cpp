@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-05-02
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/logging/LogLevel.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::LogLevel::LogLevel(const ls_std::LogLevelValue &_value)
     : ls_std::Class("LogLevel"),

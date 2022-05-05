@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2021-07-16
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/xml/XmlAttribute.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::XmlAttribute::XmlAttribute(const std::string& _name) : ls_std::Class("XmlAttribute")
 {

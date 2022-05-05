@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-07-15
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/kv/KvFileReader.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/io/FileReader.hpp>
 #include <ls_std/io/kv/KvParser.hpp>
 

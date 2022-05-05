@@ -7,9 +7,9 @@
  *
  * */
 
-#include <ls_std/serialization/json/logic/SerializableJsonState.hpp>
-#include <ls_std/serialization/json/logic/SerializableJsonStateConnection.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include "ls_std/logic/serialization/SerializableJsonState.hpp"
+#include "ls_std/logic/serialization/SerializableJsonStateConnection.hpp"
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls_std::SerializableJsonState::SerializableJsonState(const std::shared_ptr<ls_std::State> &_value) : ls_std::Class("SerializableJsonState")
 {

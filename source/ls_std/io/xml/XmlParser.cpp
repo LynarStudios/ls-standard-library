@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-05-02
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/xml/XmlParser.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/boxing/String.hpp>
 
 ls_std::XmlParser::XmlParser(const std::shared_ptr<ls_std::XmlDocument> &_document) : ls_std::Class("XmlParser")
