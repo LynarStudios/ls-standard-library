@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-09-17
+ * Changed:         2022-05-05
  *
  * */
 
@@ -30,28 +30,28 @@ namespace
   TEST_F(FileOutputStreamTest, constructor_file_does_not_exist)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "not_existing.txt";
-    ls_std::File file{path};
+    ls::File file{path};
 
     EXPECT_THROW({
                    try
                    {
-                     ls_std::FileOutputStream outputStream{file};
+                     ls::FileOutputStream outputStream{file};
                    }
-                   catch (const ls_std::FileNotFoundException &_exception)
+                   catch (const ls::FileNotFoundException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::FileNotFoundException);
+                 }, ls::FileNotFoundException);
   }
 
   TEST_F(FileOutputStreamTest, write)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
-    ls_std::File file{path};
+    ls::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());
 
-    ls_std::FileOutputStream outputStream{file};
+    ls::FileOutputStream outputStream{file};
     ASSERT_TRUE(outputStream.write("Hello! "));
     ASSERT_TRUE(outputStream.write("How are you?"));
     outputStream.close();
@@ -63,24 +63,24 @@ namespace
   TEST_F(FileOutputStreamTest, write_with_another_appending_stream)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
-    ls_std::File file{path};
+    ls::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());
 
-    ls_std::FileOutputStream outputStream{file};
+    ls::FileOutputStream outputStream{file};
     ASSERT_TRUE(outputStream.write("Hello! "));
     ASSERT_TRUE(outputStream.write("How are you?"));
     outputStream.close();
 
-    ls_std::FileOutputStream newOutputStream{file, true};
+    ls::FileOutputStream newOutputStream{file, true};
     ASSERT_TRUE(newOutputStream.write(" I'm fine! "));
     ASSERT_TRUE(newOutputStream.write("Thank you!"));
     newOutputStream.close();
 
     // validation
 
-    ls_std::FileReader reader{file};
-    ls_std::String content{reader.read()};
+    ls::FileReader reader{file};
+    ls::String content{reader.read()};
 
     ASSERT_TRUE(content.contains("Hello! How are you? I'm fine! Thank you!"));
 
@@ -91,23 +91,23 @@ namespace
   TEST_F(FileOutputStreamTest, write_no_permission_to_write)
   {
     #if defined(unix) || defined(__APPLE__)
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    ls::File file{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
     #endif
     #ifdef _WIN32
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    ls::File file{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
     #endif
 
-    ls_std::FileOutputStream outputStream{file};
+    ls::FileOutputStream outputStream{file};
 
     EXPECT_THROW({
                    try
                    {
                      outputStream.write("something");
                    }
-                   catch (const ls_std::FileOperationException &_exception)
+                   catch (const ls::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::FileOperationException);
+                 }, ls::FileOperationException);
   }
 }

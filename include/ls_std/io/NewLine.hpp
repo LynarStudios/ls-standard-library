@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2021-04-23
+ * Changed:         2022-05-05
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <string>
 
-namespace ls_std
+namespace ls
 {
   class NewLine
   {
@@ -26,10 +26,10 @@ namespace ls_std
         std::string newLine{};
 
         #if defined(unix) || defined(__APPLE__)
-        newLine = ls_std::NewLine::getUnixNewLine();
+        newLine = ls::NewLine::getUnixNewLine();
         #endif
         #ifdef _WIN32
-        newLine = ls_std::NewLine::getWindowsNewLine();
+        newLine = ls::NewLine::getWindowsNewLine();
         #endif
 
         return newLine;

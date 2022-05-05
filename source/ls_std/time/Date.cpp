@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-05-22
+ * Changed:         2022-05-05
  *
  * */
 
@@ -11,88 +11,88 @@
 #include <sstream>
 #include <ls_std/time/Date.hpp>
 
-ls_std::Date::Date() : ls_std::Class("Date")
+ls::Date::Date() : ls::Class("Date")
 {
   this->timestamp = std::time(nullptr);
   this->_init();
 }
 
-ls_std::Date &ls_std::Date::operator+(int _value)
+ls::Date &ls::Date::operator+(int _value)
 {
   this->_incrementByDays(_value);
   return *this;
 }
 
-ls_std::Date &ls_std::Date::operator-(int _value)
+ls::Date &ls::Date::operator-(int _value)
 {
   this->_decrementByDays(_value);
   return *this;
 }
 
-ls_std::Date &ls_std::Date::operator+=(int _value)
+ls::Date &ls::Date::operator+=(int _value)
 {
   this->_incrementByDays(_value);
   return *this;
 }
 
-ls_std::Date &ls_std::Date::operator-=(int _value)
+ls::Date &ls::Date::operator-=(int _value)
 {
   this->_decrementByDays(_value);
   return *this;
 }
 
-bool ls_std::Date::after(const ls_std::Date &_foreignDate) const
+bool ls::Date::after(const ls::Date &_foreignDate) const
 {
   return this->timestamp > _foreignDate.getTime();
 }
 
-bool ls_std::Date::before(const ls_std::Date &_foreignDate) const
+bool ls::Date::before(const ls::Date &_foreignDate) const
 {
   return this->timestamp < _foreignDate.getTime();
 }
 
-int ls_std::Date::getDay()
+int ls::Date::getDay()
 {
   return this->localTime->tm_mday;
 }
 
-int ls_std::Date::getHour()
+int ls::Date::getHour()
 {
   return this->localTime->tm_hour;
 }
 
-int ls_std::Date::getMinute()
+int ls::Date::getMinute()
 {
   return this->localTime->tm_min;
 }
 
-int ls_std::Date::getMonth()
+int ls::Date::getMonth()
 {
   return this->localTime->tm_mon + 1;
 }
 
-int ls_std::Date::getSecond()
+int ls::Date::getSecond()
 {
   return this->localTime->tm_sec;
 }
 
-int ls_std::Date::getYear()
+int ls::Date::getYear()
 {
   return this->localTime->tm_year + 1900;
 }
 
-time_t ls_std::Date::getTime() const
+time_t ls::Date::getTime() const
 {
   return this->timestamp;
 }
 
-void ls_std::Date::setTime(time_t _timestamp)
+void ls::Date::setTime(time_t _timestamp)
 {
   this->timestamp = _timestamp;
   this->_init();
 }
 
-std::string ls_std::Date::toString()
+std::string ls::Date::toString()
 {
   std::stringstream _stream{};
   _stream << std::put_time(this->localTime, "%Y-%m-%d %H:%M:%S");
@@ -100,17 +100,17 @@ std::string ls_std::Date::toString()
   return _stream.str();
 }
 
-void ls_std::Date::_decrementByDays(int _value)
+void ls::Date::_decrementByDays(int _value)
 {
   this->timestamp -= (_value * 86400);
 }
 
-void ls_std::Date::_incrementByDays(int _value)
+void ls::Date::_incrementByDays(int _value)
 {
   this->timestamp += (_value * 86400);
 }
 
-void ls_std::Date::_init()
+void ls::Date::_init()
 {
   this->localTime = std::localtime(&this->timestamp);
 }

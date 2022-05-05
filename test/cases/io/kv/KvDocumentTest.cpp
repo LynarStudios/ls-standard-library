@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-07-15
+ * Changed:         2022-05-05
  *
  * */
 
@@ -28,8 +28,8 @@ namespace
 
   TEST_F(KvDocumentTest, addPair)
   {
-    ls_std::KvDocument document{};
-    ls_std::KvPair pair{"port", "13088"};
+    ls::KvDocument document{};
+    ls::KvPair pair{"port", "13088"};
 
     ASSERT_TRUE(document.addPair(pair));
     ASSERT_EQ(1, document.getPairs().size());
@@ -37,8 +37,8 @@ namespace
 
   TEST_F(KvDocumentTest, addPair_retry_to_add_pair)
   {
-    ls_std::KvDocument document{};
-    ls_std::KvPair pair{"port", "13088"};
+    ls::KvDocument document{};
+    ls::KvPair pair{"port", "13088"};
 
     ASSERT_TRUE(document.addPair(pair));
     ASSERT_FALSE(document.addPair(pair));
@@ -48,8 +48,8 @@ namespace
   {
     // preparation
 
-    ls_std::KvDocument document{};
-    ls_std::KvPair pair{"port", "13088"};
+    ls::KvDocument document{};
+    ls::KvPair pair{"port", "13088"};
     document.addPair(pair);
 
     // check
@@ -61,21 +61,21 @@ namespace
 
   TEST_F(KvDocumentTest, getPairs)
   {
-    ls_std::KvDocument document{};
+    ls::KvDocument document{};
     ASSERT_TRUE(document.getPairs().empty());
   }
 
   TEST_F(KvDocumentTest, hasPair)
   {
-    ls_std::KvDocument document{};
-    document.addPair(ls_std::KvPair{"port", "80"});
+    ls::KvDocument document{};
+    document.addPair(ls::KvPair{"port", "80"});
 
     ASSERT_TRUE(document.hasPair("port"));
   }
 
   TEST_F(KvDocumentTest, hasPair_no_pairs_available)
   {
-    ls_std::KvDocument document{};
+    ls::KvDocument document{};
     ASSERT_FALSE(document.hasPair("port"));
   }
 
@@ -83,10 +83,10 @@ namespace
   {
     // preparation
 
-    ls_std::KvDocument document{};
-    document.addPair(ls_std::KvPair{"port", "80"});
-    document.addPair(ls_std::KvPair{"host", "localhost"});
-    document.addPair(ls_std::KvPair{"protocol", "TCP"});
+    ls::KvDocument document{};
+    document.addPair(ls::KvPair{"port", "80"});
+    document.addPair(ls::KvPair{"host", "localhost"});
+    document.addPair(ls::KvPair{"protocol", "TCP"});
 
     // remove pair and check
 
@@ -98,7 +98,7 @@ namespace
 
   TEST_F(KvDocumentTest, removePair_no_pair_available)
   {
-    ls_std::KvDocument document{};
+    ls::KvDocument document{};
     ASSERT_FALSE(document.removePair("port"));
   }
 }

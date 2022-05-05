@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -14,9 +14,9 @@
 #include <ls_std/core/Class.hpp>
 #include "IBoxing.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class Double : public ls_std::Class, public ls_std::IBoxing
+  class Double : public ls::Class, public ls::IBoxing
   {
     public:
 
@@ -30,44 +30,44 @@ namespace ls_std
 
       // assignment operators
 
-      ls_std::Double &operator=(double _value);
+      ls::Double &operator=(double _value);
 
       // arithmetic operators
 
       double operator-() const;
-      double operator+(const ls_std::Double &_double) const;
+      double operator+(const ls::Double &_double) const;
       double operator+(double _value) const;
-      double operator*(const ls_std::Double &_double) const;
+      double operator*(const ls::Double &_double) const;
       double operator*(double _value) const;
-      double operator-(const ls_std::Double &_double) const;
+      double operator-(const ls::Double &_double) const;
       double operator-(double _value) const;
-      double operator/(const ls_std::Double &_double) const;
+      double operator/(const ls::Double &_double) const;
       double operator/(double _value) const;
 
       // compound operators
 
-      ls_std::Double &operator+=(const ls_std::Double &_double);
-      ls_std::Double &operator+=(double _value);
-      ls_std::Double &operator-=(const ls_std::Double &_double);
-      ls_std::Double &operator-=(double _value);
-      ls_std::Double &operator*=(const ls_std::Double &_double);
-      ls_std::Double &operator*=(double _value);
-      ls_std::Double &operator/=(const ls_std::Double &_double);
-      ls_std::Double &operator/=(double _value);
+      ls::Double &operator+=(const ls::Double &_double);
+      ls::Double &operator+=(double _value);
+      ls::Double &operator-=(const ls::Double &_double);
+      ls::Double &operator-=(double _value);
+      ls::Double &operator*=(const ls::Double &_double);
+      ls::Double &operator*=(double _value);
+      ls::Double &operator/=(const ls::Double &_double);
+      ls::Double &operator/=(double _value);
 
       // comparison operators
 
-      bool operator==(const ls_std::Double &_double) const;
+      bool operator==(const ls::Double &_double) const;
       bool operator==(double _value) const;
-      bool operator!=(const ls_std::Double &_double) const;
+      bool operator!=(const ls::Double &_double) const;
       bool operator!=(double _value) const;
-      bool operator>(const ls_std::Double &_double) const;
+      bool operator>(const ls::Double &_double) const;
       bool operator>(double _value) const;
-      bool operator>=(const ls_std::Double &_double) const;
+      bool operator>=(const ls::Double &_double) const;
       bool operator>=(double _value) const;
-      bool operator<(const ls_std::Double &_double) const;
+      bool operator<(const ls::Double &_double) const;
       bool operator<(double _value) const;
-      bool operator<=(const ls_std::Double &_double) const;
+      bool operator<=(const ls::Double &_double) const;
       bool operator<=(double _value) const;
 
       // increment / decrement operator

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -16,30 +16,30 @@
 #include "KvParseParameter.hpp"
 #include <memory>
 
-namespace ls_std
+namespace ls
 {
-  class KvParser : public ls_std::Class
+  class KvParser : public ls::Class
   {
     public:
 
-      explicit KvParser(const std::shared_ptr<ls_std::KvDocument> &_document);
+      explicit KvParser(const std::shared_ptr<ls::KvDocument> &_document);
       ~KvParser() override = default;
 
-      std::shared_ptr<ls_std::KvDocument> getDocument();
-      void parse(const ls_std::byte_field &_data);
-      void setDocument(const std::shared_ptr<ls_std::KvDocument> &_document);
+      std::shared_ptr<ls::KvDocument> getDocument();
+      void parse(const ls::byte_field &_data);
+      void setDocument(const std::shared_ptr<ls::KvDocument> &_document);
 
     private:
 
-      std::shared_ptr<ls_std::KvDocument> document{};
+      std::shared_ptr<ls::KvDocument> document{};
 
-      void _assignDocument(const std::shared_ptr<ls_std::KvDocument> &_document);
-      static bool _lineHasPair(ls_std::KvParseParameter _parseParameter);
-      void _parse(const ls_std::byte_field &_data);
-      void _parsePair(ls_std::KvParseParameter _parseParameter);
-      static ls_std::KvParseParameter _readLine(const ls_std::byte_field &_data, std::string::size_type _index);
-      static void _readLineWithUnixLineBreak(ls_std::KvParseParameter &_parseParameter);
-      static void _readLineWithWindowsLineBreak(ls_std::KvParseParameter &_parseParameter);
+      void _assignDocument(const std::shared_ptr<ls::KvDocument> &_document);
+      static bool _lineHasPair(ls::KvParseParameter _parseParameter);
+      void _parse(const ls::byte_field &_data);
+      void _parsePair(ls::KvParseParameter _parseParameter);
+      static ls::KvParseParameter _readLine(const ls::byte_field &_data, std::string::size_type _index);
+      static void _readLineWithUnixLineBreak(ls::KvParseParameter &_parseParameter);
+      static void _readLineWithWindowsLineBreak(ls::KvParseParameter &_parseParameter);
   };
 }
 

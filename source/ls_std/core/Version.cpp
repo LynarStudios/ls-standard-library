@@ -3,22 +3,22 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
 #include <regex>
 #include <ls_std/core/Version.hpp>
 
-ls_std::Version::Version(ls_std::version_type _majorVersion, ls_std::version_type _minorVersion, ls_std::version_type _patchVersion)
+ls::Version::Version(ls::version_type _majorVersion, ls::version_type _minorVersion, ls::version_type _patchVersion)
     : majorVersion(_majorVersion),
       minorVersion(_minorVersion),
       patchVersion(_patchVersion)
 {}
 
-ls_std::byte_field ls_std::Version::marshal()
+ls::byte_field ls::Version::marshal()
 {
-  ls_std::byte_field data{};
+  ls::byte_field data{};
 
   data += std::to_string(this->majorVersion) + ".";
   data += std::to_string(this->minorVersion) + ".";
@@ -27,11 +27,11 @@ ls_std::byte_field ls_std::Version::marshal()
   return data;
 }
 
-void ls_std::Version::unmarshal(const ls_std::byte_field &_data)
+void ls::Version::unmarshal(const ls::byte_field &_data)
 {
   std::string field = _data;
 
-  if (ls_std::Version::_isValid(_data))
+  if (ls::Version::_isValid(_data))
   {
     size_t position = field.find('.');
     std::string subSequence = field.substr(0, position);
@@ -47,42 +47,42 @@ void ls_std::Version::unmarshal(const ls_std::byte_field &_data)
   }
 }
 
-ls_std::version_type ls_std::Version::getMajorVersion() const
+ls::version_type ls::Version::getMajorVersion() const
 {
   return this->majorVersion;
 }
 
-ls_std::version_type ls_std::Version::getMinorVersion() const
+ls::version_type ls::Version::getMinorVersion() const
 {
   return this->minorVersion;
 }
 
-ls_std::version_type ls_std::Version::getPatchVersion() const
+ls::version_type ls::Version::getPatchVersion() const
 {
   return this->patchVersion;
 }
 
-bool ls_std::Version::isValid(const std::string &_versionString)
+bool ls::Version::isValid(const std::string &_versionString)
 {
-  return ls_std::Version::_isValid(_versionString);
+  return ls::Version::_isValid(_versionString);
 }
 
-void ls_std::Version::setMajorVersion(ls_std::version_type _major)
+void ls::Version::setMajorVersion(ls::version_type _major)
 {
   this->majorVersion = _major;
 }
 
-void ls_std::Version::setMinorVersion(ls_std::version_type _minor)
+void ls::Version::setMinorVersion(ls::version_type _minor)
 {
   this->minorVersion = _minor;
 }
 
-void ls_std::Version::setPatchVersion(ls_std::version_type _patch)
+void ls::Version::setPatchVersion(ls::version_type _patch)
 {
   this->patchVersion = _patch;
 }
 
-bool ls_std::Version::_isValid(const std::string &_versionString)
+bool ls::Version::_isValid(const std::string &_versionString)
 {
   bool isValidVersionString{};
   static std::regex versionRegex{R"(\d+[.]\d+[.]\d+)"};

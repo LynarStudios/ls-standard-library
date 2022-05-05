@@ -13,7 +13,7 @@
 #include <string>
 #include <regex>
 
-namespace ls_std
+namespace ls
 {
   class RegexUtils
   {

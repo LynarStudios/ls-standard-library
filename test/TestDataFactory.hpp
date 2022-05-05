@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2021-05-02
+ * Changed:         2022-05-05
  *
  * */
 
@@ -21,8 +21,8 @@ namespace ls_std_test
       TestDataFactory() = default;
       ~TestDataFactory() = default;
 
-      static ls_std::StateMachine createStateMachine();
-      static std::shared_ptr<ls_std::XmlNode> createXmlContent();
+      static ls::StateMachine createStateMachine();
+      static std::shared_ptr<ls::XmlNode> createXmlContent();
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-07-15
+ * Changed:         2022-05-05
  *
  * */
 
@@ -32,30 +32,30 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::KvPair pair = ls_std::KvPair("", "1989");
+                     ls::KvPair pair = ls::KvPair("", "1989");
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(KvPairTest, getKey)
   {
-    ls_std::KvPair pair{"port", "13088"};
+    ls::KvPair pair{"port", "13088"};
     ASSERT_STREQ("port", pair.getKey().c_str());
   }
 
   TEST_F(KvPairTest, getValue)
   {
-    ls_std::KvPair pair{"port", "13088"};
+    ls::KvPair pair{"port", "13088"};
     ASSERT_STREQ("13088", pair.getValue().c_str());
   }
 
   TEST_F(KvPairTest, setValue)
   {
-    ls_std::KvPair pair{"port", "13088"};
+    ls::KvPair pair{"port", "13088"};
     ASSERT_STREQ("13088", pair.getValue().c_str());
 
     pair.setValue("8080");

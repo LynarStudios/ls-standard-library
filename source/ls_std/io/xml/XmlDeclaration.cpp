@@ -3,59 +3,59 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2021-07-16
+ * Changed:         2022-05-05
  *
  * */
 
 #include <ls_std/io/xml/XmlDeclaration.hpp>
 
-ls_std::XmlDeclaration::XmlDeclaration(const std::string& _version) : ls_std::Class("XmlDeclaration")
+ls::XmlDeclaration::XmlDeclaration(const std::string& _version) : ls::Class("XmlDeclaration")
 {
   this->version.setValue(_version);
 }
 
-std::string ls_std::XmlDeclaration::getEncoding()
+std::string ls::XmlDeclaration::getEncoding()
 {
   return this->encoding.getValue();
 }
 
-std::string ls_std::XmlDeclaration::getStandalone()
+std::string ls::XmlDeclaration::getStandalone()
 {
   return this->standalone.getValue();
 }
 
-std::string ls_std::XmlDeclaration::getVersion()
+std::string ls::XmlDeclaration::getVersion()
 {
   return this->version.getValue();
 }
 
-void ls_std::XmlDeclaration::setEncoding(const std::string& _encoding)
+void ls::XmlDeclaration::setEncoding(const std::string& _encoding)
 {
   this->encoding.setValue(_encoding);
 }
 
-void ls_std::XmlDeclaration::setStandalone(const std::string& _standalone)
+void ls::XmlDeclaration::setStandalone(const std::string& _standalone)
 {
   this->standalone.setValue(_standalone);
 }
 
-void ls_std::XmlDeclaration::setVersion(const std::string& _version)
+void ls::XmlDeclaration::setVersion(const std::string& _version)
 {
   this->version.setValue(_version);
 }
 
-std::string ls_std::XmlDeclaration::toXml()
+std::string ls::XmlDeclaration::toXml()
 {
   std::string declaration = "<?xml";
 
-  declaration += ls_std::XmlDeclaration::_toXmlAttribute(this->version);
-  declaration += ls_std::XmlDeclaration::_toXmlAttribute(this->encoding);
-  declaration += ls_std::XmlDeclaration::_toXmlAttribute(this->standalone);
+  declaration += ls::XmlDeclaration::_toXmlAttribute(this->version);
+  declaration += ls::XmlDeclaration::_toXmlAttribute(this->encoding);
+  declaration += ls::XmlDeclaration::_toXmlAttribute(this->standalone);
 
   return declaration + " ?>";
 }
 
-std::string ls_std::XmlDeclaration::_toXmlAttribute(ls_std::XmlAttribute _attribute)
+std::string ls::XmlDeclaration::_toXmlAttribute(ls::XmlAttribute _attribute)
 {
   std::string xmlString{};
 

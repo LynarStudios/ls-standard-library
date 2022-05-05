@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-09-18
- * Changed:         2021-09-18
+ * Changed:         2022-05-05
  *
  * */
 
@@ -28,7 +28,7 @@ namespace
 
   TEST_F(StandardOutputWriterTest, write)
   {
-    ls_std::StandardOutputWriter writer{};
+    ls::StandardOutputWriter writer{};
     ASSERT_TRUE(writer.write("Try something!"));
   }
 }

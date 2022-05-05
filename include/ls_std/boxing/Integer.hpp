@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -16,9 +16,9 @@
 #include <ls_std/serialization/ISerializable.hpp>
 #include <ls_std/io/IStorable.hpp>
 
-namespace ls_std
+namespace ls
 {
-  class Integer : public ls_std::Class, public ls_std::IBoxing
+  class Integer : public ls::Class, public ls::IBoxing
   {
     public:
 
@@ -32,59 +32,59 @@ namespace ls_std
 
       // assignment operators
 
-      ls_std::Integer &operator=(int _value);
+      ls::Integer &operator=(int _value);
 
       // arithmetic operators
 
       int operator-() const;
-      int operator+(const ls_std::Integer &_integer) const;
+      int operator+(const ls::Integer &_integer) const;
       int operator+(int _value) const;
-      int operator*(const ls_std::Integer &_integer) const;
+      int operator*(const ls::Integer &_integer) const;
       int operator*(int _value) const;
-      int operator-(const ls_std::Integer &_integer) const;
+      int operator-(const ls::Integer &_integer) const;
       int operator-(int _value) const;
-      int operator/(const ls_std::Integer &_integer) const;
+      int operator/(const ls::Integer &_integer) const;
       int operator/(int _value) const;
-      int operator%(const ls_std::Integer &_integer) const;
+      int operator%(const ls::Integer &_integer) const;
       int operator%(int _value) const;
 
       // compound operators
 
-      ls_std::Integer &operator+=(const ls_std::Integer &_integer);
-      ls_std::Integer &operator+=(int _value);
-      ls_std::Integer &operator-=(const ls_std::Integer &_integer);
-      ls_std::Integer &operator-=(int _value);
-      ls_std::Integer &operator*=(const ls_std::Integer &_integer);
-      ls_std::Integer &operator*=(int _value);
-      ls_std::Integer &operator/=(const ls_std::Integer &_integer);
-      ls_std::Integer &operator/=(int _value);
+      ls::Integer &operator+=(const ls::Integer &_integer);
+      ls::Integer &operator+=(int _value);
+      ls::Integer &operator-=(const ls::Integer &_integer);
+      ls::Integer &operator-=(int _value);
+      ls::Integer &operator*=(const ls::Integer &_integer);
+      ls::Integer &operator*=(int _value);
+      ls::Integer &operator/=(const ls::Integer &_integer);
+      ls::Integer &operator/=(int _value);
 
       // comparison operators
 
-      bool operator==(const ls_std::Integer &_integer) const;
+      bool operator==(const ls::Integer &_integer) const;
       bool operator==(int _value) const;
-      bool operator!=(const ls_std::Integer &_integer) const;
+      bool operator!=(const ls::Integer &_integer) const;
       bool operator!=(int _value) const;
-      bool operator>(const ls_std::Integer &_integer) const;
+      bool operator>(const ls::Integer &_integer) const;
       bool operator>(int _value) const;
-      bool operator>=(const ls_std::Integer &_integer) const;
+      bool operator>=(const ls::Integer &_integer) const;
       bool operator>=(int _value) const;
-      bool operator<(const ls_std::Integer &_integer) const;
+      bool operator<(const ls::Integer &_integer) const;
       bool operator<(int _value) const;
-      bool operator<=(const ls_std::Integer &_integer) const;
+      bool operator<=(const ls::Integer &_integer) const;
       bool operator<=(int _value) const;
 
       // logical operators
 
-      friend bool operator!(const ls_std::Integer &_integer)
+      friend bool operator!(const ls::Integer &_integer)
       {
         return !_integer.value;
       }
 
-      bool operator&&(const ls_std::Integer &_integer) const;
+      bool operator&&(const ls::Integer &_integer) const;
       bool operator&&(int _value) const;
       bool operator&&(bool _expression) const;
-      bool operator||(const ls_std::Integer &_integer) const;
+      bool operator||(const ls::Integer &_integer) const;
       bool operator||(int _value) const;
       bool operator||(bool _expression) const;
 

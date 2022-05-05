@@ -11,25 +11,25 @@
 #include <ls_std/core/exception/NullPointerException.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::State::State(const ls_std::StateId& _id) : ls_std::Class("State")
+ls::State::State(const ls::StateId& _id) : ls::Class("State")
 {
   this->_assignStateId(_id);
 }
 
-bool ls_std::State::addStateConnection(const ls_std::StateConnectionId &_connectionId, const std::shared_ptr<ls_std::State> &_connectedState)
+bool ls::State::addStateConnection(const ls::StateConnectionId &_connectionId, const std::shared_ptr<ls::State> &_connectedState)
 {
   bool added{};
-  std::shared_ptr<ls_std::StateConnection> connection{};
+  std::shared_ptr<ls::StateConnection> connection{};
 
   if (_connectionId.empty() || _connectedState == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
   else
   {
     if (!this->_hasConnection(_connectionId))
     {
-      connection = std::make_shared<ls_std::StateConnection>(_connectionId, _connectedState->getId());
+      connection = std::make_shared<ls::StateConnection>(_connectionId, _connectedState->getId());
       added = this->connectedStates.insert({_connectionId, connection}).second;
     }
   }
@@ -37,7 +37,7 @@ bool ls_std::State::addStateConnection(const ls_std::StateConnectionId &_connect
   return added;
 }
 
-bool ls_std::State::addStateConnection(const std::shared_ptr<ls_std::StateConnection> &_connection)
+bool ls::State::addStateConnection(const std::shared_ptr<ls::StateConnection> &_connection)
 {
   bool added{};
 
@@ -47,53 +47,53 @@ bool ls_std::State::addStateConnection(const std::shared_ptr<ls_std::StateConnec
   }
   else
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   return added;
 }
 
-void ls_std::State::clearConnections()
+void ls::State::clearConnections()
 {
   this->_clearConnections();
 }
 
-std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::StateConnection>> ls_std::State::getConnectedStates()
+std::unordered_map<ls::StateConnectionId, std::shared_ptr<ls::StateConnection>> ls::State::getConnectedStates()
 {
   return this->connectedStates;
 }
 
-ls_std::StateId ls_std::State::getId()
+ls::StateId ls::State::getId()
 {
   return this->id;
 }
 
-bool ls_std::State::hasConnection(const ls_std::StateConnectionId &_connectionId)
+bool ls::State::hasConnection(const ls::StateConnectionId &_connectionId)
 {
   return this->_hasConnection(_connectionId);
 }
 
-void ls_std::State::setId(const ls_std::StateId& _id)
+void ls::State::setId(const ls::StateId& _id)
 {
   this->_assignStateId(_id);
 }
 
-void ls_std::State::_assignStateId(const ls_std::StateId &_id)
+void ls::State::_assignStateId(const ls::StateId &_id)
 {
   if (_id.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->id = _id;
 }
 
-void ls_std::State::_clearConnections()
+void ls::State::_clearConnections()
 {
   this->connectedStates.clear();
 }
 
-bool ls_std::State::_hasConnection(const ls_std::StateConnectionId &_connectionId)
+bool ls::State::_hasConnection(const ls::StateConnectionId &_connectionId)
 {
   return this->connectedStates.find(_connectionId) != this->connectedStates.end();
 }

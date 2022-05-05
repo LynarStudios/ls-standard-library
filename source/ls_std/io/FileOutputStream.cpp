@@ -11,32 +11,32 @@
 #include <ls_std/core/exception/FileNotFoundException.hpp>
 #include <ls_std/core/exception/FileOperationException.hpp>
 
-ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file)
-    : ls_std::Class("FileOutputStream"),
+ls::FileOutputStream::FileOutputStream(ls::File &_file)
+    : ls::Class("FileOutputStream"),
       file(_file)
 {
   this->_init();
 }
 
-ls_std::FileOutputStream::FileOutputStream(ls_std::File &_file, bool _append)
-    : ls_std::Class("FileOutputStream"),
+ls::FileOutputStream::FileOutputStream(ls::File &_file, bool _append)
+    : ls::Class("FileOutputStream"),
       append(_append),
       file(_file)
 {
   this->_init();
 }
 
-ls_std::FileOutputStream::~FileOutputStream()
+ls::FileOutputStream::~FileOutputStream()
 {
   this->_close();
 }
 
-void ls_std::FileOutputStream::close()
+void ls::FileOutputStream::close()
 {
   this->_close();
 }
 
-bool ls_std::FileOutputStream::write(const ls_std::byte_field &_data)
+bool ls::FileOutputStream::write(const ls::byte_field &_data)
 {
   bool succeeded{};
 
@@ -49,13 +49,13 @@ bool ls_std::FileOutputStream::write(const ls_std::byte_field &_data)
   }
   else
   {
-    throw ls_std::FileOperationException{};
+    throw ls::FileOperationException{};
   }
 
   return succeeded;
 }
 
-void ls_std::FileOutputStream::_close()
+void ls::FileOutputStream::_close()
 {
   if (this->outputStream.is_open())
   {
@@ -63,11 +63,11 @@ void ls_std::FileOutputStream::_close()
   }
 }
 
-void ls_std::FileOutputStream::_init()
+void ls::FileOutputStream::_init()
 {
   if (!this->file.exists())
   {
-    throw ls_std::FileNotFoundException{};
+    throw ls::FileNotFoundException{};
   }
   else
   {

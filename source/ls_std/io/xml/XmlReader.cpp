@@ -13,52 +13,52 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/io/xml/XmlParser.hpp>
 
-ls_std::XmlReader::XmlReader(const std::shared_ptr<ls_std::XmlDocument> &_document, const std::string &_absolutePath)
-    : ls_std::Class("XmlReader"),
-      xmlFile(ls_std::File{""})
+ls::XmlReader::XmlReader(const std::shared_ptr<ls::XmlDocument> &_document, const std::string &_absolutePath)
+    : ls::Class("XmlReader"),
+      xmlFile(ls::File{""})
 {
   this->_assignDocument(_document);
-  this->_assignFile(ls_std::File{_absolutePath});
+  this->_assignFile(ls::File{_absolutePath});
 }
 
-ls_std::byte_field ls_std::XmlReader::read()
+ls::byte_field ls::XmlReader::read()
 {
-  ls_std::byte_field data = ls_std::FileReader{this->xmlFile}.read();
-  ls_std::XmlParser{this->document}.parse(data);
+  ls::byte_field data = ls::FileReader{this->xmlFile}.read();
+  ls::XmlParser{this->document}.parse(data);
 
   return data;
 }
 
-std::shared_ptr<ls_std::XmlDocument> ls_std::XmlReader::getDocument()
+std::shared_ptr<ls::XmlDocument> ls::XmlReader::getDocument()
 {
   return this->document;
 }
 
-void ls_std::XmlReader::setDocument(const std::shared_ptr<ls_std::XmlDocument> &_document)
+void ls::XmlReader::setDocument(const std::shared_ptr<ls::XmlDocument> &_document)
 {
   this->_assignDocument(_document);
 }
 
-void ls_std::XmlReader::setFile(const ls_std::File &_xmlFile)
+void ls::XmlReader::setFile(const ls::File &_xmlFile)
 {
   this->_assignFile(_xmlFile);
 }
 
-void ls_std::XmlReader::_assignDocument(const std::shared_ptr<ls_std::XmlDocument> &_document)
+void ls::XmlReader::_assignDocument(const std::shared_ptr<ls::XmlDocument> &_document)
 {
   if (_document == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->document = _document;
 }
 
-void ls_std::XmlReader::_assignFile(ls_std::File _xmlFile)
+void ls::XmlReader::_assignFile(ls::File _xmlFile)
 {
   if (!_xmlFile.exists())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->xmlFile = _xmlFile;

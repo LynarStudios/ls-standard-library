@@ -13,7 +13,7 @@
 #include <exception>
 #include <string>
 
-namespace ls_std
+namespace ls
 {
   class FileOperationException : public std::exception
   {

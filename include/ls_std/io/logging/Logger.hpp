@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -17,31 +17,31 @@
 #include <ls_std/io/FileOutputStream.hpp>
 #include <string>
 
-namespace ls_std
+namespace ls
 {
-  class Logger : public ls_std::Class
+  class Logger : public ls::Class
   {
     public:
 
-      explicit Logger(const std::shared_ptr<ls_std::IWriter> &_writer);
+      explicit Logger(const std::shared_ptr<ls::IWriter> &_writer);
       ~Logger() override = default;
 
-      void debug(const ls_std::byte *_data);
-      void error(const ls_std::byte *_data);
-      void fatal(const ls_std::byte *_data);
-      ls_std::LogLevel getLogLevel();
-      void info(const ls_std::byte *_data);
-      void setLogLevel(const ls_std::LogLevelValue &_logLevelValue);
-      void trace(const ls_std::byte *_data);
-      void warn(const ls_std::byte *_data);
+      void debug(const ls::byte *_data);
+      void error(const ls::byte *_data);
+      void fatal(const ls::byte *_data);
+      ls::LogLevel getLogLevel();
+      void info(const ls::byte *_data);
+      void setLogLevel(const ls::LogLevelValue &_logLevelValue);
+      void trace(const ls::byte *_data);
+      void warn(const ls::byte *_data);
 
     private:
 
-      ls_std::LogLevel logLevel{};
-      std::shared_ptr<ls_std::IWriter> writer{};
+      ls::LogLevel logLevel{};
+      std::shared_ptr<ls::IWriter> writer{};
 
-      void _assignWriter(const std::shared_ptr<ls_std::IWriter> &_writer);
-      void _log(const ls_std::byte *_data, const ls_std::LogLevel &_logLevel);
+      void _assignWriter(const std::shared_ptr<ls::IWriter> &_writer);
+      void _log(const ls::byte *_data, const ls::LogLevel &_logLevel);
   };
 }
 

@@ -31,24 +31,24 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::SerializableJsonEvent serializable{nullptr};
+                     ls::SerializableJsonEvent serializable{nullptr};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(SerializableJsonEventTest, marshal)
   {
-    ls_std::Event event{"OPEN_DOOR_EVENT"};
-    event.addParameter(ls_std::event_parameter{"key_available", "true"});
-    event.addParameter(ls_std::event_parameter{"door_id", "16675"});
+    ls::Event event{"OPEN_DOOR_EVENT"};
+    event.addParameter(ls::event_parameter{"key_available", "true"});
+    event.addParameter(ls::event_parameter{"door_id", "16675"});
 
-    ls_std::SerializableJsonEvent serializable{std::make_shared<ls_std::Event>(event)};
+    ls::SerializableJsonEvent serializable{std::make_shared<ls::Event>(event)};
 
-    ls_std::byte_field data = serializable.marshal();
+    ls::byte_field data = serializable.marshal();
     ASSERT_FALSE(data.empty());
     std::string expectedString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
     ASSERT_STREQ(expectedString.c_str(), data.c_str());
@@ -56,13 +56,13 @@ namespace
 
   TEST_F(SerializableJsonEventTest, unmarshal)
   {
-    ls_std::Event event{"TMP_EVENT"};
-    ls_std::SerializableJsonEvent serializable{std::make_shared<ls_std::Event>(event)};
+    ls::Event event{"TMP_EVENT"};
+    ls::SerializableJsonEvent serializable{std::make_shared<ls::Event>(event)};
     std::string jsonString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
 
     serializable.unmarshal(jsonString);
     ASSERT_STREQ("OPEN_DOOR_EVENT", serializable.getValue()->getId().c_str());
-    ls_std::event_parameter_list parameterList = serializable.getValue()->getParameterList();
+    ls::event_parameter_list parameterList = serializable.getValue()->getParameterList();
 
     ASSERT_FALSE(parameterList.empty());
     ASSERT_EQ(2, parameterList.size());
@@ -72,18 +72,18 @@ namespace
 
   TEST_F(SerializableJsonEventTest, setValue_parameter_not_set)
   {
-    ls_std::Event event{"TMP_EVENT"};
-    ls_std::SerializableJsonEvent serializable{std::make_shared<ls_std::Event>(event)};
+    ls::Event event{"TMP_EVENT"};
+    ls::SerializableJsonEvent serializable{std::make_shared<ls::Event>(event)};
 
     EXPECT_THROW({
                    try
                    {
                      serializable.setValue(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 }

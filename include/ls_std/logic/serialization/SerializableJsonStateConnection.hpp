@@ -16,31 +16,31 @@
 #include "ls_std/serialization/ISerializable.hpp"
 #include "ls_std/logic/StateConnection.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class SerializableJsonStateConnection : public ls_std::Class, public ls_std::ISerializable
+  class SerializableJsonStateConnection : public ls::Class, public ls::ISerializable
   {
     public:
 
-      explicit SerializableJsonStateConnection(const std::shared_ptr<ls_std::StateConnection> &_value);
+      explicit SerializableJsonStateConnection(const std::shared_ptr<ls::StateConnection> &_value);
       ~SerializableJsonStateConnection() override = default;
 
       // implementation
 
-      ls_std::byte_field marshal() override;
-      void unmarshal(const ls_std::byte_field &_data) override;
+      ls::byte_field marshal() override;
+      void unmarshal(const ls::byte_field &_data) override;
 
       // additional functionality
 
-      std::shared_ptr<ls_std::StateConnection> getValue();
-      void setValue(const std::shared_ptr<ls_std::StateConnection> &_value);
+      std::shared_ptr<ls::StateConnection> getValue();
+      void setValue(const std::shared_ptr<ls::StateConnection> &_value);
 
     private:
 
       nlohmann::json jsonObject{};
-      std::shared_ptr<ls_std::StateConnection> value{};
+      std::shared_ptr<ls::StateConnection> value{};
 
-      void _assignValue(const std::shared_ptr<ls_std::StateConnection> &_value);
+      void _assignValue(const std::shared_ptr<ls::StateConnection> &_value);
       void _clear();
       void _update();
   };

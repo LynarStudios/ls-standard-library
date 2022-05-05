@@ -10,18 +10,18 @@
 #include "ls_std/event/serialization/SerializableJsonEvent.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJsonEvent::SerializableJsonEvent(const std::shared_ptr<ls_std::Event> &_value) : ls_std::Class("SerializableJsonEvent")
+ls::SerializableJsonEvent::SerializableJsonEvent(const std::shared_ptr<ls::Event> &_value) : ls::Class("SerializableJsonEvent")
 {
   this->_assignValue(_value);
 }
 
-ls_std::byte_field ls_std::SerializableJsonEvent::marshal()
+ls::byte_field ls::SerializableJsonEvent::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls_std::SerializableJsonEvent::unmarshal(const ls_std::byte_field &_data)
+void ls::SerializableJsonEvent::unmarshal(const ls::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -29,45 +29,45 @@ void ls_std::SerializableJsonEvent::unmarshal(const ls_std::byte_field &_data)
   this->_unmarshalParameterList();
 }
 
-std::shared_ptr<ls_std::Event> ls_std::SerializableJsonEvent::getValue()
+std::shared_ptr<ls::Event> ls::SerializableJsonEvent::getValue()
 {
   return this->value;
 }
 
-void ls_std::SerializableJsonEvent::setValue(const std::shared_ptr<ls_std::Event> &_value)
+void ls::SerializableJsonEvent::setValue(const std::shared_ptr<ls::Event> &_value)
 {
   this->_assignValue(_value);
 }
 
-void ls_std::SerializableJsonEvent::_assignValue(const std::shared_ptr<ls_std::Event> &_value)
+void ls::SerializableJsonEvent::_assignValue(const std::shared_ptr<ls::Event> &_value)
 {
   if (_value == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->value = _value;
 }
 
-void ls_std::SerializableJsonEvent::_unmarshalParameterList()
+void ls::SerializableJsonEvent::_unmarshalParameterList()
 {
   this->value->clearParameterList();
 
   for (const auto &parameterJson : this->jsonObject["parameterList"])
   {
-    ls_std::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
+    ls::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
     this->value->addParameter(parameter);
   }
 }
 
-void ls_std::SerializableJsonEvent::_update()
+void ls::SerializableJsonEvent::_update()
 {
   this->jsonObject = {{"id", this->value->getId()}};
 
   this->_updateEventParameterList();
 }
 
-void ls_std::SerializableJsonEvent::_updateEventParameterList()
+void ls::SerializableJsonEvent::_updateEventParameterList()
 {
   std::string jsonString{};
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-01
+ * Changed:         2022-05-05
  *
  * */
 
@@ -14,7 +14,7 @@
 #include <memory>
 #include <ls_std/logic/IListener.hpp>
 
-namespace ls_std
+namespace ls
 {
   class IEventSubscriber
   {
@@ -23,8 +23,8 @@ namespace ls_std
       IEventSubscriber() = default;
       ~IEventSubscriber() = default;
 
-      virtual void subscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener) = 0;
-      virtual void unsubscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener) = 0;
+      virtual void subscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener) = 0;
+      virtual void unsubscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener) = 0;
   };
 }
 

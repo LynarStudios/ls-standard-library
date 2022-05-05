@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -18,38 +18,38 @@
 #include "State.hpp"
 #include "StateMachineTypes.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class StateMachine : public ls_std::Class
+  class StateMachine : public ls::Class
   {
     public:
 
       explicit StateMachine(const std::string& _name);
       ~StateMachine() override = default;
 
-      bool addState(const std::shared_ptr<ls_std::State> &_state);
-      std::shared_ptr<ls_std::State> getCurrentState();
-      std::vector<ls_std::StateId> getMemory();
+      bool addState(const std::shared_ptr<ls::State> &_state);
+      std::shared_ptr<ls::State> getCurrentState();
+      std::vector<ls::StateId> getMemory();
       std::string getName();
-      std::unordered_map<StateId, std::shared_ptr<ls_std::State>> getStates();
-      bool hasState(const ls_std::StateId &_id);
+      std::unordered_map<StateId, std::shared_ptr<ls::State>> getStates();
+      bool hasState(const ls::StateId &_id);
       bool proceed();
-      void setMemory(const std::vector<ls_std::StateId>& _memory);
+      void setMemory(const std::vector<ls::StateId>& _memory);
       void setName(const std::string& _name);
-      bool setStartState(const ls_std::StateId &_id);
+      bool setStartState(const ls::StateId &_id);
 
     private:
 
       std::shared_ptr<State> currentState{};
-      std::vector<ls_std::StateId> memory{};
+      std::vector<ls::StateId> memory{};
       std::string name{};
-      std::unordered_map<ls_std::StateId, std::shared_ptr<ls_std::State>> states{};
+      std::unordered_map<ls::StateId, std::shared_ptr<ls::State>> states{};
 
-      void _assignMemory(const std::vector<ls_std::StateId>& _memory);
+      void _assignMemory(const std::vector<ls::StateId>& _memory);
       void _assignName(const std::string& _name);
-      std::vector<ls_std::StateId> _getNextValidStates();
-      void _remember(const ls_std::StateId &_id);
-      bool _hasState(const ls_std::StateId &_id);
+      std::vector<ls::StateId> _getNextValidStates();
+      void _remember(const ls::StateId &_id);
+      bool _hasState(const ls::StateId &_id);
   };
 }
 

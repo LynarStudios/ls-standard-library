@@ -12,43 +12,43 @@
 #include <ls_std/core/exception/FileNotFoundException.hpp>
 #include <ls_std/core/exception/FileOperationException.hpp>
 
-ls_std::FileReader::FileReader(ls_std::File &_file)
-    : ls_std::Class("FileReader"),
+ls::FileReader::FileReader(ls::File &_file)
+    : ls::Class("FileReader"),
       file(_file)
 {
-  ls_std::FileReader::_init(_file);
+  ls::FileReader::_init(_file);
 }
 
-ls_std::byte_field ls_std::FileReader::read()
+ls::byte_field ls::FileReader::read()
 {
-  ls_std::byte *data;
+  ls::byte *data;
   std::ifstream inputStream{this->file.getAbsoluteFilePath(), std::ifstream::binary};
   int length = (int) this->file.getSize();
-  data = new ls_std::byte[length];
+  data = new ls::byte[length];
   inputStream.read(data, length);
 
   if (inputStream.fail())
   {
-    throw ls_std::FileOperationException{};
+    throw ls::FileOperationException{};
   }
 
   inputStream.close();
-  ls_std::byte_field readData = ls_std::byte_field{data, (size_t) this->file.getSize()};
+  ls::byte_field readData = ls::byte_field{data, (size_t) this->file.getSize()};
   delete[] data;
 
   return readData;
 }
 
-void ls_std::FileReader::reset(ls_std::File &_file)
+void ls::FileReader::reset(ls::File &_file)
 {
-  ls_std::FileReader::_init(_file);
+  ls::FileReader::_init(_file);
   this->file = _file;
 }
 
-void ls_std::FileReader::_init(ls_std::File &_file)
+void ls::FileReader::_init(ls::File &_file)
 {
   if (!_file.exists())
   {
-    throw ls_std::FileNotFoundException{};
+    throw ls::FileNotFoundException{};
   }
 }

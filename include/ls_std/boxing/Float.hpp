@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -14,9 +14,9 @@
 #include <ls_std/core/Class.hpp>
 #include "IBoxing.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class Float : public ls_std::Class, public ls_std::IBoxing
+  class Float : public ls::Class, public ls::IBoxing
   {
     public:
 
@@ -30,44 +30,44 @@ namespace ls_std
 
       // assignment operators
 
-      ls_std::Float &operator=(float _value);
+      ls::Float &operator=(float _value);
 
       // arithmetic operators
 
       float operator-() const;
-      float operator+(const ls_std::Float &_float) const;
+      float operator+(const ls::Float &_float) const;
       float operator+(float _value) const;
-      float operator*(const ls_std::Float &_float) const;
+      float operator*(const ls::Float &_float) const;
       float operator*(float _value) const;
-      float operator-(const ls_std::Float &_float) const;
+      float operator-(const ls::Float &_float) const;
       float operator-(float _value) const;
-      float operator/(const ls_std::Float &_float) const;
+      float operator/(const ls::Float &_float) const;
       float operator/(float _value) const;
 
       // compound operators
 
-      ls_std::Float &operator+=(const ls_std::Float &_float);
-      ls_std::Float &operator+=(float _value);
-      ls_std::Float &operator-=(const ls_std::Float &_float);
-      ls_std::Float &operator-=(float _value);
-      ls_std::Float &operator*=(const ls_std::Float &_float);
-      ls_std::Float &operator*=(float _value);
-      ls_std::Float &operator/=(const ls_std::Float &_float);
-      ls_std::Float &operator/=(float _value);
+      ls::Float &operator+=(const ls::Float &_float);
+      ls::Float &operator+=(float _value);
+      ls::Float &operator-=(const ls::Float &_float);
+      ls::Float &operator-=(float _value);
+      ls::Float &operator*=(const ls::Float &_float);
+      ls::Float &operator*=(float _value);
+      ls::Float &operator/=(const ls::Float &_float);
+      ls::Float &operator/=(float _value);
 
       // comparison operators
 
-      bool operator==(const ls_std::Float &_float) const;
+      bool operator==(const ls::Float &_float) const;
       bool operator==(float _value) const;
-      bool operator!=(const ls_std::Float &_float) const;
+      bool operator!=(const ls::Float &_float) const;
       bool operator!=(float _value) const;
-      bool operator>(const ls_std::Float &_float) const;
+      bool operator>(const ls::Float &_float) const;
       bool operator>(float _value) const;
-      bool operator>=(const ls_std::Float &_float) const;
+      bool operator>=(const ls::Float &_float) const;
       bool operator>=(float _value) const;
-      bool operator<(const ls_std::Float &_float) const;
+      bool operator<(const ls::Float &_float) const;
       bool operator<(float _value) const;
-      bool operator<=(const ls_std::Float &_float) const;
+      bool operator<=(const ls::Float &_float) const;
       bool operator<=(float _value) const;
 
       // increment / decrement operator

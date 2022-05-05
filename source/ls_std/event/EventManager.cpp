@@ -12,14 +12,14 @@
 #include <ls_std/core/exception/EventNotHandledException.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::EventManager::EventManager() : ls_std::Class("EventManager")
+ls::EventManager::EventManager() : ls::Class("EventManager")
 {}
 
-void ls_std::EventManager::subscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener)
+void ls::EventManager::subscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   if (this->_hasEventHandler(_id))
@@ -28,15 +28,15 @@ void ls_std::EventManager::subscribe(const ls_std::event_id &_id, const std::sha
   }
   else
   {
-    throw ls_std::EventNotSubscribedException{};
+    throw ls::EventNotSubscribedException{};
   }
 }
 
-void ls_std::EventManager::unsubscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener)
+void ls::EventManager::unsubscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   if (this->_hasEventHandler(_id))
@@ -45,25 +45,25 @@ void ls_std::EventManager::unsubscribe(const ls_std::event_id &_id, const std::s
   }
 }
 
-bool ls_std::EventManager::addEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler)
+bool ls::EventManager::addEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler)
 {
   bool wasAdded{};
 
   if (_eventHandler == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   if (!this->_hasEventHandler(_eventHandler->getId()))
   {
-    std::pair<ls_std::event_id, std::shared_ptr<ls_std::EventHandler>> element = std::make_pair(_eventHandler->getId(), _eventHandler);
+    std::pair<ls::event_id, std::shared_ptr<ls::EventHandler>> element = std::make_pair(_eventHandler->getId(), _eventHandler);
     wasAdded = this->eventHandlers.insert(element).second;
   }
 
   return wasAdded;
 }
 
-void ls_std::EventManager::fire(ls_std::Event _event)
+void ls::EventManager::fire(ls::Event _event)
 {
   if (this->_hasEventHandler(_event.getId()))
   {
@@ -71,36 +71,36 @@ void ls_std::EventManager::fire(ls_std::Event _event)
   }
   else
   {
-    throw ls_std::EventNotHandledException{};
+    throw ls::EventNotHandledException{};
   }
 }
 
-bool ls_std::EventManager::hasEventHandler(const ls_std::event_id &_id)
+bool ls::EventManager::hasEventHandler(const ls::event_id &_id)
 {
   if (_id.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   return this->_hasEventHandler(_id);
 }
 
-bool ls_std::EventManager::removeEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler)
+bool ls::EventManager::removeEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler)
 {
   if (_eventHandler == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   return this->_removeEventHandler(_eventHandler);
 }
 
-bool ls_std::EventManager::_hasEventHandler(const ls_std::event_id &_id)
+bool ls::EventManager::_hasEventHandler(const ls::event_id &_id)
 {
   return this->eventHandlers.find(_id) != this->eventHandlers.end();
 }
 
-bool ls_std::EventManager::_removeEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler)
+bool ls::EventManager::_removeEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler)
 {
   return this->eventHandlers.erase(_eventHandler->getId()) == 1;
 }

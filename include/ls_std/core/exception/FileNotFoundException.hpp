@@ -15,7 +15,7 @@
 #include <cstring>
 
 // TODO: pass parameters, use class, show class name
-namespace ls_std
+namespace ls
 {
   class FileNotFoundException : public std::exception
   {

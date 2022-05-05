@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Types.hpp>
 
-namespace ls_std
+namespace ls
 {
   class IReader
   {
@@ -21,7 +21,7 @@ namespace ls_std
       IReader() = default;
       ~IReader() = default;
 
-      virtual ls_std::byte_field read() = 0;
+      virtual ls::byte_field read() = 0;
   };
 }
 

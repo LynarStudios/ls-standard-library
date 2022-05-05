@@ -10,51 +10,51 @@
 #include <ls_std/io/xml/XmlAttribute.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::XmlAttribute::XmlAttribute(const std::string& _name) : ls_std::Class("XmlAttribute")
+ls::XmlAttribute::XmlAttribute(const std::string& _name) : ls::Class("XmlAttribute")
 {
   this->_assignName(_name);
 }
 
-std::string ls_std::XmlAttribute::getName()
+std::string ls::XmlAttribute::getName()
 {
   return this->name;
 }
 
-std::string ls_std::XmlAttribute::getValue()
+std::string ls::XmlAttribute::getValue()
 {
   return this->value;
 }
 
-void ls_std::XmlAttribute::setName(const std::string& _name)
+void ls::XmlAttribute::setName(const std::string& _name)
 {
   this->_assignName(_name);
 }
 
-void ls_std::XmlAttribute::setValue(const std::string& _value)
+void ls::XmlAttribute::setValue(const std::string& _value)
 {
   this->_assignValue(_value);
 }
 
-std::string ls_std::XmlAttribute::toXml()
+std::string ls::XmlAttribute::toXml()
 {
   return this->name + "=\"" + this->value + "\"";
 }
 
-void ls_std::XmlAttribute::_assignName(const std::string &_name)
+void ls::XmlAttribute::_assignName(const std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->name = _name;
 }
 
-void ls_std::XmlAttribute::_assignValue(const std::string &_value)
+void ls::XmlAttribute::_assignValue(const std::string &_value)
 {
   if (_value.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->value = _value;

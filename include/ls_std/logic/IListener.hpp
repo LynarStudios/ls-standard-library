@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 
-namespace ls_std
+namespace ls
 {
   class IListener
   {
@@ -21,7 +21,7 @@ namespace ls_std
       IListener() = default;
       ~IListener() = default;
 
-      virtual void listen(const ls_std::Class &_info) = 0;
+      virtual void listen(const ls::Class &_info) = 0;
   };
 }
 

@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::IllegalArithmeticOperationException{};
+                     throw ls::IllegalArithmeticOperationException{};
                    }
-                   catch (const ls_std::IllegalArithmeticOperationException &_exception)
+                   catch (const ls::IllegalArithmeticOperationException &_exception)
                    {
                      EXPECT_STREQ("IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!", _exception.what());
                      throw;
                    }
-                 }, ls_std::IllegalArithmeticOperationException);
+                 }, ls::IllegalArithmeticOperationException);
   }
 }

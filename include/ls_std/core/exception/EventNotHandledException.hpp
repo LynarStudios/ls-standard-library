@@ -12,7 +12,7 @@
 
 #include <exception>
 
-namespace ls_std
+namespace ls
 {
   class EventNotHandledException : public std::exception
   {

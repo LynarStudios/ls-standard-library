@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::FileNotFoundException{};
+                     throw ls::FileNotFoundException{};
                    }
-                   catch (const ls_std::FileNotFoundException &_exception)
+                   catch (const ls::FileNotFoundException &_exception)
                    {
                      EXPECT_STREQ("FileNotFoundException thrown - file not found!", _exception.what());
                      throw;
                    }
-                 }, ls_std::FileNotFoundException);
+                 }, ls::FileNotFoundException);
   }
 }

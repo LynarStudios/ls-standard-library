@@ -13,7 +13,7 @@
 #include <algorithm>
 #include <list>
 
-namespace ls_std
+namespace ls
 {
   class STLUtils
   {

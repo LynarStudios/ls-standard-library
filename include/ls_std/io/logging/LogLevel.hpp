@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -14,34 +14,34 @@
 #include <ls_std/core/Class.hpp>
 #include "LogLevelValue.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class LogLevel : public ls_std::Class
+  class LogLevel : public ls::Class
   {
     public:
 
-      explicit LogLevel(const ls_std::LogLevelValue &_value);
+      explicit LogLevel(const ls::LogLevelValue &_value);
       LogLevel();
       ~LogLevel() override = default;
 
       operator unsigned char() const;
-      ls_std::LogLevel &operator=(const ls_std::LogLevelValue &_value);
-      bool operator<(const ls_std::LogLevelValue &_value);
-      bool operator<=(const ls_std::LogLevelValue &_value);
-      bool operator>(const ls_std::LogLevelValue &_value);
-      bool operator>=(const ls_std::LogLevelValue &_value);
-      bool operator==(const ls_std::LogLevelValue &_value);
+      ls::LogLevel &operator=(const ls::LogLevelValue &_value);
+      bool operator<(const ls::LogLevelValue &_value);
+      bool operator<=(const ls::LogLevelValue &_value);
+      bool operator>(const ls::LogLevelValue &_value);
+      bool operator>=(const ls::LogLevelValue &_value);
+      bool operator==(const ls::LogLevelValue &_value);
 
-      void setLogLevel(const ls_std::LogLevelValue &_value);
+      void setLogLevel(const ls::LogLevelValue &_value);
       void setLogLevel(const std::string &_value);
       std::string toString() const;
 
     private:
 
       std::unordered_map<uint8_t, std::string> level{};
-      ls_std::LogLevelValue value{};
+      ls::LogLevelValue value{};
 
-      ls_std::LogLevelValue _getValueFromString(const std::string &_value);
+      ls::LogLevelValue _getValueFromString(const std::string &_value);
       void _init();
       bool _isValidLogLevelString(const std::string &_value);
   };

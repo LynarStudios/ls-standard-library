@@ -12,52 +12,52 @@
 #include <ls_std/io/FileReader.hpp>
 #include <ls_std/io/kv/KvParser.hpp>
 
-ls_std::KvFileReader::KvFileReader(const std::shared_ptr<ls_std::KvDocument> &_document, const std::string &_absolutePath)
-    : ls_std::Class("KvFileReader"),
-      kvFile(ls_std::File{""})
+ls::KvFileReader::KvFileReader(const std::shared_ptr<ls::KvDocument> &_document, const std::string &_absolutePath)
+    : ls::Class("KvFileReader"),
+      kvFile(ls::File{""})
 {
   this->_assignDocument(_document);
-  this->_assignFile(ls_std::File{_absolutePath});
+  this->_assignFile(ls::File{_absolutePath});
 }
 
-ls_std::byte_field ls_std::KvFileReader::read()
+ls::byte_field ls::KvFileReader::read()
 {
-  ls_std::byte_field data = ls_std::FileReader{this->kvFile}.read();
-  ls_std::KvParser{this->document}.parse(data);
+  ls::byte_field data = ls::FileReader{this->kvFile}.read();
+  ls::KvParser{this->document}.parse(data);
 
   return data;
 }
 
-std::shared_ptr<ls_std::KvDocument> ls_std::KvFileReader::getDocument()
+std::shared_ptr<ls::KvDocument> ls::KvFileReader::getDocument()
 {
   return this->document;
 }
 
-void ls_std::KvFileReader::setDocument(const std::shared_ptr<ls_std::KvDocument> &_document)
+void ls::KvFileReader::setDocument(const std::shared_ptr<ls::KvDocument> &_document)
 {
   this->_assignDocument(_document);
 }
 
-void ls_std::KvFileReader::setFile(const ls_std::File &_kvFile)
+void ls::KvFileReader::setFile(const ls::File &_kvFile)
 {
   this->_assignFile(_kvFile);
 }
 
-void ls_std::KvFileReader::_assignDocument(const std::shared_ptr<ls_std::KvDocument> &_document)
+void ls::KvFileReader::_assignDocument(const std::shared_ptr<ls::KvDocument> &_document)
 {
   if (_document == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->document = _document;
 }
 
-void ls_std::KvFileReader::_assignFile(ls_std::File _kvFile)
+void ls::KvFileReader::_assignFile(ls::File _kvFile)
 {
   if (!_kvFile.exists())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->kvFile = _kvFile;

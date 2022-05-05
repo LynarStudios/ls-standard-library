@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -32,13 +32,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::Class object{""};
+                     ls::Class object{""};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(ClassTest, destructor)
@@ -49,7 +49,7 @@ namespace
 
   TEST_F(ClassTest, getClassName)
   {
-    ls_std::Class object{"Class"};
+    ls::Class object{"Class"};
     ASSERT_STREQ("Class", object.getClassName().c_str());
   }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Types.hpp>
 
-namespace ls_std
+namespace ls
 {
   class IStorable
   {
@@ -20,8 +20,8 @@ namespace ls_std
       IStorable() = default;
       ~IStorable() = default;
 
-      virtual ls_std::byte_field load() = 0;
-      virtual void save(const ls_std::byte_field &_data) = 0;
+      virtual ls::byte_field load() = 0;
+      virtual void save(const ls::byte_field &_data) = 0;
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2021-05-27
+ * Changed:         2022-05-05
  *
  * */
 
@@ -44,20 +44,20 @@ namespace
   TEST_F(NarratorTest, addListener)
   {
     this->createCars();
-    ls_std::Narrator paintingMachine{};
+    ls::Narrator paintingMachine{};
 
-    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1)));
-    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2)));
-    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3)));
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes1)));
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes2)));
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes3)));
   }
 
   TEST_F(NarratorTest, addListener_listener_already_exists)
   {
     this->createCars();
-    ls_std::Narrator paintingMachine{};
+    ls::Narrator paintingMachine{};
 
-    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1)));
-    ASSERT_FALSE(paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1)));
+    ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes1)));
+    ASSERT_FALSE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes1)));
   }
 
   TEST_F(NarratorTest, addListener_no_reference)
@@ -65,23 +65,23 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::Narrator paintingMachine{};
+                     ls::Narrator paintingMachine{};
                      paintingMachine.addListener(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, clear)
   {
     this->createCars();
-    ls_std::Narrator paintingMachine{};
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3));
+    ls::Narrator paintingMachine{};
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes1));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes2));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes3));
 
     ASSERT_FALSE(paintingMachine.getListeners().empty());
     paintingMachine.clear();
@@ -90,17 +90,17 @@ namespace
 
   TEST_F(NarratorTest, getListeners)
   {
-    ls_std::Narrator narrator{};
+    ls::Narrator narrator{};
     ASSERT_TRUE(narrator.getListeners().empty());
   }
 
   TEST_F(NarratorTest, removeListener)
   {
     this->createCars();
-    ls_std::Narrator paintingMachine{};
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3));
+    ls::Narrator paintingMachine{};
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes1));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes2));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes3));
 
     ASSERT_TRUE(paintingMachine.removeListener(this->mercedes2));
     ASSERT_TRUE(paintingMachine.removeListener(this->mercedes1));
@@ -111,7 +111,7 @@ namespace
   TEST_F(NarratorTest, removeListener_no_listener_available)
   {
     this->createCars();
-    ls_std::Narrator paintingMachine{};
+    ls::Narrator paintingMachine{};
     ASSERT_FALSE(paintingMachine.removeListener(this->mercedes2));
   }
 
@@ -120,30 +120,30 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::Narrator paintingMachine{};
+                     ls::Narrator paintingMachine{};
                      paintingMachine.removeListener(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, tell)
   {
     this->createCars();
-    ls_std::Narrator paintingMachine{};
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes1));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes2));
-    paintingMachine.addListener(std::dynamic_pointer_cast<ls_std::IListener>(this->mercedes3));
+    ls::Narrator paintingMachine{};
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes1));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes2));
+    paintingMachine.addListener(std::dynamic_pointer_cast<ls::IListener>(this->mercedes3));
 
     ASSERT_STREQ("pink", this->mercedes1->getColor().c_str());
     ASSERT_STREQ("blue", this->mercedes2->getColor().c_str());
     ASSERT_STREQ("red", this->mercedes3->getColor().c_str());
 
-    ls_std::String newColor{"black"};
-    paintingMachine.tell(static_cast<const ls_std::Class &>(newColor));
+    ls::String newColor{"black"};
+    paintingMachine.tell(static_cast<const ls::Class &>(newColor));
 
     ASSERT_STREQ("black", this->mercedes1->getColor().c_str());
     ASSERT_STREQ("black", this->mercedes2->getColor().c_str());

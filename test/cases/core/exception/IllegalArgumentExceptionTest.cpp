@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::IllegalArgumentException{};
+                     throw ls::IllegalArgumentException{};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 }

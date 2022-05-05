@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -29,9 +29,9 @@
 
 #endif
 
-namespace ls_std
+namespace ls
 {
-  class File : public ls_std::Class
+  class File : public ls::Class
   {
     public:
 
@@ -40,8 +40,8 @@ namespace ls_std
 
       // comparison operators
 
-      bool operator==(ls_std::File &_file);
-      bool operator!=(ls_std::File &_file);
+      bool operator==(ls::File &_file);
+      bool operator!=(ls::File &_file);
 
       // additional functionality
 
@@ -76,7 +76,7 @@ namespace ls_std
       #ifdef _WIN32
       static void _addToFileListWindows(const std::string &_path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string> &_list);
       #endif
-      static bool _equals(ls_std::File &_file, ls_std::File &_foreignFile);
+      static bool _equals(ls::File &_file, ls::File &_foreignFile);
       static bool _exists(const std::string &_path);
       static std::string _getParent(const std::string &_path);
       #if defined(unix) || defined(__APPLE__)

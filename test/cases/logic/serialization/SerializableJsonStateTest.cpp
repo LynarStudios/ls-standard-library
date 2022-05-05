@@ -31,23 +31,23 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::SerializableJsonState serializable{nullptr};
+                     ls::SerializableJsonState serializable{nullptr};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(SerializableJsonStateTest, marshal)
   {
-    std::shared_ptr<ls_std::State> x = std::make_shared<ls_std::State>("A");
-    x->addStateConnection(std::make_shared<ls_std::StateConnection>("AB", "B"));
-    x->addStateConnection(std::make_shared<ls_std::StateConnection>("AC", "C"));
+    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
+    x->addStateConnection(std::make_shared<ls::StateConnection>("AB", "B"));
+    x->addStateConnection(std::make_shared<ls::StateConnection>("AC", "C"));
 
-    ls_std::SerializableJsonState serializable{x};
-    ls_std::byte_field jsonString = serializable.marshal();
+    ls::SerializableJsonState serializable{x};
+    ls::byte_field jsonString = serializable.marshal();
 
     ASSERT_TRUE(!jsonString.empty());
     std::string expectedJson = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
@@ -56,8 +56,8 @@ namespace
 
   TEST_F(SerializableJsonStateTest, unmarshal)
   {
-    std::shared_ptr<ls_std::State> x = std::make_shared<ls_std::State>("A");
-    ls_std::SerializableJsonState serializable{x};
+    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
+    ls::SerializableJsonState serializable{x};
 
     // before
 
@@ -78,26 +78,26 @@ namespace
 
   TEST_F(SerializableJsonStateTest, getValue)
   {
-    std::shared_ptr<ls_std::State> x = std::make_shared<ls_std::State>("A");
-    ls_std::SerializableJsonState serializable{x};
+    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
+    ls::SerializableJsonState serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJsonStateTest, setValue)
   {
-    std::shared_ptr<ls_std::State> x = std::make_shared<ls_std::State>("A");
-    x->addStateConnection(std::make_shared<ls_std::StateConnection>("AB", "B"));
-    x->addStateConnection(std::make_shared<ls_std::StateConnection>("AC", "C"));
+    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
+    x->addStateConnection(std::make_shared<ls::StateConnection>("AB", "B"));
+    x->addStateConnection(std::make_shared<ls::StateConnection>("AC", "C"));
 
-    ls_std::SerializableJsonState serializable{x};
-    ls_std::byte_field jsonString = serializable.marshal();
+    ls::SerializableJsonState serializable{x};
+    ls::byte_field jsonString = serializable.marshal();
 
     std::string expectedJson = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
     ASSERT_STREQ(expectedJson.c_str(), jsonString.c_str());
 
     // setValue should now clear json
 
-    std::shared_ptr<ls_std::State> y = std::make_shared<ls_std::State>("B");
+    std::shared_ptr<ls::State> y = std::make_shared<ls::State>("B");
     serializable.setValue(y);
     jsonString = serializable.marshal();
 
@@ -106,18 +106,18 @@ namespace
 
   TEST_F(SerializableJsonStateTest, setValue_parameter_not_set)
   {
-    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("A");
-    ls_std::SerializableJsonState serializable{state};
+    std::shared_ptr<ls::State> state = std::make_shared<ls::State>("A");
+    ls::SerializableJsonState serializable{state};
 
     EXPECT_THROW({
                    try
                    {
                      serializable.setValue(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 }

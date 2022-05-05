@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::EventNotSubscribedException{};
+                     throw ls::EventNotSubscribedException{};
                    }
-                   catch (const ls_std::EventNotSubscribedException &_exception)
+                   catch (const ls::EventNotSubscribedException &_exception)
                    {
                      EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", _exception.what());
                      throw;
                    }
-                 }, ls_std::EventNotSubscribedException);
+                 }, ls::EventNotSubscribedException);
   }
 }

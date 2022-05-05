@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2021-05-02
+ * Changed:         2022-05-05
  *
  * */
 
@@ -15,11 +15,11 @@
 
 namespace ls_std_test
 {
-  class ClassWrapper : public ls_std::Class
+  class ClassWrapper : public ls::Class
   {
     public:
 
-      ClassWrapper() : ls_std::Class("ClassWrapper") {};
+      ClassWrapper() : ls::Class("ClassWrapper") {};
       MOCK_METHOD0(Die, void());
       ~ClassWrapper() override { Die(); }
   };

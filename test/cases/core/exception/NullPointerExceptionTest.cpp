@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::NullPointerException{};
+                     throw ls::NullPointerException{};
                    }
-                   catch (const ls_std::NullPointerException &_exception)
+                   catch (const ls::NullPointerException &_exception)
                    {
                      EXPECT_STREQ("NullPointerException thrown - reference is null!", _exception.what());
                      throw;
                    }
-                 }, ls_std::NullPointerException);
+                 }, ls::NullPointerException);
   }
 }

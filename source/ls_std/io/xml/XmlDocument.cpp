@@ -10,30 +10,30 @@
 #include <ls_std/io/xml/XmlDocument.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::XmlDocument::XmlDocument() : ls_std::Class("XmlDocument")
+ls::XmlDocument::XmlDocument() : ls::Class("XmlDocument")
 {}
 
-std::shared_ptr<ls_std::XmlDeclaration> ls_std::XmlDocument::getDeclaration()
+std::shared_ptr<ls::XmlDeclaration> ls::XmlDocument::getDeclaration()
 {
   return this->declaration;
 }
 
-std::shared_ptr<ls_std::XmlNode> ls_std::XmlDocument::getRootElement()
+std::shared_ptr<ls::XmlNode> ls::XmlDocument::getRootElement()
 {
   return this->rootElement;
 }
 
-void ls_std::XmlDocument::setDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration)
+void ls::XmlDocument::setDeclaration(const std::shared_ptr<ls::XmlDeclaration> &_declaration)
 {
   this->_assignDeclaration(_declaration);
 }
 
-void ls_std::XmlDocument::setRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement)
+void ls::XmlDocument::setRootElement(const std::shared_ptr<ls::XmlNode> &_rootElement)
 {
   this->_assignRootElement(_rootElement);
 }
 
-std::string ls_std::XmlDocument::toXml()
+std::string ls::XmlDocument::toXml()
 {
   std::string xmlString{};
 
@@ -50,21 +50,21 @@ std::string ls_std::XmlDocument::toXml()
   return xmlString + this->rootElement->toXml();
 }
 
-void ls_std::XmlDocument::_assignDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration)
+void ls::XmlDocument::_assignDeclaration(const std::shared_ptr<ls::XmlDeclaration> &_declaration)
 {
   if (_declaration == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->declaration = _declaration;
 }
 
-void ls_std::XmlDocument::_assignRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement)
+void ls::XmlDocument::_assignRootElement(const std::shared_ptr<ls::XmlNode> &_rootElement)
 {
   if (_rootElement == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->rootElement = _rootElement;

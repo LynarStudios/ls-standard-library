@@ -11,221 +11,221 @@
 #include <ls_std/boxing/Float.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::Float::Float()
-    : ls_std::Class("Float"),
+ls::Float::Float()
+    : ls::Class("Float"),
       epsilon(0.00001f)
 {}
 
-ls_std::Float::Float(float _value)
-    : ls_std::Class("Float"),
+ls::Float::Float(float _value)
+    : ls::Class("Float"),
       epsilon(0.00001f),
       value(_value)
 {}
 
-ls_std::Float::operator float() const
+ls::Float::operator float() const
 {
   return this->value;
 }
 
-ls_std::Float &ls_std::Float::operator=(float _value)
+ls::Float &ls::Float::operator=(float _value)
 {
   this->value = _value;
   return *this;
 }
 
-float ls_std::Float::operator-() const
+float ls::Float::operator-() const
 {
   return -this->value;
 }
 
-float ls_std::Float::operator+(const ls_std::Float &_float) const
+float ls::Float::operator+(const ls::Float &_float) const
 {
   return this->value + _float;
 }
 
-float ls_std::Float::operator+(float _value) const
+float ls::Float::operator+(float _value) const
 {
   return this->value + _value;
 }
 
-float ls_std::Float::operator*(const ls_std::Float &_float) const
+float ls::Float::operator*(const ls::Float &_float) const
 {
   return this->value * _float;
 }
 
-float ls_std::Float::operator*(float _value) const
+float ls::Float::operator*(float _value) const
 {
   return this->value * _value;
 }
 
-float ls_std::Float::operator-(const ls_std::Float &_float) const
+float ls::Float::operator-(const ls::Float &_float) const
 {
   return this->value - _float;
 }
 
-float ls_std::Float::operator-(float _value) const
+float ls::Float::operator-(float _value) const
 {
   return this->value - _value;
 }
 
-float ls_std::Float::operator/(const ls_std::Float &_float) const
+float ls::Float::operator/(const ls::Float &_float) const
 {
   return this->value / _float;
 }
 
-float ls_std::Float::operator/(float _value) const
+float ls::Float::operator/(float _value) const
 {
   return this->value / _value;
 }
 
-ls_std::Float &ls_std::Float::operator+=(const ls_std::Float &_float)
+ls::Float &ls::Float::operator+=(const ls::Float &_float)
 {
   this->value += _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator+=(float _value)
+ls::Float &ls::Float::operator+=(float _value)
 {
   this->value += _value;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator-=(const ls_std::Float &_float)
+ls::Float &ls::Float::operator-=(const ls::Float &_float)
 {
   this->value -= _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator-=(float _value)
+ls::Float &ls::Float::operator-=(float _value)
 {
   this->value -= _value;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator*=(const ls_std::Float &_float)
+ls::Float &ls::Float::operator*=(const ls::Float &_float)
 {
   this->value *= _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator*=(float _value)
+ls::Float &ls::Float::operator*=(float _value)
 {
   this->value *= _value;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator/=(const ls_std::Float &_float)
+ls::Float &ls::Float::operator/=(const ls::Float &_float)
 {
   this->value /= _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator/=(float _value)
+ls::Float &ls::Float::operator/=(float _value)
 {
   this->value /= _value;
   return *this;
 }
 
-bool ls_std::Float::operator==(const ls_std::Float &_float) const
+bool ls::Float::operator==(const ls::Float &_float) const
 {
   return std::fabs(this->value - _float) < this->epsilon;
 }
 
-bool ls_std::Float::operator==(float _value) const
+bool ls::Float::operator==(float _value) const
 {
   return std::fabs(this->value - _value) < this->epsilon;
 }
 
-bool ls_std::Float::operator!=(const ls_std::Float &_float) const
+bool ls::Float::operator!=(const ls::Float &_float) const
 {
   return std::fabs(this->value - _float) >= this->epsilon;
 }
 
-bool ls_std::Float::operator!=(float _value) const
+bool ls::Float::operator!=(float _value) const
 {
   return std::fabs(this->value - _value) >= this->epsilon;
 }
 
-bool ls_std::Float::operator>(const ls_std::Float &_float) const
+bool ls::Float::operator>(const ls::Float &_float) const
 {
   return this->value > _float;
 }
 
-bool ls_std::Float::operator>(float _value) const
+bool ls::Float::operator>(float _value) const
 {
   return this->value > _value;
 }
 
-bool ls_std::Float::operator>=(const ls_std::Float &_float) const
+bool ls::Float::operator>=(const ls::Float &_float) const
 {
   return this->value >= _float;
 }
 
-bool ls_std::Float::operator>=(float _value) const
+bool ls::Float::operator>=(float _value) const
 {
   return this->value >= _value;
 }
 
-bool ls_std::Float::operator<(const ls_std::Float &_float) const
+bool ls::Float::operator<(const ls::Float &_float) const
 {
   return this->value < _float;
 }
 
-bool ls_std::Float::operator<(float _value) const
+bool ls::Float::operator<(float _value) const
 {
   return this->value < _value;
 }
 
-bool ls_std::Float::operator<=(const ls_std::Float &_float) const
+bool ls::Float::operator<=(const ls::Float &_float) const
 {
   return this->value <= _float;
 }
 
-bool ls_std::Float::operator<=(float _value) const
+bool ls::Float::operator<=(float _value) const
 {
   return this->value <= _value;
 }
 
-void ls_std::Float::operator++()
+void ls::Float::operator++()
 {
   this->value += 1.0f;
 }
 
-void ls_std::Float::operator--()
+void ls::Float::operator--()
 {
   this->value -= 1.0f;
 }
 
-void ls_std::Float::parse(std::string _parseText)
+void ls::Float::parse(std::string _parseText)
 {
   this->value = std::stof(_parseText);
 }
 
-std::string ls_std::Float::toString()
+std::string ls::Float::toString()
 {
   return std::to_string(this->value);
 }
 
-float ls_std::Float::getEpsilon()
+float ls::Float::getEpsilon()
 {
   return this->epsilon;
 }
 
-float ls_std::Float::getValue()
+float ls::Float::getValue()
 {
   return this->value;
 }
 
-void ls_std::Float::setEpsilon(float _epsilon)
+void ls::Float::setEpsilon(float _epsilon)
 {
   this->_assignEpsilon(_epsilon);
 }
 
-void ls_std::Float::_assignEpsilon(float _epsilon)
+void ls::Float::_assignEpsilon(float _epsilon)
 {
   if (_epsilon <= 0.0)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->epsilon = _epsilon;

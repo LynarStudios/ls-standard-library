@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-05-01
+ * Changed:         2022-05-05
  *
  * */
 
@@ -14,13 +14,13 @@
 #include <vector>
 #include <map>
 
-namespace ls_std
+namespace ls
 {
   using event_id = std::string;
   using event_parameter_id = std::string;
   using event_parameter_value = std::string;
   using event_parameter = std::pair<std::string, std::string>;
-  using event_parameter_list = std::map<ls_std::event_parameter_id, ls_std::event_parameter_value>;
+  using event_parameter_list = std::map<ls::event_parameter_id, ls::event_parameter_value>;
 }
 
 #endif

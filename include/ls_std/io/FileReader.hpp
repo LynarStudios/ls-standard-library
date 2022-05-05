@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -14,23 +14,23 @@
 #include "File.hpp"
 #include "IReader.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class FileReader : public ls_std::Class, public ls_std::IReader
+  class FileReader : public ls::Class, public ls::IReader
   {
     public:
 
-      explicit FileReader(ls_std::File &_file);
+      explicit FileReader(ls::File &_file);
       ~FileReader() override = default;
 
-      ls_std::byte_field read() override;
-      void reset(ls_std::File &_file);
+      ls::byte_field read() override;
+      void reset(ls::File &_file);
 
     private:
 
-      ls_std::File file;
+      ls::File file;
 
-      static void _init(ls_std::File &_file);
+      static void _init(ls::File &_file);
   };
 }
 

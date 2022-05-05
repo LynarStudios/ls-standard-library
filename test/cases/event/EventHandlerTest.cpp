@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-27
+ * Changed:         2022-05-05
  *
  * */
 
@@ -32,18 +32,18 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventHandler eventHandler{""};
+                     ls::EventHandler eventHandler{""};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventHandlerTest, getId)
   {
-    ls_std::EventHandler eventHandler{"EventId"};
+    ls::EventHandler eventHandler{"EventId"};
     ASSERT_STREQ("EventId", eventHandler.getId().c_str());
   }
 }

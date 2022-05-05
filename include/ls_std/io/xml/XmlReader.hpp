@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -18,32 +18,32 @@
 #include "XmlParseParameter.hpp"
 #include <list>
 
-namespace ls_std
+namespace ls
 {
-  class XmlReader : public ls_std::Class, public ls_std::IReader
+  class XmlReader : public ls::Class, public ls::IReader
   {
     public:
 
-      explicit XmlReader(const std::shared_ptr<ls_std::XmlDocument> &_document, const std::string &_absolutePath);
+      explicit XmlReader(const std::shared_ptr<ls::XmlDocument> &_document, const std::string &_absolutePath);
       ~XmlReader() override = default;
 
       // implementation
 
-      ls_std::byte_field read() override;
+      ls::byte_field read() override;
 
       // additional functionality
 
-      std::shared_ptr<ls_std::XmlDocument> getDocument();
-      void setDocument(const std::shared_ptr<ls_std::XmlDocument> &_document);
-      void setFile(const ls_std::File &_xmlFile);
+      std::shared_ptr<ls::XmlDocument> getDocument();
+      void setDocument(const std::shared_ptr<ls::XmlDocument> &_document);
+      void setFile(const ls::File &_xmlFile);
 
     private:
 
-      std::shared_ptr<ls_std::XmlDocument> document{};
-      ls_std::File xmlFile;
+      std::shared_ptr<ls::XmlDocument> document{};
+      ls::File xmlFile;
 
-      void _assignDocument(const std::shared_ptr<ls_std::XmlDocument> &_document);
-      void _assignFile(ls_std::File _xmlFile);
+      void _assignDocument(const std::shared_ptr<ls::XmlDocument> &_document);
+      void _assignFile(ls::File _xmlFile);
   };
 }
 

@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::FileOperationException{};
+                     throw ls::FileOperationException{};
                    }
-                   catch (const ls_std::FileOperationException &_exception)
+                   catch (const ls::FileOperationException &_exception)
                    {
                      EXPECT_STREQ("FileOperationException thrown - file operation failed!", _exception.what());
                      throw;
                    }
-                 }, ls_std::FileOperationException);
+                 }, ls::FileOperationException);
   }
 }

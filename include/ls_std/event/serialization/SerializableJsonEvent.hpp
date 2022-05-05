@@ -16,31 +16,31 @@
 #include <memory>
 #include "ls_std/lib/nlohmann_json/include/nlohmann/json.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class SerializableJsonEvent : public ls_std::Class, public ls_std::ISerializable
+  class SerializableJsonEvent : public ls::Class, public ls::ISerializable
   {
     public:
 
-      explicit SerializableJsonEvent(const std::shared_ptr<ls_std::Event> &_value);
+      explicit SerializableJsonEvent(const std::shared_ptr<ls::Event> &_value);
       ~SerializableJsonEvent() override = default;
 
       // implementation
 
-      ls_std::byte_field marshal() override;
-      void unmarshal(const ls_std::byte_field &_data) override;
+      ls::byte_field marshal() override;
+      void unmarshal(const ls::byte_field &_data) override;
 
       // additional functionality
 
-      std::shared_ptr<ls_std::Event> getValue();
-      void setValue(const std::shared_ptr<ls_std::Event> &_value);
+      std::shared_ptr<ls::Event> getValue();
+      void setValue(const std::shared_ptr<ls::Event> &_value);
 
     private:
 
       nlohmann::json jsonObject{};
-      std::shared_ptr<ls_std::Event> value{};
+      std::shared_ptr<ls::Event> value{};
 
-      void _assignValue(const std::shared_ptr<ls_std::Event> &_value);
+      void _assignValue(const std::shared_ptr<ls::Event> &_value);
       void _unmarshalParameterList();
       void _update();
       void _updateEventParameterList();

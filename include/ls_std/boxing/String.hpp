@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -17,9 +17,9 @@
 #include <memory>
 #include <vector>
 
-namespace ls_std
+namespace ls
 {
-  class String : public ls_std::Class, public ls_std::IBoxing
+  class String : public ls::Class, public ls::IBoxing
   {
     public:
 
@@ -34,26 +34,26 @@ namespace ls_std
 
       // assignment operators
 
-      ls_std::String &operator=(std::string _value);
+      ls::String &operator=(std::string _value);
 
       // arithmetic operators
 
-      std::string operator+(ls_std::String _string) const;
+      std::string operator+(ls::String _string) const;
       std::string operator+(const std::string &_string) const;
       std::string operator+(const char *_string) const;
       std::string operator-(int _number);
 
       // compound operators
 
-      ls_std::String &operator+=(ls_std::String _string);
-      ls_std::String &operator+=(const std::string &_text);
+      ls::String &operator+=(ls::String _string);
+      ls::String &operator+=(const std::string &_text);
 
       // comparison operators
 
-      bool operator==(ls_std::String _string);
+      bool operator==(ls::String _string);
       bool operator==(const std::string &_value);
       bool operator==(const char *_value);
-      bool operator!=(ls_std::String _string);
+      bool operator!=(ls::String _string);
       bool operator!=(const std::string &_value);
       bool operator!=(const char *_value);
 
@@ -66,9 +66,9 @@ namespace ls_std
 
       bool contains(const std::string &_text);
       bool endsWith(const std::string &_text);
-      bool equalsIgnoreCase(ls_std::String _string);
+      bool equalsIgnoreCase(ls::String _string);
       bool equalsIgnoreCase(std::string _text);
-      std::vector<ls_std::byte> getByteData();
+      std::vector<ls::byte> getByteData();
       std::string padLeft(size_t _width, char _fillCharacter);
       std::string padRight(size_t _width, char _fillCharacter);
       std::string reverse();

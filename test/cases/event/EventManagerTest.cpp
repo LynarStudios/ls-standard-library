@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-27
+ * Changed:         2022-05-05
  *
  * */
 
@@ -29,7 +29,7 @@ namespace
 
   TEST_F(EventManagerTest, getClassName)
   {
-    ls_std::EventManager eventManager{};
+    ls::EventManager eventManager{};
     ASSERT_STREQ("EventManager", eventManager.getClassName().c_str());
   }
 
@@ -38,14 +38,14 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.subscribe("", std::make_shared<ls_std_test::DailyNewsAgency>());
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, subscribe_no_listener)
@@ -53,14 +53,14 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.subscribe("TMP_ID", nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, subscribe_no_event_handler_available)
@@ -68,14 +68,14 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.subscribe("TMP_DIR", std::make_shared<ls_std_test::DailyNewsAgency>());
                    }
-                   catch (const ls_std::EventNotSubscribedException &_exception)
+                   catch (const ls::EventNotSubscribedException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::EventNotSubscribedException);
+                 }, ls::EventNotSubscribedException);
   }
 
   TEST_F(EventManagerTest, unsubscribe_empty_id)
@@ -83,14 +83,14 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.unsubscribe("", std::make_shared<ls_std_test::DailyNewsAgency>());
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, unsubscribe_no_listener)
@@ -98,27 +98,27 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.unsubscribe("TMP_ID", nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, addEventHandler)
   {
-    ls_std::EventManager eventManager{};
-    ASSERT_TRUE(eventManager.addEventHandler(std::make_shared<ls_std::EventHandler>("TMP_ID")));
+    ls::EventManager eventManager{};
+    ASSERT_TRUE(eventManager.addEventHandler(std::make_shared<ls::EventHandler>("TMP_ID")));
   }
 
   TEST_F(EventManagerTest, addEventHandler_event_handler_already_exists)
   {
-    ls_std::EventManager eventManager{};
-    ASSERT_TRUE(eventManager.addEventHandler(std::make_shared<ls_std::EventHandler>("TMP_ID")));
-    ASSERT_FALSE(eventManager.addEventHandler(std::make_shared<ls_std::EventHandler>("TMP_ID")));
+    ls::EventManager eventManager{};
+    ASSERT_TRUE(eventManager.addEventHandler(std::make_shared<ls::EventHandler>("TMP_ID")));
+    ASSERT_FALSE(eventManager.addEventHandler(std::make_shared<ls::EventHandler>("TMP_ID")));
   }
 
   TEST_F(EventManagerTest, addEventHandler_no_reference)
@@ -126,14 +126,14 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.addEventHandler(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, fire_event_handler_not_available)
@@ -141,26 +141,26 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
-                     eventManager.fire(ls_std::Event{"TMP_ID"});
+                     ls::EventManager eventManager{};
+                     eventManager.fire(ls::Event{"TMP_ID"});
                    }
-                   catch (const ls_std::EventNotHandledException &_exception)
+                   catch (const ls::EventNotHandledException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::EventNotHandledException);
+                 }, ls::EventNotHandledException);
   }
 
   TEST_F(EventManagerTest, hasEventHandler)
   {
-    ls_std::EventManager eventManager{};
-    eventManager.addEventHandler(std::make_shared<ls_std::EventHandler>("TMP_ID"));
+    ls::EventManager eventManager{};
+    eventManager.addEventHandler(std::make_shared<ls::EventHandler>("TMP_ID"));
     ASSERT_TRUE(eventManager.hasEventHandler("TMP_ID"));
   }
 
   TEST_F(EventManagerTest, hasEventHandler_no_event_handler_available)
   {
-    ls_std::EventManager eventManager{};
+    ls::EventManager eventManager{};
     ASSERT_FALSE(eventManager.hasEventHandler("TMP_ID"));
   }
 
@@ -169,20 +169,20 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.hasEventHandler("");
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, removeEventHandler)
   {
-    ls_std::EventManager eventManager{};
-    std::shared_ptr<ls_std::EventHandler> eventHandler = std::make_shared<ls_std::EventHandler>("TMP_ID");
+    ls::EventManager eventManager{};
+    std::shared_ptr<ls::EventHandler> eventHandler = std::make_shared<ls::EventHandler>("TMP_ID");
     eventManager.addEventHandler(eventHandler);
 
     ASSERT_TRUE(eventManager.removeEventHandler(eventHandler));
@@ -190,8 +190,8 @@ namespace
 
   TEST_F(EventManagerTest, removeEventHandler_no_event_handler_available)
   {
-    ls_std::EventManager eventManager{};
-    ASSERT_FALSE(eventManager.removeEventHandler(std::make_shared<ls_std::EventHandler>("TMP_ID")));
+    ls::EventManager eventManager{};
+    ASSERT_FALSE(eventManager.removeEventHandler(std::make_shared<ls::EventHandler>("TMP_ID")));
   }
 
   TEST_F(EventManagerTest, removeEventHandler_no_reference)
@@ -199,30 +199,30 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventManager eventManager{};
+                     ls::EventManager eventManager{};
                      eventManager.removeEventHandler(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, production_example)
   {
     std::string news, expectedNews{};
-    ls_std::event_id seriousNewsEventId = ls_std_test::SeriousNewsEvent{""}.getId();
-    ls_std::event_id gossipNewsEventId = ls_std_test::GossipNewsEvent{""}.getId();
+    ls::event_id seriousNewsEventId = ls_std_test::SeriousNewsEvent{""}.getId();
+    ls::event_id gossipNewsEventId = ls_std_test::GossipNewsEvent{""}.getId();
 
     // create event handler
 
-    std::shared_ptr<ls_std::EventHandler> seriousNewsEventHandler = std::make_shared<ls_std::EventHandler>(seriousNewsEventId);   // event id
-    std::shared_ptr<ls_std::EventHandler> gossipNewsEventHandler = std::make_shared<ls_std::EventHandler>(gossipNewsEventId);     // event id
+    std::shared_ptr<ls::EventHandler> seriousNewsEventHandler = std::make_shared<ls::EventHandler>(seriousNewsEventId);   // event id
+    std::shared_ptr<ls::EventHandler> gossipNewsEventHandler = std::make_shared<ls::EventHandler>(gossipNewsEventId);     // event id
 
     // create and fill event manager with handler
 
-    std::shared_ptr<ls_std::EventManager> eventManager = std::make_shared<ls_std::EventManager>();
+    std::shared_ptr<ls::EventManager> eventManager = std::make_shared<ls::EventManager>();
     eventManager->addEventHandler(seriousNewsEventHandler);
     eventManager->addEventHandler(gossipNewsEventHandler);
 

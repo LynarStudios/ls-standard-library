@@ -13,7 +13,7 @@
 #include <memory>
 #include "ls_std/core/Class.hpp"
 
-namespace ls_std
+namespace ls
 {
   class IFactory
   {
@@ -22,7 +22,7 @@ namespace ls_std
       IFactory() = default;
       ~IFactory() = default;
 
-      virtual std::shared_ptr<ls_std::Class> build() = 0;
+      virtual std::shared_ptr<ls::Class> build() = 0;
   };
 }
 

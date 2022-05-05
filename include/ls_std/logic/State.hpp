@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -17,33 +17,33 @@
 #include "StateConnection.hpp"
 #include <ls_std/serialization/ISerializable.hpp>
 
-namespace ls_std
+namespace ls
 {
-  class State : public ls_std::Class
+  class State : public ls::Class
   {
     public:
 
-      explicit State(const ls_std::StateId& _id);
+      explicit State(const ls::StateId& _id);
       ~State() override = default;
 
       // additional functionality
 
-      bool addStateConnection(const ls_std::StateConnectionId &_connectionId, const std::shared_ptr<ls_std::State> &_connectedState);
-      bool addStateConnection(const std::shared_ptr<ls_std::StateConnection> &_connection);
+      bool addStateConnection(const ls::StateConnectionId &_connectionId, const std::shared_ptr<ls::State> &_connectedState);
+      bool addStateConnection(const std::shared_ptr<ls::StateConnection> &_connection);
       void clearConnections();
-      std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::StateConnection>> getConnectedStates();
-      ls_std::StateId getId();
-      bool hasConnection(const ls_std::StateConnectionId &_connectionId);
-      void setId(const ls_std::StateId& _id);
+      std::unordered_map<ls::StateConnectionId, std::shared_ptr<ls::StateConnection>> getConnectedStates();
+      ls::StateId getId();
+      bool hasConnection(const ls::StateConnectionId &_connectionId);
+      void setId(const ls::StateId& _id);
 
     private:
 
-      std::unordered_map<ls_std::StateConnectionId, std::shared_ptr<ls_std::StateConnection>> connectedStates{};
-      ls_std::StateId id{};
+      std::unordered_map<ls::StateConnectionId, std::shared_ptr<ls::StateConnection>> connectedStates{};
+      ls::StateId id{};
 
-      void _assignStateId(const ls_std::StateId& _id);
+      void _assignStateId(const ls::StateId& _id);
       void _clearConnections();
-      bool _hasConnection(const ls_std::StateConnectionId &_connectionId);
+      bool _hasConnection(const ls::StateConnectionId &_connectionId);
   };
 }
 

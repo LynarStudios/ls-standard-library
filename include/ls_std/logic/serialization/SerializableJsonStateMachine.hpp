@@ -16,31 +16,31 @@
 #include <memory>
 #include "ls_std/lib/nlohmann_json/include/nlohmann/json.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class SerializableJsonStateMachine : public ls_std::Class, public ls_std::ISerializable
+  class SerializableJsonStateMachine : public ls::Class, public ls::ISerializable
   {
     public:
 
-      explicit SerializableJsonStateMachine(const std::shared_ptr<ls_std::StateMachine> &_value);
+      explicit SerializableJsonStateMachine(const std::shared_ptr<ls::StateMachine> &_value);
       ~SerializableJsonStateMachine() override = default;
 
       // implementation
 
-      ls_std::byte_field marshal() override;
-      void unmarshal(const ls_std::byte_field &_data) override;
+      ls::byte_field marshal() override;
+      void unmarshal(const ls::byte_field &_data) override;
 
       // additional functionality
 
-      std::shared_ptr<ls_std::StateMachine> getValue();
-      void setValue(const std::shared_ptr<ls_std::StateMachine> &_value);
+      std::shared_ptr<ls::StateMachine> getValue();
+      void setValue(const std::shared_ptr<ls::StateMachine> &_value);
 
     private:
 
       nlohmann::json jsonObject{};
-      std::shared_ptr<ls_std::StateMachine> value{};
+      std::shared_ptr<ls::StateMachine> value{};
 
-      void _assignValue(const std::shared_ptr<ls_std::StateMachine> &_value);
+      void _assignValue(const std::shared_ptr<ls::StateMachine> &_value);
       void _unmarshalCurrentState();
       void _unmarshalStates();
       void _update();

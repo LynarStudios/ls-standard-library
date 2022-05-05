@@ -10,21 +10,21 @@
 #include <ls_std/event/EventHandler.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::EventHandler::EventHandler(const ls_std::event_id& _id) : ls_std::Narrator()
+ls::EventHandler::EventHandler(const ls::event_id& _id) : ls::Narrator()
 {
   this->_assignId(_id);
 }
 
-ls_std::event_id ls_std::EventHandler::getId()
+ls::event_id ls::EventHandler::getId()
 {
   return this->id;
 }
 
-void ls_std::EventHandler::_assignId(const ls_std::event_id &_id)
+void ls::EventHandler::_assignId(const ls::event_id &_id)
 {
   if (_id.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->id = _id;

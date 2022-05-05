@@ -13,84 +13,84 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::Logger::Logger(const std::shared_ptr<ls_std::IWriter> &_writer)
-    : ls_std::Class("Logger"),
-      logLevel(ls_std::LogLevelValue::INFO)
+ls::Logger::Logger(const std::shared_ptr<ls::IWriter> &_writer)
+    : ls::Class("Logger"),
+      logLevel(ls::LogLevelValue::INFO)
 {
   this->_assignWriter(_writer);
 }
 
-void ls_std::Logger::debug(const ls_std::byte *_data)
+void ls::Logger::debug(const ls::byte *_data)
 {
-  if (this->logLevel >= ls_std::LogLevelValue::DEBUG)
+  if (this->logLevel >= ls::LogLevelValue::DEBUG)
   {
-    this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::DEBUG));
+    this->_log(_data, ls::LogLevel(ls::LogLevelValue::DEBUG));
   }
 }
 
-void ls_std::Logger::error(const ls_std::byte *_data)
+void ls::Logger::error(const ls::byte *_data)
 {
-  if (this->logLevel >= ls_std::LogLevelValue::ERR)
+  if (this->logLevel >= ls::LogLevelValue::ERR)
   {
-    this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::ERR));
+    this->_log(_data, ls::LogLevel(ls::LogLevelValue::ERR));
   }
 }
 
-void ls_std::Logger::fatal(const ls_std::byte *_data)
+void ls::Logger::fatal(const ls::byte *_data)
 {
-  if (this->logLevel >= ls_std::LogLevelValue::FATAL)
+  if (this->logLevel >= ls::LogLevelValue::FATAL)
   {
-    this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::FATAL));
+    this->_log(_data, ls::LogLevel(ls::LogLevelValue::FATAL));
   }
 }
 
-ls_std::LogLevel ls_std::Logger::getLogLevel()
+ls::LogLevel ls::Logger::getLogLevel()
 {
   return this->logLevel;
 }
 
-void ls_std::Logger::info(const ls_std::byte *_data)
+void ls::Logger::info(const ls::byte *_data)
 {
-  if (this->logLevel >= ls_std::LogLevelValue::INFO)
+  if (this->logLevel >= ls::LogLevelValue::INFO)
   {
-    this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::INFO));
+    this->_log(_data, ls::LogLevel(ls::LogLevelValue::INFO));
   }
 }
 
-void ls_std::Logger::setLogLevel(const ls_std::LogLevelValue &_logLevelValue)
+void ls::Logger::setLogLevel(const ls::LogLevelValue &_logLevelValue)
 {
   this->logLevel = _logLevelValue;
 }
 
-void ls_std::Logger::trace(const ls_std::byte *_data)
+void ls::Logger::trace(const ls::byte *_data)
 {
-  if (this->logLevel >= ls_std::LogLevelValue::TRACE)
+  if (this->logLevel >= ls::LogLevelValue::TRACE)
   {
-    this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::TRACE));
+    this->_log(_data, ls::LogLevel(ls::LogLevelValue::TRACE));
   }
 }
 
-void ls_std::Logger::warn(const ls_std::byte *_data)
+void ls::Logger::warn(const ls::byte *_data)
 {
-  if (this->logLevel >= ls_std::LogLevelValue::WARN)
+  if (this->logLevel >= ls::LogLevelValue::WARN)
   {
-    this->_log(_data, ls_std::LogLevel(ls_std::LogLevelValue::WARN));
+    this->_log(_data, ls::LogLevel(ls::LogLevelValue::WARN));
   }
 }
 
-void ls_std::Logger::_assignWriter(const std::shared_ptr<ls_std::IWriter> &_writer)
+void ls::Logger::_assignWriter(const std::shared_ptr<ls::IWriter> &_writer)
 {
   if (_writer == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->writer = _writer;
 }
 
-void ls_std::Logger::_log(const ls_std::byte *_data, const ls_std::LogLevel &_logLevel)
+void ls::Logger::_log(const ls::byte *_data, const ls::LogLevel &_logLevel)
 {
-  ls_std::Date date{};
-  std::string message = "[" + date.toString() + "] " + ls_std::String{_logLevel.toString() + ":"}.padRight(10, ' ') + std::string(_data) + ls_std::NewLine::getUnixNewLine();
+  ls::Date date{};
+  std::string message = "[" + date.toString() + "] " + ls::String{_logLevel.toString() + ":"}.padRight(10, ' ') + std::string(_data) + ls::NewLine::getUnixNewLine();
   this->writer->write(message);
 }

@@ -28,10 +28,10 @@ namespace
 
   TEST_F(RegexUtilsTest, escapeString)
   {
-    std::string escapedString = ls_std::RegexUtils::escapeString("Hello?!");
+    std::string escapedString = ls::RegexUtils::escapeString("Hello?!");
     ASSERT_STREQ(R"(Hello\?!)", escapedString.c_str());
 
-    escapedString = ls_std::RegexUtils::escapeString(R"(\)");
+    escapedString = ls::RegexUtils::escapeString(R"(\)");
     ASSERT_STREQ(R"(\\)", escapedString.c_str());
   }
 }

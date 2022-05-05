@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-04-23
+ * Changed:         2022-05-05
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <string>
 
-namespace ls_std
+namespace ls
 {
   class FilePathSeparator
   {
@@ -26,10 +26,10 @@ namespace ls_std
         char separator;
 
         #ifdef _WIN32
-        separator = ls_std::FilePathSeparator::getWindowsFilePathSeparator();
+        separator = ls::FilePathSeparator::getWindowsFilePathSeparator();
         #endif
         #if defined(unix) || defined(__APPLE__)
-        separator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
+        separator = ls::FilePathSeparator::getUnixFilePathSeparator();
         #endif
 
         return separator;

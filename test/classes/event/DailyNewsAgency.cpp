@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-04-23
+ * Changed:         2022-05-05
  *
  * */
 
@@ -12,9 +12,9 @@
 ls_std_test::DailyNewsAgency::DailyNewsAgency() : ls_std_test::NewsAgency("DailyNewsAgency")
 {}
 
-void ls_std_test::DailyNewsAgency::listen(const ls_std::Class &_info)
+void ls_std_test::DailyNewsAgency::listen(const ls::Class &_info)
 {
-  ls_std::Event event = dynamic_cast<const ls_std::Event &>(_info);
+  ls::Event event = dynamic_cast<const ls::Event &>(_info);
 
   if (event.getId() == "SeriousNewsEvent")
   {

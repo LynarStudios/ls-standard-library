@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -15,24 +15,24 @@
 #include <list>
 #include <memory>
 
-namespace ls_std
+namespace ls
 {
-  class Narrator : public ls_std::Class
+  class Narrator : public ls::Class
   {
     public:
 
       Narrator();
       ~Narrator() override = default;
 
-      bool addListener(const std::shared_ptr<ls_std::IListener> &_listener);
+      bool addListener(const std::shared_ptr<ls::IListener> &_listener);
       void clear();
-      std::list<std::shared_ptr<ls_std::IListener>> getListeners();
-      bool removeListener(const std::shared_ptr<ls_std::IListener> &_listener);
-      void tell(const ls_std::Class &_info);
+      std::list<std::shared_ptr<ls::IListener>> getListeners();
+      bool removeListener(const std::shared_ptr<ls::IListener> &_listener);
+      void tell(const ls::Class &_info);
 
     private:
 
-      std::list<std::shared_ptr<ls_std::IListener>> listeners{};
+      std::list<std::shared_ptr<ls::IListener>> listeners{};
   };
 }
 

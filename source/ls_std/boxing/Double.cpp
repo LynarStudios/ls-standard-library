@@ -11,222 +11,222 @@
 #include <ls_std/boxing/Double.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::Double::Double() : ls_std::Class("Double")
+ls::Double::Double() : ls::Class("Double")
 {
   this->_assignEpsilon(0.00000001);
 }
 
-ls_std::Double::Double(double _value)
-    : ls_std::Class("Double"),
+ls::Double::Double(double _value)
+    : ls::Class("Double"),
       value(_value)
 {
   this->_assignEpsilon(0.00000001);
 }
 
-ls_std::Double::operator double() const
+ls::Double::operator double() const
 {
   return this->value;
 }
 
-ls_std::Double &ls_std::Double::operator=(double _value)
+ls::Double &ls::Double::operator=(double _value)
 {
   this->value = _value;
   return *this;
 }
 
-double ls_std::Double::operator-() const
+double ls::Double::operator-() const
 {
   return -this->value;
 }
 
-double ls_std::Double::operator+(const ls_std::Double &_double) const
+double ls::Double::operator+(const ls::Double &_double) const
 {
   return this->value + _double;
 }
 
-double ls_std::Double::operator+(double _value) const
+double ls::Double::operator+(double _value) const
 {
   return this->value + _value;
 }
 
-double ls_std::Double::operator*(const ls_std::Double &_double) const
+double ls::Double::operator*(const ls::Double &_double) const
 {
   return this->value * _double;
 }
 
-double ls_std::Double::operator*(double _value) const
+double ls::Double::operator*(double _value) const
 {
   return this->value * _value;
 }
 
-double ls_std::Double::operator-(const ls_std::Double &_double) const
+double ls::Double::operator-(const ls::Double &_double) const
 {
   return this->value - _double;
 }
 
-double ls_std::Double::operator-(double _value) const
+double ls::Double::operator-(double _value) const
 {
   return this->value - _value;
 }
 
-double ls_std::Double::operator/(const ls_std::Double &_double) const
+double ls::Double::operator/(const ls::Double &_double) const
 {
   return this->value / _double;
 }
 
-double ls_std::Double::operator/(double _value) const
+double ls::Double::operator/(double _value) const
 {
   return this->value / _value;
 }
 
-ls_std::Double &ls_std::Double::operator+=(const ls_std::Double &_double)
+ls::Double &ls::Double::operator+=(const ls::Double &_double)
 {
   this->value += _double;
   return *this;
 }
 
-ls_std::Double &ls_std::Double::operator+=(double _value)
+ls::Double &ls::Double::operator+=(double _value)
 {
   this->value += _value;
   return *this;
 }
 
-ls_std::Double &ls_std::Double::operator-=(const ls_std::Double &_double)
+ls::Double &ls::Double::operator-=(const ls::Double &_double)
 {
   this->value -= _double;
   return *this;
 }
 
-ls_std::Double &ls_std::Double::operator-=(double _value)
+ls::Double &ls::Double::operator-=(double _value)
 {
   this->value -= _value;
   return *this;
 }
 
-ls_std::Double &ls_std::Double::operator*=(const ls_std::Double &_double)
+ls::Double &ls::Double::operator*=(const ls::Double &_double)
 {
   this->value *= _double;
   return *this;
 }
 
-ls_std::Double &ls_std::Double::operator*=(double _value)
+ls::Double &ls::Double::operator*=(double _value)
 {
   this->value *= _value;
   return *this;
 }
 
-ls_std::Double &ls_std::Double::operator/=(const ls_std::Double &_double)
+ls::Double &ls::Double::operator/=(const ls::Double &_double)
 {
   this->value /= _double;
   return *this;
 }
 
-ls_std::Double &ls_std::Double::operator/=(double _value)
+ls::Double &ls::Double::operator/=(double _value)
 {
   this->value /= _value;
   return *this;
 }
 
-bool ls_std::Double::operator==(const ls_std::Double &_double) const
+bool ls::Double::operator==(const ls::Double &_double) const
 {
   return std::fabs(this->value - _double) < this->epsilon;
 }
 
-bool ls_std::Double::operator==(double _value) const
+bool ls::Double::operator==(double _value) const
 {
   return std::fabs(this->value - _value) < this->epsilon;
 }
 
-bool ls_std::Double::operator!=(const ls_std::Double &_double) const
+bool ls::Double::operator!=(const ls::Double &_double) const
 {
   return std::fabs(this->value - _double) >= this->epsilon;
 }
 
-bool ls_std::Double::operator!=(double _value) const
+bool ls::Double::operator!=(double _value) const
 {
   return std::fabs(this->value - _value) >= this->epsilon;
 }
 
-bool ls_std::Double::operator>(const ls_std::Double &_double) const
+bool ls::Double::operator>(const ls::Double &_double) const
 {
   return this->value > _double;
 }
 
-bool ls_std::Double::operator>(double _value) const
+bool ls::Double::operator>(double _value) const
 {
   return this->value > _value;
 }
 
-bool ls_std::Double::operator>=(const ls_std::Double &_double) const
+bool ls::Double::operator>=(const ls::Double &_double) const
 {
   return this->value >= _double;
 }
 
-bool ls_std::Double::operator>=(double _value) const
+bool ls::Double::operator>=(double _value) const
 {
   return this->value >= _value;
 }
 
-bool ls_std::Double::operator<(const ls_std::Double &_double) const
+bool ls::Double::operator<(const ls::Double &_double) const
 {
   return this->value < _double;
 }
 
-bool ls_std::Double::operator<(double _value) const
+bool ls::Double::operator<(double _value) const
 {
   return this->value < _value;
 }
 
-bool ls_std::Double::operator<=(const ls_std::Double &_double) const
+bool ls::Double::operator<=(const ls::Double &_double) const
 {
   return this->value <= _double;
 }
 
-bool ls_std::Double::operator<=(double _value) const
+bool ls::Double::operator<=(double _value) const
 {
   return this->value <= _value;
 }
 
-void ls_std::Double::operator++()
+void ls::Double::operator++()
 {
   this->value += 1.0f;
 }
 
-void ls_std::Double::operator--()
+void ls::Double::operator--()
 {
   this->value -= 1.0f;
 }
 
-void ls_std::Double::parse(std::string _parseText)
+void ls::Double::parse(std::string _parseText)
 {
   this->value = std::stod(_parseText);
 }
 
-std::string ls_std::Double::toString()
+std::string ls::Double::toString()
 {
   return std::to_string(this->value);
 }
 
-double ls_std::Double::getEpsilon()
+double ls::Double::getEpsilon()
 {
   return this->epsilon;
 }
 
-double ls_std::Double::getValue()
+double ls::Double::getValue()
 {
   return this->value;
 }
 
-void ls_std::Double::setEpsilon(double _epsilon)
+void ls::Double::setEpsilon(double _epsilon)
 {
   this->_assignEpsilon(_epsilon);
 }
 
-void ls_std::Double::_assignEpsilon(double _epsilon)
+void ls::Double::_assignEpsilon(double _epsilon)
 {
   if (_epsilon <= 0.0)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->epsilon = _epsilon;

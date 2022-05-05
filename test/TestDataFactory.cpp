@@ -3,21 +3,21 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2021-05-02
+ * Changed:         2022-05-05
  *
  * */
 
 #include "TestDataFactory.hpp"
 
-ls_std::StateMachine ls_std_test::TestDataFactory::createStateMachine()
+ls::StateMachine ls_std_test::TestDataFactory::createStateMachine()
 {
-  ls_std::StateMachine stateMachine{"test_machine"};
+  ls::StateMachine stateMachine{"test_machine"};
 
-  std::shared_ptr<ls_std::State> stateA = std::make_shared<ls_std::State>("A");
-  std::shared_ptr<ls_std::State> stateB = std::make_shared<ls_std::State>("B");
-  std::shared_ptr<ls_std::State> stateC = std::make_shared<ls_std::State>("C");
-  std::shared_ptr<ls_std::State> stateD = std::make_shared<ls_std::State>("D");
-  std::shared_ptr<ls_std::State> stateE = std::make_shared<ls_std::State>("E");
+  std::shared_ptr<ls::State> stateA = std::make_shared<ls::State>("A");
+  std::shared_ptr<ls::State> stateB = std::make_shared<ls::State>("B");
+  std::shared_ptr<ls::State> stateC = std::make_shared<ls::State>("C");
+  std::shared_ptr<ls::State> stateD = std::make_shared<ls::State>("D");
+  std::shared_ptr<ls::State> stateE = std::make_shared<ls::State>("E");
 
   // add states
 
@@ -39,31 +39,31 @@ ls_std::StateMachine ls_std_test::TestDataFactory::createStateMachine()
   return stateMachine;
 }
 
-std::shared_ptr<ls_std::XmlNode> ls_std_test::TestDataFactory::createXmlContent()
+std::shared_ptr<ls::XmlNode> ls_std_test::TestDataFactory::createXmlContent()
 {
-  std::shared_ptr<ls_std::XmlNode> root = std::make_shared<ls_std::XmlNode>("dialog");
-  std::shared_ptr<ls_std::XmlAttribute> attribute{};
-  std::shared_ptr<ls_std::XmlNode> child{};
-  std::shared_ptr<ls_std::XmlNode> text{};
+  std::shared_ptr<ls::XmlNode> root = std::make_shared<ls::XmlNode>("dialog");
+  std::shared_ptr<ls::XmlAttribute> attribute{};
+  std::shared_ptr<ls::XmlNode> child{};
+  std::shared_ptr<ls::XmlNode> text{};
 
-  attribute = std::make_shared<ls_std::XmlAttribute>("name");
+  attribute = std::make_shared<ls::XmlAttribute>("name");
   attribute->setValue("dungeon_001");
   root->addAttributeToEnd(attribute);
 
-  child = std::make_shared<ls_std::XmlNode>("dialogUnit");
-  attribute = std::make_shared<ls_std::XmlAttribute>("id");
+  child = std::make_shared<ls::XmlNode>("dialogUnit");
+  attribute = std::make_shared<ls::XmlAttribute>("id");
   attribute->setValue("001");
   child->addAttributeToEnd(attribute);
-  text = std::make_shared<ls_std::XmlNode>("text");
+  text = std::make_shared<ls::XmlNode>("text");
   text->setValue("Hello!");
   child->addChildToEnd(text);
   root->addChildToEnd(child);
 
-  child = std::make_shared<ls_std::XmlNode>("dialogUnit");
-  attribute = std::make_shared<ls_std::XmlAttribute>("id");
+  child = std::make_shared<ls::XmlNode>("dialogUnit");
+  attribute = std::make_shared<ls::XmlAttribute>("id");
   attribute->setValue("002");
   child->addAttributeToEnd(attribute);
-  text = std::make_shared<ls_std::XmlNode>("text");
+  text = std::make_shared<ls::XmlNode>("text");
   text->setValue("Hello again!");
   child->addChildToEnd(text);
   root->addChildToEnd(child);

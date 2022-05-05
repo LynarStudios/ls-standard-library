@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -14,9 +14,9 @@
 #include <ls_std/core/Class.hpp>
 #include "IBoxing.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class Boolean : public ls_std::Class, public ls_std::IBoxing
+  class Boolean : public ls::Class, public ls::IBoxing
   {
     public:
 
@@ -30,12 +30,12 @@ namespace ls_std
 
       // assignment operators
 
-      ls_std::Boolean &operator=(int _value);
-      ls_std::Boolean &operator=(bool _value);
+      ls::Boolean &operator=(int _value);
+      ls::Boolean &operator=(bool _value);
 
       // stream operators
 
-      friend std::ostream &operator<<(std::ostream &_outputStream, const ls_std::Boolean &_boolean)
+      friend std::ostream &operator<<(std::ostream &_outputStream, const ls::Boolean &_boolean)
       {
         _outputStream << _boolean._toString();
         return _outputStream;
@@ -43,15 +43,15 @@ namespace ls_std
 
       // logical operators
 
-      friend bool operator!(const ls_std::Boolean &_boolean)
+      friend bool operator!(const ls::Boolean &_boolean)
       {
         return !_boolean.value;
       }
 
-      bool operator&&(const ls_std::Boolean &_boolean) const;
+      bool operator&&(const ls::Boolean &_boolean) const;
       bool operator&&(bool _value) const;
       bool operator&&(int _value) const;
-      bool operator||(const ls_std::Boolean &_boolean) const;
+      bool operator||(const ls::Boolean &_boolean) const;
       bool operator||(bool _value) const;
       bool operator||(int _value) const;
       // INFO: operator ^ can not be taken for XOR, since it's not possible to implement it respecting commutative law
@@ -64,9 +64,9 @@ namespace ls_std
       // additional functionality
 
       bool getValue() const;
-      static bool XOR(const ls_std::Boolean &_leftExpression, const ls_std::Boolean &_rightExpression);
-      static bool XOR(const ls_std::Boolean &_leftExpression, bool _rightExpression);
-      static bool XOR(bool _leftExpression, const ls_std::Boolean &_rightExpression);
+      static bool XOR(const ls::Boolean &_leftExpression, const ls::Boolean &_rightExpression);
+      static bool XOR(const ls::Boolean &_leftExpression, bool _rightExpression);
+      static bool XOR(bool _leftExpression, const ls::Boolean &_rightExpression);
       static bool XOR(bool _leftExpression, bool _rightExpression);
 
     private:

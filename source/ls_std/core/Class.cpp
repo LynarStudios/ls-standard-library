@@ -10,21 +10,21 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::Class::Class(const std::string &_name)
+ls::Class::Class(const std::string &_name)
 {
   this->_assignClassName(_name);
 }
 
-std::string ls_std::Class::getClassName()
+std::string ls::Class::getClassName()
 {
   return this->name;
 }
 
-void ls_std::Class::_assignClassName(const std::string &_name)
+void ls::Class::_assignClassName(const std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->name = _name;

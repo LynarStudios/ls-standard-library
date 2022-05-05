@@ -11,18 +11,18 @@
 #include "ls_std/logic/serialization/SerializableJsonState.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::SerializableJsonStateMachine::SerializableJsonStateMachine(const std::shared_ptr<ls_std::StateMachine> &_value) : ls_std::Class("SerializableJsonStateMachine")
+ls::SerializableJsonStateMachine::SerializableJsonStateMachine(const std::shared_ptr<ls::StateMachine> &_value) : ls::Class("SerializableJsonStateMachine")
 {
   this->_assignValue(_value);
 }
 
-ls_std::byte_field ls_std::SerializableJsonStateMachine::marshal()
+ls::byte_field ls::SerializableJsonStateMachine::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls_std::SerializableJsonStateMachine::unmarshal(const ls_std::byte_field &_data)
+void ls::SerializableJsonStateMachine::unmarshal(const ls::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -32,27 +32,27 @@ void ls_std::SerializableJsonStateMachine::unmarshal(const ls_std::byte_field &_
   this->value->setName(this->jsonObject["name"]);
 }
 
-std::shared_ptr<ls_std::StateMachine> ls_std::SerializableJsonStateMachine::getValue()
+std::shared_ptr<ls::StateMachine> ls::SerializableJsonStateMachine::getValue()
 {
   return this->value;
 }
 
-void ls_std::SerializableJsonStateMachine::setValue(const std::shared_ptr<ls_std::StateMachine> &_value)
+void ls::SerializableJsonStateMachine::setValue(const std::shared_ptr<ls::StateMachine> &_value)
 {
   this->_assignValue(_value);
 }
 
-void ls_std::SerializableJsonStateMachine::_assignValue(const std::shared_ptr<ls_std::StateMachine> &_value)
+void ls::SerializableJsonStateMachine::_assignValue(const std::shared_ptr<ls::StateMachine> &_value)
 {
   if (_value == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->value = _value;
 }
 
-void ls_std::SerializableJsonStateMachine::_unmarshalCurrentState()
+void ls::SerializableJsonStateMachine::_unmarshalCurrentState()
 {
   if (this->jsonObject.contains("currentState"))
   {
@@ -60,17 +60,17 @@ void ls_std::SerializableJsonStateMachine::_unmarshalCurrentState()
   }
 }
 
-void ls_std::SerializableJsonStateMachine::_unmarshalStates()
+void ls::SerializableJsonStateMachine::_unmarshalStates()
 {
   for (const auto &serializedState : this->jsonObject["states"])
   {
-    std::shared_ptr<ls_std::State> state = std::make_shared<ls_std::State>("TMP_ID");
-    ls_std::SerializableJsonState{state}.unmarshal(serializedState.dump());
+    std::shared_ptr<ls::State> state = std::make_shared<ls::State>("TMP_ID");
+    ls::SerializableJsonState{state}.unmarshal(serializedState.dump());
     this->value->addState(state);
   }
 }
 
-void ls_std::SerializableJsonStateMachine::_update()
+void ls::SerializableJsonStateMachine::_update()
 {
   this->jsonObject = {{"memory", this->value->getMemory()},
                       {"name",   this->value->getName()}};
@@ -79,7 +79,7 @@ void ls_std::SerializableJsonStateMachine::_update()
   this->_updateStates();
 }
 
-void ls_std::SerializableJsonStateMachine::_updateCurrentState()
+void ls::SerializableJsonStateMachine::_updateCurrentState()
 {
   if (this->value->getCurrentState() != nullptr)
   {
@@ -87,13 +87,13 @@ void ls_std::SerializableJsonStateMachine::_updateCurrentState()
   }
 }
 
-void ls_std::SerializableJsonStateMachine::_updateStates()
+void ls::SerializableJsonStateMachine::_updateStates()
 {
   std::string jsonString{};
 
   for (const auto &state : this->value->getStates())
   {
-    jsonString = ls_std::SerializableJsonState{state.second}.marshal();
+    jsonString = ls::SerializableJsonState{state.second}.marshal();
     this->jsonObject["states"][state.first] = nlohmann::json::parse(jsonString);
   }
 }

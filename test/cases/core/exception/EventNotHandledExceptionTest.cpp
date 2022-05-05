@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::EventNotHandledException{};
+                     throw ls::EventNotHandledException{};
                    }
-                   catch (const ls_std::EventNotHandledException &_exception)
+                   catch (const ls::EventNotHandledException &_exception)
                    {
                      EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", _exception.what());
                      throw;
                    }
-                 }, ls_std::EventNotHandledException);
+                 }, ls::EventNotHandledException);
   }
 }

@@ -31,34 +31,34 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::SerializableJsonStateConnection serializable{nullptr};
+                     ls::SerializableJsonStateConnection serializable{nullptr};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   // implementation
 
   TEST_F(SerializableJsonStateConnectionTest, marshal)
   {
-    ls_std::StateConnection x{"AB", "B"};
-    ls_std::SerializableJsonStateConnection serializable{std::make_shared<ls_std::StateConnection>(x)};
-    ls_std::String jsonString{serializable.marshal()};
+    ls::StateConnection x{"AB", "B"};
+    ls::SerializableJsonStateConnection serializable{std::make_shared<ls::StateConnection>(x)};
+    ls::String jsonString{serializable.marshal()};
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.toString().c_str());
   }
 
   TEST_F(SerializableJsonStateConnectionTest, unmarshal)
   {
-    std::shared_ptr<ls_std::StateConnection> x = std::make_shared<ls_std::StateConnection>("AB", "B");
+    std::shared_ptr<ls::StateConnection> x = std::make_shared<ls::StateConnection>("AB", "B");
     ASSERT_STREQ("AB", x->getConnectionId().c_str());
     ASSERT_STREQ("B", x->getStateId().c_str());
     ASSERT_FALSE(x->isPassable());
 
-    ls_std::SerializableJsonStateConnection serializable{x};
+    ls::SerializableJsonStateConnection serializable{x};
     serializable.unmarshal(R"({"condition":true,"connectionId":"BC","stateId":"C"})");
 
     ASSERT_STREQ("BC", x->getConnectionId().c_str());
@@ -68,23 +68,23 @@ namespace
 
   TEST_F(SerializableJsonStateConnectionTest, getValue)
   {
-    std::shared_ptr<ls_std::StateConnection> x = std::make_shared<ls_std::StateConnection>("AB", "B");
-    ls_std::SerializableJsonStateConnection serializable{x};
+    std::shared_ptr<ls::StateConnection> x = std::make_shared<ls::StateConnection>("AB", "B");
+    ls::SerializableJsonStateConnection serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJsonStateConnectionTest, setValue)
   {
-    ls_std::StateConnection x{"AB", "B"};
-    ls_std::SerializableJsonStateConnection serializable{std::make_shared<ls_std::StateConnection>(x)};
-    ls_std::String jsonString{serializable.marshal()};
+    ls::StateConnection x{"AB", "B"};
+    ls::SerializableJsonStateConnection serializable{std::make_shared<ls::StateConnection>(x)};
+    ls::String jsonString{serializable.marshal()};
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.toString().c_str());
 
     // set value should now reset json
 
-    ls_std::StateConnection y{"BC", "C"};
-    serializable.setValue(std::make_shared<ls_std::StateConnection>(y));
+    ls::StateConnection y{"BC", "C"};
+    serializable.setValue(std::make_shared<ls::StateConnection>(y));
     jsonString = serializable.marshal();
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"BC","stateId":"C"})", jsonString.toString().c_str());
@@ -92,18 +92,18 @@ namespace
 
   TEST_F(SerializableJsonStateConnectionTest, setValue_no_parameter_set)
   {
-    ls_std::StateConnection stateConnection{"AB", "B"};
-    ls_std::SerializableJsonStateConnection serializable{std::make_shared<ls_std::StateConnection>(stateConnection)};
+    ls::StateConnection stateConnection{"AB", "B"};
+    ls::SerializableJsonStateConnection serializable{std::make_shared<ls::StateConnection>(stateConnection)};
 
     EXPECT_THROW({
                    try
                    {
                      serializable.setValue(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 }

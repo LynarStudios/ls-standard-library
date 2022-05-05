@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -13,9 +13,9 @@
 #include <ls_std/core/Class.hpp>
 #include <ctime>
 
-namespace ls_std
+namespace ls
 {
-  class Date : public ls_std::Class
+  class Date : public ls::Class
   {
     public:
 
@@ -24,15 +24,15 @@ namespace ls_std
 
       // arithmetic operators
 
-      ls_std::Date &operator+(int _value);
-      ls_std::Date &operator-(int _value);
-      ls_std::Date &operator+=(int _value);
-      ls_std::Date &operator-=(int _value);
+      ls::Date &operator+(int _value);
+      ls::Date &operator-(int _value);
+      ls::Date &operator+=(int _value);
+      ls::Date &operator-=(int _value);
 
       // additional functionality
 
-      bool after(const ls_std::Date &_foreignDate) const;
-      bool before(const ls_std::Date &_foreignDate) const;
+      bool after(const ls::Date &_foreignDate) const;
+      bool before(const ls::Date &_foreignDate) const;
       int getDay();
       int getHour();
       int getMinute();

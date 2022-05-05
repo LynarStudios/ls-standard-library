@@ -33,40 +33,40 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::SerializableJsonStateMachine serializable{nullptr};
+                     ls::SerializableJsonStateMachine serializable{nullptr};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 
   // implementation
 
   TEST_F(SerializableJsonStateMachineTest, marshal)
   {
-    ls_std::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
     stateMachine.setStartState("A");
     stateMachine.setMemory({"A", "B", "C"});
-    ls_std::SerializableJsonStateMachine serializable{std::make_shared<ls_std::StateMachine>(stateMachine)};
+    ls::SerializableJsonStateMachine serializable{std::make_shared<ls::StateMachine>(stateMachine)};
 
     std::string jsonString = serializable.marshal();
     ASSERT_TRUE(!jsonString.empty());
 
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls_std::FileReader reader{file};
-    ls_std::String data{reader.read()};
+    ls::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls::FileReader reader{file};
+    ls::String data{reader.read()};
 
     ASSERT_TRUE(data.contains(jsonString));
   }
 
   TEST_F(SerializableJsonStateMachineTest, unmarshal)
   {
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls_std::FileReader reader{file};
-    std::shared_ptr<ls_std::StateMachine> machine = std::make_shared<ls_std::StateMachine>("bla");
-    ls_std::SerializableJsonStateMachine serializable{machine};
+    ls::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls::FileReader reader{file};
+    std::shared_ptr<ls::StateMachine> machine = std::make_shared<ls::StateMachine>("bla");
+    ls::SerializableJsonStateMachine serializable{machine};
 
     serializable.unmarshal(reader.read());
 
@@ -90,7 +90,7 @@ namespace
     ASSERT_TRUE(!machine->getStates().empty());
     ASSERT_EQ(5, machine->getStates().size());
 
-    std::shared_ptr<ls_std::State> state = machine->getStates().at("A");
+    std::shared_ptr<ls::State> state = machine->getStates().at("A");
     ASSERT_STREQ("A", state->getId().c_str());
     ASSERT_EQ(1, state->getConnectedStates().size());
     ASSERT_STREQ("AB", state->getConnectedStates().at("AB")->getConnectionId().c_str());
@@ -119,36 +119,36 @@ namespace
 
   TEST_F(SerializableJsonStateMachineTest, getValue)
   {
-    std::shared_ptr<ls_std::StateMachine> x = std::make_shared<ls_std::StateMachine>("bla");
-    ls_std::SerializableJsonStateMachine serializable{x};
+    std::shared_ptr<ls::StateMachine> x = std::make_shared<ls::StateMachine>("bla");
+    ls::SerializableJsonStateMachine serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJsonStateMachineTest, setValue)
   {
-    std::shared_ptr<ls_std::StateMachine> x = std::make_shared<ls_std::StateMachine>("bla");
-    ls_std::SerializableJsonStateMachine serializable{x};
+    std::shared_ptr<ls::StateMachine> x = std::make_shared<ls::StateMachine>("bla");
+    ls::SerializableJsonStateMachine serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
 
-    x = std::make_shared<ls_std::StateMachine>("bla2");
+    x = std::make_shared<ls::StateMachine>("bla2");
     serializable.setValue(x);
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJsonStateMachineTest, setValue_no_parameter_set)
   {
-    std::shared_ptr<ls_std::StateMachine> stateMachine = std::make_shared<ls_std::StateMachine>("bla");
-    ls_std::SerializableJsonStateMachine serializable{stateMachine};
+    std::shared_ptr<ls::StateMachine> stateMachine = std::make_shared<ls::StateMachine>("bla");
+    ls::SerializableJsonStateMachine serializable{stateMachine};
 
     EXPECT_THROW({
                    try
                    {
                      serializable.setValue(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::IllegalArgumentException);
   }
 }

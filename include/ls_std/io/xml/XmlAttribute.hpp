@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2022-04-29
+ * Changed:         2022-05-05
  *
  * */
 
@@ -13,9 +13,9 @@
 #include <ls_std/core/Class.hpp>
 #include <string>
 
-namespace ls_std
+namespace ls
 {
-  class XmlAttribute : public ls_std::Class
+  class XmlAttribute : public ls::Class
   {
     public:
 

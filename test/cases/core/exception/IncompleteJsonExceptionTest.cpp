@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls_std::IncompleteJsonException{};
+                     throw ls::IncompleteJsonException{};
                    }
-                   catch (const ls_std::IncompleteJsonException &_exception)
+                   catch (const ls::IncompleteJsonException &_exception)
                    {
                      EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", _exception.what());
                      throw;
                    }
-                 }, ls_std::IncompleteJsonException);
+                 }, ls::IncompleteJsonException);
   }
 }

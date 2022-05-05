@@ -10,57 +10,57 @@
 #include <ls_std/logic/StateConnection.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::StateConnection::StateConnection(const ls_std::StateConnectionId& _connectionId, const ls_std::StateId& _stateId) : ls_std::Class("StateConnection")
+ls::StateConnection::StateConnection(const ls::StateConnectionId& _connectionId, const ls::StateId& _stateId) : ls::Class("StateConnection")
 {
   this->_assignConnectionId(_connectionId);
   this->_assignStateId(_stateId);
 }
 
-ls_std::StateConnectionId ls_std::StateConnection::getConnectionId()
+ls::StateConnectionId ls::StateConnection::getConnectionId()
 {
   return this->connectionId;
 }
 
-ls_std::StateId ls_std::StateConnection::getStateId()
+ls::StateId ls::StateConnection::getStateId()
 {
   return this->stateId;
 }
 
-bool ls_std::StateConnection::isPassable() const
+bool ls::StateConnection::isPassable() const
 {
   return this->condition;
 }
 
-void ls_std::StateConnection::setConnectionId(const ls_std::StateConnectionId& _connectionId)
+void ls::StateConnection::setConnectionId(const ls::StateConnectionId& _connectionId)
 {
   this->_assignConnectionId(_connectionId);
 }
 
-void ls_std::StateConnection::setStateId(const ls_std::StateId& _stateId)
+void ls::StateConnection::setStateId(const ls::StateId& _stateId)
 {
   this->_assignStateId(_stateId);
 }
 
-void ls_std::StateConnection::updatePassCondition(bool _condition)
+void ls::StateConnection::updatePassCondition(bool _condition)
 {
   this->condition = _condition;
 }
 
-void ls_std::StateConnection::_assignConnectionId(const ls_std::StateConnectionId &_connectionId)
+void ls::StateConnection::_assignConnectionId(const ls::StateConnectionId &_connectionId)
 {
   if (_connectionId.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->connectionId = _connectionId;
 }
 
-void ls_std::StateConnection::_assignStateId(const ls_std::StateId &_stateId)
+void ls::StateConnection::_assignStateId(const ls::StateId &_stateId)
 {
   if (_stateId.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::IllegalArgumentException{};
   }
 
   this->stateId = _stateId;
