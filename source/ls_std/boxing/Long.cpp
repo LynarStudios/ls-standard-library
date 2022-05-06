@@ -252,14 +252,14 @@ void ls::Long::operator--()
   this->value -= 1;
 }
 
-void ls::Long::parse(std::string _parseText)
+void ls::Long::parse(::std::string _parseText)
 {
-  this->value = std::stoll(_parseText);
+  this->value = ::std::stoll(_parseText);
 }
 
 std::string ls::Long::toString()
 {
-  return std::to_string(this->value);
+  return ::std::to_string(this->value);
 }
 
 ls::long_type ls::Long::getValue() const

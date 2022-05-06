@@ -21,19 +21,19 @@ namespace ls
   {
     public:
 
-      explicit StorableFile(const std::string &_path);
+      explicit StorableFile(const ::std::string &_path);
       ~StorableFile() = default;
 
-      std::shared_ptr<ls::File> getFile();
+      ::std::shared_ptr<ls::File> getFile();
       ls::byte_field load() override;
-      void reset(const std::string &_path);
+      void reset(const ::std::string &_path);
       void save(const ls::byte_field &_data) override;
 
     private:
 
-      std::shared_ptr<ls::File> file{};
+      ::std::shared_ptr<ls::File> file{};
 
-      void _init(const std::string &_path);
+      void _init(const ::std::string &_path);
   };
 }
 

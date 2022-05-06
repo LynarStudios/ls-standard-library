@@ -22,7 +22,7 @@ namespace ls
   {
     public:
 
-      explicit SerializableJsonEvent(const std::shared_ptr<ls::Event> &_value);
+      explicit SerializableJsonEvent(const ::std::shared_ptr<ls::Event> &_value);
       ~SerializableJsonEvent() override = default;
 
       // implementation
@@ -32,15 +32,15 @@ namespace ls
 
       // additional functionality
 
-      std::shared_ptr<ls::Event> getValue();
-      void setValue(const std::shared_ptr<ls::Event> &_value);
+      ::std::shared_ptr<ls::Event> getValue();
+      void setValue(const ::std::shared_ptr<ls::Event> &_value);
 
     private:
 
       nlohmann::json jsonObject{};
-      std::shared_ptr<ls::Event> value{};
+      ::std::shared_ptr<ls::Event> value{};
 
-      void _assignValue(const std::shared_ptr<ls::Event> &_value);
+      void _assignValue(const ::std::shared_ptr<ls::Event> &_value);
       void _unmarshalParameterList();
       void _update();
       void _updateEventParameterList();

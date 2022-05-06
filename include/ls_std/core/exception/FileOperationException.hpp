@@ -15,7 +15,7 @@
 
 namespace ls
 {
-  class FileOperationException : public std::exception
+  class FileOperationException : public ::std::exception
   {
     public:
 

@@ -22,7 +22,7 @@ namespace ls
   {
     public:
 
-      explicit SerializableJsonStateMachine(const std::shared_ptr<ls::StateMachine> &_value);
+      explicit SerializableJsonStateMachine(const ::std::shared_ptr<ls::StateMachine> &_value);
       ~SerializableJsonStateMachine() override = default;
 
       // implementation
@@ -32,15 +32,15 @@ namespace ls
 
       // additional functionality
 
-      std::shared_ptr<ls::StateMachine> getValue();
-      void setValue(const std::shared_ptr<ls::StateMachine> &_value);
+      ::std::shared_ptr<ls::StateMachine> getValue();
+      void setValue(const ::std::shared_ptr<ls::StateMachine> &_value);
 
     private:
 
       nlohmann::json jsonObject{};
-      std::shared_ptr<ls::StateMachine> value{};
+      ::std::shared_ptr<ls::StateMachine> value{};
 
-      void _assignValue(const std::shared_ptr<ls::StateMachine> &_value);
+      void _assignValue(const ::std::shared_ptr<ls::StateMachine> &_value);
       void _unmarshalCurrentState();
       void _unmarshalStates();
       void _update();

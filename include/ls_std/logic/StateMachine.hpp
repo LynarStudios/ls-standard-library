@@ -24,30 +24,30 @@ namespace ls
   {
     public:
 
-      explicit StateMachine(const std::string& _name);
+      explicit StateMachine(const ::std::string& _name);
       ~StateMachine() override = default;
 
-      bool addState(const std::shared_ptr<ls::State> &_state);
-      std::shared_ptr<ls::State> getCurrentState();
-      std::vector<ls::StateId> getMemory();
-      std::string getName();
-      std::unordered_map<StateId, std::shared_ptr<ls::State>> getStates();
+      bool addState(const ::std::shared_ptr<ls::State> &_state);
+      ::std::shared_ptr<ls::State> getCurrentState();
+      ::std::vector<ls::StateId> getMemory();
+      ::std::string getName();
+      ::std::unordered_map<StateId, ::std::shared_ptr<ls::State>> getStates();
       bool hasState(const ls::StateId &_id);
       bool proceed();
-      void setMemory(const std::vector<ls::StateId>& _memory);
-      void setName(const std::string& _name);
+      void setMemory(const ::std::vector<ls::StateId>& _memory);
+      void setName(const ::std::string& _name);
       bool setStartState(const ls::StateId &_id);
 
     private:
 
-      std::shared_ptr<State> currentState{};
-      std::vector<ls::StateId> memory{};
-      std::string name{};
-      std::unordered_map<ls::StateId, std::shared_ptr<ls::State>> states{};
+      ::std::shared_ptr<State> currentState{};
+      ::std::vector<ls::StateId> memory{};
+      ::std::string name{};
+      ::std::unordered_map<ls::StateId, ::std::shared_ptr<ls::State>> states{};
 
-      void _assignMemory(const std::vector<ls::StateId>& _memory);
-      void _assignName(const std::string& _name);
-      std::vector<ls::StateId> _getNextValidStates();
+      void _assignMemory(const ::std::vector<ls::StateId>& _memory);
+      void _assignName(const ::std::string& _name);
+      ::std::vector<ls::StateId> _getNextValidStates();
       void _remember(const ls::StateId &_id);
       bool _hasState(const ls::StateId &_id);
   };

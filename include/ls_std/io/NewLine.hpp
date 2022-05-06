@@ -21,9 +21,9 @@ namespace ls
       NewLine() = default;
       ~NewLine() = default;
 
-      static std::string get()
+      static ::std::string get()
       {
-        std::string newLine{};
+        ::std::string newLine{};
 
         #if defined(unix) || defined(__APPLE__)
         newLine = ls::NewLine::getUnixNewLine();
@@ -35,12 +35,12 @@ namespace ls
         return newLine;
       }
 
-      static std::string getUnixNewLine()
+      static ::std::string getUnixNewLine()
       {
         return "\n";
       }
 
-      static std::string getWindowsNewLine()
+      static ::std::string getWindowsNewLine()
       {
         return "\r\n";
       }

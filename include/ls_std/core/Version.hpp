@@ -33,7 +33,7 @@ namespace ls
       ls::version_type getMajorVersion() const;
       ls::version_type getMinorVersion() const;
       ls::version_type getPatchVersion() const;
-      static bool isValid(const std::string &_versionString);
+      static bool isValid(const ::std::string &_versionString);
       void setMajorVersion(ls::version_type _major);
       void setMinorVersion(ls::version_type _minor);
       void setPatchVersion(ls::version_type _patch);
@@ -44,7 +44,7 @@ namespace ls
       ls::version_type minorVersion{};
       ls::version_type patchVersion{};
 
-      static bool _isValid(const std::string &_versionString);
+      static bool _isValid(const ::std::string &_versionString);
   };
 }
 

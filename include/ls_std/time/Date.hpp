@@ -41,7 +41,7 @@ namespace ls
       time_t getTime() const;
       int getYear();
       void setTime(time_t _timestamp);
-      std::string toString();
+      ::std::string toString();
 
     private:
 

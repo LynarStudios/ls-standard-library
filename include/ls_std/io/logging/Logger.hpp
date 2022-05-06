@@ -23,7 +23,7 @@ namespace ls
   {
     public:
 
-      explicit Logger(const std::shared_ptr<ls::IWriter> &_writer);
+      explicit Logger(const ::std::shared_ptr<ls::IWriter> &_writer);
       ~Logger() override = default;
 
       void debug(const ls::byte *_data);
@@ -38,9 +38,9 @@ namespace ls
     private:
 
       ls::LogLevel logLevel{};
-      std::shared_ptr<ls::IWriter> writer{};
+      ::std::shared_ptr<ls::IWriter> writer{};
 
-      void _assignWriter(const std::shared_ptr<ls::IWriter> &_writer);
+      void _assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer);
       void _log(const ls::byte *_data, const ls::LogLevel &_logLevel);
   };
 }

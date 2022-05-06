@@ -14,8 +14,8 @@
 
 namespace ls
 {
-  using kv_key = std::string;
-  using kv_value = std::string;
+  using kv_key = ::std::string;
+  using kv_value = ::std::string;
 }
 
 #endif

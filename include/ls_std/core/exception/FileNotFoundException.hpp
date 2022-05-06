@@ -17,7 +17,7 @@
 // TODO: pass parameters, use class, show class name
 namespace ls
 {
-  class FileNotFoundException : public std::exception
+  class FileNotFoundException : public ::std::exception
   {
     public:
 

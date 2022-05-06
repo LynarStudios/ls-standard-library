@@ -14,7 +14,7 @@
 
 namespace ls
 {
-  class IllegalArgumentException : public std::exception
+  class IllegalArgumentException : public ::std::exception
   {
     public:
 

@@ -33,17 +33,17 @@ namespace ls
       bool operator==(const ls::LogLevelValue &_value);
 
       void setLogLevel(const ls::LogLevelValue &_value);
-      void setLogLevel(const std::string &_value);
-      std::string toString() const;
+      void setLogLevel(const ::std::string &_value);
+      ::std::string toString() const;
 
     private:
 
-      std::unordered_map<uint8_t, std::string> level{};
+      ::std::unordered_map<uint8_t, ::std::string> level{};
       ls::LogLevelValue value{};
 
-      ls::LogLevelValue _getValueFromString(const std::string &_value);
+      ls::LogLevelValue _getValueFromString(const ::std::string &_value);
       void _init();
-      bool _isValidLogLevelString(const std::string &_value);
+      bool _isValidLogLevelString(const ::std::string &_value);
   };
 }
 

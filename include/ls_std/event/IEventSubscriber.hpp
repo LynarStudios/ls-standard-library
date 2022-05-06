@@ -23,8 +23,8 @@ namespace ls
       IEventSubscriber() = default;
       ~IEventSubscriber() = default;
 
-      virtual void subscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener) = 0;
-      virtual void unsubscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener) = 0;
+      virtual void subscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) = 0;
+      virtual void unsubscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) = 0;
   };
 }
 

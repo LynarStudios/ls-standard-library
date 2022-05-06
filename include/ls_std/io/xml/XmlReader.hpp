@@ -24,7 +24,7 @@ namespace ls
   {
     public:
 
-      explicit XmlReader(const std::shared_ptr<ls::XmlDocument> &_document, const std::string &_absolutePath);
+      explicit XmlReader(const ::std::shared_ptr<ls::XmlDocument> &_document, const ::std::string &_absolutePath);
       ~XmlReader() override = default;
 
       // implementation
@@ -33,16 +33,16 @@ namespace ls
 
       // additional functionality
 
-      std::shared_ptr<ls::XmlDocument> getDocument();
-      void setDocument(const std::shared_ptr<ls::XmlDocument> &_document);
+      ::std::shared_ptr<ls::XmlDocument> getDocument();
+      void setDocument(const ::std::shared_ptr<ls::XmlDocument> &_document);
       void setFile(const ls::File &_xmlFile);
 
     private:
 
-      std::shared_ptr<ls::XmlDocument> document{};
+      ::std::shared_ptr<ls::XmlDocument> document{};
       ls::File xmlFile;
 
-      void _assignDocument(const std::shared_ptr<ls::XmlDocument> &_document);
+      void _assignDocument(const ::std::shared_ptr<ls::XmlDocument> &_document);
       void _assignFile(ls::File _xmlFile);
   };
 }

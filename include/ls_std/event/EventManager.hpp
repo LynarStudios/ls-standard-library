@@ -28,22 +28,22 @@ namespace ls
 
       // implementation
 
-      void subscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener) override;
-      void unsubscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener) override;
+      void subscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) override;
+      void unsubscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) override;
 
       // additional functionality
 
-      bool addEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler);
+      bool addEventHandler(const ::std::shared_ptr<ls::EventHandler> &_eventHandler);
       void fire(ls::Event _event);
       bool hasEventHandler(const ls::event_id &_id);
-      bool removeEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler);
+      bool removeEventHandler(const ::std::shared_ptr<ls::EventHandler> &_eventHandler);
 
     private:
 
-      std::map<ls::event_id, std::shared_ptr<ls::EventHandler>> eventHandlers{};
+      ::std::map<ls::event_id, ::std::shared_ptr<ls::EventHandler>> eventHandlers{};
 
       bool _hasEventHandler(const ls::event_id &_id);
-      bool _removeEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler);
+      bool _removeEventHandler(const ::std::shared_ptr<ls::EventHandler> &_eventHandler);
   };
 }
 

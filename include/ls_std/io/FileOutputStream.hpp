@@ -32,7 +32,7 @@ namespace ls
 
       bool append{};
       ls::File file;
-      std::ofstream outputStream{};
+      ::std::ofstream outputStream{};
 
       void _close();
       void _init();

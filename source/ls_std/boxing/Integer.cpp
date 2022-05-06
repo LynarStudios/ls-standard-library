@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -252,14 +252,14 @@ void ls::Integer::operator--()
   this->value -= 1;
 }
 
-void ls::Integer::parse(std::string _parseText)
+void ls::Integer::parse(::std::string _parseText)
 {
-  this->value = std::stoi(_parseText);
+  this->value = ::std::stoi(_parseText);
 }
 
 std::string ls::Integer::toString()
 {
-  return std::to_string(this->value);
+  return ::std::to_string(this->value);
 }
 
 int ls::Integer::getValue() const

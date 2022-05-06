@@ -22,7 +22,7 @@ namespace ls
   {
     public:
 
-      explicit KvFileReader(const std::shared_ptr<ls::KvDocument> &_document, const std::string &_absolutePath);
+      explicit KvFileReader(const ::std::shared_ptr<ls::KvDocument> &_document, const ::std::string &_absolutePath);
       ~KvFileReader() override = default;
 
       // implementation
@@ -31,16 +31,16 @@ namespace ls
 
       // additional functionality
 
-      std::shared_ptr<ls::KvDocument> getDocument();
-      void setDocument(const std::shared_ptr<ls::KvDocument> &_document);
+      ::std::shared_ptr<ls::KvDocument> getDocument();
+      void setDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
       void setFile(const ls::File &_kvFile);
 
     private:
 
-      std::shared_ptr<ls::KvDocument> document{};
+      ::std::shared_ptr<ls::KvDocument> document{};
       ls::File kvFile;
 
-      void _assignDocument(const std::shared_ptr<ls::KvDocument> &_document);
+      void _assignDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
       void _assignFile(ls::File _kvFile);
   };
 }

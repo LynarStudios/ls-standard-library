@@ -14,7 +14,7 @@
 
 namespace ls
 {
-  static std::string getVersion()
+  static ::std::string getVersion()
   {
     return "2022.1.0";
   }

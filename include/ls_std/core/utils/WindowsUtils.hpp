@@ -23,12 +23,12 @@ namespace ls
       WindowsUtils() = default;
       ~WindowsUtils() = default;
 
-      static std::string getMessageFromErrorCode(const int &_errorCode)
+      static ::std::string getMessageFromErrorCode(const int &_errorCode)
       {
         ls::byte messageBuffer[256 + 1];
         FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, _errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), messageBuffer, sizeof(messageBuffer), nullptr);
 
-        return std::string{messageBuffer};
+        return ::std::string{messageBuffer};
       }
   };
 }

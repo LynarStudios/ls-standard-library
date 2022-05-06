@@ -22,22 +22,22 @@ namespace ls
   {
     public:
 
-      explicit KvParser(const std::shared_ptr<ls::KvDocument> &_document);
+      explicit KvParser(const ::std::shared_ptr<ls::KvDocument> &_document);
       ~KvParser() override = default;
 
-      std::shared_ptr<ls::KvDocument> getDocument();
+      ::std::shared_ptr<ls::KvDocument> getDocument();
       void parse(const ls::byte_field &_data);
-      void setDocument(const std::shared_ptr<ls::KvDocument> &_document);
+      void setDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
 
     private:
 
-      std::shared_ptr<ls::KvDocument> document{};
+      ::std::shared_ptr<ls::KvDocument> document{};
 
-      void _assignDocument(const std::shared_ptr<ls::KvDocument> &_document);
+      void _assignDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
       static bool _lineHasPair(ls::KvParseParameter _parseParameter);
       void _parse(const ls::byte_field &_data);
       void _parsePair(ls::KvParseParameter _parseParameter);
-      static ls::KvParseParameter _readLine(const ls::byte_field &_data, std::string::size_type _index);
+      static ls::KvParseParameter _readLine(const ls::byte_field &_data, ::std::string::size_type _index);
       static void _readLineWithUnixLineBreak(ls::KvParseParameter &_parseParameter);
       static void _readLineWithWindowsLineBreak(ls::KvParseParameter &_parseParameter);
   };

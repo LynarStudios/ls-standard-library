@@ -19,22 +19,22 @@ namespace ls
   {
     public:
 
-      explicit XmlAttribute(const std::string& _name);
+      explicit XmlAttribute(const ::std::string& _name);
       ~XmlAttribute() override = default;
 
-      std::string getName();
-      std::string getValue();
-      void setName(const std::string& _name);
-      void setValue(const std::string& _value);
-      std::string toXml();
+      ::std::string getName();
+      ::std::string getValue();
+      void setName(const ::std::string& _name);
+      void setValue(const ::std::string& _value);
+      ::std::string toXml();
 
     private:
 
-      std::string name{};
-      std::string value{};
+      ::std::string name{};
+      ::std::string value{};
 
-      void _assignName(const std::string& _name);
-      void _assignValue(const std::string& _value);
+      void _assignName(const ::std::string& _name);
+      void _assignValue(const ::std::string& _value);
   };
 }
 

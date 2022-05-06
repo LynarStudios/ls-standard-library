@@ -19,7 +19,7 @@ namespace ls
   struct XmlParseParameter
   {
     uint8_t level{};
-    std::shared_ptr<ls::XmlNode> node{};
+    ::std::shared_ptr<ls::XmlNode> node{};
   };
 }
 
