@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -46,7 +46,7 @@ namespace
   {
     ls::StateConnection x{"AB", "B"};
     ls::SerializableJsonStateConnection serializable{std::make_shared<ls::StateConnection>(x)};
-    ls::String jsonString{serializable.marshal()};
+    ls::std::boxing::String jsonString{serializable.marshal()};
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.toString().c_str());
   }
@@ -77,7 +77,7 @@ namespace
   {
     ls::StateConnection x{"AB", "B"};
     ls::SerializableJsonStateConnection serializable{std::make_shared<ls::StateConnection>(x)};
-    ls::String jsonString{serializable.marshal()};
+    ls::std::boxing::String jsonString{serializable.marshal()};
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.toString().c_str());
 

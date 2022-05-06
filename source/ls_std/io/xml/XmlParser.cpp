@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -11,13 +11,13 @@
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/boxing/String.hpp>
 
-ls::XmlParser::XmlParser(const std::shared_ptr<ls::XmlDocument> &_document) : ls::Class("XmlParser")
+ls::XmlParser::XmlParser(const ::std::shared_ptr<ls::XmlDocument> &_document) : ls::Class("XmlParser")
 {
   this->_assignDocument(_document);
   this->_reset();
 }
 
-std::shared_ptr<ls::XmlDocument> ls::XmlParser::getDocument()
+::std::shared_ptr<ls::XmlDocument> ls::XmlParser::getDocument()
 {
   return this->document;
 }
@@ -29,22 +29,22 @@ void ls::XmlParser::parse(const ls::byte_field &_data)
   this->_reset();
 }
 
-void ls::XmlParser::setDocument(const std::shared_ptr<ls::XmlDocument> &_document)
+void ls::XmlParser::setDocument(const ::std::shared_ptr<ls::XmlDocument> &_document)
 {
   this->_assignDocument(_document);
 }
 
-std::pair<std::string, std::string> ls::XmlParser::_readAttribute_(const ls::byte_field &_data)
+::std::pair<::std::string, ::std::string> ls::XmlParser::_readAttribute_(const ls::byte_field &_data)
 {
   return ls::XmlParser::_parseAttribute(_data);
 }
 
-std::list<std::pair<std::string, std::string>> ls::XmlParser::_readAttributes_(ls::byte_field _data)
+::std::list<::std::pair<::std::string, ::std::string>> ls::XmlParser::_readAttributes_(ls::byte_field _data)
 {
-  return ls::XmlParser::_parseAttributes(std::move(_data));
+  return ls::XmlParser::_parseAttributes(::std::move(_data));
 }
 
-void ls::XmlParser::_analyze(const ls::byte_field &_data, std::string::size_type _index)
+void ls::XmlParser::_analyze(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   this->_isDeclaration(_data, _index);
   this->_isClosingTag(_data, _index);
@@ -52,7 +52,7 @@ void ls::XmlParser::_analyze(const ls::byte_field &_data, std::string::size_type
   this->_isValue(_data, _index);
 }
 
-void ls::XmlParser::_assignDocument(const std::shared_ptr<ls::XmlDocument> &_document)
+void ls::XmlParser::_assignDocument(const ::std::shared_ptr<ls::XmlDocument> &_document)
 {
   if (_document == nullptr)
   {
@@ -62,10 +62,10 @@ void ls::XmlParser::_assignDocument(const std::shared_ptr<ls::XmlDocument> &_doc
   this->document = _document;
 }
 
-std::shared_ptr<ls::XmlDeclaration> ls::XmlParser::_createDeclaration(const std::list<std::pair<std::string, std::string>> &_attributes)
+::std::shared_ptr<ls::XmlDeclaration> ls::XmlParser::_createDeclaration(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes)
 {
-  std::shared_ptr<ls::XmlDeclaration> declaration = std::make_shared<ls::XmlDeclaration>("1.0");
-  std::pair<std::string, std::string> attribute = ls::XmlParser::_findAttribute(_attributes, "version");
+  ::std::shared_ptr<ls::XmlDeclaration> declaration = ::std::make_shared<ls::XmlDeclaration>("1.0");
+  ::std::pair<::std::string, ::std::string> attribute = ls::XmlParser::_findAttribute(_attributes, "version");
 
   if (!attribute.first.empty())
   {
@@ -89,14 +89,14 @@ std::shared_ptr<ls::XmlDeclaration> ls::XmlParser::_createDeclaration(const std:
   return declaration;
 }
 
-std::shared_ptr<ls::XmlNode> ls::XmlParser::_createNode(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name)
+::std::shared_ptr<ls::XmlNode> ls::XmlParser::_createNode(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes, const ::std::string &_name)
 {
-  std::shared_ptr<ls::XmlNode> node = std::make_shared<ls::XmlNode>(_name);
-  std::shared_ptr<ls::XmlAttribute> attribute{};
+  ::std::shared_ptr<ls::XmlNode> node = ::std::make_shared<ls::XmlNode>(_name);
+  ::std::shared_ptr<ls::XmlAttribute> attribute{};
 
   for (const auto &parsedAttribute : _attributes)
   {
-    attribute = std::make_shared<ls::XmlAttribute>(parsedAttribute.first);
+    attribute = ::std::make_shared<ls::XmlAttribute>(parsedAttribute.first);
     attribute->setValue(parsedAttribute.second);
     node->addAttributeToEnd(attribute);
   }
@@ -104,9 +104,9 @@ std::shared_ptr<ls::XmlNode> ls::XmlParser::_createNode(const std::list<std::pai
   return node;
 }
 
-std::pair<std::string, std::string> ls::XmlParser::_findAttribute(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name)
+::std::pair<::std::string, ::std::string> ls::XmlParser::_findAttribute(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes, const ::std::string &_name)
 {
-  std::pair<std::string, std::string> attribute{};
+  ::std::pair<::std::string, ::std::string> attribute{};
 
   for (const auto &currentAttribute : _attributes)
   {
@@ -122,8 +122,8 @@ std::pair<std::string, std::string> ls::XmlParser::_findAttribute(const std::lis
 
 size_t ls::XmlParser::_findAttributeEndPosition(const ls::byte_field &_data)
 {
-  std::string::size_type position = std::string::npos;
-  std::string::size_type counter{};
+  ::std::string::size_type position = ::std::string::npos;
+  ::std::string::size_type counter{};
 
   for (char letter : _data)
   {
@@ -143,12 +143,12 @@ size_t ls::XmlParser::_findAttributeEndPosition(const ls::byte_field &_data)
   return position;
 }
 
-ls::byte_field ls::XmlParser::_getNextTagString(const ls::byte_field &_data, std::string::size_type _index)
+ls::byte_field ls::XmlParser::_getNextTagString(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   ls::byte_field tag{};
   size_t closingCharacterPosition = _index + _data.substr(_index).find('>');
 
-  if (closingCharacterPosition != std::string::npos)
+  if (closingCharacterPosition != ::std::string::npos)
   {
     tag = _data.substr(_index, (closingCharacterPosition - _index) + 1);
   }
@@ -156,7 +156,7 @@ ls::byte_field ls::XmlParser::_getNextTagString(const ls::byte_field &_data, std
   return tag;
 }
 
-void ls::XmlParser::_isClosingTag(const ls::byte_field &_data, std::string::size_type _index)
+void ls::XmlParser::_isClosingTag(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   if (this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 2) == "</")
   {
@@ -164,7 +164,7 @@ void ls::XmlParser::_isClosingTag(const ls::byte_field &_data, std::string::size
   }
 }
 
-void ls::XmlParser::_isDeclaration(const ls::byte_field &_data, std::string::size_type _index)
+void ls::XmlParser::_isDeclaration(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   if (_data.substr(_index, 5) == "<?xml")
   {
@@ -172,7 +172,7 @@ void ls::XmlParser::_isDeclaration(const ls::byte_field &_data, std::string::siz
   }
 }
 
-void ls::XmlParser::_isOpeningTag(const ls::byte_field &_data, std::string::size_type _index)
+void ls::XmlParser::_isOpeningTag(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   if (this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 1) == "<")
   {
@@ -180,16 +180,16 @@ void ls::XmlParser::_isOpeningTag(const ls::byte_field &_data, std::string::size
   }
 }
 
-void ls::XmlParser::_isValue(const ls::byte_field &_data, std::string::size_type _index)
+void ls::XmlParser::_isValue(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   if (this->mode == XML_PARSE_MODE_ANALYZE)
   {
-    std::string::size_type end = _data.substr(_index).find('<');
-    bool isValue = _data[_index - 1] == '>' && end != std::string::npos && end > 0;
+    ::std::string::size_type end = _data.substr(_index).find('<');
+    bool isValue = _data[_index - 1] == '>' && end != ::std::string::npos && end > 0;
 
     if (isValue)
     {
-      ls::String value{_data.substr(_index, end)};
+      ls::std::boxing::String value{_data.substr(_index, end)};
 
       if (!value.contains("\n") && !value.contains("\r\n"))
       {
@@ -210,7 +210,7 @@ void ls::XmlParser::_mergeNodes()
   this->document->setRootElement(this->parseParameters.front().node);
 }
 
-void ls::XmlParser::_mergeChildrenToParentNode(const std::shared_ptr<ls::XmlNode> &_parent, std::list<ls::XmlParseParameter>::iterator &_iterator, uint8_t _parentLevel)
+void ls::XmlParser::_mergeChildrenToParentNode(const ::std::shared_ptr<ls::XmlNode> &_parent, ::std::list<ls::XmlParseParameter>::iterator &_iterator, uint8_t _parentLevel)
 {
   do
   {
@@ -250,7 +250,7 @@ void ls::XmlParser::_mergeNodesOnCurrentLevel()
 
 void ls::XmlParser::_parse(const ls::byte_field &_data)
 {
-  for (std::string::size_type index = 0; index < _data.size(); index++)
+  for (::std::string::size_type index = 0; index < _data.size(); index++)
   {
     switch (this->mode)
     {
@@ -291,9 +291,9 @@ void ls::XmlParser::_parse(const ls::byte_field &_data)
   }
 }
 
-std::pair<std::string, std::string> ls::XmlParser::_parseAttribute(const ls::byte_field &_data)
+::std::pair<::std::string, ::std::string> ls::XmlParser::_parseAttribute(const ls::byte_field &_data)
 {
-  std::pair<std::string, std::string> parsedAttribute{};
+  ::std::pair<::std::string, ::std::string> parsedAttribute{};
   parsedAttribute.first = _data.substr(0, _data.find('='));
   parsedAttribute.second = _data.substr(_data.find('"') + 1);
   parsedAttribute.second.pop_back();
@@ -301,11 +301,11 @@ std::pair<std::string, std::string> ls::XmlParser::_parseAttribute(const ls::byt
   return parsedAttribute;
 }
 
-std::list<std::pair<std::string, std::string>> ls::XmlParser::_parseAttributes(ls::byte_field _data)
+::std::list<::std::pair<::std::string, ::std::string>> ls::XmlParser::_parseAttributes(ls::byte_field _data)
 {
-  std::list<std::pair<std::string, std::string>> attributes{};
+  ::std::list<::std::pair<::std::string, ::std::string>> attributes{};
   size_t position = _data.find(' ');
-  _data = position == std::string::npos ? "" : _data.substr(position);
+  _data = position == ::std::string::npos ? "" : _data.substr(position);
 
   while (!_data.empty())
   {
@@ -314,12 +314,12 @@ std::list<std::pair<std::string, std::string>> ls::XmlParser::_parseAttributes(l
       position = _data.find(' ') + 1;
     } while (_data[position] == ' ');
 
-    if (_data.size() <= 3 && ls::String{_data}.endsWith(">"))
+    if (_data.size() <= 3 && ls::std::boxing::String{_data}.endsWith(">"))
     {
       break;
     }
 
-    std::string attributeString = _data.substr(position, ls::XmlParser::_findAttributeEndPosition(_data) + 1);
+    ::std::string attributeString = _data.substr(position, ls::XmlParser::_findAttributeEndPosition(_data) + 1);
     attributes.push_back(ls::XmlParser::_parseAttribute(attributeString));
     _data = _data.substr(position + attributeString.size());
   }
@@ -327,36 +327,36 @@ std::list<std::pair<std::string, std::string>> ls::XmlParser::_parseAttributes(l
   return attributes;
 }
 
-size_t ls::XmlParser::_parseClosingTag(const ls::byte_field &_data, std::string::size_type _index)
+size_t ls::XmlParser::_parseClosingTag(const ls::byte_field &_data, ::std::string::size_type _index)
 {
-  std::string tagString = ls::XmlParser::_getNextTagString(_data, _index);
+  ::std::string tagString = ls::XmlParser::_getNextTagString(_data, _index);
   this->currentLevel -= 1;
   return tagString.empty() ? _index : _index + (tagString.size() - 1);
 }
 
-size_t ls::XmlParser::_parseDeclaration(const ls::byte_field &_data, std::string::size_type _index)
+size_t ls::XmlParser::_parseDeclaration(const ls::byte_field &_data, ::std::string::size_type _index)
 {
-  std::string tagString = ls::XmlParser::_getNextTagString(_data, _index);
+  ::std::string tagString = ls::XmlParser::_getNextTagString(_data, _index);
   bool isValidTagString = !tagString.empty();
 
   if (isValidTagString)
   {
-    std::shared_ptr<ls::XmlDeclaration> declaration = this->_createDeclaration(ls::XmlParser::_parseAttributes(tagString));
+    ::std::shared_ptr<ls::XmlDeclaration> declaration = this->_createDeclaration(ls::XmlParser::_parseAttributes(tagString));
     this->document->setDeclaration(declaration);
   }
 
   return !isValidTagString ? _index : _index + (tagString.size() - 1);
 }
 
-size_t ls::XmlParser::_parseOpeningTag(const ls::byte_field &_data, std::string::size_type _index)
+size_t ls::XmlParser::_parseOpeningTag(const ls::byte_field &_data, ::std::string::size_type _index)
 {
-  ls::String tagString{ls::XmlParser::_getNextTagString(_data, _index)};
+  ls::std::boxing::String tagString{ls::XmlParser::_getNextTagString(_data, _index)};
   bool isValidTagString = !tagString.toString().empty();
   ls::XmlParseParameter singleParseParameter{};
 
   if (isValidTagString)
   {
-    std::shared_ptr<ls::XmlNode> node = ls::XmlParser::_createNode(ls::XmlParser::_parseAttributes(tagString), ls::XmlParser::_parseTagName(tagString));
+    ::std::shared_ptr<ls::XmlNode> node = ls::XmlParser::_createNode(ls::XmlParser::_parseAttributes(tagString), ls::XmlParser::_parseTagName(tagString));
 
     singleParseParameter.level = this->currentLevel;
     singleParseParameter.node = node;
@@ -374,9 +374,9 @@ size_t ls::XmlParser::_parseOpeningTag(const ls::byte_field &_data, std::string:
 
 ls::byte_field ls::XmlParser::_parseTagName(const ls::byte_field &_data)
 {
-  std::string::size_type position = _data.find(' ');
+  ::std::string::size_type position = _data.find(' ');
 
-  if (position == std::string::npos)
+  if (position == ::std::string::npos)
   {
     position = _data.find('>');
   }
@@ -384,7 +384,7 @@ ls::byte_field ls::XmlParser::_parseTagName(const ls::byte_field &_data)
   return _data.substr(1, position - 1);
 }
 
-size_t ls::XmlParser::_parseValue(const ls::byte_field &_data, std::string::size_type _index)
+size_t ls::XmlParser::_parseValue(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   ls::byte_field value = _data.substr(_index, _data.substr(_index).find('<'));
   this->parseParameters.back().node->setValue(value);

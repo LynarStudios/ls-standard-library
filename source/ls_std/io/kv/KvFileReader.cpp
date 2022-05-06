@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -12,7 +12,7 @@
 #include <ls_std/io/FileReader.hpp>
 #include <ls_std/io/kv/KvParser.hpp>
 
-ls::KvFileReader::KvFileReader(const std::shared_ptr<ls::KvDocument> &_document, const std::string &_absolutePath)
+ls::KvFileReader::KvFileReader(const ::std::shared_ptr<ls::KvDocument> &_document, const ::std::string &_absolutePath)
     : ls::Class("KvFileReader"),
       kvFile(ls::File{""})
 {
@@ -33,7 +33,7 @@ std::shared_ptr<ls::KvDocument> ls::KvFileReader::getDocument()
   return this->document;
 }
 
-void ls::KvFileReader::setDocument(const std::shared_ptr<ls::KvDocument> &_document)
+void ls::KvFileReader::setDocument(const ::std::shared_ptr<ls::KvDocument> &_document)
 {
   this->_assignDocument(_document);
 }
@@ -43,7 +43,7 @@ void ls::KvFileReader::setFile(const ls::File &_kvFile)
   this->_assignFile(_kvFile);
 }
 
-void ls::KvFileReader::_assignDocument(const std::shared_ptr<ls::KvDocument> &_document)
+void ls::KvFileReader::_assignDocument(const ::std::shared_ptr<ls::KvDocument> &_document)
 {
   if (_document == nullptr)
   {

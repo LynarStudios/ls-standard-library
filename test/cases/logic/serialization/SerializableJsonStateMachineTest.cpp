@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -56,7 +56,7 @@ namespace
 
     ls::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
     ls::FileReader reader{file};
-    ls::String data{reader.read()};
+    ls::std::boxing::String data{reader.read()};
 
     ASSERT_TRUE(data.contains(jsonString));
   }

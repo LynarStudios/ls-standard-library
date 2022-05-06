@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/io/xml/XmlParser.hpp>
 
-ls::XmlReader::XmlReader(const std::shared_ptr<ls::XmlDocument> &_document, const std::string &_absolutePath)
+ls::XmlReader::XmlReader(const ::std::shared_ptr<ls::XmlDocument> &_document, const ::std::string &_absolutePath)
     : ls::Class("XmlReader"),
       xmlFile(ls::File{""})
 {
@@ -29,12 +29,12 @@ ls::byte_field ls::XmlReader::read()
   return data;
 }
 
-std::shared_ptr<ls::XmlDocument> ls::XmlReader::getDocument()
+::std::shared_ptr<ls::XmlDocument> ls::XmlReader::getDocument()
 {
   return this->document;
 }
 
-void ls::XmlReader::setDocument(const std::shared_ptr<ls::XmlDocument> &_document)
+void ls::XmlReader::setDocument(const ::std::shared_ptr<ls::XmlDocument> &_document)
 {
   this->_assignDocument(_document);
 }
@@ -44,7 +44,7 @@ void ls::XmlReader::setFile(const ls::File &_xmlFile)
   this->_assignFile(_xmlFile);
 }
 
-void ls::XmlReader::_assignDocument(const std::shared_ptr<ls::XmlDocument> &_document)
+void ls::XmlReader::_assignDocument(const ::std::shared_ptr<ls::XmlDocument> &_document)
 {
   if (_document == nullptr)
   {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -80,7 +80,7 @@ namespace
     // validation
 
     ls::FileReader reader{file};
-    ls::String content{reader.read()};
+    ls::std::boxing::String content{reader.read()};
 
     ASSERT_TRUE(content.contains("Hello! How are you? I'm fine! Thank you!"));
 

@@ -18,94 +18,100 @@
 
 namespace ls
 {
-  class Integer : public ls::Class, public ls::std::boxing::IBoxing
+  namespace std
   {
-    public:
-
-      explicit Integer(int _value);
-      Integer();
-      ~Integer() override = default;
-
-      // conversion operator
-
-      operator int() const;
-
-      // assignment operators
-
-      ls::Integer &operator=(int _value);
-
-      // arithmetic operators
-
-      int operator-() const;
-      int operator+(const ls::Integer &_integer) const;
-      int operator+(int _value) const;
-      int operator*(const ls::Integer &_integer) const;
-      int operator*(int _value) const;
-      int operator-(const ls::Integer &_integer) const;
-      int operator-(int _value) const;
-      int operator/(const ls::Integer &_integer) const;
-      int operator/(int _value) const;
-      int operator%(const ls::Integer &_integer) const;
-      int operator%(int _value) const;
-
-      // compound operators
-
-      ls::Integer &operator+=(const ls::Integer &_integer);
-      ls::Integer &operator+=(int _value);
-      ls::Integer &operator-=(const ls::Integer &_integer);
-      ls::Integer &operator-=(int _value);
-      ls::Integer &operator*=(const ls::Integer &_integer);
-      ls::Integer &operator*=(int _value);
-      ls::Integer &operator/=(const ls::Integer &_integer);
-      ls::Integer &operator/=(int _value);
-
-      // comparison operators
-
-      bool operator==(const ls::Integer &_integer) const;
-      bool operator==(int _value) const;
-      bool operator!=(const ls::Integer &_integer) const;
-      bool operator!=(int _value) const;
-      bool operator>(const ls::Integer &_integer) const;
-      bool operator>(int _value) const;
-      bool operator>=(const ls::Integer &_integer) const;
-      bool operator>=(int _value) const;
-      bool operator<(const ls::Integer &_integer) const;
-      bool operator<(int _value) const;
-      bool operator<=(const ls::Integer &_integer) const;
-      bool operator<=(int _value) const;
-
-      // logical operators
-
-      friend bool operator!(const ls::Integer &_integer)
+    namespace boxing
+    {
+      class Integer : public ls::Class, public ls::std::boxing::IBoxing
       {
-        return !_integer.value;
-      }
+        public:
 
-      bool operator&&(const ls::Integer &_integer) const;
-      bool operator&&(int _value) const;
-      bool operator&&(bool _expression) const;
-      bool operator||(const ls::Integer &_integer) const;
-      bool operator||(int _value) const;
-      bool operator||(bool _expression) const;
+          explicit Integer(int _value);
+          Integer();
+          ~Integer() override = default;
 
-      // increment / decrement operator
+          // conversion operator
 
-      void operator++();
-      void operator--();
+          operator int() const;
 
-      // implementation
+          // assignment operators
 
-      void parse(::std::string _parseText) override;
-      ::std::string toString() override;
+          ls::std::boxing::Integer &operator=(int _value);
 
-      // additional functionality
+          // arithmetic operators
 
-      int getValue() const;
+          int operator-() const;
+          int operator+(const ls::std::boxing::Integer &_integer) const;
+          int operator+(int _value) const;
+          int operator*(const ls::std::boxing::Integer &_integer) const;
+          int operator*(int _value) const;
+          int operator-(const ls::std::boxing::Integer &_integer) const;
+          int operator-(int _value) const;
+          int operator/(const ls::std::boxing::Integer &_integer) const;
+          int operator/(int _value) const;
+          int operator%(const ls::std::boxing::Integer &_integer) const;
+          int operator%(int _value) const;
 
-    private:
+          // compound operators
 
-      int value{};
-  };
+          ls::std::boxing::Integer &operator+=(const ls::std::boxing::Integer &_integer);
+          ls::std::boxing::Integer &operator+=(int _value);
+          ls::std::boxing::Integer &operator-=(const ls::std::boxing::Integer &_integer);
+          ls::std::boxing::Integer &operator-=(int _value);
+          ls::std::boxing::Integer &operator*=(const ls::std::boxing::Integer &_integer);
+          ls::std::boxing::Integer &operator*=(int _value);
+          ls::std::boxing::Integer &operator/=(const ls::std::boxing::Integer &_integer);
+          ls::std::boxing::Integer &operator/=(int _value);
+
+          // comparison operators
+
+          bool operator==(const ls::std::boxing::Integer &_integer) const;
+          bool operator==(int _value) const;
+          bool operator!=(const ls::std::boxing::Integer &_integer) const;
+          bool operator!=(int _value) const;
+          bool operator>(const ls::std::boxing::Integer &_integer) const;
+          bool operator>(int _value) const;
+          bool operator>=(const ls::std::boxing::Integer &_integer) const;
+          bool operator>=(int _value) const;
+          bool operator<(const ls::std::boxing::Integer &_integer) const;
+          bool operator<(int _value) const;
+          bool operator<=(const ls::std::boxing::Integer &_integer) const;
+          bool operator<=(int _value) const;
+
+          // logical operators
+
+          friend bool operator!(const ls::std::boxing::Integer &_integer)
+          {
+            return !_integer.value;
+          }
+
+          bool operator&&(const ls::std::boxing::Integer &_integer) const;
+          bool operator&&(int _value) const;
+          bool operator&&(bool _expression) const;
+          bool operator||(const ls::std::boxing::Integer &_integer) const;
+          bool operator||(int _value) const;
+          bool operator||(bool _expression) const;
+
+          // increment / decrement operator
+
+          void operator++();
+          void operator--();
+
+          // implementation
+
+          void parse(::std::string _parseText) override;
+          ::std::string toString() override;
+
+          // additional functionality
+
+          int getValue() const;
+
+        private:
+
+          int value{};
+      };
+    }
+  }
 }
 
 #endif

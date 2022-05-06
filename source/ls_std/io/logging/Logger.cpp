@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::Logger::Logger(const std::shared_ptr<ls::IWriter> &_writer)
+ls::Logger::Logger(const ::std::shared_ptr<ls::IWriter> &_writer)
     : ls::Class("Logger"),
       logLevel(ls::LogLevelValue::INFO)
 {
@@ -78,7 +78,7 @@ void ls::Logger::warn(const ls::byte *_data)
   }
 }
 
-void ls::Logger::_assignWriter(const std::shared_ptr<ls::IWriter> &_writer)
+void ls::Logger::_assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer)
 {
   if (_writer == nullptr)
   {
@@ -91,6 +91,6 @@ void ls::Logger::_assignWriter(const std::shared_ptr<ls::IWriter> &_writer)
 void ls::Logger::_log(const ls::byte *_data, const ls::LogLevel &_logLevel)
 {
   ls::Date date{};
-  std::string message = "[" + date.toString() + "] " + ls::String{_logLevel.toString() + ":"}.padRight(10, ' ') + std::string(_data) + ls::NewLine::getUnixNewLine();
+  ::std::string message = "[" + date.toString() + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::NewLine::getUnixNewLine();
   this->writer->write(message);
 }

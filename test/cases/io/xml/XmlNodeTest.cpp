@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -905,7 +905,7 @@ namespace
     attribute->setValue("important");
     singleLineElement->addAttributeToEnd(attribute);
 
-    ls::String xmlContent{singleLineElement->toXml()};
+    ls::std::boxing::String xmlContent{singleLineElement->toXml()};
     std::string expectedXmlString = R"(<info id="important" />)";
 
     ASSERT_TRUE(xmlContent.contains(expectedXmlString));

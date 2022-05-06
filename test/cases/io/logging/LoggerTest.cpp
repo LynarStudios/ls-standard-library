@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -41,11 +41,11 @@ namespace
         return writer;
       }
 
-      static ls::String getContentFromLogFile(const std::string &_logName)
+      static ls::std::boxing::String getContentFromLogFile(const std::string &_logName)
       {
         ls::File file{TestHelper::getResourcesFolderLocation() + _logName};
         ls::FileReader reader{file};
-        ls::String content{reader.read()};
+        ls::std::boxing::String content{reader.read()};
         file.remove();
 
         return content;
@@ -85,7 +85,7 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::FileOutputStream>(writer)->close();
-    ls::String content = getContentFromLogFile(logName);
+    ls::std::boxing::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
@@ -114,7 +114,7 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::FileOutputStream>(writer)->close();
-    ls::String content = getContentFromLogFile(logName);
+    ls::std::boxing::String content = getContentFromLogFile(logName);
 
     ASSERT_FALSE(content.contains("1. line!"));
     ASSERT_FALSE(content.contains("2. line!"));
@@ -143,7 +143,7 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::FileOutputStream>(writer)->close();
-    ls::String content = getContentFromLogFile(logName);
+    ls::std::boxing::String content = getContentFromLogFile(logName);
 
     ASSERT_FALSE(content.contains("1. line!"));
     ASSERT_FALSE(content.contains("2. line!"));
@@ -178,7 +178,7 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::FileOutputStream>(writer)->close();
-    ls::String content = getContentFromLogFile(logName);
+    ls::std::boxing::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
@@ -215,7 +215,7 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::FileOutputStream>(writer)->close();
-    ls::String content = getContentFromLogFile(logName);
+    ls::std::boxing::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
@@ -244,7 +244,7 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::FileOutputStream>(writer)->close();
-    ls::String content = getContentFromLogFile(logName);
+    ls::std::boxing::String content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.contains("1. line!"));
     ASSERT_TRUE(content.contains("2. line!"));
