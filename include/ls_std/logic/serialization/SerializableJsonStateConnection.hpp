@@ -22,7 +22,7 @@ namespace ls
   {
     public:
 
-      explicit SerializableJsonStateConnection(const std::shared_ptr<ls::StateConnection> &_value);
+      explicit SerializableJsonStateConnection(const ::std::shared_ptr<ls::StateConnection> &_value);
       ~SerializableJsonStateConnection() override = default;
 
       // implementation
@@ -32,15 +32,15 @@ namespace ls
 
       // additional functionality
 
-      std::shared_ptr<ls::StateConnection> getValue();
-      void setValue(const std::shared_ptr<ls::StateConnection> &_value);
+      ::std::shared_ptr<ls::StateConnection> getValue();
+      void setValue(const ::std::shared_ptr<ls::StateConnection> &_value);
 
     private:
 
       nlohmann::json jsonObject{};
-      std::shared_ptr<ls::StateConnection> value{};
+      ::std::shared_ptr<ls::StateConnection> value{};
 
-      void _assignValue(const std::shared_ptr<ls::StateConnection> &_value);
+      void _assignValue(const ::std::shared_ptr<ls::StateConnection> &_value);
       void _clear();
       void _update();
   };

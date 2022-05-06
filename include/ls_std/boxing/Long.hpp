@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -19,7 +19,7 @@
 
 namespace ls
 {
-  class Long : public ls::Class, public ls::IBoxing
+  class Long : public ls::Class, public ls::std::boxing::IBoxing
   {
     public:
 
@@ -96,8 +96,8 @@ namespace ls
 
       // implementation
 
-      void parse(std::string _parseText) override;
-      std::string toString() override;
+      void parse(::std::string _parseText) override;
+      ::std::string toString() override;
 
       // additional functionality
 

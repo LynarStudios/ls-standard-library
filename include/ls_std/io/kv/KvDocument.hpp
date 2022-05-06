@@ -26,13 +26,13 @@ namespace ls
 
       bool addPair(ls::KvPair _pair);
       void clear();
-      std::map<ls::kv_key, ls::KvPair> getPairs();
+      ::std::map<ls::kv_key, ls::KvPair> getPairs();
       bool hasPair(const ls::kv_key &_key);
       bool removePair(const ls::kv_key &_key);
 
     private:
 
-      std::map<ls::kv_key, ls::KvPair> pairs{};
+      ::std::map<ls::kv_key, ls::KvPair> pairs{};
 
       bool _hasPair(const ls::kv_key &_key);
   };

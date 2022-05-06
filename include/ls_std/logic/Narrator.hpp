@@ -24,15 +24,15 @@ namespace ls
       Narrator();
       ~Narrator() override = default;
 
-      bool addListener(const std::shared_ptr<ls::IListener> &_listener);
+      bool addListener(const ::std::shared_ptr<ls::IListener> &_listener);
       void clear();
-      std::list<std::shared_ptr<ls::IListener>> getListeners();
-      bool removeListener(const std::shared_ptr<ls::IListener> &_listener);
+      ::std::list<::std::shared_ptr<ls::IListener>> getListeners();
+      bool removeListener(const ::std::shared_ptr<ls::IListener> &_listener);
       void tell(const ls::Class &_info);
 
     private:
 
-      std::list<std::shared_ptr<ls::IListener>> listeners{};
+      ::std::list<::std::shared_ptr<ls::IListener>> listeners{};
   };
 }
 

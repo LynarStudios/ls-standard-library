@@ -14,7 +14,7 @@
 
 namespace ls
 {
-  class NullPointerException : public std::exception
+  class NullPointerException : public ::std::exception
   {
     public:
 

@@ -19,16 +19,16 @@ namespace ls
   {
     public:
 
-      explicit XmlDeclaration(const std::string& _version);
+      explicit XmlDeclaration(const ::std::string& _version);
       ~XmlDeclaration() override = default;
 
-      std::string getEncoding();
-      std::string getStandalone();
-      std::string getVersion();
-      void setEncoding(const std::string& _encoding);
-      void setStandalone(const std::string& _standalone);
-      void setVersion(const std::string& _version);
-      std::string toXml();
+      ::std::string getEncoding();
+      ::std::string getStandalone();
+      ::std::string getVersion();
+      void setEncoding(const ::std::string& _encoding);
+      void setStandalone(const ::std::string& _standalone);
+      void setVersion(const ::std::string& _version);
+      ::std::string toXml();
 
     private:
 
@@ -36,7 +36,7 @@ namespace ls
       ls::XmlAttribute standalone{"standalone"};
       ls::XmlAttribute version{"version"};
 
-      static std::string _toXmlAttribute(ls::XmlAttribute _attribute);
+      static ::std::string _toXmlAttribute(ls::XmlAttribute _attribute);
   };
 }
 

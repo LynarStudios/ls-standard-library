@@ -14,7 +14,7 @@
 
 namespace ls
 {
-  class IncompleteJsonException : public std::exception
+  class IncompleteJsonException : public ::std::exception
   {
     public:
 

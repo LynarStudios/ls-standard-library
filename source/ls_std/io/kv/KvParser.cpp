@@ -11,7 +11,7 @@
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::KvParser::KvParser(const std::shared_ptr<ls::KvDocument> &_document) : ls::Class("KvParser")
+ls::KvParser::KvParser(const ::std::shared_ptr<ls::KvDocument> &_document) : ls::Class("KvParser")
 {
   this->_assignDocument(_document);
 }
@@ -26,12 +26,12 @@ void ls::KvParser::parse(const ls::byte_field &_data)
   this->_parse(_data);
 }
 
-void ls::KvParser::setDocument(const std::shared_ptr<ls::KvDocument> &_document)
+void ls::KvParser::setDocument(const ::std::shared_ptr<ls::KvDocument> &_document)
 {
   this->_assignDocument(_document);
 }
 
-void ls::KvParser::_assignDocument(const std::shared_ptr<ls::KvDocument> &_document)
+void ls::KvParser::_assignDocument(const ::std::shared_ptr<ls::KvDocument> &_document)
 {
   if (_document == nullptr)
   {
@@ -48,7 +48,7 @@ bool ls::KvParser::_lineHasPair(ls::KvParseParameter _parseParameter)
 
 void ls::KvParser::_parse(const ls::byte_field &_data)
 {
-  for (std::string::size_type index = 0; index < _data.size(); index++)
+  for (::std::string::size_type index = 0; index < _data.size(); index++)
   {
     ls::KvParseParameter parseParameter = ls::KvParser::_readLine(_data, index);
     this->_parsePair(parseParameter);
@@ -69,7 +69,7 @@ void ls::KvParser::_parsePair(ls::KvParseParameter _parseParameter)
   }
 }
 
-ls::KvParseParameter ls::KvParser::_readLine(const ls::byte_field &_data, std::string::size_type _index)
+ls::KvParseParameter ls::KvParser::_readLine(const ls::byte_field &_data, ::std::string::size_type _index)
 {
   ls::KvParseParameter parseParameter{};
   parseParameter.line = _data.substr(_index);

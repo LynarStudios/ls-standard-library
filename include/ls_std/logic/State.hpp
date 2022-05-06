@@ -28,17 +28,17 @@ namespace ls
 
       // additional functionality
 
-      bool addStateConnection(const ls::StateConnectionId &_connectionId, const std::shared_ptr<ls::State> &_connectedState);
-      bool addStateConnection(const std::shared_ptr<ls::StateConnection> &_connection);
+      bool addStateConnection(const ls::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::State> &_connectedState);
+      bool addStateConnection(const ::std::shared_ptr<ls::StateConnection> &_connection);
       void clearConnections();
-      std::unordered_map<ls::StateConnectionId, std::shared_ptr<ls::StateConnection>> getConnectedStates();
+      ::std::unordered_map<ls::StateConnectionId, ::std::shared_ptr<ls::StateConnection>> getConnectedStates();
       ls::StateId getId();
       bool hasConnection(const ls::StateConnectionId &_connectionId);
       void setId(const ls::StateId& _id);
 
     private:
 
-      std::unordered_map<ls::StateConnectionId, std::shared_ptr<ls::StateConnection>> connectedStates{};
+      ::std::unordered_map<ls::StateConnectionId, ::std::shared_ptr<ls::StateConnection>> connectedStates{};
       ls::StateId id{};
 
       void _assignStateId(const ls::StateId& _id);

@@ -22,7 +22,7 @@ namespace ls
       IFactory() = default;
       ~IFactory() = default;
 
-      virtual std::shared_ptr<ls::Class> build() = 0;
+      virtual ::std::shared_ptr<ls::Class> build() = 0;
   };
 }
 

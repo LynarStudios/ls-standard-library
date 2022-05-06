@@ -16,11 +16,11 @@
 
 namespace ls
 {
-  using event_id = std::string;
-  using event_parameter_id = std::string;
-  using event_parameter_value = std::string;
-  using event_parameter = std::pair<std::string, std::string>;
-  using event_parameter_list = std::map<ls::event_parameter_id, ls::event_parameter_value>;
+  using event_id = ::std::string;
+  using event_parameter_id = ::std::string;
+  using event_parameter_value = ::std::string;
+  using event_parameter = ::std::pair<::std::string, ::std::string>;
+  using event_parameter_list = ::std::map<ls::event_parameter_id, ls::event_parameter_value>;
 }
 
 #endif

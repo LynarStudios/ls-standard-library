@@ -14,8 +14,8 @@
 
 namespace ls
 {
-  using StateConnectionId = std::string;
-  using StateId = std::string;
+  using StateConnectionId = ::std::string;
+  using StateId = ::std::string;
 }
 
 #endif

@@ -23,48 +23,48 @@ namespace ls
   {
     public:
 
-      explicit XmlParser(const std::shared_ptr<ls::XmlDocument> &_document);
+      explicit XmlParser(const ::std::shared_ptr<ls::XmlDocument> &_document);
       ~XmlParser() override = default;
 
-      std::shared_ptr<ls::XmlDocument> getDocument();
+      ::std::shared_ptr<ls::XmlDocument> getDocument();
       void parse(const ls::byte_field &_data);
-      void setDocument(const std::shared_ptr<ls::XmlDocument> &_document);
+      void setDocument(const ::std::shared_ptr<ls::XmlDocument> &_document);
 
     protected:
 
-      static std::pair<std::string, std::string> _readAttribute_(const ls::byte_field &_data);
-      static std::list<std::pair<std::string, std::string>> _readAttributes_(ls::byte_field _data);
+      static ::std::pair<::std::string, ::std::string> _readAttribute_(const ls::byte_field &_data);
+      static ::std::list<::std::pair<::std::string, ::std::string>> _readAttributes_(ls::byte_field _data);
 
     private:
 
       uint8_t currentLevel{};
-      std::shared_ptr<ls::XmlDocument> document{};
+      ::std::shared_ptr<ls::XmlDocument> document{};
       uint8_t maxLevel{};
       ls::XmlParseMode mode{};
-      std::list<ls::XmlParseParameter> parseParameters{};
+      ::std::list<ls::XmlParseParameter> parseParameters{};
 
-      void _analyze(const ls::byte_field &_data, std::string::size_type _index);
-      void _assignDocument(const std::shared_ptr<ls::XmlDocument> &_document);
-      static std::shared_ptr<ls::XmlDeclaration> _createDeclaration(const std::list<std::pair<std::string, std::string>> &_attributes);
-      static std::shared_ptr<ls::XmlNode> _createNode(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name);
-      static std::pair<std::string, std::string> _findAttribute(const std::list<std::pair<std::string, std::string>> &_attributes, const std::string &_name);
+      void _analyze(const ls::byte_field &_data, ::std::string::size_type _index);
+      void _assignDocument(const ::std::shared_ptr<ls::XmlDocument> &_document);
+      static ::std::shared_ptr<ls::XmlDeclaration> _createDeclaration(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes);
+      static ::std::shared_ptr<ls::XmlNode> _createNode(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes, const ::std::string &_name);
+      static ::std::pair<::std::string, ::std::string> _findAttribute(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes, const ::std::string &_name);
       static size_t _findAttributeEndPosition(const ls::byte_field &_data);
-      static ls::byte_field _getNextTagString(const ls::byte_field &_data, std::string::size_type _index);
-      void _isClosingTag(const ls::byte_field &_data, std::string::size_type _index);
-      void _isDeclaration(const ls::byte_field &_data, std::string::size_type _index);
-      void _isOpeningTag(const ls::byte_field &_data, std::string::size_type _index);
-      void _isValue(const ls::byte_field &_data, std::string::size_type _index);
+      static ls::byte_field _getNextTagString(const ls::byte_field &_data, ::std::string::size_type _index);
+      void _isClosingTag(const ls::byte_field &_data, ::std::string::size_type _index);
+      void _isDeclaration(const ls::byte_field &_data, ::std::string::size_type _index);
+      void _isOpeningTag(const ls::byte_field &_data, ::std::string::size_type _index);
+      void _isValue(const ls::byte_field &_data, ::std::string::size_type _index);
       void _mergeNodes();
-      void _mergeChildrenToParentNode(const std::shared_ptr<ls::XmlNode> &_parent, std::list<ls::XmlParseParameter>::iterator &_iterator, uint8_t _parentLevel);
+      void _mergeChildrenToParentNode(const ::std::shared_ptr<ls::XmlNode> &_parent, ::std::list<ls::XmlParseParameter>::iterator &_iterator, uint8_t _parentLevel);
       void _mergeNodesOnCurrentLevel();
       void _parse(const ls::byte_field &_data);
-      static std::pair<std::string, std::string> _parseAttribute(const ls::byte_field &_data);
-      static std::list<std::pair<std::string, std::string>> _parseAttributes(ls::byte_field _data);
-      size_t _parseClosingTag(const ls::byte_field &_data, std::string::size_type _index);
-      size_t _parseDeclaration(const ls::byte_field &_data, std::string::size_type _index);
-      size_t _parseOpeningTag(const ls::byte_field &_data, std::string::size_type _index);
+      static ::std::pair<::std::string, ::std::string> _parseAttribute(const ls::byte_field &_data);
+      static ::std::list<::std::pair<::std::string, ::std::string>> _parseAttributes(ls::byte_field _data);
+      size_t _parseClosingTag(const ls::byte_field &_data, ::std::string::size_type _index);
+      size_t _parseDeclaration(const ls::byte_field &_data, ::std::string::size_type _index);
+      size_t _parseOpeningTag(const ls::byte_field &_data, ::std::string::size_type _index);
       static ls::byte_field _parseTagName(const ls::byte_field &_data);
-      size_t _parseValue(const ls::byte_field &_data, std::string::size_type _index);
+      size_t _parseValue(const ls::byte_field &_data, ::std::string::size_type _index);
       void _reset();
       void _setMaxLevel();
   };

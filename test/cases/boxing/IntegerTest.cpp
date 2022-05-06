@@ -18,7 +18,6 @@ namespace
     protected:
 
       IntegerTest() = default;
-
       ~IntegerTest() override = default;
 
       void SetUp() override

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-05
+ * Changed:         2022-05-06
  *
  * */
 
@@ -18,16 +18,16 @@ namespace ls
   {
     public:
 
-      explicit Class(const std::string &_name);
+      explicit Class(const ::std::string &_name);
       virtual ~Class() = default;
 
-      std::string getClassName();
+      ::std::string getClassName();
 
     private:
 
-      std::string name{};
+      ::std::string name{};
 
-      void _assignClassName(const std::string &_name);
+      void _assignClassName(const ::std::string &_name);
   };
 }
 

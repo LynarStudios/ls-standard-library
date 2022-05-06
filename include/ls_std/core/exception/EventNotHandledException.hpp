@@ -14,7 +14,7 @@
 
 namespace ls
 {
-  class EventNotHandledException : public std::exception
+  class EventNotHandledException : public ::std::exception
   {
     public:
 

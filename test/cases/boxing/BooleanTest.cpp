@@ -9,7 +9,6 @@
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
-#include <TestHelper.hpp>
 
 namespace
 {
@@ -31,7 +30,7 @@ namespace
 
   TEST_F(BooleanTest, operator_assignment_boolean)
   {
-    ls::Boolean expression{};
+    ls::std::boxing::Boolean expression{};
     expression = true;
 
     ASSERT_TRUE(expression);
@@ -39,7 +38,7 @@ namespace
 
   TEST_F(BooleanTest, operator_assignment_integer)
   {
-    ls::Boolean expression{};
+    ls::std::boxing::Boolean expression{};
     expression = 1;
 
     ASSERT_TRUE(expression);
@@ -49,7 +48,7 @@ namespace
 
   TEST_F(BooleanTest, operator_output_stream)
   {
-    ls::Boolean expression{true};
+    ls::std::boxing::Boolean expression{true};
     std::ostringstream _stream{};
     _stream << expression;
 
@@ -60,20 +59,20 @@ namespace
 
   TEST_F(BooleanTest, operator_negation_negative_value)
   {
-    ls::Boolean expression{};
+    ls::std::boxing::Boolean expression{};
     ASSERT_TRUE(!expression);
   }
 
   TEST_F(BooleanTest, operator_negation_positive_value)
   {
-    ls::Boolean expression{true};
+    ls::std::boxing::Boolean expression{true};
     ASSERT_FALSE(!expression);
   }
 
   TEST_F(BooleanTest, operator_and)
   {
-    ls::Boolean expressionA{true};
-    ls::Boolean expressionB{3 == 3};
+    ls::std::boxing::Boolean expressionA{true};
+    ls::std::boxing::Boolean expressionB{3 == 3};
 
     ASSERT_TRUE(expressionA && expressionB);
     ASSERT_TRUE(expressionB && expressionA);
@@ -84,8 +83,8 @@ namespace
 
   TEST_F(BooleanTest, operator_and_with_false_result)
   {
-    ls::Boolean expressionA{true};
-    ls::Boolean expressionB{3 == 4};
+    ls::std::boxing::Boolean expressionA{true};
+    ls::std::boxing::Boolean expressionB{3 == 4};
 
     ASSERT_FALSE(expressionA && expressionB);
     ASSERT_FALSE(expressionB && expressionA);
@@ -96,8 +95,8 @@ namespace
 
   TEST_F(BooleanTest, operator_or)
   {
-    ls::Boolean expressionA{false};
-    ls::Boolean expressionB{3 == 3};
+    ls::std::boxing::Boolean expressionA{false};
+    ls::std::boxing::Boolean expressionB{3 == 3};
 
     ASSERT_TRUE(expressionA || expressionB);
     ASSERT_TRUE(expressionB || expressionA);
@@ -108,8 +107,8 @@ namespace
 
   TEST_F(BooleanTest, operator_or_with_false_result)
   {
-    ls::Boolean expressionA{false};
-    ls::Boolean expressionB{3 == 4};
+    ls::std::boxing::Boolean expressionA{false};
+    ls::std::boxing::Boolean expressionB{3 == 4};
 
     ASSERT_FALSE(expressionA || expressionB);
     ASSERT_FALSE(expressionB || expressionA);
@@ -122,7 +121,7 @@ namespace
 
   TEST_F(BooleanTest, parse_true_value)
   {
-    ls::Boolean expression{};
+    ls::std::boxing::Boolean expression{};
 
     expression.parse("true");
     ASSERT_TRUE(expression);
@@ -136,7 +135,7 @@ namespace
 
   TEST_F(BooleanTest, parse_false_value)
   {
-    ls::Boolean expression{};
+    ls::std::boxing::Boolean expression{};
 
     expression.parse("false");
     ASSERT_FALSE(expression);
@@ -153,7 +152,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::Boolean expression{};
+                     ls::std::boxing::Boolean expression{};
                      expression.parse("hello");
                    } catch (const ls::IllegalArgumentException &_exception)
                    {
@@ -164,13 +163,13 @@ namespace
 
   TEST_F(BooleanTest, toString_true)
   {
-    ls::Boolean expression{2 < 3};
+    ls::std::boxing::Boolean expression{2 < 3};
     ASSERT_STREQ("true", expression.toString().c_str());
   }
 
   TEST_F(BooleanTest, toString_false)
   {
-    ls::Boolean expression{4 < 3};
+    ls::std::boxing::Boolean expression{4 < 3};
     ASSERT_STREQ("false", expression.toString().c_str());
   }
 
@@ -178,35 +177,35 @@ namespace
 
   TEST_F(BooleanTest, getValue)
   {
-    ls::Boolean x{2 < 3};
+    ls::std::boxing::Boolean x{2 < 3};
     ASSERT_TRUE(x.getValue());
   }
 
   TEST_F(BooleanTest, XOR_with_positive_result)
   {
-    ls::Boolean x{2 < 3};
-    ls::Boolean y{4 < 3};
+    ls::std::boxing::Boolean x{2 < 3};
+    ls::std::boxing::Boolean y{4 < 3};
 
-    ASSERT_TRUE(ls::Boolean::XOR(x, y));
-    ASSERT_TRUE(ls::Boolean::XOR(y, x));
-    ASSERT_TRUE(ls::Boolean::XOR(y, true));
-    ASSERT_TRUE(ls::Boolean::XOR(true, y));
-    ASSERT_TRUE(ls::Boolean::XOR(true, false));
-    ASSERT_TRUE(ls::Boolean::XOR(false, true));
+    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(x, y));
+    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(y, x));
+    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(y, true));
+    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(true, y));
+    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(true, false));
+    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(false, true));
   }
 
   TEST_F(BooleanTest, XOR_with_negative_result)
   {
-    ls::Boolean w{};
-    ls::Boolean x{true};
-    ls::Boolean y{};
-    ls::Boolean z{true};
+    ls::std::boxing::Boolean w{};
+    ls::std::boxing::Boolean x{true};
+    ls::std::boxing::Boolean y{};
+    ls::std::boxing::Boolean z{true};
 
-    ASSERT_FALSE(ls::Boolean::XOR(x, z));
-    ASSERT_FALSE(ls::Boolean::XOR(w, y));
-    ASSERT_FALSE(ls::Boolean::XOR(true, true));
-    ASSERT_FALSE(ls::Boolean::XOR(false, false));
-    ASSERT_FALSE(ls::Boolean::XOR(w, false));
-    ASSERT_FALSE(ls::Boolean::XOR(false, w));
+    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(x, z));
+    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(w, y));
+    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(true, true));
+    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(false, false));
+    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(w, false));
+    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(false, w));
   }
 }

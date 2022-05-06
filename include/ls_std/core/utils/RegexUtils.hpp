@@ -22,10 +22,10 @@ namespace ls
       RegexUtils() = default;
       ~RegexUtils() = default;
 
-      static std::string escapeString(const std::string &_text)
+      static ::std::string escapeString(const ::std::string &_text)
       {
-        static std::regex regexMetaEscape(R"(([\^\$\\\.\*\+\?\(\)\[\]\{\}\|]))");
-        return std::regex_replace(_text, regexMetaEscape, R"(\$1)");
+        static ::std::regex regexMetaEscape(R"(([\^\$\\\.\*\+\?\(\)\[\]\{\}\|]))");
+        return ::std::regex_replace(_text, regexMetaEscape, R"(\$1)");
       }
   };
 }

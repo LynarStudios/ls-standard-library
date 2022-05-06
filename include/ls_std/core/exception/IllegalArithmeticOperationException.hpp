@@ -14,7 +14,7 @@
 
 namespace ls
 {
-  class IllegalArithmeticOperationException : public std::exception
+  class IllegalArithmeticOperationException : public ::std::exception
   {
     public:
 

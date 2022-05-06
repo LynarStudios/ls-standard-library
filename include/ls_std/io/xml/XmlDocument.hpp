@@ -24,19 +24,19 @@ namespace ls
       XmlDocument();
       ~XmlDocument() override = default;
 
-      std::shared_ptr<ls::XmlDeclaration> getDeclaration();
-      std::shared_ptr<ls::XmlNode> getRootElement();
-      void setDeclaration(const std::shared_ptr<ls::XmlDeclaration> &_declaration);
-      void setRootElement(const std::shared_ptr<ls::XmlNode> &_rootElement);
-      std::string toXml();
+      ::std::shared_ptr<ls::XmlDeclaration> getDeclaration();
+      ::std::shared_ptr<ls::XmlNode> getRootElement();
+      void setDeclaration(const ::std::shared_ptr<ls::XmlDeclaration> &_declaration);
+      void setRootElement(const ::std::shared_ptr<ls::XmlNode> &_rootElement);
+      ::std::string toXml();
 
     private:
 
-      std::shared_ptr<ls::XmlDeclaration> declaration{};
-      std::shared_ptr<ls::XmlNode> rootElement{};
+      ::std::shared_ptr<ls::XmlDeclaration> declaration{};
+      ::std::shared_ptr<ls::XmlNode> rootElement{};
 
-      void _assignDeclaration(const std::shared_ptr<ls::XmlDeclaration> &_declaration);
-      void _assignRootElement(const std::shared_ptr<ls::XmlNode> &_rootElement);
+      void _assignDeclaration(const ::std::shared_ptr<ls::XmlDeclaration> &_declaration);
+      void _assignRootElement(const ::std::shared_ptr<ls::XmlNode> &_rootElement);
   };
 }
 
