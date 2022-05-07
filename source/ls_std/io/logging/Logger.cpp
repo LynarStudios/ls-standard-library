@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-06
+ * Changed:         2022-05-07
  *
  * */
 
@@ -90,7 +90,7 @@ void ls::Logger::_assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer)
 
 void ls::Logger::_log(const ls::byte *_data, const ls::LogLevel &_logLevel)
 {
-  ls::Date date{};
+  ls::std::time::Date date{};
   ::std::string message = "[" + date.toString() + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::NewLine::getUnixNewLine();
   this->writer->write(message);
 }
