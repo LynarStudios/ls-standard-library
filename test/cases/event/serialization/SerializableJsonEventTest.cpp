@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
@@ -31,7 +31,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::SerializableJsonEvent serializable{nullptr};
+                     ls::std::event::SerializableJsonEvent serializable{nullptr};
                    }
                    catch (const ls::IllegalArgumentException &_exception)
                    {
@@ -42,11 +42,11 @@ namespace
 
   TEST_F(SerializableJsonEventTest, marshal)
   {
-    ls::Event event{"OPEN_DOOR_EVENT"};
-    event.addParameter(ls::event_parameter{"key_available", "true"});
-    event.addParameter(ls::event_parameter{"door_id", "16675"});
+    ls::std::event::Event event{"OPEN_DOOR_EVENT"};
+    event.addParameter(ls::std::event::event_parameter{"key_available", "true"});
+    event.addParameter(ls::std::event::event_parameter{"door_id", "16675"});
 
-    ls::SerializableJsonEvent serializable{std::make_shared<ls::Event>(event)};
+    ls::std::event::SerializableJsonEvent serializable{std::make_shared<ls::std::event::Event>(event)};
 
     ls::byte_field data = serializable.marshal();
     ASSERT_FALSE(data.empty());
@@ -56,13 +56,13 @@ namespace
 
   TEST_F(SerializableJsonEventTest, unmarshal)
   {
-    ls::Event event{"TMP_EVENT"};
-    ls::SerializableJsonEvent serializable{std::make_shared<ls::Event>(event)};
+    ls::std::event::Event event{"TMP_EVENT"};
+    ls::std::event::SerializableJsonEvent serializable{std::make_shared<ls::std::event::Event>(event)};
     std::string jsonString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
 
     serializable.unmarshal(jsonString);
     ASSERT_STREQ("OPEN_DOOR_EVENT", serializable.getValue()->getId().c_str());
-    ls::event_parameter_list parameterList = serializable.getValue()->getParameterList();
+    ls::std::event::event_parameter_list parameterList = serializable.getValue()->getParameterList();
 
     ASSERT_FALSE(parameterList.empty());
     ASSERT_EQ(2, parameterList.size());
@@ -72,8 +72,8 @@ namespace
 
   TEST_F(SerializableJsonEventTest, setValue_parameter_not_set)
   {
-    ls::Event event{"TMP_EVENT"};
-    ls::SerializableJsonEvent serializable{std::make_shared<ls::Event>(event)};
+    ls::std::event::Event event{"TMP_EVENT"};
+    ls::std::event::SerializableJsonEvent serializable{std::make_shared<ls::std::event::Event>(event)};
 
     EXPECT_THROW({
                    try

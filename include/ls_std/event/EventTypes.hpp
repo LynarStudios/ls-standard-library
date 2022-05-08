@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
@@ -16,11 +16,17 @@
 
 namespace ls
 {
-  using event_id = ::std::string;
-  using event_parameter_id = ::std::string;
-  using event_parameter_value = ::std::string;
-  using event_parameter = ::std::pair<::std::string, ::std::string>;
-  using event_parameter_list = ::std::map<ls::event_parameter_id, ls::event_parameter_value>;
+  namespace std
+  {
+    namespace event
+    {
+      using event_id = ::std::string;
+      using event_parameter_id = ::std::string;
+      using event_parameter_value = ::std::string;
+      using event_parameter = ::std::pair<::std::string, ::std::string>;
+      using event_parameter_list = ::std::map<ls::std::event::event_parameter_id, ls::std::event::event_parameter_value>;
+    }
+  }
 }
 
 #endif

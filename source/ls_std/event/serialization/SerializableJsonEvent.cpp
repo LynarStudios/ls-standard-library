@@ -3,25 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
 #include "ls_std/event/serialization/SerializableJsonEvent.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::SerializableJsonEvent::SerializableJsonEvent(const std::shared_ptr<ls::Event> &_value) : ls::Class("SerializableJsonEvent")
+ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared_ptr<ls::std::event::Event> &_value) : ls::Class("SerializableJsonEvent")
 {
   this->_assignValue(_value);
 }
 
-ls::byte_field ls::SerializableJsonEvent::marshal()
+ls::byte_field ls::std::event::SerializableJsonEvent::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::SerializableJsonEvent::unmarshal(const ls::byte_field &_data)
+void ls::std::event::SerializableJsonEvent::unmarshal(const ls::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -29,17 +29,17 @@ void ls::SerializableJsonEvent::unmarshal(const ls::byte_field &_data)
   this->_unmarshalParameterList();
 }
 
-std::shared_ptr<ls::Event> ls::SerializableJsonEvent::getValue()
+std::shared_ptr<ls::std::event::Event> ls::std::event::SerializableJsonEvent::getValue()
 {
   return this->value;
 }
 
-void ls::SerializableJsonEvent::setValue(const std::shared_ptr<ls::Event> &_value)
+void ls::std::event::SerializableJsonEvent::setValue(const ::std::shared_ptr<ls::std::event::Event> &_value)
 {
   this->_assignValue(_value);
 }
 
-void ls::SerializableJsonEvent::_assignValue(const std::shared_ptr<ls::Event> &_value)
+void ls::std::event::SerializableJsonEvent::_assignValue(const ::std::shared_ptr<ls::std::event::Event> &_value)
 {
   if (_value == nullptr)
   {
@@ -49,27 +49,27 @@ void ls::SerializableJsonEvent::_assignValue(const std::shared_ptr<ls::Event> &_
   this->value = _value;
 }
 
-void ls::SerializableJsonEvent::_unmarshalParameterList()
+void ls::std::event::SerializableJsonEvent::_unmarshalParameterList()
 {
   this->value->clearParameterList();
 
   for (const auto &parameterJson : this->jsonObject["parameterList"])
   {
-    ls::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
+    ls::std::event::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
     this->value->addParameter(parameter);
   }
 }
 
-void ls::SerializableJsonEvent::_update()
+void ls::std::event::SerializableJsonEvent::_update()
 {
   this->jsonObject = {{"id", this->value->getId()}};
 
   this->_updateEventParameterList();
 }
 
-void ls::SerializableJsonEvent::_updateEventParameterList()
+void ls::std::event::SerializableJsonEvent::_updateEventParameterList()
 {
-  std::string jsonString{};
+  ::std::string jsonString{};
 
   for (const auto &eventParameter : this->value->getParameterList())
   {

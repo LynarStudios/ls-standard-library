@@ -3,13 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
-#include <ls_std_test.hpp>
 
 namespace
 {
@@ -32,7 +31,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::EventHandler eventHandler{""};
+                     ls::std::event::EventHandler eventHandler{""};
                    }
                    catch (const ls::IllegalArgumentException &_exception)
                    {
@@ -43,7 +42,7 @@ namespace
 
   TEST_F(EventHandlerTest, getId)
   {
-    ls::EventHandler eventHandler{"EventId"};
+    ls::std::event::EventHandler eventHandler{"EventId"};
     ASSERT_STREQ("EventId", eventHandler.getId().c_str());
   }
 }

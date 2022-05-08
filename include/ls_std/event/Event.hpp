@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
@@ -17,30 +17,36 @@
 
 namespace ls
 {
-  class Event : public ls::Class
+  namespace std
   {
-    public:
+    namespace event
+    {
+      class Event : public ls::Class
+      {
+        public:
 
-      explicit Event(const ls::event_id &_id);
-      ~Event() override = default;
+          explicit Event(const ls::std::event::event_id &_id);
+          ~Event() override = default;
 
-      // additional functionality
+          // additional functionality
 
-      bool addParameter(const ls::event_parameter &_eventParameter);
-      void clearParameterList();
-      ls::event_id getId();
-      ls::event_parameter_list getParameterList();
-      bool removeParameter(const ls::event_parameter_id &_id);
-      void setId(const ls::event_id &_id);
+          bool addParameter(const ls::std::event::event_parameter &_eventParameter);
+          void clearParameterList();
+          ls::std::event::event_id getId();
+          ls::std::event::event_parameter_list getParameterList();
+          bool removeParameter(const ls::std::event::event_parameter_id &_id);
+          void setId(const ls::std::event::event_id &_id);
 
-    private:
+        private:
 
-      ls::event_id id{};
-      ls::event_parameter_list parameterList{};
+          ls::std::event::event_id id{};
+          ls::std::event::event_parameter_list parameterList{};
 
-      void _assignId(const ls::event_id &_id);
-      bool _hasParameter(const ls::event_id &_id);
-  };
+          void _assignId(const ls::std::event::event_id &_id);
+          bool _hasParameter(const ls::std::event::event_id &_id);
+      };
+    }
+  }
 }
 
 #endif

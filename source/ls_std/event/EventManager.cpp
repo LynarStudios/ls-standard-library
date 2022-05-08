@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
@@ -12,10 +12,10 @@
 #include <ls_std/core/exception/EventNotHandledException.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::EventManager::EventManager() : ls::Class("EventManager")
+ls::std::event::EventManager::EventManager() : ls::Class("EventManager")
 {}
 
-void ls::EventManager::subscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener)
+void ls::std::event::EventManager::subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
@@ -32,7 +32,7 @@ void ls::EventManager::subscribe(const ls::event_id &_id, const std::shared_ptr<
   }
 }
 
-void ls::EventManager::unsubscribe(const ls::event_id &_id, const std::shared_ptr<ls::IListener> &_listener)
+void ls::std::event::EventManager::unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
@@ -45,7 +45,7 @@ void ls::EventManager::unsubscribe(const ls::event_id &_id, const std::shared_pt
   }
 }
 
-bool ls::EventManager::addEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler)
+bool ls::std::event::EventManager::addEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
 {
   bool wasAdded{};
 
@@ -56,14 +56,14 @@ bool ls::EventManager::addEventHandler(const std::shared_ptr<ls::EventHandler> &
 
   if (!this->_hasEventHandler(_eventHandler->getId()))
   {
-    std::pair<ls::event_id, std::shared_ptr<ls::EventHandler>> element = std::make_pair(_eventHandler->getId(), _eventHandler);
+    ::std::pair<ls::std::event::event_id, ::std::shared_ptr<ls::std::event::EventHandler>> element = ::std::make_pair(_eventHandler->getId(), _eventHandler);
     wasAdded = this->eventHandlers.insert(element).second;
   }
 
   return wasAdded;
 }
 
-void ls::EventManager::fire(ls::Event _event)
+void ls::std::event::EventManager::fire(ls::std::event::Event _event)
 {
   if (this->_hasEventHandler(_event.getId()))
   {
@@ -75,7 +75,7 @@ void ls::EventManager::fire(ls::Event _event)
   }
 }
 
-bool ls::EventManager::hasEventHandler(const ls::event_id &_id)
+bool ls::std::event::EventManager::hasEventHandler(const ls::std::event::event_id &_id)
 {
   if (_id.empty())
   {
@@ -85,7 +85,7 @@ bool ls::EventManager::hasEventHandler(const ls::event_id &_id)
   return this->_hasEventHandler(_id);
 }
 
-bool ls::EventManager::removeEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler)
+bool ls::std::event::EventManager::removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
 {
   if (_eventHandler == nullptr)
   {
@@ -95,12 +95,12 @@ bool ls::EventManager::removeEventHandler(const std::shared_ptr<ls::EventHandler
   return this->_removeEventHandler(_eventHandler);
 }
 
-bool ls::EventManager::_hasEventHandler(const ls::event_id &_id)
+bool ls::std::event::EventManager::_hasEventHandler(const ls::std::event::event_id &_id)
 {
   return this->eventHandlers.find(_id) != this->eventHandlers.end();
 }
 
-bool ls::EventManager::_removeEventHandler(const std::shared_ptr<ls::EventHandler> &_eventHandler)
+bool ls::std::event::EventManager::_removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
 {
   return this->eventHandlers.erase(_eventHandler->getId()) == 1;
 }

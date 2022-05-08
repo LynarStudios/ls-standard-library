@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
@@ -19,32 +19,38 @@
 
 namespace ls
 {
-  class EventManager : public ls::Class, public ls::IEventSubscriber
+  namespace std
   {
-    public:
+    namespace event
+    {
+      class EventManager : public ls::Class, public ls::std::event::IEventSubscriber
+      {
+        public:
 
-      explicit EventManager();
-      ~EventManager() override = default;
+          explicit EventManager();
+          ~EventManager() override = default;
 
-      // implementation
+          // implementation
 
-      void subscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) override;
-      void unsubscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) override;
+          void subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) override;
+          void unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) override;
 
-      // additional functionality
+          // additional functionality
 
-      bool addEventHandler(const ::std::shared_ptr<ls::EventHandler> &_eventHandler);
-      void fire(ls::Event _event);
-      bool hasEventHandler(const ls::event_id &_id);
-      bool removeEventHandler(const ::std::shared_ptr<ls::EventHandler> &_eventHandler);
+          bool addEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
+          void fire(ls::std::event::Event _event);
+          bool hasEventHandler(const ls::std::event::event_id &_id);
+          bool removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
 
-    private:
+        private:
 
-      ::std::map<ls::event_id, ::std::shared_ptr<ls::EventHandler>> eventHandlers{};
+          ::std::map<ls::std::event::event_id, ::std::shared_ptr<ls::std::event::EventHandler>> eventHandlers{};
 
-      bool _hasEventHandler(const ls::event_id &_id);
-      bool _removeEventHandler(const ::std::shared_ptr<ls::EventHandler> &_eventHandler);
-  };
+          bool _hasEventHandler(const ls::std::event::event_id &_id);
+          bool _removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
+      };
+    }
+  }
 }
 
 #endif

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-08
  *
  * */
 
@@ -16,16 +16,22 @@
 
 namespace ls
 {
-  class IEventSubscriber
+  namespace std
   {
-    public:
+    namespace event
+    {
+      class IEventSubscriber
+      {
+        public:
 
-      IEventSubscriber() = default;
-      ~IEventSubscriber() = default;
+          IEventSubscriber() = default;
+          ~IEventSubscriber() = default;
 
-      virtual void subscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) = 0;
-      virtual void unsubscribe(const ls::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) = 0;
-  };
+          virtual void subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) = 0;
+          virtual void unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener) = 0;
+      };
+    }
+  }
 }
 
 #endif
