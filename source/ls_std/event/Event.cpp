@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
 #include <ls_std/event/Event.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::event::Event::Event(const ls::std::event::event_id &_id) : ls::Class("Event")
+ls::std::event::Event::Event(const ls::std::event::event_id &_id) : ls::std::core::Class("Event")
 {
   this->_assignId(_id);
 }
@@ -56,7 +56,7 @@ void ls::std::event::Event::_assignId(const ls::std::event::event_id &_id)
 {
   if (_id.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->id = _id;

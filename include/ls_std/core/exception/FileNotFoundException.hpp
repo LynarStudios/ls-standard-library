@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -17,17 +17,23 @@
 // TODO: pass parameters, use class, show class name
 namespace ls
 {
-  class FileNotFoundException : public ::std::exception
+  namespace std
   {
-    public:
-
-      FileNotFoundException() = default;
-
-      const char *what() const noexcept override
+    namespace core
+    {
+      class FileNotFoundException : public ::std::exception
       {
-        return "FileNotFoundException thrown - file not found!";
+        public:
+
+          FileNotFoundException() = default;
+
+          const char *what() const noexcept override
+          {
+            return "FileNotFoundException thrown - file not found!";
+          };
       };
-  };
+    }
+  }
 }
 
 #endif

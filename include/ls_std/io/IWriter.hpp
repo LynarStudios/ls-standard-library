@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls
       IWriter() = default;
       ~IWriter() = default;
 
-      virtual bool write(const ls::byte_field &_data) = 0;
+      virtual bool write(const ls::std::core::byte_field &_data) = 0;
   };
 }
 

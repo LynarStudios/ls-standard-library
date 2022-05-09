@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -35,11 +35,11 @@ namespace
                    {
                      ls::SerializableJsonStateMachine serializable{nullptr};
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   // implementation
@@ -145,10 +145,10 @@ namespace
                    {
                      serializable.setValue(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 }

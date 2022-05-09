@@ -3,25 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
 #include "ls_std/event/serialization/SerializableJsonEvent.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared_ptr<ls::std::event::Event> &_value) : ls::Class("SerializableJsonEvent")
+ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared_ptr<ls::std::event::Event> &_value) : ls::std::core::Class("SerializableJsonEvent")
 {
   this->_assignValue(_value);
 }
 
-ls::byte_field ls::std::event::SerializableJsonEvent::marshal()
+ls::std::core::byte_field ls::std::event::SerializableJsonEvent::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::std::event::SerializableJsonEvent::unmarshal(const ls::byte_field &_data)
+void ls::std::event::SerializableJsonEvent::unmarshal(const ls::std::core::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -43,7 +43,7 @@ void ls::std::event::SerializableJsonEvent::_assignValue(const ::std::shared_ptr
 {
   if (_value == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->value = _value;

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -15,17 +15,23 @@
 
 namespace ls
 {
-  class FileOperationException : public ::std::exception
+  namespace std
   {
-    public:
-
-      explicit FileOperationException() = default;
-
-      const char *what() const noexcept override
+    namespace core
+    {
+      class FileOperationException : public ::std::exception
       {
-        return "FileOperationException thrown - file operation failed!";
-      }
-  };
+        public:
+
+          explicit FileOperationException() = default;
+
+          const char *what() const noexcept override
+          {
+            return "FileOperationException thrown - file operation failed!";
+          }
+      };
+    }
+  }
 }
 
 #endif

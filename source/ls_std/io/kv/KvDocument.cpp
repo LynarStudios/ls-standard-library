@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
 #include <ls_std/io/kv/KvDocument.hpp>
 
-ls::KvDocument::KvDocument() : ls::Class("KvDocument")
+ls::KvDocument::KvDocument() : ls::std::core::Class("KvDocument")
 {}
 
 bool ls::KvDocument::addPair(ls::KvPair _pair)
@@ -18,7 +18,7 @@ bool ls::KvDocument::addPair(ls::KvPair _pair)
 
   if (!this->_hasPair(_pair.getKey()))
   {
-    std::pair<ls::kv_key, ls::KvPair> pair = std::make_pair(_pair.getKey(), _pair);
+    ::std::pair<ls::kv_key, ls::KvPair> pair = ::std::make_pair(_pair.getKey(), _pair);
     added = this->pairs.insert(pair).second;
   }
 

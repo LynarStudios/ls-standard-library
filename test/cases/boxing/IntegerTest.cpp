@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -121,11 +121,11 @@ namespace
                      ls::std::boxing::Integer y{0};
 
                      x = x / y;
-                   } catch (const ls::IllegalArithmeticOperationException &_exception)
+                   } catch (const ls::std::core::IllegalArithmeticOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArithmeticOperationException);
+                 }, ls::std::core::IllegalArithmeticOperationException);
   }
 
   TEST_F(IntegerTest, operator_div_by_zero_with_value)
@@ -135,11 +135,11 @@ namespace
                    {
                      ls::std::boxing::Integer x{9};
                      x = x / 0;
-                   } catch (const ls::IllegalArithmeticOperationException &_exception)
+                   } catch (const ls::std::core::IllegalArithmeticOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArithmeticOperationException);
+                 }, ls::std::core::IllegalArithmeticOperationException);
   }
 
   TEST_F(IntegerTest, operator_mod_with_reference)
@@ -235,11 +235,11 @@ namespace
                      ls::std::boxing::Integer y{0};
 
                      x = x /= y;
-                   } catch (const ls::IllegalArithmeticOperationException &_exception)
+                   } catch (const ls::std::core::IllegalArithmeticOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArithmeticOperationException);
+                 }, ls::std::core::IllegalArithmeticOperationException);
   }
 
   TEST_F(IntegerTest, operator_div_assign_by_zero_with_value)
@@ -249,11 +249,11 @@ namespace
                    {
                      ls::std::boxing::Integer x{9};
                      x = x /= 0;
-                   } catch (const ls::IllegalArithmeticOperationException &_exception)
+                   } catch (const ls::std::core::IllegalArithmeticOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArithmeticOperationException);
+                 }, ls::std::core::IllegalArithmeticOperationException);
   }
 
   // comparison operators

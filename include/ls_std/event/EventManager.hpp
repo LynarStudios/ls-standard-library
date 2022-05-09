@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls
   {
     namespace event
     {
-      class EventManager : public ls::Class, public ls::std::event::IEventSubscriber
+      class EventManager : public ls::std::core::Class, public ls::std::event::IEventSubscriber
       {
         public:
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::FileNotFoundException{};
+                     throw ls::std::core::FileNotFoundException{};
                    }
-                   catch (const ls::FileNotFoundException &_exception)
+                   catch (const ls::std::core::FileNotFoundException &_exception)
                    {
                      EXPECT_STREQ("FileNotFoundException thrown - file not found!", _exception.what());
                      throw;
                    }
-                 }, ls::FileNotFoundException);
+                 }, ls::std::core::FileNotFoundException);
   }
 }

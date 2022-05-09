@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-23
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -15,15 +15,21 @@
 
 namespace ls
 {
-  class IFactory
+  namespace std
   {
-    public:
+    namespace core
+    {
+      class IFactory
+      {
+        public:
 
-      IFactory() = default;
-      ~IFactory() = default;
+          IFactory() = default;
+          ~IFactory() = default;
 
-      virtual ::std::shared_ptr<ls::Class> build() = 0;
-  };
+          virtual ::std::shared_ptr<ls::std::core::Class> build() = 0;
+      };
+    }
+  }
 }
 
 #endif

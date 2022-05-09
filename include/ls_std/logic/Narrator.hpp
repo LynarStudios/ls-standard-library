@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -17,7 +17,7 @@
 
 namespace ls
 {
-  class Narrator : public ls::Class
+  class Narrator : public ls::std::core::Class
   {
     public:
 
@@ -28,7 +28,7 @@ namespace ls
       void clear();
       ::std::list<::std::shared_ptr<ls::IListener>> getListeners();
       bool removeListener(const ::std::shared_ptr<ls::IListener> &_listener);
-      void tell(const ls::Class &_info);
+      void tell(const ls::std::core::Class &_info);
 
     private:
 

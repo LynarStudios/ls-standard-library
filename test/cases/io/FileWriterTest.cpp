@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -37,11 +37,11 @@ namespace
                    {
                      ls::FileWriter writer{file};
                    }
-                   catch (const ls::FileNotFoundException &_exception)
+                   catch (const ls::std::core::FileNotFoundException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileNotFoundException);
+                 }, ls::std::core::FileNotFoundException);
   }
 
   TEST_F(FileWriterTest, reset)

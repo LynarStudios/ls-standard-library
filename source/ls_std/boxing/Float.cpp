@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -12,12 +12,12 @@
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::boxing::Float::Float()
-    : ls::Class("Float"),
+    : ls::std::core::Class("Float"),
       epsilon(0.00001f)
 {}
 
 ls::std::boxing::Float::Float(float _value)
-    : ls::Class("Float"),
+    : ls::std::core::Class("Float"),
       epsilon(0.00001f),
       value(_value)
 {}
@@ -225,7 +225,7 @@ void ls::std::boxing::Float::_assignEpsilon(float _epsilon)
 {
   if (_epsilon <= 0.0)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->epsilon = _epsilon;

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls
   {
     namespace event
     {
-      class SerializableJsonEvent : public ls::Class, public ls::ISerializable
+      class SerializableJsonEvent : public ls::std::core::Class, public ls::ISerializable
       {
         public:
 
@@ -31,8 +31,8 @@ namespace ls
 
           // implementation
 
-          ls::byte_field marshal() override;
-          void unmarshal(const ls::byte_field &_data) override;
+          ls::std::core::byte_field marshal() override;
+          void unmarshal(const ls::std::core::byte_field &_data) override;
 
           // additional functionality
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -18,7 +18,7 @@
 
 namespace ls
 {
-  class KvParser : public ls::Class
+  class KvParser : public ls::std::core::Class
   {
     public:
 
@@ -26,7 +26,7 @@ namespace ls
       ~KvParser() override = default;
 
       ::std::shared_ptr<ls::KvDocument> getDocument();
-      void parse(const ls::byte_field &_data);
+      void parse(const ls::std::core::byte_field &_data);
       void setDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
 
     private:
@@ -35,9 +35,9 @@ namespace ls
 
       void _assignDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
       static bool _lineHasPair(ls::KvParseParameter _parseParameter);
-      void _parse(const ls::byte_field &_data);
+      void _parse(const ls::std::core::byte_field &_data);
       void _parsePair(ls::KvParseParameter _parseParameter);
-      static ls::KvParseParameter _readLine(const ls::byte_field &_data, ::std::string::size_type _index);
+      static ls::KvParseParameter _readLine(const ls::std::core::byte_field &_data, ::std::string::size_type _index);
       static void _readLineWithUnixLineBreak(ls::KvParseParameter &_parseParameter);
       static void _readLineWithWindowsLineBreak(ls::KvParseParameter &_parseParameter);
   };

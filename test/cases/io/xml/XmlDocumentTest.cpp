@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -59,11 +59,11 @@ namespace
                    {
                      document.setDeclaration(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlDocumentTest, setRootElement)
@@ -86,11 +86,11 @@ namespace
                    {
                      document.setRootElement(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlDocumentTest, toXml)

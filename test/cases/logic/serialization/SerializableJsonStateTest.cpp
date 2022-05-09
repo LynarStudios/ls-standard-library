@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -33,11 +33,11 @@ namespace
                    {
                      ls::SerializableJsonState serializable{nullptr};
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(SerializableJsonStateTest, marshal)
@@ -47,7 +47,7 @@ namespace
     x->addStateConnection(std::make_shared<ls::StateConnection>("AC", "C"));
 
     ls::SerializableJsonState serializable{x};
-    ls::byte_field jsonString = serializable.marshal();
+    ls::std::core::byte_field jsonString = serializable.marshal();
 
     ASSERT_TRUE(!jsonString.empty());
     std::string expectedJson = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
@@ -90,7 +90,7 @@ namespace
     x->addStateConnection(std::make_shared<ls::StateConnection>("AC", "C"));
 
     ls::SerializableJsonState serializable{x};
-    ls::byte_field jsonString = serializable.marshal();
+    ls::std::core::byte_field jsonString = serializable.marshal();
 
     std::string expectedJson = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
     ASSERT_STREQ(expectedJson.c_str(), jsonString.c_str());
@@ -114,10 +114,10 @@ namespace
                    {
                      serializable.setValue(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 }

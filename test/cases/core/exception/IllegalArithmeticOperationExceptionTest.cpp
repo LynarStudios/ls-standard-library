@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::IllegalArithmeticOperationException{};
+                     throw ls::std::core::IllegalArithmeticOperationException{};
                    }
-                   catch (const ls::IllegalArithmeticOperationException &_exception)
+                   catch (const ls::std::core::IllegalArithmeticOperationException &_exception)
                    {
                      EXPECT_STREQ("IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!", _exception.what());
                      throw;
                    }
-                 }, ls::IllegalArithmeticOperationException);
+                 }, ls::std::core::IllegalArithmeticOperationException);
   }
 }

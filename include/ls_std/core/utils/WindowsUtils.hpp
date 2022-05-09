@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-06
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -16,21 +16,27 @@
 
 namespace ls
 {
-  class WindowsUtils
+  namespace std
   {
-    public:
-
-      WindowsUtils() = default;
-      ~WindowsUtils() = default;
-
-      static ::std::string getMessageFromErrorCode(const int &_errorCode)
+    namespace core
+    {
+      class WindowsUtils
       {
-        ls::byte messageBuffer[256 + 1];
-        FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, _errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), messageBuffer, sizeof(messageBuffer), nullptr);
+        public:
 
-        return ::std::string{messageBuffer};
-      }
-  };
+          WindowsUtils() = default;
+          ~WindowsUtils() = default;
+
+          static ::std::string getMessageFromErrorCode(const int &_errorCode)
+          {
+            ls::byte messageBuffer[256 + 1];
+            FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, _errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), messageBuffer, sizeof(messageBuffer), nullptr);
+
+            return ::std::string{messageBuffer};
+          }
+      };
+    }
+  }
 }
 
 #endif

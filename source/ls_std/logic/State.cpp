@@ -3,33 +3,32 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
 #include <ls_std/logic/State.hpp>
-#include <ls_std/core/exception/NullPointerException.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::State::State(const ls::StateId& _id) : ls::Class("State")
+ls::State::State(const ls::StateId& _id) : ls::std::core::Class("State")
 {
   this->_assignStateId(_id);
 }
 
-bool ls::State::addStateConnection(const ls::StateConnectionId &_connectionId, const std::shared_ptr<ls::State> &_connectedState)
+bool ls::State::addStateConnection(const ls::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::State> &_connectedState)
 {
   bool added{};
-  std::shared_ptr<ls::StateConnection> connection{};
+  ::std::shared_ptr<ls::StateConnection> connection{};
 
   if (_connectionId.empty() || _connectedState == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {
     if (!this->_hasConnection(_connectionId))
     {
-      connection = std::make_shared<ls::StateConnection>(_connectionId, _connectedState->getId());
+      connection = ::std::make_shared<ls::StateConnection>(_connectionId, _connectedState->getId());
       added = this->connectedStates.insert({_connectionId, connection}).second;
     }
   }
@@ -37,9 +36,9 @@ bool ls::State::addStateConnection(const ls::StateConnectionId &_connectionId, c
   return added;
 }
 
-bool ls::State::addStateConnection(const std::shared_ptr<ls::StateConnection> &_connection)
+bool ls::State::addStateConnection(const ::std::shared_ptr<ls::StateConnection> &_connection)
 {
-  bool added{};
+  bool added;
 
   if (_connection != nullptr)
   {
@@ -47,7 +46,7 @@ bool ls::State::addStateConnection(const std::shared_ptr<ls::StateConnection> &_
   }
   else
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   return added;
@@ -82,7 +81,7 @@ void ls::State::_assignStateId(const ls::StateId &_id)
 {
   if (_id.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->id = _id;

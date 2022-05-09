@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,7 +11,7 @@
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::KvParser::KvParser(const ::std::shared_ptr<ls::KvDocument> &_document) : ls::Class("KvParser")
+ls::KvParser::KvParser(const ::std::shared_ptr<ls::KvDocument> &_document) : ls::std::core::Class("KvParser")
 {
   this->_assignDocument(_document);
 }
@@ -21,7 +21,7 @@ std::shared_ptr<ls::KvDocument> ls::KvParser::getDocument()
   return this->document;
 }
 
-void ls::KvParser::parse(const ls::byte_field &_data)
+void ls::KvParser::parse(const ls::std::core::byte_field &_data)
 {
   this->_parse(_data);
 }
@@ -35,7 +35,7 @@ void ls::KvParser::_assignDocument(const ::std::shared_ptr<ls::KvDocument> &_doc
 {
   if (_document == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->document = _document;
@@ -46,7 +46,7 @@ bool ls::KvParser::_lineHasPair(ls::KvParseParameter _parseParameter)
   return _parseParameter.line.contains("=") && _parseParameter.line.contains(";");
 }
 
-void ls::KvParser::_parse(const ls::byte_field &_data)
+void ls::KvParser::_parse(const ls::std::core::byte_field &_data)
 {
   for (::std::string::size_type index = 0; index < _data.size(); index++)
   {
@@ -69,7 +69,7 @@ void ls::KvParser::_parsePair(ls::KvParseParameter _parseParameter)
   }
 }
 
-ls::KvParseParameter ls::KvParser::_readLine(const ls::byte_field &_data, ::std::string::size_type _index)
+ls::KvParseParameter ls::KvParser::_readLine(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
 {
   ls::KvParseParameter parseParameter{};
   parseParameter.line = _data.substr(_index);

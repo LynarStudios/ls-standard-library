@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -59,11 +59,11 @@ namespace
                    {
                      ls::Logger logger{nullptr};
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(LoggerTest, debug)

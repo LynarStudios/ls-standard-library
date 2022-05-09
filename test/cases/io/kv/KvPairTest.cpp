@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -34,11 +34,11 @@ namespace
                    {
                      ls::KvPair pair = ls::KvPair("", "1989");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(KvPairTest, getKey)

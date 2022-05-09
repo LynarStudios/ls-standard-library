@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::EventNotHandledException{};
+                     throw ls::std::core::EventNotHandledException{};
                    }
-                   catch (const ls::EventNotHandledException &_exception)
+                   catch (const ls::std::core::EventNotHandledException &_exception)
                    {
                      EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", _exception.what());
                      throw;
                    }
-                 }, ls::EventNotHandledException);
+                 }, ls::std::core::EventNotHandledException);
   }
 }

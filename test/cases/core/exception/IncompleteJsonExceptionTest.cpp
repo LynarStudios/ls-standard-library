@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::IncompleteJsonException{};
+                     throw ls::std::core::IncompleteJsonException{};
                    }
-                   catch (const ls::IncompleteJsonException &_exception)
+                   catch (const ls::std::core::IncompleteJsonException &_exception)
                    {
                      EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", _exception.what());
                      throw;
                    }
-                 }, ls::IncompleteJsonException);
+                 }, ls::std::core::IncompleteJsonException);
   }
 }

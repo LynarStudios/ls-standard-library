@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -39,11 +39,11 @@ namespace
                    {
                      ls::StateConnection connection = ls::StateConnection("", "B");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateConnectionTest, constructor_empty_state_id)
@@ -53,11 +53,11 @@ namespace
                    {
                      ls::StateConnection connection = ls::StateConnection("AB", "");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateConnectionTest, getConnectionId)
@@ -95,11 +95,11 @@ namespace
                      ls::StateConnection connection = ls::StateConnection("AB", "B");
                      connection.setConnectionId("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateConnectionTest, setStateId)
@@ -119,11 +119,11 @@ namespace
                      ls::StateConnection connection = ls::StateConnection("AB", "B");
                      connection.setStateId("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateConnectionTest, updatePassCondition)

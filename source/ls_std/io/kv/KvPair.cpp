@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,8 +11,8 @@
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls::KvPair::KvPair(const ls::kv_key &_key, ls::kv_value _value)
-    : ls::Class("KvPair"),
-      value(std::move(_value))
+    : ls::std::core::Class("KvPair"),
+      value(::std::move(_value))
 {
   this->_assignKey(_key);
 }
@@ -36,7 +36,7 @@ void ls::KvPair::_assignKey(const ls::kv_key &_key)
 {
   if (_key.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->key = _key;

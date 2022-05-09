@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-20
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
@@ -33,11 +33,11 @@ namespace
                    {
                      ls::std::event::SerializableJsonEvent serializable{nullptr};
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(SerializableJsonEventTest, marshal)
@@ -48,7 +48,7 @@ namespace
 
     ls::std::event::SerializableJsonEvent serializable{std::make_shared<ls::std::event::Event>(event)};
 
-    ls::byte_field data = serializable.marshal();
+    ls::std::core::byte_field data = serializable.marshal();
     ASSERT_FALSE(data.empty());
     std::string expectedString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
     ASSERT_STREQ(expectedString.c_str(), data.c_str());
@@ -80,10 +80,10 @@ namespace
                    {
                      serializable.setValue(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 }

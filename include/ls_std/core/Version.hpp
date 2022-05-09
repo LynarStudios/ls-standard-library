@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -16,36 +16,42 @@
 
 namespace ls
 {
-  class Version : public ls::ISerializable
+  namespace std
   {
-    public:
+    namespace core
+    {
+      class Version : public ls::ISerializable
+      {
+        public:
 
-      explicit Version(ls::version_type _majorVersion, ls::version_type _minorVersion, ls::version_type _patchVersion);
-      ~Version() = default;
+          explicit Version(ls::std::core::version_type _majorVersion, ls::std::core::version_type _minorVersion, ls::std::core::version_type _patchVersion);
+          ~Version() = default;
 
-      // implementation
+          // implementation
 
-      ls::byte_field marshal() override;
-      void unmarshal(const ls::byte_field &_data) override;
+          ls::std::core::byte_field marshal() override;
+          void unmarshal(const ls::std::core::byte_field &_data) override;
 
-      // other functionality
+          // other functionality
 
-      ls::version_type getMajorVersion() const;
-      ls::version_type getMinorVersion() const;
-      ls::version_type getPatchVersion() const;
-      static bool isValid(const ::std::string &_versionString);
-      void setMajorVersion(ls::version_type _major);
-      void setMinorVersion(ls::version_type _minor);
-      void setPatchVersion(ls::version_type _patch);
+          ls::std::core::version_type getMajorVersion() const;
+          ls::std::core::version_type getMinorVersion() const;
+          ls::std::core::version_type getPatchVersion() const;
+          static bool isValid(const ::std::string &_versionString);
+          void setMajorVersion(ls::std::core::version_type _major);
+          void setMinorVersion(ls::std::core::version_type _minor);
+          void setPatchVersion(ls::std::core::version_type _patch);
 
-    private:
+        private:
 
-      ls::version_type majorVersion{};
-      ls::version_type minorVersion{};
-      ls::version_type patchVersion{};
+          ls::std::core::version_type majorVersion{};
+          ls::std::core::version_type minorVersion{};
+          ls::std::core::version_type patchVersion{};
 
-      static bool _isValid(const ::std::string &_versionString);
-  };
+          static bool _isValid(const ::std::string &_versionString);
+      };
+    }
+  }
 }
 
 #endif

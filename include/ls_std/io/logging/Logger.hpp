@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -19,21 +19,21 @@
 
 namespace ls
 {
-  class Logger : public ls::Class
+  class Logger : public ls::std::core::Class
   {
     public:
 
       explicit Logger(const ::std::shared_ptr<ls::IWriter> &_writer);
       ~Logger() override = default;
 
-      void debug(const ls::byte *_data);
-      void error(const ls::byte *_data);
-      void fatal(const ls::byte *_data);
+      void debug(const ls::std::core::byte *_data);
+      void error(const ls::std::core::byte *_data);
+      void fatal(const ls::std::core::byte *_data);
       ls::LogLevel getLogLevel();
-      void info(const ls::byte *_data);
+      void info(const ls::std::core::byte *_data);
       void setLogLevel(const ls::LogLevelValue &_logLevelValue);
-      void trace(const ls::byte *_data);
-      void warn(const ls::byte *_data);
+      void trace(const ls::std::core::byte *_data);
+      void warn(const ls::std::core::byte *_data);
 
     private:
 
@@ -41,7 +41,7 @@ namespace ls
       ::std::shared_ptr<ls::IWriter> writer{};
 
       void _assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer);
-      void _log(const ls::byte *_data, const ls::LogLevel &_logLevel);
+      void _log(const ls::std::core::byte *_data, const ls::LogLevel &_logLevel);
   };
 }
 

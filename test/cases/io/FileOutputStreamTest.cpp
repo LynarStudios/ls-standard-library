@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -37,11 +37,11 @@ namespace
                    {
                      ls::FileOutputStream outputStream{file};
                    }
-                   catch (const ls::FileNotFoundException &_exception)
+                   catch (const ls::std::core::FileNotFoundException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileNotFoundException);
+                 }, ls::std::core::FileNotFoundException);
   }
 
   TEST_F(FileOutputStreamTest, write)
@@ -104,10 +104,10 @@ namespace
                    {
                      outputStream.write("something");
                    }
-                   catch (const ls::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 }

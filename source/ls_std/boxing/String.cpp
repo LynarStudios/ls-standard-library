@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,11 +11,11 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::boxing::String::String() : ls::Class("String")
+ls::std::boxing::String::String() : ls::std::core::Class("String")
 {}
 
 ls::std::boxing::String::String(::std::string _value)
-    : ls::Class("String"),
+    : ls::std::core::Class("String"),
       value(::std::move(_value))
 {}
 
@@ -128,9 +128,9 @@ bool ls::std::boxing::String::equalsIgnoreCase(::std::string _text)
   return this->toLowerCase() == ls::std::boxing::String{::std::move(_text)}.toLowerCase();
 }
 
-std::vector<ls::byte> ls::std::boxing::String::getByteData()
+std::vector<ls::std::core::byte> ls::std::boxing::String::getByteData()
 {
-  ::std::vector<ls::byte> byteData(this->value.begin(), this->value.end());
+  ::std::vector<ls::std::core::byte> byteData(this->value.begin(), this->value.end());
   byteData.push_back('\0');
 
   return byteData;

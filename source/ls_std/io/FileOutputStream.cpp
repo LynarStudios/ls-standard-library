@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -12,14 +12,14 @@
 #include <ls_std/core/exception/FileOperationException.hpp>
 
 ls::FileOutputStream::FileOutputStream(ls::File &_file)
-    : ls::Class("FileOutputStream"),
+    : ls::std::core::Class("FileOutputStream"),
       file(_file)
 {
   this->_init();
 }
 
 ls::FileOutputStream::FileOutputStream(ls::File &_file, bool _append)
-    : ls::Class("FileOutputStream"),
+    : ls::std::core::Class("FileOutputStream"),
       append(_append),
       file(_file)
 {
@@ -36,7 +36,7 @@ void ls::FileOutputStream::close()
   this->_close();
 }
 
-bool ls::FileOutputStream::write(const ls::byte_field &_data)
+bool ls::FileOutputStream::write(const ls::std::core::byte_field &_data)
 {
   bool succeeded{};
 
@@ -49,7 +49,7 @@ bool ls::FileOutputStream::write(const ls::byte_field &_data)
   }
   else
   {
-    throw ls::FileOperationException{};
+    throw ls::std::core::FileOperationException{};
   }
 
   return succeeded;
@@ -67,13 +67,13 @@ void ls::FileOutputStream::_init()
 {
   if (!this->file.exists())
   {
-    throw ls::FileNotFoundException{};
+    throw ls::std::core::FileNotFoundException{};
   }
   else
   {
     if (this->append)
     {
-      this->outputStream.open(this->file.getAbsoluteFilePath(), std::ios::out | std::ios::app);
+      this->outputStream.open(this->file.getAbsoluteFilePath(), ::std::ios::out | ::std::ios::app);
     }
     else
     {

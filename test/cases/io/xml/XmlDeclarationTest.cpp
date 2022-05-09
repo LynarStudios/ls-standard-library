@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -33,11 +33,11 @@ namespace
                    {
                      ls::XmlDeclaration declaration{""};
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, getEncoding)
@@ -77,11 +77,11 @@ namespace
                    {
                      declaration.setEncoding("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, setStandalone)
@@ -103,11 +103,11 @@ namespace
                    {
                      declaration.setStandalone("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, setVersion)
@@ -130,11 +130,11 @@ namespace
                    {
                      declaration.setVersion("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, toXml)

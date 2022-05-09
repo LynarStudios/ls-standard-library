@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -21,8 +21,8 @@ namespace ls
       ISerializable() = default;
       ~ISerializable() = default;
 
-      virtual ls::byte_field marshal() = 0;
-      virtual void unmarshal(const ls::byte_field &_data) = 0;
+      virtual ls::std::core::byte_field marshal() = 0;
+      virtual void unmarshal(const ls::std::core::byte_field &_data) = 0;
   };
 }
 

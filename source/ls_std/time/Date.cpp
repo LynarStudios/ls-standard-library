@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-07
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,7 +11,7 @@
 #include <sstream>
 #include <ls_std/time/Date.hpp>
 
-ls::std::time::Date::Date() : ls::Class("Date")
+ls::std::time::Date::Date() : ls::std::core::Class("Date")
 {
   this->timestamp = ::std::time(nullptr);
   this->_init();

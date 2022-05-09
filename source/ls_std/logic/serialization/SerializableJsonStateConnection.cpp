@@ -3,27 +3,27 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
 #include "ls_std/logic/serialization/SerializableJsonStateConnection.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::SerializableJsonStateConnection::SerializableJsonStateConnection(const std::shared_ptr<ls::StateConnection> &_value) : ls::Class("SerializableJsonStateConnection")
+ls::SerializableJsonStateConnection::SerializableJsonStateConnection(const ::std::shared_ptr<ls::StateConnection> &_value) : ls::std::core::Class("SerializableJsonStateConnection")
 {
   this->_assignValue(_value);
 }
 
-ls::byte_field ls::SerializableJsonStateConnection::marshal()
+ls::std::core::byte_field ls::SerializableJsonStateConnection::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::SerializableJsonStateConnection::unmarshal(const ls::byte_field &_data)
+void ls::SerializableJsonStateConnection::unmarshal(const ls::std::core::byte_field &_data)
 {
-  std::string jsonString = std::string(_data);
+  ::std::string jsonString = ::std::string(_data);
   this->jsonObject = nlohmann::json::parse(jsonString);
 
   this->value->setConnectionId(this->jsonObject["connectionId"]);
@@ -36,17 +36,17 @@ std::shared_ptr<ls::StateConnection> ls::SerializableJsonStateConnection::getVal
   return this->value;
 }
 
-void ls::SerializableJsonStateConnection::setValue(const std::shared_ptr<ls::StateConnection> &_value)
+void ls::SerializableJsonStateConnection::setValue(const ::std::shared_ptr<ls::StateConnection> &_value)
 {
   this->_assignValue(_value);
   this->_clear();
 }
 
-void ls::SerializableJsonStateConnection::_assignValue(const std::shared_ptr<ls::StateConnection> &_value)
+void ls::SerializableJsonStateConnection::_assignValue(const ::std::shared_ptr<ls::StateConnection> &_value)
 {
   if (_value == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->value = _value;

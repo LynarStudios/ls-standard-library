@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -18,7 +18,7 @@
 
 namespace ls
 {
-  class KvFileReader : public ls::Class, public ls::IReader
+  class KvFileReader : public ls::std::core::Class, public ls::IReader
   {
     public:
 
@@ -27,7 +27,7 @@ namespace ls
 
       // implementation
 
-      ls::byte_field read() override;
+      ls::std::core::byte_field read() override;
 
       // additional functionality
 

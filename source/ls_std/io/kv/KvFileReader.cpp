@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -13,16 +13,16 @@
 #include <ls_std/io/kv/KvParser.hpp>
 
 ls::KvFileReader::KvFileReader(const ::std::shared_ptr<ls::KvDocument> &_document, const ::std::string &_absolutePath)
-    : ls::Class("KvFileReader"),
+    : ls::std::core::Class("KvFileReader"),
       kvFile(ls::File{""})
 {
   this->_assignDocument(_document);
   this->_assignFile(ls::File{_absolutePath});
 }
 
-ls::byte_field ls::KvFileReader::read()
+ls::std::core::byte_field ls::KvFileReader::read()
 {
-  ls::byte_field data = ls::FileReader{this->kvFile}.read();
+  ls::std::core::byte_field data = ls::FileReader{this->kvFile}.read();
   ls::KvParser{this->document}.parse(data);
 
   return data;
@@ -47,7 +47,7 @@ void ls::KvFileReader::_assignDocument(const ::std::shared_ptr<ls::KvDocument> &
 {
   if (_document == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->document = _document;
@@ -57,7 +57,7 @@ void ls::KvFileReader::_assignFile(ls::File _kvFile)
 {
   if (!_kvFile.exists())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->kvFile = _kvFile;

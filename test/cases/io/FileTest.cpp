@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -88,11 +88,11 @@ namespace
                    {
                      file.canRead();
                    }
-                   catch (const ls::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 
   TEST_F(FileTest, canWrite)
@@ -134,11 +134,11 @@ namespace
                    {
                      file.createNewFile();
                    }
-                   catch (const ls::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 
   TEST_F(FileTest, exists)
@@ -249,19 +249,19 @@ namespace
     ASSERT_EQ(7, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + ".";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "..";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "list_test_sub";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
   }
 
   TEST_F(FileTest, listFiles)
@@ -275,13 +275,13 @@ namespace
     ASSERT_EQ(4, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((ls::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
   }
 
   TEST_F(FileTest, makeDirectory)
@@ -305,11 +305,11 @@ namespace
                    {
                      directory.makeDirectory();
                    }
-                   catch (const ls::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 
   TEST_F(FileTest, makeDirectories)

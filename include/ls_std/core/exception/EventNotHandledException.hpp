@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -14,17 +14,23 @@
 
 namespace ls
 {
-  class EventNotHandledException : public ::std::exception
+  namespace std
   {
-    public:
-
-      EventNotHandledException() = default;
-
-      const char *what() const noexcept override
+    namespace core
+    {
+      class EventNotHandledException : public ::std::exception
       {
-        return "EventNotHandledException thrown - event was not handled - nothing happened!";
+        public:
+
+          EventNotHandledException() = default;
+
+          const char *what() const noexcept override
+          {
+            return "EventNotHandledException thrown - event was not handled - nothing happened!";
+          };
       };
-  };
+    }
+  }
 }
 
 #endif

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -152,11 +152,11 @@ namespace
                    {
                      logLevel.setLogLevel("This is not a valid log level!");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(LogLevelTest, toString)

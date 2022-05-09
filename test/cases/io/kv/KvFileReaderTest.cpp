@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -43,11 +43,11 @@ namespace
                      std::string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
                      ls::KvFileReader reader = ls::KvFileReader(nullptr, kvPath);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, constructor_invalid_file_path)
@@ -57,11 +57,11 @@ namespace
                    {
                      ls::KvFileReader reader = ls::KvFileReader(std::make_shared<ls::KvDocument>(), "invalid_path");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, getDocument)
@@ -100,11 +100,11 @@ namespace
                    {
                      reader->setFile(ls::File{"invalid_path"});
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, setDocument)
@@ -129,10 +129,10 @@ namespace
                    {
                      reader->setDocument(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 }

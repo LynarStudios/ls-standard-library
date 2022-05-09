@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -40,11 +40,11 @@ namespace
                    {
                      ls::StateMachine stateMachine {""};
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateMachineTest, addState)
@@ -68,11 +68,11 @@ namespace
                      ls::StateMachine stateMachine{"test_machine"};
                      stateMachine.addState(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateMachineTest, getCurrentState)
@@ -179,11 +179,11 @@ namespace
                    {
                      stateMachine.setMemory(memory);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateMachineTest, setName)
@@ -203,11 +203,11 @@ namespace
                      ls::StateMachine stateMachine {"machine"};
                      stateMachine.setName("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(StateMachineTest, setStartState)
@@ -235,10 +235,10 @@ namespace
                    {
                      stateMachine.setStartState("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 }

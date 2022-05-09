@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -33,11 +33,11 @@ namespace
                    {
                      ls::KvParser parser{nullptr};
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(KvParserTest, getDocument)
@@ -50,7 +50,7 @@ namespace
   {
     std::shared_ptr<ls::KvDocument> document = std::make_shared<ls::KvDocument>();
     ls::KvParser parser{document};
-    ls::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
+    ls::std::core::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
     parser.parse(data);
 
     ASSERT_EQ(3, document->getPairs().size());
@@ -87,10 +87,10 @@ namespace
                    {
                      parser.setDocument(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 }

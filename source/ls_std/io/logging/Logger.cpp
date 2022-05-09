@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-07
+ * Changed:         2022-05-09
  *
  * */
 
@@ -14,13 +14,13 @@
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls::Logger::Logger(const ::std::shared_ptr<ls::IWriter> &_writer)
-    : ls::Class("Logger"),
+    : ls::std::core::Class("Logger"),
       logLevel(ls::LogLevelValue::INFO)
 {
   this->_assignWriter(_writer);
 }
 
-void ls::Logger::debug(const ls::byte *_data)
+void ls::Logger::debug(const ls::std::core::byte *_data)
 {
   if (this->logLevel >= ls::LogLevelValue::DEBUG)
   {
@@ -28,7 +28,7 @@ void ls::Logger::debug(const ls::byte *_data)
   }
 }
 
-void ls::Logger::error(const ls::byte *_data)
+void ls::Logger::error(const ls::std::core::byte *_data)
 {
   if (this->logLevel >= ls::LogLevelValue::ERR)
   {
@@ -36,7 +36,7 @@ void ls::Logger::error(const ls::byte *_data)
   }
 }
 
-void ls::Logger::fatal(const ls::byte *_data)
+void ls::Logger::fatal(const ls::std::core::byte *_data)
 {
   if (this->logLevel >= ls::LogLevelValue::FATAL)
   {
@@ -49,7 +49,7 @@ ls::LogLevel ls::Logger::getLogLevel()
   return this->logLevel;
 }
 
-void ls::Logger::info(const ls::byte *_data)
+void ls::Logger::info(const ls::std::core::byte *_data)
 {
   if (this->logLevel >= ls::LogLevelValue::INFO)
   {
@@ -62,7 +62,7 @@ void ls::Logger::setLogLevel(const ls::LogLevelValue &_logLevelValue)
   this->logLevel = _logLevelValue;
 }
 
-void ls::Logger::trace(const ls::byte *_data)
+void ls::Logger::trace(const ls::std::core::byte *_data)
 {
   if (this->logLevel >= ls::LogLevelValue::TRACE)
   {
@@ -70,7 +70,7 @@ void ls::Logger::trace(const ls::byte *_data)
   }
 }
 
-void ls::Logger::warn(const ls::byte *_data)
+void ls::Logger::warn(const ls::std::core::byte *_data)
 {
   if (this->logLevel >= ls::LogLevelValue::WARN)
   {
@@ -82,13 +82,13 @@ void ls::Logger::_assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer)
 {
   if (_writer == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->writer = _writer;
 }
 
-void ls::Logger::_log(const ls::byte *_data, const ls::LogLevel &_logLevel)
+void ls::Logger::_log(const ls::std::core::byte *_data, const ls::LogLevel &_logLevel)
 {
   ls::std::time::Date date{};
   ::std::string message = "[" + date.toString() + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::NewLine::getUnixNewLine();

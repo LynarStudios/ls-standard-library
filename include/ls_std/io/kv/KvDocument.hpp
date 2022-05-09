@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -17,7 +17,7 @@
 
 namespace ls
 {
-  class KvDocument : public ls::Class
+  class KvDocument : public ls::std::core::Class
   {
     public:
 

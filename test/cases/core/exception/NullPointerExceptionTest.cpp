@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::NullPointerException{};
+                     throw ls::std::core::NullPointerException{};
                    }
-                   catch (const ls::NullPointerException &_exception)
+                   catch (const ls::std::core::NullPointerException &_exception)
                    {
                      EXPECT_STREQ("NullPointerException thrown - reference is null!", _exception.what());
                      throw;
                    }
-                 }, ls::NullPointerException);
+                 }, ls::std::core::NullPointerException);
   }
 }

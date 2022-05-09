@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -77,11 +77,11 @@ namespace
                    {
                      dialogNode.addAttributeAfter(nullptr, "assets");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeAfter_empty_name)
@@ -93,11 +93,11 @@ namespace
                    {
                      dialogNode.addAttributeAfter(std::make_shared<ls::XmlAttribute>("id"), "");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeBefore)
@@ -150,11 +150,11 @@ namespace
                    {
                      dialogNode.addAttributeBefore(nullptr, "assets");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeBefore_empty_name)
@@ -166,11 +166,11 @@ namespace
                    {
                      dialogNode.addAttributeBefore(std::make_shared<ls::XmlAttribute>("id"), "");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeToBeginning)
@@ -209,11 +209,11 @@ namespace
                    {
                      dialogNode.addAttributeToBeginning(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeToEnd)
@@ -252,11 +252,11 @@ namespace
                    {
                      dialogNode.addAttributeToEnd(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildAfter)
@@ -319,11 +319,11 @@ namespace
                    {
                      dialogNode.addChildAfter(nullptr, std::make_shared<ls::XmlNode>("children"));
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildAfter_no_search_reference)
@@ -335,11 +335,11 @@ namespace
                    {
                      dialogNode.addChildAfter(std::make_shared<ls::XmlNode>("newChild"), nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildBefore)
@@ -402,11 +402,11 @@ namespace
                    {
                      dialogNode.addChildBefore(nullptr, std::make_shared<ls::XmlNode>("children"));
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildBefore_no_search_reference)
@@ -418,11 +418,11 @@ namespace
                    {
                      dialogNode.addChildBefore(std::make_shared<ls::XmlNode>("newChild"), nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildToBeginning)
@@ -476,11 +476,11 @@ namespace
                    {
                      dialogNode.addChildToBeginning(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildToEnd)
@@ -534,11 +534,11 @@ namespace
                    {
                      dialogNode.addChildToEnd(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, clearValue)
@@ -625,11 +625,11 @@ namespace
                    {
                      dialogNode.hasAttribute("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, hasChild)
@@ -659,11 +659,11 @@ namespace
                    {
                      dialogNode.hasChild("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, hasChildV2)
@@ -695,11 +695,11 @@ namespace
                    {
                      dialogNode.hasChild(searchNode);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, removeFirstAttribute)
@@ -859,11 +859,11 @@ namespace
                    {
                      dialogNode.setName("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, setValue)
@@ -883,11 +883,11 @@ namespace
                    {
                      dialogNode.setValue("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, toXml)

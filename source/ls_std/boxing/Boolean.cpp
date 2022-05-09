@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,11 +11,11 @@
 #include <ls_std/boxing/Boolean.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::boxing::Boolean::Boolean() : ls::Class("Boolean")
+ls::std::boxing::Boolean::Boolean() : ls::std::core::Class("Boolean")
 {}
 
 ls::std::boxing::Boolean::Boolean(bool _value)
-    : ls::Class("Boolean"),
+    : ls::std::core::Class("Boolean"),
       value(_value)
 {}
 
@@ -72,7 +72,7 @@ void ls::std::boxing::Boolean::parse(::std::string _parseText)
 
   if (_parseText != this->TRUE_STRING && _parseText != this->FALSE_STRING)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::FileOperationException{};
+                     throw ls::std::core::FileOperationException{};
                    }
-                   catch (const ls::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      EXPECT_STREQ("FileOperationException thrown - file operation failed!", _exception.what());
                      throw;
                    }
-                 }, ls::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 }

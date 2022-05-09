@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,12 +11,12 @@
 #include <ls_std/core/utils/STLUtils.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::XmlNode::XmlNode(std::string _name)
-    : ls::Class("XmlNode"),
-      name(std::move(_name))
+ls::XmlNode::XmlNode(::std::string _name)
+    : ls::std::core::Class("XmlNode"),
+      name(::std::move(_name))
 {}
 
-bool ls::XmlNode::addAttributeAfter(const std::shared_ptr<ls::XmlAttribute> &_attribute, const std::string &_name)
+bool ls::XmlNode::addAttributeAfter(const ::std::shared_ptr<ls::XmlAttribute> &_attribute, const ::std::string &_name)
 {
   bool added{};
   auto iterator = this->attributes.begin();
@@ -42,7 +42,7 @@ bool ls::XmlNode::addAttributeAfter(const std::shared_ptr<ls::XmlAttribute> &_at
   return added;
 }
 
-bool ls::XmlNode::addAttributeBefore(const std::shared_ptr<ls::XmlAttribute> &_attribute, const std::string &_name)
+bool ls::XmlNode::addAttributeBefore(const ::std::shared_ptr<ls::XmlAttribute> &_attribute, const ::std::string &_name)
 {
   bool added{};
   auto iterator = this->attributes.begin();
@@ -67,7 +67,7 @@ bool ls::XmlNode::addAttributeBefore(const std::shared_ptr<ls::XmlAttribute> &_a
   return added;
 }
 
-bool ls::XmlNode::addAttributeToBeginning(const std::shared_ptr<ls::XmlAttribute> &_attribute)
+bool ls::XmlNode::addAttributeToBeginning(const ::std::shared_ptr<ls::XmlAttribute> &_attribute)
 {
   bool added{};
   _checkIfAttributeReferenceIsValid(_attribute);
@@ -81,7 +81,7 @@ bool ls::XmlNode::addAttributeToBeginning(const std::shared_ptr<ls::XmlAttribute
   return added;
 }
 
-bool ls::XmlNode::addAttributeToEnd(const std::shared_ptr<ls::XmlAttribute> &_attribute)
+bool ls::XmlNode::addAttributeToEnd(const ::std::shared_ptr<ls::XmlAttribute> &_attribute)
 {
   bool added{};
   _checkIfAttributeReferenceIsValid(_attribute);
@@ -95,7 +95,7 @@ bool ls::XmlNode::addAttributeToEnd(const std::shared_ptr<ls::XmlAttribute> &_at
   return added;
 }
 
-bool ls::XmlNode::addChildAfter(const std::shared_ptr<ls::XmlNode> &_child, const std::shared_ptr<ls::XmlNode> &_search)
+bool ls::XmlNode::addChildAfter(const ::std::shared_ptr<ls::XmlNode> &_child, const ::std::shared_ptr<ls::XmlNode> &_search)
 {
   bool added{};
   auto iterator = this->children.begin();
@@ -121,7 +121,7 @@ bool ls::XmlNode::addChildAfter(const std::shared_ptr<ls::XmlNode> &_child, cons
   return added;
 }
 
-bool ls::XmlNode::addChildBefore(const std::shared_ptr<ls::XmlNode> &_child, const std::shared_ptr<ls::XmlNode> &_search)
+bool ls::XmlNode::addChildBefore(const ::std::shared_ptr<ls::XmlNode> &_child, const ::std::shared_ptr<ls::XmlNode> &_search)
 {
   bool added{};
   auto iterator = this->children.begin();
@@ -146,7 +146,7 @@ bool ls::XmlNode::addChildBefore(const std::shared_ptr<ls::XmlNode> &_child, con
   return added;
 }
 
-bool ls::XmlNode::addChildToBeginning(const std::shared_ptr<ls::XmlNode> &_child)
+bool ls::XmlNode::addChildToBeginning(const ::std::shared_ptr<ls::XmlNode> &_child)
 {
   bool added{};
   _checkIfNodeReferenceIsValid(_child);
@@ -160,7 +160,7 @@ bool ls::XmlNode::addChildToBeginning(const std::shared_ptr<ls::XmlNode> &_child
   return added;
 }
 
-bool ls::XmlNode::addChildToEnd(const std::shared_ptr<ls::XmlNode> &_child)
+bool ls::XmlNode::addChildToEnd(const ::std::shared_ptr<ls::XmlNode> &_child)
 {
   bool added{};
   _checkIfNodeReferenceIsValid(_child);
@@ -189,9 +189,9 @@ std::list<std::shared_ptr<ls::XmlNode>> ls::XmlNode::getChildren()
   return this->children;
 }
 
-std::list<std::shared_ptr<ls::XmlNode>> ls::XmlNode::getChildren(const std::string &_name)
+std::list<std::shared_ptr<ls::XmlNode>> ls::XmlNode::getChildren(const ::std::string &_name)
 {
-  std::list<std::shared_ptr<ls::XmlNode>> childrenWithName{};
+  ::std::list<::std::shared_ptr<ls::XmlNode>> childrenWithName{};
 
   for (const auto &child : this->children)
   {
@@ -214,17 +214,17 @@ std::string ls::XmlNode::getValue()
   return this->value;
 }
 
-bool ls::XmlNode::hasAttribute(const std::string &_name)
+bool ls::XmlNode::hasAttribute(const ::std::string &_name)
 {
   return this->_hasAttribute(_name);
 }
 
-bool ls::XmlNode::hasChild(const std::string &_name)
+bool ls::XmlNode::hasChild(const ::std::string &_name)
 {
   return this->_hasChild(_name);
 }
 
-bool ls::XmlNode::hasChild(const std::shared_ptr<ls::XmlNode> &_child)
+bool ls::XmlNode::hasChild(const ::std::shared_ptr<ls::XmlNode> &_child)
 {
   return this->_hasChild(_child);
 }
@@ -277,12 +277,12 @@ bool ls::XmlNode::removeLastChild()
   return isValidOperation;
 }
 
-void ls::XmlNode::setName(const std::string &_name)
+void ls::XmlNode::setName(const ::std::string &_name)
 {
   this->_assignName(_name);
 }
 
-void ls::XmlNode::setValue(const std::string &_value)
+void ls::XmlNode::setValue(const ::std::string &_value)
 {
   this->_assignValue(_value);
 }
@@ -294,7 +294,7 @@ std::string ls::XmlNode::toXml()
 
 std::string ls::XmlNode::_toXml_(uint8_t _tabSize)
 {
-  std::string xmlStream{};
+  ::std::string xmlStream{};
 
   xmlStream += ls::XmlNode::_getTab(_tabSize);
   xmlStream += this->_toXmlOpenTag();
@@ -308,53 +308,53 @@ std::string ls::XmlNode::_toXml_(uint8_t _tabSize)
   return xmlStream;
 }
 
-void ls::XmlNode::_assignName(const std::string &_name)
+void ls::XmlNode::_assignName(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->name = _name;
 }
 
-void ls::XmlNode::_assignValue(const std::string &_value)
+void ls::XmlNode::_assignValue(const ::std::string &_value)
 {
   if (_value.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->value = _value;
 }
 
-void ls::XmlNode::_checkIfAttributeReferenceIsValid(const std::shared_ptr<ls::XmlAttribute> &_attribute)
+void ls::XmlNode::_checkIfAttributeReferenceIsValid(const ::std::shared_ptr<ls::XmlAttribute> &_attribute)
 {
   if (_attribute == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 }
 
-void ls::XmlNode::_checkIfNameIsNotEmpty(const std::string &_name)
+void ls::XmlNode::_checkIfNameIsNotEmpty(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 }
 
-void ls::XmlNode::_checkIfNodeReferenceIsValid(const std::shared_ptr<ls::XmlNode> &_child)
+void ls::XmlNode::_checkIfNodeReferenceIsValid(const ::std::shared_ptr<ls::XmlNode> &_child)
 {
   if (_child == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 }
 
 std::string ls::XmlNode::_getTab(uint8_t _tabSize)
 {
-  std::string tab{};
+  ::std::string tab{};
 
   for (uint8_t index = 0; index < _tabSize; index++)
   {
@@ -364,13 +364,13 @@ std::string ls::XmlNode::_getTab(uint8_t _tabSize)
   return tab;
 }
 
-bool ls::XmlNode::_hasAttribute(const std::string &_name)
+bool ls::XmlNode::_hasAttribute(const ::std::string &_name)
 {
   bool exists{};
 
   if (_name.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {
@@ -387,19 +387,19 @@ bool ls::XmlNode::_hasAttribute(const std::string &_name)
   return exists;
 }
 
-bool ls::XmlNode::_hasChild(const std::shared_ptr<ls::XmlNode> &_child)
+bool ls::XmlNode::_hasChild(const ::std::shared_ptr<ls::XmlNode> &_child)
 {
   _checkIfNodeReferenceIsValid(_child);
-  return ls::STLUtils::contains(this->children, _child);
+  return ls::std::core::STLUtils::contains(this->children, _child);
 }
 
-bool ls::XmlNode::_hasChild(const std::string &_name)
+bool ls::XmlNode::_hasChild(const ::std::string &_name)
 {
   bool exists{};
 
   if (_name.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {
@@ -418,7 +418,7 @@ bool ls::XmlNode::_hasChild(const std::string &_name)
 
 std::string ls::XmlNode::_toXmlAttributes()
 {
-  std::string stream{};
+  ::std::string stream{};
 
   for (const auto &_attribute : this->attributes)
   {
@@ -430,7 +430,7 @@ std::string ls::XmlNode::_toXmlAttributes()
 
 std::string ls::XmlNode::_toXmlChildren(uint8_t _tabSize)
 {
-  std::string stream{};
+  ::std::string stream{};
 
   if (this->value.empty())
   {
@@ -445,7 +445,7 @@ std::string ls::XmlNode::_toXmlChildren(uint8_t _tabSize)
 
 std::string ls::XmlNode::_toXmlCloseTag()
 {
-  std::string stream{};
+  ::std::string stream{};
 
   if (!this->children.empty() || !this->value.empty())
   {
@@ -462,7 +462,7 @@ std::string ls::XmlNode::_toXmlOpenTag()
 
 std::string ls::XmlNode::_toXmlOpenTagClose()
 {
-  std::string stream{};
+  ::std::string stream{};
 
   if (this->children.empty() && this->value.empty())
   {

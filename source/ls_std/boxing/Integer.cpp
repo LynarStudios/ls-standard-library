@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,11 +11,11 @@
 #include <ls_std/core/exception/IllegalArithmeticOperationException.hpp>
 
 ls::std::boxing::Integer::Integer(int _value)
-    : ls::Class("Integer"),
+    : ls::std::core::Class("Integer"),
       value(_value)
 {}
 
-ls::std::boxing::Integer::Integer() : ls::Class("Integer")
+ls::std::boxing::Integer::Integer() : ls::std::core::Class("Integer")
 {}
 
 ls::std::boxing::Integer::operator int() const
@@ -68,7 +68,7 @@ int ls::std::boxing::Integer::operator/(const ls::std::boxing::Integer &_integer
 {
   if (_integer == 0)
   {
-    throw ls::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{};
   }
 
   return this->value / _integer;
@@ -78,7 +78,7 @@ int ls::std::boxing::Integer::operator/(int _value) const
 {
   if (_value == 0)
   {
-    throw ls::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{};
   }
 
   return this->value / _value;
@@ -134,7 +134,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator/=(const ls::std::bo
 {
   if (_integer == 0)
   {
-    throw ls::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{};
   }
 
   this->value /= _integer;
@@ -145,7 +145,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator/=(int _value)
 {
   if (_value == 0)
   {
-    throw ls::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{};
   }
 
   this->value /= _value;

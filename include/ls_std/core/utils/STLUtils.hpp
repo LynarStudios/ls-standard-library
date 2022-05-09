@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -15,42 +15,48 @@
 
 namespace ls
 {
-  class STLUtils
+  namespace std
   {
-    public:
-
-      STLUtils() = default;
-      ~STLUtils() = default;
-
-      template<class container, class dataType>
-      static bool contains(container _container, const dataType &_value)
+    namespace core
+    {
+      class STLUtils
       {
-        return ::std::find(_container.begin(), _container.end(), _value) != _container.end();
-      }
+        public:
 
-      template<class dataType>
-      static dataType getListElementAt(const ::std::list<dataType> &_list, size_t _index)
-      {
-        dataType value{};
-        size_t counter{};
+          STLUtils() = default;
+          ~STLUtils() = default;
 
-        if (_index < _list.size())
-        {
-          for (const auto &_value : _list)
+          template<class container, class dataType>
+          static bool contains(container _container, const dataType &_value)
           {
-            if (counter == _index)
+            return ::std::find(_container.begin(), _container.end(), _value) != _container.end();
+          }
+
+          template<class dataType>
+          static dataType getListElementAt(const ::std::list<dataType> &_list, size_t _index)
+          {
+            dataType value{};
+            size_t counter{};
+
+            if (_index < _list.size())
             {
-              value = _value;
-              break;
+              for (const auto &_value: _list)
+              {
+                if (counter == _index)
+                {
+                  value = _value;
+                  break;
+                }
+
+                counter++;
+              }
             }
 
-            counter++;
+            return value;
           }
-        }
-
-        return value;
-      }
-  };
+      };
+    }
+  }
 }
 
 #endif

@@ -3,28 +3,28 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::Class::Class(const std::string &_name)
+ls::std::core::Class::Class(const ::std::string &_name)
 {
   this->_assignClassName(_name);
 }
 
-std::string ls::Class::getClassName()
+std::string ls::std::core::Class::getClassName()
 {
   return this->name;
 }
 
-void ls::Class::_assignClassName(const std::string &_name)
+void ls::std::core::Class::_assignClassName(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->name = _name;

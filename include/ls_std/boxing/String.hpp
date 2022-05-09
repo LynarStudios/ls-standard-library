@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-06
+ * Changed:         2022-05-09
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls
   {
     namespace boxing
     {
-      class String : public ls::Class, public ls::std::boxing::IBoxing
+      class String : public ls::std::core::Class, public ls::std::boxing::IBoxing
       {
         public:
 
@@ -72,7 +72,7 @@ namespace ls
           bool endsWith(const ::std::string &_text);
           bool equalsIgnoreCase(ls::std::boxing::String _string);
           bool equalsIgnoreCase(::std::string _text);
-          ::std::vector<ls::byte> getByteData();
+          ::std::vector<ls::std::core::byte> getByteData();
           ::std::string padLeft(size_t _width, char _fillCharacter);
           ::std::string padRight(size_t _width, char _fillCharacter);
           ::std::string reverse();

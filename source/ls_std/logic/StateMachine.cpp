@@ -3,25 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
 #include <ls_std/logic/StateMachine.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::StateMachine::StateMachine(const std::string& _name) : ls::Class("StateMachine")
+ls::StateMachine::StateMachine(const ::std::string& _name) : ls::std::core::Class("StateMachine")
 {
   this->_assignName(_name);
 }
 
-bool ls::StateMachine::addState(const std::shared_ptr<ls::State> &_state)
+bool ls::StateMachine::addState(const ::std::shared_ptr<ls::State> &_state)
 {
   bool wasAdded{};
 
   if (_state == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {
@@ -61,7 +61,7 @@ bool ls::StateMachine::hasState(const ls::StateId &_id)
 
 bool ls::StateMachine::proceed()
 {
-  std::vector<ls::StateId> nextValidStates = this->_getNextValidStates();
+  ::std::vector<ls::StateId> nextValidStates = this->_getNextValidStates();
   bool onlyOneWayToGo = nextValidStates.size() == 1;
 
   if (onlyOneWayToGo)
@@ -73,12 +73,12 @@ bool ls::StateMachine::proceed()
   return onlyOneWayToGo;
 }
 
-void ls::StateMachine::setMemory(const std::vector<ls::StateId>& _memory)
+void ls::StateMachine::setMemory(const ::std::vector<ls::StateId>& _memory)
 {
   this->_assignMemory(_memory);
 }
 
-void ls::StateMachine::setName(const std::string& _name)
+void ls::StateMachine::setName(const ::std::string& _name)
 {
   this->_assignName(_name);
 }
@@ -89,7 +89,7 @@ bool ls::StateMachine::setStartState(const ls::StateId &_id)
 
   if (_id.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {
@@ -104,21 +104,21 @@ bool ls::StateMachine::setStartState(const ls::StateId &_id)
   return startStateSet;
 }
 
-void ls::StateMachine::_assignMemory(const std::vector<ls::StateId> &_memory)
+void ls::StateMachine::_assignMemory(const ::std::vector<ls::StateId> &_memory)
 {
   if (_memory.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->memory = _memory;
 }
 
-void ls::StateMachine::_assignName(const std::string &_name)
+void ls::StateMachine::_assignName(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->name = _name;
@@ -126,7 +126,7 @@ void ls::StateMachine::_assignName(const std::string &_name)
 
 std::vector<ls::StateId> ls::StateMachine::_getNextValidStates()
 {
-  std::vector<ls::StateId> validStates{};
+  ::std::vector<ls::StateId> validStates{};
 
   for (const auto &state : this->currentState->getConnectedStates())
   {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -15,7 +15,7 @@
 
 namespace ls
 {
-  class XmlDeclaration : public ls::Class
+  class XmlDeclaration : public ls::std::core::Class
   {
     public:
 

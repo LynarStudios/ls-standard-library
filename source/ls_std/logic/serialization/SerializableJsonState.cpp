@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,18 +11,18 @@
 #include "ls_std/logic/serialization/SerializableJsonStateConnection.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::SerializableJsonState::SerializableJsonState(const std::shared_ptr<ls::State> &_value) : ls::Class("SerializableJsonState")
+ls::SerializableJsonState::SerializableJsonState(const ::std::shared_ptr<ls::State> &_value) : ls::std::core::Class("SerializableJsonState")
 {
   this->_assignValue(_value);
 }
 
-ls::byte_field ls::SerializableJsonState::marshal()
+ls::std::core::byte_field ls::SerializableJsonState::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::SerializableJsonState::unmarshal(const ls::byte_field &_data)
+void ls::SerializableJsonState::unmarshal(const ls::std::core::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -35,17 +35,17 @@ std::shared_ptr<ls::State> ls::SerializableJsonState::getValue()
   return this->value;
 }
 
-void ls::SerializableJsonState::setValue(const std::shared_ptr<ls::State> &_value)
+void ls::SerializableJsonState::setValue(const ::std::shared_ptr<ls::State> &_value)
 {
   this->_assignValue(_value);
   this->_clear();
 }
 
-void ls::SerializableJsonState::_assignValue(const std::shared_ptr<ls::State> &_value)
+void ls::SerializableJsonState::_assignValue(const ::std::shared_ptr<ls::State> &_value)
 {
   if (_value == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->value = _value;
@@ -64,7 +64,7 @@ void ls::SerializableJsonState::_unmarshalStateConnections()
 
     for (const auto &connectionJson : this->jsonObject["connectedStates"])
     {
-      std::shared_ptr<ls::StateConnection> connection = std::make_shared<ls::StateConnection>("TMP_ID", "TMP_ID");
+      ::std::shared_ptr<ls::StateConnection> connection = ::std::make_shared<ls::StateConnection>("TMP_ID", "TMP_ID");
       ls::SerializableJsonStateConnection{connection}.unmarshal(connectionJson.dump());
       this->value->addStateConnection(connection);
     }
@@ -80,7 +80,7 @@ void ls::SerializableJsonState::_update()
 
 void ls::SerializableJsonState::_updateStateConnections()
 {
-  std::string jsonString{};
+  ::std::string jsonString{};
 
   for (const auto &connection : this->value->getConnectedStates())
   {

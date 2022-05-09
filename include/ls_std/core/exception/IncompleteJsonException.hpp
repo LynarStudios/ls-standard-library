@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-30
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -14,17 +14,23 @@
 
 namespace ls
 {
-  class IncompleteJsonException : public ::std::exception
+  namespace std
   {
-    public:
-
-      explicit IncompleteJsonException() = default;
-
-      const char *what() const noexcept override
+    namespace core
+    {
+      class IncompleteJsonException : public ::std::exception
       {
-        return "IncompleteJsonException thrown - this JSON string is incomplete.";
-      }
-  };
+        public:
+
+          explicit IncompleteJsonException() = default;
+
+          const char *what() const noexcept override
+          {
+            return "IncompleteJsonException thrown - this JSON string is incomplete.";
+          }
+      };
+    }
+  }
 }
 
 #endif

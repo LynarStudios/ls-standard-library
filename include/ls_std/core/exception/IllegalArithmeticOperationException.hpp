@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -14,17 +14,23 @@
 
 namespace ls
 {
-  class IllegalArithmeticOperationException : public ::std::exception
+  namespace std
   {
-    public:
-
-      IllegalArithmeticOperationException() = default;
-
-      const char *what() const noexcept override
+    namespace core
+    {
+      class IllegalArithmeticOperationException : public ::std::exception
       {
-        return "IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!";
-      }
-  };
+        public:
+
+          IllegalArithmeticOperationException() = default;
+
+          const char *what() const noexcept override
+          {
+            return "IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!";
+          }
+      };
+    }
+  }
 }
 
 #endif

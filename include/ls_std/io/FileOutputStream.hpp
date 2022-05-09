@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -17,7 +17,7 @@
 
 namespace ls
 {
-  class FileOutputStream : public ls::Class, public ls::IWriter
+  class FileOutputStream : public ls::std::core::Class, public ls::IWriter
   {
     public:
 
@@ -26,7 +26,7 @@ namespace ls
       ~FileOutputStream() override;
 
       void close();
-      bool write(const ls::byte_field &_data) override;
+      bool write(const ls::std::core::byte_field &_data) override;
 
     private:
 

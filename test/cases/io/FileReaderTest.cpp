@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -36,11 +36,11 @@ namespace
                    {
                      ls::FileReader reader{file};
                    }
-                   catch (const ls::FileNotFoundException &_exception)
+                   catch (const ls::std::core::FileNotFoundException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileNotFoundException);
+                 }, ls::std::core::FileNotFoundException);
   }
 
   TEST_F(FileReaderTest, read)
@@ -50,7 +50,7 @@ namespace
     std::string expectedUnix = "Hello!" + ls::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls::NewLine::getWindowsNewLine();
 
-    ls::byte_field content = reader.read();
+    ls::std::core::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
@@ -64,13 +64,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::byte_field content = reader.read();
+                     ls::std::core::byte_field content = reader.read();
                    }
-                   catch (const ls::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 
   TEST_F(FileReaderTest, reset)
@@ -80,7 +80,7 @@ namespace
     std::string expectedUnix = "Hello!" + ls::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls::NewLine::getWindowsNewLine();
 
-    ls::byte_field content = reader.read();
+    ls::std::core::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
     ls::File anotherFile{TestHelper::getResourcesFolderLocation() + "list_test/bla.txt"};

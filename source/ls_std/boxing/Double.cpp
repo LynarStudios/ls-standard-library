@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,13 +11,13 @@
 #include <ls_std/boxing/Double.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::boxing::Double::Double() : ls::Class("Double")
+ls::std::boxing::Double::Double() : ls::std::core::Class("Double")
 {
   this->_assignEpsilon(0.00000001);
 }
 
 ls::std::boxing::Double::Double(double _value)
-    : ls::Class("Double"),
+    : ls::std::core::Class("Double"),
       value(_value)
 {
   this->_assignEpsilon(0.00000001);
@@ -226,7 +226,7 @@ void ls::std::boxing::Double::_assignEpsilon(double _epsilon)
 {
   if (_epsilon <= 0.0)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->epsilon = _epsilon;

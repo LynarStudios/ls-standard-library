@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -16,7 +16,7 @@
 
 namespace ls
 {
-  class StateConnection : public ls::Class
+  class StateConnection : public ls::std::core::Class
   {
     public:
 

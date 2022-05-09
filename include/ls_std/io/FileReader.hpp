@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -16,14 +16,14 @@
 
 namespace ls
 {
-  class FileReader : public ls::Class, public ls::IReader
+  class FileReader : public ls::std::core::Class, public ls::IReader
   {
     public:
 
       explicit FileReader(ls::File &_file);
       ~FileReader() override = default;
 
-      ls::byte_field read() override;
+      ls::std::core::byte_field read() override;
       void reset(ls::File &_file);
 
     private:

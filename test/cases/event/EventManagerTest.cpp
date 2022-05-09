@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
@@ -41,11 +41,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.subscribe("", std::make_shared<ls_std_test::DailyNewsAgency>());
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, subscribe_no_listener)
@@ -56,11 +56,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.subscribe("TMP_ID", nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, subscribe_no_event_handler_available)
@@ -71,11 +71,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.subscribe("TMP_DIR", std::make_shared<ls_std_test::DailyNewsAgency>());
                    }
-                   catch (const ls::EventNotSubscribedException &_exception)
+                   catch (const ls::std::core::EventNotSubscribedException &_exception)
                    {
                      throw;
                    }
-                 }, ls::EventNotSubscribedException);
+                 }, ls::std::core::EventNotSubscribedException);
   }
 
   TEST_F(EventManagerTest, unsubscribe_empty_id)
@@ -86,11 +86,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.unsubscribe("", std::make_shared<ls_std_test::DailyNewsAgency>());
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, unsubscribe_no_listener)
@@ -101,11 +101,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.unsubscribe("TMP_ID", nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, addEventHandler)
@@ -129,11 +129,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.addEventHandler(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, fire_event_handler_not_available)
@@ -144,11 +144,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.fire(ls::std::event::Event{"TMP_ID"});
                    }
-                   catch (const ls::EventNotHandledException &_exception)
+                   catch (const ls::std::core::EventNotHandledException &_exception)
                    {
                      throw;
                    }
-                 }, ls::EventNotHandledException);
+                 }, ls::std::core::EventNotHandledException);
   }
 
   TEST_F(EventManagerTest, hasEventHandler)
@@ -172,11 +172,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.hasEventHandler("");
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, removeEventHandler)
@@ -202,11 +202,11 @@ namespace
                      ls::std::event::EventManager eventManager{};
                      eventManager.removeEventHandler(nullptr);
                    }
-                   catch (const ls::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, production_example)

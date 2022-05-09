@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,13 +11,13 @@
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls::LogLevel::LogLevel(const ls::LogLevelValue &_value)
-    : ls::Class("LogLevel"),
+    : ls::std::core::Class("LogLevel"),
       value(_value)
 {
   this->_init();
 }
 
-ls::LogLevel::LogLevel() : ls::Class("LogLevel")
+ls::LogLevel::LogLevel() : ls::std::core::Class("LogLevel")
 {
   this->_init();
 }
@@ -63,7 +63,7 @@ void ls::LogLevel::setLogLevel(const ls::LogLevelValue &_value)
   this->value = _value;
 }
 
-void ls::LogLevel::setLogLevel(const std::string &_value)
+void ls::LogLevel::setLogLevel(const ::std::string &_value)
 {
   if (this->_isValidLogLevelString(_value))
   {
@@ -71,7 +71,7 @@ void ls::LogLevel::setLogLevel(const std::string &_value)
   }
   else
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 }
 
@@ -80,7 +80,7 @@ std::string ls::LogLevel::toString() const
   return this->level.at(this->value);
 }
 
-ls::LogLevelValue ls::LogLevel::_getValueFromString(const std::string &_value)
+ls::LogLevelValue ls::LogLevel::_getValueFromString(const ::std::string &_value)
 {
   ls::LogLevelValue logLevelValue{};
 
@@ -106,7 +106,7 @@ void ls::LogLevel::_init()
   this->level.insert({ls::LogLevelValue::TRACE, "TRACE"});
 }
 
-bool ls::LogLevel::_isValidLogLevelString(const std::string &_value)
+bool ls::LogLevel::_isValidLogLevelString(const ::std::string &_value)
 {
   bool isValidString{};
 

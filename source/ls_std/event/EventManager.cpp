@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
@@ -12,14 +12,14 @@
 #include <ls_std/core/exception/EventNotHandledException.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::event::EventManager::EventManager() : ls::Class("EventManager")
+ls::std::event::EventManager::EventManager() : ls::std::core::Class("EventManager")
 {}
 
 void ls::std::event::EventManager::subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   if (this->_hasEventHandler(_id))
@@ -28,7 +28,7 @@ void ls::std::event::EventManager::subscribe(const ls::std::event::event_id &_id
   }
   else
   {
-    throw ls::EventNotSubscribedException{};
+    throw ls::std::core::EventNotSubscribedException{};
   }
 }
 
@@ -36,7 +36,7 @@ void ls::std::event::EventManager::unsubscribe(const ls::std::event::event_id &_
 {
   if (_id.empty() || _listener == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   if (this->_hasEventHandler(_id))
@@ -51,7 +51,7 @@ bool ls::std::event::EventManager::addEventHandler(const ::std::shared_ptr<ls::s
 
   if (_eventHandler == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   if (!this->_hasEventHandler(_eventHandler->getId()))
@@ -71,7 +71,7 @@ void ls::std::event::EventManager::fire(ls::std::event::Event _event)
   }
   else
   {
-    throw ls::EventNotHandledException{};
+    throw ls::std::core::EventNotHandledException{};
   }
 }
 
@@ -79,7 +79,7 @@ bool ls::std::event::EventManager::hasEventHandler(const ls::std::event::event_i
 {
   if (_id.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   return this->_hasEventHandler(_id);
@@ -89,7 +89,7 @@ bool ls::std::event::EventManager::removeEventHandler(const ::std::shared_ptr<ls
 {
   if (_eventHandler == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   return this->_removeEventHandler(_eventHandler);

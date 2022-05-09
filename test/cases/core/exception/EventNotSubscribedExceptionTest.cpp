@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -31,13 +31,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::EventNotSubscribedException{};
+                     throw ls::std::core::EventNotSubscribedException{};
                    }
-                   catch (const ls::EventNotSubscribedException &_exception)
+                   catch (const ls::std::core::EventNotSubscribedException &_exception)
                    {
                      EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", _exception.what());
                      throw;
                    }
-                 }, ls::EventNotSubscribedException);
+                 }, ls::std::core::EventNotSubscribedException);
   }
 }

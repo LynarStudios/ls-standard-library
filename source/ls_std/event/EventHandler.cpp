@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-08
+ * Changed:         2022-05-09
  *
  * */
 
@@ -24,7 +24,7 @@ void ls::std::event::EventHandler::_assignId(const ls::std::event::event_id &_id
 {
   if (_id.empty())
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->id = _id;

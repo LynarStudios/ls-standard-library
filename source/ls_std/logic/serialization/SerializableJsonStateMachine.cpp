@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-05
+ * Changed:         2022-05-09
  *
  * */
 
@@ -11,18 +11,18 @@
 #include "ls_std/logic/serialization/SerializableJsonState.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::SerializableJsonStateMachine::SerializableJsonStateMachine(const std::shared_ptr<ls::StateMachine> &_value) : ls::Class("SerializableJsonStateMachine")
+ls::SerializableJsonStateMachine::SerializableJsonStateMachine(const ::std::shared_ptr<ls::StateMachine> &_value) : ls::std::core::Class("SerializableJsonStateMachine")
 {
   this->_assignValue(_value);
 }
 
-ls::byte_field ls::SerializableJsonStateMachine::marshal()
+ls::std::core::byte_field ls::SerializableJsonStateMachine::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::SerializableJsonStateMachine::unmarshal(const ls::byte_field &_data)
+void ls::SerializableJsonStateMachine::unmarshal(const ls::std::core::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -37,16 +37,16 @@ std::shared_ptr<ls::StateMachine> ls::SerializableJsonStateMachine::getValue()
   return this->value;
 }
 
-void ls::SerializableJsonStateMachine::setValue(const std::shared_ptr<ls::StateMachine> &_value)
+void ls::SerializableJsonStateMachine::setValue(const ::std::shared_ptr<ls::StateMachine> &_value)
 {
   this->_assignValue(_value);
 }
 
-void ls::SerializableJsonStateMachine::_assignValue(const std::shared_ptr<ls::StateMachine> &_value)
+void ls::SerializableJsonStateMachine::_assignValue(const ::std::shared_ptr<ls::StateMachine> &_value)
 {
   if (_value == nullptr)
   {
-    throw ls::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->value = _value;
@@ -64,7 +64,7 @@ void ls::SerializableJsonStateMachine::_unmarshalStates()
 {
   for (const auto &serializedState : this->jsonObject["states"])
   {
-    std::shared_ptr<ls::State> state = std::make_shared<ls::State>("TMP_ID");
+    ::std::shared_ptr<ls::State> state = ::std::make_shared<ls::State>("TMP_ID");
     ls::SerializableJsonState{state}.unmarshal(serializedState.dump());
     this->value->addState(state);
   }
@@ -89,7 +89,7 @@ void ls::SerializableJsonStateMachine::_updateCurrentState()
 
 void ls::SerializableJsonStateMachine::_updateStates()
 {
-  std::string jsonString{};
+  ::std::string jsonString{};
 
   for (const auto &state : this->value->getStates())
   {
