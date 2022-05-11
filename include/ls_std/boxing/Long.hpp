@@ -14,8 +14,6 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/core/Types.hpp>
-#include <ls_std/core/interface/ISerializable.hpp>
-#include <ls_std/core/interface/IStorable.hpp>
 
 namespace ls
 {
