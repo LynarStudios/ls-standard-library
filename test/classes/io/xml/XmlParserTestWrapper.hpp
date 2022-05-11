@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -14,7 +14,7 @@
 
 namespace ls_std_test
 {
-  class XmlParserTestWrapper : public ls::XmlParser
+  class XmlParserTestWrapper : public ls::std::io::XmlParser
   {
     public:
 

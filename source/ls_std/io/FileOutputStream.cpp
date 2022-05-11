@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -11,14 +11,14 @@
 #include <ls_std/core/exception/FileNotFoundException.hpp>
 #include <ls_std/core/exception/FileOperationException.hpp>
 
-ls::FileOutputStream::FileOutputStream(ls::File &_file)
+ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file)
     : ls::std::core::Class("FileOutputStream"),
       file(_file)
 {
   this->_init();
 }
 
-ls::FileOutputStream::FileOutputStream(ls::File &_file, bool _append)
+ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file, bool _append)
     : ls::std::core::Class("FileOutputStream"),
       append(_append),
       file(_file)
@@ -26,17 +26,17 @@ ls::FileOutputStream::FileOutputStream(ls::File &_file, bool _append)
   this->_init();
 }
 
-ls::FileOutputStream::~FileOutputStream()
+ls::std::io::FileOutputStream::~FileOutputStream()
 {
   this->_close();
 }
 
-void ls::FileOutputStream::close()
+void ls::std::io::FileOutputStream::close()
 {
   this->_close();
 }
 
-bool ls::FileOutputStream::write(const ls::std::core::byte_field &_data)
+bool ls::std::io::FileOutputStream::write(const ls::std::core::byte_field &_data)
 {
   bool succeeded{};
 
@@ -55,7 +55,7 @@ bool ls::FileOutputStream::write(const ls::std::core::byte_field &_data)
   return succeeded;
 }
 
-void ls::FileOutputStream::_close()
+void ls::std::io::FileOutputStream::_close()
 {
   if (this->outputStream.is_open())
   {
@@ -63,7 +63,7 @@ void ls::FileOutputStream::_close()
   }
 }
 
-void ls::FileOutputStream::_init()
+void ls::std::io::FileOutputStream::_init()
 {
   if (!this->file.exists())
   {

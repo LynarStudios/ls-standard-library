@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -29,30 +29,30 @@ namespace
 
   TEST_F(XmlDocumentTest, getDeclaration)
   {
-    ls::XmlDocument document{};
+    ls::std::io::XmlDocument document{};
     ASSERT_TRUE(document.getDeclaration() == nullptr);
   }
 
   TEST_F(XmlDocumentTest, getRootElement)
   {
-    ls::XmlDocument document{};
+    ls::std::io::XmlDocument document{};
     ASSERT_TRUE(document.getRootElement() == nullptr);
   }
 
   TEST_F(XmlDocumentTest, setDeclaration)
   {
-    ls::XmlDocument document{};
+    ls::std::io::XmlDocument document{};
     ASSERT_TRUE(document.getDeclaration() == nullptr);
 
-    ls::XmlDeclaration declaration{"1.0"};
-    document.setDeclaration(std::make_shared<ls::XmlDeclaration>(declaration));
+    ls::std::io::XmlDeclaration declaration{"1.0"};
+    document.setDeclaration(std::make_shared<ls::std::io::XmlDeclaration>(declaration));
     ASSERT_TRUE(document.getDeclaration() != nullptr);
     ASSERT_STREQ("1.0", document.getDeclaration()->getVersion().c_str());
   }
 
   TEST_F(XmlDocumentTest, setDeclaration_no_reference)
   {
-    ls::XmlDocument document{};
+    ls::std::io::XmlDocument document{};
 
     EXPECT_THROW({
                    try
@@ -68,10 +68,10 @@ namespace
 
   TEST_F(XmlDocumentTest, setRootElement)
   {
-    ls::XmlDocument document{};
+    ls::std::io::XmlDocument document{};
     ASSERT_TRUE(document.getRootElement() == nullptr);
 
-    ls::XmlDeclaration declaration{"1.0"};
+    ls::std::io::XmlDeclaration declaration{"1.0"};
     document.setRootElement(ls_std_test::TestDataFactory::createXmlContent());
     ASSERT_TRUE(document.getRootElement() != nullptr);
     ASSERT_STREQ("dialog", document.getRootElement()->getName().c_str());
@@ -79,7 +79,7 @@ namespace
 
   TEST_F(XmlDocumentTest, setRootElement_no_reference)
   {
-    ls::XmlDocument document{};
+    ls::std::io::XmlDocument document{};
 
     EXPECT_THROW({
                    try
@@ -95,12 +95,12 @@ namespace
 
   TEST_F(XmlDocumentTest, toXml)
   {
-    ls::XmlDocument document{};
+    ls::std::io::XmlDocument document{};
 
-    ls::XmlDeclaration declaration{"1.0"};
+    ls::std::io::XmlDeclaration declaration{"1.0"};
     declaration.setEncoding("UTF-8");
     declaration.setStandalone("yes");
-    document.setDeclaration(std::make_shared<ls::XmlDeclaration>(declaration));
+    document.setDeclaration(std::make_shared<ls::std::io::XmlDeclaration>(declaration));
 
     document.setRootElement(ls_std_test::TestDataFactory::createXmlContent());
     std::string xmlStream = document.toXml();

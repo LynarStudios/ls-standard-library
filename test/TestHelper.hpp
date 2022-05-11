@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-05
+ * Changed:         2022-05-11
  *
  * */
 
@@ -22,13 +22,13 @@ class TestHelper
 
     static std::string getResourcesFolderLocation()
     {
-      return TestHelper::getTestFolderLocation() + "resources" + ls::FilePathSeparator::get();
+      return TestHelper::getTestFolderLocation() + "resources" + ls::std::io::FilePathSeparator::get();
     }
 
     static std::string getTestFolderLocation()
     {
-      ls::File buildDirectory{ls::File::getWorkingDirectory()};
-      return buildDirectory.getParent() + "test" + ls::FilePathSeparator::get();
+      ls::std::io::File buildDirectory{ls::std::io::File::getWorkingDirectory()};
+      return buildDirectory.getParent() + "test" + ls::std::io::FilePathSeparator::get();
     }
 };
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -18,31 +18,37 @@
 
 namespace ls
 {
-  class KvFileReader : public ls::std::core::Class, public ls::IReader
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class KvFileReader : public ls::std::core::Class, public ls::std::io::IReader
+      {
+        public:
 
-      explicit KvFileReader(const ::std::shared_ptr<ls::KvDocument> &_document, const ::std::string &_absolutePath);
-      ~KvFileReader() override = default;
+          explicit KvFileReader(const ::std::shared_ptr<ls::std::io::KvDocument> &_document, const ::std::string &_absolutePath);
+          ~KvFileReader() override = default;
 
-      // implementation
+          // implementation
 
-      ls::std::core::byte_field read() override;
+          ls::std::core::byte_field read() override;
 
-      // additional functionality
+          // additional functionality
 
-      ::std::shared_ptr<ls::KvDocument> getDocument();
-      void setDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
-      void setFile(const ls::File &_kvFile);
+          ::std::shared_ptr<ls::std::io::KvDocument> getDocument();
+          void setDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
+          void setFile(const ls::std::io::File &_kvFile);
 
-    private:
+        private:
 
-      ::std::shared_ptr<ls::KvDocument> document{};
-      ls::File kvFile;
+          ::std::shared_ptr<ls::std::io::KvDocument> document{};
+          ls::std::io::File kvFile;
 
-      void _assignDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
-      void _assignFile(ls::File _kvFile);
-  };
+          void _assignDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
+          void _assignFile(ls::std::io::File _kvFile);
+      };
+    }
+  }
 }
 
 #endif

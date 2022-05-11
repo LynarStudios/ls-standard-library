@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -31,7 +31,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::XmlAttribute attribute{""};
+                     ls::std::io::XmlAttribute attribute{""};
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -42,19 +42,19 @@ namespace
 
   TEST_F(XmlAttributeTest, getName)
   {
-    ls::XmlAttribute attribute{"id"};
+    ls::std::io::XmlAttribute attribute{"id"};
     ASSERT_STREQ("id", attribute.getName().c_str());
   }
 
   TEST_F(XmlAttributeTest, getValue)
   {
-    ls::XmlAttribute attribute{"id"};
+    ls::std::io::XmlAttribute attribute{"id"};
     ASSERT_TRUE(attribute.getValue().empty());
   }
 
   TEST_F(XmlAttributeTest, setName)
   {
-    ls::XmlAttribute attribute{"id"};
+    ls::std::io::XmlAttribute attribute{"id"};
     attribute.setName("id2");
 
     ASSERT_STREQ("id2", attribute.getName().c_str());
@@ -65,7 +65,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::XmlAttribute attribute{"id"};
+                     ls::std::io::XmlAttribute attribute{"id"};
                      attribute.setName("");
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
@@ -77,7 +77,7 @@ namespace
 
   TEST_F(XmlAttributeTest, setValue)
   {
-    ls::XmlAttribute attribute{"id"};
+    ls::std::io::XmlAttribute attribute{"id"};
     attribute.setValue("some_content");
 
     ASSERT_STREQ("some_content", attribute.getValue().c_str());
@@ -88,7 +88,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::XmlAttribute attribute{"id"};
+                     ls::std::io::XmlAttribute attribute{"id"};
                      attribute.setValue("");
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
@@ -100,7 +100,7 @@ namespace
 
   TEST_F(XmlAttributeTest, toXml)
   {
-    ls::XmlAttribute attribute{"id"};
+    ls::std::io::XmlAttribute attribute{"id"};
     attribute.setValue("some_content");
 
     ASSERT_STREQ(R"(id="some_content")", attribute.toXml().c_str());

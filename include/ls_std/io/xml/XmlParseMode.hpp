@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-13
- * Changed:         2022-05-05
+ * Changed:         2022-05-11
  *
  * */
 
@@ -12,10 +12,16 @@
 
 namespace ls
 {
-  enum XmlParseMode
+  namespace std
   {
-    XML_PARSE_MODE_ANALYZE = 0, XML_PARSE_MODE_DECLARATION, XML_PARSE_MODE_OPENING_TAG, XML_PARSE_MODE_VALUE, XML_PARSE_MODE_CLOSING_TAG
-  };
+    namespace io
+    {
+      enum XmlParseMode
+      {
+        XML_PARSE_MODE_ANALYZE = 0, XML_PARSE_MODE_DECLARATION, XML_PARSE_MODE_OPENING_TAG, XML_PARSE_MODE_VALUE, XML_PARSE_MODE_CLOSING_TAG
+      };
+    }
+  }
 }
 
 #endif

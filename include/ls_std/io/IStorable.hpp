@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -14,15 +14,22 @@
 
 namespace ls
 {
-  class IStorable
+  namespace std
   {
-    public:
-      IStorable() = default;
-      ~IStorable() = default;
+    namespace io
+    {
+      class IStorable
+      {
+        public:
 
-      virtual ls::std::core::byte_field load() = 0;
-      virtual void save(const ls::std::core::byte_field &_data) = 0;
-  };
+          IStorable() = default;
+          ~IStorable() = default;
+
+          virtual ls::std::core::byte_field load() = 0;
+          virtual void save(const ls::std::core::byte_field &_data) = 0;
+      };
+    }
+  }
 }
 
 #endif

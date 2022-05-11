@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -15,29 +15,35 @@
 
 namespace ls
 {
-  class XmlDeclaration : public ls::std::core::Class
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class XmlDeclaration : public ls::std::core::Class
+      {
+        public:
 
-      explicit XmlDeclaration(const ::std::string& _version);
-      ~XmlDeclaration() override = default;
+          explicit XmlDeclaration(const ::std::string &_version);
+          ~XmlDeclaration() override = default;
 
-      ::std::string getEncoding();
-      ::std::string getStandalone();
-      ::std::string getVersion();
-      void setEncoding(const ::std::string& _encoding);
-      void setStandalone(const ::std::string& _standalone);
-      void setVersion(const ::std::string& _version);
-      ::std::string toXml();
+          ::std::string getEncoding();
+          ::std::string getStandalone();
+          ::std::string getVersion();
+          void setEncoding(const ::std::string &_encoding);
+          void setStandalone(const ::std::string &_standalone);
+          void setVersion(const ::std::string &_version);
+          ::std::string toXml();
 
-    private:
+        private:
 
-      ls::XmlAttribute encoding{"encoding"};
-      ls::XmlAttribute standalone{"standalone"};
-      ls::XmlAttribute version{"version"};
+          ls::std::io::XmlAttribute encoding{"encoding"};
+          ls::std::io::XmlAttribute standalone{"standalone"};
+          ls::std::io::XmlAttribute version{"version"};
 
-      static ::std::string _toXmlAttribute(ls::XmlAttribute _attribute);
-  };
+          static ::std::string _toXmlAttribute(ls::std::io::XmlAttribute _attribute);
+      };
+    }
+  }
 }
 
 #endif

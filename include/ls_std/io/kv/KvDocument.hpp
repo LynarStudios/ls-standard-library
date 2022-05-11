@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -17,25 +17,31 @@
 
 namespace ls
 {
-  class KvDocument : public ls::std::core::Class
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class KvDocument : public ls::std::core::Class
+      {
+        public:
 
-      KvDocument();
-      ~KvDocument() override = default;
+          KvDocument();
+          ~KvDocument() override = default;
 
-      bool addPair(ls::KvPair _pair);
-      void clear();
-      ::std::map<ls::kv_key, ls::KvPair> getPairs();
-      bool hasPair(const ls::kv_key &_key);
-      bool removePair(const ls::kv_key &_key);
+          bool addPair(ls::std::io::KvPair _pair);
+          void clear();
+          ::std::map<ls::std::io::kv_key, ls::std::io::KvPair> getPairs();
+          bool hasPair(const ls::std::io::kv_key &_key);
+          bool removePair(const ls::std::io::kv_key &_key);
 
-    private:
+        private:
 
-      ::std::map<ls::kv_key, ls::KvPair> pairs{};
+          ::std::map<ls::std::io::kv_key, ls::std::io::KvPair> pairs{};
 
-      bool _hasPair(const ls::kv_key &_key);
-  };
+          bool _hasPair(const ls::std::io::kv_key &_key);
+      };
+    }
+  }
 }
 
 #endif

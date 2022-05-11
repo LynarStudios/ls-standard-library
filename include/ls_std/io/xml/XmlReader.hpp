@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -20,31 +20,37 @@
 
 namespace ls
 {
-  class XmlReader : public ls::std::core::Class, public ls::IReader
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class XmlReader : public ls::std::core::Class, public ls::std::io::IReader
+      {
+        public:
 
-      explicit XmlReader(const ::std::shared_ptr<ls::XmlDocument> &_document, const ::std::string &_absolutePath);
-      ~XmlReader() override = default;
+          explicit XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath);
+          ~XmlReader() override = default;
 
-      // implementation
+          // implementation
 
-      ls::std::core::byte_field read() override;
+          ls::std::core::byte_field read() override;
 
-      // additional functionality
+          // additional functionality
 
-      ::std::shared_ptr<ls::XmlDocument> getDocument();
-      void setDocument(const ::std::shared_ptr<ls::XmlDocument> &_document);
-      void setFile(const ls::File &_xmlFile);
+          ::std::shared_ptr<ls::std::io::XmlDocument> getDocument();
+          void setDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
+          void setFile(const ls::std::io::File &_xmlFile);
 
-    private:
+        private:
 
-      ::std::shared_ptr<ls::XmlDocument> document{};
-      ls::File xmlFile;
+          ::std::shared_ptr<ls::std::io::XmlDocument> document{};
+          ls::std::io::File xmlFile;
 
-      void _assignDocument(const ::std::shared_ptr<ls::XmlDocument> &_document);
-      void _assignFile(ls::File _xmlFile);
-  };
+          void _assignDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
+          void _assignFile(ls::std::io::File _xmlFile);
+      };
+    }
+  }
 }
 
 #endif

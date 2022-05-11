@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-06
+ * Changed:         2022-05-11
  *
  * */
 
@@ -15,11 +15,17 @@
 
 namespace ls
 {
-  struct KvParseParameter
+  namespace std
   {
-    ::std::string::size_type index{};
-    ls::std::boxing::String line{};
-  };
+    namespace io
+    {
+      struct KvParseParameter
+      {
+        ::std::string::size_type index{};
+        ls::std::boxing::String line{};
+      };
+    }
+  }
 }
 
 #endif

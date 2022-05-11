@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -31,28 +31,28 @@ namespace
 
   TEST_F(StorableFileTest, getFile)
   {
-    ls::StorableFile storableFile{this->fileLocation};
+    ls::std::io::StorableFile storableFile{this->fileLocation};
     ASSERT_STREQ(this->fileLocation.c_str(), storableFile.getFile()->getAbsoluteFilePath().c_str());
   }
 
   TEST_F(StorableFileTest, load)
   {
-    ls::StorableFile storableFile{this->fileLocation};
+    ls::std::io::StorableFile storableFile{this->fileLocation};
     ls::std::core::byte_field content = storableFile.load();
 
-    std::string expectedUnix = "Hello!" + ls::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls::NewLine::getWindowsNewLine();
+    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
   TEST_F(StorableFileTest, reset)
   {
-    ls::StorableFile storableFile{this->fileLocation};
+    ls::std::io::StorableFile storableFile{this->fileLocation};
     ls::std::core::byte_field content = storableFile.load();
 
-    std::string expectedUnix = "Hello!" + ls::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls::NewLine::getWindowsNewLine();
+    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
@@ -62,8 +62,8 @@ namespace
     storableFile.reset(anotherFileLocation);
     content = storableFile.load();
 
-    expectedUnix = "nothing to say!" + ls::NewLine::getUnixNewLine();
-    expectedWindows = "nothing to say!" + ls::NewLine::getWindowsNewLine();
+    expectedUnix = "nothing to say!" + ls::std::io::NewLine::getUnixNewLine();
+    expectedWindows = "nothing to say!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
@@ -71,12 +71,12 @@ namespace
   TEST_F(StorableFileTest, save)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
-    ls::File file{path};
+    ls::std::io::File file{path};
     file.createNewFile();
 
-    ls::StorableFile storableFile{path};
-    ls::std::core::byte_field textUnix = "Testing save method!" + ls::NewLine::getUnixNewLine();
-    ls::std::core::byte_field textWindows = "Testing save method!" + ls::NewLine::getWindowsNewLine();
+    ls::std::io::StorableFile storableFile{path};
+    ls::std::core::byte_field textUnix = "Testing save method!" + ls::std::io::NewLine::getUnixNewLine();
+    ls::std::core::byte_field textWindows = "Testing save method!" + ls::std::io::NewLine::getWindowsNewLine();
 
     storableFile.save(textUnix);
     ls::std::core::byte_field content = storableFile.load();

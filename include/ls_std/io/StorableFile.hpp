@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -17,24 +17,30 @@
 
 namespace ls
 {
-  class StorableFile : public ls::IStorable
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class StorableFile : public ls::std::io::IStorable
+      {
+        public:
 
-      explicit StorableFile(const ::std::string &_path);
-      ~StorableFile() = default;
+          explicit StorableFile(const ::std::string &_path);
+          ~StorableFile() = default;
 
-      ::std::shared_ptr<ls::File> getFile();
-      ls::std::core::byte_field load() override;
-      void reset(const ::std::string &_path);
-      void save(const ls::std::core::byte_field &_data) override;
+          ::std::shared_ptr<ls::std::io::File> getFile();
+          ls::std::core::byte_field load() override;
+          void reset(const ::std::string &_path);
+          void save(const ls::std::core::byte_field &_data) override;
 
-    private:
+        private:
 
-      ::std::shared_ptr<ls::File> file{};
+          ::std::shared_ptr<ls::std::io::File> file{};
 
-      void _init(const ::std::string &_path);
-  };
+          void _init(const ::std::string &_path);
+      };
+    }
+  }
 }
 
 #endif

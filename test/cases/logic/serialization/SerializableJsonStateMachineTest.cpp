@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -54,8 +54,8 @@ namespace
     std::string jsonString = serializable.marshal();
     ASSERT_TRUE(!jsonString.empty());
 
-    ls::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls::FileReader reader{file};
+    ls::std::io::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls::std::io::FileReader reader{file};
     ls::std::boxing::String data{reader.read()};
 
     ASSERT_TRUE(data.contains(jsonString));
@@ -63,8 +63,8 @@ namespace
 
   TEST_F(SerializableJsonStateMachineTest, unmarshal)
   {
-    ls::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls::FileReader reader{file};
+    ls::std::io::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls::std::io::FileReader reader{file};
     std::shared_ptr<ls::StateMachine> machine = std::make_shared<ls::StateMachine>("bla");
     ls::SerializableJsonStateMachine serializable{machine};
 

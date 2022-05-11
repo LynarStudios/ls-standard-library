@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -23,8 +23,8 @@ namespace
       static ls::std::core::byte_field readXmlStateMachine()
       {
         std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-        ls::File file{xmlPath};
-        ls::std::core::byte_field data = ls::FileReader{file}.read();
+        ls::std::io::File file{xmlPath};
+        ls::std::core::byte_field data = ls::std::io::FileReader{file}.read();
 
         return data;
       }
@@ -38,12 +38,12 @@ namespace
 
   TEST_F(XmlParserTest, constructor)
   {
-    std::shared_ptr<ls::XmlDocument> document{};
+    std::shared_ptr<ls::std::io::XmlDocument> document{};
 
     EXPECT_THROW({
                    try
                    {
-                     ls::XmlParser xmlParser{document};
+                     ls::std::io::XmlParser xmlParser{document};
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -54,9 +54,9 @@ namespace
 
   TEST_F(XmlParserTest, read)
   {
-    ls::XmlParser xmlParser{std::make_shared<ls::XmlDocument>()};
-    std::list<std::shared_ptr<ls::XmlNode>> children, statesChildren, memoryChildren, connectionChildren{};
-    std::list<std::shared_ptr<ls::XmlAttribute>> attributes{};
+    ls::std::io::XmlParser xmlParser{std::make_shared<ls::std::io::XmlDocument>()};
+    std::list<std::shared_ptr<ls::std::io::XmlNode>> children, statesChildren, memoryChildren, connectionChildren{};
+    std::list<std::shared_ptr<ls::std::io::XmlAttribute>> attributes{};
 
     ls::std::core::byte_field data = readXmlStateMachine();
     xmlParser.parse(data);
@@ -69,7 +69,7 @@ namespace
 
     // check root element
 
-    std::shared_ptr<ls::XmlNode> root = xmlParser.getDocument()->getRootElement();
+    std::shared_ptr<ls::std::io::XmlNode> root = xmlParser.getDocument()->getRootElement();
     ASSERT_STREQ("stateMachine", root->getName().c_str());
     ASSERT_STREQ("name", root->getAttributes().front()->getName().c_str());
     ASSERT_EQ(1, root->getAttributes().size());
@@ -222,7 +222,7 @@ namespace
   TEST_F(XmlParserTest, getDocument)
   {
     std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::XmlParser xmlParser{std::make_shared<ls::XmlDocument>()};
+    ls::std::io::XmlParser xmlParser{std::make_shared<ls::std::io::XmlDocument>()};
 
     ASSERT_TRUE(xmlParser.getDocument() != nullptr);
   }
@@ -230,19 +230,19 @@ namespace
   TEST_F(XmlParserTest, setDocument)
   {
     std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    std::shared_ptr<ls::XmlDocument> document = std::make_shared<ls::XmlDocument>();
-    ls::XmlParser xmlParser{document};
+    std::shared_ptr<ls::std::io::XmlDocument> document = std::make_shared<ls::std::io::XmlDocument>();
+    ls::std::io::XmlParser xmlParser{document};
     ASSERT_TRUE(xmlParser.getDocument() == document);
 
-    document = std::make_shared<ls::XmlDocument>();
+    document = std::make_shared<ls::std::io::XmlDocument>();
     xmlParser.setDocument(document);
     ASSERT_TRUE(xmlParser.getDocument() == document);
   }
 
   TEST_F(XmlParserTest, setDocument_no_reference)
   {
-    std::shared_ptr<ls::XmlDocument> document = std::make_shared<ls::XmlDocument>();
-    ls::XmlParser xmlParser{document};
+    std::shared_ptr<ls::std::io::XmlDocument> document = std::make_shared<ls::std::io::XmlDocument>();
+    ls::std::io::XmlParser xmlParser{document};
 
     EXPECT_THROW({
                    try

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -19,30 +19,36 @@
 
 namespace ls
 {
-  class Logger : public ls::std::core::Class
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class Logger : public ls::std::core::Class
+      {
+        public:
 
-      explicit Logger(const ::std::shared_ptr<ls::IWriter> &_writer);
-      ~Logger() override = default;
+          explicit Logger(const ::std::shared_ptr<ls::std::io::IWriter> &_writer);
+          ~Logger() override = default;
 
-      void debug(const ls::std::core::byte *_data);
-      void error(const ls::std::core::byte *_data);
-      void fatal(const ls::std::core::byte *_data);
-      ls::LogLevel getLogLevel();
-      void info(const ls::std::core::byte *_data);
-      void setLogLevel(const ls::LogLevelValue &_logLevelValue);
-      void trace(const ls::std::core::byte *_data);
-      void warn(const ls::std::core::byte *_data);
+          void debug(const ls::std::core::byte *_data);
+          void error(const ls::std::core::byte *_data);
+          void fatal(const ls::std::core::byte *_data);
+          ls::std::io::LogLevel getLogLevel();
+          void info(const ls::std::core::byte *_data);
+          void setLogLevel(const ls::std::io::LogLevelValue &_logLevelValue);
+          void trace(const ls::std::core::byte *_data);
+          void warn(const ls::std::core::byte *_data);
 
-    private:
+        private:
 
-      ls::LogLevel logLevel{};
-      ::std::shared_ptr<ls::IWriter> writer{};
+          ls::std::io::LogLevel logLevel{};
+          ::std::shared_ptr<ls::std::io::IWriter> writer{};
 
-      void _assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer);
-      void _log(const ls::std::core::byte *_data, const ls::LogLevel &_logLevel);
-  };
+          void _assignWriter(const ::std::shared_ptr<ls::std::io::IWriter> &_writer);
+          void _log(const ls::std::core::byte *_data, const ls::std::io::LogLevel &_logLevel);
+      };
+    }
+  }
 }
 
 #endif

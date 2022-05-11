@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -30,12 +30,12 @@ namespace
   TEST_F(FileWriterTest, constructor_file_does_not_exist)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
-    ls::File file{path};
+    ls::std::io::File file{path};
 
     EXPECT_THROW({
                    try
                    {
-                     ls::FileWriter writer{file};
+                     ls::std::io::FileWriter writer{file};
                    }
                    catch (const ls::std::core::FileNotFoundException &_exception)
                    {
@@ -47,15 +47,15 @@ namespace
   TEST_F(FileWriterTest, reset)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
-    ls::File file{path};
+    ls::std::io::File file{path};
     file.createNewFile();
-    ls::FileWriter writer{file};
+    ls::std::io::FileWriter writer{file};
     ASSERT_TRUE(writer.write("Testing something!\n"));
 
     // reset
 
     path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test2.txt";
-    ls::File anotherFile{path};
+    ls::std::io::File anotherFile{path};
     anotherFile.createNewFile();
 
     writer.reset(anotherFile);
@@ -72,13 +72,13 @@ namespace
   TEST_F(FileWriterTest, write)
   {
     std::string path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
-    ls::File file{path};
+    ls::std::io::File file{path};
 
     ASSERT_FALSE(file.exists());
     file.createNewFile();
     ASSERT_TRUE(file.exists());
 
-    ls::FileWriter writer{file};
+    ls::std::io::FileWriter writer{file};
     ASSERT_TRUE(writer.write("Testing something!\n"));
 
     file.remove();

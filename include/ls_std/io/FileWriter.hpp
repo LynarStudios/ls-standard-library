@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -16,22 +16,28 @@
 
 namespace ls
 {
-  class FileWriter : public ls::std::core::Class, public ls::IWriter
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class FileWriter : public ls::std::core::Class, public ls::std::io::IWriter
+      {
+        public:
 
-      explicit FileWriter(ls::File &_file);
-      ~FileWriter() override = default;
+          explicit FileWriter(ls::std::io::File &_file);
+          ~FileWriter() override = default;
 
-      void reset(ls::File &_file);
-      bool write(const ls::std::core::byte_field &_data) override;
+          void reset(ls::std::io::File &_file);
+          bool write(const ls::std::core::byte_field &_data) override;
 
-    private:
+        private:
 
-      ls::File file;
+          ls::std::io::File file;
 
-      static void _init(ls::File &_file);
-  };
+          static void _init(ls::std::io::File &_file);
+      };
+    }
+  }
 }
 
 #endif

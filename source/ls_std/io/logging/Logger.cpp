@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -13,72 +13,72 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::Logger::Logger(const ::std::shared_ptr<ls::IWriter> &_writer)
+ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::io::IWriter> &_writer)
     : ls::std::core::Class("Logger"),
-      logLevel(ls::LogLevelValue::INFO)
+      logLevel(ls::std::io::LogLevelValue::INFO)
 {
   this->_assignWriter(_writer);
 }
 
-void ls::Logger::debug(const ls::std::core::byte *_data)
+void ls::std::io::Logger::debug(const ls::std::core::byte *_data)
 {
-  if (this->logLevel >= ls::LogLevelValue::DEBUG)
+  if (this->logLevel >= ls::std::io::LogLevelValue::DEBUG)
   {
-    this->_log(_data, ls::LogLevel(ls::LogLevelValue::DEBUG));
+    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::DEBUG));
   }
 }
 
-void ls::Logger::error(const ls::std::core::byte *_data)
+void ls::std::io::Logger::error(const ls::std::core::byte *_data)
 {
-  if (this->logLevel >= ls::LogLevelValue::ERR)
+  if (this->logLevel >= ls::std::io::LogLevelValue::ERR)
   {
-    this->_log(_data, ls::LogLevel(ls::LogLevelValue::ERR));
+    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::ERR));
   }
 }
 
-void ls::Logger::fatal(const ls::std::core::byte *_data)
+void ls::std::io::Logger::fatal(const ls::std::core::byte *_data)
 {
-  if (this->logLevel >= ls::LogLevelValue::FATAL)
+  if (this->logLevel >= ls::std::io::LogLevelValue::FATAL)
   {
-    this->_log(_data, ls::LogLevel(ls::LogLevelValue::FATAL));
+    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::FATAL));
   }
 }
 
-ls::LogLevel ls::Logger::getLogLevel()
+ls::std::io::LogLevel ls::std::io::Logger::getLogLevel()
 {
   return this->logLevel;
 }
 
-void ls::Logger::info(const ls::std::core::byte *_data)
+void ls::std::io::Logger::info(const ls::std::core::byte *_data)
 {
-  if (this->logLevel >= ls::LogLevelValue::INFO)
+  if (this->logLevel >= ls::std::io::LogLevelValue::INFO)
   {
-    this->_log(_data, ls::LogLevel(ls::LogLevelValue::INFO));
+    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::INFO));
   }
 }
 
-void ls::Logger::setLogLevel(const ls::LogLevelValue &_logLevelValue)
+void ls::std::io::Logger::setLogLevel(const ls::std::io::LogLevelValue &_logLevelValue)
 {
   this->logLevel = _logLevelValue;
 }
 
-void ls::Logger::trace(const ls::std::core::byte *_data)
+void ls::std::io::Logger::trace(const ls::std::core::byte *_data)
 {
-  if (this->logLevel >= ls::LogLevelValue::TRACE)
+  if (this->logLevel >= ls::std::io::LogLevelValue::TRACE)
   {
-    this->_log(_data, ls::LogLevel(ls::LogLevelValue::TRACE));
+    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::TRACE));
   }
 }
 
-void ls::Logger::warn(const ls::std::core::byte *_data)
+void ls::std::io::Logger::warn(const ls::std::core::byte *_data)
 {
-  if (this->logLevel >= ls::LogLevelValue::WARN)
+  if (this->logLevel >= ls::std::io::LogLevelValue::WARN)
   {
-    this->_log(_data, ls::LogLevel(ls::LogLevelValue::WARN));
+    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::WARN));
   }
 }
 
-void ls::Logger::_assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer)
+void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::io::IWriter> &_writer)
 {
   if (_writer == nullptr)
   {
@@ -88,9 +88,9 @@ void ls::Logger::_assignWriter(const ::std::shared_ptr<ls::IWriter> &_writer)
   this->writer = _writer;
 }
 
-void ls::Logger::_log(const ls::std::core::byte *_data, const ls::LogLevel &_logLevel)
+void ls::std::io::Logger::_log(const ls::std::core::byte *_data, const ls::std::io::LogLevel &_logLevel)
 {
   ls::std::time::Date date{};
-  ::std::string message = "[" + date.toString() + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::NewLine::getUnixNewLine();
+  ::std::string message = "[" + date.toString() + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::std::io::NewLine::getUnixNewLine();
   this->writer->write(message);
 }

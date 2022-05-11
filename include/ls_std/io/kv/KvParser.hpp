@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -18,29 +18,35 @@
 
 namespace ls
 {
-  class KvParser : public ls::std::core::Class
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class KvParser : public ls::std::core::Class
+      {
+        public:
 
-      explicit KvParser(const ::std::shared_ptr<ls::KvDocument> &_document);
-      ~KvParser() override = default;
+          explicit KvParser(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
+          ~KvParser() override = default;
 
-      ::std::shared_ptr<ls::KvDocument> getDocument();
-      void parse(const ls::std::core::byte_field &_data);
-      void setDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
+          ::std::shared_ptr<ls::std::io::KvDocument> getDocument();
+          void parse(const ls::std::core::byte_field &_data);
+          void setDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
 
-    private:
+        private:
 
-      ::std::shared_ptr<ls::KvDocument> document{};
+          ::std::shared_ptr<ls::std::io::KvDocument> document{};
 
-      void _assignDocument(const ::std::shared_ptr<ls::KvDocument> &_document);
-      static bool _lineHasPair(ls::KvParseParameter _parseParameter);
-      void _parse(const ls::std::core::byte_field &_data);
-      void _parsePair(ls::KvParseParameter _parseParameter);
-      static ls::KvParseParameter _readLine(const ls::std::core::byte_field &_data, ::std::string::size_type _index);
-      static void _readLineWithUnixLineBreak(ls::KvParseParameter &_parseParameter);
-      static void _readLineWithWindowsLineBreak(ls::KvParseParameter &_parseParameter);
-  };
+          void _assignDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
+          static bool _lineHasPair(ls::std::io::KvParseParameter _parseParameter);
+          void _parse(const ls::std::core::byte_field &_data);
+          void _parsePair(ls::std::io::KvParseParameter _parseParameter);
+          static ls::std::io::KvParseParameter _readLine(const ls::std::core::byte_field &_data, ::std::string::size_type _index);
+          static void _readLineWithUnixLineBreak(ls::std::io::KvParseParameter &_parseParameter);
+          static void _readLineWithWindowsLineBreak(ls::std::io::KvParseParameter &_parseParameter);
+      };
+    }
+  }
 }
 
 #endif
