@@ -10,7 +10,7 @@
 #ifndef LS_STD_STRING_HPP
 #define LS_STD_STRING_HPP
 
-#include "ls_std/core/interface/IBoxing.hpp"
+#include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/Types.hpp>
 #include <string>

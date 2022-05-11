@@ -11,7 +11,7 @@
 #define LS_STD_NARRATOR_HPP
 
 #include <ls_std/core/Class.hpp>
-#include "ls_std/core/interface/IListener.hpp"
+#include <ls_std/core/interface/IListener.hpp>
 #include <list>
 #include <memory>
 

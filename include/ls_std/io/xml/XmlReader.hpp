@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "XmlDocument.hpp"
-#include "ls_std/core/interface/IReader.hpp"
+#include <ls_std/core/interface/IReader.hpp>
 #include <ls_std/io/File.hpp>
 #include "XmlParseMode.hpp"
 #include "XmlParseParameter.hpp"

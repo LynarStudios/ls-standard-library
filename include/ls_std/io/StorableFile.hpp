@@ -12,7 +12,7 @@
 
 #include <string>
 #include <memory>
-#include "ls_std/core/interface/IStorable.hpp"
+#include <ls_std/core/interface/IStorable.hpp>
 #include "File.hpp"
 
 namespace ls

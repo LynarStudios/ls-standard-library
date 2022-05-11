@@ -11,7 +11,7 @@
 #define LS_STD_I_FACTORY_HPP
 
 #include <memory>
-#include "ls_std/core/Class.hpp"
+#include <ls_std/core/Class.hpp>
 
 // TODO: is this really necessary to have?
 

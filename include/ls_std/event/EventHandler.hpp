@@ -13,7 +13,7 @@
 #include <ls_std/core/Class.hpp>
 #include <list>
 #include <memory>
-#include "ls_std/core/interface/IListener.hpp"
+#include <ls_std/core/interface/IListener.hpp>
 #include "Event.hpp"
 #include <ls_std/logic/Narrator.hpp>
 

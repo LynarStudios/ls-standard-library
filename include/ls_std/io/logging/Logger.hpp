@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "LogLevel.hpp"
-#include "ls_std/core/interface/IWriter.hpp"
+#include <ls_std/core/interface/IWriter.hpp>
 #include <ls_std/io/File.hpp>
 #include <ls_std/io/FileOutputStream.hpp>
 #include <string>

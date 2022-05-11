@@ -15,7 +15,7 @@
 #include <ls_std/event/EventTypes.hpp>
 #include <memory>
 #include "EventHandler.hpp"
-#include "ls_std/core/interface/IEventSubscriber.hpp"
+#include <ls_std/core/interface/IEventSubscriber.hpp>
 
 namespace ls
 {

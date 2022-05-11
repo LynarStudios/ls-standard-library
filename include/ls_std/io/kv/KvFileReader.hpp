@@ -11,7 +11,7 @@
 #define LS_STD_KV_FILE_READER_HPP
 
 #include <ls_std/core/Class.hpp>
-#include "ls_std/core/interface/IReader.hpp"
+#include <ls_std/core/interface/IReader.hpp>
 #include <ls_std/io/kv/KvDocument.hpp>
 #include <ls_std/io/File.hpp>
 #include <memory>

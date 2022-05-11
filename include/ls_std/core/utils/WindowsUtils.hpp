@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-06
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
 #ifndef LS_STD_WINDOWS_UTILS_HPP
 #define LS_STD_WINDOWS_UTILS_HPP
 
-#include "ls_std/core/Types.hpp"
+#include <ls_std/core/Types.hpp>
 #include <string>
 #include <windows.h>
 

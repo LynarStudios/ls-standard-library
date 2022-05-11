@@ -14,7 +14,7 @@
 #include <ls_std/core/interface/ISerializable.hpp>
 #include <ls_std/logic/StateMachine.hpp>
 #include <memory>
-#include "ls_std/lib/nlohmann_json/include/nlohmann/json.hpp"
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
 
 namespace ls
 {

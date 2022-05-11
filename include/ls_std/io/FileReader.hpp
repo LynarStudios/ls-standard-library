@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "File.hpp"
-#include "ls_std/core/interface/IReader.hpp"
+#include <ls_std/core/interface/IReader.hpp>
 
 namespace ls
 {

@@ -10,7 +10,7 @@
 #ifndef LS_STD_STANDARD_OUTPUT_WRITER_HPP
 #define LS_STD_STANDARD_OUTPUT_WRITER_HPP
 
-#include "ls_std/core/interface/IWriter.hpp"
+#include <ls_std/core/interface/IWriter.hpp>
 
 namespace ls
 {

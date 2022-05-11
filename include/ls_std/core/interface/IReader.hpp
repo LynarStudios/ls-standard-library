@@ -10,7 +10,7 @@
 #ifndef LS_STD_I_READER_HPP
 #define LS_STD_I_READER_HPP
 
-#include "ls_std/core/Types.hpp"
+#include <ls_std/core/Types.hpp>
 
 namespace ls
 {

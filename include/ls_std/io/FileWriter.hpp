@@ -11,7 +11,7 @@
 #define LS_STD_FILE_WRITER_HPP
 
 #include <ls_std/core/Class.hpp>
-#include "ls_std/core/interface/IWriter.hpp"
+#include <ls_std/core/interface/IWriter.hpp>
 #include "File.hpp"
 
 namespace ls
