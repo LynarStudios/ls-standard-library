@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <memory>
 #include <ls_std/core/Class.hpp>
-#include "IBoxing.hpp"
+#include "ls_std/core/interface/IBoxing.hpp"
 
 namespace ls
 {
@@ -20,7 +20,7 @@ namespace ls
   {
     namespace boxing
     {
-      class Float : public ls::std::core::Class, public ls::std::boxing::IBoxing
+      class Float : public ls::std::core::Class, public ls::std::core::IBoxing
       {
         public:
 

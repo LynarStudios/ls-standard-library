@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-23
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -12,6 +12,8 @@
 
 #include <memory>
 #include "ls_std/core/Class.hpp"
+
+// TODO: is this really necessary to have?
 
 namespace ls
 {

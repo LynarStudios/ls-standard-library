@@ -10,13 +10,13 @@
 #ifndef LS_STD_I_LISTENER_HPP
 #define LS_STD_I_LISTENER_HPP
 
-#include <ls_std/core/Class.hpp>
+#include "ls_std/core/Class.hpp"
 
 namespace ls
 {
   namespace std
   {
-    namespace logic
+    namespace core
     {
       class IListener
       {

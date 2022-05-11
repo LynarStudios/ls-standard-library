@@ -12,7 +12,7 @@
 
 #include <string>
 #include <memory>
-#include "IStorable.hpp"
+#include "ls_std/core/interface/IStorable.hpp"
 #include "File.hpp"
 
 namespace ls
@@ -21,7 +21,7 @@ namespace ls
   {
     namespace io
     {
-      class StorableFile : public ls::std::io::IStorable
+      class StorableFile : public ls::std::core::IStorable
       {
         public:
 

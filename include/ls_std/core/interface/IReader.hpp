@@ -7,26 +7,25 @@
  *
  * */
 
-#ifndef LS_STD_I_WRITER_HPP
-#define LS_STD_I_WRITER_HPP
+#ifndef LS_STD_I_READER_HPP
+#define LS_STD_I_READER_HPP
 
-#include <vector>
-#include <ls_std/core/Types.hpp>
+#include "ls_std/core/Types.hpp"
 
 namespace ls
 {
   namespace std
   {
-    namespace io
+    namespace core
     {
-      class IWriter
+      class IReader
       {
         public:
 
-          IWriter() = default;
-          ~IWriter() = default;
+          IReader() = default;
+          ~IReader() = default;
 
-          virtual bool write(const ls::std::core::byte_field &_data) = 0;
+          virtual ls::std::core::byte_field read() = 0;
       };
     }
   }

@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "File.hpp"
-#include "IWriter.hpp"
+#include "ls_std/core/interface/IWriter.hpp"
 #include <fstream>
 
 namespace ls
@@ -21,7 +21,7 @@ namespace ls
   {
     namespace io
     {
-      class FileOutputStream : public ls::std::core::Class, public ls::std::io::IWriter
+      class FileOutputStream : public ls::std::core::Class, public ls::std::core::IWriter
       {
         public:
 

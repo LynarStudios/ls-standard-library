@@ -18,7 +18,7 @@
 
 namespace ls_std_test
 {
-  class GossipNewsAgency : public ls_std_test::NewsAgency, public ls::std::logic::IListener
+  class GossipNewsAgency : public ls_std_test::NewsAgency, public ls::std::core::IListener
   {
     public:
 

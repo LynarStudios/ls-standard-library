@@ -10,15 +10,15 @@
 #ifndef LS_STD_I_EVENT_SUBSCRIBER_HPP
 #define LS_STD_I_EVENT_SUBSCRIBER_HPP
 
-#include "EventTypes.hpp"
+#include "ls_std/event/EventTypes.hpp"
 #include <memory>
-#include <ls_std/logic/IListener.hpp>
+#include "IListener.hpp"
 
 namespace ls
 {
   namespace std
   {
-    namespace event
+    namespace core
     {
       class IEventSubscriber
       {
@@ -27,8 +27,8 @@ namespace ls
           IEventSubscriber() = default;
           ~IEventSubscriber() = default;
 
-          virtual void subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::logic::IListener> &_listener) = 0;
-          virtual void unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::logic::IListener> &_listener) = 0;
+          virtual void subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener) = 0;
+          virtual void unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener) = 0;
       };
     }
   }

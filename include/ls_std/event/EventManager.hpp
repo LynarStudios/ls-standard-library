@@ -15,7 +15,7 @@
 #include <ls_std/event/EventTypes.hpp>
 #include <memory>
 #include "EventHandler.hpp"
-#include "IEventSubscriber.hpp"
+#include "ls_std/core/interface/IEventSubscriber.hpp"
 
 namespace ls
 {
@@ -23,7 +23,7 @@ namespace ls
   {
     namespace event
     {
-      class EventManager : public ls::std::core::Class, public ls::std::event::IEventSubscriber
+      class EventManager : public ls::std::core::Class, public ls::std::core::IEventSubscriber
       {
         public:
 
@@ -32,8 +32,8 @@ namespace ls
 
           // implementation
 
-          void subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::logic::IListener> &_listener) override;
-          void unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::logic::IListener> &_listener) override;
+          void subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener) override;
+          void unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener) override;
 
           // additional functionality
 

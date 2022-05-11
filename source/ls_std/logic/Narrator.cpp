@@ -14,7 +14,7 @@
 ls::std::logic::Narrator::Narrator() : ls::std::core::Class("Narrator")
 {}
 
-bool ls::std::logic::Narrator::addListener(const ::std::shared_ptr<ls::std::logic::IListener> &_listener)
+bool ls::std::logic::Narrator::addListener(const ::std::shared_ptr<ls::std::core::IListener> &_listener)
 {
   bool wasAdded{};
 
@@ -39,12 +39,12 @@ void ls::std::logic::Narrator::clear()
   this->listeners.clear();
 }
 
-std::list<std::shared_ptr<ls::std::logic::IListener>> ls::std::logic::Narrator::getListeners()
+std::list<std::shared_ptr<ls::std::core::IListener>> ls::std::logic::Narrator::getListeners()
 {
   return this->listeners;
 }
 
-bool ls::std::logic::Narrator::removeListener(const ::std::shared_ptr<ls::std::logic::IListener> &_listener)
+bool ls::std::logic::Narrator::removeListener(const ::std::shared_ptr<ls::std::core::IListener> &_listener)
 {
   bool wasRemoved{};
 

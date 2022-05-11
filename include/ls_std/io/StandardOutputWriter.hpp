@@ -10,7 +10,7 @@
 #ifndef LS_STD_STANDARD_OUTPUT_WRITER_HPP
 #define LS_STD_STANDARD_OUTPUT_WRITER_HPP
 
-#include "IWriter.hpp"
+#include "ls_std/core/interface/IWriter.hpp"
 
 namespace ls
 {
@@ -18,7 +18,7 @@ namespace ls
   {
     namespace io
     {
-      class StandardOutputWriter : public ls::std::io::IWriter
+      class StandardOutputWriter : public ls::std::core::IWriter
       {
         public:
 

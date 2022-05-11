@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -12,9 +12,9 @@
 
 #include <memory>
 #include <ls_std/core/Class.hpp>
-#include "IBoxing.hpp"
-#include <ls_std/serialization/ISerializable.hpp>
-#include <ls_std/io/IStorable.hpp>
+#include "ls_std/core/interface/IBoxing.hpp"
+#include <ls_std/core/interface/ISerializable.hpp>
+#include "ls_std/core/interface/IStorable.hpp"
 
 namespace ls
 {
@@ -22,7 +22,7 @@ namespace ls
   {
     namespace boxing
     {
-      class Integer : public ls::std::core::Class, public ls::std::boxing::IBoxing
+      class Integer : public ls::std::core::Class, public ls::std::core::IBoxing
       {
         public:
 

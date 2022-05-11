@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "File.hpp"
-#include "IReader.hpp"
+#include "ls_std/core/interface/IReader.hpp"
 
 namespace ls
 {
@@ -20,7 +20,7 @@ namespace ls
   {
     namespace io
     {
-      class FileReader : public ls::std::core::Class, public ls::std::io::IReader
+      class FileReader : public ls::std::core::Class, public ls::std::core::IReader
       {
         public:
 

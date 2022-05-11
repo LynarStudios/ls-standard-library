@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_EVENT_HPP
 
 #include <ls_std/core/Class.hpp>
-#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/core/interface/ISerializable.hpp>
 #include <memory>
 #include "EventTypes.hpp"
 

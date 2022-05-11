@@ -13,7 +13,7 @@
 #include <ls_std/boxing/String.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::io::IWriter> &_writer)
+ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::IWriter> &_writer)
     : ls::std::core::Class("Logger"),
       logLevel(ls::std::io::LogLevelValue::INFO)
 {
@@ -78,7 +78,7 @@ void ls::std::io::Logger::warn(const ls::std::core::byte *_data)
   }
 }
 
-void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::io::IWriter> &_writer)
+void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::IWriter> &_writer)
 {
   if (_writer == nullptr)
   {

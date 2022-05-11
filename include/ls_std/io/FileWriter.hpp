@@ -11,7 +11,7 @@
 #define LS_STD_FILE_WRITER_HPP
 
 #include <ls_std/core/Class.hpp>
-#include "IWriter.hpp"
+#include "ls_std/core/interface/IWriter.hpp"
 #include "File.hpp"
 
 namespace ls
@@ -20,7 +20,7 @@ namespace ls
   {
     namespace io
     {
-      class FileWriter : public ls::std::core::Class, public ls::std::io::IWriter
+      class FileWriter : public ls::std::core::Class, public ls::std::core::IWriter
       {
         public:
 

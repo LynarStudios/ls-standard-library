@@ -10,13 +10,13 @@
 #ifndef LS_STD_I_STORABLE_HPP
 #define LS_STD_I_STORABLE_HPP
 
-#include <ls_std/core/Types.hpp>
+#include "ls_std/core/Types.hpp"
 
 namespace ls
 {
   namespace std
   {
-    namespace io
+    namespace core
     {
       class IStorable
       {

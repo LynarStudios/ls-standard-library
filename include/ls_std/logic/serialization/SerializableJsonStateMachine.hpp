@@ -10,9 +10,9 @@
 #ifndef LS_STD_SERIALIZABLE_JSON_STATE_MACHINE_HPP
 #define LS_STD_SERIALIZABLE_JSON_STATE_MACHINE_HPP
 
-#include "ls_std/core/Class.hpp"
-#include "ls_std/serialization/ISerializable.hpp"
-#include "ls_std/logic/StateMachine.hpp"
+#include <ls_std/core/Class.hpp>
+#include <ls_std/core/interface/ISerializable.hpp>
+#include <ls_std/logic/StateMachine.hpp>
 #include <memory>
 #include "ls_std/lib/nlohmann_json/include/nlohmann/json.hpp"
 
@@ -22,7 +22,7 @@ namespace ls
   {
     namespace logic
     {
-      class SerializableJsonStateMachine : public ls::std::core::Class, public ls::ISerializable
+      class SerializableJsonStateMachine : public ls::std::core::Class, public ls::std::core::ISerializable
       {
         public:
 

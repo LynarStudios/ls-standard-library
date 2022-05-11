@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-06
+ * Changed:         2022-05-11
  *
  * */
 
@@ -16,7 +16,7 @@ namespace ls
 {
   namespace std
   {
-    namespace boxing
+    namespace core
     {
       class IBoxing
       {

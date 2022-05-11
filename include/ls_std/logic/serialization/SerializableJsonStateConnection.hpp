@@ -11,10 +11,10 @@
 #define LS_STD_SERIALIZABLE_JSON_STATE_CONNECTION_HPP
 
 #include <memory>
-#include "ls_std/lib/nlohmann_json/include/nlohmann/json.hpp"
-#include "ls_std/core/Class.hpp"
-#include "ls_std/serialization/ISerializable.hpp"
-#include "ls_std/logic/StateConnection.hpp"
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/core/Class.hpp>
+#include <ls_std/core/interface/ISerializable.hpp>
+#include <ls_std/logic/StateConnection.hpp>
 
 namespace ls
 {
@@ -22,7 +22,7 @@ namespace ls
   {
     namespace logic
     {
-      class SerializableJsonStateConnection : public ls::std::core::Class, public ls::ISerializable
+      class SerializableJsonStateConnection : public ls::std::core::Class, public ls::std::core::ISerializable
       {
         public:
 

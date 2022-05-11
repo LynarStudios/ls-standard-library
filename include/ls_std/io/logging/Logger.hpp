@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "LogLevel.hpp"
-#include <ls_std/io/IWriter.hpp>
+#include "ls_std/core/interface/IWriter.hpp"
 #include <ls_std/io/File.hpp>
 #include <ls_std/io/FileOutputStream.hpp>
 #include <string>
@@ -27,7 +27,7 @@ namespace ls
       {
         public:
 
-          explicit Logger(const ::std::shared_ptr<ls::std::io::IWriter> &_writer);
+          explicit Logger(const ::std::shared_ptr<ls::std::core::IWriter> &_writer);
           ~Logger() override = default;
 
           void debug(const ls::std::core::byte *_data);
@@ -42,9 +42,9 @@ namespace ls
         private:
 
           ls::std::io::LogLevel logLevel{};
-          ::std::shared_ptr<ls::std::io::IWriter> writer{};
+          ::std::shared_ptr<ls::std::core::IWriter> writer{};
 
-          void _assignWriter(const ::std::shared_ptr<ls::std::io::IWriter> &_writer);
+          void _assignWriter(const ::std::shared_ptr<ls::std::core::IWriter> &_writer);
           void _log(const ls::std::core::byte *_data, const ls::std::io::LogLevel &_logLevel);
       };
     }

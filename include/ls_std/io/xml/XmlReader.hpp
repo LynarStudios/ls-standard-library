@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "XmlDocument.hpp"
-#include <ls_std/io/IReader.hpp>
+#include "ls_std/core/interface/IReader.hpp"
 #include <ls_std/io/File.hpp>
 #include "XmlParseMode.hpp"
 #include "XmlParseParameter.hpp"
@@ -24,7 +24,7 @@ namespace ls
   {
     namespace io
     {
-      class XmlReader : public ls::std::core::Class, public ls::std::io::IReader
+      class XmlReader : public ls::std::core::Class, public ls::std::core::IReader
       {
         public:
 

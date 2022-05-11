@@ -3,14 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2022-05-05
+ * Changed:         2022-05-11
  *
  * */
 
 #ifndef LS_STD_LS_STD_HPP
 #define LS_STD_LS_STD_HPP
 
-#include "boxing/IBoxing.hpp"
 #include "boxing/Boolean.hpp"
 #include "boxing/Double.hpp"
 #include "boxing/Float.hpp"
@@ -26,7 +25,14 @@
 #include "core/exception/IllegalArithmeticOperationException.hpp"
 #include "core/exception/IncompleteJsonException.hpp"
 #include "core/exception/NullPointerException.hpp"
-#include "core/factory/IFactory.hpp"
+#include "core/interface/IBoxing.hpp"
+#include "core/interface/IEventSubscriber.hpp"
+#include "core/interface/IFactory.hpp"
+#include "core/interface/IListener.hpp"
+#include "core/interface/IReader.hpp"
+#include "core/interface/ISerializable.hpp"
+#include "core/interface/IStorable.hpp"
+#include "core/interface/IWriter.hpp"
 #include "core/utils/RegexUtils.hpp"
 #include "core/utils/STLUtils.hpp"
 #if _WIN32
@@ -42,7 +48,6 @@
 #include "event/EventHandler.hpp"
 #include "event/EventManager.hpp"
 #include "event/EventTypes.hpp"
-#include "event/IEventSubscriber.hpp"
 
 #include "io/kv/KvDocument.hpp"
 #include "io/kv/KvFileReader.hpp"
@@ -67,9 +72,6 @@
 #include "io/FilePathSeparatorMatch.hpp"
 #include "io/FileReader.hpp"
 #include "io/FileWriter.hpp"
-#include "io/IReader.hpp"
-#include "io/IStorable.hpp"
-#include "io/IWriter.hpp"
 #include "io/NewLine.hpp"
 #include "io/StandardOutputWriter.hpp"
 #include "io/StorableFile.hpp"
@@ -77,14 +79,11 @@
 #include "logic/serialization/SerializableJsonState.hpp"
 #include "logic/serialization/SerializableJsonStateConnection.hpp"
 #include "logic/serialization/SerializableJsonStateMachine.hpp"
-#include "logic/IListener.hpp"
 #include "logic/Narrator.hpp"
 #include "logic/State.hpp"
 #include "logic/StateConnection.hpp"
 #include "logic/StateMachine.hpp"
 #include "logic/StateMachineTypes.hpp"
-
-#include "serialization/ISerializable.hpp"
 
 #include "time/Date.hpp"
 

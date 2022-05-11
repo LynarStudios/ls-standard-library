@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
 #ifndef LS_STD_SERIALIZABLE_JSON_EVENT_HPP
 #define LS_STD_SERIALIZABLE_JSON_EVENT_HPP
 
-#include "ls_std/serialization/ISerializable.hpp"
-#include "ls_std/core/Class.hpp"
-#include "ls_std/event/Event.hpp"
+#include <ls_std/core/interface/ISerializable.hpp>
+#include <ls_std/core/Class.hpp>
+#include <ls_std/event/Event.hpp>
 #include <memory>
-#include "ls_std/lib/nlohmann_json/include/nlohmann/json.hpp"
+#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
 
 namespace ls
 {
@@ -22,7 +22,7 @@ namespace ls
   {
     namespace event
     {
-      class SerializableJsonEvent : public ls::std::core::Class, public ls::ISerializable
+      class SerializableJsonEvent : public ls::std::core::Class, public ls::std::core::ISerializable
       {
         public:
 

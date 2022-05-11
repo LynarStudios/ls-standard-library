@@ -15,7 +15,7 @@
 #include <ls_std/core/Class.hpp>
 #include "StateMachineTypes.hpp"
 #include "StateConnection.hpp"
-#include <ls_std/serialization/ISerializable.hpp>
+#include <ls_std/core/interface/ISerializable.hpp>
 
 namespace ls
 {
