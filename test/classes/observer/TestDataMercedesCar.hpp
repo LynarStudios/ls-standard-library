@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -16,7 +16,7 @@
 
 namespace ls_std_test
 {
-  class TestDataMercedesCar : public TestDataCar, public ls::IListener
+  class TestDataMercedesCar : public TestDataCar, public ls::std::logic::IListener
   {
     public:
 

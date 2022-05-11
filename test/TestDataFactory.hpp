@@ -21,7 +21,7 @@ namespace ls_std_test
       TestDataFactory() = default;
       ~TestDataFactory() = default;
 
-      static ls::StateMachine createStateMachine();
+      static ls::std::logic::StateMachine createStateMachine();
       static std::shared_ptr<ls::std::io::XmlNode> createXmlContent();
   };
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -31,7 +31,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::SerializableJsonState serializable{nullptr};
+                     ls::std::logic::SerializableJsonState serializable{nullptr};
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -42,11 +42,11 @@ namespace
 
   TEST_F(SerializableJsonStateTest, marshal)
   {
-    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
-    x->addStateConnection(std::make_shared<ls::StateConnection>("AB", "B"));
-    x->addStateConnection(std::make_shared<ls::StateConnection>("AC", "C"));
+    std::shared_ptr<ls::std::logic::State> x = std::make_shared<ls::std::logic::State>("A");
+    x->addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AB", "B"));
+    x->addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AC", "C"));
 
-    ls::SerializableJsonState serializable{x};
+    ls::std::logic::SerializableJsonState serializable{x};
     ls::std::core::byte_field jsonString = serializable.marshal();
 
     ASSERT_TRUE(!jsonString.empty());
@@ -56,8 +56,8 @@ namespace
 
   TEST_F(SerializableJsonStateTest, unmarshal)
   {
-    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
-    ls::SerializableJsonState serializable{x};
+    std::shared_ptr<ls::std::logic::State> x = std::make_shared<ls::std::logic::State>("A");
+    ls::std::logic::SerializableJsonState serializable{x};
 
     // before
 
@@ -78,18 +78,18 @@ namespace
 
   TEST_F(SerializableJsonStateTest, getValue)
   {
-    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
-    ls::SerializableJsonState serializable{x};
+    std::shared_ptr<ls::std::logic::State> x = std::make_shared<ls::std::logic::State>("A");
+    ls::std::logic::SerializableJsonState serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJsonStateTest, setValue)
   {
-    std::shared_ptr<ls::State> x = std::make_shared<ls::State>("A");
-    x->addStateConnection(std::make_shared<ls::StateConnection>("AB", "B"));
-    x->addStateConnection(std::make_shared<ls::StateConnection>("AC", "C"));
+    std::shared_ptr<ls::std::logic::State> x = std::make_shared<ls::std::logic::State>("A");
+    x->addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AB", "B"));
+    x->addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AC", "C"));
 
-    ls::SerializableJsonState serializable{x};
+    ls::std::logic::SerializableJsonState serializable{x};
     ls::std::core::byte_field jsonString = serializable.marshal();
 
     std::string expectedJson = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
@@ -97,7 +97,7 @@ namespace
 
     // setValue should now clear json
 
-    std::shared_ptr<ls::State> y = std::make_shared<ls::State>("B");
+    std::shared_ptr<ls::std::logic::State> y = std::make_shared<ls::std::logic::State>("B");
     serializable.setValue(y);
     jsonString = serializable.marshal();
 
@@ -106,8 +106,8 @@ namespace
 
   TEST_F(SerializableJsonStateTest, setValue_parameter_not_set)
   {
-    std::shared_ptr<ls::State> state = std::make_shared<ls::State>("A");
-    ls::SerializableJsonState serializable{state};
+    std::shared_ptr<ls::std::logic::State> state = std::make_shared<ls::std::logic::State>("A");
+    ls::std::logic::SerializableJsonState serializable{state};
 
     EXPECT_THROW({
                    try

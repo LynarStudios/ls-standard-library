@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -29,7 +29,7 @@ namespace
 
   TEST_F(StateMachineTest, getClassName)
   {
-    ls::StateMachine stateMachine {"machine"};
+    ls::std::logic::StateMachine stateMachine {"machine"};
     ASSERT_STREQ("StateMachine", stateMachine.getClassName().c_str());
   }
 
@@ -38,7 +38,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::StateMachine stateMachine {""};
+                     ls::std::logic::StateMachine stateMachine {""};
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -49,15 +49,15 @@ namespace
 
   TEST_F(StateMachineTest, addState)
   {
-    ls::StateMachine stateMachine{"test_machine"};
-    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::State>("A")));
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
+    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
   }
 
   TEST_F(StateMachineTest, addState_state_already_exists)
   {
-    ls::StateMachine stateMachine{"test_machine"};
-    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::State>("A")));
-    ASSERT_FALSE(stateMachine.addState(std::make_shared<ls::State>("A")));
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
+    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
+    ASSERT_FALSE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
   }
 
   TEST_F(StateMachineTest, addState_no_reference)
@@ -65,7 +65,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::StateMachine stateMachine{"test_machine"};
+                     ls::std::logic::StateMachine stateMachine{"test_machine"};
                      stateMachine.addState(nullptr);
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
@@ -77,33 +77,33 @@ namespace
 
   TEST_F(StateMachineTest, getCurrentState)
   {
-    ls::StateMachine stateMachine{"test_machine"};
-    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::State>("A")));
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
+    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
 
     ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
   }
 
   TEST_F(StateMachineTest, getMemory)
   {
-    ls::StateMachine stateMachine {"machine"};
+    ls::std::logic::StateMachine stateMachine {"machine"};
     ASSERT_TRUE(stateMachine.getMemory().empty());
   }
 
   TEST_F(StateMachineTest, getName)
   {
-    ls::StateMachine stateMachine{"test_machine"};
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
   }
 
   TEST_F(StateMachineTest, getStates)
   {
-    ls::StateMachine stateMachine {"machine"};
+    ls::std::logic::StateMachine stateMachine {"machine"};
     ASSERT_TRUE(stateMachine.getStates().empty());
   }
 
   TEST_F(StateMachineTest, hasState)
   {
-    ls::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls::std::logic::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
 
     ASSERT_TRUE(stateMachine.hasState("A"));
     ASSERT_TRUE(stateMachine.hasState("B"));
@@ -114,13 +114,13 @@ namespace
 
   TEST_F(StateMachineTest, hasState_no_state_available)
   {
-    ls::StateMachine stateMachine {"machine"};
+    ls::std::logic::StateMachine stateMachine {"machine"};
     ASSERT_FALSE(stateMachine.hasState("F"));
   }
 
   TEST_F(StateMachineTest, proceed)
   {
-    ls::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls::std::logic::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
     ASSERT_TRUE(stateMachine.setStartState("A"));
 
@@ -171,8 +171,8 @@ namespace
 
   TEST_F(StateMachineTest, setMemory_no_memory)
   {
-    ls::StateMachine stateMachine{"test_machine"};
-    std::vector<ls::StateId> memory{};
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
+    std::vector<ls::std::logic::StateId> memory{};
 
     EXPECT_THROW({
                    try
@@ -188,7 +188,7 @@ namespace
 
   TEST_F(StateMachineTest, setName)
   {
-    ls::StateMachine stateMachine{"test_machine"};
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
 
     stateMachine.setName("bla");
@@ -200,7 +200,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::StateMachine stateMachine {"machine"};
+                     ls::std::logic::StateMachine stateMachine {"machine"};
                      stateMachine.setName("");
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
@@ -212,9 +212,9 @@ namespace
 
   TEST_F(StateMachineTest, setStartState)
   {
-    ls::StateMachine stateMachine{"test_machine"};
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
-    stateMachine.addState(std::make_shared<ls::State>("A"));
+    stateMachine.addState(std::make_shared<ls::std::logic::State>("A"));
 
     ASSERT_TRUE(stateMachine.setStartState("A"));
     ASSERT_FALSE(stateMachine.getCurrentState() == nullptr);
@@ -222,13 +222,13 @@ namespace
 
   TEST_F(StateMachineTest, setStartState_state_does_not_exist)
   {
-    ls::StateMachine stateMachine{"test_machine"};
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
     ASSERT_FALSE(stateMachine.setStartState("A"));
   }
 
   TEST_F(StateMachineTest, setStartState_empty_id)
   {
-    ls::StateMachine stateMachine{"test_machine"};
+    ls::std::logic::StateMachine stateMachine{"test_machine"};
 
     EXPECT_THROW({
                    try

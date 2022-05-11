@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -14,15 +14,21 @@
 
 namespace ls
 {
-  class IListener
+  namespace std
   {
-    public:
+    namespace logic
+    {
+      class IListener
+      {
+        public:
 
-      IListener() = default;
-      ~IListener() = default;
+          IListener() = default;
+          ~IListener() = default;
 
-      virtual void listen(const ls::std::core::Class &_info) = 0;
-  };
+          virtual void listen(const ls::std::core::Class &_info) = 0;
+      };
+    }
+  }
 }
 
 #endif

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -29,7 +29,7 @@ namespace
 
   TEST_F(StateTest, getClassName)
   {
-    ls::State state{"A"};
+    ls::std::logic::State state{"A"};
     ASSERT_STREQ("State", state.getClassName().c_str());
   }
 
@@ -38,7 +38,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::State state = ls::State("");
+                     ls::std::logic::State state = ls::std::logic::State("");
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -51,29 +51,29 @@ namespace
 
   TEST_F(StateTest, addStateConnection_v1)
   {
-    ls::State stateA{"A"};
-    ls::State stateB{"B"};
+    ls::std::logic::State stateA{"A"};
+    ls::std::logic::State stateB{"B"};
 
-    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::State>(stateB)));
+    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
   }
 
   TEST_F(StateTest, addStateConnection_v1_connection_already_exists)
   {
-    ls::State stateA{"A"};
-    ls::State stateB{"B"};
+    ls::std::logic::State stateA{"A"};
+    ls::std::logic::State stateB{"B"};
 
-    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::State>(stateB)));
-    ASSERT_FALSE(stateA.addStateConnection("AB", std::make_shared<ls::State>(stateB)));
+    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
+    ASSERT_FALSE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
   }
 
   TEST_F(StateTest, addStateConnection_v1_empty_connection_id)
   {
-    ls::State state{"A"};
+    ls::std::logic::State state{"A"};
 
     EXPECT_THROW({
                    try
                    {
-                     state.addStateConnection("", std::make_shared<ls::State>("B"));
+                     state.addStateConnection("", std::make_shared<ls::std::logic::State>("B"));
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -84,7 +84,7 @@ namespace
 
   TEST_F(StateTest, addStateConnection_v1_no_reference)
   {
-    ls::State state{"A"};
+    ls::std::logic::State state{"A"};
 
     EXPECT_THROW({
                    try
@@ -100,15 +100,15 @@ namespace
 
   TEST_F(StateTest, addStateConnection_v2)
   {
-    ls::State stateA{"A"};
-    ls::State stateB{"B"};
+    ls::std::logic::State stateA{"A"};
+    ls::std::logic::State stateB{"B"};
 
-    ASSERT_TRUE(stateA.addStateConnection(std::make_shared<ls::StateConnection>("AB", stateB.getId())));
+    ASSERT_TRUE(stateA.addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AB", stateB.getId())));
   }
 
   TEST_F(StateTest, addStateConnection_v2_no_reference)
   {
-    ls::State stateA{"A"};
+    ls::std::logic::State stateA{"A"};
 
     EXPECT_THROW({
                    try
@@ -124,9 +124,9 @@ namespace
 
   TEST_F(StateTest, clearConnections)
   {
-    ls::State stateA{"A"};
-    stateA.addStateConnection(std::make_shared<ls::StateConnection>("AB", "B"));
-    stateA.addStateConnection(std::make_shared<ls::StateConnection>("AC", "C"));
+    ls::std::logic::State stateA{"A"};
+    stateA.addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AB", "B"));
+    stateA.addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AC", "C"));
 
     ASSERT_FALSE(stateA.getConnectedStates().empty());
     stateA.clearConnections();
@@ -135,19 +135,19 @@ namespace
 
   TEST_F(StateTest, getConnectedStates)
   {
-    ls::State stateA{"A"};
+    ls::std::logic::State stateA{"A"};
     ASSERT_TRUE(stateA.getConnectedStates().empty());
   }
 
   TEST_F(StateTest, getId)
   {
-    ls::State stateA{"A"};
+    ls::std::logic::State stateA{"A"};
     ASSERT_STREQ("A", stateA.getId().c_str());
   }
 
   TEST_F(StateTest, setId)
   {
-    ls::State stateA{"A"};
+    ls::std::logic::State stateA{"A"};
     ASSERT_STREQ("A", stateA.getId().c_str());
 
     stateA.setId("B");
@@ -156,7 +156,7 @@ namespace
 
   TEST_F(StateTest, setId_empty_id)
   {
-    ls::State stateA{"A"};
+    ls::std::logic::State stateA{"A"};
 
     EXPECT_THROW({
                    try
@@ -172,19 +172,19 @@ namespace
 
   TEST_F(StateTest, hasConnection)
   {
-    ls::State stateA{"A"};
-    ls::State stateB{"B"};
-    ls::State stateC{"C"};
+    ls::std::logic::State stateA{"A"};
+    ls::std::logic::State stateB{"B"};
+    ls::std::logic::State stateC{"C"};
 
-    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::State>(stateB)));
+    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
     ASSERT_TRUE(stateA.hasConnection("AB"));
-    ASSERT_TRUE(stateA.addStateConnection("AC", std::make_shared<ls::State>(stateC)));
+    ASSERT_TRUE(stateA.addStateConnection("AC", std::make_shared<ls::std::logic::State>(stateC)));
     ASSERT_TRUE(stateA.hasConnection("AC"));
   }
 
   TEST_F(StateTest, hasConnection_no_connections_available)
   {
-    ls::State stateA{"A"};
+    ls::std::logic::State stateA{"A"};
     ASSERT_FALSE(stateA.hasConnection("AB"));
   }
 }

@@ -33,7 +33,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::SerializableJsonStateMachine serializable{nullptr};
+                     ls::std::logic::SerializableJsonStateMachine serializable{nullptr};
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -46,10 +46,10 @@ namespace
 
   TEST_F(SerializableJsonStateMachineTest, marshal)
   {
-    ls::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls::std::logic::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
     stateMachine.setStartState("A");
     stateMachine.setMemory({"A", "B", "C"});
-    ls::SerializableJsonStateMachine serializable{std::make_shared<ls::StateMachine>(stateMachine)};
+    ls::std::logic::SerializableJsonStateMachine serializable{std::make_shared<ls::std::logic::StateMachine>(stateMachine)};
 
     std::string jsonString = serializable.marshal();
     ASSERT_TRUE(!jsonString.empty());
@@ -65,8 +65,8 @@ namespace
   {
     ls::std::io::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
     ls::std::io::FileReader reader{file};
-    std::shared_ptr<ls::StateMachine> machine = std::make_shared<ls::StateMachine>("bla");
-    ls::SerializableJsonStateMachine serializable{machine};
+    std::shared_ptr<ls::std::logic::StateMachine> machine = std::make_shared<ls::std::logic::StateMachine>("bla");
+    ls::std::logic::SerializableJsonStateMachine serializable{machine};
 
     serializable.unmarshal(reader.read());
 
@@ -90,7 +90,7 @@ namespace
     ASSERT_TRUE(!machine->getStates().empty());
     ASSERT_EQ(5, machine->getStates().size());
 
-    std::shared_ptr<ls::State> state = machine->getStates().at("A");
+    std::shared_ptr<ls::std::logic::State> state = machine->getStates().at("A");
     ASSERT_STREQ("A", state->getId().c_str());
     ASSERT_EQ(1, state->getConnectedStates().size());
     ASSERT_STREQ("AB", state->getConnectedStates().at("AB")->getConnectionId().c_str());
@@ -119,26 +119,26 @@ namespace
 
   TEST_F(SerializableJsonStateMachineTest, getValue)
   {
-    std::shared_ptr<ls::StateMachine> x = std::make_shared<ls::StateMachine>("bla");
-    ls::SerializableJsonStateMachine serializable{x};
+    std::shared_ptr<ls::std::logic::StateMachine> x = std::make_shared<ls::std::logic::StateMachine>("bla");
+    ls::std::logic::SerializableJsonStateMachine serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJsonStateMachineTest, setValue)
   {
-    std::shared_ptr<ls::StateMachine> x = std::make_shared<ls::StateMachine>("bla");
-    ls::SerializableJsonStateMachine serializable{x};
+    std::shared_ptr<ls::std::logic::StateMachine> x = std::make_shared<ls::std::logic::StateMachine>("bla");
+    ls::std::logic::SerializableJsonStateMachine serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
 
-    x = std::make_shared<ls::StateMachine>("bla2");
+    x = std::make_shared<ls::std::logic::StateMachine>("bla2");
     serializable.setValue(x);
     ASSERT_TRUE(serializable.getValue() == x);
   }
 
   TEST_F(SerializableJsonStateMachineTest, setValue_no_parameter_set)
   {
-    std::shared_ptr<ls::StateMachine> stateMachine = std::make_shared<ls::StateMachine>("bla");
-    ls::SerializableJsonStateMachine serializable{stateMachine};
+    std::shared_ptr<ls::std::logic::StateMachine> stateMachine = std::make_shared<ls::std::logic::StateMachine>("bla");
+    ls::std::logic::SerializableJsonStateMachine serializable{stateMachine};
 
     EXPECT_THROW({
                    try

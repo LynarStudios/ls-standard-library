@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -18,35 +18,41 @@
 
 namespace ls
 {
-  class SerializableJsonStateMachine : public ls::std::core::Class, public ls::ISerializable
+  namespace std
   {
-    public:
+    namespace logic
+    {
+      class SerializableJsonStateMachine : public ls::std::core::Class, public ls::ISerializable
+      {
+        public:
 
-      explicit SerializableJsonStateMachine(const ::std::shared_ptr<ls::StateMachine> &_value);
-      ~SerializableJsonStateMachine() override = default;
+          explicit SerializableJsonStateMachine(const ::std::shared_ptr<ls::std::logic::StateMachine> &_value);
+          ~SerializableJsonStateMachine() override = default;
 
-      // implementation
+          // implementation
 
-      ls::std::core::byte_field marshal() override;
-      void unmarshal(const ls::std::core::byte_field &_data) override;
+          ls::std::core::byte_field marshal() override;
+          void unmarshal(const ls::std::core::byte_field &_data) override;
 
-      // additional functionality
+          // additional functionality
 
-      ::std::shared_ptr<ls::StateMachine> getValue();
-      void setValue(const ::std::shared_ptr<ls::StateMachine> &_value);
+          ::std::shared_ptr<ls::std::logic::StateMachine> getValue();
+          void setValue(const ::std::shared_ptr<ls::std::logic::StateMachine> &_value);
 
-    private:
+        private:
 
-      nlohmann::json jsonObject{};
-      ::std::shared_ptr<ls::StateMachine> value{};
+          nlohmann::json jsonObject{};
+          ::std::shared_ptr<ls::std::logic::StateMachine> value{};
 
-      void _assignValue(const ::std::shared_ptr<ls::StateMachine> &_value);
-      void _unmarshalCurrentState();
-      void _unmarshalStates();
-      void _update();
-      void _updateCurrentState();
-      void _updateStates();
-  };
+          void _assignValue(const ::std::shared_ptr<ls::std::logic::StateMachine> &_value);
+          void _unmarshalCurrentState();
+          void _unmarshalStates();
+          void _update();
+          void _updateCurrentState();
+          void _updateStates();
+      };
+    }
+  }
 }
 
 #endif

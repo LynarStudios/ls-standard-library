@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -11,18 +11,18 @@
 #include "ls_std/logic/serialization/SerializableJsonState.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::SerializableJsonStateMachine::SerializableJsonStateMachine(const ::std::shared_ptr<ls::StateMachine> &_value) : ls::std::core::Class("SerializableJsonStateMachine")
+ls::std::logic::SerializableJsonStateMachine::SerializableJsonStateMachine(const ::std::shared_ptr<ls::std::logic::StateMachine> &_value) : ls::std::core::Class("SerializableJsonStateMachine")
 {
   this->_assignValue(_value);
 }
 
-ls::std::core::byte_field ls::SerializableJsonStateMachine::marshal()
+ls::std::core::byte_field ls::std::logic::SerializableJsonStateMachine::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::SerializableJsonStateMachine::unmarshal(const ls::std::core::byte_field &_data)
+void ls::std::logic::SerializableJsonStateMachine::unmarshal(const ls::std::core::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -32,17 +32,17 @@ void ls::SerializableJsonStateMachine::unmarshal(const ls::std::core::byte_field
   this->value->setName(this->jsonObject["name"]);
 }
 
-std::shared_ptr<ls::StateMachine> ls::SerializableJsonStateMachine::getValue()
+std::shared_ptr<ls::std::logic::StateMachine> ls::std::logic::SerializableJsonStateMachine::getValue()
 {
   return this->value;
 }
 
-void ls::SerializableJsonStateMachine::setValue(const ::std::shared_ptr<ls::StateMachine> &_value)
+void ls::std::logic::SerializableJsonStateMachine::setValue(const ::std::shared_ptr<ls::std::logic::StateMachine> &_value)
 {
   this->_assignValue(_value);
 }
 
-void ls::SerializableJsonStateMachine::_assignValue(const ::std::shared_ptr<ls::StateMachine> &_value)
+void ls::std::logic::SerializableJsonStateMachine::_assignValue(const ::std::shared_ptr<ls::std::logic::StateMachine> &_value)
 {
   if (_value == nullptr)
   {
@@ -52,7 +52,7 @@ void ls::SerializableJsonStateMachine::_assignValue(const ::std::shared_ptr<ls::
   this->value = _value;
 }
 
-void ls::SerializableJsonStateMachine::_unmarshalCurrentState()
+void ls::std::logic::SerializableJsonStateMachine::_unmarshalCurrentState()
 {
   if (this->jsonObject.contains("currentState"))
   {
@@ -60,17 +60,17 @@ void ls::SerializableJsonStateMachine::_unmarshalCurrentState()
   }
 }
 
-void ls::SerializableJsonStateMachine::_unmarshalStates()
+void ls::std::logic::SerializableJsonStateMachine::_unmarshalStates()
 {
   for (const auto &serializedState : this->jsonObject["states"])
   {
-    ::std::shared_ptr<ls::State> state = ::std::make_shared<ls::State>("TMP_ID");
-    ls::SerializableJsonState{state}.unmarshal(serializedState.dump());
+    ::std::shared_ptr<ls::std::logic::State> state = ::std::make_shared<ls::std::logic::State>("TMP_ID");
+    ls::std::logic::SerializableJsonState{state}.unmarshal(serializedState.dump());
     this->value->addState(state);
   }
 }
 
-void ls::SerializableJsonStateMachine::_update()
+void ls::std::logic::SerializableJsonStateMachine::_update()
 {
   this->jsonObject = {{"memory", this->value->getMemory()},
                       {"name",   this->value->getName()}};
@@ -79,7 +79,7 @@ void ls::SerializableJsonStateMachine::_update()
   this->_updateStates();
 }
 
-void ls::SerializableJsonStateMachine::_updateCurrentState()
+void ls::std::logic::SerializableJsonStateMachine::_updateCurrentState()
 {
   if (this->value->getCurrentState() != nullptr)
   {
@@ -87,13 +87,13 @@ void ls::SerializableJsonStateMachine::_updateCurrentState()
   }
 }
 
-void ls::SerializableJsonStateMachine::_updateStates()
+void ls::std::logic::SerializableJsonStateMachine::_updateStates()
 {
   ::std::string jsonString{};
 
   for (const auto &state : this->value->getStates())
   {
-    jsonString = ls::SerializableJsonState{state.second}.marshal();
+    jsonString = ls::std::logic::SerializableJsonState{state.second}.marshal();
     this->jsonObject["states"][state.first] = nlohmann::json::parse(jsonString);
   }
 }

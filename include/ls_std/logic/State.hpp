@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -19,32 +19,38 @@
 
 namespace ls
 {
-  class State : public ls::std::core::Class
+  namespace std
   {
-    public:
+    namespace logic
+    {
+      class State : public ls::std::core::Class
+      {
+        public:
 
-      explicit State(const ls::StateId& _id);
-      ~State() override = default;
+          explicit State(const ls::std::logic::StateId &_id);
+          ~State() override = default;
 
-      // additional functionality
+          // additional functionality
 
-      bool addStateConnection(const ls::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::State> &_connectedState);
-      bool addStateConnection(const ::std::shared_ptr<ls::StateConnection> &_connection);
-      void clearConnections();
-      ::std::unordered_map<ls::StateConnectionId, ::std::shared_ptr<ls::StateConnection>> getConnectedStates();
-      ls::StateId getId();
-      bool hasConnection(const ls::StateConnectionId &_connectionId);
-      void setId(const ls::StateId& _id);
+          bool addStateConnection(const ls::std::logic::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::std::logic::State> &_connectedState);
+          bool addStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_connection);
+          void clearConnections();
+          ::std::unordered_map<ls::std::logic::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> getConnectedStates();
+          ls::std::logic::StateId getId();
+          bool hasConnection(const ls::std::logic::StateConnectionId &_connectionId);
+          void setId(const ls::std::logic::StateId &_id);
 
-    private:
+        private:
 
-      ::std::unordered_map<ls::StateConnectionId, ::std::shared_ptr<ls::StateConnection>> connectedStates{};
-      ls::StateId id{};
+          ::std::unordered_map<ls::std::logic::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> connectedStates{};
+          ls::std::logic::StateId id{};
 
-      void _assignStateId(const ls::StateId& _id);
-      void _clearConnections();
-      bool _hasConnection(const ls::StateConnectionId &_connectionId);
-  };
+          void _assignStateId(const ls::std::logic::StateId &_id);
+          void _clearConnections();
+          bool _hasConnection(const ls::std::logic::StateConnectionId &_connectionId);
+      };
+    }
+  }
 }
 
 #endif

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -17,23 +17,29 @@
 
 namespace ls
 {
-  class Narrator : public ls::std::core::Class
+  namespace std
   {
-    public:
+    namespace logic
+    {
+      class Narrator : public ls::std::core::Class
+      {
+        public:
 
-      Narrator();
-      ~Narrator() override = default;
+          Narrator();
+          ~Narrator() override = default;
 
-      bool addListener(const ::std::shared_ptr<ls::IListener> &_listener);
-      void clear();
-      ::std::list<::std::shared_ptr<ls::IListener>> getListeners();
-      bool removeListener(const ::std::shared_ptr<ls::IListener> &_listener);
-      void tell(const ls::std::core::Class &_info);
+          bool addListener(const ::std::shared_ptr<ls::std::logic::IListener> &_listener);
+          void clear();
+          ::std::list<::std::shared_ptr<ls::std::logic::IListener>> getListeners();
+          bool removeListener(const ::std::shared_ptr<ls::std::logic::IListener> &_listener);
+          void tell(const ls::std::core::Class &_info);
 
-    private:
+        private:
 
-      ::std::list<::std::shared_ptr<ls::IListener>> listeners{};
-  };
+          ::std::list<::std::shared_ptr<ls::std::logic::IListener>> listeners{};
+      };
+    }
+  }
 }
 
 #endif

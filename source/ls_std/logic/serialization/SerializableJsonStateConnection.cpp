@@ -3,25 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
 #include "ls_std/logic/serialization/SerializableJsonStateConnection.hpp"
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::SerializableJsonStateConnection::SerializableJsonStateConnection(const ::std::shared_ptr<ls::StateConnection> &_value) : ls::std::core::Class("SerializableJsonStateConnection")
+ls::std::logic::SerializableJsonStateConnection::SerializableJsonStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value) : ls::std::core::Class("SerializableJsonStateConnection")
 {
   this->_assignValue(_value);
 }
 
-ls::std::core::byte_field ls::SerializableJsonStateConnection::marshal()
+ls::std::core::byte_field ls::std::logic::SerializableJsonStateConnection::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::SerializableJsonStateConnection::unmarshal(const ls::std::core::byte_field &_data)
+void ls::std::logic::SerializableJsonStateConnection::unmarshal(const ls::std::core::byte_field &_data)
 {
   ::std::string jsonString = ::std::string(_data);
   this->jsonObject = nlohmann::json::parse(jsonString);
@@ -31,18 +31,18 @@ void ls::SerializableJsonStateConnection::unmarshal(const ls::std::core::byte_fi
   this->value->updatePassCondition(this->jsonObject["condition"]);
 }
 
-std::shared_ptr<ls::StateConnection> ls::SerializableJsonStateConnection::getValue()
+std::shared_ptr<ls::std::logic::StateConnection> ls::std::logic::SerializableJsonStateConnection::getValue()
 {
   return this->value;
 }
 
-void ls::SerializableJsonStateConnection::setValue(const ::std::shared_ptr<ls::StateConnection> &_value)
+void ls::std::logic::SerializableJsonStateConnection::setValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value)
 {
   this->_assignValue(_value);
   this->_clear();
 }
 
-void ls::SerializableJsonStateConnection::_assignValue(const ::std::shared_ptr<ls::StateConnection> &_value)
+void ls::std::logic::SerializableJsonStateConnection::_assignValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value)
 {
   if (_value == nullptr)
   {
@@ -52,12 +52,12 @@ void ls::SerializableJsonStateConnection::_assignValue(const ::std::shared_ptr<l
   this->value = _value;
 }
 
-void ls::SerializableJsonStateConnection::_clear()
+void ls::std::logic::SerializableJsonStateConnection::_clear()
 {
   this->jsonObject.clear();
 }
 
-void ls::SerializableJsonStateConnection::_update()
+void ls::std::logic::SerializableJsonStateConnection::_update()
 {
   this->jsonObject = {{"condition",    this->value->isPassable()},
                       {"connectionId", this->value->getConnectionId()},

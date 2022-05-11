@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -11,10 +11,10 @@
 #include <ls_std/logic/Narrator.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::Narrator::Narrator() : ls::std::core::Class("Narrator")
+ls::std::logic::Narrator::Narrator() : ls::std::core::Class("Narrator")
 {}
 
-bool ls::Narrator::addListener(const ::std::shared_ptr<ls::IListener> &_listener)
+bool ls::std::logic::Narrator::addListener(const ::std::shared_ptr<ls::std::logic::IListener> &_listener)
 {
   bool wasAdded{};
 
@@ -34,17 +34,17 @@ bool ls::Narrator::addListener(const ::std::shared_ptr<ls::IListener> &_listener
   return wasAdded;
 }
 
-void ls::Narrator::clear()
+void ls::std::logic::Narrator::clear()
 {
   this->listeners.clear();
 }
 
-std::list<std::shared_ptr<ls::IListener>> ls::Narrator::getListeners()
+std::list<std::shared_ptr<ls::std::logic::IListener>> ls::std::logic::Narrator::getListeners()
 {
   return this->listeners;
 }
 
-bool ls::Narrator::removeListener(const ::std::shared_ptr<ls::IListener> &_listener)
+bool ls::std::logic::Narrator::removeListener(const ::std::shared_ptr<ls::std::logic::IListener> &_listener)
 {
   bool wasRemoved{};
 
@@ -64,7 +64,7 @@ bool ls::Narrator::removeListener(const ::std::shared_ptr<ls::IListener> &_liste
   return wasRemoved;
 }
 
-void ls::Narrator::tell(const ls::std::core::Class &_info)
+void ls::std::logic::Narrator::tell(const ls::std::core::Class &_info)
 {
   for (const auto &listener : this->listeners)
   {

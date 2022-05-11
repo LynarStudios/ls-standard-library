@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -18,32 +18,38 @@
 
 namespace ls
 {
-  class SerializableJsonStateConnection : public ls::std::core::Class, public ls::ISerializable
+  namespace std
   {
-    public:
+    namespace logic
+    {
+      class SerializableJsonStateConnection : public ls::std::core::Class, public ls::ISerializable
+      {
+        public:
 
-      explicit SerializableJsonStateConnection(const ::std::shared_ptr<ls::StateConnection> &_value);
-      ~SerializableJsonStateConnection() override = default;
+          explicit SerializableJsonStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
+          ~SerializableJsonStateConnection() override = default;
 
-      // implementation
+          // implementation
 
-      ls::std::core::byte_field marshal() override;
-      void unmarshal(const ls::std::core::byte_field &_data) override;
+          ls::std::core::byte_field marshal() override;
+          void unmarshal(const ls::std::core::byte_field &_data) override;
 
-      // additional functionality
+          // additional functionality
 
-      ::std::shared_ptr<ls::StateConnection> getValue();
-      void setValue(const ::std::shared_ptr<ls::StateConnection> &_value);
+          ::std::shared_ptr<ls::std::logic::StateConnection> getValue();
+          void setValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
 
-    private:
+        private:
 
-      nlohmann::json jsonObject{};
-      ::std::shared_ptr<ls::StateConnection> value{};
+          nlohmann::json jsonObject{};
+          ::std::shared_ptr<ls::std::logic::StateConnection> value{};
 
-      void _assignValue(const ::std::shared_ptr<ls::StateConnection> &_value);
-      void _clear();
-      void _update();
-  };
+          void _assignValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
+          void _clear();
+          void _update();
+      };
+    }
+  }
 }
 
 #endif

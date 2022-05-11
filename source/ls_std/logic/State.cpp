@@ -3,22 +3,22 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
 #include <ls_std/logic/State.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::State::State(const ls::StateId& _id) : ls::std::core::Class("State")
+ls::std::logic::State::State(const ls::std::logic::StateId& _id) : ls::std::core::Class("State")
 {
   this->_assignStateId(_id);
 }
 
-bool ls::State::addStateConnection(const ls::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::State> &_connectedState)
+bool ls::std::logic::State::addStateConnection(const ls::std::logic::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::std::logic::State> &_connectedState)
 {
   bool added{};
-  ::std::shared_ptr<ls::StateConnection> connection{};
+  ::std::shared_ptr<ls::std::logic::StateConnection> connection{};
 
   if (_connectionId.empty() || _connectedState == nullptr)
   {
@@ -28,7 +28,7 @@ bool ls::State::addStateConnection(const ls::StateConnectionId &_connectionId, c
   {
     if (!this->_hasConnection(_connectionId))
     {
-      connection = ::std::make_shared<ls::StateConnection>(_connectionId, _connectedState->getId());
+      connection = ::std::make_shared<ls::std::logic::StateConnection>(_connectionId, _connectedState->getId());
       added = this->connectedStates.insert({_connectionId, connection}).second;
     }
   }
@@ -36,7 +36,7 @@ bool ls::State::addStateConnection(const ls::StateConnectionId &_connectionId, c
   return added;
 }
 
-bool ls::State::addStateConnection(const ::std::shared_ptr<ls::StateConnection> &_connection)
+bool ls::std::logic::State::addStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_connection)
 {
   bool added;
 
@@ -52,32 +52,32 @@ bool ls::State::addStateConnection(const ::std::shared_ptr<ls::StateConnection> 
   return added;
 }
 
-void ls::State::clearConnections()
+void ls::std::logic::State::clearConnections()
 {
   this->_clearConnections();
 }
 
-std::unordered_map<ls::StateConnectionId, std::shared_ptr<ls::StateConnection>> ls::State::getConnectedStates()
+std::unordered_map<ls::std::logic::StateConnectionId, std::shared_ptr<ls::std::logic::StateConnection>> ls::std::logic::State::getConnectedStates()
 {
   return this->connectedStates;
 }
 
-ls::StateId ls::State::getId()
+ls::std::logic::StateId ls::std::logic::State::getId()
 {
   return this->id;
 }
 
-bool ls::State::hasConnection(const ls::StateConnectionId &_connectionId)
+bool ls::std::logic::State::hasConnection(const ls::std::logic::StateConnectionId &_connectionId)
 {
   return this->_hasConnection(_connectionId);
 }
 
-void ls::State::setId(const ls::StateId& _id)
+void ls::std::logic::State::setId(const ls::std::logic::StateId& _id)
 {
   this->_assignStateId(_id);
 }
 
-void ls::State::_assignStateId(const ls::StateId &_id)
+void ls::std::logic::State::_assignStateId(const ls::std::logic::StateId &_id)
 {
   if (_id.empty())
   {
@@ -87,12 +87,12 @@ void ls::State::_assignStateId(const ls::StateId &_id)
   this->id = _id;
 }
 
-void ls::State::_clearConnections()
+void ls::std::logic::State::_clearConnections()
 {
   this->connectedStates.clear();
 }
 
-bool ls::State::_hasConnection(const ls::StateConnectionId &_connectionId)
+bool ls::std::logic::State::_hasConnection(const ls::std::logic::StateConnectionId &_connectionId)
 {
   return this->connectedStates.find(_connectionId) != this->connectedStates.end();
 }

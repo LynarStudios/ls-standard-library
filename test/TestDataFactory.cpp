@@ -9,15 +9,15 @@
 
 #include "TestDataFactory.hpp"
 
-ls::StateMachine ls_std_test::TestDataFactory::createStateMachine()
+ls::std::logic::StateMachine ls_std_test::TestDataFactory::createStateMachine()
 {
-  ls::StateMachine stateMachine{"test_machine"};
+  ls::std::logic::StateMachine stateMachine{"test_machine"};
 
-  std::shared_ptr<ls::State> stateA = std::make_shared<ls::State>("A");
-  std::shared_ptr<ls::State> stateB = std::make_shared<ls::State>("B");
-  std::shared_ptr<ls::State> stateC = std::make_shared<ls::State>("C");
-  std::shared_ptr<ls::State> stateD = std::make_shared<ls::State>("D");
-  std::shared_ptr<ls::State> stateE = std::make_shared<ls::State>("E");
+  std::shared_ptr<ls::std::logic::State> stateA = std::make_shared<ls::std::logic::State>("A");
+  std::shared_ptr<ls::std::logic::State> stateB = std::make_shared<ls::std::logic::State>("B");
+  std::shared_ptr<ls::std::logic::State> stateC = std::make_shared<ls::std::logic::State>("C");
+  std::shared_ptr<ls::std::logic::State> stateD = std::make_shared<ls::std::logic::State>("D");
+  std::shared_ptr<ls::std::logic::State> stateE = std::make_shared<ls::std::logic::State>("E");
 
   // add states
 

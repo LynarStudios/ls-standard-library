@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-09
+ * Changed:         2022-05-11
  *
  * */
 
@@ -18,7 +18,7 @@
 
 namespace ls_std_test
 {
-  class DailyNewsAgency : public ls_std_test::NewsAgency, public ls::IListener
+  class DailyNewsAgency : public ls_std_test::NewsAgency, public ls::std::logic::IListener
   {
     public:
 
