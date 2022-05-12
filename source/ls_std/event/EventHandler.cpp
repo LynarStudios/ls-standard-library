@@ -10,7 +10,7 @@
 #include <ls_std/event/EventHandler.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::event::EventHandler::EventHandler(const ls::std::core::type::event_id& _id) : ls::std::logic::Narrator()
+ls::std::event::EventHandler::EventHandler(const ls::std::core::type::event_id& _id) : ls::std::event::Narrator()
 {
   this->_assignId(_id);
 }

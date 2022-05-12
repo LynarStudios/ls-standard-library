@@ -50,6 +50,7 @@
 #include "event/Event.hpp"
 #include "event/EventHandler.hpp"
 #include "event/EventManager.hpp"
+#include "event/Narrator.hpp"
 
 #include "io/kv/KvDocument.hpp"
 #include "io/kv/KvFileReader.hpp"
@@ -80,7 +81,6 @@
 #include "logic/serialization/SerializableJsonState.hpp"
 #include "logic/serialization/SerializableJsonStateConnection.hpp"
 #include "logic/serialization/SerializableJsonStateMachine.hpp"
-#include "logic/Narrator.hpp"
 #include "logic/State.hpp"
 #include "logic/StateConnection.hpp"
 #include "logic/StateMachine.hpp"

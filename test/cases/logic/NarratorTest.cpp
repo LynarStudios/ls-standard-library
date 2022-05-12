@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -44,7 +44,7 @@ namespace
   TEST_F(NarratorTest, addListener)
   {
     this->createCars();
-    ls::std::logic::Narrator paintingMachine{};
+    ls::std::event::Narrator paintingMachine{};
 
     ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes1)));
     ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes2)));
@@ -54,7 +54,7 @@ namespace
   TEST_F(NarratorTest, addListener_listener_already_exists)
   {
     this->createCars();
-    ls::std::logic::Narrator paintingMachine{};
+    ls::std::event::Narrator paintingMachine{};
 
     ASSERT_TRUE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes1)));
     ASSERT_FALSE(paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes1)));
@@ -65,7 +65,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::logic::Narrator paintingMachine{};
+                     ls::std::event::Narrator paintingMachine{};
                      paintingMachine.addListener(nullptr);
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
@@ -78,7 +78,7 @@ namespace
   TEST_F(NarratorTest, clear)
   {
     this->createCars();
-    ls::std::logic::Narrator paintingMachine{};
+    ls::std::event::Narrator paintingMachine{};
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes1));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes2));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes3));
@@ -90,14 +90,14 @@ namespace
 
   TEST_F(NarratorTest, getListeners)
   {
-    ls::std::logic::Narrator narrator{};
+    ls::std::event::Narrator narrator{};
     ASSERT_TRUE(narrator.getListeners().empty());
   }
 
   TEST_F(NarratorTest, removeListener)
   {
     this->createCars();
-    ls::std::logic::Narrator paintingMachine{};
+    ls::std::event::Narrator paintingMachine{};
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes1));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes2));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes3));
@@ -111,7 +111,7 @@ namespace
   TEST_F(NarratorTest, removeListener_no_listener_available)
   {
     this->createCars();
-    ls::std::logic::Narrator paintingMachine{};
+    ls::std::event::Narrator paintingMachine{};
     ASSERT_FALSE(paintingMachine.removeListener(this->mercedes2));
   }
 
@@ -120,7 +120,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::logic::Narrator paintingMachine{};
+                     ls::std::event::Narrator paintingMachine{};
                      paintingMachine.removeListener(nullptr);
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
@@ -133,7 +133,7 @@ namespace
   TEST_F(NarratorTest, tell)
   {
     this->createCars();
-    ls::std::logic::Narrator paintingMachine{};
+    ls::std::event::Narrator paintingMachine{};
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes1));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes2));
     paintingMachine.addListener(std::dynamic_pointer_cast<ls::std::core::IListener>(this->mercedes3));

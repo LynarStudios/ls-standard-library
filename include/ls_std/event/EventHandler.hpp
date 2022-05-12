@@ -15,7 +15,7 @@
 #include <memory>
 #include <ls_std/core/interface/IListener.hpp>
 #include "Event.hpp"
-#include <ls_std/logic/Narrator.hpp> // FIXME: dependency to "logic" module
+#include "Narrator.hpp"
 
 namespace ls
 {
@@ -23,7 +23,7 @@ namespace ls
   {
     namespace event
     {
-      class EventHandler : public ls::std::logic::Narrator
+      class EventHandler : public ls::std::event::Narrator
       {
         public:
 
