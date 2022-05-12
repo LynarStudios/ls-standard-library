@@ -12,7 +12,7 @@
 
 #include "Class.hpp"
 #include <ls_std/core/interface/ISerializable.hpp>
-#include "ls_std/core/types/Types.hpp"
+#include <ls_std/core/types/Types.hpp>
 
 namespace ls
 {

@@ -10,7 +10,7 @@
 #ifndef LS_STD_SERIALIZABLE_HPP
 #define LS_STD_SERIALIZABLE_HPP
 
-#include "ls_std/core/types/Types.hpp"
+#include <ls_std/core/types/Types.hpp>
 
 namespace ls
 {
