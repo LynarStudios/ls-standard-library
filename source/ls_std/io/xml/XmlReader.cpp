@@ -10,7 +10,7 @@
 #include <ls_std/io/xml/XmlReader.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/io/FileReader.hpp>
-#include <ls_std/boxing/String.hpp>
+#include <ls_std/boxing/String.hpp> // FIXME: remove "boxing" dependency from "io" module
 #include <ls_std/io/xml/XmlParser.hpp>
 
 ls::std::io::XmlReader::XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath)

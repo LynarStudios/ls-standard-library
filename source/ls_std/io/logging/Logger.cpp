@@ -8,9 +8,9 @@
  * */
 
 #include <ls_std/io/logging/Logger.hpp>
-#include <ls_std/time/Date.hpp>
+#include <ls_std/time/Date.hpp> // FIXME: remove "time" dependency from "io" module
 #include <ls_std/io/NewLine.hpp>
-#include <ls_std/boxing/String.hpp>
+#include <ls_std/boxing/String.hpp> // FIXME: remove "boxing" dependency from "io" module
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::IWriter> &_writer)

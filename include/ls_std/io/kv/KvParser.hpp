@@ -11,7 +11,7 @@
 #define LS_STD_KV_PARSER_HPP
 
 #include <ls_std/core/Class.hpp>
-#include "ls_std/core/types/Types.hpp"
+#include <ls_std/core/types/Types.hpp>
 #include "KvDocument.hpp"
 #include "KvParseParameter.hpp"
 #include <memory>

@@ -9,7 +9,7 @@
 
 #include <ls_std/io/xml/XmlParser.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
-#include <ls_std/boxing/String.hpp>
+#include <ls_std/boxing/String.hpp> // FIXME: remove "boxing" dependency from "io" module
 
 ls::std::io::XmlParser::XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document) : ls::std::core::Class("XmlParser")
 {

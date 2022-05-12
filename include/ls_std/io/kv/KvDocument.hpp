@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "KvPair.hpp"
-#include "ls_std/core/types/KvTypes.hpp"
+#include <ls_std/core/types/KvTypes.hpp>
 #include <map>
 
 namespace ls
