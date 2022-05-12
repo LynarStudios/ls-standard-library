@@ -67,7 +67,8 @@ set(SOURCE_FILES_EVENT
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/serialization/SerializableJsonEvent.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Narrator.cpp)
 
 set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvDocument.cpp
@@ -93,11 +94,9 @@ set(SOURCE_FILES_LOGIC
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonState.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonStateConnection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonStateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/Narrator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp
-        )
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp)
 
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
@@ -131,6 +130,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/NarratorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/NewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/DailyNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
@@ -163,13 +163,11 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateConnectionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateMachineTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/NarratorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataCar.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataMercedesCar.cpp
-            )
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataMercedesCar.cpp)
 
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
