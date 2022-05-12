@@ -16,7 +16,7 @@
 #include <vector>
 #include <ls_std/core/Class.hpp>
 #include "State.hpp"
-#include "ls_std/core/types/StateMachineTypes.hpp"
+#include <ls_std/core/types/StateMachineTypes.hpp>
 
 namespace ls
 {

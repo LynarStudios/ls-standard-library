@@ -13,7 +13,7 @@
 #include <memory>
 #include <unordered_map>
 #include <ls_std/core/Class.hpp>
-#include "ls_std/core/types/StateMachineTypes.hpp"
+#include <ls_std/core/types/StateMachineTypes.hpp>
 #include "StateConnection.hpp"
 #include <ls_std/core/interface/ISerializable.hpp>
 
