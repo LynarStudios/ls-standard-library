@@ -27,27 +27,27 @@ namespace ls
       {
         public:
 
-          explicit State(const ls::std::core::type::StateId &_id);
+          explicit State(const ls::std::core::type::state_id &_id);
           ~State() override = default;
 
           // additional functionality
 
-          bool addStateConnection(const ls::std::core::type::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::std::logic::State> &_connectedState);
+          bool addStateConnection(const ls::std::core::type::state_connection_id &_connectionId, const ::std::shared_ptr<ls::std::logic::State> &_connectedState);
           bool addStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_connection);
           void clearConnections();
-          ::std::unordered_map<ls::std::core::type::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> getConnectedStates();
-          ls::std::core::type::StateId getId();
-          bool hasConnection(const ls::std::core::type::StateConnectionId &_connectionId);
-          void setId(const ls::std::core::type::StateId &_id);
+          ::std::unordered_map<ls::std::core::type::state_connection_id, ::std::shared_ptr<ls::std::logic::StateConnection>> getConnectedStates();
+          ls::std::core::type::state_id getId();
+          bool hasConnection(const ls::std::core::type::state_connection_id &_connectionId);
+          void setId(const ls::std::core::type::state_id &_id);
 
         private:
 
-          ::std::unordered_map<ls::std::core::type::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> connectedStates{};
-          ls::std::core::type::StateId id{};
+          ::std::unordered_map<ls::std::core::type::state_connection_id, ::std::shared_ptr<ls::std::logic::StateConnection>> connectedStates{};
+          ls::std::core::type::state_id id{};
 
-          void _assignStateId(const ls::std::core::type::StateId &_id);
+          void _assignStateId(const ls::std::core::type::state_id &_id);
           void _clearConnections();
-          bool _hasConnection(const ls::std::core::type::StateConnectionId &_connectionId);
+          bool _hasConnection(const ls::std::core::type::state_connection_id &_connectionId);
       };
     }
   }

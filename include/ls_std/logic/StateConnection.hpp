@@ -24,24 +24,24 @@ namespace ls
       {
         public:
 
-          explicit StateConnection(const ls::std::core::type::StateConnectionId &_connectionId, const ls::std::core::type::StateId &_stateId);
+          explicit StateConnection(const ls::std::core::type::state_connection_id &_connectionId, const ls::std::core::type::state_id &_stateId);
           ~StateConnection() override = default;
 
-          ls::std::core::type::StateConnectionId getConnectionId();
-          ls::std::core::type::StateId getStateId();
+          ls::std::core::type::state_connection_id getConnectionId();
+          ls::std::core::type::state_id getStateId();
           bool isPassable() const;
-          void setConnectionId(const ls::std::core::type::StateConnectionId &_connectionId);
-          void setStateId(const ls::std::core::type::StateId &_stateId);
+          void setConnectionId(const ls::std::core::type::state_connection_id &_connectionId);
+          void setStateId(const ls::std::core::type::state_id &_stateId);
           void updatePassCondition(bool _condition);
 
         private:
 
           bool condition{};
-          ls::std::core::type::StateConnectionId connectionId{};
-          ls::std::core::type::StateId stateId{};
+          ls::std::core::type::state_connection_id connectionId{};
+          ls::std::core::type::state_id stateId{};
 
-          void _assignConnectionId(const ls::std::core::type::StateConnectionId &_connectionId);
-          void _assignStateId(const ls::std::core::type::StateId &_stateId);
+          void _assignConnectionId(const ls::std::core::type::state_connection_id &_connectionId);
+          void _assignStateId(const ls::std::core::type::state_id &_stateId);
       };
     }
   }

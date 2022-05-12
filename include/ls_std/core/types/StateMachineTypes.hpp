@@ -20,8 +20,8 @@ namespace ls
     {
       namespace type
       {
-        using StateConnectionId = ::std::string;
-        using StateId = ::std::string;
+        using state_connection_id = ::std::string;
+        using state_id = ::std::string;
       }
     }
   }

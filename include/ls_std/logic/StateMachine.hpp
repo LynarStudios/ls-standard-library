@@ -33,27 +33,27 @@ namespace ls
 
           bool addState(const ::std::shared_ptr<ls::std::logic::State> &_state);
           ::std::shared_ptr<ls::std::logic::State> getCurrentState();
-          ::std::vector<ls::std::core::type::StateId> getMemory();
+          ::std::vector<ls::std::core::type::state_id> getMemory();
           ::std::string getName();
-          ::std::unordered_map<ls::std::core::type::StateId, ::std::shared_ptr<ls::std::logic::State>> getStates();
-          bool hasState(const ls::std::core::type::StateId &_id);
+          ::std::unordered_map<ls::std::core::type::state_id, ::std::shared_ptr<ls::std::logic::State>> getStates();
+          bool hasState(const ls::std::core::type::state_id &_id);
           bool proceed();
-          void setMemory(const ::std::vector<ls::std::core::type::StateId> &_memory);
+          void setMemory(const ::std::vector<ls::std::core::type::state_id> &_memory);
           void setName(const ::std::string &_name);
-          bool setStartState(const ls::std::core::type::StateId &_id);
+          bool setStartState(const ls::std::core::type::state_id &_id);
 
         private:
 
           ::std::shared_ptr<ls::std::logic::State> currentState{};
-          ::std::vector<ls::std::core::type::StateId> memory{};
+          ::std::vector<ls::std::core::type::state_id> memory{};
           ::std::string name{};
-          ::std::unordered_map<ls::std::core::type::StateId, ::std::shared_ptr<ls::std::logic::State>> states{};
+          ::std::unordered_map<ls::std::core::type::state_id, ::std::shared_ptr<ls::std::logic::State>> states{};
 
-          void _assignMemory(const ::std::vector<ls::std::core::type::StateId> &_memory);
+          void _assignMemory(const ::std::vector<ls::std::core::type::state_id> &_memory);
           void _assignName(const ::std::string &_name);
-          ::std::vector<ls::std::core::type::StateId> _getNextValidStates();
-          void _remember(const ls::std::core::type::StateId &_id);
-          bool _hasState(const ls::std::core::type::StateId &_id);
+          ::std::vector<ls::std::core::type::state_id> _getNextValidStates();
+          void _remember(const ls::std::core::type::state_id &_id);
+          bool _hasState(const ls::std::core::type::state_id &_id);
       };
     }
   }

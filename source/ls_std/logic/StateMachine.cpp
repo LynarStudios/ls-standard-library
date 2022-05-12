@@ -39,7 +39,7 @@ std::shared_ptr<ls::std::logic::State> ls::std::logic::StateMachine::getCurrentS
   return this->currentState;
 }
 
-std::vector<ls::std::core::type::StateId> ls::std::logic::StateMachine::getMemory()
+std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::getMemory()
 {
   return this->memory;
 }
@@ -49,19 +49,19 @@ std::string ls::std::logic::StateMachine::getName()
   return this->name;
 }
 
-std::unordered_map<ls::std::core::type::StateId, std::shared_ptr<ls::std::logic::State>> ls::std::logic::StateMachine::getStates()
+std::unordered_map<ls::std::core::type::state_id, std::shared_ptr<ls::std::logic::State>> ls::std::logic::StateMachine::getStates()
 {
   return this->states;
 }
 
-bool ls::std::logic::StateMachine::hasState(const ls::std::core::type::StateId &_id)
+bool ls::std::logic::StateMachine::hasState(const ls::std::core::type::state_id &_id)
 {
   return this->_hasState(_id);
 }
 
 bool ls::std::logic::StateMachine::proceed()
 {
-  ::std::vector<ls::std::core::type::StateId> nextValidStates = this->_getNextValidStates();
+  ::std::vector<ls::std::core::type::state_id> nextValidStates = this->_getNextValidStates();
   bool onlyOneWayToGo = nextValidStates.size() == 1;
 
   if (onlyOneWayToGo)
@@ -73,7 +73,7 @@ bool ls::std::logic::StateMachine::proceed()
   return onlyOneWayToGo;
 }
 
-void ls::std::logic::StateMachine::setMemory(const ::std::vector<ls::std::core::type::StateId>& _memory)
+void ls::std::logic::StateMachine::setMemory(const ::std::vector<ls::std::core::type::state_id>& _memory)
 {
   this->_assignMemory(_memory);
 }
@@ -83,7 +83,7 @@ void ls::std::logic::StateMachine::setName(const ::std::string& _name)
   this->_assignName(_name);
 }
 
-bool ls::std::logic::StateMachine::setStartState(const ls::std::core::type::StateId &_id)
+bool ls::std::logic::StateMachine::setStartState(const ls::std::core::type::state_id &_id)
 {
   bool startStateSet{};
 
@@ -104,7 +104,7 @@ bool ls::std::logic::StateMachine::setStartState(const ls::std::core::type::Stat
   return startStateSet;
 }
 
-void ls::std::logic::StateMachine::_assignMemory(const ::std::vector<ls::std::core::type::StateId> &_memory)
+void ls::std::logic::StateMachine::_assignMemory(const ::std::vector<ls::std::core::type::state_id> &_memory)
 {
   if (_memory.empty())
   {
@@ -124,9 +124,9 @@ void ls::std::logic::StateMachine::_assignName(const ::std::string &_name)
   this->name = _name;
 }
 
-std::vector<ls::std::core::type::StateId> ls::std::logic::StateMachine::_getNextValidStates()
+std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::_getNextValidStates()
 {
-  ::std::vector<ls::std::core::type::StateId> validStates{};
+  ::std::vector<ls::std::core::type::state_id> validStates{};
 
   for (const auto &state : this->currentState->getConnectedStates())
   {
@@ -139,12 +139,12 @@ std::vector<ls::std::core::type::StateId> ls::std::logic::StateMachine::_getNext
   return validStates;
 }
 
-void ls::std::logic::StateMachine::_remember(const ls::std::core::type::StateId &_id)
+void ls::std::logic::StateMachine::_remember(const ls::std::core::type::state_id &_id)
 {
   this->memory.push_back(_id);
 }
 
-bool ls::std::logic::StateMachine::_hasState(const ls::std::core::type::StateId &_id)
+bool ls::std::logic::StateMachine::_hasState(const ls::std::core::type::state_id &_id)
 {
   return this->states.find(_id) != this->states.end();
 }

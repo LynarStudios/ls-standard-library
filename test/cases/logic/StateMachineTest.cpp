@@ -172,7 +172,7 @@ namespace
   TEST_F(StateMachineTest, setMemory_no_memory)
   {
     ls::std::logic::StateMachine stateMachine{"test_machine"};
-    std::vector<ls::std::core::type::StateId> memory{};
+    std::vector<ls::std::core::type::state_id> memory{};
 
     EXPECT_THROW({
                    try
