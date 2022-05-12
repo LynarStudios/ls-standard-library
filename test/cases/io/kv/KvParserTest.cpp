@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -50,7 +50,7 @@ namespace
   {
     std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
     ls::std::io::KvParser parser{document};
-    ls::std::core::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
+    ls::std::core::type::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
     parser.parse(data);
 
     ASSERT_EQ(3, document->getPairs().size());

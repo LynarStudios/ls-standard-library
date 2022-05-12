@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-29
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -33,6 +33,10 @@
 #include "core/interface/ISerializable.hpp"
 #include "core/interface/IStorable.hpp"
 #include "core/interface/IWriter.hpp"
+#include "core/types/EventTypes.hpp"
+#include "core/types/KvTypes.hpp"
+#include "core/types/StateMachineTypes.hpp"
+#include "core/types/Types.hpp"
 #include "core/utils/RegexUtils.hpp"
 #include "core/utils/STLUtils.hpp"
 #if _WIN32
@@ -40,21 +44,18 @@
 #endif
 #include "core/Class.hpp"
 #include "core/LibraryVersion.hpp"
-#include "core/Types.hpp"
 #include "core/Version.hpp"
 
 #include "event/serialization/SerializableJsonEvent.hpp"
 #include "event/Event.hpp"
 #include "event/EventHandler.hpp"
 #include "event/EventManager.hpp"
-#include "event/EventTypes.hpp"
 
 #include "io/kv/KvDocument.hpp"
 #include "io/kv/KvFileReader.hpp"
 #include "io/kv/KvPair.hpp"
 #include "io/kv/KvParseParameter.hpp"
 #include "io/kv/KvParser.hpp"
-#include "io/kv/KvTypes.hpp"
 #include "io/logging/Logger.hpp"
 #include "io/logging/LogLevel.hpp"
 #include "io/logging/LogLevelValue.hpp"
@@ -83,7 +84,6 @@
 #include "logic/State.hpp"
 #include "logic/StateConnection.hpp"
 #include "logic/StateMachine.hpp"
-#include "logic/StateMachineTypes.hpp"
 
 #include "time/Date.hpp"
 

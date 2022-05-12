@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -172,7 +172,7 @@ namespace
   TEST_F(StateMachineTest, setMemory_no_memory)
   {
     ls::std::logic::StateMachine stateMachine{"test_machine"};
-    std::vector<ls::std::logic::StateId> memory{};
+    std::vector<ls::std::core::type::StateId> memory{};
 
     EXPECT_THROW({
                    try

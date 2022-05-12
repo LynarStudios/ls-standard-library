@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -15,7 +15,7 @@
 ls::std::event::EventManager::EventManager() : ls::std::core::Class("EventManager")
 {}
 
-void ls::std::event::EventManager::subscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener)
+void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
@@ -32,7 +32,7 @@ void ls::std::event::EventManager::subscribe(const ls::std::event::event_id &_id
   }
 }
 
-void ls::std::event::EventManager::unsubscribe(const ls::std::event::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener)
+void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
@@ -56,7 +56,7 @@ bool ls::std::event::EventManager::addEventHandler(const ::std::shared_ptr<ls::s
 
   if (!this->_hasEventHandler(_eventHandler->getId()))
   {
-    ::std::pair<ls::std::event::event_id, ::std::shared_ptr<ls::std::event::EventHandler>> element = ::std::make_pair(_eventHandler->getId(), _eventHandler);
+    ::std::pair<ls::std::core::type::event_id, ::std::shared_ptr<ls::std::event::EventHandler>> element = ::std::make_pair(_eventHandler->getId(), _eventHandler);
     wasAdded = this->eventHandlers.insert(element).second;
   }
 
@@ -75,7 +75,7 @@ void ls::std::event::EventManager::fire(ls::std::event::Event _event)
   }
 }
 
-bool ls::std::event::EventManager::hasEventHandler(const ls::std::event::event_id &_id)
+bool ls::std::event::EventManager::hasEventHandler(const ls::std::core::type::event_id &_id)
 {
   if (_id.empty())
   {
@@ -95,7 +95,7 @@ bool ls::std::event::EventManager::removeEventHandler(const ::std::shared_ptr<ls
   return this->_removeEventHandler(_eventHandler);
 }
 
-bool ls::std::event::EventManager::_hasEventHandler(const ls::std::event::event_id &_id)
+bool ls::std::event::EventManager::_hasEventHandler(const ls::std::core::type::event_id &_id)
 {
   return this->eventHandlers.find(_id) != this->eventHandlers.end();
 }

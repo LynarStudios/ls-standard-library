@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <memory>
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/IBoxing.hpp>
-#include <ls_std/core/Types.hpp>
+#include <ls_std/core/types/Types.hpp>
 
 namespace ls
 {
@@ -25,57 +25,57 @@ namespace ls
       {
         public:
 
-          explicit Long(ls::std::core::long_type _value);
+          explicit Long(ls::std::core::type::long_type _value);
           Long();
           ~Long() override = default;
 
           // conversion operator
 
-          operator ls::std::core::long_type() const;
+          operator ls::std::core::type::long_type() const;
 
           // assignment operators
 
-          ls::std::boxing::Long &operator=(ls::std::core::long_type _value);
+          ls::std::boxing::Long &operator=(ls::std::core::type::long_type _value);
 
           // arithmetic operators
 
-          ls::std::core::long_type operator-() const;
-          ls::std::core::long_type operator+(const ls::std::boxing::Long &_long) const;
-          ls::std::core::long_type operator+(ls::std::core::long_type _value) const;
-          ls::std::core::long_type operator*(const ls::std::boxing::Long &_long) const;
-          ls::std::core::long_type operator*(ls::std::core::long_type _value) const;
-          ls::std::core::long_type operator-(const ls::std::boxing::Long &_long) const;
-          ls::std::core::long_type operator-(ls::std::core::long_type _value) const;
-          ls::std::core::long_type operator/(const ls::std::boxing::Long &_long) const;
-          ls::std::core::long_type operator/(ls::std::core::long_type _value) const;
-          ls::std::core::long_type operator%(const ls::std::boxing::Long &_long) const;
-          ls::std::core::long_type operator%(ls::std::core::long_type _value) const;
+          ls::std::core::type::long_type operator-() const;
+          ls::std::core::type::long_type operator+(const ls::std::boxing::Long &_long) const;
+          ls::std::core::type::long_type operator+(ls::std::core::type::long_type _value) const;
+          ls::std::core::type::long_type operator*(const ls::std::boxing::Long &_long) const;
+          ls::std::core::type::long_type operator*(ls::std::core::type::long_type _value) const;
+          ls::std::core::type::long_type operator-(const ls::std::boxing::Long &_long) const;
+          ls::std::core::type::long_type operator-(ls::std::core::type::long_type _value) const;
+          ls::std::core::type::long_type operator/(const ls::std::boxing::Long &_long) const;
+          ls::std::core::type::long_type operator/(ls::std::core::type::long_type _value) const;
+          ls::std::core::type::long_type operator%(const ls::std::boxing::Long &_long) const;
+          ls::std::core::type::long_type operator%(ls::std::core::type::long_type _value) const;
 
           // compound operators
 
           ls::std::boxing::Long &operator+=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator+=(ls::std::core::long_type _value);
+          ls::std::boxing::Long &operator+=(ls::std::core::type::long_type _value);
           ls::std::boxing::Long &operator-=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator-=(ls::std::core::long_type _value);
+          ls::std::boxing::Long &operator-=(ls::std::core::type::long_type _value);
           ls::std::boxing::Long &operator*=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator*=(ls::std::core::long_type _value);
+          ls::std::boxing::Long &operator*=(ls::std::core::type::long_type _value);
           ls::std::boxing::Long &operator/=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator/=(ls::std::core::long_type _value);
+          ls::std::boxing::Long &operator/=(ls::std::core::type::long_type _value);
 
           // comparison operators
 
           bool operator==(const ls::std::boxing::Long &_long) const;
-          bool operator==(ls::std::core::long_type _value) const;
+          bool operator==(ls::std::core::type::long_type _value) const;
           bool operator!=(const ls::std::boxing::Long &_long) const;
-          bool operator!=(ls::std::core::long_type _value) const;
+          bool operator!=(ls::std::core::type::long_type _value) const;
           bool operator>(const ls::std::boxing::Long &_long) const;
-          bool operator>(ls::std::core::long_type _value) const;
+          bool operator>(ls::std::core::type::long_type _value) const;
           bool operator>=(const ls::std::boxing::Long &_long) const;
-          bool operator>=(ls::std::core::long_type _value) const;
+          bool operator>=(ls::std::core::type::long_type _value) const;
           bool operator<(const ls::std::boxing::Long &_long) const;
-          bool operator<(ls::std::core::long_type _value) const;
+          bool operator<(ls::std::core::type::long_type _value) const;
           bool operator<=(const ls::std::boxing::Long &_long) const;
-          bool operator<=(ls::std::core::long_type _value) const;
+          bool operator<=(ls::std::core::type::long_type _value) const;
 
           // logical operators
 
@@ -85,10 +85,10 @@ namespace ls
           }
 
           bool operator&&(const ls::std::boxing::Long &_long) const;
-          bool operator&&(ls::std::core::long_type _value) const;
+          bool operator&&(ls::std::core::type::long_type _value) const;
           bool operator&&(bool _expression) const;
           bool operator||(const ls::std::boxing::Long &_long) const;
-          bool operator||(ls::std::core::long_type _value) const;
+          bool operator||(ls::std::core::type::long_type _value) const;
           bool operator||(bool _expression) const;
 
           // increment / decrement operator
@@ -103,11 +103,11 @@ namespace ls
 
           // additional functionality
 
-          ls::std::core::long_type getValue() const;
+          ls::std::core::type::long_type getValue() const;
 
         private:
 
-          ls::std::core::long_type value{};
+          ls::std::core::type::long_type value{};
       };
     }
   }

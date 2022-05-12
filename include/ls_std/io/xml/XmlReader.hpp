@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -33,7 +33,7 @@ namespace ls
 
           // implementation
 
-          ls::std::core::byte_field read() override;
+          ls::std::core::type::byte_field read() override;
 
           // additional functionality
 

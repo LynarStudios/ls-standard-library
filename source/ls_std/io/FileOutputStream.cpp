@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -36,7 +36,7 @@ void ls::std::io::FileOutputStream::close()
   this->_close();
 }
 
-bool ls::std::io::FileOutputStream::write(const ls::std::core::byte_field &_data)
+bool ls::std::io::FileOutputStream::write(const ls::std::core::type::byte_field &_data)
 {
   bool succeeded{};
 

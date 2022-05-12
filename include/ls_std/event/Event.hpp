@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/ISerializable.hpp>
 #include <memory>
-#include "EventTypes.hpp"
+#include <ls_std/core/types/EventTypes.hpp>
 
 namespace ls
 {
@@ -25,25 +25,25 @@ namespace ls
       {
         public:
 
-          explicit Event(const ls::std::event::event_id &_id);
+          explicit Event(const ls::std::core::type::event_id &_id);
           ~Event() override = default;
 
           // additional functionality
 
-          bool addParameter(const ls::std::event::event_parameter &_eventParameter);
+          bool addParameter(const ls::std::core::type::event_parameter &_eventParameter);
           void clearParameterList();
-          ls::std::event::event_id getId();
-          ls::std::event::event_parameter_list getParameterList();
-          bool removeParameter(const ls::std::event::event_parameter_id &_id);
-          void setId(const ls::std::event::event_id &_id);
+          ls::std::core::type::event_id getId();
+          ls::std::core::type::event_parameter_list getParameterList();
+          bool removeParameter(const ls::std::core::type::event_parameter_id &_id);
+          void setId(const ls::std::core::type::event_id &_id);
 
         private:
 
-          ls::std::event::event_id id{};
-          ls::std::event::event_parameter_list parameterList{};
+          ls::std::core::type::event_id id{};
+          ls::std::core::type::event_parameter_list parameterList{};
 
-          void _assignId(const ls::std::event::event_id &_id);
-          bool _hasParameter(const ls::std::event::event_id &_id);
+          void _assignId(const ls::std::core::type::event_id &_id);
+          bool _hasParameter(const ls::std::core::type::event_id &_id);
       };
     }
   }

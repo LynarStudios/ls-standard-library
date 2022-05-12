@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-12
  *
  * */
 
@@ -128,9 +128,9 @@ bool ls::std::boxing::String::equalsIgnoreCase(::std::string _text)
   return this->toLowerCase() == ls::std::boxing::String{::std::move(_text)}.toLowerCase();
 }
 
-std::vector<ls::std::core::byte> ls::std::boxing::String::getByteData()
+std::vector<ls::std::core::type::byte> ls::std::boxing::String::getByteData()
 {
-  ::std::vector<ls::std::core::byte> byteData(this->value.begin(), this->value.end());
+  ::std::vector<ls::std::core::type::byte> byteData(this->value.begin(), this->value.end());
   byteData.push_back('\0');
 
   return byteData;

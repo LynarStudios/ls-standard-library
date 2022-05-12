@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -31,8 +31,8 @@ namespace ls
 
           // implementation
 
-          ls::std::core::byte_field marshal() override;
-          void unmarshal(const ls::std::core::byte_field &_data) override;
+          ls::std::core::type::byte_field marshal() override;
+          void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
           // additional functionality
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-09
+ * Changed:         2022-05-12
  *
  * */
 
@@ -212,8 +212,8 @@ namespace
   TEST_F(EventManagerTest, production_example)
   {
     std::string news, expectedNews{};
-    ls::std::event::event_id seriousNewsEventId = ls_std_test::SeriousNewsEvent{""}.getId();
-    ls::std::event::event_id gossipNewsEventId = ls_std_test::GossipNewsEvent{""}.getId();
+    ls::std::core::type::event_id seriousNewsEventId = ls_std_test::SeriousNewsEvent{""}.getId();
+    ls::std::core::type::event_id gossipNewsEventId = ls_std_test::GossipNewsEvent{""}.getId();
 
     // create event handler
 

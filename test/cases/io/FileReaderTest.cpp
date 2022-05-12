@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -50,7 +50,7 @@ namespace
     std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
-    ls::std::core::byte_field content = reader.read();
+    ls::std::core::type::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
@@ -64,7 +64,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::core::byte_field content = reader.read();
+                     ls::std::core::type::byte_field content = reader.read();
                    }
                    catch (const ls::std::core::FileOperationException &_exception)
                    {
@@ -80,7 +80,7 @@ namespace
     std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
-    ls::std::core::byte_field content = reader.read();
+    ls::std::core::type::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
     ls::std::io::File anotherFile{TestHelper::getResourcesFolderLocation() + "list_test/bla.txt"};

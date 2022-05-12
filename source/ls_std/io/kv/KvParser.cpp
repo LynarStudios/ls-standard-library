@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -21,7 +21,7 @@ std::shared_ptr<ls::std::io::KvDocument> ls::std::io::KvParser::getDocument()
   return this->document;
 }
 
-void ls::std::io::KvParser::parse(const ls::std::core::byte_field &_data)
+void ls::std::io::KvParser::parse(const ls::std::core::type::byte_field &_data)
 {
   this->_parse(_data);
 }
@@ -46,7 +46,7 @@ bool ls::std::io::KvParser::_lineHasPair(ls::std::io::KvParseParameter _parsePar
   return _parseParameter.line.contains("=") && _parseParameter.line.contains(";");
 }
 
-void ls::std::io::KvParser::_parse(const ls::std::core::byte_field &_data)
+void ls::std::io::KvParser::_parse(const ls::std::core::type::byte_field &_data)
 {
   for (::std::string::size_type index = 0; index < _data.size(); index++)
   {
@@ -61,15 +61,15 @@ void ls::std::io::KvParser::_parsePair(ls::std::io::KvParseParameter _parseParam
   if (ls::std::io::KvParser::_lineHasPair(_parseParameter))
   {
     size_t equalSignPosition = _parseParameter.line.toString().find('=');
-    ls::std::io::kv_key key = _parseParameter.line.toString().substr(0, equalSignPosition);
-    ls::std::io::kv_value value = _parseParameter.line.toString().substr(equalSignPosition + 1);
+    ls::std::core::type::kv_key key = _parseParameter.line.toString().substr(0, equalSignPosition);
+    ls::std::core::type::kv_value value = _parseParameter.line.toString().substr(equalSignPosition + 1);
     value = value.substr(0, value.find(';'));
 
     this->document->addPair(ls::std::io::KvPair{key, value});
   }
 }
 
-ls::std::io::KvParseParameter ls::std::io::KvParser::_readLine(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+ls::std::io::KvParseParameter ls::std::io::KvParser::_readLine(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   ls::std::io::KvParseParameter parseParameter{};
   parseParameter.line = _data.substr(_index);

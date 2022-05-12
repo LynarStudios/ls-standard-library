@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -47,7 +47,7 @@ namespace
     x->addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AC", "C"));
 
     ls::std::logic::SerializableJsonState serializable{x};
-    ls::std::core::byte_field jsonString = serializable.marshal();
+    ls::std::core::type::byte_field jsonString = serializable.marshal();
 
     ASSERT_TRUE(!jsonString.empty());
     std::string expectedJson = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
@@ -90,7 +90,7 @@ namespace
     x->addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AC", "C"));
 
     ls::std::logic::SerializableJsonState serializable{x};
-    ls::std::core::byte_field jsonString = serializable.marshal();
+    ls::std::core::type::byte_field jsonString = serializable.marshal();
 
     std::string expectedJson = R"({"connectedStates":{"AB":{"condition":false,"connectionId":"AB","stateId":"B"},"AC":{"condition":false,"connectionId":"AC","stateId":"C"}},"id":"A"})";
     ASSERT_STREQ(expectedJson.c_str(), jsonString.c_str());

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -20,11 +20,11 @@ namespace
       XmlParserTest() = default;
       ~XmlParserTest() override = default;
 
-      static ls::std::core::byte_field readXmlStateMachine()
+      static ls::std::core::type::byte_field readXmlStateMachine()
       {
         std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
         ls::std::io::File file{xmlPath};
-        ls::std::core::byte_field data = ls::std::io::FileReader{file}.read();
+        ls::std::core::type::byte_field data = ls::std::io::FileReader{file}.read();
 
         return data;
       }
@@ -58,7 +58,7 @@ namespace
     std::list<std::shared_ptr<ls::std::io::XmlNode>> children, statesChildren, memoryChildren, connectionChildren{};
     std::list<std::shared_ptr<ls::std::io::XmlAttribute>> attributes{};
 
-    ls::std::core::byte_field data = readXmlStateMachine();
+    ls::std::core::type::byte_field data = readXmlStateMachine();
     xmlParser.parse(data);
 
     // check declaration

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -19,12 +19,12 @@ ls::std::io::FileReader::FileReader(ls::std::io::File &_file)
   ls::std::io::FileReader::_init(_file);
 }
 
-ls::std::core::byte_field ls::std::io::FileReader::read()
+ls::std::core::type::byte_field ls::std::io::FileReader::read()
 {
-  ls::std::core::byte *data;
+  ls::std::core::type::byte *data;
   ::std::ifstream inputStream{this->file.getAbsoluteFilePath(), ::std::ifstream::binary};
   int length = (int) this->file.getSize();
-  data = new ls::std::core::byte[length];
+  data = new ls::std::core::type::byte[length];
   inputStream.read(data, length);
 
   if (inputStream.fail())
@@ -33,7 +33,7 @@ ls::std::core::byte_field ls::std::io::FileReader::read()
   }
 
   inputStream.close();
-  ls::std::core::byte_field readData = ls::std::core::byte_field{data, (size_t) this->file.getSize()};
+  ls::std::core::type::byte_field readData = ls::std::core::type::byte_field{data, (size_t) this->file.getSize()};
   delete[] data;
 
   return readData;

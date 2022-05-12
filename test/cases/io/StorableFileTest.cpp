@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -38,7 +38,7 @@ namespace
   TEST_F(StorableFileTest, load)
   {
     ls::std::io::StorableFile storableFile{this->fileLocation};
-    ls::std::core::byte_field content = storableFile.load();
+    ls::std::core::type::byte_field content = storableFile.load();
 
     std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
@@ -49,7 +49,7 @@ namespace
   TEST_F(StorableFileTest, reset)
   {
     ls::std::io::StorableFile storableFile{this->fileLocation};
-    ls::std::core::byte_field content = storableFile.load();
+    ls::std::core::type::byte_field content = storableFile.load();
 
     std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
     std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
@@ -75,11 +75,11 @@ namespace
     file.createNewFile();
 
     ls::std::io::StorableFile storableFile{path};
-    ls::std::core::byte_field textUnix = "Testing save method!" + ls::std::io::NewLine::getUnixNewLine();
-    ls::std::core::byte_field textWindows = "Testing save method!" + ls::std::io::NewLine::getWindowsNewLine();
+    ls::std::core::type::byte_field textUnix = "Testing save method!" + ls::std::io::NewLine::getUnixNewLine();
+    ls::std::core::type::byte_field textWindows = "Testing save method!" + ls::std::io::NewLine::getWindowsNewLine();
 
     storableFile.save(textUnix);
-    ls::std::core::byte_field content = storableFile.load();
+    ls::std::core::type::byte_field content = storableFile.load();
     ASSERT_TRUE(content == textUnix || content == textWindows);
 
     file.remove();

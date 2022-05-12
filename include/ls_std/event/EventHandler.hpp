@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -15,7 +15,7 @@
 #include <memory>
 #include <ls_std/core/interface/IListener.hpp>
 #include "Event.hpp"
-#include <ls_std/logic/Narrator.hpp>
+#include <ls_std/logic/Narrator.hpp> // FIXME: dependency to "logic" module
 
 namespace ls
 {
@@ -27,16 +27,16 @@ namespace ls
       {
         public:
 
-          explicit EventHandler(const ls::std::event::event_id &_id);
+          explicit EventHandler(const ls::std::core::type::event_id &_id);
           ~EventHandler() override = default;
 
-          ls::std::event::event_id getId();
+          ls::std::core::type::event_id getId();
 
         private:
 
-          ls::std::event::event_id id{};
+          ls::std::core::type::event_id id{};
 
-          void _assignId(const ls::std::event::event_id &_id);
+          void _assignId(const ls::std::core::type::event_id &_id);
       };
     }
   }

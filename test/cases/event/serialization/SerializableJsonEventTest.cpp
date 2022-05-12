@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-20
- * Changed:         2022-05-09
+ * Changed:         2022-05-12
  *
  * */
 
@@ -43,12 +43,12 @@ namespace
   TEST_F(SerializableJsonEventTest, marshal)
   {
     ls::std::event::Event event{"OPEN_DOOR_EVENT"};
-    event.addParameter(ls::std::event::event_parameter{"key_available", "true"});
-    event.addParameter(ls::std::event::event_parameter{"door_id", "16675"});
+    event.addParameter(ls::std::core::type::event_parameter{"key_available", "true"});
+    event.addParameter(ls::std::core::type::event_parameter{"door_id", "16675"});
 
     ls::std::event::SerializableJsonEvent serializable{std::make_shared<ls::std::event::Event>(event)};
 
-    ls::std::core::byte_field data = serializable.marshal();
+    ls::std::core::type::byte_field data = serializable.marshal();
     ASSERT_FALSE(data.empty());
     std::string expectedString = R"({"id":"OPEN_DOOR_EVENT","parameterList":{"door_id":["door_id","16675"],"key_available":["key_available","true"]}})";
     ASSERT_STREQ(expectedString.c_str(), data.c_str());
@@ -62,7 +62,7 @@ namespace
 
     serializable.unmarshal(jsonString);
     ASSERT_STREQ("OPEN_DOOR_EVENT", serializable.getValue()->getId().c_str());
-    ls::std::event::event_parameter_list parameterList = serializable.getValue()->getParameterList();
+    ls::std::core::type::event_parameter_list parameterList = serializable.getValue()->getParameterList();
 
     ASSERT_FALSE(parameterList.empty());
     ASSERT_EQ(2, parameterList.size());

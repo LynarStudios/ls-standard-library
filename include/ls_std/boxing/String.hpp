@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/core/Class.hpp>
-#include <ls_std/core/Types.hpp>
+#include <ls_std/core/types/Types.hpp>
 #include <string>
 #include <memory>
 #include <vector>
@@ -72,7 +72,7 @@ namespace ls
           bool endsWith(const ::std::string &_text);
           bool equalsIgnoreCase(ls::std::boxing::String _string);
           bool equalsIgnoreCase(::std::string _text);
-          ::std::vector<ls::std::core::byte> getByteData();
+          ::std::vector<ls::std::core::type::byte> getByteData();
           ::std::string padLeft(size_t _width, char _fillCharacter);
           ::std::string padRight(size_t _width, char _fillCharacter);
           ::std::string reverse();

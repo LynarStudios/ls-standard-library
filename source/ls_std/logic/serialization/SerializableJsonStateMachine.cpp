@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -16,13 +16,13 @@ ls::std::logic::SerializableJsonStateMachine::SerializableJsonStateMachine(const
   this->_assignValue(_value);
 }
 
-ls::std::core::byte_field ls::std::logic::SerializableJsonStateMachine::marshal()
+ls::std::core::type::byte_field ls::std::logic::SerializableJsonStateMachine::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::std::logic::SerializableJsonStateMachine::unmarshal(const ls::std::core::byte_field &_data)
+void ls::std::logic::SerializableJsonStateMachine::unmarshal(const ls::std::core::type::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 

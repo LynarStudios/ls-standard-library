@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "KvPair.hpp"
-#include "KvTypes.hpp"
+#include "ls_std/core/types/KvTypes.hpp"
 #include <map>
 
 namespace ls
@@ -30,15 +30,15 @@ namespace ls
 
           bool addPair(ls::std::io::KvPair _pair);
           void clear();
-          ::std::map<ls::std::io::kv_key, ls::std::io::KvPair> getPairs();
-          bool hasPair(const ls::std::io::kv_key &_key);
-          bool removePair(const ls::std::io::kv_key &_key);
+          ::std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> getPairs();
+          bool hasPair(const ls::std::core::type::kv_key &_key);
+          bool removePair(const ls::std::core::type::kv_key &_key);
 
         private:
 
-          ::std::map<ls::std::io::kv_key, ls::std::io::KvPair> pairs{};
+          ::std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> pairs{};
 
-          bool _hasPair(const ls::std::io::kv_key &_key);
+          bool _hasPair(const ls::std::core::type::kv_key &_key);
       };
     }
   }

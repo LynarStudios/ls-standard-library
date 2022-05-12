@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -22,7 +22,7 @@ ls::std::io::XmlParser::XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocume
   return this->document;
 }
 
-void ls::std::io::XmlParser::parse(const ls::std::core::byte_field &_data)
+void ls::std::io::XmlParser::parse(const ls::std::core::type::byte_field &_data)
 {
   this->_parse(_data);
   this->_mergeNodes();
@@ -34,17 +34,17 @@ void ls::std::io::XmlParser::setDocument(const ::std::shared_ptr<ls::std::io::Xm
   this->_assignDocument(_document);
 }
 
-::std::pair<::std::string, ::std::string> ls::std::io::XmlParser::_readAttribute_(const ls::std::core::byte_field &_data)
+::std::pair<::std::string, ::std::string> ls::std::io::XmlParser::_readAttribute_(const ls::std::core::type::byte_field &_data)
 {
   return ls::std::io::XmlParser::_parseAttribute(_data);
 }
 
-::std::list<::std::pair<::std::string, ::std::string>> ls::std::io::XmlParser::_readAttributes_(ls::std::core::byte_field _data)
+::std::list<::std::pair<::std::string, ::std::string>> ls::std::io::XmlParser::_readAttributes_(ls::std::core::type::byte_field _data)
 {
   return ls::std::io::XmlParser::_parseAttributes(::std::move(_data));
 }
 
-void ls::std::io::XmlParser::_analyze(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+void ls::std::io::XmlParser::_analyze(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   this->_isDeclaration(_data, _index);
   this->_isClosingTag(_data, _index);
@@ -120,7 +120,7 @@ void ls::std::io::XmlParser::_assignDocument(const ::std::shared_ptr<ls::std::io
   return attribute;
 }
 
-size_t ls::std::io::XmlParser::_findAttributeEndPosition(const ls::std::core::byte_field &_data)
+size_t ls::std::io::XmlParser::_findAttributeEndPosition(const ls::std::core::type::byte_field &_data)
 {
   ::std::string::size_type position = ::std::string::npos;
   ::std::string::size_type counter{};
@@ -143,9 +143,9 @@ size_t ls::std::io::XmlParser::_findAttributeEndPosition(const ls::std::core::by
   return position;
 }
 
-ls::std::core::byte_field ls::std::io::XmlParser::_getNextTagString(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+ls::std::core::type::byte_field ls::std::io::XmlParser::_getNextTagString(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
-  ls::std::core::byte_field tag{};
+  ls::std::core::type::byte_field tag{};
   size_t closingCharacterPosition = _index + _data.substr(_index).find('>');
 
   if (closingCharacterPosition != ::std::string::npos)
@@ -156,7 +156,7 @@ ls::std::core::byte_field ls::std::io::XmlParser::_getNextTagString(const ls::st
   return tag;
 }
 
-void ls::std::io::XmlParser::_isClosingTag(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+void ls::std::io::XmlParser::_isClosingTag(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   if (this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 2) == "</")
   {
@@ -164,7 +164,7 @@ void ls::std::io::XmlParser::_isClosingTag(const ls::std::core::byte_field &_dat
   }
 }
 
-void ls::std::io::XmlParser::_isDeclaration(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+void ls::std::io::XmlParser::_isDeclaration(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   if (_data.substr(_index, 5) == "<?xml")
   {
@@ -172,7 +172,7 @@ void ls::std::io::XmlParser::_isDeclaration(const ls::std::core::byte_field &_da
   }
 }
 
-void ls::std::io::XmlParser::_isOpeningTag(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+void ls::std::io::XmlParser::_isOpeningTag(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   if (this->mode == XML_PARSE_MODE_ANALYZE && _data.substr(_index, 1) == "<")
   {
@@ -180,7 +180,7 @@ void ls::std::io::XmlParser::_isOpeningTag(const ls::std::core::byte_field &_dat
   }
 }
 
-void ls::std::io::XmlParser::_isValue(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+void ls::std::io::XmlParser::_isValue(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   if (this->mode == XML_PARSE_MODE_ANALYZE)
   {
@@ -248,7 +248,7 @@ void ls::std::io::XmlParser::_mergeNodesOnCurrentLevel()
   }
 }
 
-void ls::std::io::XmlParser::_parse(const ls::std::core::byte_field &_data)
+void ls::std::io::XmlParser::_parse(const ls::std::core::type::byte_field &_data)
 {
   for (::std::string::size_type index = 0; index < _data.size(); index++)
   {
@@ -291,7 +291,7 @@ void ls::std::io::XmlParser::_parse(const ls::std::core::byte_field &_data)
   }
 }
 
-::std::pair<::std::string, ::std::string> ls::std::io::XmlParser::_parseAttribute(const ls::std::core::byte_field &_data)
+::std::pair<::std::string, ::std::string> ls::std::io::XmlParser::_parseAttribute(const ls::std::core::type::byte_field &_data)
 {
   ::std::pair<::std::string, ::std::string> parsedAttribute{};
   parsedAttribute.first = _data.substr(0, _data.find('='));
@@ -301,7 +301,7 @@ void ls::std::io::XmlParser::_parse(const ls::std::core::byte_field &_data)
   return parsedAttribute;
 }
 
-::std::list<::std::pair<::std::string, ::std::string>> ls::std::io::XmlParser::_parseAttributes(ls::std::core::byte_field _data)
+::std::list<::std::pair<::std::string, ::std::string>> ls::std::io::XmlParser::_parseAttributes(ls::std::core::type::byte_field _data)
 {
   ::std::list<::std::pair<::std::string, ::std::string>> attributes{};
   size_t position = _data.find(' ');
@@ -327,14 +327,14 @@ void ls::std::io::XmlParser::_parse(const ls::std::core::byte_field &_data)
   return attributes;
 }
 
-size_t ls::std::io::XmlParser::_parseClosingTag(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+size_t ls::std::io::XmlParser::_parseClosingTag(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   ::std::string tagString = ls::std::io::XmlParser::_getNextTagString(_data, _index);
   this->currentLevel -= 1;
   return tagString.empty() ? _index : _index + (tagString.size() - 1);
 }
 
-size_t ls::std::io::XmlParser::_parseDeclaration(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+size_t ls::std::io::XmlParser::_parseDeclaration(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   ::std::string tagString = ls::std::io::XmlParser::_getNextTagString(_data, _index);
   bool isValidTagString = !tagString.empty();
@@ -348,7 +348,7 @@ size_t ls::std::io::XmlParser::_parseDeclaration(const ls::std::core::byte_field
   return !isValidTagString ? _index : _index + (tagString.size() - 1);
 }
 
-size_t ls::std::io::XmlParser::_parseOpeningTag(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+size_t ls::std::io::XmlParser::_parseOpeningTag(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   ls::std::boxing::String tagString{ls::std::io::XmlParser::_getNextTagString(_data, _index)};
   bool isValidTagString = !tagString.toString().empty();
@@ -372,7 +372,7 @@ size_t ls::std::io::XmlParser::_parseOpeningTag(const ls::std::core::byte_field 
   return !isValidTagString ? _index : _index + (tagString.toString().size() - 1);
 }
 
-ls::std::core::byte_field ls::std::io::XmlParser::_parseTagName(const ls::std::core::byte_field &_data)
+ls::std::core::type::byte_field ls::std::io::XmlParser::_parseTagName(const ls::std::core::type::byte_field &_data)
 {
   ::std::string::size_type position = _data.find(' ');
 
@@ -384,9 +384,9 @@ ls::std::core::byte_field ls::std::io::XmlParser::_parseTagName(const ls::std::c
   return _data.substr(1, position - 1);
 }
 
-size_t ls::std::io::XmlParser::_parseValue(const ls::std::core::byte_field &_data, ::std::string::size_type _index)
+size_t ls::std::io::XmlParser::_parseValue(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
-  ls::std::core::byte_field value = _data.substr(_index, _data.substr(_index).find('<'));
+  ls::std::core::type::byte_field value = _data.substr(_index, _data.substr(_index).find('<'));
   this->parseParameters.back().node->setValue(value);
 
   return _index + (value.size() - 1);

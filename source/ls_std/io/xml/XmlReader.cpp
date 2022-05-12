@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -21,9 +21,9 @@ ls::std::io::XmlReader::XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocume
   this->_assignFile(ls::std::io::File{_absolutePath});
 }
 
-ls::std::core::byte_field ls::std::io::XmlReader::read()
+ls::std::core::type::byte_field ls::std::io::XmlReader::read()
 {
-  ls::std::core::byte_field data = ls::std::io::FileReader{this->xmlFile}.read();
+  ls::std::core::type::byte_field data = ls::std::io::FileReader{this->xmlFile}.read();
   ls::std::io::XmlParser{this->document}.parse(data);
 
   return data;

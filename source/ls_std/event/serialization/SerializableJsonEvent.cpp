@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-09
+ * Changed:         2022-05-12
  *
  * */
 
-#include "ls_std/event/serialization/SerializableJsonEvent.hpp"
+#include <ls_std/event/serialization/SerializableJsonEvent.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared_ptr<ls::std::event::Event> &_value) : ls::std::core::Class("SerializableJsonEvent")
@@ -15,13 +15,13 @@ ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared
   this->_assignValue(_value);
 }
 
-ls::std::core::byte_field ls::std::event::SerializableJsonEvent::marshal()
+ls::std::core::type::byte_field ls::std::event::SerializableJsonEvent::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::std::event::SerializableJsonEvent::unmarshal(const ls::std::core::byte_field &_data)
+void ls::std::event::SerializableJsonEvent::unmarshal(const ls::std::core::type::byte_field &_data)
 {
   this->jsonObject = nlohmann::json::parse(_data);
 
@@ -55,7 +55,7 @@ void ls::std::event::SerializableJsonEvent::_unmarshalParameterList()
 
   for (const auto &parameterJson : this->jsonObject["parameterList"])
   {
-    ls::std::event::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
+    ls::std::core::type::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
     this->value->addParameter(parameter);
   }
 }

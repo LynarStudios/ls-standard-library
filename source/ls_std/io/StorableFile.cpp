@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -21,7 +21,7 @@ std::shared_ptr<ls::std::io::File> ls::std::io::StorableFile::getFile()
   return this->file;
 }
 
-ls::std::core::byte_field ls::std::io::StorableFile::load()
+ls::std::core::type::byte_field ls::std::io::StorableFile::load()
 {
   ls::std::io::FileReader reader{*this->file};
   return reader.read();
@@ -32,7 +32,7 @@ void ls::std::io::StorableFile::reset(const ::std::string &_path)
   this->_init(_path);
 }
 
-void ls::std::io::StorableFile::save(const ls::std::core::byte_field &_data)
+void ls::std::io::StorableFile::save(const ls::std::core::type::byte_field &_data)
 {
   ls::std::io::FileWriter writer{*this->file};
   writer.write(_data);

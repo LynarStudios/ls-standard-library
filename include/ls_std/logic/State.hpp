@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-11
+ * Changed:         2022-05-12
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <memory>
 #include <unordered_map>
 #include <ls_std/core/Class.hpp>
-#include "StateMachineTypes.hpp"
+#include "ls_std/core/types/StateMachineTypes.hpp"
 #include "StateConnection.hpp"
 #include <ls_std/core/interface/ISerializable.hpp>
 
@@ -27,27 +27,27 @@ namespace ls
       {
         public:
 
-          explicit State(const ls::std::logic::StateId &_id);
+          explicit State(const ls::std::core::type::StateId &_id);
           ~State() override = default;
 
           // additional functionality
 
-          bool addStateConnection(const ls::std::logic::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::std::logic::State> &_connectedState);
+          bool addStateConnection(const ls::std::core::type::StateConnectionId &_connectionId, const ::std::shared_ptr<ls::std::logic::State> &_connectedState);
           bool addStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_connection);
           void clearConnections();
-          ::std::unordered_map<ls::std::logic::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> getConnectedStates();
-          ls::std::logic::StateId getId();
-          bool hasConnection(const ls::std::logic::StateConnectionId &_connectionId);
-          void setId(const ls::std::logic::StateId &_id);
+          ::std::unordered_map<ls::std::core::type::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> getConnectedStates();
+          ls::std::core::type::StateId getId();
+          bool hasConnection(const ls::std::core::type::StateConnectionId &_connectionId);
+          void setId(const ls::std::core::type::StateId &_id);
 
         private:
 
-          ::std::unordered_map<ls::std::logic::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> connectedStates{};
-          ls::std::logic::StateId id{};
+          ::std::unordered_map<ls::std::core::type::StateConnectionId, ::std::shared_ptr<ls::std::logic::StateConnection>> connectedStates{};
+          ls::std::core::type::StateId id{};
 
-          void _assignStateId(const ls::std::logic::StateId &_id);
+          void _assignStateId(const ls::std::core::type::StateId &_id);
           void _clearConnections();
-          bool _hasConnection(const ls::std::logic::StateConnectionId &_connectionId);
+          bool _hasConnection(const ls::std::core::type::StateConnectionId &_connectionId);
       };
     }
   }
