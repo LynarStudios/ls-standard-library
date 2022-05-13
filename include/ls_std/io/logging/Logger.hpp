@@ -45,8 +45,11 @@ namespace ls
           ::std::shared_ptr<ls::std::core::IWriter> writer{};
 
           void _assignWriter(const ::std::shared_ptr<ls::std::core::IWriter> &_writer);
+          static ::std::string _buildCharacterChain(size_t _amount);
+          static ::std::string _createFillContent(const ::std::string &_text);
           static ::std::string _generateTimeString(tm *_localTime);
           void _log(const ls::std::core::type::byte *_data, const ls::std::io::LogLevel &_logLevel);
+          static ::std::string _padRight(const ::std::string& _text);
       };
     }
   }

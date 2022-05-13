@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-25
- * Changed:         2022-05-12
+ * Changed:         2022-05-13
  *
  * */
 
@@ -49,8 +49,10 @@ namespace ls
 
           void _analyze(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index);
           void _assignDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
+          static bool _contains(const ::std::string &_text, const ::std::string &_searchText);
           static ::std::shared_ptr<ls::std::io::XmlDeclaration> _createDeclaration(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes);
           static ::std::shared_ptr<ls::std::io::XmlNode> _createNode(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes, const ::std::string &_name);
+          static bool _endsWith(const ::std::string &_text, const ::std::string &_ending);
           static ::std::pair<::std::string, ::std::string> _findAttribute(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes, const ::std::string &_name);
           static size_t _findAttributeEndPosition(const ls::std::core::type::byte_field &_data);
           static ls::std::core::type::byte_field _getNextTagString(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index);

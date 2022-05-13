@@ -3,13 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-12
+ * Changed:         2022-05-13
  *
  * */
 
 #include <ls_std/io/xml/XmlParser.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
-#include <ls_std/boxing/String.hpp> // FIXME: remove "boxing" dependency from "io" module
 
 ls::std::io::XmlParser::XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document) : ls::std::core::Class("XmlParser")
 {
@@ -62,6 +61,11 @@ void ls::std::io::XmlParser::_assignDocument(const ::std::shared_ptr<ls::std::io
   this->document = _document;
 }
 
+bool ls::std::io::XmlParser::_contains(const ::std::string &_text, const ::std::string &_searchText)
+{
+  return _text.find(_searchText) != ::std::string::npos;
+}
+
 ::std::shared_ptr<ls::std::io::XmlDeclaration> ls::std::io::XmlParser::_createDeclaration(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes)
 {
   ::std::shared_ptr<ls::std::io::XmlDeclaration> declaration = ::std::make_shared<ls::std::io::XmlDeclaration>("1.0");
@@ -94,7 +98,7 @@ void ls::std::io::XmlParser::_assignDocument(const ::std::shared_ptr<ls::std::io
   ::std::shared_ptr<ls::std::io::XmlNode> node = ::std::make_shared<ls::std::io::XmlNode>(_name);
   ::std::shared_ptr<ls::std::io::XmlAttribute> attribute{};
 
-  for (const auto &parsedAttribute : _attributes)
+  for (const auto &parsedAttribute: _attributes)
   {
     attribute = ::std::make_shared<ls::std::io::XmlAttribute>(parsedAttribute.first);
     attribute->setValue(parsedAttribute.second);
@@ -104,11 +108,16 @@ void ls::std::io::XmlParser::_assignDocument(const ::std::shared_ptr<ls::std::io
   return node;
 }
 
+bool ls::std::io::XmlParser::_endsWith(const ::std::string &_text, const ::std::string &_ending)
+{
+  return _text.rfind(_ending) == (_text.size() - _ending.size());
+}
+
 ::std::pair<::std::string, ::std::string> ls::std::io::XmlParser::_findAttribute(const ::std::list<::std::pair<::std::string, ::std::string>> &_attributes, const ::std::string &_name)
 {
   ::std::pair<::std::string, ::std::string> attribute{};
 
-  for (const auto &currentAttribute : _attributes)
+  for (const auto &currentAttribute: _attributes)
   {
     if (currentAttribute.first == _name)
     {
@@ -125,7 +134,7 @@ size_t ls::std::io::XmlParser::_findAttributeEndPosition(const ls::std::core::ty
   ::std::string::size_type position = ::std::string::npos;
   ::std::string::size_type counter{};
 
-  for (char letter : _data)
+  for (char letter: _data)
   {
     if (letter == '"')
     {
@@ -189,9 +198,9 @@ void ls::std::io::XmlParser::_isValue(const ls::std::core::type::byte_field &_da
 
     if (isValue)
     {
-      ls::std::boxing::String value{_data.substr(_index, end)};
+      ::std::string value{_data.substr(_index, end)};
 
-      if (!value.contains("\n") && !value.contains("\r\n"))
+      if (!ls::std::io::XmlParser::_contains(value, "\n") && !ls::std::io::XmlParser::_contains(value, "\r\n"))
       {
         this->mode = XML_PARSE_MODE_VALUE;
       }
@@ -314,7 +323,7 @@ void ls::std::io::XmlParser::_parse(const ls::std::core::type::byte_field &_data
       position = _data.find(' ') + 1;
     } while (_data[position] == ' ');
 
-    if (_data.size() <= 3 && ls::std::boxing::String{_data}.endsWith(">"))
+    if (_data.size() <= 3 && ls::std::io::XmlParser::_endsWith(::std::string{_data}, ">"))
     {
       break;
     }
@@ -350,8 +359,8 @@ size_t ls::std::io::XmlParser::_parseDeclaration(const ls::std::core::type::byte
 
 size_t ls::std::io::XmlParser::_parseOpeningTag(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
-  ls::std::boxing::String tagString{ls::std::io::XmlParser::_getNextTagString(_data, _index)};
-  bool isValidTagString = !tagString.toString().empty();
+  ::std::string tagString{ls::std::io::XmlParser::_getNextTagString(_data, _index)};
+  bool isValidTagString = !tagString.empty();
   ls::std::io::XmlParseParameter singleParseParameter{};
 
   if (isValidTagString)
@@ -362,14 +371,14 @@ size_t ls::std::io::XmlParser::_parseOpeningTag(const ls::std::core::type::byte_
     singleParseParameter.node = node;
     this->parseParameters.push_back(singleParseParameter);
 
-    if (!tagString.endsWith("/>"))
+    if (!ls::std::io::XmlParser::_endsWith(tagString, "/>"))
     {
       this->currentLevel += 1;
       this->_setMaxLevel();
     }
   }
 
-  return !isValidTagString ? _index : _index + (tagString.toString().size() - 1);
+  return !isValidTagString ? _index : _index + (tagString.size() - 1);
 }
 
 ls::std::core::type::byte_field ls::std::io::XmlParser::_parseTagName(const ls::std::core::type::byte_field &_data)

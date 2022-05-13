@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-12
+ * Changed:         2022-05-13
  *
  * */
 
@@ -41,9 +41,14 @@ void ls::std::io::KvParser::_assignDocument(const ::std::shared_ptr<ls::std::io:
   this->document = _document;
 }
 
-bool ls::std::io::KvParser::_lineHasPair(ls::std::io::KvParseParameter _parseParameter)
+bool ls::std::io::KvParser::_contains(const ::std::string &_text, const ::std::string &_searchText)
 {
-  return _parseParameter.line.contains("=") && _parseParameter.line.contains(";");
+  return _text.find(_searchText) != ::std::string::npos;
+}
+
+bool ls::std::io::KvParser::_lineHasPair(const ls::std::io::KvParseParameter& _parseParameter)
+{
+  return ls::std::io::KvParser::_contains(_parseParameter.line, "=") && ls::std::io::KvParser::_contains(_parseParameter.line, ";");
 }
 
 void ls::std::io::KvParser::_parse(const ls::std::core::type::byte_field &_data)
@@ -56,13 +61,13 @@ void ls::std::io::KvParser::_parse(const ls::std::core::type::byte_field &_data)
   }
 }
 
-void ls::std::io::KvParser::_parsePair(ls::std::io::KvParseParameter _parseParameter)
+void ls::std::io::KvParser::_parsePair(const ls::std::io::KvParseParameter& _parseParameter)
 {
   if (ls::std::io::KvParser::_lineHasPair(_parseParameter))
   {
-    size_t equalSignPosition = _parseParameter.line.toString().find('=');
-    ls::std::core::type::kv_key key = _parseParameter.line.toString().substr(0, equalSignPosition);
-    ls::std::core::type::kv_value value = _parseParameter.line.toString().substr(equalSignPosition + 1);
+    size_t equalSignPosition = _parseParameter.line.find('=');
+    ls::std::core::type::kv_key key = _parseParameter.line.substr(0, equalSignPosition);
+    ls::std::core::type::kv_value value = _parseParameter.line.substr(equalSignPosition + 1);
     value = value.substr(0, value.find(';'));
 
     this->document->addPair(ls::std::io::KvPair{key, value});
@@ -74,30 +79,30 @@ ls::std::io::KvParseParameter ls::std::io::KvParser::_readLine(const ls::std::co
   ls::std::io::KvParseParameter parseParameter{};
   parseParameter.line = _data.substr(_index);
 
-  if (parseParameter.line.contains(ls::std::io::NewLine::getWindowsNewLine()))
+  if (ls::std::io::KvParser::_contains(parseParameter.line, ls::std::io::NewLine::getWindowsNewLine()))
   {
     ls::std::io::KvParser::_readLineWithWindowsLineBreak(parseParameter);
   }
   else
   {
-    if (parseParameter.line.contains(ls::std::io::NewLine::getUnixNewLine()))
+    if (ls::std::io::KvParser::_contains(parseParameter.line, ls::std::io::NewLine::getUnixNewLine()))
     {
       ls::std::io::KvParser::_readLineWithUnixLineBreak(parseParameter);
     }
   }
 
-  parseParameter.index = _index + parseParameter.line.toString().size();
+  parseParameter.index = _index + parseParameter.line.size();
   return parseParameter;
 }
 
 void ls::std::io::KvParser::_readLineWithUnixLineBreak(ls::std::io::KvParseParameter &_parseParameter)
 {
-  size_t newLinePosition = _parseParameter.line.toString().find(ls::std::io::NewLine::getUnixNewLine());
-  _parseParameter.line = _parseParameter.line.toString().substr(0, newLinePosition);
+  size_t newLinePosition = _parseParameter.line.find(ls::std::io::NewLine::getUnixNewLine());
+  _parseParameter.line = _parseParameter.line.substr(0, newLinePosition);
 }
 
 void ls::std::io::KvParser::_readLineWithWindowsLineBreak(ls::std::io::KvParseParameter &_parseParameter)
 {
-  size_t newLinePosition = _parseParameter.line.toString().find(ls::std::io::NewLine::getWindowsNewLine());
-  _parseParameter.line = _parseParameter.line.toString().substr(0, newLinePosition + 1);
+  size_t newLinePosition = _parseParameter.line.find(ls::std::io::NewLine::getWindowsNewLine());
+  _parseParameter.line = _parseParameter.line.substr(0, newLinePosition + 1);
 }

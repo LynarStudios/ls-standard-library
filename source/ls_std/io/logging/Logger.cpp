@@ -11,7 +11,6 @@
 #include <ctime>
 #include <iomanip>
 #include <ls_std/io/NewLine.hpp>
-#include <ls_std/boxing/String.hpp> // FIXME: remove "boxing" dependency from "io" module
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::IWriter> &_writer)
@@ -89,6 +88,32 @@ void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::I
   this->writer = _writer;
 }
 
+::std::string ls::std::io::Logger::_buildCharacterChain(size_t _amount)
+{
+  ::std::string fillContent{};
+
+  for (size_t iteration{}; iteration < _amount; iteration++)
+  {
+    fillContent += ' ';
+  }
+
+  return fillContent;
+}
+
+std::string ls::std::io::Logger::_createFillContent(const ::std::string &_text)
+{
+  size_t padSize = 10;
+  size_t fillSize = _text.size() > padSize ? 0 : padSize - _text.size();
+  ::std::string fillContent{};
+
+  if (fillSize > 0)
+  {
+    fillContent = ls::std::io::Logger::_buildCharacterChain(fillSize);
+  }
+
+  return fillContent;
+}
+
 ::std::string ls::std::io::Logger::_generateTimeString(tm *_localTime)
 {
   ::std::stringstream _stream{};
@@ -102,6 +127,12 @@ void ls::std::io::Logger::_log(const ls::std::core::type::byte *_data, const ls:
   time_t timestamp = ::std::time(nullptr);
   tm *localTime = ::std::localtime(&timestamp);
 
-  ::std::string message = "[" + ls::std::io::Logger::_generateTimeString(localTime) + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::std::io::NewLine::getUnixNewLine();
+  ::std::string logLevelString = ls::std::io::Logger::_padRight(::std::string{_logLevel.toString() + ":"});
+  ::std::string message = "[" + ls::std::io::Logger::_generateTimeString(localTime) + "] " + logLevelString + ::std::string(_data) + ls::std::io::NewLine::getUnixNewLine();
   this->writer->write(message);
+}
+
+::std::string ls::std::io::Logger::_padRight(const ::std::string& _text)
+{
+  return _text + ls::std::io::Logger::_createFillContent(_text);
 }
