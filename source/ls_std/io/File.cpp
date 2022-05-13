@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-11
+ * Changed:         2022-05-13
  *
  * */
 
@@ -242,10 +242,10 @@ void ls::std::io::File::reset(const ::std::string &_newPath)
 
 #ifdef _WIN32
 
-void ls::std::io::File::_addToFileListWindows(const std::string &_path, bool _withDirectories, WIN32_FIND_DATA _data, std::list<std::string> &_list)
+void ls::std::io::File::_addToFileListWindows(const ::std::string &_path, bool _withDirectories, WIN32_FIND_DATA _data, ::std::list<::std::string> &_list)
 {
   const char separator = ls::std::io::FilePathSeparator::get();
-  std::string absolutePath = _path + separator + _data.cFileName;
+  ::std::string absolutePath = _path + separator + _data.cFileName;
 
   if (_withDirectories)
   {
@@ -344,16 +344,16 @@ std::string ls::std::io::File::_getWorkingDirectoryUnix()
 
 std::string ls::std::io::File::_getWorkingDirectoryWindows()
 {
-  std::string workingDirectory{};
+  ::std::string workingDirectory{};
   TCHAR buffer[MAX_PATH];
 
   if (!GetCurrentDirectory(MAX_PATH, buffer))
   {
-    throw ls::FileOperationException{};
+    throw ls::std::core::FileOperationException{};
   }
   else
   {
-    workingDirectory = std::string(buffer);
+    workingDirectory = ::std::string(buffer);
   }
 
   return workingDirectory;
@@ -431,7 +431,7 @@ bool ls::std::io::File::_isReadableUnix(const ::std::string &_path)
 
 #ifdef _WIN32
 
-bool ls::std::io::File::_isReadableWindows(const std::string &_path)
+bool ls::std::io::File::_isReadableWindows(const ::std::string &_path)
 {
   bool readable;
   WIN32_FIND_DATA data{};
@@ -443,7 +443,7 @@ bool ls::std::io::File::_isReadableWindows(const std::string &_path)
   }
   else
   {
-    throw ls::FileOperationException{};
+    throw ls::std::core::FileOperationException{};
   }
 
   return readable;
@@ -531,12 +531,12 @@ std::list<std::string> ls::std::io::File::_listUnix(const ::std::string &_path, 
 
 #ifdef _WIN32
 
-std::list<std::string> ls::std::io::File::_listWindows(const std::string &_path, bool withDirectories)
+std::list<std::string> ls::std::io::File::_listWindows(const ::std::string &_path, bool withDirectories)
 {
-  std::list<std::string> filesInDirectory{};
+  ::std::list<::std::string> filesInDirectory{};
   WIN32_FIND_DATA data{};
   HANDLE hFind;
-  std::string pattern{_path + ls::std::io::FilePathSeparator::get() + "*"};
+  ::std::string pattern{_path + ls::std::io::FilePathSeparator::get() + "*"};
 
   if ((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE)
   {
@@ -624,7 +624,7 @@ void ls::std::io::File::_removeUnix(const ::std::string &_path)
 
 #ifdef _WIN32
 
-void ls::std::io::File::_removeWindows(const std::string &_path)
+void ls::std::io::File::_removeWindows(const ::std::string &_path)
 {
   _rmdir(_path.c_str());
 }
@@ -646,7 +646,7 @@ std::string ls::std::io::File::_replaceWrongSeparator(::std::string _path)
   #endif
 
   #ifdef _WIN32
-  std::replace(_path.begin(), _path.end(), unixSeparator, windowsSeparator);
+  ::std::replace(_path.begin(), _path.end(), unixSeparator, windowsSeparator);
   #endif
 
   return _path;
