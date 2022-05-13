@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-12
+ * Changed:         2022-05-13
  *
  * */
 
 #include <ls_std/io/logging/Logger.hpp>
-#include <ls_std/time/Date.hpp> // FIXME: remove "time" dependency from "io" module
+#include <ctime>
+#include <iomanip>
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/boxing/String.hpp> // FIXME: remove "boxing" dependency from "io" module
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
@@ -88,9 +89,19 @@ void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::I
   this->writer = _writer;
 }
 
+::std::string ls::std::io::Logger::_generateTimeString(tm *_localTime)
+{
+  ::std::stringstream _stream{};
+  _stream << ::std::put_time(_localTime, "%Y-%m-%d %H:%M:%S");
+
+  return _stream.str();
+}
+
 void ls::std::io::Logger::_log(const ls::std::core::type::byte *_data, const ls::std::io::LogLevel &_logLevel)
 {
-  ls::std::time::Date date{};
-  ::std::string message = "[" + date.toString() + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::std::io::NewLine::getUnixNewLine();
+  time_t timestamp = ::std::time(nullptr);
+  tm *localTime = ::std::localtime(&timestamp);
+
+  ::std::string message = "[" + ls::std::io::Logger::_generateTimeString(localTime) + "] " + ls::std::boxing::String{_logLevel.toString() + ":"}.padRight(10, ' ') + ::std::string(_data) + ls::std::io::NewLine::getUnixNewLine();
   this->writer->write(message);
 }

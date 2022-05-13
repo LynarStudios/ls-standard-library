@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-12
+ * Changed:         2022-05-13
  *
  * */
 
@@ -45,6 +45,7 @@ namespace ls
           ::std::shared_ptr<ls::std::core::IWriter> writer{};
 
           void _assignWriter(const ::std::shared_ptr<ls::std::core::IWriter> &_writer);
+          static ::std::string _generateTimeString(tm *_localTime);
           void _log(const ls::std::core::type::byte *_data, const ls::std::io::LogLevel &_logLevel);
       };
     }
