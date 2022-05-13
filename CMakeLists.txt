@@ -5,6 +5,13 @@
 cmake_minimum_required(VERSION 3.17)
 project(ls_std VERSION 2022.1.0)
 
+set(MODULE_NAME_BOXING ls_std_boxing)
+set(MODULE_NAME_CORE ls_std_core)
+set(MODULE_NAME_EVENT ls_std_event)
+set(MODULE_NAME_IO ls_std_io)
+set(MODULE_NAME_LOGIC ls_std_logic)
+set(MODULE_NAME_TIME ls_std_time)
+
 ##########################################################
 # Options
 ##########################################################
@@ -182,6 +189,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Build Tests (boxing)
+##########################################################
+
+#if (${LS_STD_BUILD_WITH_TESTS})
+#    message("${MODULE_NAME_BOXING}: Building tests...")
+#    add_executable(${MODULE_NAME_BOXING}_test ${TEST_FILES_BOXING})
+#endif ()
+
+##########################################################
 # Build Tests
 ##########################################################
 
@@ -199,43 +215,94 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Build Library
+# Build Library (boxing)
 ##########################################################
 
-message("${PROJECT_NAME}: Building library version ${PROJECT_VERSION}...")
+message("${PROJECT_NAME}: Building ${MODULE_NAME_BOXING} library version ${PROJECT_VERSION}...")
 
 if (${LS_STD_BUILD_STATIC})
-    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_static" STATIC
-            ${SOURCE_FILES_BOXING}
-            ${SOURCE_FILES_CORE}
-            ${SOURCE_FILES_EVENT}
-            ${SOURCE_FILES_IO}
-            ${SOURCE_FILES_LOGIC}
-            ${SOURCE_FILES_TIME})
-    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_static" PROPERTIES DEBUG_POSTFIX "_d")
+    add_library("${MODULE_NAME_BOXING}" STATIC ${SOURCE_FILES_BOXING})
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
-    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_shared" SHARED
-            ${SOURCE_FILES_BOXING}
-            ${SOURCE_FILES_CORE}
-            ${SOURCE_FILES_EVENT}
-            ${SOURCE_FILES_IO}
-            ${SOURCE_FILES_LOGIC}
-            ${SOURCE_FILES_TIME})
-    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_shared" PROPERTIES DEBUG_POSTFIX "_d")
+    add_library("${MODULE_NAME_BOXING}" SHARED ${SOURCE_FILES_BOXING})
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
-    add_library("${PROJECT_NAME}_${PROJECT_VERSION}_module" MODULE
-            ${SOURCE_FILES_BOXING}
-            ${SOURCE_FILES_CORE}
-            ${SOURCE_FILES_EVENT}
-            ${SOURCE_FILES_IO}
-            ${SOURCE_FILES_LOGIC}
-            ${SOURCE_FILES_TIME})
-    set_target_properties("${PROJECT_NAME}_${PROJECT_VERSION}_module" PROPERTIES DEBUG_POSTFIX "_d")
+    add_library("${MODULE_NAME_BOXING}" MODULE ${SOURCE_FILES_BOXING})
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
+
+##########################################################
+# Build Library (core)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_CORE} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_CORE}" STATIC ${SOURCE_FILES_CORE})
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
+# Build Library (event)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_EVENT} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_EVENT}" STATIC ${SOURCE_FILES_EVENT})
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
+# Build Library (io)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_IO} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_IO}" STATIC ${SOURCE_FILES_IO})
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
+# Build Library (logic)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_LOGIC} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_LOGIC}" STATIC ${SOURCE_FILES_LOGIC})
+    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
+# Build Library (time)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_TIME} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_TIME}" STATIC ${SOURCE_FILES_TIME})
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
+# Linking (boxing)
+##########################################################
+
+#if (${LS_STD_BUILD_WITH_TESTS})
+#    message("${MODULE_NAME_BOXING}: Linking libraries for test application...")
+#    target_link_libraries(${MODULE_NAME_BOXING}_test
+#            gtest
+#            gmock
+#            gtest_main
+#            "${MODULE_NAME_CORE}"
+#            "${MODULE_NAME_BOXING}")
+#endif ()
 
 ##########################################################
 # Linking
@@ -243,5 +310,14 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
-    target_link_libraries(${PROJECT_NAME}_test gtest gmock gtest_main "${PROJECT_NAME}_${PROJECT_VERSION}_static")
+    target_link_libraries(${PROJECT_NAME}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_CORE}"
+            "${MODULE_NAME_BOXING}"
+            "${MODULE_NAME_EVENT}"
+            "${MODULE_NAME_IO}"
+            "${MODULE_NAME_LOGIC}"
+            "${MODULE_NAME_TIME}")
 endif ()
