@@ -198,6 +198,15 @@ endif ()
 #endif ()
 
 ##########################################################
+# Build Tests (core)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_CORE}: Building tests...")
+    add_executable(${MODULE_NAME_CORE}_test ${TEST_FILES_CORE})
+endif ()
+
+##########################################################
 # Build Tests
 ##########################################################
 
@@ -303,6 +312,19 @@ endif ()
 #            "${MODULE_NAME_CORE}"
 #            "${MODULE_NAME_BOXING}")
 #endif ()
+
+##########################################################
+# Linking (core)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_CORE}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_CORE}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_CORE}")
+endif ()
 
 ##########################################################
 # Linking
