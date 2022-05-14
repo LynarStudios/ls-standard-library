@@ -3,11 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-09
+ * Changed:         2022-05-14
  *
  * */
 
 #include "DailyNewsAgency.hpp"
+#include <ls_std/ls_std_event.hpp>
 
 ls_std_test::DailyNewsAgency::DailyNewsAgency() : ls_std_test::NewsAgency("DailyNewsAgency")
 {}

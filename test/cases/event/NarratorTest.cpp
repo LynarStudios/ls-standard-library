@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-12
+ * Changed:         2022-05-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <classes/observer/TestDataMercedesCar.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_event.hpp>
+#include <ls_std_event_test.hpp>
 
 namespace
 {
@@ -142,7 +143,7 @@ namespace
     ASSERT_STREQ("blue", this->mercedes2->getColor().c_str());
     ASSERT_STREQ("red", this->mercedes3->getColor().c_str());
 
-    ls::std::boxing::String newColor{"black"};
+    ls_std_event_test::Colour newColor{"black"};
     paintingMachine.tell(static_cast<const ls::std::core::Class &>(newColor));
 
     ASSERT_STREQ("black", this->mercedes1->getColor().c_str());

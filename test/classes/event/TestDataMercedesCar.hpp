@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-11
+ * Changed:         2022-05-14
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include "TestDataCar.hpp"
 #include "ls_std/core/interface/IListener.hpp"
-#include <ls_std/core/Class.hpp>
+#include "ls_std/core/Class.hpp"
 
 namespace ls_std_test
 {

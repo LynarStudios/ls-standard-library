@@ -3,11 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-09
+ * Changed:         2022-05-14
  *
  * */
 
 #include "GossipNewsAgency.hpp"
+#include <ls_std/ls_std_event.hpp>
 
 ls_std_test::GossipNewsAgency::GossipNewsAgency() : ls_std_test::NewsAgency("GossipNewsAgency")
 {}

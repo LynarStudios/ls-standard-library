@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-11
+ * Changed:         2022-05-14
  *
  * */
 
@@ -13,10 +13,10 @@
 #include <string>
 #include <memory>
 #include <map>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_core.hpp>
 #include "NewsAgency.hpp"
 
-namespace ls_std_test
+namespace ls_std_test // TODO: change namespace to event specific namespace
 {
   class DailyNewsAgency : public ls_std_test::NewsAgency, public ls::std::core::IListener
   {

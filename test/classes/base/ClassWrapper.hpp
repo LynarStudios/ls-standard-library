@@ -12,8 +12,8 @@
 
 #include <ls_std/ls_std.hpp>
 #include <gmock/gmock.h>
-
-namespace ls_std_test
+// TODO: check if this class is being used with correct include
+namespace ls_std_test // TODO: change namespace to core specific namespace
 {
   class ClassWrapper : public ls::std::core::Class
   {

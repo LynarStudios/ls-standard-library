@@ -138,11 +138,14 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/NarratorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/NewsAgency.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/Colour.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/DailyNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsEvent.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/SeriousNewsEvent.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/NewsAgency.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/SeriousNewsEvent.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/TestDataCar.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/TestDataMercedesCar.cpp)
 
     set(TEST_FILES_IO
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvDocumentTest.cpp
@@ -172,9 +175,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataCar.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/observer/TestDataMercedesCar.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp)
 
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
@@ -204,6 +205,15 @@ endif ()
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_CORE}: Building tests...")
     add_executable(${MODULE_NAME_CORE}_test ${TEST_FILES_CORE})
+endif ()
+
+##########################################################
+# Build Tests (event)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_EVENT}: Building tests...")
+    add_executable(${MODULE_NAME_EVENT}_test ${TEST_FILES_EVENT})
 endif ()
 
 ##########################################################
@@ -323,6 +333,20 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gtest
             gmock
             gtest_main
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Linking (event)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_EVENT}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_EVENT}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_CORE}")
 endif ()
 

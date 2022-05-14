@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-14
  *
  * */
 
-#include <ls_std/boxing/String.hpp>
+#include "Colour.hpp"
 #include "TestDataMercedesCar.hpp"
 
 ls_std_test::TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
@@ -17,5 +17,5 @@ ls_std_test::TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
 
 void ls_std_test::TestDataMercedesCar::listen(const ls::std::core::Class &_info)
 {
-  this->setColor(dynamic_cast<const ls::std::boxing::String &>(_info));
+  this->setColor(dynamic_cast<const ls_std_event_test::Colour &>(_info).getValue());
 }
