@@ -14,9 +14,9 @@
 #include "ls_std/core/interface/IListener.hpp"
 #include "ls_std/core/Class.hpp"
 
-namespace ls_std_test
+namespace ls_std_event_test
 {
-  class TestDataMercedesCar : public TestDataCar, public ls::std::core::IListener
+  class TestDataMercedesCar : public ls_std_event_test::TestDataCar, public ls::std::core::IListener
   {
     public:
 

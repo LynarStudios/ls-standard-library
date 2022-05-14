@@ -9,15 +9,15 @@
 
 #include "TestDataCar.hpp"
 
-ls_std_test::TestDataCar::TestDataCar() : color("white")
+ls_std_event_test::TestDataCar::TestDataCar() : color("white")
 {}
 
-std::string ls_std_test::TestDataCar::getColor()
+std::string ls_std_event_test::TestDataCar::getColor()
 {
   return this->color;
 }
 
-void ls_std_test::TestDataCar::setColor(std::string _color)
+void ls_std_event_test::TestDataCar::setColor(std::string _color)
 {
   this->color = std::move(_color);
 }

@@ -13,7 +13,7 @@
 #include <ls_std/ls_std_event.hpp>
 #include <string>
 
-namespace ls_std_test
+namespace ls_std_event_test
 {
   class SeriousNewsEvent : public ls::std::event::Event
   {

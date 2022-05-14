@@ -16,9 +16,9 @@
 #include <ls_std/ls_std_core.hpp>
 #include "NewsAgency.hpp"
 
-namespace ls_std_test // TODO: change namespace to event specific namespace
+namespace ls_std_event_test
 {
-  class DailyNewsAgency : public ls_std_test::NewsAgency, public ls::std::core::IListener
+  class DailyNewsAgency : public ls_std_event_test::NewsAgency, public ls::std::core::IListener
   {
     public:
 

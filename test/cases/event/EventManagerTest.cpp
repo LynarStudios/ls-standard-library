@@ -39,7 +39,7 @@ namespace
                    try
                    {
                      ls::std::event::EventManager eventManager{};
-                     eventManager.subscribe("", std::make_shared<ls_std_test::DailyNewsAgency>());
+                     eventManager.subscribe("", std::make_shared<ls_std_event_test::DailyNewsAgency>());
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -69,7 +69,7 @@ namespace
                    try
                    {
                      ls::std::event::EventManager eventManager{};
-                     eventManager.subscribe("TMP_DIR", std::make_shared<ls_std_test::DailyNewsAgency>());
+                     eventManager.subscribe("TMP_DIR", std::make_shared<ls_std_event_test::DailyNewsAgency>());
                    }
                    catch (const ls::std::core::EventNotSubscribedException &_exception)
                    {
@@ -84,7 +84,7 @@ namespace
                    try
                    {
                      ls::std::event::EventManager eventManager{};
-                     eventManager.unsubscribe("", std::make_shared<ls_std_test::DailyNewsAgency>());
+                     eventManager.unsubscribe("", std::make_shared<ls_std_event_test::DailyNewsAgency>());
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -212,8 +212,8 @@ namespace
   TEST_F(EventManagerTest, production_example)
   {
     std::string news, expectedNews{};
-    ls::std::core::type::event_id seriousNewsEventId = ls_std_test::SeriousNewsEvent{""}.getId();
-    ls::std::core::type::event_id gossipNewsEventId = ls_std_test::GossipNewsEvent{""}.getId();
+    ls::std::core::type::event_id seriousNewsEventId = ls_std_event_test::SeriousNewsEvent{""}.getId();
+    ls::std::core::type::event_id gossipNewsEventId = ls_std_event_test::GossipNewsEvent{""}.getId();
 
     // create event handler
 
@@ -228,12 +228,12 @@ namespace
 
     // create news agency (listener)
 
-    std::shared_ptr<ls_std_test::DailyNewsAgency> dailyNews = std::make_shared<ls_std_test::DailyNewsAgency>();
-    std::shared_ptr<ls_std_test::GossipNewsAgency> gossipNews = std::make_shared<ls_std_test::GossipNewsAgency>();
+    std::shared_ptr<ls_std_event_test::DailyNewsAgency> dailyNews = std::make_shared<ls_std_event_test::DailyNewsAgency>();
+    std::shared_ptr<ls_std_event_test::GossipNewsAgency> gossipNews = std::make_shared<ls_std_event_test::GossipNewsAgency>();
 
     // fire SeriousNewsEvent event with no effect
 
-    eventManager->fire(ls_std_test::SeriousNewsEvent(news)); // event call
+    eventManager->fire(ls_std_event_test::SeriousNewsEvent(news)); // event call
     ASSERT_TRUE(dailyNews->getNews().empty());
     ASSERT_TRUE(gossipNews->getNews().empty());
 
@@ -242,7 +242,7 @@ namespace
     eventManager->subscribe(seriousNewsEventId, dailyNews);
     eventManager->subscribe(seriousNewsEventId, gossipNews);
     news = "COVID-19 is still going on!";
-    eventManager->fire(ls_std_test::SeriousNewsEvent(news)); // event call
+    eventManager->fire(ls_std_event_test::SeriousNewsEvent(news)); // event call
 
     expectedNews = "DailyNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), dailyNews->getNews().c_str());
@@ -255,7 +255,7 @@ namespace
     // unsubscribe SeriousNewsEvent from GossipNewsAgency
 
     eventManager->unsubscribe(seriousNewsEventId, gossipNews);
-    eventManager->fire(ls_std_test::SeriousNewsEvent(news)); // event call
+    eventManager->fire(ls_std_event_test::SeriousNewsEvent(news)); // event call
 
     expectedNews = "DailyNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), dailyNews->getNews().c_str());
@@ -270,12 +270,12 @@ namespace
     eventManager->subscribe(seriousNewsEventId, gossipNews);
 
     news = "COVID-19 is still going on!";
-    eventManager->fire(ls_std_test::SeriousNewsEvent(news)); // event call
+    eventManager->fire(ls_std_event_test::SeriousNewsEvent(news)); // event call
     expectedNews = "GossipNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), gossipNews->getNews().c_str());
 
     news = "ape likes banana!";
-    eventManager->fire(ls_std_test::GossipNewsEvent(news)); // event call
+    eventManager->fire(ls_std_event_test::GossipNewsEvent(news)); // event call
     expectedNews = "GossipNewsAgency: " + news;
     ASSERT_STREQ(expectedNews.c_str(), gossipNews->getNews().c_str());
   }

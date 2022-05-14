@@ -27,17 +27,17 @@ namespace
       void TearDown() override
       {}
 
-      std::shared_ptr<ls_std_test::TestDataMercedesCar> mercedes1{};
-      std::shared_ptr<ls_std_test::TestDataMercedesCar> mercedes2{};
-      std::shared_ptr<ls_std_test::TestDataMercedesCar> mercedes3{};
+      std::shared_ptr<ls_std_event_test::TestDataMercedesCar> mercedes1{};
+      std::shared_ptr<ls_std_event_test::TestDataMercedesCar> mercedes2{};
+      std::shared_ptr<ls_std_event_test::TestDataMercedesCar> mercedes3{};
 
       void createCars()
       {
-        this->mercedes1 = std::make_shared<ls_std_test::TestDataMercedesCar>();
+        this->mercedes1 = std::make_shared<ls_std_event_test::TestDataMercedesCar>();
         this->mercedes1->setColor("pink");
-        this->mercedes2 = std::make_shared<ls_std_test::TestDataMercedesCar>();
+        this->mercedes2 = std::make_shared<ls_std_event_test::TestDataMercedesCar>();
         this->mercedes2->setColor("blue");
-        this->mercedes3 = std::make_shared<ls_std_test::TestDataMercedesCar>();
+        this->mercedes3 = std::make_shared<ls_std_event_test::TestDataMercedesCar>();
         this->mercedes3->setColor("red");
       }
   };
