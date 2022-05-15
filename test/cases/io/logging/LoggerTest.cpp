@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-11
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <TestHelper.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include <ls_std_io_test.hpp>
 
 namespace
 {
@@ -28,7 +29,7 @@ namespace
 
       static std::shared_ptr<ls::std::core::IWriter> createFileLogger(const std::string &_logName)
       {
-        std::string path = TestHelper::getResourcesFolderLocation() + _logName;
+        std::string path = ls_std_io_test::TestHelper::getResourcesFolderLocation() + _logName;
         ls::std::io::File file{path};
 
         if (!file.exists())
@@ -41,11 +42,11 @@ namespace
         return writer;
       }
 
-      static ls::std::boxing::String getContentFromLogFile(const std::string &_logName)
+      static ::std::string getContentFromLogFile(const std::string &_logName)
       {
-        ls::std::io::File file{TestHelper::getResourcesFolderLocation() + _logName};
+        ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + _logName};
         ls::std::io::FileReader reader{file};
-        ls::std::boxing::String content{reader.read()};
+        ::std::string content{reader.read()};
         file.remove();
 
         return content;
@@ -85,14 +86,14 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ls::std::boxing::String content = getContentFromLogFile(logName);
+    ::std::string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.contains("1. line!"));
-    ASSERT_TRUE(content.contains("2. line!"));
-    ASSERT_TRUE(content.contains("3. line!"));
-    ASSERT_TRUE(content.contains("4. line!"));
-    ASSERT_TRUE(content.contains("5. line!"));
-    ASSERT_FALSE(content.contains("6. line!"));
+    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("5. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
   }
 
   TEST_F(LoggerTest, error)
@@ -114,14 +115,14 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ls::std::boxing::String content = getContentFromLogFile(logName);
+    ::std::string content = getContentFromLogFile(logName);
 
-    ASSERT_FALSE(content.contains("1. line!"));
-    ASSERT_FALSE(content.contains("2. line!"));
-    ASSERT_TRUE(content.contains("3. line!"));
-    ASSERT_TRUE(content.contains("4. line!"));
-    ASSERT_FALSE(content.contains("5. line!"));
-    ASSERT_FALSE(content.contains("6. line!"));
+    ASSERT_FALSE(content.find("1. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("2. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
   }
 
   TEST_F(LoggerTest, fatal)
@@ -143,14 +144,14 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ls::std::boxing::String content = getContentFromLogFile(logName);
+    ::std::string content = getContentFromLogFile(logName);
 
-    ASSERT_FALSE(content.contains("1. line!"));
-    ASSERT_FALSE(content.contains("2. line!"));
-    ASSERT_FALSE(content.contains("3. line!"));
-    ASSERT_TRUE(content.contains("4. line!"));
-    ASSERT_FALSE(content.contains("5. line!"));
-    ASSERT_FALSE(content.contains("6. line!"));
+    ASSERT_FALSE(content.find("1. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("2. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("3. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
   }
 
   TEST_F(LoggerTest, getLogLevel)
@@ -178,14 +179,14 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ls::std::boxing::String content = getContentFromLogFile(logName);
+    ::std::string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.contains("1. line!"));
-    ASSERT_TRUE(content.contains("2. line!"));
-    ASSERT_TRUE(content.contains("3. line!"));
-    ASSERT_TRUE(content.contains("4. line!"));
-    ASSERT_FALSE(content.contains("5. line!"));
-    ASSERT_FALSE(content.contains("6. line!"));
+    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
   }
 
   TEST_F(LoggerTest, setLogLevel)
@@ -215,14 +216,14 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ls::std::boxing::String content = getContentFromLogFile(logName);
+    ::std::string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.contains("1. line!"));
-    ASSERT_TRUE(content.contains("2. line!"));
-    ASSERT_TRUE(content.contains("3. line!"));
-    ASSERT_TRUE(content.contains("4. line!"));
-    ASSERT_TRUE(content.contains("5. line!"));
-    ASSERT_TRUE(content.contains("6. line!"));
+    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("5. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("6. line!") != ::std::string::npos);
   }
 
   TEST_F(LoggerTest, warn)
@@ -244,13 +245,13 @@ namespace
     // get content and check
 
     std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ls::std::boxing::String content = getContentFromLogFile(logName);
+    ::std::string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.contains("1. line!"));
-    ASSERT_TRUE(content.contains("2. line!"));
-    ASSERT_TRUE(content.contains("3. line!"));
-    ASSERT_FALSE(content.contains("4. line!"));
-    ASSERT_FALSE(content.contains("5. line!"));
-    ASSERT_FALSE(content.contains("6. line!"));
+    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("4. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
   }
 }

@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-11
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std.hpp>
 #include <TestDataFactory.hpp>
-#include <TestHelper.hpp>
+#include "classes/io/xml/TestHelper.hpp"
 
 namespace
 {
@@ -54,7 +54,7 @@ namespace
     std::string jsonString = serializable.marshal();
     ASSERT_TRUE(!jsonString.empty());
 
-    ls::std::io::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
     ls::std::io::FileReader reader{file};
     ls::std::boxing::String data{reader.read()};
 
@@ -63,7 +63,7 @@ namespace
 
   TEST_F(SerializableJsonStateMachineTest, unmarshal)
   {
-    ls::std::io::File file{TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
+    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
     ls::std::io::FileReader reader{file};
     std::shared_ptr<ls::std::logic::StateMachine> machine = std::make_shared<ls::std::logic::StateMachine>("bla");
     ls::std::logic::SerializableJsonStateMachine serializable{machine};

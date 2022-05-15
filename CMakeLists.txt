@@ -167,6 +167,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StandardOutputWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestHelper.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 
     set(TEST_FILES_LOGIC
@@ -184,7 +186,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp)
 
     set(TEST_FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/TestHelper.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp)
 endif ()
@@ -214,6 +215,15 @@ endif ()
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_EVENT}: Building tests...")
     add_executable(${MODULE_NAME_EVENT}_test ${TEST_FILES_EVENT})
+endif ()
+
+##########################################################
+# Build Tests (io)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_IO}: Building tests...")
+    add_executable(${MODULE_NAME_IO}_test ${TEST_FILES_IO})
 endif ()
 
 ##########################################################
@@ -347,6 +357,20 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gmock
             gtest_main
             "${MODULE_NAME_EVENT}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Linking (io)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_IO}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_IO}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_IO}"
             "${MODULE_NAME_CORE}")
 endif ()
 

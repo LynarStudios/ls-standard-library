@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2022-05-12
+ * Changed:         2022-05-14
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <ls_std/io/xml/XmlParser.hpp>
 
-namespace ls_std_test
+namespace ls_std_io_test
 {
   class XmlParserTestWrapper : public ls::std::io::XmlParser
   {

@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-05-12
+ * Changed:         2022-05-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <TestHelper.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include <ls_std_io_test.hpp>
 
 namespace
 {
@@ -22,7 +23,7 @@ namespace
 
       static ls::std::core::type::byte_field readXmlStateMachine()
       {
-        std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+        std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
         ls::std::io::File file{xmlPath};
         ls::std::core::type::byte_field data = ls::std::io::FileReader{file}.read();
 
@@ -221,7 +222,7 @@ namespace
 
   TEST_F(XmlParserTest, getDocument)
   {
-    std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     ls::std::io::XmlParser xmlParser{std::make_shared<ls::std::io::XmlDocument>()};
 
     ASSERT_TRUE(xmlParser.getDocument() != nullptr);
@@ -229,7 +230,7 @@ namespace
 
   TEST_F(XmlParserTest, setDocument)
   {
-    std::string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     std::shared_ptr<ls::std::io::XmlDocument> document = std::make_shared<ls::std::io::XmlDocument>();
     ls::std::io::XmlParser xmlParser{document};
     ASSERT_TRUE(xmlParser.getDocument() == document);

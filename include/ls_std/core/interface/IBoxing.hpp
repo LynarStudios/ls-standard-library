@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-11
+ * Changed:         2022-05-14
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_I_BOXING_HPP
 
 #include <string>
-
+// TODO: add "interface" namespace
 namespace ls
 {
   namespace std

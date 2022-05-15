@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2022-05-11
+ * Changed:         2022-05-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <TestDataFactory.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include <ls_std_io_test.hpp>
 
 namespace
 {
@@ -72,7 +73,7 @@ namespace
     ASSERT_TRUE(document.getRootElement() == nullptr);
 
     ls::std::io::XmlDeclaration declaration{"1.0"};
-    document.setRootElement(ls_std_test::TestDataFactory::createXmlContent());
+    document.setRootElement(ls_std_io_test::TestDataFactory::createXmlContent());
     ASSERT_TRUE(document.getRootElement() != nullptr);
     ASSERT_STREQ("dialog", document.getRootElement()->getName().c_str());
   }
@@ -102,7 +103,7 @@ namespace
     declaration.setStandalone("yes");
     document.setDeclaration(std::make_shared<ls::std::io::XmlDeclaration>(declaration));
 
-    document.setRootElement(ls_std_test::TestDataFactory::createXmlContent());
+    document.setRootElement(ls_std_io_test::TestDataFactory::createXmlContent());
     std::string xmlStream = document.toXml();
 
     ASSERT_TRUE(!xmlStream.empty());

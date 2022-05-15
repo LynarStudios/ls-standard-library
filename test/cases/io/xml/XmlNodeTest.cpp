@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2022-05-11
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <TestDataFactory.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include <ls_std_io_test.hpp>
 
 namespace
 {
@@ -892,7 +893,7 @@ namespace
 
   TEST_F(XmlNodeTest, toXml)
   {
-    auto root = ls_std_test::TestDataFactory::createXmlContent();
+    auto root = ls_std_io_test::TestDataFactory::createXmlContent();
     std::string xmlContent = root->toXml();
 
     ASSERT_TRUE(!xmlContent.empty());
@@ -905,9 +906,9 @@ namespace
     attribute->setValue("important");
     singleLineElement->addAttributeToEnd(attribute);
 
-    ls::std::boxing::String xmlContent{singleLineElement->toXml()};
-    std::string expectedXmlString = R"(<info id="important" />)";
+    ::std::string xmlContent{singleLineElement->toXml()};
+    ::std::string expectedXmlString = R"(<info id="important" />)";
 
-    ASSERT_TRUE(xmlContent.contains(expectedXmlString));
+    ASSERT_TRUE(xmlContent.find(expectedXmlString) != ::std::string::npos);
   }
 }
