@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-14
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std_io_test.hpp>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -21,7 +21,7 @@ namespace
       FileTest() = default;
       ~FileTest() override = default;
 
-      std::string fileLocation = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
+      std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
 
       void SetUp() override
       {}
@@ -48,7 +48,7 @@ namespace
   TEST_F(FileTest, operator_not_equals)
   {
     ls::std::io::File file{this->fileLocation};
-    ls::std::io::File file2{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
+    ls::std::io::File file2{ls_std_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
 
     ASSERT_TRUE(file != file2);
     ASSERT_TRUE(file2 != file);
@@ -59,10 +59,10 @@ namespace
   TEST_F(FileTest, canExecute)
   {
     #ifdef _WIN32
-    ls::std::io::File executableFile{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
+    ls::std::io::File executableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
     #endif
     #if defined(unix) || defined(__APPLE__)
-    ls::std::io::File executableFile{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "app"};
+    ls::std::io::File executableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "app"};
     #endif
 
     ASSERT_TRUE(executableFile.canExecute());
@@ -105,18 +105,18 @@ namespace
   TEST_F(FileTest, canWrite_not_writable)
   {
     #if defined(unix) || defined(__APPLE__)
-    ls::std::io::File noWritableFile{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    ls::std::io::File noWritableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
     #endif
     #ifdef _WIN32
-    ls::std::io::File noWritableFile{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    ls::std::io::File noWritableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
     #endif
   }
 
   TEST_F(FileTest, createNewFile)
   {
-    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "tmp.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp.txt"};
     ASSERT_FALSE(file.exists());
 
     file.createNewFile();
@@ -128,7 +128,7 @@ namespace
 
   TEST_F(FileTest, createNewFile_file_does_already_exist)
   {
-    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "simple.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt"};
 
     EXPECT_THROW({
                    try
@@ -145,7 +145,7 @@ namespace
   TEST_F(FileTest, exists)
   {
     ls::std::io::File file{this->fileLocation};
-    ls::std::io::File directory{ls_std_io_test::TestHelper::getResourcesFolderLocation()};
+    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
 
     ASSERT_TRUE(file.exists());
     ASSERT_TRUE(directory.exists());
@@ -153,7 +153,7 @@ namespace
 
   TEST_F(FileTest, exists_does_not_exist)
   {
-    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "bla.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "bla.txt"};
     ASSERT_FALSE(file.exists());
   }
 
@@ -172,9 +172,9 @@ namespace
   TEST_F(FileTest, getName)
   {
     ls::std::io::File file{this->fileLocation};
-    ls::std::io::File executableFile{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
+    ls::std::io::File executableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
     ls::std::io::File anotherFile{"bla.txt"};
-    ls::std::io::File directory{ls_std_io_test::TestHelper::getResourcesFolderLocation()};
+    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
 
     ASSERT_STREQ("simple.txt", file.getName().c_str());
     ASSERT_STREQ("app.exe", executableFile.getName().c_str());
@@ -185,7 +185,7 @@ namespace
   TEST_F(FileTest, getParent)
   {
     ls::std::io::File file{this->fileLocation};
-    ASSERT_STREQ(ls_std_io_test::TestHelper::getResourcesFolderLocation().c_str(), file.getParent().c_str());
+    ASSERT_STREQ(ls_std_test::TestHelper::getResourcesFolderLocation().c_str(), file.getParent().c_str());
   }
 
   TEST_F(FileTest, getWorkingDirectory)
@@ -204,7 +204,7 @@ namespace
 
   TEST_F(FileTest, isDirectory)
   {
-    ls::std::io::File directory{ls_std_io_test::TestHelper::getResourcesFolderLocation()};
+    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
     ASSERT_TRUE(directory.isDirectory());
   }
 
@@ -221,13 +221,13 @@ namespace
     ls::std::io::File file{this->fileLocation};
     ASSERT_TRUE(file.isFile());
 
-    ls::std::io::File file2{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "list_test" + separator + "bla.txt"};
+    ls::std::io::File file2{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test" + separator + "bla.txt"};
     ASSERT_TRUE(file2.isFile());
   }
 
   TEST_F(FileTest, isFile_is_a_directory)
   {
-    ls::std::io::File directory{ls_std_io_test::TestHelper::getResourcesFolderLocation()};
+    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
     ASSERT_FALSE(directory.isFile());
   }
 
@@ -239,7 +239,7 @@ namespace
 
   TEST_F(FileTest, list)
   {
-    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "list_test"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
     std::list<std::string> filesInDirectory = file.list();
     std::string expectedFile{};
     const char separator = ls::std::io::FilePathSeparator::get();
@@ -267,7 +267,7 @@ namespace
 
   TEST_F(FileTest, listFiles)
   {
-    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "list_test"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
     std::list<std::string> filesInDirectory = file.listFiles();
     std::string expectedFile{};
     const char separator = ls::std::io::FilePathSeparator::get();
@@ -287,7 +287,7 @@ namespace
 
   TEST_F(FileTest, makeDirectory)
   {
-    ls::std::io::File directory{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "testDir"};
+    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir"};
     ASSERT_FALSE(directory.exists());
 
     directory.makeDirectory();
@@ -299,7 +299,7 @@ namespace
 
   TEST_F(FileTest, makeDirectory_directory_already_exists)
   {
-    ls::std::io::File directory{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "list_test"};
+    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
 
     EXPECT_THROW({
                    try
@@ -315,7 +315,7 @@ namespace
 
   TEST_F(FileTest, makeDirectories)
   {
-    ls::std::io::File directory{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp/bla"};
+    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp/bla"};
     ASSERT_FALSE(directory.exists());
 
     directory.makeDirectories();
@@ -324,17 +324,17 @@ namespace
     // clean up
 
     directory.remove();
-    directory = ls::std::io::File(ls_std_io_test::TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp");
+    directory = ls::std::io::File(ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp");
     directory.remove();
-    directory = ls::std::io::File(ls_std_io_test::TestHelper::getResourcesFolderLocation() + "testDir/sub");
+    directory = ls::std::io::File(ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir/sub");
     directory.remove();
-    directory = ls::std::io::File(ls_std_io_test::TestHelper::getResourcesFolderLocation() + "testDir");
+    directory = ls::std::io::File(ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir");
     directory.remove();
   }
 
   TEST_F(FileTest, remove)
   {
-    std::string fileName = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "removable_file.txt";
+    std::string fileName = ls_std_test::TestHelper::getResourcesFolderLocation() + "removable_file.txt";
     ls::std::io::File file{fileName};
     file.createNewFile();
 
@@ -346,8 +346,8 @@ namespace
 
   TEST_F(FileTest, renameTo)
   {
-    std::string currentName = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to.txt";
-    std::string newName = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to_better_name.txt";
+    std::string currentName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to.txt";
+    std::string newName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to_better_name.txt";
 
     ls::std::io::File file{currentName};
     file.createNewFile();
@@ -367,7 +367,7 @@ namespace
     ls::std::io::File file{this->fileLocation};
     ASSERT_TRUE(file.exists());
 
-    file.reset(ls_std_io_test::TestHelper::getResourcesFolderLocation() + "list_test/hello.txt");
+    file.reset(ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test/hello.txt");
     ASSERT_TRUE(file.exists());
   }
 }

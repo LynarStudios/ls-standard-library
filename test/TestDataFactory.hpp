@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2022-05-11
+ * Changed:         2022-05-15
  *
  * */
 
@@ -14,7 +14,7 @@
 
 namespace ls_std_test
 {
-  class TestDataFactory
+  class TestDataFactory // TODO: remove class, after migrated to submodules
   {
     public:
 

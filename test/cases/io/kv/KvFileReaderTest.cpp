@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-14
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
-#include <ls_std_io_test.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -29,7 +29,7 @@ namespace
 
       static std::shared_ptr<ls::std::io::KvFileReader> createTestKVFileReader()
       {
-        std::string kvPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+        std::string kvPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
         std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
 
         return std::make_shared<ls::std::io::KvFileReader>(document, kvPath);
@@ -41,7 +41,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     std::string kvPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+                     std::string kvPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
                      ls::std::io::KvFileReader reader = ls::std::io::KvFileReader(nullptr, kvPath);
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)

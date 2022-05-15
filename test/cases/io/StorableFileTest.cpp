@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-14
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std_io_test.hpp>
 #include <ls_std/ls_std_io.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -20,7 +20,7 @@ namespace
       StorableFileTest() = default;
       ~StorableFileTest() override = default;
 
-      std::string fileLocation = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
+      std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
 
       void SetUp() override
       {}
@@ -58,7 +58,7 @@ namespace
 
     // reset
 
-    std::string anotherFileLocation = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
+    std::string anotherFileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
     storableFile.reset(anotherFileLocation);
     content = storableFile.load();
 
@@ -70,7 +70,7 @@ namespace
 
   TEST_F(StorableFileTest, save)
   {
-    std::string path = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
+    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
     ls::std::io::File file{path};
     file.createNewFile();
 

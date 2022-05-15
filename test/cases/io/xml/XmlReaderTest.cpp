@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2022-05-14
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
-#include <ls_std_io_test.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -30,7 +30,7 @@ namespace
 
   TEST_F(XmlReaderTest, read)
   {
-    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(!xmlReader.read().empty());
@@ -38,7 +38,7 @@ namespace
 
   TEST_F(XmlReaderTest, getDocument)
   {
-    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(xmlReader.getDocument() != nullptr);
@@ -46,7 +46,7 @@ namespace
 
   TEST_F(XmlReaderTest, setDocument)
   {
-    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     std::shared_ptr<ls::std::io::XmlDocument> document = std::make_shared<ls::std::io::XmlDocument>();
     ls::std::io::XmlReader xmlReader{document, xmlPath};
     ASSERT_TRUE(xmlReader.getDocument() == document);
@@ -58,7 +58,7 @@ namespace
 
   TEST_F(XmlReaderTest, setDocument_no_reference)
   {
-    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     std::shared_ptr<ls::std::io::XmlDocument> document = std::make_shared<ls::std::io::XmlDocument>();
     ls::std::io::XmlReader xmlReader{document, xmlPath};
 
@@ -76,7 +76,7 @@ namespace
 
   TEST_F(XmlReaderTest, setFile)
   {
-    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
     ls::std::io::File xmlFile{xmlPath};
     xmlReader.setFile(xmlFile);
@@ -86,7 +86,7 @@ namespace
 
   TEST_F(XmlReaderTest, setFile_does_not_exist)
   {
-    std::string xmlPath = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
     ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
     ls::std::io::File xmlFile{xmlPath};
 

@@ -10,7 +10,7 @@
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
-#include <ls_std_io_test.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -29,7 +29,7 @@ namespace
 
       static std::shared_ptr<ls::std::core::IWriter> createFileLogger(const std::string &_logName)
       {
-        std::string path = ls_std_io_test::TestHelper::getResourcesFolderLocation() + _logName;
+        std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + _logName;
         ls::std::io::File file{path};
 
         if (!file.exists())
@@ -44,7 +44,7 @@ namespace
 
       static ::std::string getContentFromLogFile(const std::string &_logName)
       {
-        ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + _logName};
+        ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + _logName};
         ls::std::io::FileReader reader{file};
         ::std::string content{reader.read()};
         file.remove();

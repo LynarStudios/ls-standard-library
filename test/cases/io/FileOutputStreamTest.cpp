@@ -8,9 +8,9 @@
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std_io_test.hpp>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -30,7 +30,7 @@ namespace
 
   TEST_F(FileOutputStreamTest, constructor_file_does_not_exist)
   {
-    std::string path = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "not_existing.txt";
+    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "not_existing.txt";
     ls::std::io::File file{path};
 
     EXPECT_THROW({
@@ -47,7 +47,7 @@ namespace
 
   TEST_F(FileOutputStreamTest, write)
   {
-    std::string path = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
+    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
     ls::std::io::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());
@@ -63,7 +63,7 @@ namespace
 
   TEST_F(FileOutputStreamTest, write_with_another_appending_stream)
   {
-    std::string path = ls_std_io_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
+    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
     ls::std::io::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());
@@ -92,10 +92,10 @@ namespace
   TEST_F(FileOutputStreamTest, write_no_permission_to_write)
   {
     #if defined(unix) || defined(__APPLE__)
-    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
     #endif
     #ifdef _WIN32
-    ls::std::io::File file{ls_std_io_test::TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
     #endif
 
     ls::std::io::FileOutputStream outputStream{file};
