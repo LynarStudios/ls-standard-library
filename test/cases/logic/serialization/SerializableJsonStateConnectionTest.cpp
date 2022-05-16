@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-11
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_logic.hpp>
 
 namespace
 {
@@ -46,9 +47,9 @@ namespace
   {
     ls::std::logic::StateConnection x{"AB", "B"};
     ls::std::logic::SerializableJsonStateConnection serializable{std::make_shared<ls::std::logic::StateConnection>(x)};
-    ls::std::boxing::String jsonString{serializable.marshal()};
+    ::std::string jsonString{serializable.marshal()};
 
-    ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.toString().c_str());
+    ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.c_str());
   }
 
   TEST_F(SerializableJsonStateConnectionTest, unmarshal)
@@ -77,9 +78,9 @@ namespace
   {
     ls::std::logic::StateConnection x{"AB", "B"};
     ls::std::logic::SerializableJsonStateConnection serializable{std::make_shared<ls::std::logic::StateConnection>(x)};
-    ls::std::boxing::String jsonString{serializable.marshal()};
+    ::std::string jsonString{serializable.marshal()};
 
-    ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.toString().c_str());
+    ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.c_str());
 
     // set value should now reset json
 
@@ -87,7 +88,8 @@ namespace
     serializable.setValue(std::make_shared<ls::std::logic::StateConnection>(y));
     jsonString = serializable.marshal();
 
-    ASSERT_STREQ(R"({"condition":false,"connectionId":"BC","stateId":"C"})", jsonString.toString().c_str());
+    ASSERT_STREQ(R"({"condition":false,"connectionId":"BC","stateId":"C"})", jsonString.c_str());
+    //I love YOU
   }
 
   TEST_F(SerializableJsonStateConnectionTest, setValue_no_parameter_set)

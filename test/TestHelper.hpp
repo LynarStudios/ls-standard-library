@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-15
+ * Changed:         2022-05-16
  *
  * */
 
@@ -17,6 +17,7 @@
 #include <sstream>
 #include <climits>
 #include <unistd.h>
+#include <fstream>
 
 namespace ls_std_test
 {
@@ -27,12 +28,12 @@ namespace ls_std_test
       TestHelper() = default;
       ~TestHelper() = default;
 
-      static std::string getResourcesFolderLocation()
+      static ::std::string getResourcesFolderLocation()
       {
         return TestHelper::getTestFolderLocation() + "resources" + ls_std_test::TestHelper::_getFilePathSeparator();
       }
 
-      static std::string getTestFolderLocation()
+      static ::std::string getTestFolderLocation()
       {
         ::std::string buildDirectory = ls_std_test::TestHelper::_getWorkingDirectory();
         buildDirectory = ls_std_test::TestHelper::_normalizePath(buildDirectory);
@@ -40,7 +41,38 @@ namespace ls_std_test
         return ls_std_test::TestHelper::_getParent(buildDirectory) + "test" + ls_std_test::TestHelper::_getFilePathSeparator();
       }
 
+      static ::std::string normalize(const ::std::string &_path)
+      {
+        return ls_std_test::TestHelper::_normalizePath(_path);
+      }
+
+      static ::std::string readFile(const ::std::string &_absoluteFilePath)
+      {
+        char *data;
+        ::std::ifstream inputStream{_absoluteFilePath, ::std::ifstream::binary};
+        int length = (int) ls_std_test::TestHelper::_getFileSize(_absoluteFilePath);
+        data = new ls::std::core::type::byte[length];
+        inputStream.read(data, length);
+
+        if (inputStream.fail())
+        {
+          throw ::std::runtime_error("invalid file operation!");
+        }
+
+        inputStream.close();
+        ls::std::core::type::byte_field readData = ls::std::core::type::byte_field{data, (size_t) ls_std_test::TestHelper::_getFileSize(_absoluteFilePath)};
+        delete[] data;
+
+        return readData;
+      }
+
     private:
+
+      static bool _fileExists(const ::std::string &_path)
+      {
+        struct stat _stat{};
+        return (stat(_path.c_str(), &_stat) == 0);
+      }
 
       static char _getFilePathSeparator()
       {
@@ -54,6 +86,22 @@ namespace ls_std_test
         #endif
 
         return separator;
+      }
+
+      static long _getFileSize(const ::std::string &_absoluteFilePath)
+      {
+        ::std::streampos fileSize{};
+
+        if (ls_std_test::TestHelper::_fileExists(_absoluteFilePath))
+        {
+          ::std::ifstream fileHandler{_absoluteFilePath, ::std::ios::in};
+          fileSize = fileHandler.tellg();
+          fileHandler.seekg(0, ::std::ios::end);
+          fileSize = fileHandler.tellg() - fileSize;
+          fileHandler.close();
+        }
+
+        return (long) fileSize;
       }
 
       static std::string _getParent(const ::std::string &_path)

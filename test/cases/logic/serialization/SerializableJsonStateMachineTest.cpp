@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-15
+ * Changed:         2022-05-16
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <TestDataFactory.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_logic.hpp>
+#include <ls_std_logic_test.hpp>
 #include "TestHelper.hpp"
 
 namespace
@@ -46,7 +47,7 @@ namespace
 
   TEST_F(SerializableJsonStateMachineTest, marshal)
   {
-    ls::std::logic::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls::std::logic::StateMachine stateMachine = ls_std_logic_test::TestDataFactory::createStateMachine();
     stateMachine.setStartState("A");
     stateMachine.setMemory({"A", "B", "C"});
     ls::std::logic::SerializableJsonStateMachine serializable{std::make_shared<ls::std::logic::StateMachine>(stateMachine)};
@@ -54,21 +55,22 @@ namespace
     std::string jsonString = serializable.marshal();
     ASSERT_TRUE(!jsonString.empty());
 
-    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls::std::io::FileReader reader{file};
-    ls::std::boxing::String data{reader.read()};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "/state_machine_test.json";
+    path = ls_std_test::TestHelper::normalize(path);
+    ::std::string content = ls_std_test::TestHelper::readFile(path);
 
-    ASSERT_TRUE(data.contains(jsonString));
+    ASSERT_TRUE(content.find(jsonString) != ::std::string::npos);
   }
 
   TEST_F(SerializableJsonStateMachineTest, unmarshal)
   {
-    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "/state_machine_test.json"};
-    ls::std::io::FileReader reader{file};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "/state_machine_test.json";
+    path = ls_std_test::TestHelper::normalize(path);
+
     std::shared_ptr<ls::std::logic::StateMachine> machine = std::make_shared<ls::std::logic::StateMachine>("bla");
     ls::std::logic::SerializableJsonStateMachine serializable{machine};
 
-    serializable.unmarshal(reader.read());
+    serializable.unmarshal(ls_std_test::TestHelper::readFile(path));
 
     ASSERT_STREQ("test_machine", machine->getName().c_str());
 

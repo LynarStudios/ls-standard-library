@@ -9,7 +9,7 @@
 
 #ifndef LS_STD_LS_STD_TEST_HPP
 #define LS_STD_LS_STD_TEST_HPP
-
+// TODO: file can be removed
 #include "classes/base/ClassWrapper.hpp"
 
 #include "classes/event/NewsAgency.hpp"

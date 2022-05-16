@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2022-05-12
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <TestDataFactory.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_logic.hpp>
+#include <ls_std_logic_test.hpp>
 
 namespace
 {
@@ -103,7 +104,7 @@ namespace
 
   TEST_F(StateMachineTest, hasState)
   {
-    ls::std::logic::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls::std::logic::StateMachine stateMachine = ls_std_logic_test::TestDataFactory::createStateMachine();
 
     ASSERT_TRUE(stateMachine.hasState("A"));
     ASSERT_TRUE(stateMachine.hasState("B"));
@@ -120,7 +121,7 @@ namespace
 
   TEST_F(StateMachineTest, proceed)
   {
-    ls::std::logic::StateMachine stateMachine = ls_std_test::TestDataFactory::createStateMachine();
+    ls::std::logic::StateMachine stateMachine = ls_std_logic_test::TestDataFactory::createStateMachine();
     ASSERT_STREQ("test_machine", stateMachine.getName().c_str());
     ASSERT_TRUE(stateMachine.setStartState("A"));
 

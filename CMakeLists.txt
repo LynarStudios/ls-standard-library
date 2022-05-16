@@ -176,17 +176,14 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/logic/TestDataFactory.cpp)
 
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
     set(TEST_FILES_TIME
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp)
-
-    set(TEST_FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/TestDataFactory.cpp)
 endif ()
 
 ##########################################################
@@ -226,6 +223,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Build Tests (logic)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_LOGIC}: Building tests...")
+    add_executable(${MODULE_NAME_LOGIC}_test ${TEST_FILES_LOGIC})
+endif ()
+
+##########################################################
 # Build Tests
 ##########################################################
 
@@ -238,8 +244,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${TEST_FILES_IO}
             ${TEST_FILES_LOGIC}
             ${TEST_FILES_SERIALIZATION}
-            ${TEST_FILES_TIME}
-            ${TEST_FILES})
+            ${TEST_FILES_TIME})
 endif ()
 
 ##########################################################
@@ -370,6 +375,20 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gmock
             gtest_main
             "${MODULE_NAME_IO}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Linking (logic)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_LOGIC}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_LOGIC}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_LOGIC}"
             "${MODULE_NAME_CORE}")
 endif ()
 

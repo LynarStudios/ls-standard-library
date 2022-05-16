@@ -10,11 +10,11 @@
 #ifndef LS_STD_TEST_DATA_FACTORY_HPP
 #define LS_STD_TEST_DATA_FACTORY_HPP
 
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_logic.hpp>
 
-namespace ls_std_test
+namespace ls_std_logic_test
 {
-  class TestDataFactory // TODO: remove class, after migrated to submodules
+  class TestDataFactory
   {
     public:
 
@@ -22,7 +22,6 @@ namespace ls_std_test
       ~TestDataFactory() = default;
 
       static ls::std::logic::StateMachine createStateMachine();
-      static std::shared_ptr<ls::std::io::XmlNode> createXmlContent();
   };
 }
 
