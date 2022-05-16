@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-09
+ * Changed:         2022-05-16
  *
  * */
 
@@ -14,7 +14,7 @@
 #include <string>
 #include <cstring>
 
-// TODO: pass parameters, use class, show class name
+//TODO: pass parameters, use class, show class name
 namespace ls
 {
   namespace std

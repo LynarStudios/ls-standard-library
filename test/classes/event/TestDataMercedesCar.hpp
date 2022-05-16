@@ -11,8 +11,7 @@
 #define LS_STD_TEST_DATA_MERCEDES_CAR_HPP
 
 #include "TestDataCar.hpp"
-#include "ls_std/core/interface/IListener.hpp"
-#include "ls_std/core/Class.hpp"
+#include <ls_std/ls_std_core.hpp>
 
 namespace ls_std_event_test
 {
