@@ -43,7 +43,7 @@ namespace
 
   TEST_F(ClassTest, destructor)
   {
-    std::shared_ptr<ls_std_test::ClassWrapper> object = std::make_shared<ls_std_test::ClassWrapper>();
+    std::shared_ptr<ls_std_core_test::ClassWrapper> object = std::make_shared<ls_std_core_test::ClassWrapper>();
     EXPECT_CALL(*object, Die());
   }
 
