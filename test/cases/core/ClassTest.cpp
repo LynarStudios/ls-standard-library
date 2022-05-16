@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2022-05-13
+ * Changed:         2022-05-16
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
-#include <ls_std_test.hpp>
+#include <ls_std_core_test.hpp>
 
 namespace
 {
