@@ -232,6 +232,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Build Tests (time)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_TIME}: Building tests...")
+    add_executable(${MODULE_NAME_TIME}_test ${TEST_FILES_TIME})
+endif ()
+
+##########################################################
 # Build Tests
 ##########################################################
 
@@ -389,6 +398,20 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gmock
             gtest_main
             "${MODULE_NAME_LOGIC}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Linking (time)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_TIME}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_TIME}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_TIME}"
             "${MODULE_NAME_CORE}")
 endif ()
 
