@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2022-05-13
+ * Changed:         2022-05-16
  *
  * */
 
@@ -21,7 +21,6 @@
 
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/core/interface/IEventSubscriber.hpp>
-#include <ls_std/core/interface/IFactory.hpp>
 #include <ls_std/core/interface/IListener.hpp>
 #include <ls_std/core/interface/IReader.hpp>
 #include <ls_std/core/interface/ISerializable.hpp>
