@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2021-07-16
+ * Changed:         2022-05-11
  *
  * */
 
@@ -11,33 +11,39 @@
 #define LS_STD_XML_DOCUMENT_HPP
 
 #include <memory>
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "XmlNode.hpp"
 #include "XmlDeclaration.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class XmlDocument : public ls_std::Class
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class XmlDocument : public ls::std::core::Class
+      {
+        public:
 
-      XmlDocument();
-      ~XmlDocument() override = default;
+          XmlDocument();
+          ~XmlDocument() override = default;
 
-      std::shared_ptr<ls_std::XmlDeclaration> getDeclaration();
-      std::shared_ptr<ls_std::XmlNode> getRootElement();
-      void setDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration);
-      void setRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement);
-      std::string toXml();
+          ::std::shared_ptr<ls::std::io::XmlDeclaration> getDeclaration();
+          ::std::shared_ptr<ls::std::io::XmlNode> getRootElement();
+          void setDeclaration(const ::std::shared_ptr<ls::std::io::XmlDeclaration> &_declaration);
+          void setRootElement(const ::std::shared_ptr<ls::std::io::XmlNode> &_rootElement);
+          ::std::string toXml();
 
-    private:
+        private:
 
-      std::shared_ptr<ls_std::XmlDeclaration> declaration{};
-      std::shared_ptr<ls_std::XmlNode> rootElement{};
+          ::std::shared_ptr<ls::std::io::XmlDeclaration> declaration{};
+          ::std::shared_ptr<ls::std::io::XmlNode> rootElement{};
 
-      void _assignDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration);
-      void _assignRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement);
-  };
+          void _assignDeclaration(const ::std::shared_ptr<ls::std::io::XmlDeclaration> &_declaration);
+          void _assignRootElement(const ::std::shared_ptr<ls::std::io::XmlNode> &_rootElement);
+      };
+    }
+  }
 }
 
 #endif

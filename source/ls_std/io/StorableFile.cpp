@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2021-04-23
+ * Changed:         2022-05-12
  *
  * */
 
@@ -11,38 +11,38 @@
 #include <ls_std/io/FileReader.hpp>
 #include <ls_std/io/FileWriter.hpp>
 
-ls_std::StorableFile::StorableFile(const std::string &_path)
+ls::std::io::StorableFile::StorableFile(const ::std::string &_path)
 {
   this->_init(_path);
 }
 
-std::shared_ptr<ls_std::File> ls_std::StorableFile::getFile()
+std::shared_ptr<ls::std::io::File> ls::std::io::StorableFile::getFile()
 {
   return this->file;
 }
 
-ls_std::byte_field ls_std::StorableFile::load()
+ls::std::core::type::byte_field ls::std::io::StorableFile::load()
 {
-  ls_std::FileReader reader{*this->file};
+  ls::std::io::FileReader reader{*this->file};
   return reader.read();
 }
 
-void ls_std::StorableFile::reset(const std::string &_path)
+void ls::std::io::StorableFile::reset(const ::std::string &_path)
 {
   this->_init(_path);
 }
 
-void ls_std::StorableFile::save(const ls_std::byte_field &_data)
+void ls::std::io::StorableFile::save(const ls::std::core::type::byte_field &_data)
 {
-  ls_std::FileWriter writer{*this->file};
+  ls::std::io::FileWriter writer{*this->file};
   writer.write(_data);
 }
 
-void ls_std::StorableFile::_init(const std::string &_path)
+void ls::std::io::StorableFile::_init(const ::std::string &_path)
 {
   if (this->file == nullptr)
   {
-    this->file = std::make_shared<ls_std::File>(_path);
+    this->file = ::std::make_shared<ls::std::io::File>(_path);
   }
   else
   {

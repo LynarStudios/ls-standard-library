@@ -3,64 +3,64 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2021-05-27
+ * Changed:         2022-05-12
  *
  * */
 
 #include <ls_std/logic/StateConnection.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::StateConnection::StateConnection(const ls_std::StateConnectionId& _connectionId, const ls_std::StateId& _stateId) : ls_std::Class("StateConnection")
+ls::std::logic::StateConnection::StateConnection(const ls::std::core::type::state_connection_id& _connectionId, const ls::std::core::type::state_id& _stateId) : ls::std::core::Class("StateConnection")
 {
   this->_assignConnectionId(_connectionId);
   this->_assignStateId(_stateId);
 }
 
-ls_std::StateConnectionId ls_std::StateConnection::getConnectionId()
+ls::std::core::type::state_connection_id ls::std::logic::StateConnection::getConnectionId()
 {
   return this->connectionId;
 }
 
-ls_std::StateId ls_std::StateConnection::getStateId()
+ls::std::core::type::state_id ls::std::logic::StateConnection::getStateId()
 {
   return this->stateId;
 }
 
-bool ls_std::StateConnection::isPassable() const
+bool ls::std::logic::StateConnection::isPassable() const
 {
   return this->condition;
 }
 
-void ls_std::StateConnection::setConnectionId(const ls_std::StateConnectionId& _connectionId)
+void ls::std::logic::StateConnection::setConnectionId(const ls::std::core::type::state_connection_id& _connectionId)
 {
   this->_assignConnectionId(_connectionId);
 }
 
-void ls_std::StateConnection::setStateId(const ls_std::StateId& _stateId)
+void ls::std::logic::StateConnection::setStateId(const ls::std::core::type::state_id& _stateId)
 {
   this->_assignStateId(_stateId);
 }
 
-void ls_std::StateConnection::updatePassCondition(bool _condition)
+void ls::std::logic::StateConnection::updatePassCondition(bool _condition)
 {
   this->condition = _condition;
 }
 
-void ls_std::StateConnection::_assignConnectionId(const ls_std::StateConnectionId &_connectionId)
+void ls::std::logic::StateConnection::_assignConnectionId(const ls::std::core::type::state_connection_id &_connectionId)
 {
   if (_connectionId.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->connectionId = _connectionId;
 }
 
-void ls_std::StateConnection::_assignStateId(const ls_std::StateId &_stateId)
+void ls::std::logic::StateConnection::_assignStateId(const ls::std::core::type::state_id &_stateId)
 {
   if (_stateId.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->stateId = _stateId;

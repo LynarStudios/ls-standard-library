@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2021-07-16
+ * Changed:         2022-05-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
 
 namespace
 {
@@ -28,150 +29,150 @@ namespace
 
   TEST_F(LogLevelTest, constructor_with_log_level_value_parameter)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::INFO};
-    ASSERT_EQ(ls_std::LogLevelValue::INFO, logLevel);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::INFO};
+    ASSERT_EQ(ls::std::io::LogLevelValue::INFO, logLevel);
   }
 
   TEST_F(LogLevelTest, constructor_default)
   {
-    ls_std::LogLevel logLevel{};
-    ASSERT_EQ(ls_std::LogLevelValue::FATAL, logLevel);
+    ls::std::io::LogLevel logLevel{};
+    ASSERT_EQ(ls::std::io::LogLevelValue::FATAL, logLevel);
   }
 
   TEST_F(LogLevelTest, operator_assign)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
-    logLevel = ls_std::LogLevelValue::INFO;
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::DEBUG};
+    logLevel = ls::std::io::LogLevelValue::INFO;
 
-    ASSERT_EQ(ls_std::LogLevelValue::INFO, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::INFO, logLevel);
   }
 
   TEST_F(LogLevelTest, operator_lessThan)
   {
-    ls_std::LogLevel logLevel{}; // default is FATAL
+    ls::std::io::LogLevel logLevel{}; // default is FATAL
 
-    ASSERT_TRUE(logLevel < ls_std::LogLevelValue::ERR);
-    ASSERT_TRUE(logLevel < ls_std::LogLevelValue::WARN);
-    ASSERT_TRUE(logLevel < ls_std::LogLevelValue::INFO);
-    ASSERT_TRUE(logLevel < ls_std::LogLevelValue::DEBUG);
-    ASSERT_TRUE(logLevel < ls_std::LogLevelValue::TRACE);
+    ASSERT_TRUE(logLevel < ls::std::io::LogLevelValue::ERR);
+    ASSERT_TRUE(logLevel < ls::std::io::LogLevelValue::WARN);
+    ASSERT_TRUE(logLevel < ls::std::io::LogLevelValue::INFO);
+    ASSERT_TRUE(logLevel < ls::std::io::LogLevelValue::DEBUG);
+    ASSERT_TRUE(logLevel < ls::std::io::LogLevelValue::TRACE);
   }
 
   TEST_F(LogLevelTest, operator_lessThan_not_less_than)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
-    ASSERT_FALSE(logLevel < ls_std::LogLevelValue::ERR);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::DEBUG};
+    ASSERT_FALSE(logLevel < ls::std::io::LogLevelValue::ERR);
   }
 
   TEST_F(LogLevelTest, operator_less_than_equals)
   {
-    ls_std::LogLevel logLevel{}; // default is FATAL
+    ls::std::io::LogLevel logLevel{}; // default is FATAL
 
-    ASSERT_TRUE(logLevel <= ls_std::LogLevelValue::FATAL);
-    ASSERT_TRUE(logLevel <= ls_std::LogLevelValue::ERR);
-    ASSERT_TRUE(logLevel <= ls_std::LogLevelValue::WARN);
-    ASSERT_TRUE(logLevel <= ls_std::LogLevelValue::INFO);
-    ASSERT_TRUE(logLevel <= ls_std::LogLevelValue::DEBUG);
-    ASSERT_TRUE(logLevel <= ls_std::LogLevelValue::TRACE);
+    ASSERT_TRUE(logLevel <= ls::std::io::LogLevelValue::FATAL);
+    ASSERT_TRUE(logLevel <= ls::std::io::LogLevelValue::ERR);
+    ASSERT_TRUE(logLevel <= ls::std::io::LogLevelValue::WARN);
+    ASSERT_TRUE(logLevel <= ls::std::io::LogLevelValue::INFO);
+    ASSERT_TRUE(logLevel <= ls::std::io::LogLevelValue::DEBUG);
+    ASSERT_TRUE(logLevel <= ls::std::io::LogLevelValue::TRACE);
   }
 
   TEST_F(LogLevelTest, operator_less_than_equals_not_less_than_equals)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
-    ASSERT_FALSE(logLevel <= ls_std::LogLevelValue::ERR);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::DEBUG};
+    ASSERT_FALSE(logLevel <= ls::std::io::LogLevelValue::ERR);
   }
 
   TEST_F(LogLevelTest, operator_greater_than)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
-    ASSERT_TRUE(logLevel > ls_std::LogLevelValue::ERR);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::DEBUG};
+    ASSERT_TRUE(logLevel > ls::std::io::LogLevelValue::ERR);
   }
 
   TEST_F(LogLevelTest, operator_greater_than_not_greater_than)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
-    ASSERT_FALSE(logLevel > ls_std::LogLevelValue::DEBUG);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::DEBUG};
+    ASSERT_FALSE(logLevel > ls::std::io::LogLevelValue::DEBUG);
   }
 
   TEST_F(LogLevelTest, operator_greater_than_equals)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
-    ASSERT_TRUE(logLevel >= ls_std::LogLevelValue::ERR);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::DEBUG};
+    ASSERT_TRUE(logLevel >= ls::std::io::LogLevelValue::ERR);
   }
 
   TEST_F(LogLevelTest, operator_greater_than_equals_not_greater_than_equals)
   {
-    ls_std::LogLevel logLevel{};
-    ASSERT_FALSE(logLevel >= ls_std::LogLevelValue::ERR);
+    ls::std::io::LogLevel logLevel{};
+    ASSERT_FALSE(logLevel >= ls::std::io::LogLevelValue::ERR);
   }
 
   TEST_F(LogLevelTest, operator_equals)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::DEBUG};
-    ASSERT_TRUE(logLevel == ls_std::LogLevelValue::DEBUG);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::DEBUG};
+    ASSERT_TRUE(logLevel == ls::std::io::LogLevelValue::DEBUG);
   }
 
   TEST_F(LogLevelTest, operator_equals_not_equals)
   {
-    ls_std::LogLevel logLevel{ls_std::LogLevelValue::TRACE};
-    ASSERT_FALSE(logLevel == ls_std::LogLevelValue::DEBUG);
+    ls::std::io::LogLevel logLevel{ls::std::io::LogLevelValue::TRACE};
+    ASSERT_FALSE(logLevel == ls::std::io::LogLevelValue::DEBUG);
   }
 
   TEST_F(LogLevelTest, setLogLevel_with_log_level_value)
   {
-    ls_std::LogLevel logLevel{};
-    logLevel.setLogLevel(ls_std::LogLevelValue::INFO);
+    ls::std::io::LogLevel logLevel{};
+    logLevel.setLogLevel(ls::std::io::LogLevelValue::INFO);
 
-    ASSERT_EQ(ls_std::LogLevelValue::INFO, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::INFO, logLevel);
   }
 
   TEST_F(LogLevelTest, setLogLevel_with_string)
   {
-    ls_std::LogLevel logLevel{};
+    ls::std::io::LogLevel logLevel{};
 
     logLevel.setLogLevel("FATAL");
-    ASSERT_EQ(ls_std::LogLevelValue::FATAL, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::FATAL, logLevel);
     logLevel.setLogLevel("ERROR");
-    ASSERT_EQ(ls_std::LogLevelValue::ERR, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::ERR, logLevel);
     logLevel.setLogLevel("WARN");
-    ASSERT_EQ(ls_std::LogLevelValue::WARN, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::WARN, logLevel);
     logLevel.setLogLevel("INFO");
-    ASSERT_EQ(ls_std::LogLevelValue::INFO, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::INFO, logLevel);
     logLevel.setLogLevel("DEBUG");
-    ASSERT_EQ(ls_std::LogLevelValue::DEBUG, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::DEBUG, logLevel);
     logLevel.setLogLevel("TRACE");
-    ASSERT_EQ(ls_std::LogLevelValue::TRACE, logLevel);
+    ASSERT_EQ(ls::std::io::LogLevelValue::TRACE, logLevel);
   }
 
   TEST_F(LogLevelTest, setLogLevel_string_no_valid_string)
   {
-    ls_std::LogLevel logLevel{};
+    ls::std::io::LogLevel logLevel{};
 
     EXPECT_THROW({
                    try
                    {
                      logLevel.setLogLevel("This is not a valid log level!");
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(LogLevelTest, toString)
   {
-    ls_std::LogLevel logLevel{};
+    ls::std::io::LogLevel logLevel{};
     ASSERT_STREQ("FATAL", logLevel.toString().c_str());
-    logLevel.setLogLevel(ls_std::LogLevelValue::ERR);
+    logLevel.setLogLevel(ls::std::io::LogLevelValue::ERR);
     ASSERT_STREQ("ERROR", logLevel.toString().c_str());
-    logLevel.setLogLevel(ls_std::LogLevelValue::WARN);
+    logLevel.setLogLevel(ls::std::io::LogLevelValue::WARN);
     ASSERT_STREQ("WARN", logLevel.toString().c_str());
-    logLevel.setLogLevel(ls_std::LogLevelValue::INFO);
+    logLevel.setLogLevel(ls::std::io::LogLevelValue::INFO);
     ASSERT_STREQ("INFO", logLevel.toString().c_str());
-    logLevel.setLogLevel(ls_std::LogLevelValue::DEBUG);
+    logLevel.setLogLevel(ls::std::io::LogLevelValue::DEBUG);
     ASSERT_STREQ("DEBUG", logLevel.toString().c_str());
-    logLevel.setLogLevel(ls_std::LogLevelValue::TRACE);
+    logLevel.setLogLevel(ls::std::io::LogLevelValue::TRACE);
     ASSERT_STREQ("TRACE", logLevel.toString().c_str());
   }
 }

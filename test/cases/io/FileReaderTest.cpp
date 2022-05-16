@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2021-09-17
+ * Changed:         2022-05-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <TestHelper.hpp>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -29,64 +30,64 @@ namespace
 
   TEST_F(FileReaderTest, constructor_file_does_not_exist)
   {
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "does_not_exist.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "does_not_exist.txt"};
 
     EXPECT_THROW({
                    try
                    {
-                     ls_std::FileReader reader{file};
+                     ls::std::io::FileReader reader{file};
                    }
-                   catch (const ls_std::FileNotFoundException &_exception)
+                   catch (const ls::std::core::FileNotFoundException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::FileNotFoundException);
+                 }, ls::std::core::FileNotFoundException);
   }
 
   TEST_F(FileReaderTest, read)
   {
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "simple.txt"};
-    ls_std::FileReader reader{file};
-    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt"};
+    ls::std::io::FileReader reader{file};
+    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
-    ls_std::byte_field content = reader.read();
+    ls::std::core::type::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
   TEST_F(FileReaderTest, read_file_gets_lost_in_between)
   {
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "lost_readable_file.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "lost_readable_file.txt"};
     file.createNewFile();
-    ls_std::FileReader reader{file};
+    ls::std::io::FileReader reader{file};
     file.remove();
 
     EXPECT_THROW({
                    try
                    {
-                     ls_std::byte_field content = reader.read();
+                     ls::std::core::type::byte_field content = reader.read();
                    }
-                   catch (const ls_std::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 
   TEST_F(FileReaderTest, reset)
   {
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "simple.txt"};
-    ls_std::FileReader reader{file};
-    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt"};
+    ls::std::io::FileReader reader{file};
+    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
-    ls_std::byte_field content = reader.read();
+    ls::std::core::type::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
-    ls_std::File anotherFile{TestHelper::getResourcesFolderLocation() + "list_test/bla.txt"};
+    ls::std::io::File anotherFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test/bla.txt"};
     reader.reset(anotherFile);
-    expectedUnix = "nothing to say!" + ls_std::NewLine::getUnixNewLine();
-    expectedWindows = "nothing to say!" + ls_std::NewLine::getWindowsNewLine();
+    expectedUnix = "nothing to say!" + ls::std::io::NewLine::getUnixNewLine();
+    expectedWindows = "nothing to say!" + ls::std::io::NewLine::getWindowsNewLine();
 
     content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);

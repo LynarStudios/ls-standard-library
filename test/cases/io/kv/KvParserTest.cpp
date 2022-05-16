@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-07-15
+ * Changed:         2022-05-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
 
 namespace
 {
@@ -31,26 +32,26 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::KvParser parser{nullptr};
+                     ls::std::io::KvParser parser{nullptr};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(KvParserTest, getDocument)
   {
-    ls_std::KvParser parser{std::make_shared<ls_std::KvDocument>()};
+    ls::std::io::KvParser parser{std::make_shared<ls::std::io::KvDocument>()};
     ASSERT_TRUE(parser.getDocument() != nullptr);
   }
 
   TEST_F(KvParserTest, parse)
   {
-    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
-    ls_std::KvParser parser{document};
-    ls_std::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
+    std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
+    ls::std::io::KvParser parser{document};
+    ls::std::core::type::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
     parser.parse(data);
 
     ASSERT_EQ(3, document->getPairs().size());
@@ -67,30 +68,30 @@ namespace
   {
     // preparation
 
-    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
-    ls_std::KvParser parser{document};
+    std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
+    ls::std::io::KvParser parser{document};
 
     // set and check
 
-    std::shared_ptr<ls_std::KvDocument> newDocument = std::make_shared<ls_std::KvDocument>();
+    std::shared_ptr<ls::std::io::KvDocument> newDocument = std::make_shared<ls::std::io::KvDocument>();
     parser.setDocument(newDocument);
     ASSERT_TRUE(parser.getDocument() == newDocument);
   }
 
   TEST_F(KvParserTest, setDocument_no_reference)
   {
-    std::shared_ptr<ls_std::KvDocument> document = std::make_shared<ls_std::KvDocument>();
-    ls_std::KvParser parser{document};
+    std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
+    ls::std::io::KvParser parser{document};
 
     EXPECT_THROW({
                    try
                    {
                      parser.setDocument(nullptr);
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 }
