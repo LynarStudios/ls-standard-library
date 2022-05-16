@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-21
- * Changed:         2022-05-12
+ * Changed:         2022-05-16
  *
  * */
 
@@ -18,16 +18,19 @@ namespace ls
   {
     namespace core
     {
-      class ISerializable
+      namespace interface
       {
-        public:
+        class ISerializable
+        {
+          public:
 
-          ISerializable() = default;
-          ~ISerializable() = default;
+            ISerializable() = default;
+            ~ISerializable() = default;
 
-          virtual ls::std::core::type::byte_field marshal() = 0;
-          virtual void unmarshal(const ls::std::core::type::byte_field &_data) = 0;
-      };
+            virtual ls::std::core::type::byte_field marshal() = 0;
+            virtual void unmarshal(const ls::std::core::type::byte_field &_data) = 0;
+        };
+      }
     }
   }
 }

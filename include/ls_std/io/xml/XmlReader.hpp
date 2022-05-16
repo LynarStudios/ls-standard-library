@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2022-05-12
+ * Changed:         2022-05-16
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls
   {
     namespace io
     {
-      class XmlReader : public ls::std::core::Class, public ls::std::core::IReader
+      class XmlReader : public ls::std::core::Class, public ls::std::core::interface::IReader
       {
         public:
 

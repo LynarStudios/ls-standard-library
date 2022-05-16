@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-12
+ * Changed:         2022-05-16
  *
  * */
 
@@ -14,7 +14,7 @@
 ls::std::event::Narrator::Narrator() : ls::std::core::Class("Narrator")
 {}
 
-bool ls::std::event::Narrator::addListener(const ::std::shared_ptr<ls::std::core::IListener> &_listener)
+bool ls::std::event::Narrator::addListener(const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener)
 {
   bool wasAdded{};
 
@@ -39,12 +39,12 @@ void ls::std::event::Narrator::clear()
   this->listeners.clear();
 }
 
-std::list<std::shared_ptr<ls::std::core::IListener>> ls::std::event::Narrator::getListeners()
+std::list<std::shared_ptr<ls::std::core::interface::IListener>> ls::std::event::Narrator::getListeners()
 {
   return this->listeners;
 }
 
-bool ls::std::event::Narrator::removeListener(const ::std::shared_ptr<ls::std::core::IListener> &_listener)
+bool ls::std::event::Narrator::removeListener(const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener)
 {
   bool wasRemoved{};
 

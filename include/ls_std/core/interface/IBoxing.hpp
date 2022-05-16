@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-14
+ * Changed:         2022-05-16
  *
  * */
 
@@ -11,23 +11,26 @@
 #define LS_STD_I_BOXING_HPP
 
 #include <string>
-// TODO: add "interface" namespace
+
 namespace ls
 {
   namespace std
   {
     namespace core
     {
-      class IBoxing
+      namespace interface
       {
-        public:
+        class IBoxing
+        {
+          public:
 
-          IBoxing() = default;
-          ~IBoxing() = default;
+            IBoxing() = default;
+            ~IBoxing() = default;
 
-          virtual void parse(::std::string _parseText) = 0;
-          virtual ::std::string toString() = 0;
-      };
+            virtual void parse(::std::string _parseText) = 0;
+            virtual ::std::string toString() = 0;
+        };
+      }
     }
   }
 }

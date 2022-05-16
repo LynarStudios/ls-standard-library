@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-15
+ * Changed:         2022-05-16
  *
  * */
 
@@ -27,7 +27,7 @@ namespace
       void TearDown() override
       {}
 
-      static std::shared_ptr<ls::std::core::IWriter> createFileLogger(const std::string &_logName)
+      static std::shared_ptr<ls::std::core::interface::IWriter> createFileLogger(const std::string &_logName)
       {
         std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + _logName;
         ls::std::io::File file{path};
@@ -37,7 +37,7 @@ namespace
           file.createNewFile();
         }
 
-        std::shared_ptr<ls::std::core::IWriter> writer = std::dynamic_pointer_cast<ls::std::core::IWriter>(std::make_shared<ls::std::io::FileOutputStream>(file));
+        std::shared_ptr<ls::std::core::interface::IWriter> writer = std::dynamic_pointer_cast<ls::std::core::interface::IWriter>(std::make_shared<ls::std::io::FileOutputStream>(file));
 
         return writer;
       }
@@ -72,7 +72,7 @@ namespace
     // write to log file
 
     std::string logName = "output_debug.log";
-    std::shared_ptr<ls::std::core::IWriter> writer = createFileLogger(logName);
+    std::shared_ptr<ls::std::core::interface::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::DEBUG);
@@ -101,7 +101,7 @@ namespace
     // write to log file
 
     std::string logName = "output_error.log";
-    std::shared_ptr<ls::std::core::IWriter> writer = createFileLogger(logName);
+    std::shared_ptr<ls::std::core::interface::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::ERR);
@@ -130,7 +130,7 @@ namespace
     // write to log file
 
     std::string logName = "output_fatal.log";
-    std::shared_ptr<ls::std::core::IWriter> writer = createFileLogger(logName);
+    std::shared_ptr<ls::std::core::interface::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::FATAL);
@@ -165,7 +165,7 @@ namespace
     // write to log file
 
     std::string logName = "output_info.log";
-    std::shared_ptr<ls::std::core::IWriter> writer = createFileLogger(logName);
+    std::shared_ptr<ls::std::core::interface::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::INFO);
@@ -202,7 +202,7 @@ namespace
     // write to log file
 
     std::string logName = "output_trace.log";
-    std::shared_ptr<ls::std::core::IWriter> writer = createFileLogger(logName);
+    std::shared_ptr<ls::std::core::interface::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::TRACE);
@@ -231,7 +231,7 @@ namespace
     // write to log file
 
     std::string logName = "output_warn.log";
-    std::shared_ptr<ls::std::core::IWriter> writer = createFileLogger(logName);
+    std::shared_ptr<ls::std::core::interface::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::WARN);

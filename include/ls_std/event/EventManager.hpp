@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-12
+ * Changed:         2022-05-16
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls
   {
     namespace event
     {
-      class EventManager : public ls::std::core::Class, public ls::std::core::IEventSubscriber
+      class EventManager : public ls::std::core::Class, public ls::std::core::interface::IEventSubscriber
       {
         public:
 
@@ -32,8 +32,8 @@ namespace ls
 
           // implementation
 
-          void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener) override;
-          void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::IListener> &_listener) override;
+          void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener) override;
+          void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener) override;
 
           // additional functionality
 

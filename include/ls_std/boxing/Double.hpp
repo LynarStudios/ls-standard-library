@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-11
+ * Changed:         2022-05-16
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls
   {
     namespace boxing
     {
-      class Double : public ls::std::core::Class, public ls::std::core::IBoxing
+      class Double : public ls::std::core::Class, public ls::std::core::interface::IBoxing
       {
         public:
 

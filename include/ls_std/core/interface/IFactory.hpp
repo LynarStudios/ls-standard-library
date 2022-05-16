@@ -13,7 +13,7 @@
 #include <memory>
 #include <ls_std/core/Class.hpp>
 
-// TODO: is this really necessary to have?
+//TODO: can this class be removed?
 
 namespace ls
 {

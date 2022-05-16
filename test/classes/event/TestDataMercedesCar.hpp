@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-14
+ * Changed:         2022-05-16
  *
  * */
 
@@ -16,7 +16,7 @@
 
 namespace ls_std_event_test
 {
-  class TestDataMercedesCar : public ls_std_event_test::TestDataCar, public ls::std::core::IListener
+  class TestDataMercedesCar : public ls_std_event_test::TestDataCar, public ls::std::core::interface::IListener
   {
     public:
 

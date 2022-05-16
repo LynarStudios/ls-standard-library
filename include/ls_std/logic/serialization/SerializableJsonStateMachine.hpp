@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-12
+ * Changed:         2022-05-16
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls
   {
     namespace logic
     {
-      class SerializableJsonStateMachine : public ls::std::core::Class, public ls::std::core::ISerializable
+      class SerializableJsonStateMachine : public ls::std::core::Class, public ls::std::core::interface::ISerializable
       {
         public:
 
