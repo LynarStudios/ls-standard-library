@@ -3,48 +3,54 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-27
+ * Changed:         2022-05-16
  *
  * */
 
 #ifndef LS_STD_EVENT_MANAGER_HPP
 #define LS_STD_EVENT_MANAGER_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include <map>
-#include <ls_std/event/EventTypes.hpp>
+#include <ls_std/core/types/EventTypes.hpp>
 #include <memory>
 #include "EventHandler.hpp"
-#include "IEventSubscriber.hpp"
+#include <ls_std/core/interface/IEventSubscriber.hpp>
 
-namespace ls_std
+namespace ls
 {
-  class EventManager : public ls_std::Class, public ls_std::IEventSubscriber
+  namespace std
   {
-    public:
+    namespace event
+    {
+      class EventManager : public ls::std::core::Class, public ls::std::core::interface::IEventSubscriber
+      {
+        public:
 
-      explicit EventManager();
-      ~EventManager() override = default;
+          explicit EventManager();
+          ~EventManager() override = default;
 
-      // implementation
+          // implementation
 
-      void subscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener) override;
-      void unsubscribe(const ls_std::event_id &_id, const std::shared_ptr<ls_std::IListener> &_listener) override;
+          void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener) override;
+          void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener) override;
 
-      // additional functionality
+          // additional functionality
 
-      bool addEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler);
-      void fire(ls_std::Event _event);
-      bool hasEventHandler(const ls_std::event_id &_id);
-      bool removeEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler);
+          bool addEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
+          void fire(ls::std::event::Event _event);
+          bool hasEventHandler(const ls::std::core::type::event_id &_id);
+          bool removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
 
-    private:
+        private:
 
-      std::map<ls_std::event_id, std::shared_ptr<ls_std::EventHandler>> eventHandlers{};
+          ::std::map<ls::std::core::type::event_id, ::std::shared_ptr<ls::std::event::EventHandler>> eventHandlers{};
 
-      bool _hasEventHandler(const ls_std::event_id &_id);
-      bool _removeEventHandler(const std::shared_ptr<ls_std::EventHandler> &_eventHandler);
-  };
+          bool _hasEventHandler(const ls::std::core::type::event_id &_id);
+          bool _removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
+      };
+    }
+  }
 }
 
 #endif

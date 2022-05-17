@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2021-05-02
+ * Changed:         2021-05-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std_test.hpp>
+#include <ls_std_io_test.hpp>
 
 namespace
 {
@@ -28,11 +28,11 @@ namespace
 
   TEST_F(XmlParserTestWrapperTest, readAttribute)
   {
-    std::pair<std::string, std::string> attribute = ls_std_test::XmlParserTestWrapper::readAttribute(R"(name="tim")");
+    std::pair<std::string, std::string> attribute = ls_std_io_test::XmlParserTestWrapper::readAttribute(R"(name="tim")");
     ASSERT_TRUE(attribute.first == "name");
     ASSERT_TRUE(attribute.second == "tim");
 
-    attribute = ls_std_test::XmlParserTestWrapper::readAttribute(R"(id="dialog_001")");
+    attribute = ls_std_io_test::XmlParserTestWrapper::readAttribute(R"(id="dialog_001")");
     ASSERT_TRUE(attribute.first == "id");
     ASSERT_TRUE(attribute.second == "dialog_001");
   }
@@ -42,7 +42,7 @@ namespace
     // first case
 
     std::string tag = R"(<?xml version="1.0" encoding="UTF-8" ?>)";
-    std::list<std::pair<std::string, std::string>> attributes = ls_std_test::XmlParserTestWrapper::readAttributes(tag);
+    std::list<std::pair<std::string, std::string>> attributes = ls_std_io_test::XmlParserTestWrapper::readAttributes(tag);
 
     ASSERT_EQ(2, attributes.size());
 
@@ -57,7 +57,7 @@ namespace
     // second case
 
     tag = R"(<stateMachine name="test_machine">)";
-    attributes = ls_std_test::XmlParserTestWrapper::readAttributes(tag);
+    attributes = ls_std_io_test::XmlParserTestWrapper::readAttributes(tag);
 
     ASSERT_EQ(1, attributes.size());
 

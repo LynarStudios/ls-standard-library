@@ -3,19 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2021-07-14
+ * Changed:         2022-05-12
  *
  * */
 
 #include <ls_std/event/Event.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::Event::Event(const ls_std::event_id &_id) : ls_std::Class("Event")
+ls::std::event::Event::Event(const ls::std::core::type::event_id &_id) : ls::std::core::Class("Event")
 {
   this->_assignId(_id);
 }
 
-bool ls_std::Event::addParameter(const ls_std::event_parameter &_eventParameter)
+bool ls::std::event::Event::addParameter(const ls::std::core::type::event_parameter &_eventParameter)
 {
   bool wasAdded{};
 
@@ -27,42 +27,42 @@ bool ls_std::Event::addParameter(const ls_std::event_parameter &_eventParameter)
   return wasAdded;
 }
 
-void ls_std::Event::clearParameterList()
+void ls::std::event::Event::clearParameterList()
 {
   this->parameterList.clear();
 }
 
-ls_std::event_id ls_std::Event::getId()
+ls::std::core::type::event_id ls::std::event::Event::getId()
 {
   return this->id;
 }
 
-ls_std::event_parameter_list ls_std::Event::getParameterList()
+ls::std::core::type::event_parameter_list ls::std::event::Event::getParameterList()
 {
   return this->parameterList;
 }
 
-bool ls_std::Event::removeParameter(const ls_std::event_parameter_id &_id)
+bool ls::std::event::Event::removeParameter(const ls::std::core::type::event_parameter_id &_id)
 {
   return this->parameterList.erase(_id) == 1;
 }
 
-void ls_std::Event::setId(const ls_std::event_id &_id)
+void ls::std::event::Event::setId(const ls::std::core::type::event_id &_id)
 {
   this->_assignId(_id);
 }
 
-void ls_std::Event::_assignId(const ls_std::event_id &_id)
+void ls::std::event::Event::_assignId(const ls::std::core::type::event_id &_id)
 {
   if (_id.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->id = _id;
 }
 
-bool ls_std::Event::_hasParameter(const ls_std::event_id &_id)
+bool ls::std::event::Event::_hasParameter(const ls::std::core::type::event_id &_id)
 {
   return this->parameterList.find(_id) != this->parameterList.end();
 }

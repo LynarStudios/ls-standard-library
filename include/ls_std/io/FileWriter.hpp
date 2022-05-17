@@ -3,35 +3,41 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-05-01
+ * Changed:         2022-05-16
  *
  * */
 
 #ifndef LS_STD_FILE_WRITER_HPP
 #define LS_STD_FILE_WRITER_HPP
 
-#include <ls_std/base/Class.hpp>
-#include "IWriter.hpp"
+#include <ls_std/core/Class.hpp>
+#include <ls_std/core/interface/IWriter.hpp>
 #include "File.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class FileWriter : public ls_std::Class, public ls_std::IWriter
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class FileWriter : public ls::std::core::Class, public ls::std::core::interface::IWriter
+      {
+        public:
 
-      explicit FileWriter(ls_std::File &_file);
-      ~FileWriter() override = default;
+          explicit FileWriter(ls::std::io::File &_file);
+          ~FileWriter() override = default;
 
-      void reset(ls_std::File &_file);
-      bool write(const ls_std::byte_field &_data) override;
+          void reset(ls::std::io::File &_file);
+          bool write(const ls::std::core::type::byte_field &_data) override;
 
-    private:
+        private:
 
-      ls_std::File file;
+          ls::std::io::File file;
 
-      static void _init(ls_std::File &_file);
-  };
+          static void _init(ls::std::io::File &_file);
+      };
+    }
+  }
 }
 
 #endif

@@ -3,49 +3,49 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-07-15
+ * Changed:         2022-05-12
  *
  * */
 
 #include <ls_std/io/kv/KvDocument.hpp>
 
-ls_std::KvDocument::KvDocument() : ls_std::Class("KvDocument")
+ls::std::io::KvDocument::KvDocument() : ls::std::core::Class("KvDocument")
 {}
 
-bool ls_std::KvDocument::addPair(ls_std::KvPair _pair)
+bool ls::std::io::KvDocument::addPair(ls::std::io::KvPair _pair)
 {
   bool added{};
 
   if (!this->_hasPair(_pair.getKey()))
   {
-    std::pair<ls_std::kv_key, ls_std::KvPair> pair = std::make_pair(_pair.getKey(), _pair);
+    ::std::pair<ls::std::core::type::kv_key, ls::std::io::KvPair> pair = ::std::make_pair(_pair.getKey(), _pair);
     added = this->pairs.insert(pair).second;
   }
 
   return added;
 }
 
-void ls_std::KvDocument::clear()
+void ls::std::io::KvDocument::clear()
 {
   this->pairs.clear();
 }
 
-std::map<ls_std::kv_key, ls_std::KvPair> ls_std::KvDocument::getPairs()
+std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> ls::std::io::KvDocument::getPairs()
 {
   return this->pairs;
 }
 
-bool ls_std::KvDocument::hasPair(const ls_std::kv_key &_key)
+bool ls::std::io::KvDocument::hasPair(const ls::std::core::type::kv_key &_key)
 {
   return this->_hasPair(_key);
 }
 
-bool ls_std::KvDocument::removePair(const ls_std::kv_key &_key)
+bool ls::std::io::KvDocument::removePair(const ls::std::core::type::kv_key &_key)
 {
   return this->pairs.erase(_key) == 1;
 }
 
-bool ls_std::KvDocument::_hasPair(const ls_std::kv_key &_key)
+bool ls::std::io::KvDocument::_hasPair(const ls::std::core::type::kv_key &_key)
 {
   return this->pairs.find(_key) != this->pairs.end();
 }

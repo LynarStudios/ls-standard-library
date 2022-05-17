@@ -3,19 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-05-02
+ * Changed:         2022-05-11
  *
  * */
 
 #ifndef LS_STD_LOG_LEVEL_VALUE_HPP
 #define LS_STD_LOG_LEVEL_VALUE_HPP
 
-namespace ls_std
+namespace ls
 {
-  enum LogLevelValue
+  namespace std
   {
-    FATAL = 0, ERR, WARN, INFO, DEBUG, TRACE
-  };
+    namespace io
+    {
+      enum LogLevelValue
+      {
+        FATAL = 0, ERR, WARN, INFO, DEBUG, TRACE
+      };
+    }
+  }
 }
 
 #endif

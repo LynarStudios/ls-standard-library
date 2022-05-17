@@ -3,25 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2021-04-23
+ * Changed:         2022-05-12
  *
  * */
 
 #include <ls_std/logic/StateMachine.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::StateMachine::StateMachine(const std::string& _name) : ls_std::Class("StateMachine")
+ls::std::logic::StateMachine::StateMachine(const ::std::string& _name) : ls::std::core::Class("StateMachine")
 {
   this->_assignName(_name);
 }
 
-bool ls_std::StateMachine::addState(const std::shared_ptr<ls_std::State> &_state)
+bool ls::std::logic::StateMachine::addState(const ::std::shared_ptr<ls::std::logic::State> &_state)
 {
   bool wasAdded{};
 
   if (_state == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {
@@ -34,34 +34,34 @@ bool ls_std::StateMachine::addState(const std::shared_ptr<ls_std::State> &_state
   return wasAdded;
 }
 
-std::shared_ptr<ls_std::State> ls_std::StateMachine::getCurrentState()
+std::shared_ptr<ls::std::logic::State> ls::std::logic::StateMachine::getCurrentState()
 {
   return this->currentState;
 }
 
-std::vector<ls_std::StateId> ls_std::StateMachine::getMemory()
+std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::getMemory()
 {
   return this->memory;
 }
 
-std::string ls_std::StateMachine::getName()
+std::string ls::std::logic::StateMachine::getName()
 {
   return this->name;
 }
 
-std::unordered_map<ls_std::StateId, std::shared_ptr<ls_std::State>> ls_std::StateMachine::getStates()
+std::unordered_map<ls::std::core::type::state_id, std::shared_ptr<ls::std::logic::State>> ls::std::logic::StateMachine::getStates()
 {
   return this->states;
 }
 
-bool ls_std::StateMachine::hasState(const ls_std::StateId &_id)
+bool ls::std::logic::StateMachine::hasState(const ls::std::core::type::state_id &_id)
 {
   return this->_hasState(_id);
 }
 
-bool ls_std::StateMachine::proceed()
+bool ls::std::logic::StateMachine::proceed()
 {
-  std::vector<ls_std::StateId> nextValidStates = this->_getNextValidStates();
+  ::std::vector<ls::std::core::type::state_id> nextValidStates = this->_getNextValidStates();
   bool onlyOneWayToGo = nextValidStates.size() == 1;
 
   if (onlyOneWayToGo)
@@ -73,23 +73,23 @@ bool ls_std::StateMachine::proceed()
   return onlyOneWayToGo;
 }
 
-void ls_std::StateMachine::setMemory(const std::vector<ls_std::StateId>& _memory)
+void ls::std::logic::StateMachine::setMemory(const ::std::vector<ls::std::core::type::state_id>& _memory)
 {
   this->_assignMemory(_memory);
 }
 
-void ls_std::StateMachine::setName(const std::string& _name)
+void ls::std::logic::StateMachine::setName(const ::std::string& _name)
 {
   this->_assignName(_name);
 }
 
-bool ls_std::StateMachine::setStartState(const ls_std::StateId &_id)
+bool ls::std::logic::StateMachine::setStartState(const ls::std::core::type::state_id &_id)
 {
   bool startStateSet{};
 
   if (_id.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
   else
   {
@@ -104,29 +104,29 @@ bool ls_std::StateMachine::setStartState(const ls_std::StateId &_id)
   return startStateSet;
 }
 
-void ls_std::StateMachine::_assignMemory(const std::vector<ls_std::StateId> &_memory)
+void ls::std::logic::StateMachine::_assignMemory(const ::std::vector<ls::std::core::type::state_id> &_memory)
 {
   if (_memory.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->memory = _memory;
 }
 
-void ls_std::StateMachine::_assignName(const std::string &_name)
+void ls::std::logic::StateMachine::_assignName(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->name = _name;
 }
 
-std::vector<ls_std::StateId> ls_std::StateMachine::_getNextValidStates()
+std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::_getNextValidStates()
 {
-  std::vector<ls_std::StateId> validStates{};
+  ::std::vector<ls::std::core::type::state_id> validStates{};
 
   for (const auto &state : this->currentState->getConnectedStates())
   {
@@ -139,12 +139,12 @@ std::vector<ls_std::StateId> ls_std::StateMachine::_getNextValidStates()
   return validStates;
 }
 
-void ls_std::StateMachine::_remember(const ls_std::StateId &_id)
+void ls::std::logic::StateMachine::_remember(const ls::std::core::type::state_id &_id)
 {
   this->memory.push_back(_id);
 }
 
-bool ls_std::StateMachine::_hasState(const ls_std::StateId &_id)
+bool ls::std::logic::StateMachine::_hasState(const ls::std::core::type::state_id &_id)
 {
   return this->states.find(_id) != this->states.end();
 }
