@@ -12,6 +12,8 @@ set(MODULE_NAME_IO ls_std_io)
 set(MODULE_NAME_LOGIC ls_std_logic)
 set(MODULE_NAME_TIME ls_std_time)
 
+set(GOOGLE_TEST_MODULE googletest-1.11.0)
+
 ##########################################################
 # Options
 ##########################################################
@@ -38,8 +40,8 @@ message("${PROJECT_NAME}: Adding include directories...")
 
 if (${LS_STD_BUILD_WITH_TESTS})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
-    include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googletest/include)
-    include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1/googlemock/include)
+    include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/${GOOGLE_TEST_MODULE}/googletest/include)
+    include_directories(${CMAKE_CURRENT_LIST_DIR}/test/lib/${GOOGLE_TEST_MODULE}/googlemock/include)
 endif ()
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
@@ -51,7 +53,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 message("${PROJECT_NAME}: Adding additional cmake dependencies...")
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/googletest-1.8.1)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/${GOOGLE_TEST_MODULE})
 endif ()
 
 ##########################################################
