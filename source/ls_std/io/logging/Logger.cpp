@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-16
+ * Changed:         2022-05-19
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface::IWriter> &_writer)
+ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer)
     : ls::std::core::Class("Logger"),
       logLevel(ls::std::io::LogLevelValue::INFO)
 {
@@ -78,7 +78,7 @@ void ls::std::io::Logger::warn(const ls::std::core::type::byte *_data)
   }
 }
 
-void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::interface::IWriter> &_writer)
+void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer)
 {
   if (_writer == nullptr)
   {
