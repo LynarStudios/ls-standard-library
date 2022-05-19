@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-16
+ * Changed:         2022-05-19
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls
   {
     namespace core
     {
-      namespace interface
+      namespace interface_type
       {
         class IEventSubscriber
         {
@@ -29,8 +29,8 @@ namespace ls
             IEventSubscriber() = default;
             ~IEventSubscriber() = default;
 
-            virtual void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener) = 0;
-            virtual void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener) = 0;
+            virtual void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;
+            virtual void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;
         };
       }
     }

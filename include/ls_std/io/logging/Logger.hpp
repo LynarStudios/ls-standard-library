@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-16
+ * Changed:         2022-05-19
  *
  * */
 
@@ -27,7 +27,7 @@ namespace ls
       {
         public:
 
-          explicit Logger(const ::std::shared_ptr<ls::std::core::interface::IWriter> &_writer);
+          explicit Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer);
           ~Logger() override = default;
 
           void debug(const ls::std::core::type::byte *_data);
@@ -42,9 +42,9 @@ namespace ls
         private:
 
           ls::std::io::LogLevel logLevel{};
-          ::std::shared_ptr<ls::std::core::interface::IWriter> writer{};
+          ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer{};
 
-          void _assignWriter(const ::std::shared_ptr<ls::std::core::interface::IWriter> &_writer);
+          void _assignWriter(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer);
           static ::std::string _buildCharacterChain(size_t _amount);
           static ::std::string _createFillContent(const ::std::string &_text);
           static ::std::string _generateTimeString(tm *_localTime);
