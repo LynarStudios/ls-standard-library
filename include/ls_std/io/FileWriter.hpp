@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-16
+ * Changed:         2022-05-19
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls
   {
     namespace io
     {
-      class FileWriter : public ls::std::core::Class, public ls::std::core::interface::IWriter
+      class FileWriter : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
       {
         public:
 
