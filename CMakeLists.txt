@@ -1,3 +1,11 @@
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# General
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
 ##########################################################
 # Basic
 ##########################################################
@@ -7,6 +15,7 @@ project(ls_std VERSION 2022.1.0)
 
 set(MODULE_NAME_BOXING ls_std_boxing)
 set(MODULE_NAME_CORE ls_std_core)
+set(MODULE_NAME_ENCODING ls_std_encoding)
 set(MODULE_NAME_EVENT ls_std_event)
 set(MODULE_NAME_IO ls_std_io)
 set(MODULE_NAME_LOGIC ls_std_logic)
@@ -18,10 +27,32 @@ set(GOOGLE_TEST_MODULE googletest-1.11.0)
 # Options
 ##########################################################
 
-option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
+option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." ON)
 option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
 option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
 option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)
+
+set(TARGET_COUNTER 0)
+
+if (${LS_STD_BUILD_STATIC})
+    math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
+    message("${PROJECT_NAME}: [Goal] static library")
+endif ()
+
+if (${LS_STD_BUILD_SHARED})
+    math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
+    message("${PROJECT_NAME}: [Goal] shared library")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
+    message("${PROJECT_NAME}: [Goal] module library")
+endif ()
+
+if (TARGET_COUNTER GREATER 1)
+    message("${PROJECT_NAME}: [Error] only one goal supported at the same time!")
+    return()
+endif ()
 
 ##########################################################
 # Compiler Settings
@@ -56,9 +87,13 @@ if (${LS_STD_BUILD_WITH_TESTS})
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test/lib/${GOOGLE_TEST_MODULE})
 endif ()
 
-##########################################################
-# Source Files
-##########################################################
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Source Files Modularization
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
 
 set(SOURCE_FILES_BOXING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
@@ -71,6 +106,9 @@ set(SOURCE_FILES_BOXING
 set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+
+set(SOURCE_FILES_ENCODING
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp)
 
 set(SOURCE_FILES_EVENT
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/serialization/SerializableJsonEvent.cpp
@@ -110,6 +148,14 @@ set(SOURCE_FILES_LOGIC
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
 
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Test Files Modularization
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
 if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES_BOXING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
@@ -133,6 +179,9 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp)
+
+    set(TEST_FILES_ENCODING
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
 
     set(TEST_FILES_EVENT
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/serialization/SerializableJsonEventTest.cpp
@@ -188,6 +237,14 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp)
 endif ()
 
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Test Suite Builds
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
 ##########################################################
 # Build Tests (boxing)
 ##########################################################
@@ -204,6 +261,15 @@ endif ()
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_CORE}: Building tests...")
     add_executable(${MODULE_NAME_CORE}_test ${TEST_FILES_CORE})
+endif ()
+
+##########################################################
+# Build Tests (encoding)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_ENCODING}: Building tests...")
+    add_executable(${MODULE_NAME_ENCODING}_test ${TEST_FILES_ENCODING})
 endif ()
 
 ##########################################################
@@ -243,7 +309,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Build Tests
+# Build Tests (all)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
@@ -251,12 +317,21 @@ if (${LS_STD_BUILD_WITH_TESTS})
     add_executable(${PROJECT_NAME}_test
             ${TEST_FILES_BOXING}
             ${TEST_FILES_CORE}
+            ${TEST_FILES_ENCODING}
             ${TEST_FILES_EVENT}
             ${TEST_FILES_IO}
             ${TEST_FILES_LOGIC}
             ${TEST_FILES_SERIALIZATION}
             ${TEST_FILES_TIME})
 endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Build Library Binaries
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
 
 ##########################################################
 # Build Library (boxing)
@@ -290,6 +365,37 @@ if (${LS_STD_BUILD_STATIC})
     set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE})
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_CORE}" MODULE ${SOURCE_FILES_CORE})
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
+# Build Library (encoding)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_ENCODING} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_ENCODING}" STATIC ${SOURCE_FILES_ENCODING})
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_ENCODING}" SHARED ${SOURCE_FILES_ENCODING})
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_ENCODING}" MODULE ${SOURCE_FILES_ENCODING})
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
 ##########################################################
 # Build Library (event)
 ##########################################################
@@ -298,6 +404,16 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_EVENT} library version ${PROJEC
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_EVENT}" STATIC ${SOURCE_FILES_EVENT})
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_EVENT}" SHARED ${SOURCE_FILES_EVENT})
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_EVENT}" MODULE ${SOURCE_FILES_EVENT})
     set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
@@ -312,6 +428,16 @@ if (${LS_STD_BUILD_STATIC})
     set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_IO}" SHARED ${SOURCE_FILES_IO})
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_IO}" MODULE ${SOURCE_FILES_IO})
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
 ##########################################################
 # Build Library (logic)
 ##########################################################
@@ -320,6 +446,16 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_LOGIC} library version ${PROJEC
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_LOGIC}" STATIC ${SOURCE_FILES_LOGIC})
+    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_LOGIC}" SHARED ${SOURCE_FILES_LOGIC})
+    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_LOGIC}" MODULE ${SOURCE_FILES_LOGIC})
     set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
@@ -334,11 +470,29 @@ if (${LS_STD_BUILD_STATIC})
     set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_TIME}" MODULE ${SOURCE_FILES_TIME})
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Test Suite: Static Linking
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
 ##########################################################
-# Linking (boxing)
+# Static Linking (boxing)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
     message("${MODULE_NAME_BOXING}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_BOXING}_test
             gtest
@@ -349,10 +503,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (core)
+# Static Linking (core)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
     message("${MODULE_NAME_CORE}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_CORE}_test
             gtest
@@ -362,10 +516,24 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (event)
+# Static Linking (encoding)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+    message("${MODULE_NAME_ENCODING}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_ENCODING}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_ENCODING}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Static Linking (event)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
     message("${MODULE_NAME_EVENT}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_EVENT}_test
             gtest
@@ -376,10 +544,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (io)
+# Static Linking (io)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
     message("${MODULE_NAME_IO}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_IO}_test
             gtest
@@ -390,10 +558,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (logic)
+# Static Linking (logic)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
     message("${MODULE_NAME_LOGIC}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_LOGIC}_test
             gtest
@@ -404,10 +572,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (time)
+# Static Linking (time)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
     message("${MODULE_NAME_TIME}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_TIME}_test
             gtest
@@ -418,10 +586,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking
+# Static Linking (all)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
     message("${PROJECT_NAME}: Linking libraries for test application...")
     target_link_libraries(${PROJECT_NAME}_test
             gtest
@@ -429,6 +597,131 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gtest_main
             "${MODULE_NAME_CORE}"
             "${MODULE_NAME_BOXING}"
+            "${MODULE_NAME_ENCODING}"
+            "${MODULE_NAME_EVENT}"
+            "${MODULE_NAME_IO}"
+            "${MODULE_NAME_LOGIC}"
+            "${MODULE_NAME_TIME}")
+endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Test Suite: Dynamic Linking
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+##########################################################
+# Dynamic Linking (boxing)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${MODULE_NAME_BOXING}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_BOXING}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_BOXING}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Dynamic Linking (core)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${MODULE_NAME_CORE}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_CORE}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Dynamic Linking (encoding)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${MODULE_NAME_ENCODING}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_ENCODING}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_ENCODING}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Dynamic Linking (event)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${MODULE_NAME_EVENT}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_EVENT}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_EVENT}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Dynamic Linking (io)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${MODULE_NAME_IO}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_IO}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_IO}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Dynamic Linking (logic)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${MODULE_NAME_LOGIC}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_LOGIC}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_LOGIC}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Dynamic Linking (time)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${MODULE_NAME_TIME}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_TIME}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_TIME}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
+# Dynamic Linking (all)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED})
+    message("${PROJECT_NAME}: Linking libraries for test application...")
+    target_link_libraries(${PROJECT_NAME}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_CORE}"
+            "${MODULE_NAME_BOXING}"
+            "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
             "${MODULE_NAME_LOGIC}"
