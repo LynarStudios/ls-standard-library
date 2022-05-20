@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2022-05-17
+ * Changed:         2022-05-20
  *
  * */
 
@@ -20,7 +20,7 @@ std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
     encodedString += ls::std::encoding::Base64::_encodeByteTriple(byteTriple);
   }
 
-  return encodedString;
+  return ls::std::encoding::Base64::_applyEndingRule(encodedString, _sequence.size());
 }
 
 std::string ls::std::encoding::Base64::decode(const ::std::string &_sequence)
@@ -36,11 +36,29 @@ std::string ls::std::encoding::Base64::decode(const ::std::string &_sequence)
   return decodedString;
 }
 
+::std::string ls::std::encoding::Base64::_applyEndingRule(::std::string _encodedString, size_t _sequenceSize)
+{
+  size_t size = _encodedString.size();
+
+  if (_sequenceSize % 3 == 1)
+  {
+    _encodedString[size - 2] = '=';
+    _encodedString[size - 1] = '=';
+  }
+
+  if (_sequenceSize % 3 == 2)
+  {
+    _encodedString[size - 1] = '=';
+  }
+
+  return _encodedString;
+}
+
 std::string ls::std::encoding::Base64::_decodeByteQuadruple(const ::std::string& _quadruple)
 {
   ::std::string decodedText{};
   uint8_t shiftValue = 16;
-  uint32_t bitStorage = ls::std::encoding::Base64::_toBitStorage(_quadruple);
+  uint32_t bitStorage = ls::std::encoding::Base64::_toDecodingBitStorage(_quadruple);
 
   for (uint8_t index = 0; index < ((uint8_t) _quadruple.size() - 1); index++)
   {
@@ -55,9 +73,21 @@ std::string ls::std::encoding::Base64::_decodeByteQuadruple(const ::std::string&
   return decodedText;
 }
 
-std::string ls::std::encoding::Base64::_encodeByteTriple(const ::std::string& characterSequence)
+std::string ls::std::encoding::Base64::_encodeByteTriple(const ::std::string& _byteTriple)
 {
   ::std::string encodedText{};
+  uint32_t bitStorage = ls::std::encoding::Base64::_toEncodingBitStorage(_byteTriple);
+  static ::std::vector<uint32_t> bitMaskStorage = {16515072, 258048, 4032, 63};
+  static ::std::unordered_map<uint8_t, char> encodingMap = ls::std::encoding::Base64::_getEncodingMap();
+  uint8_t shiftValue = 18;
+
+  for (uint8_t bitMaskIndex = 0 ; bitMaskIndex < 4 ; bitMaskIndex++)
+  {
+    uint32_t extractedBitSequence = ls::std::encoding::Base64::_extractBitSequence(bitMaskStorage[bitMaskIndex], bitStorage);
+    extractedBitSequence = extractedBitSequence >> shiftValue;
+    encodedText += encodingMap[(uint8_t) extractedBitSequence];
+    shiftValue -= 6;
+  }
 
   return encodedText;
 }
@@ -99,21 +129,21 @@ std::unordered_map<char, uint8_t> ls::std::encoding::Base64::_getDecodingMap()
   return decodingMap;
 }
 
-std::vector<char> ls::std::encoding::Base64::_getEncodingField()
+std::unordered_map<uint8_t, char> ls::std::encoding::Base64::_getEncodingMap()
 {
-  static ::std::vector<char> encodingTable
+  static ::std::unordered_map<uint8_t, char> encodingMap =
   {
-    'A','B','C','D','E','F','G','H',
-    'I','J','K','L','M','N','O','P',
-    'Q','R','S','T','U','V','W','X',
-    'Y','Z','a','b','c','d','e','f',
-    'g','h','i','j','k','l','m','n',
-    'o','p','q','r','s','t','u','v',
-    'w','x','y','z','0','1','2','3',
-    '4','5','6','7','8','9','+','/'
+    {0, 'A'}, {1, 'B'}, {2, 'C'}, {3, 'D'}, {4, 'E'}, {5, 'F'}, {6, 'G'}, {7, 'H'},
+    {8, 'I'}, {9, 'J'}, {10, 'K'}, {11, 'L'}, {12, 'M'}, {13, 'N'}, {14, 'O'}, {15, 'P'},
+    {16, 'Q'}, {17, 'R'}, {18, 'S'}, {19, 'T'}, {20, 'U'}, {21, 'V'}, {22, 'W'}, {23, 'X'},
+    {24, 'Y'}, {25, 'Z'}, {26, 'a'}, {27, 'b'}, {28, 'c'}, {29, 'd'}, {30, 'e'}, {31, 'f'},
+    {32, 'g'}, {33, 'h'}, {34, 'i'}, {35, 'j'}, {36, 'k'}, {37, 'l'}, {38, 'm'}, {39, 'n'},
+    {40, 'o'}, {41, 'p'}, {42, 'q'}, {43, 'r'}, {44, 's'}, {45, 't'}, {46, 'u'}, {47, 'v'},
+    {48, 'w'}, {49, 'x'}, {50, 'y'}, {51, 'z'}, {52, '0'}, {53, '1'}, {54, '2'}, {55, '3'},
+    {56, '4'}, {57, '5'}, {58, '6'}, {59, '7'}, {60, '8'}, {61, '9'}, {62, '+'}, {63, '/'},
   };
 
-  return encodingTable;
+  return encodingMap;
 }
 
 std::string ls::std::encoding::Base64::_getNextByteQuadruple(const ::std::string &_sequence, size_t _index)
@@ -131,7 +161,7 @@ void ls::std::encoding::Base64::_mergeBitSequence(uint32_t &_bitStorage, const u
   _bitStorage = _bitStorage | _bitMask;
 }
 
-uint32_t ls::std::encoding::Base64::_toBitStorage(const ::std::string &_quadruple)
+uint32_t ls::std::encoding::Base64::_toDecodingBitStorage(const ::std::string &_quadruple)
 {
   uint32_t bitStorage{};
   uint8_t letterCounter = 1;
@@ -142,6 +172,21 @@ uint32_t ls::std::encoding::Base64::_toBitStorage(const ::std::string &_quadrupl
     uint32_t bitMask = ls::std::encoding::Base64::_generateBitMask(decodingMap[(char) letter], (4 - letterCounter) * 6); // must be hardcoded - even in case of less than 4 characters, so that conversion is correct
     ls::std::encoding::Base64::_mergeBitSequence(bitStorage, bitMask);
     ++letterCounter;
+  }
+
+  return bitStorage;
+}
+
+uint32_t ls::std::encoding::Base64::_toEncodingBitStorage(const ::std::string &_triple)
+{
+  uint32_t bitStorage{};
+  uint8_t shiftValue = 16;
+
+  for(char letter : _triple)
+  {
+    uint32_t bitMask = ls::std::encoding::Base64::_generateBitMask((uint8_t) letter, shiftValue);
+    ls::std::encoding::Base64::_mergeBitSequence(bitStorage, bitMask);
+    shiftValue -= 8;
   }
 
   return bitStorage;
