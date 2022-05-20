@@ -44,6 +44,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 - there is a cmake guard now to ensure that only one goal at the time is being build
 - test suites for shared libraries have been introduced to ensure that building and linking created shared library is working
 - namespaces have been improved library wide and are more specific - __there is no _ls_std_ namespace anymore__ - instead you can choose submodule specific namespaces (e.g. _ls::std::boxing::_)
+- GoogleTest framework has been upgraded to 1.11.0
 
 #### Fixes ####
 
