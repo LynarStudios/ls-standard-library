@@ -1,55 +1,36 @@
 # Lynar Studios - Standard Library 2022.1.0 #
 
-This is a cross-platform standard library written in C++ offering functionalities you'd usually miss in C++ standard library, especially if you'd search for cross-platform implementations. This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
+This is a cross-platform standard library written in C++ offering functionalities you'd usually miss in C++'s standard template library (STL), especially if you'd search for cross-platform implementations. This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
+Following a modularized approach the following submodules are defined in scope of this library, which are independent:
  
 #### Boxing ####
 
-This library provides boxing classes for primitive data types (e.g. string, int, long, float...) to add additional functionalities for each one of them.
- 
-#### File ####
+This library module provides boxing classes for primitive data types (e.g. string, int, long, float...) to add additional functionalities for each one of them.
 
-To handle file operations - or to receive information of a file - this library provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.
+#### Core ####
 
-#### Base ####
+The core module is a base module providing a base __Class__, exceptions, data types and interfaces. Usually the other submodules are dependent on this module. 
 
-This is a collection of very basic functionalities like a base __Class__ which provides minimal reflection like class name. Also, you have the possibility with this collection to fetch this libraries version or even handle own versions for your project.
+#### Encoding ####
 
-#### Time ####
+To encode a byte field (e.g. binaries) for transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
 
-A __Date__ class comes with this collection, which you can use to represent a date and doing operations on it. 
+#### Event ####
+
+This submodule comes with an __Event__ class, as well as with handlers and managers to provide an intuitive event managing for your application.
+
+#### IO ####
+
+To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
+Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
 
 #### Logic ####
 
-This collection of classes provides some nice functionalities to support your project with some nice logical features, like state machines and observer pattern supporting classes.
+Functionalities provided by this submodule support your project with some nice logical features. The first one being provided by it is a state machine.
 
-#### Serialization ####
+#### Time ####
 
-Serialization is very important nowadays to persist data. This library offers a serializable interface, which can then be implemented in your project.  
-In addition to that there is already JSON serialization-based implementation for some public library classes.
-
-#### JSON ####
-
-This library uses a transitive JSON dependency, which is in line with our license model. Many thanks to __Niels Lohmann__ for writing this nice little library.
-
-#### XML ####
-
-To handle XML files this library has an own XML parser implementation, which uses modern C++ features, such as shared pointers.
-
-#### Logger ####
-
-For logging functionality you might need for your project there is a __Logger__ class coming with this library, which is also able to handle different log level.
-
-#### Event Handling ####
-
-With this first implemented milestone of event handling this library provides functionalities for creating and firing events.
-
-#### Exception ####
-
-This library provides some basic exceptions which can be used in your project to create awareness of certain error behaviour.
-
-#### KV ####
-
-A key value file offers the possibility to store simple information pairs in a file. This library provides parsing functionalities for __.kv__ files.
+A __Date__ class comes with this submodule, which you can use to represent a date and do operations on it. 
 
 ### Changelog ###
 
@@ -59,11 +40,14 @@ A key value file offers the possibility to store simple information pairs in a f
 
 #### Improvements ####
 
-- TBA
+- modularization has been improved by restructuring library files, which would result into having submodules - __there is no central header or binary file anymore__ - instead submodules can be linked independently now (e.g. using __ls_std_event.hpp__ and linking __libls_std_event.so__)
+- there is a cmake guard now to ensure that only one goal at the time is being build
+- test suites for shared libraries have been introduced to ensure that building and linking created shared library is working
+- namespaces have been improved library wide and are more specific - __there is no _ls_std_ namespace anymore__ - instead you can choose submodule specific namespaces (e.g. _ls::std::boxing::_)
 
 #### Fixes ####
 
-- TBA
+- there is a cmake guard now to ensure that only one goal at the time is being build
 
 ### Documentation ###
 

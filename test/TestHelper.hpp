@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-16
+ * Changed:         2022-05-19
  *
  * */
 
@@ -156,7 +156,7 @@ namespace ls_std_test
 
       #ifdef _WIN32
 
-      ::std::string _getWorkingDirectoryWindows()
+      static ::std::string _getWorkingDirectoryWindows()
       {
         ::std::string workingDirectory{};
         TCHAR buffer[MAX_PATH];
