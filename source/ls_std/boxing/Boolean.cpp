@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-05-09
+ * Changed:         2022-05-20
  *
  * */
 
@@ -88,7 +88,7 @@ void ls::std::boxing::Boolean::parse(::std::string _parseText)
   }
 }
 
-std::string ls::std::boxing::Boolean::toString()
+::std::string ls::std::boxing::Boolean::toString()
 {
   return this->_toString();
 }
@@ -118,7 +118,7 @@ bool ls::std::boxing::Boolean::XOR(bool _leftExpression, bool _rightExpression)
   return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
 }
 
-std::string ls::std::boxing::Boolean::_toString() const
+::std::string ls::std::boxing::Boolean::_toString() const
 {
   ::std::string booleanString{};
 

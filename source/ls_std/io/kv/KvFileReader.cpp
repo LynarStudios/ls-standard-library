@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -28,7 +28,7 @@ ls::std::core::type::byte_field ls::std::io::KvFileReader::read()
   return data;
 }
 
-std::shared_ptr<ls::std::io::KvDocument> ls::std::io::KvFileReader::getDocument()
+::std::shared_ptr<ls::std::io::KvDocument> ls::std::io::KvFileReader::getDocument()
 {
   return this->document;
 }

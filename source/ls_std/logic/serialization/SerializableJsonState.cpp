@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -30,7 +30,7 @@ void ls::std::logic::SerializableJsonState::unmarshal(const ls::std::core::type:
   this->value->setId(this->jsonObject["id"]);
 }
 
-std::shared_ptr<ls::std::logic::State> ls::std::logic::SerializableJsonState::getValue()
+::std::shared_ptr<ls::std::logic::State> ls::std::logic::SerializableJsonState::getValue()
 {
   return this->value;
 }

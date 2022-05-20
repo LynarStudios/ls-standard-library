@@ -10,7 +10,7 @@
 #include <ls_std/encoding/Base64.hpp>
 #include <bitset>
 
-std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
+::std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
 {
   ::std::string encodedString{};
 
@@ -23,7 +23,7 @@ std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
   return ls::std::encoding::Base64::_applyEndingRule(encodedString, _sequence.size());
 }
 
-std::string ls::std::encoding::Base64::decode(const ::std::string &_sequence)
+::std::string ls::std::encoding::Base64::decode(const ::std::string &_sequence)
 {
   ::std::string decodedString{};
 
@@ -54,7 +54,7 @@ std::string ls::std::encoding::Base64::decode(const ::std::string &_sequence)
   return _encodedString;
 }
 
-std::string ls::std::encoding::Base64::_decodeByteQuadruple(const ::std::string& _quadruple)
+::std::string ls::std::encoding::Base64::_decodeByteQuadruple(const ::std::string& _quadruple)
 {
   ::std::string decodedText{};
   uint8_t shiftValue = 16;
@@ -73,7 +73,7 @@ std::string ls::std::encoding::Base64::_decodeByteQuadruple(const ::std::string&
   return decodedText;
 }
 
-std::string ls::std::encoding::Base64::_encodeByteTriple(const ::std::string& _byteTriple)
+::std::string ls::std::encoding::Base64::_encodeByteTriple(const ::std::string& _byteTriple)
 {
   ::std::string encodedText{};
   uint32_t bitStorage = ls::std::encoding::Base64::_toEncodingBitStorage(_byteTriple);
@@ -112,7 +112,7 @@ uint32_t ls::std::encoding::Base64::_generateBitMask(uint32_t _maskValue, uint8_
   return _maskValue << _shiftValue;
 }
 
-std::unordered_map<char, uint8_t> ls::std::encoding::Base64::_getDecodingMap()
+::std::unordered_map<char, uint8_t> ls::std::encoding::Base64::_getDecodingMap()
 {
   static ::std::unordered_map<char, uint8_t> decodingMap =
   {
@@ -129,7 +129,7 @@ std::unordered_map<char, uint8_t> ls::std::encoding::Base64::_getDecodingMap()
   return decodingMap;
 }
 
-std::unordered_map<uint8_t, char> ls::std::encoding::Base64::_getEncodingMap()
+::std::unordered_map<uint8_t, char> ls::std::encoding::Base64::_getEncodingMap()
 {
   static ::std::unordered_map<uint8_t, char> encodingMap =
   {
@@ -146,12 +146,12 @@ std::unordered_map<uint8_t, char> ls::std::encoding::Base64::_getEncodingMap()
   return encodingMap;
 }
 
-std::string ls::std::encoding::Base64::_getNextByteQuadruple(const ::std::string &_sequence, size_t _index)
+::std::string ls::std::encoding::Base64::_getNextByteQuadruple(const ::std::string &_sequence, size_t _index)
 {
   return _sequence.substr(_index, 4);
 }
 
-std::string ls::std::encoding::Base64::_getNextByteTriple(const ::std::string &_sequence, size_t _index)
+::std::string ls::std::encoding::Base64::_getNextByteTriple(const ::std::string &_sequence, size_t _index)
 {
   return _sequence.substr(_index, 3);
 }

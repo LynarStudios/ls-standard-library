@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -21,7 +21,7 @@ namespace
       FileTest() = default;
       ~FileTest() override = default;
 
-      std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
+      ::std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
 
       void SetUp() override
       {}
@@ -161,10 +161,10 @@ namespace
   {
     ls::std::io::File file{this->fileLocation};
     ASSERT_STREQ(this->fileLocation.c_str(), file.getAbsoluteFilePath().c_str());
-    std::string s = {ls::std::io::FilePathSeparator::get()};
+    ::std::string s = {ls::std::io::FilePathSeparator::get()};
 
-    std::string wrongFilePath = "home" + s + s + s + "user" + s + "bla" + s + s + "sub_folder";
-    std::string expectedFilePath = "home" + s + "user" + s + "bla" + s + "sub_folder";
+    ::std::string wrongFilePath = "home" + s + s + s + "user" + s + "bla" + s + s + "sub_folder";
+    ::std::string expectedFilePath = "home" + s + "user" + s + "bla" + s + "sub_folder";
     ls::std::io::File anotherFile{wrongFilePath};
     ASSERT_STREQ(expectedFilePath.c_str(), anotherFile.getAbsoluteFilePath().c_str());
   }
@@ -190,7 +190,7 @@ namespace
 
   TEST_F(FileTest, getWorkingDirectory)
   {
-    std::string workingDirectory = ls::std::io::File::getWorkingDirectory();
+    ::std::string workingDirectory = ls::std::io::File::getWorkingDirectory();
     ASSERT_FALSE(workingDirectory.empty());
   }
 
@@ -240,8 +240,8 @@ namespace
   TEST_F(FileTest, list)
   {
     ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
-    std::list<std::string> filesInDirectory = file.list();
-    std::string expectedFile{};
+    ::std::list<std::string> filesInDirectory = file.list();
+    ::std::string expectedFile{};
     const char separator = ls::std::io::FilePathSeparator::get();
 
     auto filesIterator = filesInDirectory.begin();
@@ -268,8 +268,8 @@ namespace
   TEST_F(FileTest, listFiles)
   {
     ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
-    std::list<std::string> filesInDirectory = file.listFiles();
-    std::string expectedFile{};
+    ::std::list<::std::string> filesInDirectory = file.listFiles();
+    ::std::string expectedFile{};
     const char separator = ls::std::io::FilePathSeparator::get();
 
     ASSERT_FALSE(filesInDirectory.empty());
@@ -334,7 +334,7 @@ namespace
 
   TEST_F(FileTest, remove)
   {
-    std::string fileName = ls_std_test::TestHelper::getResourcesFolderLocation() + "removable_file.txt";
+    ::std::string fileName = ls_std_test::TestHelper::getResourcesFolderLocation() + "removable_file.txt";
     ls::std::io::File file{fileName};
     file.createNewFile();
 
@@ -346,8 +346,8 @@ namespace
 
   TEST_F(FileTest, renameTo)
   {
-    std::string currentName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to.txt";
-    std::string newName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to_better_name.txt";
+    ::std::string currentName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to.txt";
+    ::std::string newName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to_better_name.txt";
 
     ls::std::io::File file{currentName};
     file.createNewFile();

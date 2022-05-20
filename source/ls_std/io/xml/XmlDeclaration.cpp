@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2022-05-11
+ * Changed:         2022-05-20
  *
  * */
 
@@ -14,17 +14,17 @@ ls::std::io::XmlDeclaration::XmlDeclaration(const ::std::string& _version) : ls:
   this->version.setValue(_version);
 }
 
-std::string ls::std::io::XmlDeclaration::getEncoding()
+::std::string ls::std::io::XmlDeclaration::getEncoding()
 {
   return this->encoding.getValue();
 }
 
-std::string ls::std::io::XmlDeclaration::getStandalone()
+::std::string ls::std::io::XmlDeclaration::getStandalone()
 {
   return this->standalone.getValue();
 }
 
-std::string ls::std::io::XmlDeclaration::getVersion()
+::std::string ls::std::io::XmlDeclaration::getVersion()
 {
   return this->version.getValue();
 }
@@ -44,7 +44,7 @@ void ls::std::io::XmlDeclaration::setVersion(const ::std::string& _version)
   this->version.setValue(_version);
 }
 
-std::string ls::std::io::XmlDeclaration::toXml()
+::std::string ls::std::io::XmlDeclaration::toXml()
 {
   ::std::string declaration = "<?xml";
 
@@ -55,7 +55,7 @@ std::string ls::std::io::XmlDeclaration::toXml()
   return declaration + " ?>";
 }
 
-std::string ls::std::io::XmlDeclaration::_toXmlAttribute(ls::std::io::XmlAttribute _attribute)
+::std::string ls::std::io::XmlDeclaration::_toXmlAttribute(ls::std::io::XmlAttribute _attribute)
 {
   ::std::string xmlString{};
 

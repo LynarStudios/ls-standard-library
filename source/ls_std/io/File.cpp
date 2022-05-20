@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-13
+ * Changed:         2022-05-20
  *
  * */
 
@@ -87,12 +87,12 @@ bool ls::std::io::File::exists()
   return ls::std::io::File::_exists(this->absoluteFilePath);
 }
 
-std::string ls::std::io::File::getAbsoluteFilePath()
+::std::string ls::std::io::File::getAbsoluteFilePath()
 {
   return this->absoluteFilePath;
 }
 
-std::string ls::std::io::File::getName()
+::std::string ls::std::io::File::getName()
 {
   ::std::string copy = this->absoluteFilePath;
 
@@ -109,12 +109,12 @@ std::string ls::std::io::File::getName()
   return ::std::string{base, copy.end()};
 }
 
-std::string ls::std::io::File::getParent()
+::std::string ls::std::io::File::getParent()
 {
   return ls::std::io::File::_getParent(this->absoluteFilePath);
 }
 
-std::string ls::std::io::File::getWorkingDirectory()
+::std::string ls::std::io::File::getWorkingDirectory()
 {
   ::std::string workingDirectory{};
 
@@ -159,7 +159,7 @@ time_t ls::std::io::File::lastModified()
   return ls::std::io::File::_lastModified(this->absoluteFilePath);
 }
 
-std::list<std::string> ls::std::io::File::list()
+::std::list<::std::string> ls::std::io::File::list()
 {
   ::std::list<::std::string> fileList{};
 
@@ -171,7 +171,7 @@ std::list<std::string> ls::std::io::File::list()
   return fileList;
 }
 
-std::list<std::string> ls::std::io::File::listFiles()
+::std::list<::std::string> ls::std::io::File::listFiles()
 {
   ::std::list<::std::string> fileList{};
 
@@ -304,7 +304,7 @@ bool ls::std::io::File::_exists(const ::std::string &_path)
   return (stat(_path.c_str(), &_stat) == 0);
 }
 
-std::string ls::std::io::File::_getParent(const ::std::string &_path)
+::std::string ls::std::io::File::_getParent(const ::std::string &_path)
 {
   ::std::string parent{};
   ::std::vector<::std::string> subDirectoryNames = ls::std::io::File::_splitIntoSubDirectoryNames(_path);
@@ -321,7 +321,7 @@ std::string ls::std::io::File::_getParent(const ::std::string &_path)
 
 #if defined(unix) || defined(__APPLE__)
 
-std::string ls::std::io::File::_getWorkingDirectoryUnix()
+::std::string ls::std::io::File::_getWorkingDirectoryUnix()
 {
   ::std::string workingDirectory{};
   char buffer[PATH_MAX];
@@ -342,7 +342,7 @@ std::string ls::std::io::File::_getWorkingDirectoryUnix()
 
 #ifdef _WIN32
 
-std::string ls::std::io::File::_getWorkingDirectoryWindows()
+::std::string ls::std::io::File::_getWorkingDirectoryWindows()
 {
   ::std::string workingDirectory{};
   TCHAR buffer[MAX_PATH];
@@ -481,7 +481,7 @@ time_t ls::std::io::File::_lastModified(const ::std::string &_path)
   return lastModifiedTimeStamp;
 }
 
-std::list<std::string> ls::std::io::File::_list(const ::std::string &_path)
+::std::list<::std::string> ls::std::io::File::_list(const ::std::string &_path)
 {
   ::std::list<::std::string> filesInDirectory{};
 
@@ -495,7 +495,7 @@ std::list<std::string> ls::std::io::File::_list(const ::std::string &_path)
   return filesInDirectory;
 }
 
-std::list<std::string> ls::std::io::File::_listFiles(const ::std::string &_path)
+::std::list<::std::string> ls::std::io::File::_listFiles(const ::std::string &_path)
 {
   ::std::list<::std::string> filesInDirectory{};
 
@@ -511,7 +511,7 @@ std::list<std::string> ls::std::io::File::_listFiles(const ::std::string &_path)
 
 #if defined(unix) || defined(__APPLE__)
 
-std::list<std::string> ls::std::io::File::_listUnix(const ::std::string &_path, bool withDirectories)
+::std::list<::std::string> ls::std::io::File::_listUnix(const ::std::string &_path, bool withDirectories)
 {
   ::std::list<::std::string> filesInDirectory{};
   DIR *directory = opendir(_path.c_str());
@@ -531,7 +531,7 @@ std::list<std::string> ls::std::io::File::_listUnix(const ::std::string &_path, 
 
 #ifdef _WIN32
 
-std::list<std::string> ls::std::io::File::_listWindows(const ::std::string &_path, bool withDirectories)
+::std::list<::std::string> ls::std::io::File::_listWindows(const ::std::string &_path, bool withDirectories)
 {
   ::std::list<::std::string> filesInDirectory{};
   WIN32_FIND_DATA data{};
@@ -568,7 +568,7 @@ int ls::std::io::File::_mkdir(const ::std::string &_path)
   return result;
 }
 
-std::string ls::std::io::File::_normalizePath(::std::string _path)
+::std::string ls::std::io::File::_normalizePath(::std::string _path)
 {
   _path = ls::std::io::File::_replaceWrongSeparator(_path);
   _path = ls::std::io::File::_reduceSeparators(_path);
@@ -576,7 +576,7 @@ std::string ls::std::io::File::_normalizePath(::std::string _path)
   return _path;
 }
 
-std::string ls::std::io::File::_reduceSeparators(const ::std::string &_path)
+::std::string ls::std::io::File::_reduceSeparators(const ::std::string &_path)
 {
   static const char separator = {ls::std::io::FilePathSeparator::get()};
   ::std::string normalizedPath{};
@@ -636,7 +636,7 @@ bool ls::std::io::File::_renameTo(const ::std::string &_oldName, const ::std::st
   return ::std::rename(_oldName.c_str(), _newName.c_str()) == 0;
 }
 
-std::string ls::std::io::File::_replaceWrongSeparator(::std::string _path)
+::std::string ls::std::io::File::_replaceWrongSeparator(::std::string _path)
 {
   static const char unixSeparator = ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
   static const char windowsSeparator = ls::std::io::FilePathSeparator::getWindowsFilePathSeparator();
@@ -652,7 +652,7 @@ std::string ls::std::io::File::_replaceWrongSeparator(::std::string _path)
   return _path;
 }
 
-std::vector<std::string> ls::std::io::File::_splitIntoSubDirectoryNames(const ::std::string &_path)
+::std::vector<::std::string> ls::std::io::File::_splitIntoSubDirectoryNames(const ::std::string &_path)
 {
   ::std::vector<::std::string> subDirectoryNames{};
   ::std::stringstream _stream{_path};

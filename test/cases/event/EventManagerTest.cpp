@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -39,7 +39,7 @@ namespace
                    try
                    {
                      ls::std::event::EventManager eventManager{};
-                     eventManager.subscribe("", std::make_shared<ls_std_event_test::DailyNewsAgency>());
+                     eventManager.subscribe("", ::std::make_shared<ls_std_event_test::DailyNewsAgency>());
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -69,7 +69,7 @@ namespace
                    try
                    {
                      ls::std::event::EventManager eventManager{};
-                     eventManager.subscribe("TMP_DIR", std::make_shared<ls_std_event_test::DailyNewsAgency>());
+                     eventManager.subscribe("TMP_DIR", ::std::make_shared<ls_std_event_test::DailyNewsAgency>());
                    }
                    catch (const ls::std::core::EventNotSubscribedException &_exception)
                    {
@@ -84,7 +84,7 @@ namespace
                    try
                    {
                      ls::std::event::EventManager eventManager{};
-                     eventManager.unsubscribe("", std::make_shared<ls_std_event_test::DailyNewsAgency>());
+                     eventManager.unsubscribe("", ::std::make_shared<ls_std_event_test::DailyNewsAgency>());
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -111,14 +111,14 @@ namespace
   TEST_F(EventManagerTest, addEventHandler)
   {
     ls::std::event::EventManager eventManager{};
-    ASSERT_TRUE(eventManager.addEventHandler(std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
+    ASSERT_TRUE(eventManager.addEventHandler(::std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
   }
 
   TEST_F(EventManagerTest, addEventHandler_event_handler_already_exists)
   {
     ls::std::event::EventManager eventManager{};
-    ASSERT_TRUE(eventManager.addEventHandler(std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
-    ASSERT_FALSE(eventManager.addEventHandler(std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
+    ASSERT_TRUE(eventManager.addEventHandler(::std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
+    ASSERT_FALSE(eventManager.addEventHandler(::std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
   }
 
   TEST_F(EventManagerTest, addEventHandler_no_reference)
@@ -154,7 +154,7 @@ namespace
   TEST_F(EventManagerTest, hasEventHandler)
   {
     ls::std::event::EventManager eventManager{};
-    eventManager.addEventHandler(std::make_shared<ls::std::event::EventHandler>("TMP_ID"));
+    eventManager.addEventHandler(::std::make_shared<ls::std::event::EventHandler>("TMP_ID"));
     ASSERT_TRUE(eventManager.hasEventHandler("TMP_ID"));
   }
 
@@ -182,7 +182,7 @@ namespace
   TEST_F(EventManagerTest, removeEventHandler)
   {
     ls::std::event::EventManager eventManager{};
-    std::shared_ptr<ls::std::event::EventHandler> eventHandler = std::make_shared<ls::std::event::EventHandler>("TMP_ID");
+    ::std::shared_ptr<ls::std::event::EventHandler> eventHandler = ::std::make_shared<ls::std::event::EventHandler>("TMP_ID");
     eventManager.addEventHandler(eventHandler);
 
     ASSERT_TRUE(eventManager.removeEventHandler(eventHandler));
@@ -191,7 +191,7 @@ namespace
   TEST_F(EventManagerTest, removeEventHandler_no_event_handler_available)
   {
     ls::std::event::EventManager eventManager{};
-    ASSERT_FALSE(eventManager.removeEventHandler(std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
+    ASSERT_FALSE(eventManager.removeEventHandler(::std::make_shared<ls::std::event::EventHandler>("TMP_ID")));
   }
 
   TEST_F(EventManagerTest, removeEventHandler_no_reference)
@@ -211,25 +211,25 @@ namespace
 
   TEST_F(EventManagerTest, production_example)
   {
-    std::string news, expectedNews{};
+    ::std::string news, expectedNews{};
     ls::std::core::type::event_id seriousNewsEventId = ls_std_event_test::SeriousNewsEvent{""}.getId();
     ls::std::core::type::event_id gossipNewsEventId = ls_std_event_test::GossipNewsEvent{""}.getId();
 
     // create event handler
 
-    std::shared_ptr<ls::std::event::EventHandler> seriousNewsEventHandler = std::make_shared<ls::std::event::EventHandler>(seriousNewsEventId);   // event id
-    std::shared_ptr<ls::std::event::EventHandler> gossipNewsEventHandler = std::make_shared<ls::std::event::EventHandler>(gossipNewsEventId);     // event id
+    ::std::shared_ptr<ls::std::event::EventHandler> seriousNewsEventHandler = ::std::make_shared<ls::std::event::EventHandler>(seriousNewsEventId);   // event id
+    ::std::shared_ptr<ls::std::event::EventHandler> gossipNewsEventHandler = ::std::make_shared<ls::std::event::EventHandler>(gossipNewsEventId);     // event id
 
     // create and fill event manager with handler
 
-    std::shared_ptr<ls::std::event::EventManager> eventManager = std::make_shared<ls::std::event::EventManager>();
+    ::std::shared_ptr<ls::std::event::EventManager> eventManager = ::std::make_shared<ls::std::event::EventManager>();
     eventManager->addEventHandler(seriousNewsEventHandler);
     eventManager->addEventHandler(gossipNewsEventHandler);
 
     // create news agency (listener)
 
-    std::shared_ptr<ls_std_event_test::DailyNewsAgency> dailyNews = std::make_shared<ls_std_event_test::DailyNewsAgency>();
-    std::shared_ptr<ls_std_event_test::GossipNewsAgency> gossipNews = std::make_shared<ls_std_event_test::GossipNewsAgency>();
+    ::std::shared_ptr<ls_std_event_test::DailyNewsAgency> dailyNews = ::std::make_shared<ls_std_event_test::DailyNewsAgency>();
+    ::std::shared_ptr<ls_std_event_test::GossipNewsAgency> gossipNews = ::std::make_shared<ls_std_event_test::GossipNewsAgency>();
 
     // fire SeriousNewsEvent event with no effect
 

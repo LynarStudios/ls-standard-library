@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -50,7 +50,7 @@ namespace
   TEST_F(BooleanTest, operator_output_stream)
   {
     ls::std::boxing::Boolean expression{true};
-    std::ostringstream _stream{};
+    ::std::ostringstream _stream{};
     _stream << expression;
 
     ASSERT_STREQ("true", _stream.str().c_str());

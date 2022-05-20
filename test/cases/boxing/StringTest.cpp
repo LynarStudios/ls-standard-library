@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -42,7 +42,7 @@ namespace
   {
     ls::std::boxing::String greetings{"Hello! "};
     ls::std::boxing::String question{"How are you? "};
-    const std::string& answer = "I'm good by the way!";
+    const ::std::string& answer = "I'm good by the way!";
 
     greetings = greetings + question + answer;
 

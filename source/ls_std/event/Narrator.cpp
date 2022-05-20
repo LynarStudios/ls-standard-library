@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-19
+ * Changed:         2022-05-20
  *
  * */
 
@@ -39,7 +39,7 @@ void ls::std::event::Narrator::clear()
   this->listeners.clear();
 }
 
-std::list<std::shared_ptr<ls::std::core::interface_type::IListener>> ls::std::event::Narrator::getListeners()
+::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> ls::std::event::Narrator::getListeners()
 {
   return this->listeners;
 }

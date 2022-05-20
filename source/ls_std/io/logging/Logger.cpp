@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-19
+ * Changed:         2022-05-20
  *
  * */
 
@@ -100,7 +100,7 @@ void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::i
   return fillContent;
 }
 
-std::string ls::std::io::Logger::_createFillContent(const ::std::string &_text)
+::std::string ls::std::io::Logger::_createFillContent(const ::std::string &_text)
 {
   size_t padSize = 10;
   size_t fillSize = _text.size() > padSize ? 0 : padSize - _text.size();

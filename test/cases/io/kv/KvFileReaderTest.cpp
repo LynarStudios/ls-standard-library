@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -29,10 +29,10 @@ namespace
 
       static std::shared_ptr<ls::std::io::KvFileReader> createTestKVFileReader()
       {
-        std::string kvPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
-        std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
+        ::std::string kvPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+        ::std::shared_ptr<ls::std::io::KvDocument> document = ::std::make_shared<ls::std::io::KvDocument>();
 
-        return std::make_shared<ls::std::io::KvFileReader>(document, kvPath);
+        return ::std::make_shared<ls::std::io::KvFileReader>(document, kvPath);
       }
   };
 
@@ -41,7 +41,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     std::string kvPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+                     ::std::string kvPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "server_settings.kv";
                      ls::std::io::KvFileReader reader = ls::std::io::KvFileReader(nullptr, kvPath);
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
@@ -56,7 +56,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::io::KvFileReader reader = ls::std::io::KvFileReader(std::make_shared<ls::std::io::KvDocument>(), "invalid_path");
+                     ls::std::io::KvFileReader reader = ls::std::io::KvFileReader(::std::make_shared<ls::std::io::KvDocument>(), "invalid_path");
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -67,7 +67,7 @@ namespace
 
   TEST_F(KvFileReaderTest, getDocument)
   {
-    const std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
+    const ::std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
     ASSERT_TRUE(reader->getDocument() != nullptr);
   }
 
@@ -75,12 +75,12 @@ namespace
   {
     // preparation
 
-    const std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
+    const ::std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
 
     // read file and check
 
     reader->read();
-    const std::shared_ptr<ls::std::io::KvDocument> &document = reader->getDocument();
+    const ::std::shared_ptr<ls::std::io::KvDocument> &document = reader->getDocument();
 
     ASSERT_EQ(3, document->getPairs().size());
     ASSERT_TRUE(document->hasPair("port"));
@@ -94,7 +94,7 @@ namespace
 
   TEST_F(KvFileReaderTest, setFile_no_existing_file)
   {
-    const std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
+    const ::std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
 
     EXPECT_THROW({
                    try
@@ -112,18 +112,18 @@ namespace
   {
     // preparation
 
-    const std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
+    const ::std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
 
     // set new document and check
 
-    std::shared_ptr<ls::std::io::KvDocument> newDocument = std::make_shared<ls::std::io::KvDocument>();
+    ::std::shared_ptr<ls::std::io::KvDocument> newDocument = ::std::make_shared<ls::std::io::KvDocument>();
     reader->setDocument(newDocument);
     ASSERT_TRUE(reader->getDocument() == newDocument);
   }
 
   TEST_F(KvFileReaderTest, setDocument_no_reference)
   {
-    const std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
+    const ::std::shared_ptr<ls::std::io::KvFileReader> &reader = createTestKVFileReader();
 
     EXPECT_THROW({
                    try

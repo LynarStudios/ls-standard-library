@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -30,36 +30,36 @@ namespace
 
   TEST_F(XmlReaderTest, read)
   {
-    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
+    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(!xmlReader.read().empty());
   }
 
   TEST_F(XmlReaderTest, getDocument)
   {
-    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
+    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(xmlReader.getDocument() != nullptr);
   }
 
   TEST_F(XmlReaderTest, setDocument)
   {
-    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    std::shared_ptr<ls::std::io::XmlDocument> document = std::make_shared<ls::std::io::XmlDocument>();
+    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    ::std::shared_ptr<ls::std::io::XmlDocument> document = ::std::make_shared<ls::std::io::XmlDocument>();
     ls::std::io::XmlReader xmlReader{document, xmlPath};
     ASSERT_TRUE(xmlReader.getDocument() == document);
 
-    document = std::make_shared<ls::std::io::XmlDocument>();
+    document = ::std::make_shared<ls::std::io::XmlDocument>();
     xmlReader.setDocument(document);
     ASSERT_TRUE(xmlReader.getDocument() == document);
   }
 
   TEST_F(XmlReaderTest, setDocument_no_reference)
   {
-    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    std::shared_ptr<ls::std::io::XmlDocument> document = std::make_shared<ls::std::io::XmlDocument>();
+    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    ::std::shared_ptr<ls::std::io::XmlDocument> document = ::std::make_shared<ls::std::io::XmlDocument>();
     ls::std::io::XmlReader xmlReader{document, xmlPath};
 
     EXPECT_THROW({
@@ -76,8 +76,8 @@ namespace
 
   TEST_F(XmlReaderTest, setFile)
   {
-    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
+    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
     ls::std::io::File xmlFile{xmlPath};
     xmlReader.setFile(xmlFile);
 
@@ -86,8 +86,8 @@ namespace
 
   TEST_F(XmlReaderTest, setFile_does_not_exist)
   {
-    std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
+    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
     ls::std::io::File xmlFile{xmlPath};
 
     EXPECT_THROW({

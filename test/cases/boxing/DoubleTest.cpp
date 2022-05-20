@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -315,7 +315,7 @@ namespace
   TEST_F(DoubleTest, toString)
   {
     ls::std::boxing::Double x{13.1543};
-    ASSERT_TRUE(x.toString().find("13.1543") != std::string::npos);
+    ASSERT_TRUE(x.toString().find("13.1543") != ::std::string::npos);
   }
 
   // additional functionality

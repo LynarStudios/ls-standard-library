@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -57,7 +57,7 @@ void ls::std::logic::State::clearConnections()
   this->_clearConnections();
 }
 
-std::unordered_map<ls::std::core::type::state_connection_id, std::shared_ptr<ls::std::logic::StateConnection>> ls::std::logic::State::getConnectedStates()
+::std::unordered_map<ls::std::core::type::state_connection_id, ::std::shared_ptr<ls::std::logic::StateConnection>> ls::std::logic::State::getConnectedStates()
 {
   return this->connectedStates;
 }

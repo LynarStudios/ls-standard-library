@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -30,7 +30,7 @@ void ls::std::io::KvDocument::clear()
   this->pairs.clear();
 }
 
-std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> ls::std::io::KvDocument::getPairs()
+::std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> ls::std::io::KvDocument::getPairs()
 {
   return this->pairs;
 }

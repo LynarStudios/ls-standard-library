@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-09
+ * Changed:         2022-05-20
  *
  * */
 
@@ -15,7 +15,7 @@ ls::std::core::Class::Class(const ::std::string &_name)
   this->_assignClassName(_name);
 }
 
-std::string ls::std::core::Class::getClassName()
+::std::string ls::std::core::Class::getClassName()
 {
   return this->name;
 }

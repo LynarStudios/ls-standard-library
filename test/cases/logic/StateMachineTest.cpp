@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-09
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -51,14 +51,14 @@ namespace
   TEST_F(StateMachineTest, addState)
   {
     ls::std::logic::StateMachine stateMachine{"test_machine"};
-    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
+    ASSERT_TRUE(stateMachine.addState(::std::make_shared<ls::std::logic::State>("A")));
   }
 
   TEST_F(StateMachineTest, addState_state_already_exists)
   {
     ls::std::logic::StateMachine stateMachine{"test_machine"};
-    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
-    ASSERT_FALSE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
+    ASSERT_TRUE(stateMachine.addState(::std::make_shared<ls::std::logic::State>("A")));
+    ASSERT_FALSE(stateMachine.addState(::std::make_shared<ls::std::logic::State>("A")));
   }
 
   TEST_F(StateMachineTest, addState_no_reference)
@@ -79,7 +79,7 @@ namespace
   TEST_F(StateMachineTest, getCurrentState)
   {
     ls::std::logic::StateMachine stateMachine{"test_machine"};
-    ASSERT_TRUE(stateMachine.addState(std::make_shared<ls::std::logic::State>("A")));
+    ASSERT_TRUE(stateMachine.addState(::std::make_shared<ls::std::logic::State>("A")));
 
     ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
   }
@@ -173,7 +173,7 @@ namespace
   TEST_F(StateMachineTest, setMemory_no_memory)
   {
     ls::std::logic::StateMachine stateMachine{"test_machine"};
-    std::vector<ls::std::core::type::state_id> memory{};
+    ::std::vector<ls::std::core::type::state_id> memory{};
 
     EXPECT_THROW({
                    try
@@ -215,7 +215,7 @@ namespace
   {
     ls::std::logic::StateMachine stateMachine{"test_machine"};
     ASSERT_TRUE(stateMachine.getCurrentState() == nullptr);
-    stateMachine.addState(std::make_shared<ls::std::logic::State>("A"));
+    stateMachine.addState(::std::make_shared<ls::std::logic::State>("A"));
 
     ASSERT_TRUE(stateMachine.setStartState("A"));
     ASSERT_FALSE(stateMachine.getCurrentState() == nullptr);

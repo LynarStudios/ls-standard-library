@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-19
+ * Changed:         2022-05-20
  *
  * */
 
@@ -32,11 +32,11 @@ namespace ls_std_event_test
       // additional functionality
 
       void clear();
-      std::string getNews();
+      ::std::string getNews();
 
     private:
 
-      std::string news{};
+      ::std::string news{};
   };
 }
 

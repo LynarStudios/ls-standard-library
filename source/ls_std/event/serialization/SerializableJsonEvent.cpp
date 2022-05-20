@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -29,7 +29,7 @@ void ls::std::event::SerializableJsonEvent::unmarshal(const ls::std::core::type:
   this->_unmarshalParameterList();
 }
 
-std::shared_ptr<ls::std::event::Event> ls::std::event::SerializableJsonEvent::getValue()
+::std::shared_ptr<ls::std::event::Event> ls::std::event::SerializableJsonEvent::getValue()
 {
   return this->value;
 }

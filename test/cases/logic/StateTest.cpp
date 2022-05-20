@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -55,7 +55,7 @@ namespace
     ls::std::logic::State stateA{"A"};
     ls::std::logic::State stateB{"B"};
 
-    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
+    ASSERT_TRUE(stateA.addStateConnection("AB", ::std::make_shared<ls::std::logic::State>(stateB)));
   }
 
   TEST_F(StateTest, addStateConnection_v1_connection_already_exists)
@@ -63,8 +63,8 @@ namespace
     ls::std::logic::State stateA{"A"};
     ls::std::logic::State stateB{"B"};
 
-    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
-    ASSERT_FALSE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
+    ASSERT_TRUE(stateA.addStateConnection("AB", ::std::make_shared<ls::std::logic::State>(stateB)));
+    ASSERT_FALSE(stateA.addStateConnection("AB", ::std::make_shared<ls::std::logic::State>(stateB)));
   }
 
   TEST_F(StateTest, addStateConnection_v1_empty_connection_id)
@@ -74,7 +74,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     state.addStateConnection("", std::make_shared<ls::std::logic::State>("B"));
+                     state.addStateConnection("", ::std::make_shared<ls::std::logic::State>("B"));
                    }
                    catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
@@ -104,7 +104,7 @@ namespace
     ls::std::logic::State stateA{"A"};
     ls::std::logic::State stateB{"B"};
 
-    ASSERT_TRUE(stateA.addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AB", stateB.getId())));
+    ASSERT_TRUE(stateA.addStateConnection(::std::make_shared<ls::std::logic::StateConnection>("AB", stateB.getId())));
   }
 
   TEST_F(StateTest, addStateConnection_v2_no_reference)
@@ -126,8 +126,8 @@ namespace
   TEST_F(StateTest, clearConnections)
   {
     ls::std::logic::State stateA{"A"};
-    stateA.addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AB", "B"));
-    stateA.addStateConnection(std::make_shared<ls::std::logic::StateConnection>("AC", "C"));
+    stateA.addStateConnection(::std::make_shared<ls::std::logic::StateConnection>("AB", "B"));
+    stateA.addStateConnection(::std::make_shared<ls::std::logic::StateConnection>("AC", "C"));
 
     ASSERT_FALSE(stateA.getConnectedStates().empty());
     stateA.clearConnections();
@@ -177,9 +177,9 @@ namespace
     ls::std::logic::State stateB{"B"};
     ls::std::logic::State stateC{"C"};
 
-    ASSERT_TRUE(stateA.addStateConnection("AB", std::make_shared<ls::std::logic::State>(stateB)));
+    ASSERT_TRUE(stateA.addStateConnection("AB", ::std::make_shared<ls::std::logic::State>(stateB)));
     ASSERT_TRUE(stateA.hasConnection("AB"));
-    ASSERT_TRUE(stateA.addStateConnection("AC", std::make_shared<ls::std::logic::State>(stateC)));
+    ASSERT_TRUE(stateA.addStateConnection("AC", ::std::make_shared<ls::std::logic::State>(stateC)));
     ASSERT_TRUE(stateA.hasConnection("AC"));
   }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -21,12 +21,12 @@ namespace ls_std_event_test
       TestDataCar();
       ~TestDataCar() = default;
 
-      std::string getColor();
-      void setColor(std::string _color);
+      ::std::string getColor();
+      void setColor(::std::string _color);
 
     private:
 
-      std::string color{};
+      ::std::string color{};
   };
 }
 

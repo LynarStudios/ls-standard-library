@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-13
+ * Changed:         2022-05-20
  *
  * */
 
@@ -16,7 +16,7 @@ ls::std::io::KvParser::KvParser(const ::std::shared_ptr<ls::std::io::KvDocument>
   this->_assignDocument(_document);
 }
 
-std::shared_ptr<ls::std::io::KvDocument> ls::std::io::KvParser::getDocument()
+::std::shared_ptr<ls::std::io::KvDocument> ls::std::io::KvParser::getDocument()
 {
   return this->document;
 }

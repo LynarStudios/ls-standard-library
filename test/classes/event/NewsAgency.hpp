@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -18,14 +18,14 @@ namespace ls_std_event_test
   {
     public:
 
-      explicit NewsAgency(std::string _agencyName); // TODO: use ::std:: instead of std:: library wide
+      explicit NewsAgency(::std::string _agencyName);
       ~NewsAgency() = default;
 
-      std::string getName();
+      ::std::string getName();
 
     private:
 
-      std::string agencyName{};
+      ::std::string agencyName{};
   };
 }
 

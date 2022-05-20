@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-16
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -13,11 +13,11 @@ ls::std::logic::StateMachine ls_std_logic_test::TestDataFactory::createStateMach
 {
   ls::std::logic::StateMachine stateMachine{"test_machine"};
 
-  std::shared_ptr<ls::std::logic::State> stateA = std::make_shared<ls::std::logic::State>("A");
-  std::shared_ptr<ls::std::logic::State> stateB = std::make_shared<ls::std::logic::State>("B");
-  std::shared_ptr<ls::std::logic::State> stateC = std::make_shared<ls::std::logic::State>("C");
-  std::shared_ptr<ls::std::logic::State> stateD = std::make_shared<ls::std::logic::State>("D");
-  std::shared_ptr<ls::std::logic::State> stateE = std::make_shared<ls::std::logic::State>("E");
+  ::std::shared_ptr<ls::std::logic::State> stateA = ::std::make_shared<ls::std::logic::State>("A");
+  ::std::shared_ptr<ls::std::logic::State> stateB = ::std::make_shared<ls::std::logic::State>("B");
+  ::std::shared_ptr<ls::std::logic::State> stateC = ::std::make_shared<ls::std::logic::State>("C");
+  ::std::shared_ptr<ls::std::logic::State> stateD = ::std::make_shared<ls::std::logic::State>("D");
+  ::std::shared_ptr<ls::std::logic::State> stateE = ::std::make_shared<ls::std::logic::State>("E");
 
   // add states
 

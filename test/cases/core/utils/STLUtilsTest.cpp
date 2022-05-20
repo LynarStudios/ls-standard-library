@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-13
+ * Changed:         2022-05-20
  *
  * */
 
@@ -31,8 +31,8 @@ namespace
 
   TEST_F(STLUtilsTest, contains)
   {
-    std::vector<int> values{1, 13, 7, 8};
-    std::list<std::string> names{"Tim", "Alex", "Nadine"};
+    ::std::vector<int> values{1, 13, 7, 8};
+    ::std::list<::std::string> names{"Tim", "Alex", "Nadine"};
 
     ASSERT_TRUE((ls::std::core::STLUtils::contains(values, 1)));
     ASSERT_TRUE((ls::std::core::STLUtils::contains(values, 13)));
@@ -46,8 +46,8 @@ namespace
 
   TEST_F(STLUtilsTest, containsNegative)
   {
-    std::vector<int> values{1, 13, 7, 8};
-    std::list<std::string> names{"Tim", "Alex", "Nadine"};
+    ::std::vector<int> values{1, 13, 7, 8};
+    ::std::list<::std::string> names{"Tim", "Alex", "Nadine"};
 
     ASSERT_FALSE((ls::std::core::STLUtils::contains(values, 55)));
     ASSERT_FALSE((ls::std::core::STLUtils::contains(values, 9)));
@@ -58,8 +58,8 @@ namespace
 
   TEST_F(STLUtilsTest, getListElementAt)
   {
-    std::list<int> values{1, 13, 7, 8};
-    std::list<std::string> names{"Tim", "Alex", "Nadine"};
+    ::std::list<int> values{1, 13, 7, 8};
+    ::std::list<::std::string> names{"Tim", "Alex", "Nadine"};
 
     ASSERT_EQ(1, (ls::std::core::STLUtils::getListElementAt(values, 0)));
     ASSERT_EQ(13, (ls::std::core::STLUtils::getListElementAt(values, 1)));
@@ -73,8 +73,8 @@ namespace
 
   TEST_F(STLUtilsTest, getListElementAtNegative)
   {
-    std::list<int> values{1, 13, 7, 8};
-    std::list<std::string> names{"Tim", "Alex", "Nadine"};
+    ::std::list<int> values{1, 13, 7, 8};
+    ::std::list<::std::string> names{"Tim", "Alex", "Nadine"};
 
     ASSERT_EQ(0, (ls::std::core::STLUtils::getListElementAt(values, 15)));
     ASSERT_STREQ("", ls::std::core::STLUtils::getListElementAt(names, 15).c_str());

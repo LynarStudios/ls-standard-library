@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-20
  *
  * */
 
@@ -202,7 +202,7 @@ void ls::std::boxing::Double::parse(::std::string _parseText)
   this->value = ::std::stod(_parseText);
 }
 
-std::string ls::std::boxing::Double::toString()
+::std::string ls::std::boxing::Double::toString()
 {
   return ::std::to_string(this->value);
 }

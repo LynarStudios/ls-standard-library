@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-19
+ * Changed:         2022-05-20
  *
  * */
 
@@ -27,9 +27,9 @@ namespace
       void TearDown() override
       {}
 
-      static std::shared_ptr<ls::std::core::interface_type::IWriter> createFileLogger(const std::string &_logName)
+      static ::std::shared_ptr<ls::std::core::interface_type::IWriter> createFileLogger(const ::std::string &_logName)
       {
-        std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + _logName;
+        ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + _logName;
         ls::std::io::File file{path};
 
         if (!file.exists())
@@ -37,12 +37,12 @@ namespace
           file.createNewFile();
         }
 
-        std::shared_ptr<ls::std::core::interface_type::IWriter> writer = std::dynamic_pointer_cast<ls::std::core::interface_type::IWriter>(std::make_shared<ls::std::io::FileOutputStream>(file));
+        ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = ::std::dynamic_pointer_cast<ls::std::core::interface_type::IWriter>(::std::make_shared<ls::std::io::FileOutputStream>(file));
 
         return writer;
       }
 
-      static ::std::string getContentFromLogFile(const std::string &_logName)
+      static ::std::string getContentFromLogFile(const ::std::string &_logName)
       {
         ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + _logName};
         ls::std::io::FileReader reader{file};
@@ -71,8 +71,8 @@ namespace
   {
     // write to log file
 
-    std::string logName = "output_debug.log";
-    std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    ::std::string logName = "output_debug.log";
+    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::DEBUG);
@@ -85,7 +85,7 @@ namespace
 
     // get content and check
 
-    std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
+    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
     ::std::string content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
@@ -100,8 +100,8 @@ namespace
   {
     // write to log file
 
-    std::string logName = "output_error.log";
-    std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    ::std::string logName = "output_error.log";
+    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::ERR);
@@ -114,7 +114,7 @@ namespace
 
     // get content and check
 
-    std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
+    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
     ::std::string content = getContentFromLogFile(logName);
 
     ASSERT_FALSE(content.find("1. line!") != ::std::string::npos);
@@ -129,8 +129,8 @@ namespace
   {
     // write to log file
 
-    std::string logName = "output_fatal.log";
-    std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    ::std::string logName = "output_fatal.log";
+    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::FATAL);
@@ -143,7 +143,7 @@ namespace
 
     // get content and check
 
-    std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
+    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
     ::std::string content = getContentFromLogFile(logName);
 
     ASSERT_FALSE(content.find("1. line!") != ::std::string::npos);
@@ -164,8 +164,8 @@ namespace
   {
     // write to log file
 
-    std::string logName = "output_info.log";
-    std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    ::std::string logName = "output_info.log";
+    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::INFO);
@@ -178,7 +178,7 @@ namespace
 
     // get content and check
 
-    std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
+    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
     ::std::string content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
@@ -201,8 +201,8 @@ namespace
   {
     // write to log file
 
-    std::string logName = "output_trace.log";
-    std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    ::std::string logName = "output_trace.log";
+    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::TRACE);
@@ -215,7 +215,7 @@ namespace
 
     // get content and check
 
-    std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
+    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
     ::std::string content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
@@ -230,8 +230,8 @@ namespace
   {
     // write to log file
 
-    std::string logName = "output_warn.log";
-    std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    ::std::string logName = "output_warn.log";
+    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
 
     ls::std::io::Logger logger{writer};
     logger.setLogLevel(ls::std::io::LogLevelValue::WARN);
@@ -244,7 +244,7 @@ namespace
 
     // get content and check
 
-    std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
+    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
     ::std::string content = getContentFromLogFile(logName);
 
     ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);

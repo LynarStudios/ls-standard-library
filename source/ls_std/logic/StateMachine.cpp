@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -34,22 +34,22 @@ bool ls::std::logic::StateMachine::addState(const ::std::shared_ptr<ls::std::log
   return wasAdded;
 }
 
-std::shared_ptr<ls::std::logic::State> ls::std::logic::StateMachine::getCurrentState()
+::std::shared_ptr<ls::std::logic::State> ls::std::logic::StateMachine::getCurrentState()
 {
   return this->currentState;
 }
 
-std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::getMemory()
+::std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::getMemory()
 {
   return this->memory;
 }
 
-std::string ls::std::logic::StateMachine::getName()
+::std::string ls::std::logic::StateMachine::getName()
 {
   return this->name;
 }
 
-std::unordered_map<ls::std::core::type::state_id, std::shared_ptr<ls::std::logic::State>> ls::std::logic::StateMachine::getStates()
+::std::unordered_map<ls::std::core::type::state_id, ::std::shared_ptr<ls::std::logic::State>> ls::std::logic::StateMachine::getStates()
 {
   return this->states;
 }
@@ -124,7 +124,7 @@ void ls::std::logic::StateMachine::_assignName(const ::std::string &_name)
   this->name = _name;
 }
 
-std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::_getNextValidStates()
+::std::vector<ls::std::core::type::state_id> ls::std::logic::StateMachine::_getNextValidStates()
 {
   ::std::vector<ls::std::core::type::state_id> validStates{};
 

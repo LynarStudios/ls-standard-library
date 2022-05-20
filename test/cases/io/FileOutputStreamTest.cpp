@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -30,7 +30,7 @@ namespace
 
   TEST_F(FileOutputStreamTest, constructor_file_does_not_exist)
   {
-    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "not_existing.txt";
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "not_existing.txt";
     ls::std::io::File file{path};
 
     EXPECT_THROW({
@@ -47,7 +47,7 @@ namespace
 
   TEST_F(FileOutputStreamTest, write)
   {
-    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
     ls::std::io::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());
@@ -63,7 +63,7 @@ namespace
 
   TEST_F(FileOutputStreamTest, write_with_another_appending_stream)
   {
-    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
     ls::std::io::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());

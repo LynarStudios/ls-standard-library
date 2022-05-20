@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -20,7 +20,7 @@ namespace
       StorableFileTest() = default;
       ~StorableFileTest() override = default;
 
-      std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
+      ::std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
 
       void SetUp() override
       {}
@@ -40,8 +40,8 @@ namespace
     ls::std::io::StorableFile storableFile{this->fileLocation};
     ls::std::core::type::byte_field content = storableFile.load();
 
-    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
+    ::std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    ::std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
@@ -51,14 +51,14 @@ namespace
     ls::std::io::StorableFile storableFile{this->fileLocation};
     ls::std::core::type::byte_field content = storableFile.load();
 
-    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
+    ::std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    ::std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
     // reset
 
-    std::string anotherFileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
+    ::std::string anotherFileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
     storableFile.reset(anotherFileLocation);
     content = storableFile.load();
 
@@ -70,7 +70,7 @@ namespace
 
   TEST_F(StorableFileTest, save)
   {
-    std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
     ls::std::io::File file{path};
     file.createNewFile();
 

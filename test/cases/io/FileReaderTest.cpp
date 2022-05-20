@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -48,8 +48,8 @@ namespace
   {
     ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt"};
     ls::std::io::FileReader reader{file};
-    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
+    ::std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    ::std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ls::std::core::type::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
@@ -78,8 +78,8 @@ namespace
   {
     ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt"};
     ls::std::io::FileReader reader{file};
-    std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
+    ::std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    ::std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ls::std::core::type::byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);

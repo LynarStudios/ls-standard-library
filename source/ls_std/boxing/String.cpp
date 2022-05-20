@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -35,22 +35,22 @@ ls::std::boxing::String &ls::std::boxing::String::operator=(::std::string _value
   return *this;
 }
 
-std::string ls::std::boxing::String::operator+(ls::std::boxing::String _string) const
+::std::string ls::std::boxing::String::operator+(ls::std::boxing::String _string) const
 {
   return this->value + _string.toString();
 }
 
-std::string ls::std::boxing::String::operator+(const ::std::string &_string) const
+::std::string ls::std::boxing::String::operator+(const ::std::string &_string) const
 {
   return this->value + _string;
 }
 
-std::string ls::std::boxing::String::operator+(const char *_string) const
+::std::string ls::std::boxing::String::operator+(const char *_string) const
 {
   return this->value + _string;
 }
 
-std::string ls::std::boxing::String::operator-(int _number)
+::std::string ls::std::boxing::String::operator-(int _number)
 {
   ::std::string copy = this->value;
   return copy.substr(0, copy.size() - _number);
@@ -103,7 +103,7 @@ void ls::std::boxing::String::parse(::std::string _parseText)
   this->value = ::std::move(_parseText);
 }
 
-std::string ls::std::boxing::String::toString()
+::std::string ls::std::boxing::String::toString()
 {
   return this->value;
 }
@@ -128,7 +128,7 @@ bool ls::std::boxing::String::equalsIgnoreCase(::std::string _text)
   return this->toLowerCase() == ls::std::boxing::String{::std::move(_text)}.toLowerCase();
 }
 
-std::vector<ls::std::core::type::byte> ls::std::boxing::String::getByteData()
+::std::vector<ls::std::core::type::byte> ls::std::boxing::String::getByteData()
 {
   ::std::vector<ls::std::core::type::byte> byteData(this->value.begin(), this->value.end());
   byteData.push_back('\0');
@@ -136,17 +136,17 @@ std::vector<ls::std::core::type::byte> ls::std::boxing::String::getByteData()
   return byteData;
 }
 
-std::string ls::std::boxing::String::padLeft(size_t _width, const char _fillCharacter)
+::std::string ls::std::boxing::String::padLeft(size_t _width, const char _fillCharacter)
 {
   return ls::std::boxing::String::_createFillContent(this->value, _width, _fillCharacter) + this->value;
 }
 
-std::string ls::std::boxing::String::padRight(size_t _width, const char _fillCharacter)
+::std::string ls::std::boxing::String::padRight(size_t _width, const char _fillCharacter)
 {
   return this->value + ls::std::boxing::String::_createFillContent(this->value, _width, _fillCharacter);
 }
 
-std::string ls::std::boxing::String::reverse()
+::std::string ls::std::boxing::String::reverse()
 {
   ::std::string copy = this->value;
   ::std::reverse(copy.begin(), copy.end());
@@ -159,7 +159,7 @@ bool ls::std::boxing::String::startsWith(const ::std::string &_text)
   return this->value.rfind(_text, 0) == 0;
 }
 
-std::string ls::std::boxing::String::toLowerCase()
+::std::string ls::std::boxing::String::toLowerCase()
 {
   ::std::string copy = this->value;
   ::std::transform(copy.begin(), copy.end(), copy.begin(), ::tolower);
@@ -167,7 +167,7 @@ std::string ls::std::boxing::String::toLowerCase()
   return copy;
 }
 
-std::string ls::std::boxing::String::toUpperCase()
+::std::string ls::std::boxing::String::toUpperCase()
 {
   ::std::string copy = this->value;
   ::std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
@@ -175,7 +175,7 @@ std::string ls::std::boxing::String::toUpperCase()
   return copy;
 }
 
-std::string ls::std::boxing::String::_buildCharacterChain(size_t _amount, const char _fillCharacter)
+::std::string ls::std::boxing::String::_buildCharacterChain(size_t _amount, const char _fillCharacter)
 {
   ::std::string fillContent{};
 
@@ -187,7 +187,7 @@ std::string ls::std::boxing::String::_buildCharacterChain(size_t _amount, const 
   return fillContent;
 }
 
-std::string ls::std::boxing::String::_createFillContent(const ::std::string &_text, size_t _width, const char _fillCharacter)
+::std::string ls::std::boxing::String::_createFillContent(const ::std::string &_text, size_t _width, const char _fillCharacter)
 {
   size_t fillSize = _text.size() > _width ? 0 : _width - _text.size();
   ::std::string fillContent{};

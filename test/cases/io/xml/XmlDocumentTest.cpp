@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -46,7 +46,7 @@ namespace
     ASSERT_TRUE(document.getDeclaration() == nullptr);
 
     ls::std::io::XmlDeclaration declaration{"1.0"};
-    document.setDeclaration(std::make_shared<ls::std::io::XmlDeclaration>(declaration));
+    document.setDeclaration(::std::make_shared<ls::std::io::XmlDeclaration>(declaration));
     ASSERT_TRUE(document.getDeclaration() != nullptr);
     ASSERT_STREQ("1.0", document.getDeclaration()->getVersion().c_str());
   }
@@ -101,14 +101,14 @@ namespace
     ls::std::io::XmlDeclaration declaration{"1.0"};
     declaration.setEncoding("UTF-8");
     declaration.setStandalone("yes");
-    document.setDeclaration(std::make_shared<ls::std::io::XmlDeclaration>(declaration));
+    document.setDeclaration(::std::make_shared<ls::std::io::XmlDeclaration>(declaration));
 
     document.setRootElement(ls_std_io_test::TestDataFactory::createXmlContent());
-    std::string xmlStream = document.toXml();
+    ::std::string xmlStream = document.toXml();
 
     ASSERT_TRUE(!xmlStream.empty());
 
-    std::string expectedXmlString = R"(<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+    ::std::string expectedXmlString = R"(<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <dialog name="dungeon_001">
     <dialogUnit id="001">
         <text>Hello!</text>

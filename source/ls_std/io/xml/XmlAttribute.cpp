@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2022-05-11
+ * Changed:         2022-05-20
  *
  * */
 
@@ -15,12 +15,12 @@ ls::std::io::XmlAttribute::XmlAttribute(const ::std::string& _name) : ls::std::c
   this->_assignName(_name);
 }
 
-std::string ls::std::io::XmlAttribute::getName()
+::std::string ls::std::io::XmlAttribute::getName()
 {
   return this->name;
 }
 
-std::string ls::std::io::XmlAttribute::getValue()
+::std::string ls::std::io::XmlAttribute::getValue()
 {
   return this->value;
 }
@@ -35,7 +35,7 @@ void ls::std::io::XmlAttribute::setValue(const ::std::string& _value)
   this->_assignValue(_value);
 }
 
-std::string ls::std::io::XmlAttribute::toXml()
+::std::string ls::std::io::XmlAttribute::toXml()
 {
   return this->name + "=\"" + this->value + "\"";
 }

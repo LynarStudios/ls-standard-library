@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-15
+ * Changed:         2022-05-20
  *
  * */
 
@@ -46,7 +46,7 @@ namespace
   TEST_F(SerializableJsonStateConnectionTest, marshal)
   {
     ls::std::logic::StateConnection x{"AB", "B"};
-    ls::std::logic::SerializableJsonStateConnection serializable{std::make_shared<ls::std::logic::StateConnection>(x)};
+    ls::std::logic::SerializableJsonStateConnection serializable{::std::make_shared<ls::std::logic::StateConnection>(x)};
     ::std::string jsonString{serializable.marshal()};
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.c_str());
@@ -54,7 +54,7 @@ namespace
 
   TEST_F(SerializableJsonStateConnectionTest, unmarshal)
   {
-    std::shared_ptr<ls::std::logic::StateConnection> x = std::make_shared<ls::std::logic::StateConnection>("AB", "B");
+    ::std::shared_ptr<ls::std::logic::StateConnection> x = ::std::make_shared<ls::std::logic::StateConnection>("AB", "B");
     ASSERT_STREQ("AB", x->getConnectionId().c_str());
     ASSERT_STREQ("B", x->getStateId().c_str());
     ASSERT_FALSE(x->isPassable());
@@ -69,7 +69,7 @@ namespace
 
   TEST_F(SerializableJsonStateConnectionTest, getValue)
   {
-    std::shared_ptr<ls::std::logic::StateConnection> x = std::make_shared<ls::std::logic::StateConnection>("AB", "B");
+    ::std::shared_ptr<ls::std::logic::StateConnection> x = ::std::make_shared<ls::std::logic::StateConnection>("AB", "B");
     ls::std::logic::SerializableJsonStateConnection serializable{x};
     ASSERT_TRUE(serializable.getValue() == x);
   }
@@ -77,7 +77,7 @@ namespace
   TEST_F(SerializableJsonStateConnectionTest, setValue)
   {
     ls::std::logic::StateConnection x{"AB", "B"};
-    ls::std::logic::SerializableJsonStateConnection serializable{std::make_shared<ls::std::logic::StateConnection>(x)};
+    ls::std::logic::SerializableJsonStateConnection serializable{::std::make_shared<ls::std::logic::StateConnection>(x)};
     ::std::string jsonString{serializable.marshal()};
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"AB","stateId":"B"})", jsonString.c_str());
@@ -85,7 +85,7 @@ namespace
     // set value should now reset json
 
     ls::std::logic::StateConnection y{"BC", "C"};
-    serializable.setValue(std::make_shared<ls::std::logic::StateConnection>(y));
+    serializable.setValue(::std::make_shared<ls::std::logic::StateConnection>(y));
     jsonString = serializable.marshal();
 
     ASSERT_STREQ(R"({"condition":false,"connectionId":"BC","stateId":"C"})", jsonString.c_str());
@@ -95,7 +95,7 @@ namespace
   TEST_F(SerializableJsonStateConnectionTest, setValue_no_parameter_set)
   {
     ls::std::logic::StateConnection stateConnection{"AB", "B"};
-    ls::std::logic::SerializableJsonStateConnection serializable{std::make_shared<ls::std::logic::StateConnection>(stateConnection)};
+    ls::std::logic::SerializableJsonStateConnection serializable{::std::make_shared<ls::std::logic::StateConnection>(stateConnection)};
 
     EXPECT_THROW({
                    try

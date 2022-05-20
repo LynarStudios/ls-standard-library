@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-16
+ * Changed:         2022-05-20
  *
  * */
 
@@ -213,10 +213,10 @@ namespace
   TEST_F(DateTest, toString)
   {
     ls::std::time::Date date{};
-    std::string regexSearchString = R"((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}))";
-    std::regex _regex{regexSearchString};
-    std::string dateString = date.toString();
+    ::std::string regexSearchString = R"((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}))";
+    ::std::regex _regex{regexSearchString};
+    ::std::string dateString = date.toString();
 
-    ASSERT_TRUE(std::regex_match(dateString, _regex));
+    ASSERT_TRUE(::std::regex_match(dateString, _regex));
   }
 }

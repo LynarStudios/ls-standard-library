@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-09
+ * Changed:         2022-05-20
  *
  * */
 
@@ -92,7 +92,7 @@ void ls::std::time::Date::setTime(time_t _timestamp)
   this->_init();
 }
 
-std::string ls::std::time::Date::toString()
+::std::string ls::std::time::Date::toString()
 {
   ::std::stringstream _stream{};
   _stream << ::std::put_time(this->localTime, "%Y-%m-%d %H:%M:%S");

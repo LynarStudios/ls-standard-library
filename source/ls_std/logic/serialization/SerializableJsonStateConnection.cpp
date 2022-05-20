@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-12
+ * Changed:         2022-05-20
  *
  * */
 
@@ -31,7 +31,7 @@ void ls::std::logic::SerializableJsonStateConnection::unmarshal(const ls::std::c
   this->value->updatePassCondition(this->jsonObject["condition"]);
 }
 
-std::shared_ptr<ls::std::logic::StateConnection> ls::std::logic::SerializableJsonStateConnection::getValue()
+::std::shared_ptr<ls::std::logic::StateConnection> ls::std::logic::SerializableJsonStateConnection::getValue()
 {
   return this->value;
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2022-05-09
+ * Changed:         2022-05-20
  *
  * */
 
@@ -13,12 +13,12 @@
 ls::std::io::XmlDocument::XmlDocument() : ls::std::core::Class("XmlDocument")
 {}
 
-std::shared_ptr<ls::std::io::XmlDeclaration> ls::std::io::XmlDocument::getDeclaration()
+::std::shared_ptr<ls::std::io::XmlDeclaration> ls::std::io::XmlDocument::getDeclaration()
 {
   return this->declaration;
 }
 
-std::shared_ptr<ls::std::io::XmlNode> ls::std::io::XmlDocument::getRootElement()
+::std::shared_ptr<ls::std::io::XmlNode> ls::std::io::XmlDocument::getRootElement()
 {
   return this->rootElement;
 }
@@ -33,7 +33,7 @@ void ls::std::io::XmlDocument::setRootElement(const ::std::shared_ptr<ls::std::i
   this->_assignRootElement(_rootElement);
 }
 
-std::string ls::std::io::XmlDocument::toXml()
+::std::string ls::std::io::XmlDocument::toXml()
 {
   ::std::string xmlString{};
 

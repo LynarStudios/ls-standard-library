@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-11
+ * Changed:         2022-05-20
  *
  * */
 
@@ -75,7 +75,7 @@ void ls::std::io::LogLevel::setLogLevel(const ::std::string &_value)
   }
 }
 
-std::string ls::std::io::LogLevel::toString() const
+::std::string ls::std::io::LogLevel::toString() const
 {
   return this->level.at(this->value);
 }

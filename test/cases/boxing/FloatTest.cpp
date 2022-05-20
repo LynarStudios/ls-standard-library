@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -304,7 +304,7 @@ namespace
   TEST_F(FloatTest, toString)
   {
     ls::std::boxing::Float x{13.1543f};
-    ASSERT_TRUE(x.toString().find("13.1543") != std::string::npos);
+    ASSERT_TRUE(x.toString().find("13.1543") != ::std::string::npos);
   }
 
   // additional functionality

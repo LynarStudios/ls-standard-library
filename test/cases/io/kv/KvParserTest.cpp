@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-14
+ * Changed:         2022-05-20
  *
  * */
 
@@ -43,13 +43,13 @@ namespace
 
   TEST_F(KvParserTest, getDocument)
   {
-    ls::std::io::KvParser parser{std::make_shared<ls::std::io::KvDocument>()};
+    ls::std::io::KvParser parser{::std::make_shared<ls::std::io::KvDocument>()};
     ASSERT_TRUE(parser.getDocument() != nullptr);
   }
 
   TEST_F(KvParserTest, parse)
   {
-    std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
+    ::std::shared_ptr<ls::std::io::KvDocument> document = ::std::make_shared<ls::std::io::KvDocument>();
     ls::std::io::KvParser parser{document};
     ls::std::core::type::byte_field data = "# starting comment\n\nport=8080; # some comment\nhost=localhost;\nservice-name=deamon;";
     parser.parse(data);
@@ -68,19 +68,19 @@ namespace
   {
     // preparation
 
-    std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
+    ::std::shared_ptr<ls::std::io::KvDocument> document = ::std::make_shared<ls::std::io::KvDocument>();
     ls::std::io::KvParser parser{document};
 
     // set and check
 
-    std::shared_ptr<ls::std::io::KvDocument> newDocument = std::make_shared<ls::std::io::KvDocument>();
+    ::std::shared_ptr<ls::std::io::KvDocument> newDocument = ::std::make_shared<ls::std::io::KvDocument>();
     parser.setDocument(newDocument);
     ASSERT_TRUE(parser.getDocument() == newDocument);
   }
 
   TEST_F(KvParserTest, setDocument_no_reference)
   {
-    std::shared_ptr<ls::std::io::KvDocument> document = std::make_shared<ls::std::io::KvDocument>();
+    ::std::shared_ptr<ls::std::io::KvDocument> document = ::std::make_shared<ls::std::io::KvDocument>();
     ls::std::io::KvParser parser{document};
 
     EXPECT_THROW({
