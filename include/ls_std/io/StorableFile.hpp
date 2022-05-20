@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-16
+ * Changed:         2022-05-19
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls
   {
     namespace io
     {
-      class StorableFile : public ls::std::core::interface::IStorable
+      class StorableFile : public ls::std::core::interface_type::IStorable
       {
         public:
 

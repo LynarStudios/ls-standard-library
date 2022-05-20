@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-16
+ * Changed:         2022-05-19
  *
  * */
 
@@ -15,7 +15,7 @@
 ls::std::event::EventManager::EventManager() : ls::std::core::Class("EventManager")
 {}
 
-void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener)
+void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
@@ -32,7 +32,7 @@ void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id
   }
 }
 
-void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface::IListener> &_listener)
+void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
   if (_id.empty() || _listener == nullptr)
   {
