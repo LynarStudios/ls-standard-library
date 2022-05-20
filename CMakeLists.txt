@@ -7,6 +7,7 @@ project(ls_std VERSION 2022.1.0)
 
 set(MODULE_NAME_BOXING ls_std_boxing)
 set(MODULE_NAME_CORE ls_std_core)
+set(MODULE_NAME_ENCODING ls_std_encoding)
 set(MODULE_NAME_EVENT ls_std_event)
 set(MODULE_NAME_IO ls_std_io)
 set(MODULE_NAME_LOGIC ls_std_logic)
@@ -70,6 +71,9 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
 
+set(SOURCE_FILES_ENCODING
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp)
+
 set(SOURCE_FILES_EVENT
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/serialization/SerializableJsonEvent.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
@@ -131,6 +135,9 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp)
+
+    set(TEST_FILES_ENCODING
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
 
     set(TEST_FILES_EVENT
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/serialization/SerializableJsonEventTest.cpp
@@ -205,6 +212,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Build Tests (encoding)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_ENCODING}: Building tests...")
+    add_executable(${MODULE_NAME_ENCODING}_test ${TEST_FILES_ENCODING})
+endif ()
+
+##########################################################
 # Build Tests (event)
 ##########################################################
 
@@ -249,6 +265,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
     add_executable(${PROJECT_NAME}_test
             ${TEST_FILES_BOXING}
             ${TEST_FILES_CORE}
+            ${TEST_FILES_ENCODING}
             ${TEST_FILES_EVENT}
             ${TEST_FILES_IO}
             ${TEST_FILES_LOGIC}
@@ -286,6 +303,17 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_CORE} library version ${PROJECT
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_CORE}" STATIC ${SOURCE_FILES_CORE})
     set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
+# Build Library (encoding)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_ENCODING} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_ENCODING}" STATIC ${SOURCE_FILES_ENCODING})
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
 ##########################################################
@@ -360,6 +388,20 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Linking (encoding)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_ENCODING}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_ENCODING}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_ENCODING}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
 # Linking (event)
 ##########################################################
 
@@ -427,6 +469,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gtest_main
             "${MODULE_NAME_CORE}"
             "${MODULE_NAME_BOXING}"
+            "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
             "${MODULE_NAME_LOGIC}"
