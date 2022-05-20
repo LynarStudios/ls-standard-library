@@ -36,7 +36,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- TBA
+- "encoding" submodule has been added providing __Base64__ encoding and decoding functionality
 
 #### Improvements ####
 
