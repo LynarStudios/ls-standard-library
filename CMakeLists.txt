@@ -36,21 +36,28 @@ set(TARGET_COUNTER 0)
 
 if (${LS_STD_BUILD_STATIC})
     math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
-    message("${PROJECT_NAME}: [Goal] static library")
+    set(GOAL "static library")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
-    message("${PROJECT_NAME}: [Goal] shared library")
+    set(GOAL "shared library")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
     math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
-    message("${PROJECT_NAME}: [Goal] module library")
+    set(GOAL "module library")
 endif ()
+
+message("${PROJECT_NAME}: [Goal] ${GOAL}")
 
 if (TARGET_COUNTER GREATER 1)
     message("${PROJECT_NAME}: [Error] only one goal supported at the same time!")
+    return()
+endif ()
+
+if (TARGET_COUNTER EQUAL 0)
+    message("${PROJECT_NAME}: [Error] no goal selected!")
     return()
 endif ()
 
@@ -63,12 +70,30 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
-# supported compilers
+##########################################################
+# Compiler Support
+##########################################################
+
+# define supported compilers
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC OR ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
     message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
 else()
-    message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
+    message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
+    return()
+endif ()
+
+# define which goals can run tests
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+    message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with tests is not supported... terminated!")
+    return()
+endif ()
+
+# define which compilers are supported for shared or module goal
+
+if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+    message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
     return()
 endif ()
 
@@ -355,6 +380,7 @@ endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_BOXING}" SHARED ${SOURCE_FILES_BOXING})
+    target_link_libraries("${MODULE_NAME_BOXING}" ${MODULE_NAME_CORE})
     set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
@@ -418,6 +444,7 @@ endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_EVENT}" SHARED ${SOURCE_FILES_EVENT})
+    target_link_libraries("${MODULE_NAME_EVENT}" ${MODULE_NAME_CORE})
     set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
@@ -439,6 +466,7 @@ endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_IO}" SHARED ${SOURCE_FILES_IO})
+    target_link_libraries("${MODULE_NAME_IO}" ${MODULE_NAME_CORE})
     set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
@@ -460,6 +488,7 @@ endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_LOGIC}" SHARED ${SOURCE_FILES_LOGIC})
+    target_link_libraries("${MODULE_NAME_LOGIC}" ${MODULE_NAME_CORE})
     set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
@@ -481,6 +510,7 @@ endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
+    target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
     set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
