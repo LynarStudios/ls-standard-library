@@ -3,13 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-20
+ * Changed:         2022-05-21
  *
  * */
 
 #include <ls_std/io/logging/Logger.hpp>
 #include <ctime>
 #include <iomanip>
+#ifdef _MSC_VER
+#include <sstream>
+#endif
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 
