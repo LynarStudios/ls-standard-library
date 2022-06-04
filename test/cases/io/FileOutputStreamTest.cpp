@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-09-17
+ * Changed:         2022-05-20
  *
  * */
 
 #include <gtest/gtest.h>
-#include <TestHelper.hpp>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -29,29 +30,29 @@ namespace
 
   TEST_F(FileOutputStreamTest, constructor_file_does_not_exist)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "not_existing.txt";
-    ls_std::File file{path};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "not_existing.txt";
+    ls::std::io::File file{path};
 
     EXPECT_THROW({
                    try
                    {
-                     ls_std::FileOutputStream outputStream{file};
+                     ls::std::io::FileOutputStream outputStream{file};
                    }
-                   catch (const ls_std::FileNotFoundException &_exception)
+                   catch (const ls::std::core::FileNotFoundException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::FileNotFoundException);
+                 }, ls::std::core::FileNotFoundException);
   }
 
   TEST_F(FileOutputStreamTest, write)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
-    ls_std::File file{path};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
+    ls::std::io::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());
 
-    ls_std::FileOutputStream outputStream{file};
+    ls::std::io::FileOutputStream outputStream{file};
     ASSERT_TRUE(outputStream.write("Hello! "));
     ASSERT_TRUE(outputStream.write("How are you?"));
     outputStream.close();
@@ -62,27 +63,27 @@ namespace
 
   TEST_F(FileOutputStreamTest, write_with_another_appending_stream)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
-    ls_std::File file{path};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_output_stream.txt";
+    ls::std::io::File file{path};
     file.createNewFile();
     ASSERT_TRUE(file.exists());
 
-    ls_std::FileOutputStream outputStream{file};
+    ls::std::io::FileOutputStream outputStream{file};
     ASSERT_TRUE(outputStream.write("Hello! "));
     ASSERT_TRUE(outputStream.write("How are you?"));
     outputStream.close();
 
-    ls_std::FileOutputStream newOutputStream{file, true};
+    ls::std::io::FileOutputStream newOutputStream{file, true};
     ASSERT_TRUE(newOutputStream.write(" I'm fine! "));
     ASSERT_TRUE(newOutputStream.write("Thank you!"));
     newOutputStream.close();
 
     // validation
 
-    ls_std::FileReader reader{file};
-    ls_std::String content{reader.read()};
+    ls::std::io::FileReader reader{file};
+    ::std::string content{reader.read()};
 
-    ASSERT_TRUE(content.contains("Hello! How are you? I'm fine! Thank you!"));
+    ASSERT_TRUE(content.find("Hello! How are you? I'm fine! Thank you!") != ::std::string::npos);
 
     file.remove();
     ASSERT_FALSE(file.exists());
@@ -91,23 +92,23 @@ namespace
   TEST_F(FileOutputStreamTest, write_no_permission_to_write)
   {
     #if defined(unix) || defined(__APPLE__)
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
     #endif
     #ifdef _WIN32
-    ls_std::File file{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
     #endif
 
-    ls_std::FileOutputStream outputStream{file};
+    ls::std::io::FileOutputStream outputStream{file};
 
     EXPECT_THROW({
                    try
                    {
                      outputStream.write("something");
                    }
-                   catch (const ls_std::FileOperationException &_exception)
+                   catch (const ls::std::core::FileOperationException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::FileOperationException);
+                 }, ls::std::core::FileOperationException);
   }
 }

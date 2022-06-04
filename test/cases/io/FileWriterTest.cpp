@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-09-18
+ * Changed:         2022-05-20
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <TestHelper.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -29,33 +30,33 @@ namespace
 
   TEST_F(FileWriterTest, constructor_file_does_not_exist)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
-    ls_std::File file{path};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
+    ls::std::io::File file{path};
 
     EXPECT_THROW({
                    try
                    {
-                     ls_std::FileWriter writer{file};
+                     ls::std::io::FileWriter writer{file};
                    }
-                   catch (const ls_std::FileNotFoundException &_exception)
+                   catch (const ls::std::core::FileNotFoundException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::FileNotFoundException);
+                 }, ls::std::core::FileNotFoundException);
   }
 
   TEST_F(FileWriterTest, reset)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
-    ls_std::File file{path};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
+    ls::std::io::File file{path};
     file.createNewFile();
-    ls_std::FileWriter writer{file};
+    ls::std::io::FileWriter writer{file};
     ASSERT_TRUE(writer.write("Testing something!\n"));
 
     // reset
 
-    path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test2.txt";
-    ls_std::File anotherFile{path};
+    path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test2.txt";
+    ls::std::io::File anotherFile{path};
     anotherFile.createNewFile();
 
     writer.reset(anotherFile);
@@ -71,14 +72,14 @@ namespace
 
   TEST_F(FileWriterTest, write)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
-    ls_std::File file{path};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
+    ls::std::io::File file{path};
 
     ASSERT_FALSE(file.exists());
     file.createNewFile();
     ASSERT_TRUE(file.exists());
 
-    ls_std::FileWriter writer{file};
+    ls::std::io::FileWriter writer{file};
     ASSERT_TRUE(writer.write("Testing something!\n"));
 
     file.remove();

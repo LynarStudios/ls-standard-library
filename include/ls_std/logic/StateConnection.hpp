@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2021-05-27
+ * Changed:         2022-05-12
  *
  * */
 
@@ -11,34 +11,40 @@
 #define LS_STD_STATE_CONNECTION_HPP
 
 #include <memory>
-#include <ls_std/base/Class.hpp>
-#include "StateMachineTypes.hpp"
+#include <ls_std/core/Class.hpp>
+#include <ls_std/core/types/StateMachineTypes.hpp>
 
-namespace ls_std
+namespace ls
 {
-  class StateConnection : public ls_std::Class
+  namespace std
   {
-    public:
+    namespace logic
+    {
+      class StateConnection : public ls::std::core::Class
+      {
+        public:
 
-      explicit StateConnection(const ls_std::StateConnectionId& _connectionId, const ls_std::StateId& _stateId);
-      ~StateConnection() override = default;
+          explicit StateConnection(const ls::std::core::type::state_connection_id &_connectionId, const ls::std::core::type::state_id &_stateId);
+          ~StateConnection() override = default;
 
-      StateConnectionId getConnectionId();
-      ls_std::StateId getStateId();
-      bool isPassable() const;
-      void setConnectionId(const ls_std::StateConnectionId& _connectionId);
-      void setStateId(const ls_std::StateId& _stateId);
-      void updatePassCondition(bool _condition);
+          ls::std::core::type::state_connection_id getConnectionId();
+          ls::std::core::type::state_id getStateId();
+          bool isPassable() const;
+          void setConnectionId(const ls::std::core::type::state_connection_id &_connectionId);
+          void setStateId(const ls::std::core::type::state_id &_stateId);
+          void updatePassCondition(bool _condition);
 
-    private:
+        private:
 
-      bool condition{};
-      ls_std::StateConnectionId connectionId{};
-      ls_std::StateId stateId{};
+          bool condition{};
+          ls::std::core::type::state_connection_id connectionId{};
+          ls::std::core::type::state_id stateId{};
 
-      void _assignConnectionId(const ls_std::StateConnectionId& _connectionId);
-      void _assignStateId(const ls_std::StateId& _stateId);
-  };
+          void _assignConnectionId(const ls::std::core::type::state_connection_id &_connectionId);
+          void _assignStateId(const ls::std::core::type::state_id &_stateId);
+      };
+    }
+  }
 }
 
 #endif

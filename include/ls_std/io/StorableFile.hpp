@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2021-05-01
+ * Changed:         2022-05-19
  *
  * */
 
@@ -12,29 +12,35 @@
 
 #include <string>
 #include <memory>
-#include "IStorable.hpp"
+#include <ls_std/core/interface/IStorable.hpp>
 #include "File.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class StorableFile : public ls_std::IStorable
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class StorableFile : public ls::std::core::interface_type::IStorable
+      {
+        public:
 
-      explicit StorableFile(const std::string &_path);
-      ~StorableFile() = default;
+          explicit StorableFile(const ::std::string &_path);
+          ~StorableFile() = default;
 
-      std::shared_ptr<ls_std::File> getFile();
-      ls_std::byte_field load() override;
-      void reset(const std::string &_path);
-      void save(const ls_std::byte_field &_data) override;
+          ::std::shared_ptr<ls::std::io::File> getFile();
+          ls::std::core::type::byte_field load() override;
+          void reset(const ::std::string &_path);
+          void save(const ls::std::core::type::byte_field &_data) override;
 
-    private:
+        private:
 
-      std::shared_ptr<ls_std::File> file{};
+          ::std::shared_ptr<ls::std::io::File> file{};
 
-      void _init(const std::string &_path);
-  };
+          void _init(const ::std::string &_path);
+      };
+    }
+  }
 }
 
 #endif

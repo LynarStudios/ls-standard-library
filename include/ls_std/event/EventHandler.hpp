@@ -3,37 +3,43 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-27
+ * Changed:         2022-05-12
  *
  * */
 
 #ifndef LS_STD_EVENT_HANDLER_HPP
 #define LS_STD_EVENT_HANDLER_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include <list>
 #include <memory>
-#include <ls_std/logic/IListener.hpp>
+#include <ls_std/core/interface/IListener.hpp>
 #include "Event.hpp"
-#include <ls_std/logic/Narrator.hpp>
+#include "Narrator.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class EventHandler : public ls_std::Narrator
+  namespace std
   {
-    public:
+    namespace event
+    {
+      class EventHandler : public ls::std::event::Narrator
+      {
+        public:
 
-      explicit EventHandler(const ls_std::event_id& _id);
-      ~EventHandler() override = default;
+          explicit EventHandler(const ls::std::core::type::event_id &_id);
+          ~EventHandler() override = default;
 
-      ls_std::event_id getId();
+          ls::std::core::type::event_id getId();
 
-    private:
+        private:
 
-      ls_std::event_id id{};
+          ls::std::core::type::event_id id{};
 
-      void _assignId(const ls_std::event_id& _id);
-  };
+          void _assignId(const ls::std::core::type::event_id &_id);
+      };
+    }
+  }
 }
 
 #endif

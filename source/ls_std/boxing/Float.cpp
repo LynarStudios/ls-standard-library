@@ -3,229 +3,229 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2021-07-12
+ * Changed:         2022-05-20
  *
  * */
 
 #include <cmath>
 #include <ls_std/boxing/Float.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::Float::Float()
-    : ls_std::Class("Float"),
+ls::std::boxing::Float::Float()
+    : ls::std::core::Class("Float"),
       epsilon(0.00001f)
 {}
 
-ls_std::Float::Float(float _value)
-    : ls_std::Class("Float"),
+ls::std::boxing::Float::Float(float _value)
+    : ls::std::core::Class("Float"),
       epsilon(0.00001f),
       value(_value)
 {}
 
-ls_std::Float::operator float() const
+ls::std::boxing::Float::operator float() const
 {
   return this->value;
 }
 
-ls_std::Float &ls_std::Float::operator=(float _value)
+ls::std::boxing::Float &ls::std::boxing::Float::operator=(float _value)
 {
   this->value = _value;
   return *this;
 }
 
-float ls_std::Float::operator-() const
+float ls::std::boxing::Float::operator-() const
 {
   return -this->value;
 }
 
-float ls_std::Float::operator+(const ls_std::Float &_float) const
+float ls::std::boxing::Float::operator+(const ls::std::boxing::Float &_float) const
 {
   return this->value + _float;
 }
 
-float ls_std::Float::operator+(float _value) const
+float ls::std::boxing::Float::operator+(float _value) const
 {
   return this->value + _value;
 }
 
-float ls_std::Float::operator*(const ls_std::Float &_float) const
+float ls::std::boxing::Float::operator*(const ls::std::boxing::Float &_float) const
 {
   return this->value * _float;
 }
 
-float ls_std::Float::operator*(float _value) const
+float ls::std::boxing::Float::operator*(float _value) const
 {
   return this->value * _value;
 }
 
-float ls_std::Float::operator-(const ls_std::Float &_float) const
+float ls::std::boxing::Float::operator-(const ls::std::boxing::Float &_float) const
 {
   return this->value - _float;
 }
 
-float ls_std::Float::operator-(float _value) const
+float ls::std::boxing::Float::operator-(float _value) const
 {
   return this->value - _value;
 }
 
-float ls_std::Float::operator/(const ls_std::Float &_float) const
+float ls::std::boxing::Float::operator/(const ls::std::boxing::Float &_float) const
 {
   return this->value / _float;
 }
 
-float ls_std::Float::operator/(float _value) const
+float ls::std::boxing::Float::operator/(float _value) const
 {
   return this->value / _value;
 }
 
-ls_std::Float &ls_std::Float::operator+=(const ls_std::Float &_float)
+ls::std::boxing::Float &ls::std::boxing::Float::operator+=(const ls::std::boxing::Float &_float)
 {
   this->value += _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator+=(float _value)
+ls::std::boxing::Float &ls::std::boxing::Float::operator+=(float _value)
 {
   this->value += _value;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator-=(const ls_std::Float &_float)
+ls::std::boxing::Float &ls::std::boxing::Float::operator-=(const ls::std::boxing::Float &_float)
 {
   this->value -= _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator-=(float _value)
+ls::std::boxing::Float &ls::std::boxing::Float::operator-=(float _value)
 {
   this->value -= _value;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator*=(const ls_std::Float &_float)
+ls::std::boxing::Float &ls::std::boxing::Float::operator*=(const ls::std::boxing::Float &_float)
 {
   this->value *= _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator*=(float _value)
+ls::std::boxing::Float &ls::std::boxing::Float::operator*=(float _value)
 {
   this->value *= _value;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator/=(const ls_std::Float &_float)
+ls::std::boxing::Float &ls::std::boxing::Float::operator/=(const ls::std::boxing::Float &_float)
 {
   this->value /= _float;
   return *this;
 }
 
-ls_std::Float &ls_std::Float::operator/=(float _value)
+ls::std::boxing::Float &ls::std::boxing::Float::operator/=(float _value)
 {
   this->value /= _value;
   return *this;
 }
 
-bool ls_std::Float::operator==(const ls_std::Float &_float) const
+bool ls::std::boxing::Float::operator==(const ls::std::boxing::Float &_float) const
 {
-  return std::fabs(this->value - _float) < this->epsilon;
+  return ::std::fabs(this->value - _float) < this->epsilon;
 }
 
-bool ls_std::Float::operator==(float _value) const
+bool ls::std::boxing::Float::operator==(float _value) const
 {
-  return std::fabs(this->value - _value) < this->epsilon;
+  return ::std::fabs(this->value - _value) < this->epsilon;
 }
 
-bool ls_std::Float::operator!=(const ls_std::Float &_float) const
+bool ls::std::boxing::Float::operator!=(const ls::std::boxing::Float &_float) const
 {
-  return std::fabs(this->value - _float) >= this->epsilon;
+  return ::std::fabs(this->value - _float) >= this->epsilon;
 }
 
-bool ls_std::Float::operator!=(float _value) const
+bool ls::std::boxing::Float::operator!=(float _value) const
 {
-  return std::fabs(this->value - _value) >= this->epsilon;
+  return ::std::fabs(this->value - _value) >= this->epsilon;
 }
 
-bool ls_std::Float::operator>(const ls_std::Float &_float) const
+bool ls::std::boxing::Float::operator>(const ls::std::boxing::Float &_float) const
 {
   return this->value > _float;
 }
 
-bool ls_std::Float::operator>(float _value) const
+bool ls::std::boxing::Float::operator>(float _value) const
 {
   return this->value > _value;
 }
 
-bool ls_std::Float::operator>=(const ls_std::Float &_float) const
+bool ls::std::boxing::Float::operator>=(const ls::std::boxing::Float &_float) const
 {
   return this->value >= _float;
 }
 
-bool ls_std::Float::operator>=(float _value) const
+bool ls::std::boxing::Float::operator>=(float _value) const
 {
   return this->value >= _value;
 }
 
-bool ls_std::Float::operator<(const ls_std::Float &_float) const
+bool ls::std::boxing::Float::operator<(const ls::std::boxing::Float &_float) const
 {
   return this->value < _float;
 }
 
-bool ls_std::Float::operator<(float _value) const
+bool ls::std::boxing::Float::operator<(float _value) const
 {
   return this->value < _value;
 }
 
-bool ls_std::Float::operator<=(const ls_std::Float &_float) const
+bool ls::std::boxing::Float::operator<=(const ls::std::boxing::Float &_float) const
 {
   return this->value <= _float;
 }
 
-bool ls_std::Float::operator<=(float _value) const
+bool ls::std::boxing::Float::operator<=(float _value) const
 {
   return this->value <= _value;
 }
 
-void ls_std::Float::operator++()
+void ls::std::boxing::Float::operator++()
 {
   this->value += 1.0f;
 }
 
-void ls_std::Float::operator--()
+void ls::std::boxing::Float::operator--()
 {
   this->value -= 1.0f;
 }
 
-void ls_std::Float::parse(std::string _parseText)
+void ls::std::boxing::Float::parse(::std::string _parseText)
 {
-  this->value = std::stof(_parseText);
+  this->value = ::std::stof(_parseText);
 }
 
-std::string ls_std::Float::toString()
+::std::string ls::std::boxing::Float::toString()
 {
-  return std::to_string(this->value);
+  return ::std::to_string(this->value);
 }
 
-float ls_std::Float::getEpsilon()
+float ls::std::boxing::Float::getEpsilon()
 {
   return this->epsilon;
 }
 
-float ls_std::Float::getValue()
+float ls::std::boxing::Float::getValue()
 {
   return this->value;
 }
 
-void ls_std::Float::setEpsilon(float _epsilon)
+void ls::std::boxing::Float::setEpsilon(float _epsilon)
 {
   this->_assignEpsilon(_epsilon);
 }
 
-void ls_std::Float::_assignEpsilon(float _epsilon)
+void ls::std::boxing::Float::_assignEpsilon(float _epsilon)
 {
   if (_epsilon <= 0.0)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->epsilon = _epsilon;

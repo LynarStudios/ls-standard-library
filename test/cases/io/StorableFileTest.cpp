@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2021-09-18
+ * Changed:         2022-05-20
  *
  * */
 
 #include <gtest/gtest.h>
-#include <TestHelper.hpp>
-#include <ls_std/ls_std.hpp>
+#include <ls_std/ls_std_io.hpp>
+#include "TestHelper.hpp"
 
 namespace
 {
@@ -20,7 +20,7 @@ namespace
       StorableFileTest() = default;
       ~StorableFileTest() override = default;
 
-      std::string fileLocation = TestHelper::getResourcesFolderLocation() + "simple.txt";
+      ::std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
 
       void SetUp() override
       {}
@@ -31,55 +31,55 @@ namespace
 
   TEST_F(StorableFileTest, getFile)
   {
-    ls_std::StorableFile storableFile{this->fileLocation};
+    ls::std::io::StorableFile storableFile{this->fileLocation};
     ASSERT_STREQ(this->fileLocation.c_str(), storableFile.getFile()->getAbsoluteFilePath().c_str());
   }
 
   TEST_F(StorableFileTest, load)
   {
-    ls_std::StorableFile storableFile{this->fileLocation};
-    ls_std::byte_field content = storableFile.load();
+    ls::std::io::StorableFile storableFile{this->fileLocation};
+    ls::std::core::type::byte_field content = storableFile.load();
 
-    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
+    ::std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    ::std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
   TEST_F(StorableFileTest, reset)
   {
-    ls_std::StorableFile storableFile{this->fileLocation};
-    ls_std::byte_field content = storableFile.load();
+    ls::std::io::StorableFile storableFile{this->fileLocation};
+    ls::std::core::type::byte_field content = storableFile.load();
 
-    std::string expectedUnix = "Hello!" + ls_std::NewLine::getUnixNewLine();
-    std::string expectedWindows = "Hello!" + ls_std::NewLine::getWindowsNewLine();
+    ::std::string expectedUnix = "Hello!" + ls::std::io::NewLine::getUnixNewLine();
+    ::std::string expectedWindows = "Hello!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
     // reset
 
-    std::string anotherFileLocation = TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
+    ::std::string anotherFileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
     storableFile.reset(anotherFileLocation);
     content = storableFile.load();
 
-    expectedUnix = "nothing to say!" + ls_std::NewLine::getUnixNewLine();
-    expectedWindows = "nothing to say!" + ls_std::NewLine::getWindowsNewLine();
+    expectedUnix = "nothing to say!" + ls::std::io::NewLine::getUnixNewLine();
+    expectedWindows = "nothing to say!" + ls::std::io::NewLine::getWindowsNewLine();
 
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
   }
 
   TEST_F(StorableFileTest, save)
   {
-    std::string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
-    ls_std::File file{path};
+    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
+    ls::std::io::File file{path};
     file.createNewFile();
 
-    ls_std::StorableFile storableFile{path};
-    ls_std::byte_field textUnix = "Testing save method!" + ls_std::NewLine::getUnixNewLine();
-    ls_std::byte_field textWindows = "Testing save method!" + ls_std::NewLine::getWindowsNewLine();
+    ls::std::io::StorableFile storableFile{path};
+    ls::std::core::type::byte_field textUnix = "Testing save method!" + ls::std::io::NewLine::getUnixNewLine();
+    ls::std::core::type::byte_field textWindows = "Testing save method!" + ls::std::io::NewLine::getWindowsNewLine();
 
     storableFile.save(textUnix);
-    ls_std::byte_field content = storableFile.load();
+    ls::std::core::type::byte_field content = storableFile.load();
     ASSERT_TRUE(content == textUnix || content == textWindows);
 
     file.remove();

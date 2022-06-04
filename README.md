@@ -1,78 +1,55 @@
-# Lynar Studios - Standard Library 2021.2.0 #
+# Lynar Studios - Standard Library 2022.1.0 #
 
-This is a cross-platform standard library written in C++ offering functionalities you'd usually miss in C++ standard library, especially if you'd search for cross-platform implementations. This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
+This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
+This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
+Following a modularized approach the following submodules are defined in scope of this library, which are independent:
  
 #### Boxing ####
 
-This library provides boxing classes for primitive data types (e.g. string, int, long, float...) to add additional functionalities for each one of them.
- 
-#### File ####
+This library module provides boxing classes for primitive data types (e.g. string, int, long, float...) to provide additional functionalities.
 
-To handle file operations - or to receive information of a file - this library provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.
+#### Core ####
 
-#### Base ####
+The core module is a base module providing a base __Class__, exceptions, data types and interfaces. Usually the other submodules are dependent on this module. 
 
-This is a collection of very basic functionalities like a base __Class__ which provides minimal reflection like class name. Also, you have the possibility with this collection to fetch this libraries version or even handle own versions for your project.
+#### Encoding ####
 
-#### Time ####
+To encode a byte field (e.g. a binary file) for transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
 
-A __Date__ class comes with this collection, which you can use to represent a date and doing operations on it. 
+#### Event ####
+
+This submodule comes with an __Event__ class, as well as with handlers and managers to provide an intuitive event handling for your application.
+
+#### IO ####
+
+To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
+Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
 
 #### Logic ####
 
-This collection of classes provides some nice functionalities to support your project with some nice logical features, like state machines and observer pattern supporting classes.
+Functionalities provided by this submodule support your project with some nice logical features. The first one being provided by it is a state machine.
 
-#### Serialization ####
+#### Time ####
 
-Serialization is very important nowadays to persist data. This library offers a serializable interface, which can then be implemented in your project.  
-In addition to that there is already JSON serialization-based implementation for some public library classes.
-
-#### JSON ####
-
-This library uses a transitive JSON dependency, which is in line with our license model. Many thanks to __Niels Lohmann__ for writing this nice little library.
-
-#### XML ####
-
-To handle XML files this library has an own XML parser implementation, which uses modern C++ features, such as shared pointers.
-
-#### Logger ####
-
-For logging functionality you might need for your project there is a __Logger__ class coming with this library, which is also able to handle different log level.
-
-#### Event Handling ####
-
-With this first implemented milestone of event handling this library provides functionalities for creating and firing events.
-
-#### Exception ####
-
-This library provides some basic exceptions which can be used in your project to create awareness of certain error behaviour.
-
-#### KV ####
-
-A key value file offers the possibility to store simple information pairs in a file. This library provides parsing functionalities for __.kv__ files.
+A __Date__ class comes with this submodule, which you can use to represent a date and do operations on it. 
 
 ### Changelog ###
 
 #### Features ####
 
-- extended EventManager class by adding EventHandler availability check method
-- added exceptions for event management
-- extended Date class by introducing __+=__ and __-=__ operators
-- it's now possible to retrieve library version
-- added more operators to __LogLevel__ class
-- added factory interface
-- added "current working directory" detection implementation for __File__ class
+- "encoding" submodule has been added providing __Base64__ encoding and decoding functionality
 
 #### Improvements ####
 
-- increased test coverage by adding more unit tests
-- improved overall error handling by adding more error checks
-- reduced overall unnecessary complexity of public classes 
-- improved naming of certain classes
+- modularization has been improved by restructuring library files, which would result into having submodules - __there is no central header or binary file anymore__ - instead submodules can be linked independently now (e.g. using __ls_std_event.hpp__ and linking __libls_std_event.so__)
+- there is a CMake guard now to ensure that only one goal at the time is being build
+- the CMake option __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ has been added to detect compiler support
+- namespaces have been improved library wide and are more specific - __there is no ls\_std namespace anymore__ - instead you can choose submodule specific namespaces (e.g. _ls::std::boxing::_)
+- GoogleTest framework has been upgraded to 1.11.0
 
 #### Fixes ####
 
-- added missing header files to main header file
+- none
 
 ### Documentation ###
 
@@ -84,14 +61,14 @@ This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ f
 
 ### Building ###
 
-To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__, __MSVC__ or __AppleClang__ installed.  
+To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__ or __MinGW__ installed.  
 Inside project's root directory create the following folder:
 
 ```
 cmake_build_release
 ```
 
-Open your OS specific command line window and navigate to this new folder and run the following command to configure the project and generate a native build system:  
+Open your OS specific command line interface (CLI) and navigate to this new folder and run the following command to configure the project and generate a native build system:  
 
 ```
 cmake ../
@@ -103,21 +80,23 @@ Inside __cmake_build_release__ folder you will now find cmake generated files. T
 cmake --build . --config Release
 ```
 
-### Add Library To Your Project ###
+__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.
 
-If you would like to add this library to your cmake project - to the __CMakeLists.txt__ file - make sure that you add the libraries' include directory:
+### Add Library To Your CMake Project ###
+
+If you would like to add this library to your CMake project (__CMakeLists.txt__ file), make sure that you would add the libraries' include directory:
 
 ```
 include_directories(${CMAKE_CURRENT_LIST_DIR}/path/to/this/library/include)
 ```
 
-Then link the library binary file inside your __CMakeLists.txt__ file:
+Then link the libraries' binary file inside your __CMakeLists.txt__ file:
 
 ```
-target_link_libraries(... "path/to/this/library/../libls_std_YYYY.MAJOR.MINOR.dll")
+target_link_libraries(... libls_std_core libls_std_boxing ...)
 ```
 
 ### Testing ###
 
 This project contains unit tests to provide test coverage.  
-To run those tests you have to build this project with option __LS_STD_BUILD_WITH_TESTS__ set to __ON__.
+To run those tests you have to build this project with option __LS_STD_BUILD_WITH_TESTS__ set to __ON__ - then reset and reload the CMake project.

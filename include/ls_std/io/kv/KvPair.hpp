@@ -3,36 +3,42 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2022-05-12
  *
  * */
 
 #ifndef LS_STD_KV_PAIR_HPP
 #define LS_STD_KV_PAIR_HPP
 
-#include <ls_std/base/Class.hpp>
-#include "KvTypes.hpp"
+#include <ls_std/core/Class.hpp>
+#include "ls_std/core/types/KvTypes.hpp"
 
-namespace ls_std
+namespace ls
 {
-  class KvPair : public ls_std::Class
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class KvPair : public ls::std::core::Class
+      {
+        public:
 
-      explicit KvPair(const ls_std::kv_key &_key, ls_std::kv_value _value);
-      ~KvPair() override = default;
+          explicit KvPair(const ls::std::core::type::kv_key &_key, ls::std::core::type::kv_value _value);
+          ~KvPair() override = default;
 
-      ls_std::kv_key getKey();
-      ls_std::kv_value getValue();
-      void setValue(const ls_std::kv_value &_value);
+          ls::std::core::type::kv_key getKey();
+          ls::std::core::type::kv_value getValue();
+          void setValue(const ls::std::core::type::kv_value &_value);
 
-    private:
+        private:
 
-      ls_std::kv_key key{};
-      ls_std::kv_value value{};
+          ls::std::core::type::kv_key key{};
+          ls::std::core::type::kv_value value{};
 
-      void _assignKey(const ls_std::kv_key &_key);
-  };
+          void _assignKey(const ls::std::core::type::kv_key &_key);
+      };
+    }
+  }
 }
 
 #endif

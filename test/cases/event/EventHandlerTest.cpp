@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2021-05-27
+ * Changed:         2022-05-14
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std.hpp>
-#include <ls_std_test.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_event.hpp>
 
 namespace
 {
@@ -32,18 +32,18 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls_std::EventHandler eventHandler{""};
+                     ls::std::event::EventHandler eventHandler{""};
                    }
-                   catch (const ls_std::IllegalArgumentException &_exception)
+                   catch (const ls::std::core::IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls_std::IllegalArgumentException);
+                 }, ls::std::core::IllegalArgumentException);
   }
 
   TEST_F(EventHandlerTest, getId)
   {
-    ls_std::EventHandler eventHandler{"EventId"};
+    ls::std::event::EventHandler eventHandler{"EventId"};
     ASSERT_STREQ("EventId", eventHandler.getId().c_str());
   }
 }

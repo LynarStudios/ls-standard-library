@@ -3,40 +3,40 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2021-05-02
+ * Changed:         2022-05-12
  *
  * */
 
 #include <ls_std/io/kv/KvPair.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::KvPair::KvPair(const ls_std::kv_key &_key, ls_std::kv_value _value)
-    : ls_std::Class("KvPair"),
-      value(std::move(_value))
+ls::std::io::KvPair::KvPair(const ls::std::core::type::kv_key &_key, ls::std::core::type::kv_value _value)
+    : ls::std::core::Class("KvPair"),
+      value(::std::move(_value))
 {
   this->_assignKey(_key);
 }
 
-ls_std::kv_key ls_std::KvPair::getKey()
+ls::std::core::type::kv_key ls::std::io::KvPair::getKey()
 {
   return this->key;
 }
 
-ls_std::kv_value ls_std::KvPair::getValue()
+ls::std::core::type::kv_value ls::std::io::KvPair::getValue()
 {
   return this->value;
 }
 
-void ls_std::KvPair::setValue(const ls_std::kv_value &_value)
+void ls::std::io::KvPair::setValue(const ls::std::core::type::kv_value &_value)
 {
   this->value = _value;
 }
 
-void ls_std::KvPair::_assignKey(const ls_std::kv_key &_key)
+void ls::std::io::KvPair::_assignKey(const ls::std::core::type::kv_key &_key)
 {
   if (_key.empty())
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->key = _key;

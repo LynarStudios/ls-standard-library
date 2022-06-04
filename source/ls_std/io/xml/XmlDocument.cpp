@@ -3,39 +3,39 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2021-07-16
+ * Changed:         2022-05-20
  *
  * */
 
 #include <ls_std/io/xml/XmlDocument.hpp>
-#include <ls_std/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
 
-ls_std::XmlDocument::XmlDocument() : ls_std::Class("XmlDocument")
+ls::std::io::XmlDocument::XmlDocument() : ls::std::core::Class("XmlDocument")
 {}
 
-std::shared_ptr<ls_std::XmlDeclaration> ls_std::XmlDocument::getDeclaration()
+::std::shared_ptr<ls::std::io::XmlDeclaration> ls::std::io::XmlDocument::getDeclaration()
 {
   return this->declaration;
 }
 
-std::shared_ptr<ls_std::XmlNode> ls_std::XmlDocument::getRootElement()
+::std::shared_ptr<ls::std::io::XmlNode> ls::std::io::XmlDocument::getRootElement()
 {
   return this->rootElement;
 }
 
-void ls_std::XmlDocument::setDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration)
+void ls::std::io::XmlDocument::setDeclaration(const ::std::shared_ptr<ls::std::io::XmlDeclaration> &_declaration)
 {
   this->_assignDeclaration(_declaration);
 }
 
-void ls_std::XmlDocument::setRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement)
+void ls::std::io::XmlDocument::setRootElement(const ::std::shared_ptr<ls::std::io::XmlNode> &_rootElement)
 {
   this->_assignRootElement(_rootElement);
 }
 
-std::string ls_std::XmlDocument::toXml()
+::std::string ls::std::io::XmlDocument::toXml()
 {
-  std::string xmlString{};
+  ::std::string xmlString{};
 
   if (this->declaration != nullptr)
   {
@@ -50,21 +50,21 @@ std::string ls_std::XmlDocument::toXml()
   return xmlString + this->rootElement->toXml();
 }
 
-void ls_std::XmlDocument::_assignDeclaration(const std::shared_ptr<ls_std::XmlDeclaration> &_declaration)
+void ls::std::io::XmlDocument::_assignDeclaration(const ::std::shared_ptr<ls::std::io::XmlDeclaration> &_declaration)
 {
   if (_declaration == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->declaration = _declaration;
 }
 
-void ls_std::XmlDocument::_assignRootElement(const std::shared_ptr<ls_std::XmlNode> &_rootElement)
+void ls::std::io::XmlDocument::_assignRootElement(const ::std::shared_ptr<ls::std::io::XmlNode> &_rootElement)
 {
   if (_rootElement == nullptr)
   {
-    throw ls_std::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{};
   }
 
   this->rootElement = _rootElement;

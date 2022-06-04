@@ -3,35 +3,41 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2021-05-01
+ * Changed:         2022-05-19
  *
  * */
 
 #ifndef LS_STD_FILE_READER_HPP
 #define LS_STD_FILE_READER_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "File.hpp"
-#include "IReader.hpp"
+#include <ls_std/core/interface/IReader.hpp>
 
-namespace ls_std
+namespace ls
 {
-  class FileReader : public ls_std::Class, public ls_std::IReader
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class FileReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
+      {
+        public:
 
-      explicit FileReader(ls_std::File &_file);
-      ~FileReader() override = default;
+          explicit FileReader(ls::std::io::File &_file);
+          ~FileReader() override = default;
 
-      ls_std::byte_field read() override;
-      void reset(ls_std::File &_file);
+          ls::std::core::type::byte_field read() override;
+          void reset(ls::std::io::File &_file);
 
-    private:
+        private:
 
-      ls_std::File file;
+          ls::std::io::File file;
 
-      static void _init(ls_std::File &_file);
-  };
+          static void _init(ls::std::io::File &_file);
+      };
+    }
+  }
 }
 
 #endif

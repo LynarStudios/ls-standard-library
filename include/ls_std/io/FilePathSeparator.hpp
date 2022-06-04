@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2021-04-23
+ * Changed:         2022-05-11
  *
  * */
 
@@ -12,39 +12,45 @@
 
 #include <string>
 
-namespace ls_std
+namespace ls
 {
-  class FilePathSeparator
+  namespace std
   {
-    public:
-
-      FilePathSeparator() = default;
-      ~FilePathSeparator() = default;
-
-      static char get()
+    namespace io
+    {
+      class FilePathSeparator
       {
-        char separator;
+        public:
 
-        #ifdef _WIN32
-        separator = ls_std::FilePathSeparator::getWindowsFilePathSeparator();
-        #endif
-        #if defined(unix) || defined(__APPLE__)
-        separator = ls_std::FilePathSeparator::getUnixFilePathSeparator();
-        #endif
+          FilePathSeparator() = default;
+          ~FilePathSeparator() = default;
 
-        return separator;
-      }
+          static char get()
+          {
+            char separator;
 
-      static char getUnixFilePathSeparator()
-      {
-        return '/';
-      }
+            #ifdef _WIN32
+            separator = ls::std::io::FilePathSeparator::getWindowsFilePathSeparator();
+            #endif
+            #if defined(unix) || defined(__APPLE__)
+            separator = ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
+            #endif
 
-      static char getWindowsFilePathSeparator()
-      {
-        return '\\';
-      }
-  };
+            return separator;
+          }
+
+          static char getUnixFilePathSeparator()
+          {
+            return '/';
+          }
+
+          static char getWindowsFilePathSeparator()
+          {
+            return '\\';
+          }
+      };
+    }
+  }
 }
 
 #endif

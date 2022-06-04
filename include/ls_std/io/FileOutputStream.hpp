@@ -3,40 +3,46 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2021-05-01
+ * Changed:         2022-05-19
  *
  * */
 
 #ifndef LS_STD_FILE_OUTPUT_STREAM_HPP
 #define LS_STD_FILE_OUTPUT_STREAM_HPP
 
-#include <ls_std/base/Class.hpp>
+#include <ls_std/core/Class.hpp>
 #include "File.hpp"
-#include "IWriter.hpp"
+#include <ls_std/core/interface/IWriter.hpp>
 #include <fstream>
 
-namespace ls_std
+namespace ls
 {
-  class FileOutputStream : public ls_std::Class, public ls_std::IWriter
+  namespace std
   {
-    public:
+    namespace io
+    {
+      class FileOutputStream : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
+      {
+        public:
 
-      explicit FileOutputStream(ls_std::File &_file);
-      explicit FileOutputStream(ls_std::File &_file, bool _append);
-      ~FileOutputStream() override;
+          explicit FileOutputStream(ls::std::io::File &_file);
+          explicit FileOutputStream(ls::std::io::File &_file, bool _append);
+          ~FileOutputStream() override;
 
-      void close();
-      bool write(const ls_std::byte_field &_data) override;
+          void close();
+          bool write(const ls::std::core::type::byte_field &_data) override;
 
-    private:
+        private:
 
-      bool append{};
-      ls_std::File file;
-      std::ofstream outputStream{};
+          bool append{};
+          ls::std::io::File file;
+          ::std::ofstream outputStream{};
 
-      void _close();
-      void _init();
-  };
+          void _close();
+          void _init();
+      };
+    }
+  }
 }
 
 #endif
