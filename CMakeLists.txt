@@ -28,6 +28,7 @@ set(GOOGLE_TEST_MODULE googletest-1.11.0)
 ##########################################################
 
 option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
+option(LS_STD_BUILD_WITH_SUPPORTED_COMPILER "Build project with supported compiler only..." ON)
 option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
 option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
 option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)
@@ -74,26 +75,30 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 # Compiler Support
 ##########################################################
 
-# define supported compilers
+if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
+    message("${PROJECT_NAME}: build with compiler support...")
 
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC OR ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-    message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
-else()
-    message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
-    return()
-endif ()
+    # define supported compilers
+
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC OR ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
+        message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
+    else()
+        message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
+        return()
+    endif ()
+
+    # define which compilers are supported for shared or module goal
+
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+        message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
+        return()
+    endif ()
+endif()
 
 # define which goals can run tests
 
 if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
     message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with tests is not supported... terminated!")
-    return()
-endif ()
-
-# define which compilers are supported for shared or module goal
-
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
-    message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
     return()
 endif ()
 
