@@ -1,11 +1,12 @@
 # Lynar Studios - Standard Library 2022.1.0 #
 
-This is a cross-platform standard library written in C++ offering functionalities you'd usually miss in C++'s standard template library (STL), especially if you'd search for cross-platform implementations. This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
+This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
+This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
 Following a modularized approach the following submodules are defined in scope of this library, which are independent:
  
 #### Boxing ####
 
-This library module provides boxing classes for primitive data types (e.g. string, int, long, float...) to add additional functionalities for each one of them.
+This library module provides boxing classes for primitive data types (e.g. string, int, long, float...) to provide additional functionalities.
 
 #### Core ####
 
@@ -13,11 +14,11 @@ The core module is a base module providing a base __Class__, exceptions, data ty
 
 #### Encoding ####
 
-To encode a byte field (e.g. binaries) for transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
+To encode a byte field (e.g. a binary file) for transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
 
 #### Event ####
 
-This submodule comes with an __Event__ class, as well as with handlers and managers to provide an intuitive event managing for your application.
+This submodule comes with an __Event__ class, as well as with handlers and managers to provide an intuitive event handling for your application.
 
 #### IO ####
 
@@ -41,14 +42,14 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 #### Improvements ####
 
 - modularization has been improved by restructuring library files, which would result into having submodules - __there is no central header or binary file anymore__ - instead submodules can be linked independently now (e.g. using __ls_std_event.hpp__ and linking __libls_std_event.so__)
-- there is a cmake guard now to ensure that only one goal at the time is being build
-- test suites for shared libraries have been introduced to ensure that building and linking created shared library is working
+- there is a CMake guard now to ensure that only one goal at the time is being build
+- the CMake option __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ has been added to detect compiler support
 - namespaces have been improved library wide and are more specific - __there is no ls\_std namespace anymore__ - instead you can choose submodule specific namespaces (e.g. _ls::std::boxing::_)
 - GoogleTest framework has been upgraded to 1.11.0
 
 #### Fixes ####
 
-- there is a cmake guard now to ensure that only one goal at the time is being build
+- none
 
 ### Documentation ###
 
@@ -60,14 +61,14 @@ This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ f
 
 ### Building ###
 
-To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__, __MSVC__ or __AppleClang__ installed.  
+To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__ or __MinGW__ installed.  
 Inside project's root directory create the following folder:
 
 ```
 cmake_build_release
 ```
 
-Open your OS specific command line window and navigate to this new folder and run the following command to configure the project and generate a native build system:  
+Open your OS specific command line interface (CLI) and navigate to this new folder and run the following command to configure the project and generate a native build system:  
 
 ```
 cmake ../
@@ -79,21 +80,23 @@ Inside __cmake_build_release__ folder you will now find cmake generated files. T
 cmake --build . --config Release
 ```
 
-### Add Library To Your Project ###
+__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.
 
-If you would like to add this library to your cmake project - to the __CMakeLists.txt__ file - make sure that you add the libraries' include directory:
+### Add Library To Your CMake Project ###
+
+If you would like to add this library to your CMake project (__CMakeLists.txt__ file), make sure that you would add the libraries' include directory:
 
 ```
 include_directories(${CMAKE_CURRENT_LIST_DIR}/path/to/this/library/include)
 ```
 
-Then link the library binary file inside your __CMakeLists.txt__ file:
+Then link the libraries' binary file inside your __CMakeLists.txt__ file:
 
 ```
-target_link_libraries(... "path/to/this/library/../libls_std_YYYY.MAJOR.MINOR.dll")
+target_link_libraries(... libls_std_core libls_std_boxing ...)
 ```
 
 ### Testing ###
 
 This project contains unit tests to provide test coverage.  
-To run those tests you have to build this project with option __LS_STD_BUILD_WITH_TESTS__ set to __ON__.
+To run those tests you have to build this project with option __LS_STD_BUILD_WITH_TESTS__ set to __ON__ - then reset and reload the CMake project.
