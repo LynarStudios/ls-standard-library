@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-12
+ * Changed:         2022-06-29
  *
  * */
 
@@ -14,6 +14,7 @@
 #include <list>
 #include <memory>
 #include <ls_std/core/interface/IListener.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 #include "Event.hpp"
 #include "Narrator.hpp"
 
@@ -23,7 +24,7 @@ namespace ls
   {
     namespace event
     {
-      class EventHandler : public ls::std::event::Narrator
+      class DYNAMIC_GOAL EventHandler : public ls::std::event::Narrator
       {
         public:
 
