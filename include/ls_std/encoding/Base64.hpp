@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2022-05-20
+ * Changed:         2022-06-29
  *
  * */
 
@@ -14,6 +14,7 @@
 #include <bitset>
 #include <vector>
 #include <unordered_map>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -21,7 +22,7 @@ namespace ls
   {
     namespace encoding
     {
-      class Base64 : public ls::std::core::interface_type::IEncoding
+      class DYNAMIC_GOAL Base64 : public ls::std::core::interface_type::IEncoding
       {
         public:
 
