@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-09
+ * Changed:         2022-06-29
  *
  * */
 
@@ -12,6 +12,7 @@
 
 #include <exception>
 #include <string>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -19,7 +20,7 @@ namespace ls
   {
     namespace core
     {
-      class FileOperationException : public ::std::exception
+      class DYNAMIC_GOAL FileOperationException : public ::std::exception
       {
         public:
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-09
+ * Changed:         2022-06-29
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_ILLEGAL_OPERATION_EXCEPTION_HPP
 
 #include <exception>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -18,7 +19,7 @@ namespace ls
   {
     namespace core
     {
-      class IllegalArithmeticOperationException : public ::std::exception
+      class DYNAMIC_GOAL IllegalArithmeticOperationException : public ::std::exception
       {
         public:
 

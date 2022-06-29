@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-30
- * Changed:         2022-05-09
+ * Changed:         2022-06-29
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_INCOMPLETE_JSON_EXCEPTION_HPP
 
 #include <exception>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -18,7 +19,7 @@ namespace ls
   {
     namespace core
     {
-      class IncompleteJsonException : public ::std::exception
+      class DYNAMIC_GOAL IncompleteJsonException : public ::std::exception
       {
         public:
 
