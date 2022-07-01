@@ -89,7 +89,7 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
 
     # define which compilers are supported for shared or module goal
 
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_MODULE})
         message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
         return()
     endif ()
@@ -97,7 +97,7 @@ endif()
 
 # define which goals can run tests
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_MODULE})
     message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with tests is not supported... terminated!")
     return()
 endif ()
