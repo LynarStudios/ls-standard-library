@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-11
+ * Changed:         2022-07-01
  *
  * */
 
@@ -16,6 +16,7 @@
 #include <list>
 #include <ctime>
 #include <regex>
+#include <ls_std/os/dynamic_goal.hpp>
 
 #if defined(unix) || defined(__APPLE__)
 
@@ -35,7 +36,7 @@ namespace ls
   {
     namespace io
     {
-      class File : public ls::std::core::Class
+      class DYNAMIC_GOAL File : public ls::std::core::Class
       {
         public:
 

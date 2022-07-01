@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-19
+ * Changed:         2022-07-01
  *
  * */
 
@@ -13,6 +13,7 @@
 #include <ls_std/core/Class.hpp>
 #include "File.hpp"
 #include <ls_std/core/interface/IReader.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -20,7 +21,7 @@ namespace ls
   {
     namespace io
     {
-      class FileReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
+      class DYNAMIC_GOAL FileReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
       {
         public:
 

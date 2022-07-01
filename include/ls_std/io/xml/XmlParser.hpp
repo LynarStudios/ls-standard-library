@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-25
- * Changed:         2022-05-13
+ * Changed:         2022-07-01
  *
  * */
 
@@ -16,6 +16,7 @@
 #include "XmlParseMode.hpp"
 #include "XmlParseParameter.hpp"
 #include <list>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -23,7 +24,7 @@ namespace ls
   {
     namespace io
     {
-      class XmlParser : public ls::std::core::Class
+      class DYNAMIC_GOAL XmlParser : public ls::std::core::Class
       {
         public:
 

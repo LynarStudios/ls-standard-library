@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-13
+ * Changed:         2022-07-01
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_KV_PARSE_DATA_HPP
 
 #include <string>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -18,7 +19,7 @@ namespace ls
   {
     namespace io
     {
-      struct KvParseParameter
+      struct DYNAMIC_GOAL KvParseParameter
       {
         ::std::string::size_type index{};
         ::std::string line{};

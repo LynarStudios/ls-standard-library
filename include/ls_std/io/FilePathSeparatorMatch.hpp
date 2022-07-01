@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-11
+ * Changed:         2022-07-01
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_FILE_PATH_MATCH_HPP
 
 #include "FilePathSeparator.hpp"
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -18,7 +19,7 @@ namespace ls
   {
     namespace io
     {
-      struct FilePathSeparatorMatch
+      struct DYNAMIC_GOAL FilePathSeparatorMatch
       {
         bool operator()(char _char) const
         {

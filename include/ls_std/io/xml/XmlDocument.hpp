@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2022-05-11
+ * Changed:         2022-07-01
  *
  * */
 
@@ -14,6 +14,7 @@
 #include <ls_std/core/Class.hpp>
 #include "XmlNode.hpp"
 #include "XmlDeclaration.hpp"
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -21,7 +22,7 @@ namespace ls
   {
     namespace io
     {
-      class XmlDocument : public ls::std::core::Class
+      class DYNAMIC_GOAL XmlDocument : public ls::std::core::Class
       {
         public:
 

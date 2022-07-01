@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-11
+ * Changed:         2022-07-01
  *
  * */
 
@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <ls_std/core/Class.hpp>
 #include "LogLevelValue.hpp"
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -20,7 +21,7 @@ namespace ls
   {
     namespace io
     {
-      class LogLevel : public ls::std::core::Class
+      class DYNAMIC_GOAL LogLevel : public ls::std::core::Class
       {
         public:
 

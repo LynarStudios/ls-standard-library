@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-05-19
+ * Changed:         2022-07-01
  *
  * */
 
@@ -14,6 +14,7 @@
 #include <memory>
 #include <ls_std/core/interface/IStorable.hpp>
 #include "File.hpp"
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -21,7 +22,7 @@ namespace ls
   {
     namespace io
     {
-      class StorableFile : public ls::std::core::interface_type::IStorable
+      class DYNAMIC_GOAL StorableFile : public ls::std::core::interface_type::IStorable
       {
         public:
 
