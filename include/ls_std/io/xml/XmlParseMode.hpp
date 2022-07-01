@@ -10,15 +10,13 @@
 #ifndef LS_STD_XML_PARSE_MODE_HPP
 #define LS_STD_XML_PARSE_MODE_HPP
 
-#include <ls_std/os/dynamic_goal.hpp>
-
 namespace ls
 {
   namespace std
   {
     namespace io
     {
-      enum DYNAMIC_GOAL XmlParseMode
+      enum XmlParseMode
       {
         XML_PARSE_MODE_ANALYZE = 0, XML_PARSE_MODE_DECLARATION, XML_PARSE_MODE_OPENING_TAG, XML_PARSE_MODE_VALUE, XML_PARSE_MODE_CLOSING_TAG
       };

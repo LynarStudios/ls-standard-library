@@ -13,7 +13,6 @@
 #include <cstdint>
 #include <memory>
 #include "XmlNode.hpp"
-#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -21,7 +20,7 @@ namespace ls
   {
     namespace io
     {
-      struct DYNAMIC_GOAL XmlParseParameter
+      struct XmlParseParameter
       {
         uint8_t level{};
         ::std::shared_ptr<ls::std::io::XmlNode> node{};

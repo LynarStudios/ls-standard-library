@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2022-06-29
+ * Changed:         2022-07-01
  *
  * */
 
@@ -11,7 +11,6 @@
 #define LS_STD_EVENT_NOT_SUBSCRIBED_EXCEPTION_HPP
 
 #include <exception>
-#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -19,7 +18,7 @@ namespace ls
   {
     namespace core
     {
-      class DYNAMIC_GOAL EventNotSubscribedException : public ::std::exception
+      class EventNotSubscribedException : public ::std::exception
       {
         public:
 

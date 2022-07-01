@@ -11,7 +11,6 @@
 #define LS_STD_FILE_PATH_MATCH_HPP
 
 #include "FilePathSeparator.hpp"
-#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -19,7 +18,7 @@ namespace ls
   {
     namespace io
     {
-      struct DYNAMIC_GOAL FilePathSeparatorMatch
+      struct FilePathSeparatorMatch
       {
         bool operator()(char _char) const
         {

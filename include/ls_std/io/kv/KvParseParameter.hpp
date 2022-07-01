@@ -11,7 +11,6 @@
 #define LS_STD_KV_PARSE_DATA_HPP
 
 #include <string>
-#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -19,7 +18,7 @@ namespace ls
   {
     namespace io
     {
-      struct DYNAMIC_GOAL KvParseParameter
+      struct KvParseParameter
       {
         ::std::string::size_type index{};
         ::std::string line{};

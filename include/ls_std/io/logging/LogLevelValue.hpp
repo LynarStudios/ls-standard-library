@@ -10,15 +10,13 @@
 #ifndef LS_STD_LOG_LEVEL_VALUE_HPP
 #define LS_STD_LOG_LEVEL_VALUE_HPP
 
-#include <ls_std/os/dynamic_goal.hpp>
-
 namespace ls
 {
   namespace std
   {
     namespace io
     {
-      enum DYNAMIC_GOAL LogLevelValue
+      enum LogLevelValue
       {
         FATAL = 0, ERR, WARN, INFO, DEBUG, TRACE
       };

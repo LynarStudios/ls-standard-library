@@ -11,7 +11,6 @@
 #define LS_STD_NEW_LINE_HPP
 
 #include <string>
-#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -19,7 +18,7 @@ namespace ls
   {
     namespace io
     {
-      class DYNAMIC_GOAL NewLine
+      class NewLine
       {
         public:
 

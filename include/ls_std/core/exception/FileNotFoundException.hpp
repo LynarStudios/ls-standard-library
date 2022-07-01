@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-06-29
+ * Changed:         2022-07-01
  *
  * */
 
@@ -13,7 +13,6 @@
 #include <exception>
 #include <string>
 #include <cstring>
-#include <ls_std/os/dynamic_goal.hpp>
 
 //TODO: pass parameters, use class, show class name
 namespace ls
@@ -22,7 +21,7 @@ namespace ls
   {
     namespace core
     {
-      class DYNAMIC_GOAL FileNotFoundException : public ::std::exception
+      class FileNotFoundException : public ::std::exception
       {
         public:
 
