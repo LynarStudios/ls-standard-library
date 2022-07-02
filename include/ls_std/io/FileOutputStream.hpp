@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-19
+ * Changed:         2022-07-01
  *
  * */
 
@@ -14,6 +14,7 @@
 #include "File.hpp"
 #include <ls_std/core/interface/IWriter.hpp>
 #include <fstream>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -21,7 +22,7 @@ namespace ls
   {
     namespace io
     {
-      class FileOutputStream : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
+      class DYNAMIC_GOAL FileOutputStream : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
       {
         public:
 

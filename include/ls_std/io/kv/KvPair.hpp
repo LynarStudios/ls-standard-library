@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-12
+ * Changed:         2022-07-01
  *
  * */
 
@@ -12,6 +12,7 @@
 
 #include <ls_std/core/Class.hpp>
 #include "ls_std/core/types/KvTypes.hpp"
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -19,7 +20,7 @@ namespace ls
   {
     namespace io
     {
-      class KvPair : public ls::std::core::Class
+      class DYNAMIC_GOAL KvPair : public ls::std::core::Class
       {
         public:
 

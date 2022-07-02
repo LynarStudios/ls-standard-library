@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-19
+ * Changed:         2022-07-01
  *
  * */
 
@@ -15,6 +15,7 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/ISerializable.hpp>
 #include <ls_std/logic/StateConnection.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -22,7 +23,7 @@ namespace ls
   {
     namespace logic
     {
-      class SerializableJsonStateConnection : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
+      class DYNAMIC_GOAL SerializableJsonStateConnection : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
       {
         public:
 

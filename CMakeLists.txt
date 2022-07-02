@@ -89,7 +89,7 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
 
     # define which compilers are supported for shared or module goal
 
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_MODULE})
         message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
         return()
     endif ()
@@ -97,7 +97,7 @@ endif()
 
 # define which goals can run tests
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_MODULE})
     message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with tests is not supported... terminated!")
     return()
 endif ()
@@ -527,16 +527,16 @@ endif ()
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
-# Test Suite: Static Linking
+# Test Suite: Linking
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
 
 ##########################################################
-# Static Linking (boxing)
+# Linking (boxing)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_BOXING}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_BOXING}_test
             gtest
@@ -547,10 +547,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (core)
+# Linking (core)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_CORE}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_CORE}_test
             gtest
@@ -560,10 +560,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (encoding)
+# Linking (encoding)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_ENCODING}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_ENCODING}_test
             gtest
@@ -574,10 +574,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (event)
+# Linking (event)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_EVENT}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_EVENT}_test
             gtest
@@ -588,10 +588,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (io)
+# Linking (io)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_IO}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_IO}_test
             gtest
@@ -602,10 +602,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (logic)
+# Linking (logic)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_LOGIC}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_LOGIC}_test
             gtest
@@ -616,10 +616,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (time)
+# Linking (time)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_TIME}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_TIME}_test
             gtest
@@ -630,10 +630,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (all)
+# Linking (all)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
     target_link_libraries(${PROJECT_NAME}_test
             gtest

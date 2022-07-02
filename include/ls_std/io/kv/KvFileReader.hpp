@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-19
+ * Changed:         2022-07-01
  *
  * */
 
@@ -15,6 +15,7 @@
 #include <ls_std/io/kv/KvDocument.hpp>
 #include <ls_std/io/File.hpp>
 #include <memory>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -22,7 +23,7 @@ namespace ls
   {
     namespace io
     {
-      class KvFileReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
+      class DYNAMIC_GOAL KvFileReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
       {
         public:
 

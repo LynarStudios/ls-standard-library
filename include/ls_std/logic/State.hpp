@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-05-12
+ * Changed:         2022-07-01
  *
  * */
 
@@ -16,6 +16,7 @@
 #include <ls_std/core/types/StateMachineTypes.hpp>
 #include "StateConnection.hpp"
 #include <ls_std/core/interface/ISerializable.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -23,7 +24,7 @@ namespace ls
   {
     namespace logic
     {
-      class State : public ls::std::core::Class
+      class DYNAMIC_GOAL State : public ls::std::core::Class
       {
         public:
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-19
+ * Changed:         2022-06-29
  *
  * */
 
@@ -15,6 +15,7 @@
 #include <ls_std/event/Event.hpp>
 #include <memory>
 #include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -22,7 +23,7 @@ namespace ls
   {
     namespace event
     {
-      class SerializableJsonEvent : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
+      class DYNAMIC_GOAL SerializableJsonEvent : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
       {
         public:
 

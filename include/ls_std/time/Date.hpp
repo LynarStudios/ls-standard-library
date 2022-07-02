@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-09
+ * Changed:         2022-06-29
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_DATE_HPP
 
 #include <ls_std/core/Class.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 #include <ctime>
 
 namespace ls
@@ -19,7 +20,7 @@ namespace ls
   {
     namespace time
     {
-      class Date : public ls::std::core::Class
+      class DYNAMIC_GOAL Date : public ls::std::core::Class
       {
         public:
 

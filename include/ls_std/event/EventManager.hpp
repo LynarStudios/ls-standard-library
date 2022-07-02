@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-19
+ * Changed:         2022-06-29
  *
  * */
 
@@ -16,6 +16,7 @@
 #include <memory>
 #include "EventHandler.hpp"
 #include <ls_std/core/interface/IEventSubscriber.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -23,7 +24,7 @@ namespace ls
   {
     namespace event
     {
-      class EventManager : public ls::std::core::Class, public ls::std::core::interface_type::IEventSubscriber
+      class DYNAMIC_GOAL EventManager : public ls::std::core::Class, public ls::std::core::interface_type::IEventSubscriber
       {
         public:
 

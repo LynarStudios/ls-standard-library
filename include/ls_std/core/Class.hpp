@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-05-09
+ * Changed:         2022-06-29
  *
  * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_CLASS_HPP
 
 #include <string>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -18,7 +19,7 @@ namespace ls
   {
     namespace core
     {
-      class Class
+      class DYNAMIC_GOAL Class
       {
         public:
 

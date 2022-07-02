@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-19
+ * Changed:         2022-06-29
  *
  * */
 
@@ -14,6 +14,7 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/core/types/Types.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls
 {
@@ -21,7 +22,7 @@ namespace ls
   {
     namespace boxing
     {
-      class Long : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
+      class DYNAMIC_GOAL Long : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
       {
         public:
 
