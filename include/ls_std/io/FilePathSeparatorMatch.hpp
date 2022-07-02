@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-07-01
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,21 +12,15 @@
 
 #include "FilePathSeparator.hpp"
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  struct FilePathSeparatorMatch
   {
-    namespace io
+    bool operator()(char _char) const
     {
-      struct FilePathSeparatorMatch
-      {
-        bool operator()(char _char) const
-        {
-          return _char == ls::std::io::FilePathSeparator::getWindowsFilePathSeparator() || _char == ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
-        }
-      };
+      return _char == ls::std::io::FilePathSeparator::getWindowsFilePathSeparator() || _char == ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
     }
-  }
+  };
 }
 
 #endif

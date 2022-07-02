@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-07-01
+ * Changed:         2022-07-02
  *
  * */
 
@@ -16,34 +16,28 @@
 #include <fstream>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class DYNAMIC_GOAL FileOutputStream : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
   {
-    namespace io
-    {
-      class DYNAMIC_GOAL FileOutputStream : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
-      {
-        public:
+    public:
 
-          explicit FileOutputStream(ls::std::io::File &_file);
-          explicit FileOutputStream(ls::std::io::File &_file, bool _append);
-          ~FileOutputStream() override;
+      explicit FileOutputStream(ls::std::io::File &_file);
+      explicit FileOutputStream(ls::std::io::File &_file, bool _append);
+      ~FileOutputStream() override;
 
-          void close();
-          bool write(const ls::std::core::type::byte_field &_data) override;
+      void close();
+      bool write(const ls::std::core::type::byte_field &_data) override;
 
-        private:
+    private:
 
-          bool append{};
-          ls::std::io::File file;
-          ::std::ofstream outputStream{};
+      bool append{};
+      ls::std::io::File file;
+      ::std::ofstream outputStream{};
 
-          void _close();
-          void _init();
-      };
-    }
-  }
+      void _close();
+      void _init();
+  };
 }
 
 #endif
