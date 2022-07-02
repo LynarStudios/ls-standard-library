@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-06-29
+ * Changed:         2022-07-02
  *
  * */
 
@@ -18,29 +18,23 @@
 #include "Event.hpp"
 #include "Narrator.hpp"
 
-namespace ls
+namespace ls::std::event
 {
-  namespace std
+  class DYNAMIC_GOAL EventHandler : public ls::std::event::Narrator
   {
-    namespace event
-    {
-      class DYNAMIC_GOAL EventHandler : public ls::std::event::Narrator
-      {
-        public:
+    public:
 
-          explicit EventHandler(const ls::std::core::type::event_id &_id);
-          ~EventHandler() override = default;
+      explicit EventHandler(const ls::std::core::type::event_id &_id);
+      ~EventHandler() override = default;
 
-          ls::std::core::type::event_id getId();
+      ls::std::core::type::event_id getId();
 
-        private:
+    private:
 
-          ls::std::core::type::event_id id{};
+      ls::std::core::type::event_id id{};
 
-          void _assignId(const ls::std::core::type::event_id &_id);
-      };
-    }
-  }
+      void _assignId(const ls::std::core::type::event_id &_id);
+  };
 }
 
 #endif
