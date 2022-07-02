@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-07-01
+ * Changed:         2022-07-02
  *
  * */
 
@@ -17,40 +17,34 @@
 #include <ls_std/logic/StateConnection.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::logic
 {
-  namespace std
+  class DYNAMIC_GOAL SerializableJsonStateConnection : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
   {
-    namespace logic
-    {
-      class DYNAMIC_GOAL SerializableJsonStateConnection : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
-      {
-        public:
+    public:
 
-          explicit SerializableJsonStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
-          ~SerializableJsonStateConnection() override = default;
+      explicit SerializableJsonStateConnection(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
+      ~SerializableJsonStateConnection() override = default;
 
-          // implementation
+      // implementation
 
-          ls::std::core::type::byte_field marshal() override;
-          void unmarshal(const ls::std::core::type::byte_field &_data) override;
+      ls::std::core::type::byte_field marshal() override;
+      void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
-          // additional functionality
+      // additional functionality
 
-          ::std::shared_ptr<ls::std::logic::StateConnection> getValue();
-          void setValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
+      ::std::shared_ptr<ls::std::logic::StateConnection> getValue();
+      void setValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
 
-        private:
+    private:
 
-          nlohmann::json jsonObject{};
-          ::std::shared_ptr<ls::std::logic::StateConnection> value{};
+      nlohmann::json jsonObject{};
+      ::std::shared_ptr<ls::std::logic::StateConnection> value{};
 
-          void _assignValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
-          void _clear();
-          void _update();
-      };
-    }
-  }
+      void _assignValue(const ::std::shared_ptr<ls::std::logic::StateConnection> &_value);
+      void _clear();
+      void _update();
+  };
 }
 
 #endif
