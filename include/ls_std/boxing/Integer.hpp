@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-06-29
+ * Changed:         2022-07-02
  *
  * */
 
@@ -15,102 +15,96 @@
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::boxing
 {
-  namespace std
+  class DYNAMIC_GOAL Integer : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
   {
-    namespace boxing
-    {
-      class DYNAMIC_GOAL Integer : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
+    public:
+
+      explicit Integer(int _value);
+      Integer();
+      ~Integer() override = default;
+
+      // conversion operator
+
+      operator int() const;
+
+      // assignment operators
+
+      ls::std::boxing::Integer &operator=(int _value);
+
+      // arithmetic operators
+
+      int operator-() const;
+      int operator+(const ls::std::boxing::Integer &_integer) const;
+      int operator+(int _value) const;
+      int operator*(const ls::std::boxing::Integer &_integer) const;
+      int operator*(int _value) const;
+      int operator-(const ls::std::boxing::Integer &_integer) const;
+      int operator-(int _value) const;
+      int operator/(const ls::std::boxing::Integer &_integer) const;
+      int operator/(int _value) const;
+      int operator%(const ls::std::boxing::Integer &_integer) const;
+      int operator%(int _value) const;
+
+      // compound operators
+
+      ls::std::boxing::Integer &operator+=(const ls::std::boxing::Integer &_integer);
+      ls::std::boxing::Integer &operator+=(int _value);
+      ls::std::boxing::Integer &operator-=(const ls::std::boxing::Integer &_integer);
+      ls::std::boxing::Integer &operator-=(int _value);
+      ls::std::boxing::Integer &operator*=(const ls::std::boxing::Integer &_integer);
+      ls::std::boxing::Integer &operator*=(int _value);
+      ls::std::boxing::Integer &operator/=(const ls::std::boxing::Integer &_integer);
+      ls::std::boxing::Integer &operator/=(int _value);
+
+      // comparison operators
+
+      bool operator==(const ls::std::boxing::Integer &_integer) const;
+      bool operator==(int _value) const;
+      bool operator!=(const ls::std::boxing::Integer &_integer) const;
+      bool operator!=(int _value) const;
+      bool operator>(const ls::std::boxing::Integer &_integer) const;
+      bool operator>(int _value) const;
+      bool operator>=(const ls::std::boxing::Integer &_integer) const;
+      bool operator>=(int _value) const;
+      bool operator<(const ls::std::boxing::Integer &_integer) const;
+      bool operator<(int _value) const;
+      bool operator<=(const ls::std::boxing::Integer &_integer) const;
+      bool operator<=(int _value) const;
+
+      // logical operators
+
+      friend bool operator!(const ls::std::boxing::Integer &_integer)
       {
-        public:
+        return !_integer.value;
+      }
 
-          explicit Integer(int _value);
-          Integer();
-          ~Integer() override = default;
+      bool operator&&(const ls::std::boxing::Integer &_integer) const;
+      bool operator&&(int _value) const;
+      bool operator&&(bool _expression) const;
+      bool operator||(const ls::std::boxing::Integer &_integer) const;
+      bool operator||(int _value) const;
+      bool operator||(bool _expression) const;
 
-          // conversion operator
+      // increment / decrement operator
 
-          operator int() const;
+      void operator++();
+      void operator--();
 
-          // assignment operators
+      // implementation
 
-          ls::std::boxing::Integer &operator=(int _value);
+      void parse(::std::string _parseText) override;
+      ::std::string toString() override;
 
-          // arithmetic operators
+      // additional functionality
 
-          int operator-() const;
-          int operator+(const ls::std::boxing::Integer &_integer) const;
-          int operator+(int _value) const;
-          int operator*(const ls::std::boxing::Integer &_integer) const;
-          int operator*(int _value) const;
-          int operator-(const ls::std::boxing::Integer &_integer) const;
-          int operator-(int _value) const;
-          int operator/(const ls::std::boxing::Integer &_integer) const;
-          int operator/(int _value) const;
-          int operator%(const ls::std::boxing::Integer &_integer) const;
-          int operator%(int _value) const;
+      int getValue() const;
 
-          // compound operators
+    private:
 
-          ls::std::boxing::Integer &operator+=(const ls::std::boxing::Integer &_integer);
-          ls::std::boxing::Integer &operator+=(int _value);
-          ls::std::boxing::Integer &operator-=(const ls::std::boxing::Integer &_integer);
-          ls::std::boxing::Integer &operator-=(int _value);
-          ls::std::boxing::Integer &operator*=(const ls::std::boxing::Integer &_integer);
-          ls::std::boxing::Integer &operator*=(int _value);
-          ls::std::boxing::Integer &operator/=(const ls::std::boxing::Integer &_integer);
-          ls::std::boxing::Integer &operator/=(int _value);
-
-          // comparison operators
-
-          bool operator==(const ls::std::boxing::Integer &_integer) const;
-          bool operator==(int _value) const;
-          bool operator!=(const ls::std::boxing::Integer &_integer) const;
-          bool operator!=(int _value) const;
-          bool operator>(const ls::std::boxing::Integer &_integer) const;
-          bool operator>(int _value) const;
-          bool operator>=(const ls::std::boxing::Integer &_integer) const;
-          bool operator>=(int _value) const;
-          bool operator<(const ls::std::boxing::Integer &_integer) const;
-          bool operator<(int _value) const;
-          bool operator<=(const ls::std::boxing::Integer &_integer) const;
-          bool operator<=(int _value) const;
-
-          // logical operators
-
-          friend bool operator!(const ls::std::boxing::Integer &_integer)
-          {
-            return !_integer.value;
-          }
-
-          bool operator&&(const ls::std::boxing::Integer &_integer) const;
-          bool operator&&(int _value) const;
-          bool operator&&(bool _expression) const;
-          bool operator||(const ls::std::boxing::Integer &_integer) const;
-          bool operator||(int _value) const;
-          bool operator||(bool _expression) const;
-
-          // increment / decrement operator
-
-          void operator++();
-          void operator--();
-
-          // implementation
-
-          void parse(::std::string _parseText) override;
-          ::std::string toString() override;
-
-          // additional functionality
-
-          int getValue() const;
-
-        private:
-
-          int value{};
-      };
-    }
-  }
+      int value{};
+  };
 }
 
 #endif
