@@ -20,7 +20,7 @@ namespace ls::std::core
 
       IllegalArgumentException() = default;
 
-      const char *what() const noexcept override
+      [[nodiscard]] const char *what() const noexcept override
       {
         return "IllegalArgumentException thrown - passed argument is not valid!";
       }

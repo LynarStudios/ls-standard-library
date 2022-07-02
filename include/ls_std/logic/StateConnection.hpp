@@ -26,7 +26,7 @@ namespace ls::std::logic
 
       ls::std::core::type::state_connection_id getConnectionId();
       ls::std::core::type::state_id getStateId();
-      bool isPassable() const;
+      [[nodiscard]] bool isPassable() const;
       void setConnectionId(const ls::std::core::type::state_connection_id &_connectionId);
       void setStateId(const ls::std::core::type::state_id &_stateId);
       void updatePassCondition(bool _condition);

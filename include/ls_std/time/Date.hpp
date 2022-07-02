@@ -32,14 +32,14 @@ namespace ls::std::time
 
       // additional functionality
 
-      bool after(const ls::std::time::Date &_foreignDate) const;
-      bool before(const ls::std::time::Date &_foreignDate) const;
+      [[nodiscard]] bool after(const ls::std::time::Date &_foreignDate) const;
+      [[nodiscard]] bool before(const ls::std::time::Date &_foreignDate) const;
       int getDay();
       int getHour();
       int getMinute();
       int getMonth();
       int getSecond();
-      time_t getTime() const;
+      [[nodiscard]] time_t getTime() const;
       int getYear();
       void setTime(time_t _timestamp);
       ::std::string toString();

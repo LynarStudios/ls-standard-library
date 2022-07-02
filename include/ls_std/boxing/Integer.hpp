@@ -99,7 +99,7 @@ namespace ls::std::boxing
 
       // additional functionality
 
-      int getValue() const;
+      [[nodiscard]] int getValue() const;
 
     private:
 

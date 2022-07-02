@@ -20,7 +20,7 @@ namespace ls::std::core
 
       explicit NullPointerException() = default;
 
-      const char *what() const noexcept override
+      [[nodiscard]] const char *what() const noexcept override
       {
         return "NullPointerException thrown - reference is null!";
       }

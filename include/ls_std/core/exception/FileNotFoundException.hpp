@@ -23,7 +23,7 @@ namespace ls::std::core
 
       FileNotFoundException() = default;
 
-      const char *what() const noexcept override
+      [[nodiscard]] const char *what() const noexcept override
       {
         return "FileNotFoundException thrown - file not found!";
       };

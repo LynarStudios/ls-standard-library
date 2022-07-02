@@ -20,7 +20,7 @@ namespace ls::std::core
 
       EventNotHandledException() = default;
 
-      const char *what() const noexcept override
+      [[nodiscard]] const char *what() const noexcept override
       {
         return "EventNotHandledException thrown - event was not handled - nothing happened!";
       };

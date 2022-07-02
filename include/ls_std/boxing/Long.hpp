@@ -100,7 +100,7 @@ namespace ls::std::boxing
 
       // additional functionality
 
-      ls::std::core::type::long_type getValue() const;
+      [[nodiscard]] ls::std::core::type::long_type getValue() const;
 
     private:
 

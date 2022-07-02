@@ -65,7 +65,7 @@ namespace ls::std::boxing
 
       // additional functionality
 
-      bool getValue() const;
+      [[nodiscard]] bool getValue() const;
       static bool XOR(const ls::std::boxing::Boolean &_leftExpression, const ls::std::boxing::Boolean &_rightExpression);
       static bool XOR(const ls::std::boxing::Boolean &_leftExpression, bool _rightExpression);
       static bool XOR(bool _leftExpression, const ls::std::boxing::Boolean &_rightExpression);
@@ -78,7 +78,7 @@ namespace ls::std::boxing
       const ::std::string FALSE_STRING = "false";
       const ::std::string TRUE_STRING = "true";
 
-      ::std::string _toString() const;
+      [[nodiscard]] ::std::string _toString() const;
   };
 }
 

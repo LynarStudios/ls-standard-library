@@ -21,7 +21,7 @@ namespace ls::std::core
 
       explicit FileOperationException() = default;
 
-      const char *what() const noexcept override
+      [[nodiscard]] const char *what() const noexcept override
       {
         return "FileOperationException thrown - file operation failed!";
       }

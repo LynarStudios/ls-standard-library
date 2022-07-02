@@ -20,7 +20,7 @@ namespace ls::std::core
 
       EventNotSubscribedException() = default;
 
-      const char *what() const noexcept override
+      [[nodiscard]] const char *what() const noexcept override
       {
         return "EventNotSubscribedException thrown - event was not subscribed!";
       };

@@ -20,7 +20,7 @@ namespace ls::std::core
 
       explicit IncompleteJsonException() = default;
 
-      const char *what() const noexcept override
+      [[nodiscard]] const char *what() const noexcept override
       {
         return "IncompleteJsonException thrown - this JSON string is incomplete.";
       }

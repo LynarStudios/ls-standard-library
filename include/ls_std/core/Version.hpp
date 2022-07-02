@@ -31,9 +31,9 @@ namespace ls::std::core
 
       // other functionality
 
-      ls::std::core::type::version_type getMajorVersion() const;
-      ls::std::core::type::version_type getMinorVersion() const;
-      ls::std::core::type::version_type getPatchVersion() const;
+      [[nodiscard]] ls::std::core::type::version_type getMajorVersion() const;
+      [[nodiscard]] ls::std::core::type::version_type getMinorVersion() const;
+      [[nodiscard]] ls::std::core::type::version_type getPatchVersion() const;
       static bool isValid(const ::std::string &_versionString);
       void setMajorVersion(ls::std::core::type::version_type _major);
       void setMinorVersion(ls::std::core::type::version_type _minor);
