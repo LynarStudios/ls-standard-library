@@ -12,12 +12,8 @@
 
 #include <exception>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
-  {
-    namespace core
-    {
       class IllegalArithmeticOperationException : public ::std::exception
       {
         public:
@@ -29,8 +25,6 @@ namespace ls
             return "IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!";
           }
       };
-    }
-  }
 }
 
 #endif

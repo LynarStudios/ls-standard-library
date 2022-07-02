@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2022-05-19
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,24 +12,15 @@
 
 #include <string>
 
-namespace ls
+namespace ls::std::core::interface_type
 {
-  namespace std
+  class IEncoding
   {
-    namespace core
-    {
-      namespace interface_type
-      {
-        class IEncoding
-        {
-          public:
+    public:
 
-            virtual ::std::string encode(const ::std::string &_sequence) = 0;
-            virtual ::std::string decode(const ::std::string &_sequence) = 0;
-        };
-      }
-    }
-  }
+      virtual ::std::string encode(const ::std::string &_sequence) = 0;
+      virtual ::std::string decode(const ::std::string &_sequence) = 0;
+  };
 }
 
 #endif

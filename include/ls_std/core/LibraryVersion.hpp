@@ -12,17 +12,11 @@
 
 #include <string>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  static ::std::string getVersion()
   {
-    namespace core
-    {
-      static ::std::string getVersion()
-      {
-        return "2022.2.0";
-      }
-    }
+    return "2022.2.0";
   }
 }
 

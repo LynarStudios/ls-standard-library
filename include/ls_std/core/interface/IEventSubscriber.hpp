@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-19
+ * Changed:         2022-07-02
  *
  * */
 
@@ -14,27 +14,18 @@
 #include <memory>
 #include "IListener.hpp"
 
-namespace ls
+namespace ls::std::core::interface_type
 {
-  namespace std
+  class IEventSubscriber
   {
-    namespace core
-    {
-      namespace interface_type
-      {
-        class IEventSubscriber
-        {
-          public:
+    public:
 
-            IEventSubscriber() = default;
-            ~IEventSubscriber() = default;
+      IEventSubscriber() = default;
+      ~IEventSubscriber() = default;
 
-            virtual void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;
-            virtual void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;
-        };
-      }
-    }
-  }
+      virtual void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;
+      virtual void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;
+  };
 }
 
 #endif

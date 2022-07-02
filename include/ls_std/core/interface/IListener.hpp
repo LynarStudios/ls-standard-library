@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-19
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,26 +12,17 @@
 
 #include <ls_std/core/Class.hpp>
 
-namespace ls
+namespace ls::std::core::interface_type
 {
-  namespace std
+  class IListener
   {
-    namespace core
-    {
-      namespace interface_type
-      {
-        class IListener
-        {
-          public:
+    public:
 
-            IListener() = default;
-            ~IListener() = default;
+      IListener() = default;
+      ~IListener() = default;
 
-            virtual void listen(const ls::std::core::Class &_info) = 0;
-        };
-      }
-    }
-  }
+      virtual void listen(const ls::std::core::Class &_info) = 0;
+  };
 }
 
 #endif

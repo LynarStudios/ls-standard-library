@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-09
+ * Changed:         2022-07-02
  *
  * */
 
@@ -13,50 +13,44 @@
 #include <algorithm>
 #include <list>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  class STLUtils
   {
-    namespace core
-    {
-      class STLUtils
+    public:
+
+      STLUtils() = default;
+      ~STLUtils() = default;
+
+      template<class container, class dataType>
+      static bool contains(container _container, const dataType &_value)
       {
-        public:
+        return ::std::find(_container.begin(), _container.end(), _value) != _container.end();
+      }
 
-          STLUtils() = default;
-          ~STLUtils() = default;
+      template<class dataType>
+      static dataType getListElementAt(const ::std::list<dataType> &_list, size_t _index)
+      {
+        dataType value{};
+        size_t counter{};
 
-          template<class container, class dataType>
-          static bool contains(container _container, const dataType &_value)
+        if (_index < _list.size())
+        {
+          for (const auto &_value: _list)
           {
-            return ::std::find(_container.begin(), _container.end(), _value) != _container.end();
-          }
-
-          template<class dataType>
-          static dataType getListElementAt(const ::std::list<dataType> &_list, size_t _index)
-          {
-            dataType value{};
-            size_t counter{};
-
-            if (_index < _list.size())
+            if (counter == _index)
             {
-              for (const auto &_value: _list)
-              {
-                if (counter == _index)
-                {
-                  value = _value;
-                  break;
-                }
-
-                counter++;
-              }
+              value = _value;
+              break;
             }
 
-            return value;
+            counter++;
           }
-      };
-    }
-  }
+        }
+
+        return value;
+      }
+  };
 }
 
 #endif

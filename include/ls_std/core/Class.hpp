@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-06-29
+ * Changed:         2022-07-02
  *
  * */
 
@@ -13,29 +13,23 @@
 #include <string>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  class DYNAMIC_GOAL Class
   {
-    namespace core
-    {
-      class DYNAMIC_GOAL Class
-      {
-        public:
+    public:
 
-          explicit Class(const ::std::string &_name);
-          virtual ~Class() = default;
+      explicit Class(const ::std::string &_name);
+      virtual ~Class() = default;
 
-          ::std::string getClassName();
+      ::std::string getClassName();
 
-        private:
+    private:
 
-          ::std::string name{};
+      ::std::string name{};
 
-          void _assignClassName(const ::std::string &_name);
-      };
-    }
-  }
+      void _assignClassName(const ::std::string &_name);
+  };
 }
 
 #endif
