@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-07-02
+ * Changed:         2022-07-03
  *
  * */
 
@@ -19,7 +19,7 @@
 
 namespace ls::std::io
 {
-  class DYNAMIC_GOAL KvParser : public ls::std::core::Class
+  class LS_STD_DYNAMIC_GOAL KvParser : public ls::std::core::Class
   {
     public:
 

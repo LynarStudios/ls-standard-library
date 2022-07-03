@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2022-07-02
+ * Changed:         2022-07-03
  *
  * */
 
@@ -17,7 +17,7 @@
 
 namespace ls::std::core
 {
-  class DYNAMIC_GOAL Version : public ls::std::core::interface_type::ISerializable
+  class LS_STD_DYNAMIC_GOAL Version : public ls::std::core::interface_type::ISerializable
   {
     public:
 
