@@ -16,32 +16,26 @@
 #include "File.hpp"
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL StorableFile : public ls::std::core::interface_type::IStorable
   {
-    namespace io
-    {
-      class LS_STD_DYNAMIC_GOAL StorableFile : public ls::std::core::interface_type::IStorable
-      {
-        public:
+    public:
 
-          explicit StorableFile(const ::std::string &_path);
-          ~StorableFile() = default;
+      explicit StorableFile(const ::std::string &_path);
+      ~StorableFile() = default;
 
-          ::std::shared_ptr<ls::std::io::File> getFile();
-          ls::std::core::type::byte_field load() override;
-          void reset(const ::std::string &_path);
-          void save(const ls::std::core::type::byte_field &_data) override;
+      ::std::shared_ptr<ls::std::io::File> getFile();
+      ls::std::core::type::byte_field load() override;
+      void reset(const ::std::string &_path);
+      void save(const ls::std::core::type::byte_field &_data) override;
 
-        private:
+    private:
 
-          ::std::shared_ptr<ls::std::io::File> file{};
+      ::std::shared_ptr<ls::std::io::File> file{};
 
-          void _init(const ::std::string &_path);
-      };
-    }
-  }
+      void _init(const ::std::string &_path);
+  };
 }
 
 #endif

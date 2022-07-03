@@ -15,91 +15,85 @@
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::boxing
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL Double : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
   {
-    namespace boxing
-    {
-      class LS_STD_DYNAMIC_GOAL Double : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
-      {
-        public:
+    public:
 
-          Double();
-          explicit Double(double _value);
-          ~Double() override = default;
+      Double();
+      explicit Double(double _value);
+      ~Double() override = default;
 
-          // conversion operator
+      // conversion operator
 
-          operator double() const; // do not make explicit!
+      operator double() const; // do not make explicit!
 
-          // assignment operators
+      // assignment operators
 
-          ls::std::boxing::Double &operator=(double _value);
+      ls::std::boxing::Double &operator=(double _value);
 
-          // arithmetic operators
+      // arithmetic operators
 
-          double operator-() const;
-          double operator+(const ls::std::boxing::Double &_double) const;
-          double operator+(double _value) const;
-          double operator*(const ls::std::boxing::Double &_double) const;
-          double operator*(double _value) const;
-          double operator-(const ls::std::boxing::Double &_double) const;
-          double operator-(double _value) const;
-          double operator/(const ls::std::boxing::Double &_double) const;
-          double operator/(double _value) const;
+      double operator-() const;
+      double operator+(const ls::std::boxing::Double &_double) const;
+      double operator+(double _value) const;
+      double operator*(const ls::std::boxing::Double &_double) const;
+      double operator*(double _value) const;
+      double operator-(const ls::std::boxing::Double &_double) const;
+      double operator-(double _value) const;
+      double operator/(const ls::std::boxing::Double &_double) const;
+      double operator/(double _value) const;
 
-          // compound operators
+      // compound operators
 
-          ls::std::boxing::Double &operator+=(const ls::std::boxing::Double &_double);
-          ls::std::boxing::Double &operator+=(double _value);
-          ls::std::boxing::Double &operator-=(const ls::std::boxing::Double &_double);
-          ls::std::boxing::Double &operator-=(double _value);
-          ls::std::boxing::Double &operator*=(const ls::std::boxing::Double &_double);
-          ls::std::boxing::Double &operator*=(double _value);
-          ls::std::boxing::Double &operator/=(const ls::std::boxing::Double &_double);
-          ls::std::boxing::Double &operator/=(double _value);
+      ls::std::boxing::Double &operator+=(const ls::std::boxing::Double &_double);
+      ls::std::boxing::Double &operator+=(double _value);
+      ls::std::boxing::Double &operator-=(const ls::std::boxing::Double &_double);
+      ls::std::boxing::Double &operator-=(double _value);
+      ls::std::boxing::Double &operator*=(const ls::std::boxing::Double &_double);
+      ls::std::boxing::Double &operator*=(double _value);
+      ls::std::boxing::Double &operator/=(const ls::std::boxing::Double &_double);
+      ls::std::boxing::Double &operator/=(double _value);
 
-          // comparison operators
+      // comparison operators
 
-          bool operator==(const ls::std::boxing::Double &_double) const;
-          bool operator==(double _value) const;
-          bool operator!=(const ls::std::boxing::Double &_double) const;
-          bool operator!=(double _value) const;
-          bool operator>(const ls::std::boxing::Double &_double) const;
-          bool operator>(double _value) const;
-          bool operator>=(const ls::std::boxing::Double &_double) const;
-          bool operator>=(double _value) const;
-          bool operator<(const ls::std::boxing::Double &_double) const;
-          bool operator<(double _value) const;
-          bool operator<=(const ls::std::boxing::Double &_double) const;
-          bool operator<=(double _value) const;
+      bool operator==(const ls::std::boxing::Double &_double) const;
+      bool operator==(double _value) const;
+      bool operator!=(const ls::std::boxing::Double &_double) const;
+      bool operator!=(double _value) const;
+      bool operator>(const ls::std::boxing::Double &_double) const;
+      bool operator>(double _value) const;
+      bool operator>=(const ls::std::boxing::Double &_double) const;
+      bool operator>=(double _value) const;
+      bool operator<(const ls::std::boxing::Double &_double) const;
+      bool operator<(double _value) const;
+      bool operator<=(const ls::std::boxing::Double &_double) const;
+      bool operator<=(double _value) const;
 
-          // increment / decrement operator
+      // increment / decrement operator
 
-          void operator++();
-          void operator--();
+      void operator++();
+      void operator--();
 
-          // implementation
+      // implementation
 
-          void parse(::std::string _parseText) override;
-          ::std::string toString() override;
+      void parse(::std::string _parseText) override;
+      ::std::string toString() override;
 
-          // additional functionality
+      // additional functionality
 
-          double getEpsilon();
-          double getValue();
-          void setEpsilon(double _epsilon);
+      double getEpsilon();
+      double getValue();
+      void setEpsilon(double _epsilon);
 
-        private:
+    private:
 
-          double epsilon{};
-          double value{};
+      double epsilon{};
+      double value{};
 
-          void _assignEpsilon(double _epsilon);
-      };
-    }
-  }
+      void _assignEpsilon(double _epsilon);
+  };
 }
 
 #endif

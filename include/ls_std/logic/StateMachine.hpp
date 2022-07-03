@@ -19,45 +19,39 @@
 #include <ls_std/core/types/StateMachineTypes.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::logic
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL StateMachine : public ls::std::core::Class
   {
-    namespace logic
-    {
-      class LS_STD_DYNAMIC_GOAL StateMachine : public ls::std::core::Class
-      {
-        public:
+    public:
 
-          explicit StateMachine(const ::std::string &_name);
-          ~StateMachine() override = default;
+      explicit StateMachine(const ::std::string &_name);
+      ~StateMachine() override = default;
 
-          bool addState(const ::std::shared_ptr<ls::std::logic::State> &_state);
-          ::std::shared_ptr<ls::std::logic::State> getCurrentState();
-          ::std::vector<ls::std::core::type::state_id> getMemory();
-          ::std::string getName();
-          ::std::unordered_map<ls::std::core::type::state_id, ::std::shared_ptr<ls::std::logic::State>> getStates();
-          bool hasState(const ls::std::core::type::state_id &_id);
-          bool proceed();
-          void setMemory(const ::std::vector<ls::std::core::type::state_id> &_memory);
-          void setName(const ::std::string &_name);
-          bool setStartState(const ls::std::core::type::state_id &_id);
+      bool addState(const ::std::shared_ptr<ls::std::logic::State> &_state);
+      ::std::shared_ptr<ls::std::logic::State> getCurrentState();
+      ::std::vector<ls::std::core::type::state_id> getMemory();
+      ::std::string getName();
+      ::std::unordered_map<ls::std::core::type::state_id, ::std::shared_ptr<ls::std::logic::State>> getStates();
+      bool hasState(const ls::std::core::type::state_id &_id);
+      bool proceed();
+      void setMemory(const ::std::vector<ls::std::core::type::state_id> &_memory);
+      void setName(const ::std::string &_name);
+      bool setStartState(const ls::std::core::type::state_id &_id);
 
-        private:
+    private:
 
-          ::std::shared_ptr<ls::std::logic::State> currentState{};
-          ::std::vector<ls::std::core::type::state_id> memory{};
-          ::std::string name{};
-          ::std::unordered_map<ls::std::core::type::state_id, ::std::shared_ptr<ls::std::logic::State>> states{};
+      ::std::shared_ptr<ls::std::logic::State> currentState{};
+      ::std::vector<ls::std::core::type::state_id> memory{};
+      ::std::string name{};
+      ::std::unordered_map<ls::std::core::type::state_id, ::std::shared_ptr<ls::std::logic::State>> states{};
 
-          void _assignMemory(const ::std::vector<ls::std::core::type::state_id> &_memory);
-          void _assignName(const ::std::string &_name);
-          ::std::vector<ls::std::core::type::state_id> _getNextValidStates();
-          void _remember(const ls::std::core::type::state_id &_id);
-          bool _hasState(const ls::std::core::type::state_id &_id);
-      };
-    }
-  }
+      void _assignMemory(const ::std::vector<ls::std::core::type::state_id> &_memory);
+      void _assignName(const ::std::string &_name);
+      ::std::vector<ls::std::core::type::state_id> _getNextValidStates();
+      void _remember(const ls::std::core::type::state_id &_id);
+      bool _hasState(const ls::std::core::type::state_id &_id);
+  };
 }
 
 #endif

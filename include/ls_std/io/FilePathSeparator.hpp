@@ -13,45 +13,39 @@
 #include <string>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL FilePathSeparator
   {
-    namespace io
-    {
-      class LS_STD_DYNAMIC_GOAL FilePathSeparator
+    public:
+
+      FilePathSeparator() = default;
+      ~FilePathSeparator() = default;
+
+      static char get()
       {
-        public:
+        char separator;
 
-          FilePathSeparator() = default;
-          ~FilePathSeparator() = default;
+        #ifdef _WIN32
+        separator = ls::std::io::FilePathSeparator::getWindowsFilePathSeparator();
+        #endif
+        #if defined(unix) || defined(__APPLE__)
+        separator = ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
+        #endif
 
-          static char get()
-          {
-            char separator;
+        return separator;
+      }
 
-            #ifdef _WIN32
-            separator = ls::std::io::FilePathSeparator::getWindowsFilePathSeparator();
-            #endif
-            #if defined(unix) || defined(__APPLE__)
-            separator = ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
-            #endif
+      static char getUnixFilePathSeparator()
+      {
+        return '/';
+      }
 
-            return separator;
-          }
-
-          static char getUnixFilePathSeparator()
-          {
-            return '/';
-          }
-
-          static char getWindowsFilePathSeparator()
-          {
-            return '\\';
-          }
-      };
-    }
-  }
+      static char getWindowsFilePathSeparator()
+      {
+        return '\\';
+      }
+  };
 }
 
 #endif

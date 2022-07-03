@@ -15,91 +15,85 @@
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::boxing
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL Float : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
   {
-    namespace boxing
-    {
-      class LS_STD_DYNAMIC_GOAL Float : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
-      {
-        public:
+    public:
 
-          Float();
-          explicit Float(float _value);
-          ~Float() override = default;
+      Float();
+      explicit Float(float _value);
+      ~Float() override = default;
 
-          // conversion operator
+      // conversion operator
 
-          operator float() const; // do not make explicit!
+      operator float() const; // do not make explicit!
 
-          // assignment operators
+      // assignment operators
 
-          ls::std::boxing::Float &operator=(float _value);
+      ls::std::boxing::Float &operator=(float _value);
 
-          // arithmetic operators
+      // arithmetic operators
 
-          float operator-() const;
-          float operator+(const ls::std::boxing::Float &_float) const;
-          float operator+(float _value) const;
-          float operator*(const ls::std::boxing::Float &_float) const;
-          float operator*(float _value) const;
-          float operator-(const ls::std::boxing::Float &_float) const;
-          float operator-(float _value) const;
-          float operator/(const ls::std::boxing::Float &_float) const;
-          float operator/(float _value) const;
+      float operator-() const;
+      float operator+(const ls::std::boxing::Float &_float) const;
+      float operator+(float _value) const;
+      float operator*(const ls::std::boxing::Float &_float) const;
+      float operator*(float _value) const;
+      float operator-(const ls::std::boxing::Float &_float) const;
+      float operator-(float _value) const;
+      float operator/(const ls::std::boxing::Float &_float) const;
+      float operator/(float _value) const;
 
-          // compound operators
+      // compound operators
 
-          ls::std::boxing::Float &operator+=(const ls::std::boxing::Float &_float);
-          ls::std::boxing::Float &operator+=(float _value);
-          ls::std::boxing::Float &operator-=(const ls::std::boxing::Float &_float);
-          ls::std::boxing::Float &operator-=(float _value);
-          ls::std::boxing::Float &operator*=(const ls::std::boxing::Float &_float);
-          ls::std::boxing::Float &operator*=(float _value);
-          ls::std::boxing::Float &operator/=(const ls::std::boxing::Float &_float);
-          ls::std::boxing::Float &operator/=(float _value);
+      ls::std::boxing::Float &operator+=(const ls::std::boxing::Float &_float);
+      ls::std::boxing::Float &operator+=(float _value);
+      ls::std::boxing::Float &operator-=(const ls::std::boxing::Float &_float);
+      ls::std::boxing::Float &operator-=(float _value);
+      ls::std::boxing::Float &operator*=(const ls::std::boxing::Float &_float);
+      ls::std::boxing::Float &operator*=(float _value);
+      ls::std::boxing::Float &operator/=(const ls::std::boxing::Float &_float);
+      ls::std::boxing::Float &operator/=(float _value);
 
-          // comparison operators
+      // comparison operators
 
-          bool operator==(const ls::std::boxing::Float &_float) const;
-          bool operator==(float _value) const;
-          bool operator!=(const ls::std::boxing::Float &_float) const;
-          bool operator!=(float _value) const;
-          bool operator>(const ls::std::boxing::Float &_float) const;
-          bool operator>(float _value) const;
-          bool operator>=(const ls::std::boxing::Float &_float) const;
-          bool operator>=(float _value) const;
-          bool operator<(const ls::std::boxing::Float &_float) const;
-          bool operator<(float _value) const;
-          bool operator<=(const ls::std::boxing::Float &_float) const;
-          bool operator<=(float _value) const;
+      bool operator==(const ls::std::boxing::Float &_float) const;
+      bool operator==(float _value) const;
+      bool operator!=(const ls::std::boxing::Float &_float) const;
+      bool operator!=(float _value) const;
+      bool operator>(const ls::std::boxing::Float &_float) const;
+      bool operator>(float _value) const;
+      bool operator>=(const ls::std::boxing::Float &_float) const;
+      bool operator>=(float _value) const;
+      bool operator<(const ls::std::boxing::Float &_float) const;
+      bool operator<(float _value) const;
+      bool operator<=(const ls::std::boxing::Float &_float) const;
+      bool operator<=(float _value) const;
 
-          // increment / decrement operator
+      // increment / decrement operator
 
-          void operator++();
-          void operator--();
+      void operator++();
+      void operator--();
 
-          // implementation
+      // implementation
 
-          void parse(::std::string _parseText) override;
-          ::std::string toString() override;
+      void parse(::std::string _parseText) override;
+      ::std::string toString() override;
 
-          // additional functionality
+      // additional functionality
 
-          float getEpsilon();
-          float getValue();
-          void setEpsilon(float _epsilon);
+      float getEpsilon();
+      float getValue();
+      void setEpsilon(float _epsilon);
 
-        private:
+    private:
 
-          float epsilon{};
-          float value{};
+      float epsilon{};
+      float value{};
 
-          void _assignEpsilon(float _epsilon);
-      };
-    }
-  }
+      void _assignEpsilon(float _epsilon);
+  };
 }
 
 #endif

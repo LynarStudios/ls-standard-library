@@ -14,51 +14,45 @@
 #include <ls_std/os/dynamic_goal.hpp>
 #include <ctime>
 
-namespace ls
+namespace ls::std::time
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL Date : public ls::std::core::Class
   {
-    namespace time
-    {
-      class LS_STD_DYNAMIC_GOAL Date : public ls::std::core::Class
-      {
-        public:
+    public:
 
-          Date();
-          ~Date() override = default;
+      Date();
+      ~Date() override = default;
 
-          // arithmetic operators
+      // arithmetic operators
 
-          ls::std::time::Date &operator+(int _value);
-          ls::std::time::Date &operator-(int _value);
-          ls::std::time::Date &operator+=(int _value);
-          ls::std::time::Date &operator-=(int _value);
+      ls::std::time::Date &operator+(int _value);
+      ls::std::time::Date &operator-(int _value);
+      ls::std::time::Date &operator+=(int _value);
+      ls::std::time::Date &operator-=(int _value);
 
-          // additional functionality
+      // additional functionality
 
-          bool after(const ls::std::time::Date &_foreignDate) const;
-          bool before(const ls::std::time::Date &_foreignDate) const;
-          int getDay();
-          int getHour();
-          int getMinute();
-          int getMonth();
-          int getSecond();
-          time_t getTime() const;
-          int getYear();
-          void setTime(time_t _timestamp);
-          ::std::string toString();
+      [[nodiscard]] bool after(const ls::std::time::Date &_foreignDate) const;
+      [[nodiscard]] bool before(const ls::std::time::Date &_foreignDate) const;
+      int getDay();
+      int getHour();
+      int getMinute();
+      int getMonth();
+      int getSecond();
+      [[nodiscard]] time_t getTime() const;
+      int getYear();
+      void setTime(time_t _timestamp);
+      ::std::string toString();
 
-        private:
+    private:
 
-          time_t timestamp{};
-          tm *localTime{};
+      time_t timestamp{};
+      tm *localTime{};
 
-          void _decrementByDays(int _value);
-          void _incrementByDays(int _value);
-          void _init();
-      };
-    }
-  }
+      void _decrementByDays(int _value);
+      void _incrementByDays(int _value);
+      void _init();
+  };
 }
 
 #endif

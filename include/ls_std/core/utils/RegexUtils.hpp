@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2022-05-09
+ * Changed:         2022-07-02
  *
  * */
 
@@ -13,27 +13,21 @@
 #include <string>
 #include <regex>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  class RegexUtils
   {
-    namespace core
-    {
-      class RegexUtils
+    public:
+
+      RegexUtils() = default;
+      ~RegexUtils() = default;
+
+      static ::std::string escapeString(const ::std::string &_text)
       {
-        public:
-
-          RegexUtils() = default;
-          ~RegexUtils() = default;
-
-          static ::std::string escapeString(const ::std::string &_text)
-          {
-            static ::std::regex regexMetaEscape(R"(([\^\$\\\.\*\+\?\(\)\[\]\{\}\|]))");
-            return ::std::regex_replace(_text, regexMetaEscape, R"(\$1)");
-          }
-      };
-    }
-  }
+        static ::std::regex regexMetaEscape(R"(([\^\$\\\.\*\+\?\(\)\[\]\{\}\|]))");
+        return ::std::regex_replace(_text, regexMetaEscape, R"(\$1)");
+      }
+  };
 }
 
 #endif

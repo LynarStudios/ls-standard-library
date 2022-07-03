@@ -17,42 +17,36 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::logic
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL SerializableJsonState : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
   {
-    namespace logic
-    {
-      class LS_STD_DYNAMIC_GOAL SerializableJsonState : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
-      {
-        public:
+    public:
 
-          explicit SerializableJsonState(const ::std::shared_ptr<ls::std::logic::State> &_value);
-          ~SerializableJsonState() override = default;
+      explicit SerializableJsonState(const ::std::shared_ptr<ls::std::logic::State> &_value);
+      ~SerializableJsonState() override = default;
 
-          // implementation
+      // implementation
 
-          ls::std::core::type::byte_field marshal() override;
-          void unmarshal(const ls::std::core::type::byte_field &_data) override;
+      ls::std::core::type::byte_field marshal() override;
+      void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
-          // additional functionality
+      // additional functionality
 
-          ::std::shared_ptr<ls::std::logic::State> getValue();
-          void setValue(const ::std::shared_ptr<ls::std::logic::State> &_value);
+      ::std::shared_ptr<ls::std::logic::State> getValue();
+      void setValue(const ::std::shared_ptr<ls::std::logic::State> &_value);
 
-        private:
+    private:
 
-          nlohmann::json jsonObject{};
-          ::std::shared_ptr<ls::std::logic::State> value{};
+      nlohmann::json jsonObject{};
+      ::std::shared_ptr<ls::std::logic::State> value{};
 
-          void _assignValue(const ::std::shared_ptr<ls::std::logic::State> &_value);
-          void _clear();
-          void _unmarshalStateConnections();
-          void _update();
-          void _updateStateConnections();
-      };
-    }
-  }
+      void _assignValue(const ::std::shared_ptr<ls::std::logic::State> &_value);
+      void _clear();
+      void _unmarshalStateConnections();
+      void _update();
+      void _updateStateConnections();
+  };
 }
 
 #endif

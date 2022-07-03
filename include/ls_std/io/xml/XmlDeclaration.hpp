@@ -14,37 +14,31 @@
 #include "XmlAttribute.hpp"
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL XmlDeclaration : public ls::std::core::Class
   {
-    namespace io
-    {
-      class LS_STD_DYNAMIC_GOAL XmlDeclaration : public ls::std::core::Class
-      {
-        public:
+    public:
 
-          explicit XmlDeclaration(const ::std::string &_version);
-          ~XmlDeclaration() override = default;
+      explicit XmlDeclaration(const ::std::string &_version);
+      ~XmlDeclaration() override = default;
 
-          ::std::string getEncoding();
-          ::std::string getStandalone();
-          ::std::string getVersion();
-          void setEncoding(const ::std::string &_encoding);
-          void setStandalone(const ::std::string &_standalone);
-          void setVersion(const ::std::string &_version);
-          ::std::string toXml();
+      ::std::string getEncoding();
+      ::std::string getStandalone();
+      ::std::string getVersion();
+      void setEncoding(const ::std::string &_encoding);
+      void setStandalone(const ::std::string &_standalone);
+      void setVersion(const ::std::string &_version);
+      ::std::string toXml();
 
-        private:
+    private:
 
-          ls::std::io::XmlAttribute encoding{"encoding"};
-          ls::std::io::XmlAttribute standalone{"standalone"};
-          ls::std::io::XmlAttribute version{"version"};
+      ls::std::io::XmlAttribute encoding{"encoding"};
+      ls::std::io::XmlAttribute standalone{"standalone"};
+      ls::std::io::XmlAttribute version{"version"};
 
-          static ::std::string _toXmlAttribute(ls::std::io::XmlAttribute _attribute);
-      };
-    }
-  }
+      static ::std::string _toXmlAttribute(ls::std::io::XmlAttribute _attribute);
+  };
 }
 
 #endif

@@ -15,43 +15,37 @@
 #include "LogLevelValue.hpp"
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL LogLevel : public ls::std::core::Class
   {
-    namespace io
-    {
-      class LS_STD_DYNAMIC_GOAL LogLevel : public ls::std::core::Class
-      {
-        public:
+    public:
 
-          explicit LogLevel(const ls::std::io::LogLevelValue &_value);
-          LogLevel();
-          ~LogLevel() override = default;
+      explicit LogLevel(const ls::std::io::LogLevelValue &_value);
+      LogLevel();
+      ~LogLevel() override = default;
 
-          operator unsigned char() const;
-          ls::std::io::LogLevel &operator=(const ls::std::io::LogLevelValue &_value);
-          bool operator<(const ls::std::io::LogLevelValue &_value);
-          bool operator<=(const ls::std::io::LogLevelValue &_value);
-          bool operator>(const ls::std::io::LogLevelValue &_value);
-          bool operator>=(const ls::std::io::LogLevelValue &_value);
-          bool operator==(const ls::std::io::LogLevelValue &_value);
+      operator unsigned char() const;
+      ls::std::io::LogLevel &operator=(const ls::std::io::LogLevelValue &_value);
+      bool operator<(const ls::std::io::LogLevelValue &_value);
+      bool operator<=(const ls::std::io::LogLevelValue &_value);
+      bool operator>(const ls::std::io::LogLevelValue &_value);
+      bool operator>=(const ls::std::io::LogLevelValue &_value);
+      bool operator==(const ls::std::io::LogLevelValue &_value);
 
-          void setLogLevel(const ls::std::io::LogLevelValue &_value);
-          void setLogLevel(const ::std::string &_value);
-          ::std::string toString() const;
+      void setLogLevel(const ls::std::io::LogLevelValue &_value);
+      void setLogLevel(const ::std::string &_value);
+      ::std::string toString() const;
 
-        private:
+    private:
 
-          ::std::unordered_map<uint8_t, ::std::string> level{};
-          ls::std::io::LogLevelValue value{};
+      ::std::unordered_map<uint8_t, ::std::string> level{};
+      ls::std::io::LogLevelValue value{};
 
-          ls::std::io::LogLevelValue _getValueFromString(const ::std::string &_value);
-          void _init();
-          bool _isValidLogLevelString(const ::std::string &_value);
-      };
-    }
-  }
+      ls::std::io::LogLevelValue _getValueFromString(const ::std::string &_value);
+      void _init();
+      bool _isValidLogLevelString(const ::std::string &_value);
+  };
 }
 
 #endif

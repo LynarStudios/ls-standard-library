@@ -18,78 +18,72 @@
 #include <vector>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::boxing
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL String : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
   {
-    namespace boxing
-    {
-      class LS_STD_DYNAMIC_GOAL String : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
-      {
-        public:
+    public:
 
-          String();
-          explicit String(::std::string _value);
-          ~String() override = default;
+      String();
+      explicit String(::std::string _value);
+      ~String() override = default;
 
-          // conversion operator
+      // conversion operator
 
-          operator const char *() const; // do not make explicit!
-          operator ::std::string() const; // do not make explicit!
+      operator const char *() const; // do not make explicit!
+      operator ::std::string() const; // do not make explicit!
 
-          // assignment operators
+      // assignment operators
 
-          ls::std::boxing::String &operator=(::std::string _value);
+      ls::std::boxing::String &operator=(::std::string _value);
 
-          // arithmetic operators
+      // arithmetic operators
 
-          ::std::string operator+(ls::std::boxing::String _string) const;
-          ::std::string operator+(const ::std::string &_string) const;
-          ::std::string operator+(const char *_string) const;
-          ::std::string operator-(int _number);
+      ::std::string operator+(ls::std::boxing::String _string) const;
+      ::std::string operator+(const ::std::string &_string) const;
+      ::std::string operator+(const char *_string) const;
+      ::std::string operator-(int _number);
 
-          // compound operators
+      // compound operators
 
-          ls::std::boxing::String &operator+=(ls::std::boxing::String _string);
-          ls::std::boxing::String &operator+=(const ::std::string &_text);
+      ls::std::boxing::String &operator+=(ls::std::boxing::String _string);
+      ls::std::boxing::String &operator+=(const ::std::string &_text);
 
-          // comparison operators
+      // comparison operators
 
-          bool operator==(ls::std::boxing::String _string);
-          bool operator==(const ::std::string &_value);
-          bool operator==(const char *_value);
-          bool operator!=(ls::std::boxing::String _string);
-          bool operator!=(const ::std::string &_value);
-          bool operator!=(const char *_value);
+      bool operator==(ls::std::boxing::String _string);
+      bool operator==(const ::std::string &_value);
+      bool operator==(const char *_value);
+      bool operator!=(ls::std::boxing::String _string);
+      bool operator!=(const ::std::string &_value);
+      bool operator!=(const char *_value);
 
-          // implementation
+      // implementation
 
-          void parse(::std::string _parseText) override;
-          ::std::string toString() override;
+      void parse(::std::string _parseText) override;
+      ::std::string toString() override;
 
-          // additional functionality
+      // additional functionality
 
-          bool contains(const ::std::string &_text);
-          bool endsWith(const ::std::string &_text);
-          bool equalsIgnoreCase(ls::std::boxing::String _string);
-          bool equalsIgnoreCase(::std::string _text);
-          ::std::vector<ls::std::core::type::byte> getByteData();
-          ::std::string padLeft(size_t _width, char _fillCharacter);
-          ::std::string padRight(size_t _width, char _fillCharacter);
-          ::std::string reverse();
-          bool startsWith(const ::std::string &_text);
-          ::std::string toLowerCase();
-          ::std::string toUpperCase();
+      bool contains(const ::std::string &_text);
+      bool endsWith(const ::std::string &_text);
+      bool equalsIgnoreCase(ls::std::boxing::String _string);
+      bool equalsIgnoreCase(::std::string _text);
+      ::std::vector<ls::std::core::type::byte> getByteData();
+      ::std::string padLeft(size_t _width, char _fillCharacter);
+      ::std::string padRight(size_t _width, char _fillCharacter);
+      ::std::string reverse();
+      bool startsWith(const ::std::string &_text);
+      ::std::string toLowerCase();
+      ::std::string toUpperCase();
 
-        private:
+    private:
 
-          ::std::string value{};
+      ::std::string value{};
 
-          static ::std::string _buildCharacterChain(size_t _amount, char _fillCharacter);
-          static ::std::string _createFillContent(const ::std::string &_text, size_t _width, char _fillCharacter);
-      };
-    }
-  }
+      static ::std::string _buildCharacterChain(size_t _amount, char _fillCharacter);
+      static ::std::string _createFillContent(const ::std::string &_text, size_t _width, char _fillCharacter);
+  };
 }
 
 #endif

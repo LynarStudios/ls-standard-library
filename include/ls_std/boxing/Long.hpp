@@ -16,102 +16,96 @@
 #include <ls_std/core/types/Types.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::boxing
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL Long : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
   {
-    namespace boxing
-    {
-      class LS_STD_DYNAMIC_GOAL Long : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
+    public:
+
+      explicit Long(ls::std::core::type::long_type _value);
+      Long();
+      ~Long() override = default;
+
+      // conversion operator
+
+      operator ls::std::core::type::long_type() const;
+
+      // assignment operators
+
+      ls::std::boxing::Long &operator=(ls::std::core::type::long_type _value);
+
+      // arithmetic operators
+
+      ls::std::core::type::long_type operator-() const;
+      ls::std::core::type::long_type operator+(const ls::std::boxing::Long &_long) const;
+      ls::std::core::type::long_type operator+(ls::std::core::type::long_type _value) const;
+      ls::std::core::type::long_type operator*(const ls::std::boxing::Long &_long) const;
+      ls::std::core::type::long_type operator*(ls::std::core::type::long_type _value) const;
+      ls::std::core::type::long_type operator-(const ls::std::boxing::Long &_long) const;
+      ls::std::core::type::long_type operator-(ls::std::core::type::long_type _value) const;
+      ls::std::core::type::long_type operator/(const ls::std::boxing::Long &_long) const;
+      ls::std::core::type::long_type operator/(ls::std::core::type::long_type _value) const;
+      ls::std::core::type::long_type operator%(const ls::std::boxing::Long &_long) const;
+      ls::std::core::type::long_type operator%(ls::std::core::type::long_type _value) const;
+
+      // compound operators
+
+      ls::std::boxing::Long &operator+=(const ls::std::boxing::Long &_long);
+      ls::std::boxing::Long &operator+=(ls::std::core::type::long_type _value);
+      ls::std::boxing::Long &operator-=(const ls::std::boxing::Long &_long);
+      ls::std::boxing::Long &operator-=(ls::std::core::type::long_type _value);
+      ls::std::boxing::Long &operator*=(const ls::std::boxing::Long &_long);
+      ls::std::boxing::Long &operator*=(ls::std::core::type::long_type _value);
+      ls::std::boxing::Long &operator/=(const ls::std::boxing::Long &_long);
+      ls::std::boxing::Long &operator/=(ls::std::core::type::long_type _value);
+
+      // comparison operators
+
+      bool operator==(const ls::std::boxing::Long &_long) const;
+      bool operator==(ls::std::core::type::long_type _value) const;
+      bool operator!=(const ls::std::boxing::Long &_long) const;
+      bool operator!=(ls::std::core::type::long_type _value) const;
+      bool operator>(const ls::std::boxing::Long &_long) const;
+      bool operator>(ls::std::core::type::long_type _value) const;
+      bool operator>=(const ls::std::boxing::Long &_long) const;
+      bool operator>=(ls::std::core::type::long_type _value) const;
+      bool operator<(const ls::std::boxing::Long &_long) const;
+      bool operator<(ls::std::core::type::long_type _value) const;
+      bool operator<=(const ls::std::boxing::Long &_long) const;
+      bool operator<=(ls::std::core::type::long_type _value) const;
+
+      // logical operators
+
+      friend bool operator!(const ls::std::boxing::Long &_long)
       {
-        public:
+        return !_long.value;
+      }
 
-          explicit Long(ls::std::core::type::long_type _value);
-          Long();
-          ~Long() override = default;
+      bool operator&&(const ls::std::boxing::Long &_long) const;
+      bool operator&&(ls::std::core::type::long_type _value) const;
+      bool operator&&(bool _expression) const;
+      bool operator||(const ls::std::boxing::Long &_long) const;
+      bool operator||(ls::std::core::type::long_type _value) const;
+      bool operator||(bool _expression) const;
 
-          // conversion operator
+      // increment / decrement operator
 
-          operator ls::std::core::type::long_type() const;
+      void operator++();
+      void operator--();
 
-          // assignment operators
+      // implementation
 
-          ls::std::boxing::Long &operator=(ls::std::core::type::long_type _value);
+      void parse(::std::string _parseText) override;
+      ::std::string toString() override;
 
-          // arithmetic operators
+      // additional functionality
 
-          ls::std::core::type::long_type operator-() const;
-          ls::std::core::type::long_type operator+(const ls::std::boxing::Long &_long) const;
-          ls::std::core::type::long_type operator+(ls::std::core::type::long_type _value) const;
-          ls::std::core::type::long_type operator*(const ls::std::boxing::Long &_long) const;
-          ls::std::core::type::long_type operator*(ls::std::core::type::long_type _value) const;
-          ls::std::core::type::long_type operator-(const ls::std::boxing::Long &_long) const;
-          ls::std::core::type::long_type operator-(ls::std::core::type::long_type _value) const;
-          ls::std::core::type::long_type operator/(const ls::std::boxing::Long &_long) const;
-          ls::std::core::type::long_type operator/(ls::std::core::type::long_type _value) const;
-          ls::std::core::type::long_type operator%(const ls::std::boxing::Long &_long) const;
-          ls::std::core::type::long_type operator%(ls::std::core::type::long_type _value) const;
+      [[nodiscard]] ls::std::core::type::long_type getValue() const;
 
-          // compound operators
+    private:
 
-          ls::std::boxing::Long &operator+=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator+=(ls::std::core::type::long_type _value);
-          ls::std::boxing::Long &operator-=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator-=(ls::std::core::type::long_type _value);
-          ls::std::boxing::Long &operator*=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator*=(ls::std::core::type::long_type _value);
-          ls::std::boxing::Long &operator/=(const ls::std::boxing::Long &_long);
-          ls::std::boxing::Long &operator/=(ls::std::core::type::long_type _value);
-
-          // comparison operators
-
-          bool operator==(const ls::std::boxing::Long &_long) const;
-          bool operator==(ls::std::core::type::long_type _value) const;
-          bool operator!=(const ls::std::boxing::Long &_long) const;
-          bool operator!=(ls::std::core::type::long_type _value) const;
-          bool operator>(const ls::std::boxing::Long &_long) const;
-          bool operator>(ls::std::core::type::long_type _value) const;
-          bool operator>=(const ls::std::boxing::Long &_long) const;
-          bool operator>=(ls::std::core::type::long_type _value) const;
-          bool operator<(const ls::std::boxing::Long &_long) const;
-          bool operator<(ls::std::core::type::long_type _value) const;
-          bool operator<=(const ls::std::boxing::Long &_long) const;
-          bool operator<=(ls::std::core::type::long_type _value) const;
-
-          // logical operators
-
-          friend bool operator!(const ls::std::boxing::Long &_long)
-          {
-            return !_long.value;
-          }
-
-          bool operator&&(const ls::std::boxing::Long &_long) const;
-          bool operator&&(ls::std::core::type::long_type _value) const;
-          bool operator&&(bool _expression) const;
-          bool operator||(const ls::std::boxing::Long &_long) const;
-          bool operator||(ls::std::core::type::long_type _value) const;
-          bool operator||(bool _expression) const;
-
-          // increment / decrement operator
-
-          void operator++();
-          void operator--();
-
-          // implementation
-
-          void parse(::std::string _parseText) override;
-          ::std::string toString() override;
-
-          // additional functionality
-
-          ls::std::core::type::long_type getValue() const;
-
-        private:
-
-          ls::std::core::type::long_type value{};
-      };
-    }
-  }
+      ls::std::core::type::long_type value{};
+  };
 }
 
 #endif

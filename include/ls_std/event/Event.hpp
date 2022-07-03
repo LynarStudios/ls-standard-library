@@ -16,38 +16,32 @@
 #include <ls_std/core/types/EventTypes.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::event
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL Event : public ls::std::core::Class
   {
-    namespace event
-    {
-      class LS_STD_DYNAMIC_GOAL Event : public ls::std::core::Class
-      {
-        public:
+    public:
 
-          explicit Event(const ls::std::core::type::event_id &_id);
-          ~Event() override = default;
+      explicit Event(const ls::std::core::type::event_id &_id);
+      ~Event() override = default;
 
-          // additional functionality
+      // additional functionality
 
-          bool addParameter(const ls::std::core::type::event_parameter &_eventParameter);
-          void clearParameterList();
-          ls::std::core::type::event_id getId();
-          ls::std::core::type::event_parameter_list getParameterList();
-          bool removeParameter(const ls::std::core::type::event_parameter_id &_id);
-          void setId(const ls::std::core::type::event_id &_id);
+      bool addParameter(const ls::std::core::type::event_parameter &_eventParameter);
+      void clearParameterList();
+      ls::std::core::type::event_id getId();
+      ls::std::core::type::event_parameter_list getParameterList();
+      bool removeParameter(const ls::std::core::type::event_parameter_id &_id);
+      void setId(const ls::std::core::type::event_id &_id);
 
-        private:
+    private:
 
-          ls::std::core::type::event_id id{};
-          ls::std::core::type::event_parameter_list parameterList{};
+      ls::std::core::type::event_id id{};
+      ls::std::core::type::event_parameter_list parameterList{};
 
-          void _assignId(const ls::std::core::type::event_id &_id);
-          bool _hasParameter(const ls::std::core::type::event_id &_id);
-      };
-    }
-  }
+      void _assignId(const ls::std::core::type::event_id &_id);
+      bool _hasParameter(const ls::std::core::type::event_id &_id);
+  };
 }
 
 #endif

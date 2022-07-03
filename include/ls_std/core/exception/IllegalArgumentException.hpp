@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-07-01
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,25 +12,19 @@
 
 #include <exception>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  class IllegalArgumentException : public ::std::exception
   {
-    namespace core
-    {
-      class IllegalArgumentException : public ::std::exception
+    public:
+
+      IllegalArgumentException() = default;
+
+      [[nodiscard]] const char *what() const noexcept override
       {
-        public:
-
-          IllegalArgumentException() = default;
-
-          const char *what() const noexcept override
-          {
-            return "IllegalArgumentException thrown - passed argument is not valid!";
-          }
-      };
-    }
-  }
+        return "IllegalArgumentException thrown - passed argument is not valid!";
+      }
+  };
 }
 
 #endif
