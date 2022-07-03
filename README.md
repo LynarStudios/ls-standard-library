@@ -40,6 +40,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - this library is now being compiled with C++ 17 standard
 - this library can now build shared libraries by using MSVC
+- Clang support has been added to this library
 
 #### Improvements ####
 
