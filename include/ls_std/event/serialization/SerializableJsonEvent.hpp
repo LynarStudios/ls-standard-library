@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-06-29
+ * Changed:         2022-07-03
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls
   {
     namespace event
     {
-      class DYNAMIC_GOAL SerializableJsonEvent : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
+      class LS_STD_DYNAMIC_GOAL SerializableJsonEvent : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
       {
         public:
 

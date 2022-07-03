@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-06-29
+ * Changed:         2022-07-03
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls
   {
     namespace event
     {
-      class DYNAMIC_GOAL EventHandler : public ls::std::event::Narrator
+      class LS_STD_DYNAMIC_GOAL EventHandler : public ls::std::event::Narrator
       {
         public:
 
