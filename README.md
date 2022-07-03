@@ -82,7 +82,16 @@ Inside __cmake_build_release__ folder you will now find cmake generated files. T
 cmake --build . --config Release
 ```
 
-__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.
+__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.  
+
+Find below a table of compiler/OS combinations which have been tested during library version development:
+
+| Supported Compiler | OS              | Compiler Version        |
+|--------------------|-----------------|-------------------------|
+| GCC                | Linux Mint 20.3 | 12.1.0                  |
+| Clang              | Linux Mint 20.3 | 12.0.0-3ubuntu1~20.04.5 |
+| MinGW-w64 / GCC    | Windows 10      | 11.2.0                  |
+| MSVC               | Windows 10      | 19.32.31332.0           |
 
 ---
 ### Add Library To Your CMake Project ###
