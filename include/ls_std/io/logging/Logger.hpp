@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-07-01
+ * Changed:         2022-07-03
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls
   {
     namespace io
     {
-      class DYNAMIC_GOAL Logger : public ls::std::core::Class
+      class LS_STD_DYNAMIC_GOAL Logger : public ls::std::core::Class
       {
         public:
 

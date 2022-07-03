@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2022-07-01
+ * Changed:         2022-07-03
  *
  * */
 
@@ -19,7 +19,7 @@ namespace ls
   {
     namespace io
     {
-      class DYNAMIC_GOAL StandardOutputWriter : public ls::std::core::interface_type::IWriter
+      class LS_STD_DYNAMIC_GOAL StandardOutputWriter : public ls::std::core::interface_type::IWriter
       {
         public:
 

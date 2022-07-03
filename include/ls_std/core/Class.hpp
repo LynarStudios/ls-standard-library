@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2022-06-29
+ * Changed:         2022-07-03
  *
  * */
 
@@ -19,7 +19,7 @@ namespace ls
   {
     namespace core
     {
-      class DYNAMIC_GOAL Class
+      class LS_STD_DYNAMIC_GOAL Class
       {
         public:
 

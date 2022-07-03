@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2022-06-29
+ * Changed:         2022-07-03
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls
   {
     namespace encoding
     {
-      class DYNAMIC_GOAL Base64 : public ls::std::core::interface_type::IEncoding
+      class LS_STD_DYNAMIC_GOAL Base64 : public ls::std::core::interface_type::IEncoding
       {
         public:
 
