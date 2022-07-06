@@ -438,6 +438,12 @@ if (${LS_STD_BUILD_MODULE})
     set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
+# CLI base64
+
+add_executable(cli_base64
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/cli/cli_base64_main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp)
+
 ##########################################################
 # Build Library (event)
 ##########################################################
