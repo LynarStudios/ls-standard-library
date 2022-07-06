@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    std::cerr << "There is an error in this command. Please use \"--help\" to get some support." << std::endl;
+    std::cerr << "There is an error in this command. Please use \"--help\" to get more information." << std::endl;
   }
 
   exit(0);
