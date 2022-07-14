@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2022-05-20
+ * Changed:         2022-07-14
  *
  * */
 
@@ -23,7 +23,7 @@ ls::std::core::type::byte_field ls::std::event::SerializableJsonEvent::marshal()
 
 void ls::std::event::SerializableJsonEvent::unmarshal(const ls::std::core::type::byte_field &_data)
 {
-  this->jsonObject = nlohmann::json::parse(_data);
+  this->jsonObject = ls::std::core::type::json::parse(_data);
 
   this->value->setId(this->jsonObject["id"]);
   this->_unmarshalParameterList();
@@ -73,7 +73,7 @@ void ls::std::event::SerializableJsonEvent::_updateEventParameterList()
 
   for (const auto &eventParameter : this->value->getParameterList())
   {
-    nlohmann::json parameterJson = {eventParameter.first, eventParameter.second};
+    ls::std::core::type::json parameterJson = {eventParameter.first, eventParameter.second};
     this->jsonObject["parameterList"][eventParameter.first] = parameterJson;
   }
 }

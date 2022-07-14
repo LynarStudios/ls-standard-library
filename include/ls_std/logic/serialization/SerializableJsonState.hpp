@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-15
- * Changed:         2022-07-03
+ * Changed:         2022-07-14
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_SERIALIZABLE_JSON_STATE_HPP
 
 #include <memory>
-#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/core/types/Types.hpp>
 #include <ls_std/logic/State.hpp>
 #include <ls_std/core/interface/ISerializable.hpp>
 #include <ls_std/core/Class.hpp>
@@ -38,7 +38,7 @@ namespace ls::std::logic
 
     private:
 
-      nlohmann::json jsonObject{};
+      ls::std::core::type::json jsonObject{};
       ::std::shared_ptr<ls::std::logic::State> value{};
 
       void _assignValue(const ::std::shared_ptr<ls::std::logic::State> &_value);
