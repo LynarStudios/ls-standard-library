@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-05
+ * Changed:         2022-07-15
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/core/types/Types.hpp>
 
 namespace
 {
@@ -28,7 +28,7 @@ namespace
 
   TEST_F(JsonTest, simpleSerialization)
   {
-    nlohmann::json jsonObject{};
+    ls::std::core::type::json jsonObject{};
     jsonObject["value"] = 1989;
 
     ASSERT_STREQ(R"({"value":1989})", jsonObject.dump().c_str());
