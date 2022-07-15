@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-05
- * Changed:         2022-07-03
+ * Changed:         2022-07-15
  *
  * */
 
@@ -21,7 +21,7 @@
 
 namespace ls::std::logic
 {
-  class LS_STD_DYNAMIC_GOAL StateMachine : public ls::std::core::Class
+  class [[deprecated("consider using ls_game_tool_kit dependency instead!")]] LS_STD_DYNAMIC_GOAL StateMachine : public ls::std::core::Class
   {
     public:
 
