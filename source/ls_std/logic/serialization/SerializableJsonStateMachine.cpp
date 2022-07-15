@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-05-20
+ * Changed:         2022-07-14
  *
  * */
 
@@ -24,7 +24,7 @@ ls::std::core::type::byte_field ls::std::logic::SerializableJsonStateMachine::ma
 
 void ls::std::logic::SerializableJsonStateMachine::unmarshal(const ls::std::core::type::byte_field &_data)
 {
-  this->jsonObject = nlohmann::json::parse(_data);
+  this->jsonObject = ls::std::core::type::json::parse(_data);
 
   this->_unmarshalStates();
   this->_unmarshalCurrentState();
@@ -94,6 +94,6 @@ void ls::std::logic::SerializableJsonStateMachine::_updateStates()
   for (const auto &state : this->value->getStates())
   {
     jsonString = ls::std::logic::SerializableJsonState{state.second}.marshal();
-    this->jsonObject["states"][state.first] = nlohmann::json::parse(jsonString);
+    this->jsonObject["states"][state.first] = ls::std::core::type::json::parse(jsonString);
   }
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-17
- * Changed:         2022-07-03
+ * Changed:         2022-07-14
  *
  * */
 
@@ -14,7 +14,7 @@
 #include <ls_std/core/interface/ISerializable.hpp>
 #include <ls_std/logic/StateMachine.hpp>
 #include <memory>
-#include <ls_std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <ls_std/core/types/Types.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls::std::logic
@@ -38,7 +38,7 @@ namespace ls::std::logic
 
     private:
 
-      nlohmann::json jsonObject{};
+      ls::std::core::type::json jsonObject{};
       ::std::shared_ptr<ls::std::logic::StateMachine> value{};
 
       void _assignValue(const ::std::shared_ptr<ls::std::logic::StateMachine> &_value);

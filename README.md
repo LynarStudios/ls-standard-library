@@ -42,6 +42,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 - this library can now build shared libraries by using MSVC
 - Clang support has been added to this library
 - added Base64 CLI Tool, which enables a user to use Base64 encoding and decoding functionalities via CLI
+- JSON type alias has been added to avoid direct nlohmann library usage
 
 #### Improvements ####
 
