@@ -442,7 +442,8 @@ endif ()
 
 add_executable(cli_base64
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/cli/cli_base64_main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
 
 ##########################################################
 # Build Library (event)
