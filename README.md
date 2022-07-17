@@ -25,7 +25,7 @@ This submodule comes with an __Event__ class, as well as with handlers and manag
 To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
 Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
 
-#### Logic ####
+#### Logic (Deprecated) ####
 
 Functionalities provided by this submodule support your project with some nice logical features. The first one being provided by it is a state machine.
 
@@ -46,7 +46,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Improvements ####
 
-- none
+- logic module is now officially deprecated
 
 #### Fixes ####
 
