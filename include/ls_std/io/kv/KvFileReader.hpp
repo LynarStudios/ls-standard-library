@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-19
+ * Changed:         2022-07-03
  *
  * */
 
@@ -15,40 +15,35 @@
 #include <ls_std/io/kv/KvDocument.hpp>
 #include <ls_std/io/File.hpp>
 #include <memory>
+#include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL KvFileReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
   {
-    namespace io
-    {
-      class KvFileReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
-      {
-        public:
+    public:
 
-          explicit KvFileReader(const ::std::shared_ptr<ls::std::io::KvDocument> &_document, const ::std::string &_absolutePath);
-          ~KvFileReader() override = default;
+      explicit KvFileReader(const ::std::shared_ptr<ls::std::io::KvDocument> &_document, const ::std::string &_absolutePath);
+      ~KvFileReader() override = default;
 
-          // implementation
+      // implementation
 
-          ls::std::core::type::byte_field read() override;
+      ls::std::core::type::byte_field read() override;
 
-          // additional functionality
+      // additional functionality
 
-          ::std::shared_ptr<ls::std::io::KvDocument> getDocument();
-          void setDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
-          void setFile(const ls::std::io::File &_kvFile);
+      ::std::shared_ptr<ls::std::io::KvDocument> getDocument();
+      void setDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
+      void setFile(const ls::std::io::File &_kvFile);
 
-        private:
+    private:
 
-          ::std::shared_ptr<ls::std::io::KvDocument> document{};
-          ls::std::io::File kvFile;
+      ::std::shared_ptr<ls::std::io::KvDocument> document{};
+      ls::std::io::File kvFile;
 
-          void _assignDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
-          void _assignFile(ls::std::io::File _kvFile);
-      };
-    }
-  }
+      void _assignDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
+      void _assignFile(ls::std::io::File _kvFile);
+  };
 }
 
 #endif

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-14
- * Changed:         2022-05-20
+ * Changed:         2022-07-14
  *
  * */
 
@@ -24,7 +24,7 @@ ls::std::core::type::byte_field ls::std::logic::SerializableJsonStateConnection:
 void ls::std::logic::SerializableJsonStateConnection::unmarshal(const ls::std::core::type::byte_field &_data)
 {
   ::std::string jsonString = ::std::string(_data);
-  this->jsonObject = nlohmann::json::parse(jsonString);
+  this->jsonObject = ls::std::core::type::json::parse(jsonString);
 
   this->value->setConnectionId(this->jsonObject["connectionId"]);
   this->value->setStateId(this->jsonObject["stateId"]);

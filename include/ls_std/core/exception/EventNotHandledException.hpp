@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2022-05-09
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,25 +12,19 @@
 
 #include <exception>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  class EventNotHandledException : public ::std::exception
   {
-    namespace core
-    {
-      class EventNotHandledException : public ::std::exception
+    public:
+
+      EventNotHandledException() = default;
+
+      [[nodiscard]] const char *what() const noexcept override
       {
-        public:
-
-          EventNotHandledException() = default;
-
-          const char *what() const noexcept override
-          {
-            return "EventNotHandledException thrown - event was not handled - nothing happened!";
-          };
+        return "EventNotHandledException thrown - event was not handled - nothing happened!";
       };
-    }
-  }
+  };
 }
 
 #endif

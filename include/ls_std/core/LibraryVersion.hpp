@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2022-05-09
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,17 +12,11 @@
 
 #include <string>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  static ::std::string getVersion()
   {
-    namespace core
-    {
-      static ::std::string getVersion()
-      {
-        return "2022.1.0";
-      }
-    }
+    return "2022.2.0";
   }
 }
 

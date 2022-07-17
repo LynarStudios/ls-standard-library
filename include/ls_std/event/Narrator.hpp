@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-19
+ * Changed:         2022-07-03
  *
  * */
 
@@ -12,34 +12,29 @@
 
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/IListener.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 #include <list>
 #include <memory>
 
-namespace ls
+namespace ls::std::event
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL Narrator : public ls::std::core::Class
   {
-    namespace event
-    {
-      class Narrator : public ls::std::core::Class
-      {
-        public:
+    public:
 
-          Narrator();
-          ~Narrator() override = default;
+      Narrator();
+      ~Narrator() override = default;
 
-          bool addListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
-          void clear();
-          ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> getListeners();
-          bool removeListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
-          void tell(const ls::std::core::Class &_info);
+      bool addListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
+      void clear();
+      ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> getListeners();
+      bool removeListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
+      void tell(const ls::std::core::Class &_info);
 
-        private:
+    private:
 
-          ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> listeners{};
-      };
-    }
-  }
+      ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> listeners{};
+  };
 }
 
 #endif

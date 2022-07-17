@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2022.1.0 #
+# Lynar Studios - Standard Library 2022.2.0 #
 
 This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
 This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
@@ -25,7 +25,7 @@ This submodule comes with an __Event__ class, as well as with handlers and manag
 To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
 Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
 
-#### Logic ####
+#### Logic (Deprecated) ####
 
 Functionalities provided by this submodule support your project with some nice logical features. The first one being provided by it is a state machine.
 
@@ -33,32 +33,36 @@ Functionalities provided by this submodule support your project with some nice l
 
 A __Date__ class comes with this submodule, which you can use to represent a date and do operations on it. 
 
+---
 ### Changelog ###
 
 #### Features ####
 
-- "encoding" submodule has been added providing __Base64__ encoding and decoding functionality
+- this library is now being compiled with C++ 17 standard
+- this library can now build shared libraries by using MSVC
+- Clang support has been added to this library
+- added Base64 CLI Tool, which enables a user to use Base64 encoding and decoding functionalities via CLI
 
 #### Improvements ####
 
-- modularization has been improved by restructuring library files, which would result into having submodules - __there is no central header or binary file anymore__ - instead submodules can be linked independently now (e.g. using __ls_std_event.hpp__ and linking __libls_std_event.so__)
-- there is a CMake guard now to ensure that only one goal at the time is being build
-- the CMake option __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ has been added to detect compiler support
-- namespaces have been improved library wide and are more specific - __there is no ls\_std namespace anymore__ - instead you can choose submodule specific namespaces (e.g. _ls::std::boxing::_)
-- GoogleTest framework has been upgraded to 1.11.0
+- JSON type alias has been added to avoid direct nlohmann library usage
+- logic module is now officially deprecated
 
 #### Fixes ####
 
 - none
 
+---
 ### Documentation ###
 
 You can find a detailed documentation on Lynar Studios Website: lynarstudios.com
 
+---
 ### License ###
 
 This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ file inside the project's root directory.
 
+---
 ### Building ###
 
 To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__ or __MinGW__ installed.  
@@ -80,8 +84,18 @@ Inside __cmake_build_release__ folder you will now find cmake generated files. T
 cmake --build . --config Release
 ```
 
-__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.
+__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.  
 
+Find below a table of compiler/OS combinations which have been tested during library version development:
+
+| Supported Compiler | OS              | Compiler Version        |
+|--------------------|-----------------|-------------------------|
+| GCC                | Linux Mint 20.3 | 12.1.0                  |
+| Clang              | Linux Mint 20.3 | 12.0.0-3ubuntu1~20.04.5 |
+| MinGW-w64 / GCC    | Windows 10      | 11.2.0                  |
+| MSVC               | Windows 10      | 19.32.31332.0           |
+
+---
 ### Add Library To Your CMake Project ###
 
 If you would like to add this library to your CMake project (__CMakeLists.txt__ file), make sure that you would add the libraries' include directory:
@@ -96,6 +110,7 @@ Then link the libraries' binary file inside your __CMakeLists.txt__ file:
 target_link_libraries(... libls_std_core libls_std_boxing ...)
 ```
 
+---
 ### Testing ###
 
 This project contains unit tests to provide test coverage.  

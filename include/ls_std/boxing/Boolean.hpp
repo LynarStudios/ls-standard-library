@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-05-21
+ * Changed:         2022-07-03
  *
  * */
 
@@ -14,77 +14,72 @@
 #include <sstream>
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/IBoxing.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::boxing
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL Boolean : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
   {
-    namespace boxing
-    {
-      class Boolean : public ls::std::core::Class, public ls::std::core::interface_type::IBoxing
+    public:
+
+      explicit Boolean(bool _value);
+      Boolean();
+      ~Boolean() override = default;
+
+      // conversion operator
+
+      operator bool() const;
+
+      // assignment operators
+
+      ls::std::boxing::Boolean &operator=(int _value);
+      ls::std::boxing::Boolean &operator=(bool _value);
+
+      // stream operators
+
+      friend ::std::ostream &operator<<(::std::ostream &_outputStream, const ls::std::boxing::Boolean &_boolean)
       {
-        public:
+        _outputStream << _boolean._toString();
+        return _outputStream;
+      }
 
-          explicit Boolean(bool _value);
-          Boolean();
-          ~Boolean() override = default;
+      // logical operators
 
-          // conversion operator
+      friend bool operator!(const ls::std::boxing::Boolean &_boolean)
+      {
+        return !_boolean.value;
+      }
 
-          operator bool() const;
+      bool operator&&(const ls::std::boxing::Boolean &_boolean) const;
+      bool operator&&(bool _value) const;
+      bool operator&&(int _value) const;
+      bool operator||(const ls::std::boxing::Boolean &_boolean) const;
+      bool operator||(bool _value) const;
+      bool operator||(int _value) const;
+      // INFO: operator ^ can not be taken for XOR, since it's not possible to implement it respecting commutative law
 
-          // assignment operators
+      // implementation
 
-          ls::std::boxing::Boolean &operator=(int _value);
-          ls::std::boxing::Boolean &operator=(bool _value);
+      void parse(::std::string _parseText) override;
+      ::std::string toString() override;
 
-          // stream operators
+      // additional functionality
 
-          friend ::std::ostream &operator<<(::std::ostream &_outputStream, const ls::std::boxing::Boolean &_boolean)
-          {
-            _outputStream << _boolean._toString();
-            return _outputStream;
-          }
+      [[nodiscard]] bool getValue() const;
+      static bool XOR(const ls::std::boxing::Boolean &_leftExpression, const ls::std::boxing::Boolean &_rightExpression);
+      static bool XOR(const ls::std::boxing::Boolean &_leftExpression, bool _rightExpression);
+      static bool XOR(bool _leftExpression, const ls::std::boxing::Boolean &_rightExpression);
+      static bool XOR(bool _leftExpression, bool _rightExpression);
 
-          // logical operators
+    private:
 
-          friend bool operator!(const ls::std::boxing::Boolean &_boolean)
-          {
-            return !_boolean.value;
-          }
+      bool value{};
 
-          bool operator&&(const ls::std::boxing::Boolean &_boolean) const;
-          bool operator&&(bool _value) const;
-          bool operator&&(int _value) const;
-          bool operator||(const ls::std::boxing::Boolean &_boolean) const;
-          bool operator||(bool _value) const;
-          bool operator||(int _value) const;
-          // INFO: operator ^ can not be taken for XOR, since it's not possible to implement it respecting commutative law
+      const ::std::string FALSE_STRING = "false";
+      const ::std::string TRUE_STRING = "true";
 
-          // implementation
-
-          void parse(::std::string _parseText) override;
-          ::std::string toString() override;
-
-          // additional functionality
-
-          bool getValue() const;
-          static bool XOR(const ls::std::boxing::Boolean &_leftExpression, const ls::std::boxing::Boolean &_rightExpression);
-          static bool XOR(const ls::std::boxing::Boolean &_leftExpression, bool _rightExpression);
-          static bool XOR(bool _leftExpression, const ls::std::boxing::Boolean &_rightExpression);
-          static bool XOR(bool _leftExpression, bool _rightExpression);
-
-        private:
-
-          bool value{};
-
-          const ::std::string FALSE_STRING = "false";
-          const ::std::string TRUE_STRING = "true";
-
-          ::std::string _toString() const;
-      };
-    }
-  }
+      [[nodiscard]] ::std::string _toString() const;
+  };
 }
 
 #endif

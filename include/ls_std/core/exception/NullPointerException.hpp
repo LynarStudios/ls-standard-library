@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2022-05-09
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,25 +12,19 @@
 
 #include <exception>
 
-namespace ls
+namespace ls::std::core
 {
-  namespace std
+  class NullPointerException : public ::std::exception
   {
-    namespace core
-    {
-      class NullPointerException : public ::std::exception
+    public:
+
+      explicit NullPointerException() = default;
+
+      [[nodiscard]] const char *what() const noexcept override
       {
-        public:
-
-          explicit NullPointerException() = default;
-
-          const char *what() const noexcept override
-          {
-            return "NullPointerException thrown - reference is null!";
-          }
-      };
-    }
-  }
+        return "NullPointerException thrown - reference is null!";
+      }
+  };
 }
 
 #endif

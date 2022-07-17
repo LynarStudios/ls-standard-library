@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-19
+ * Changed:         2022-07-03
  *
  * */
 
@@ -13,31 +13,26 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/core/interface/IWriter.hpp>
 #include "File.hpp"
+#include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL FileWriter : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
   {
-    namespace io
-    {
-      class FileWriter : public ls::std::core::Class, public ls::std::core::interface_type::IWriter
-      {
-        public:
+    public:
 
-          explicit FileWriter(ls::std::io::File &_file);
-          ~FileWriter() override = default;
+      explicit FileWriter(ls::std::io::File &_file);
+      ~FileWriter() override = default;
 
-          void reset(ls::std::io::File &_file);
-          bool write(const ls::std::core::type::byte_field &_data) override;
+      void reset(ls::std::io::File &_file);
+      bool write(const ls::std::core::type::byte_field &_data) override;
 
-        private:
+    private:
 
-          ls::std::io::File file;
+      ls::std::io::File file;
 
-          static void _init(ls::std::io::File &_file);
-      };
-    }
-  }
+      static void _init(ls::std::io::File &_file);
+  };
 }
 
 #endif

@@ -1,0 +1,10 @@
+New Version (after merge back to development branch)
+
+- README.md file:
+    - increase version in headline
+    - empty changelog
+- CMakeLists.txt:
+    - increase version
+- LibraryVersion:
+    - increase version in method
+    - adjust test

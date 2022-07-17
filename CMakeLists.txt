@@ -11,7 +11,7 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-project(ls_std VERSION 2022.1.0)
+project(ls_std VERSION 2022.2.0)
 
 set(MODULE_NAME_BOXING ls_std_boxing)
 set(MODULE_NAME_CORE ls_std_core)
@@ -67,7 +67,7 @@ endif ()
 ##########################################################
 
 message("${PROJECT_NAME}: Setting compiler flags...")
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
@@ -80,7 +80,9 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
 
     # define supported compilers
 
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC OR ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC OR
+            ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
+            ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
         message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
     else()
         message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
@@ -89,7 +91,7 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
 
     # define which compilers are supported for shared or module goal
 
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_MODULE})
         message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
         return()
     endif ()
@@ -97,7 +99,7 @@ endif()
 
 # define which goals can run tests
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_SHARED} OR ${LS_STD_BUILD_MODULE})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_MODULE})
     message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with tests is not supported... terminated!")
     return()
 endif ()
@@ -436,6 +438,13 @@ if (${LS_STD_BUILD_MODULE})
     set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
 endif ()
 
+# CLI base64
+
+add_executable(cli_base64
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/cli/cli_base64_main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+
 ##########################################################
 # Build Library (event)
 ##########################################################
@@ -527,16 +536,16 @@ endif ()
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
-# Test Suite: Static Linking
+# Test Suite: Linking
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
 
 ##########################################################
-# Static Linking (boxing)
+# Linking (boxing)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_BOXING}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_BOXING}_test
             gtest
@@ -547,10 +556,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (core)
+# Linking (core)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_CORE}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_CORE}_test
             gtest
@@ -560,10 +569,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (encoding)
+# Linking (encoding)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_ENCODING}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_ENCODING}_test
             gtest
@@ -574,10 +583,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (event)
+# Linking (event)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_EVENT}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_EVENT}_test
             gtest
@@ -588,10 +597,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (io)
+# Linking (io)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_IO}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_IO}_test
             gtest
@@ -602,10 +611,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (logic)
+# Linking (logic)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_LOGIC}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_LOGIC}_test
             gtest
@@ -616,10 +625,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (time)
+# Linking (time)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_TIME}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_TIME}_test
             gtest
@@ -630,10 +639,10 @@ if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
 endif ()
 
 ##########################################################
-# Static Linking (all)
+# Linking (all)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_STATIC})
+if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
     target_link_libraries(${PROJECT_NAME}_test
             gtest

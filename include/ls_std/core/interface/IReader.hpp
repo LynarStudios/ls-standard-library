@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-19
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,26 +12,17 @@
 
 #include <ls_std/core/types/Types.hpp>
 
-namespace ls
+namespace ls::std::core::interface_type
 {
-  namespace std
+  class IReader
   {
-    namespace core
-    {
-      namespace interface_type
-      {
-        class IReader
-        {
-          public:
+    public:
 
-            IReader() = default;
-            ~IReader() = default;
+      IReader() = default;
+      ~IReader() = default;
 
-            virtual ls::std::core::type::byte_field read() = 0;
-        };
-      }
-    }
-  }
+      virtual ls::std::core::type::byte_field read() = 0;
+  };
 }
 
 #endif

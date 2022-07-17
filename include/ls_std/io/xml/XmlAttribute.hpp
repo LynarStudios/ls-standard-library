@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2022-05-11
+ * Changed:         2022-07-03
  *
  * */
 
@@ -12,36 +12,31 @@
 
 #include <ls_std/core/Class.hpp>
 #include <string>
+#include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL XmlAttribute : public ls::std::core::Class
   {
-    namespace io
-    {
-      class XmlAttribute : public ls::std::core::Class
-      {
-        public:
+    public:
 
-          explicit XmlAttribute(const ::std::string &_name);
-          ~XmlAttribute() override = default;
+      explicit XmlAttribute(const ::std::string &_name);
+      ~XmlAttribute() override = default;
 
-          ::std::string getName();
-          ::std::string getValue();
-          void setName(const ::std::string &_name);
-          void setValue(const ::std::string &_value);
-          ::std::string toXml();
+      ::std::string getName();
+      ::std::string getValue();
+      void setName(const ::std::string &_name);
+      void setValue(const ::std::string &_value);
+      ::std::string toXml();
 
-        private:
+    private:
 
-          ::std::string name{};
-          ::std::string value{};
+      ::std::string name{};
+      ::std::string value{};
 
-          void _assignName(const ::std::string &_name);
-          void _assignValue(const ::std::string &_value);
-      };
-    }
-  }
+      void _assignName(const ::std::string &_name);
+      void _assignValue(const ::std::string &_value);
+  };
 }
 
 #endif

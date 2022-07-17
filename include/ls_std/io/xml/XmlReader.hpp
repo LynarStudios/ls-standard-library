@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2022-05-19
+ * Changed:         2022-07-03
  *
  * */
 
@@ -17,40 +17,35 @@
 #include "XmlParseMode.hpp"
 #include "XmlParseParameter.hpp"
 #include <list>
+#include <ls_std/os/dynamic_goal.hpp>
 
-namespace ls
+namespace ls::std::io
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL XmlReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
   {
-    namespace io
-    {
-      class XmlReader : public ls::std::core::Class, public ls::std::core::interface_type::IReader
-      {
-        public:
+    public:
 
-          explicit XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath);
-          ~XmlReader() override = default;
+      explicit XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath);
+      ~XmlReader() override = default;
 
-          // implementation
+      // implementation
 
-          ls::std::core::type::byte_field read() override;
+      ls::std::core::type::byte_field read() override;
 
-          // additional functionality
+      // additional functionality
 
-          ::std::shared_ptr<ls::std::io::XmlDocument> getDocument();
-          void setDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
-          void setFile(const ls::std::io::File &_xmlFile);
+      ::std::shared_ptr<ls::std::io::XmlDocument> getDocument();
+      void setDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
+      void setFile(const ls::std::io::File &_xmlFile);
 
-        private:
+    private:
 
-          ::std::shared_ptr<ls::std::io::XmlDocument> document{};
-          ls::std::io::File xmlFile;
+      ::std::shared_ptr<ls::std::io::XmlDocument> document{};
+      ls::std::io::File xmlFile;
 
-          void _assignDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
-          void _assignFile(ls::std::io::File _xmlFile);
-      };
-    }
-  }
+      void _assignDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
+      void _assignFile(ls::std::io::File _xmlFile);
+  };
 }
 
 #endif

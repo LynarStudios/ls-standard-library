@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-10
- * Changed:         2022-05-12
+ * Changed:         2022-07-02
  *
  * */
 
@@ -12,19 +12,10 @@
 
 #include <string>
 
-namespace ls
+namespace ls::std::core::type
 {
-  namespace std
-  {
-    namespace core
-    {
-      namespace type
-      {
-        using state_connection_id = ::std::string;
-        using state_id = ::std::string;
-      }
-    }
-  }
+  using state_connection_id = ::std::string;
+  using state_id = ::std::string;
 }
 
 #endif

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-12
+ * Changed:         2022-07-03
  *
  * */
 
@@ -14,32 +14,27 @@
 #include <list>
 #include <memory>
 #include <ls_std/core/interface/IListener.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 #include "Event.hpp"
 #include "Narrator.hpp"
 
-namespace ls
+namespace ls::std::event
 {
-  namespace std
+  class LS_STD_DYNAMIC_GOAL EventHandler : public ls::std::event::Narrator
   {
-    namespace event
-    {
-      class EventHandler : public ls::std::event::Narrator
-      {
-        public:
+    public:
 
-          explicit EventHandler(const ls::std::core::type::event_id &_id);
-          ~EventHandler() override = default;
+      explicit EventHandler(const ls::std::core::type::event_id &_id);
+      ~EventHandler() override = default;
 
-          ls::std::core::type::event_id getId();
+      ls::std::core::type::event_id getId();
 
-        private:
+    private:
 
-          ls::std::core::type::event_id id{};
+      ls::std::core::type::event_id id{};
 
-          void _assignId(const ls::std::core::type::event_id &_id);
-      };
-    }
-  }
+      void _assignId(const ls::std::core::type::event_id &_id);
+  };
 }
 
 #endif
