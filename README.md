@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2022.2.0 #
+# Lynar Studios - Standard Library 2022.3.0 #
 
 This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
 This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
@@ -38,15 +38,11 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- this library is now being compiled with C++ 17 standard
-- this library can now build shared libraries by using MSVC
-- Clang support has been added to this library
-- added Base64 CLI Tool, which enables a user to use Base64 encoding and decoding functionalities via CLI
+- none
 
 #### Improvements ####
 
-- JSON type alias has been added to avoid direct nlohmann library usage
-- logic module is now officially deprecated
+- none
 
 #### Fixes ####
 
