@@ -21,9 +21,21 @@ namespace ls::std::os
       explicit RuntimeLibraryLoader(ls::std::os::RuntimeLibraryLoaderParameter _parameter);
       ~RuntimeLibraryLoader() = default;
 
+      bool open();
+
     private:
 
+      #if defined(unix) || defined(__APPLE__)
+      void* handle{};
+      #endif
       ls::std::os::RuntimeLibraryLoaderParameter parameter{};
+
+      #if defined(unix) || defined(__APPLE__)
+      [[nodiscard]] bool _openUnix();
+      #endif
+      #ifdef _WIN32
+      bool _openWindows();
+      #endif
   };
 }
 

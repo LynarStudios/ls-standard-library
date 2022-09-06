@@ -609,6 +609,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gtest
             gmock
             gtest_main
+            dl
             "${MODULE_NAME_OS}")
 endif ()
 
@@ -636,6 +637,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gtest
             gmock
             gtest_main
+            dl
             "${MODULE_NAME_CORE}"
             "${MODULE_NAME_BOXING}"
             "${MODULE_NAME_ENCODING}"
