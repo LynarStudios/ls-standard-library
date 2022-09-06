@@ -25,10 +25,6 @@ This submodule comes with an __Event__ class, as well as with handlers and manag
 To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
 Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
 
-#### Logic (Deprecated) ####
-
-Functionalities provided by this submodule support your project with some nice logical features. The first one being provided by it is a state machine.
-
 #### Time ####
 
 A __Date__ class comes with this submodule, which you can use to represent a date and do operations on it. 
@@ -38,15 +34,11 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- this library is now being compiled with C++ 17 standard
-- this library can now build shared libraries by using MSVC
-- Clang support has been added to this library
-- added Base64 CLI Tool, which enables a user to use Base64 encoding and decoding functionalities via CLI
-- JSON type alias has been added to avoid direct nlohmann library usage
+- none
 
 #### Improvements ####
 
-- logic module is now officially deprecated
+- __logic__ module have been removed from library and can now be found in __ls-game-tool-kit__ library
 
 #### Fixes ####
 
