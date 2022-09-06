@@ -18,6 +18,7 @@ set(MODULE_NAME_CORE ls_std_core)
 set(MODULE_NAME_ENCODING ls_std_encoding)
 set(MODULE_NAME_EVENT ls_std_event)
 set(MODULE_NAME_IO ls_std_io)
+set(MODULE_NAME_OS ls_std_os)
 set(MODULE_NAME_TIME ls_std_time)
 
 set(GOOGLE_TEST_MODULE googletest-1.11.0)
@@ -177,6 +178,9 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
 
+set(SOURCE_FILES_OS
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/os/library/RuntimeLibraryLoader.cpp)
+
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
 
@@ -253,6 +257,9 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 
+    set(TEST_FILES_OS
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/os/library/RuntimeLibraryLoaderTest.cpp)
+
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
@@ -314,6 +321,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Build Tests (os)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_OS}: Building tests...")
+    add_executable(${MODULE_NAME_OS}_test ${TEST_FILES_OS})
+endif ()
+
+##########################################################
 # Build Tests (time)
 ##########################################################
 
@@ -334,6 +350,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${TEST_FILES_ENCODING}
             ${TEST_FILES_EVENT}
             ${TEST_FILES_IO}
+            ${TEST_FILES_OS}
             ${TEST_FILES_SERIALIZATION}
             ${TEST_FILES_TIME})
 endif ()
@@ -462,6 +479,28 @@ if (${LS_STD_BUILD_MODULE})
 endif ()
 
 ##########################################################
+# Build Library (os)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_OS} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_OS}" STATIC ${SOURCE_FILES_OS})
+    set_target_properties("${MODULE_NAME_OS}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_OS}" SHARED ${SOURCE_FILES_OS})
+    target_link_libraries("${MODULE_NAME_OS}" ${MODULE_NAME_CORE})
+    set_target_properties("${MODULE_NAME_OS}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_OS}" MODULE ${SOURCE_FILES_OS})
+    set_target_properties("${MODULE_NAME_OS}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
 # Build Library (time)
 ##########################################################
 
@@ -561,6 +600,19 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Linking (os)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_OS}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_OS}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_OS}")
+endif ()
+
+##########################################################
 # Linking (time)
 ##########################################################
 
@@ -589,5 +641,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
+            "${MODULE_NAME_OS}"
             "${MODULE_NAME_TIME}")
 endif ()
