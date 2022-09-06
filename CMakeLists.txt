@@ -18,7 +18,6 @@ set(MODULE_NAME_CORE ls_std_core)
 set(MODULE_NAME_ENCODING ls_std_encoding)
 set(MODULE_NAME_EVENT ls_std_event)
 set(MODULE_NAME_IO ls_std_io)
-set(MODULE_NAME_LOGIC ls_std_logic)
 set(MODULE_NAME_TIME ls_std_time)
 
 set(GOOGLE_TEST_MODULE googletest-1.11.0)
@@ -178,14 +177,6 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
 
-set(SOURCE_FILES_LOGIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonState.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonStateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonStateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp)
-
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
 
@@ -262,15 +253,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 
-    set(TEST_FILES_LOGIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateConnectionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateMachineTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/logic/TestDataFactory.cpp)
-
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
@@ -332,15 +314,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Build Tests (logic)
-##########################################################
-
-if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_LOGIC}: Building tests...")
-    add_executable(${MODULE_NAME_LOGIC}_test ${TEST_FILES_LOGIC})
-endif ()
-
-##########################################################
 # Build Tests (time)
 ##########################################################
 
@@ -361,7 +334,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${TEST_FILES_ENCODING}
             ${TEST_FILES_EVENT}
             ${TEST_FILES_IO}
-            ${TEST_FILES_LOGIC}
             ${TEST_FILES_SERIALIZATION}
             ${TEST_FILES_TIME})
 endif ()
@@ -490,28 +462,6 @@ if (${LS_STD_BUILD_MODULE})
 endif ()
 
 ##########################################################
-# Build Library (logic)
-##########################################################
-
-message("${PROJECT_NAME}: Building ${MODULE_NAME_LOGIC} library version ${PROJECT_VERSION}...")
-
-if (${LS_STD_BUILD_STATIC})
-    add_library("${MODULE_NAME_LOGIC}" STATIC ${SOURCE_FILES_LOGIC})
-    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_SHARED})
-    add_library("${MODULE_NAME_LOGIC}" SHARED ${SOURCE_FILES_LOGIC})
-    target_link_libraries("${MODULE_NAME_LOGIC}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_LOGIC}" MODULE ${SOURCE_FILES_LOGIC})
-    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-##########################################################
 # Build Library (time)
 ##########################################################
 
@@ -611,20 +561,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (logic)
-##########################################################
-
-if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_LOGIC}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_LOGIC}_test
-            gtest
-            gmock
-            gtest_main
-            "${MODULE_NAME_LOGIC}"
-            "${MODULE_NAME_CORE}")
-endif ()
-
-##########################################################
 # Linking (time)
 ##########################################################
 
@@ -653,6 +589,5 @@ if (${LS_STD_BUILD_WITH_TESTS})
             "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
-            "${MODULE_NAME_LOGIC}"
             "${MODULE_NAME_TIME}")
 endif ()
