@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2022.2.0 #
+# Lynar Studios - Standard Library 2022.3.0 #
 
 This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
 This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.

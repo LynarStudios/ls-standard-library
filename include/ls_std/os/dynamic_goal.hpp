@@ -3,17 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-06-29
- * Changed:         2022-06-29
+ * Changed:         2022-07-17
  *
  * */
 
 #ifndef LS_STD_DYNAMIC_GOAL_HPP
 #define LS_STD_DYNAMIC_GOAL_HPP
 
-#ifdef _WIN32
+#if defined(_WIN32) && defined(_MSC_VER)
 #include <ls_std/os/windows/msvc_dll_definitions.hpp>
 #endif
-#if defined(unix) || defined(__APPLE__)
+#if defined(unix) || defined(__APPLE__) || defined(_WIN32) && defined(__GNUC__)
 #include <ls_std/os/unix/unix_so_definitions.hpp>
 #endif
 
