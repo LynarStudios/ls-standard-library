@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-07-03
+ * Changed:         2022-10-23
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <ls_std/core/Class.hpp>
 #include "LogLevelValue.hpp"
-#include <ls_std/os/dynamic_goal.hpp>
+#include <ls_std/os/library/goals/dynamic_goal.hpp>
 
 namespace ls::std::io
 {

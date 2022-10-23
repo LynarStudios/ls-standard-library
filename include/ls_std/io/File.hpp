@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-07-03
+ * Changed:         2022-10-23
  *
  * */
 
@@ -16,7 +16,7 @@
 #include <list>
 #include <ctime>
 #include <regex>
-#include <ls_std/os/dynamic_goal.hpp>
+#include <ls_std/os/library/goals/dynamic_goal.hpp>
 
 #if defined(unix) || defined(__APPLE__)
 

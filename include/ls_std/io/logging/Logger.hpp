@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-07-03
+ * Changed:         2022-10-23
  *
  * */
 
@@ -16,7 +16,7 @@
 #include <ls_std/io/File.hpp>
 #include <ls_std/io/FileOutputStream.hpp>
 #include <string>
-#include <ls_std/os/dynamic_goal.hpp>
+#include <ls_std/os/library/goals/dynamic_goal.hpp>
 
 namespace ls::std::io
 {

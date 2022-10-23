@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2022-07-03
+ * Changed:         2022-10-23
  *
  * */
 
@@ -14,7 +14,7 @@
 #include <ls_std/core/interface/ISerializable.hpp>
 #include <memory>
 #include <ls_std/core/types/EventTypes.hpp>
-#include <ls_std/os/dynamic_goal.hpp>
+#include <ls_std/os/library/goals/dynamic_goal.hpp>
 
 namespace ls::std::event
 {
