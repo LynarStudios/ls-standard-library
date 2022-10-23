@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-09-06
- * Changed:         2022-10-20
+ * Changed:         2022-10-23
  *
  * */
 
@@ -11,7 +11,6 @@
 #include <ls_std/ls_std_os.hpp>
 #include <ls_std/ls_std_core.hpp>
 #include "TestHelper.hpp"
-#include <ls_std/ls_std_time.hpp>
 
 namespace
 {
@@ -32,7 +31,7 @@ namespace
       {
         ls::std::os::RuntimeLibraryLoaderParameter parameter{};
         #if defined(unix) || defined(__APPLE__)
-        parameter.path = ls_std_test::TestHelper::getResourcesFolderLocation() + "libls_std_time.so";
+        parameter.path = ls_std_test::TestHelper::getResourcesFolderLocation() + "libtest_math_d.so";
         #endif
 
         return parameter;
@@ -68,17 +67,14 @@ namespace
 
   TEST_F(RuntimeLibraryLoaderTest, getSymbol)
   {
-    // TODO: also provide a debug library for loading - currently debug execution is not working due to lack of debug information
-
     ls::std::os::RuntimeLibraryLoader loader{createParameter()};
     ASSERT_TRUE(loader.open());
-    ASSERT_TRUE(loader.loadSymbol("_ZN2ls3std4time4DateC1Ev"));
+    ASSERT_TRUE(loader.loadSymbol("_ZN4Math3addERKiS1_"));
 
-    using constructorType = ls::std::time::Date();
-    ::std::function<ls::std::time::Date()> date{reinterpret_cast<constructorType*>(loader.getSymbol("_ZN2ls3std4time4DateC1Ev"))};
+    using addSignature = int(const int&, const int&);
+    ::std::function<addSignature> add{reinterpret_cast<addSignature*>(loader.getSymbol("_ZN4Math3addERKiS1_"))};
 
-    ASSERT_TRUE(date().getDay() > 0);
-    ASSERT_TRUE(date().getHour() > 0);
+    ASSERT_EQ(5, add(2, 3));
   }
 
   TEST_F(RuntimeLibraryLoaderTest, getSymbol_no_symbol)
@@ -86,27 +82,27 @@ namespace
     ls::std::os::RuntimeLibraryLoader loader{createParameter()};
 
     ASSERT_TRUE(loader.open());
-    ASSERT_TRUE(loader.getSymbol("_ZN2ls3std4time4DateC1Ev") == nullptr);
+    ASSERT_TRUE(loader.getSymbol("_ZN4Math3addERKiS1_") == nullptr);
   }
 
   TEST_F(RuntimeLibraryLoaderTest, hasSymbol_not_found)
   {
     ls::std::os::RuntimeLibraryLoader loader{createParameter()};
-    ASSERT_FALSE(loader.hasSymbol("getTimeStamp"));
+    ASSERT_FALSE(loader.hasSymbol("getSquare"));
   }
 
   TEST_F(RuntimeLibraryLoaderTest, loadSymbol)
   {
     ls::std::os::RuntimeLibraryLoader loader{createParameter()};
     ASSERT_TRUE(loader.open());
-    ASSERT_TRUE(loader.loadSymbol("_ZN2ls3std4time4Date6getDayEv"));
+    ASSERT_TRUE(loader.loadSymbol("_ZN4Math3addERKiS1_"));
   }
 
   TEST_F(RuntimeLibraryLoaderTest, loadSymbol_symbol_not_available)
   {
     ls::std::os::RuntimeLibraryLoader loader{createParameter()};
     ASSERT_TRUE(loader.open());
-    ASSERT_FALSE(loader.loadSymbol("_ZN2ls3std4time4Date6getLeapEv"));
+    ASSERT_FALSE(loader.loadSymbol("_ZN4Math3subERKiS1_"));
   }
 
   TEST_F(RuntimeLibraryLoaderTest, open)
