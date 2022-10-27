@@ -179,6 +179,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
 
 set(SOURCE_FILES_OS
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/os/library/RuntimeLibrary.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/os/library/RuntimeLibraryLoader.cpp)
 
 set(SOURCE_FILES_TIME
@@ -258,7 +259,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 
     set(TEST_FILES_OS
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/os/library/RuntimeLibraryLoaderTest.cpp)
+            #${CMAKE_CURRENT_SOURCE_DIR}/test/cases/os/library/RuntimeLibraryLoaderTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/os/library/RuntimeLibraryTest.cpp)
 
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
@@ -603,13 +605,22 @@ endif ()
 # Linking (os)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     message("${MODULE_NAME_OS}: Linking libraries for test application...")
     target_link_libraries(${MODULE_NAME_OS}_test
             gtest
             gmock
             gtest_main
             dl
+            "${MODULE_NAME_OS}")
+endif ()
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    message("${MODULE_NAME_OS}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_OS}_test
+            gtest
+            gmock
+            gtest_main
             "${MODULE_NAME_OS}")
 endif ()
 
@@ -631,13 +642,28 @@ endif ()
 # Linking (all)
 ##########################################################
 
-if (${LS_STD_BUILD_WITH_TESTS})
+if (${LS_STD_BUILD_WITH_TESTS} AND ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     message("${PROJECT_NAME}: Linking libraries for test application...")
     target_link_libraries(${PROJECT_NAME}_test
             gtest
             gmock
             gtest_main
             dl
+            "${MODULE_NAME_CORE}"
+            "${MODULE_NAME_BOXING}"
+            "${MODULE_NAME_ENCODING}"
+            "${MODULE_NAME_EVENT}"
+            "${MODULE_NAME_IO}"
+            "${MODULE_NAME_OS}"
+            "${MODULE_NAME_TIME}")
+endif ()
+
+if (${LS_STD_BUILD_WITH_TESTS} AND ${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    message("${PROJECT_NAME}: Linking libraries for test application...")
+    target_link_libraries(${PROJECT_NAME}_test
+            gtest
+            gmock
+            gtest_main
             "${MODULE_NAME_CORE}"
             "${MODULE_NAME_BOXING}"
             "${MODULE_NAME_ENCODING}"
