@@ -3,4 +3,5 @@ cmake-build-debug
 cmake-build-release
 cmake-build-debug-coverage
 cmake-build-wsl_debug
+cmake-build-default
 test/TestHelper.hpp

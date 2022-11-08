@@ -34,7 +34,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- none
+- __AppleClang__ compiler is now officially supported 
 
 #### Improvements ####
 
