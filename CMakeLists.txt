@@ -81,7 +81,8 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
 
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC OR
             ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
-            ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
+            ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang OR
+            ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
         message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
     else()
         message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")

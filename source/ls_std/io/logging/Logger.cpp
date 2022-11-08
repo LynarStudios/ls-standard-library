@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-21
+ * Changed:         2022-11-08
  *
  * */
 
@@ -15,6 +15,7 @@
 #endif
 #include <ls_std/io/NewLine.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
+#include <sstream>
 
 ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer)
     : ls::std::core::Class("Logger"),
