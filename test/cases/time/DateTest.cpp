@@ -3,13 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-20
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <regex>
 #include <ls_std/ls_std_time.hpp>
+
+using namespace ls::std::time;
+using namespace ::std;
 
 namespace
 {
@@ -31,7 +34,7 @@ namespace
 
   TEST_F(DateTest, operator_add)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date = date + 1;
@@ -40,7 +43,7 @@ namespace
 
   TEST_F(DateTest, operator_add_with_negative_value)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date = date + (-1);
@@ -49,7 +52,7 @@ namespace
 
   TEST_F(DateTest, operator_subtraction)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date = date - 1;
@@ -58,7 +61,7 @@ namespace
 
   TEST_F(DateTest, operator_subtraction_with_negative_value)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date = date - (-1);
@@ -67,7 +70,7 @@ namespace
 
   TEST_F(DateTest, operator_plus_equals)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date += 2;
@@ -77,7 +80,7 @@ namespace
 
   TEST_F(DateTest, operator_plus_equals_with_negative_value)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date += -2;
@@ -87,7 +90,7 @@ namespace
 
   TEST_F(DateTest, operator_minus_equals)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date -= 2;
@@ -97,7 +100,7 @@ namespace
 
   TEST_F(DateTest, operator_minus_equals_with_negative_value)
   {
-    ls::std::time::Date date{};
+    Date date{};
     time_t timestamp = date.getTime();
 
     date -= -2;
@@ -109,9 +112,9 @@ namespace
 
   TEST_F(DateTest, after)
   {
-    ls::std::time::Date date{}; // today
+    Date date{}; // today
 
-    ls::std::time::Date referenceDate{};
+    Date referenceDate{};
     referenceDate = referenceDate - 1; // yesterday
 
     ASSERT_TRUE(date.after(referenceDate));
@@ -119,8 +122,8 @@ namespace
 
   TEST_F(DateTest, after_is_before_refernce_date)
   {
-    ls::std::time::Date date{}; // is today
-    ls::std::time::Date referenceDate{};
+    Date date{}; // is today
+    Date referenceDate{};
 
     referenceDate = referenceDate + 1; // is tomorrow
 
@@ -129,18 +132,18 @@ namespace
 
   TEST_F(DateTest, before)
   {
-    ls::std::time::Date date{};
+    Date date{};
     date = date - 1; // yesterday
 
-    ls::std::time::Date referenceDate{}; // today
+    Date referenceDate{}; // today
 
     ASSERT_TRUE(date.before(referenceDate));
   }
 
   TEST_F(DateTest, before_is_after_reference_date)
   {
-    ls::std::time::Date date{}; // today
-    ls::std::time::Date referenceDate{};
+    Date date{}; // today
+    Date referenceDate{};
 
     referenceDate = referenceDate - 1; // yesterday
 
@@ -149,7 +152,7 @@ namespace
 
   TEST_F(DateTest, getDay)
   {
-    ls::std::time::Date date{};
+    Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(14, date.getDay());
@@ -157,7 +160,7 @@ namespace
 
   TEST_F(DateTest, getHour)
   {
-    ls::std::time::Date date{};
+    Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(21, date.getHour());
@@ -165,7 +168,7 @@ namespace
 
   TEST_F(DateTest, getMinute)
   {
-    ls::std::time::Date date{};
+    Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(34, date.getMinute());
@@ -173,7 +176,7 @@ namespace
 
   TEST_F(DateTest, getMonth)
   {
-    ls::std::time::Date date{};
+    Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(8, date.getMonth());
@@ -181,7 +184,7 @@ namespace
 
   TEST_F(DateTest, getSecond)
   {
-    ls::std::time::Date date{};
+    Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(53, date.getSecond());
@@ -189,13 +192,13 @@ namespace
 
   TEST_F(DateTest, getTime)
   {
-    ls::std::time::Date date{};
+    Date date{};
     ASSERT_TRUE(date.getTime() > 0);
   }
 
   TEST_F(DateTest, getYear)
   {
-    ls::std::time::Date date{};
+    Date date{};
     date.setTime(1597433693);
 
     ASSERT_EQ(2020, date.getYear());
@@ -203,7 +206,7 @@ namespace
 
   TEST_F(DateTest, setTime)
   {
-    ls::std::time::Date date{};
+    Date date{};
     ASSERT_TRUE(date.getTime() > 1000000);
 
     date.setTime(1000);
@@ -212,11 +215,11 @@ namespace
 
   TEST_F(DateTest, toString)
   {
-    ls::std::time::Date date{};
-    ::std::string regexSearchString = R"((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}))";
-    ::std::regex _regex{regexSearchString};
-    ::std::string dateString = date.toString();
+    Date date{};
+    string regexSearchString = R"((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}))";
+    regex _regex{regexSearchString};
+    string dateString = date.toString();
 
-    ASSERT_TRUE(::std::regex_match(dateString, _regex));
+    ASSERT_TRUE(regex_match(dateString, _regex));
   }
 }
