@@ -3,13 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2022-05-14
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
+
+using namespace ls::std::core;
+using namespace ls::std::io;
 
 namespace
 {
@@ -32,30 +35,30 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::io::XmlAttribute attribute{""};
+                     XmlAttribute attribute{""};
                    }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
+                   catch (const IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 
   TEST_F(XmlAttributeTest, getName)
   {
-    ls::std::io::XmlAttribute attribute{"id"};
+    XmlAttribute attribute{"id"};
     ASSERT_STREQ("id", attribute.getName().c_str());
   }
 
   TEST_F(XmlAttributeTest, getValue)
   {
-    ls::std::io::XmlAttribute attribute{"id"};
+    XmlAttribute attribute{"id"};
     ASSERT_TRUE(attribute.getValue().empty());
   }
 
   TEST_F(XmlAttributeTest, setName)
   {
-    ls::std::io::XmlAttribute attribute{"id"};
+    XmlAttribute attribute{"id"};
     attribute.setName("id2");
 
     ASSERT_STREQ("id2", attribute.getName().c_str());
@@ -66,19 +69,19 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::io::XmlAttribute attribute{"id"};
+                     XmlAttribute attribute{"id"};
                      attribute.setName("");
                    }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
+                   catch (const IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 
   TEST_F(XmlAttributeTest, setValue)
   {
-    ls::std::io::XmlAttribute attribute{"id"};
+    XmlAttribute attribute{"id"};
     attribute.setValue("some_content");
 
     ASSERT_STREQ("some_content", attribute.getValue().c_str());
@@ -89,19 +92,19 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::io::XmlAttribute attribute{"id"};
+                     XmlAttribute attribute{"id"};
                      attribute.setValue("");
                    }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
+                   catch (const IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 
   TEST_F(XmlAttributeTest, toXml)
   {
-    ls::std::io::XmlAttribute attribute{"id"};
+    XmlAttribute attribute{"id"};
     attribute.setValue("some_content");
 
     ASSERT_STREQ(R"(id="some_content")", attribute.toXml().c_str());

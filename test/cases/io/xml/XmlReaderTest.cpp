@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2022-05-20
+ * Changed:         2022-11-09
  *
  * */
 
@@ -11,6 +11,11 @@
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
 #include "TestHelper.hpp"
+
+using namespace ls::std::core;
+using namespace ls::std::io;
+using namespace ::std;
+using namespace ls_std_test;
 
 namespace
 {
@@ -30,55 +35,55 @@ namespace
 
   TEST_F(XmlReaderTest, read)
   {
-    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(!xmlReader.read().empty());
   }
 
   TEST_F(XmlReaderTest, getDocument)
   {
-    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(xmlReader.getDocument() != nullptr);
   }
 
   TEST_F(XmlReaderTest, setDocument)
   {
-    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ::std::shared_ptr<ls::std::io::XmlDocument> document = ::std::make_shared<ls::std::io::XmlDocument>();
-    ls::std::io::XmlReader xmlReader{document, xmlPath};
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
+    XmlReader xmlReader{document, xmlPath};
     ASSERT_TRUE(xmlReader.getDocument() == document);
 
-    document = ::std::make_shared<ls::std::io::XmlDocument>();
+    document = make_shared<XmlDocument>();
     xmlReader.setDocument(document);
     ASSERT_TRUE(xmlReader.getDocument() == document);
   }
 
   TEST_F(XmlReaderTest, setDocument_no_reference)
   {
-    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ::std::shared_ptr<ls::std::io::XmlDocument> document = ::std::make_shared<ls::std::io::XmlDocument>();
-    ls::std::io::XmlReader xmlReader{document, xmlPath};
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
+    XmlReader xmlReader{document, xmlPath};
 
     EXPECT_THROW({
                    try
                    {
                      xmlReader.setDocument(nullptr);
                    }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
+                   catch (const IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 
   TEST_F(XmlReaderTest, setFile)
   {
-    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
-    ls::std::io::File xmlFile{xmlPath};
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
+    File xmlFile{xmlPath};
     xmlReader.setFile(xmlFile);
 
     ASSERT_TRUE(true);
@@ -86,19 +91,19 @@ namespace
 
   TEST_F(XmlReaderTest, setFile_does_not_exist)
   {
-    ::std::string xmlPath = ls_std_test::TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
-    ls::std::io::XmlReader xmlReader{::std::make_shared<ls::std::io::XmlDocument>(), xmlPath};
-    ls::std::io::File xmlFile{xmlPath};
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
+    File xmlFile{xmlPath};
 
     EXPECT_THROW({
                    try
                    {
-                     xmlReader.setFile(ls::std::io::File{""});
+                     xmlReader.setFile(File{""});
                    }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
+                   catch (const IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 }

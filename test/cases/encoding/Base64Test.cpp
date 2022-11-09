@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-08
- * Changed:         2022-05-20
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_encoding.hpp>
+
+using namespace ls::std::encoding;
 
 namespace
 {
@@ -28,7 +30,7 @@ namespace
 
   TEST_F(Base64Test, encode)
   {
-    ls::std::encoding::Base64 base64{};
+    Base64 base64{};
 
     ASSERT_STREQ("YWJj", base64.encode("abc").c_str());
     ASSERT_STREQ("YWJjZGU=", base64.encode("abcde").c_str());
@@ -38,7 +40,7 @@ namespace
 
   TEST_F(Base64Test, decode)
   {
-    ls::std::encoding::Base64 base64{};
+    Base64 base64{};
 
     ASSERT_STREQ("abc", base64.decode("YWJj").c_str());
     ASSERT_STREQ("abcde", base64.decode("YWJjZGU=").c_str());

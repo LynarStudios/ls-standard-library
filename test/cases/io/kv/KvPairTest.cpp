@@ -3,13 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2022-05-14
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_io.hpp>
+
+using namespace ls::std::core;
+using namespace ls::std::io;
 
 namespace
 {
@@ -33,30 +36,30 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::io::KvPair pair = ls::std::io::KvPair("", "1989");
+                     KvPair pair = KvPair("", "1989");
                    }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
+                   catch (const IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 
   TEST_F(KvPairTest, getKey)
   {
-    ls::std::io::KvPair pair{"port", "13088"};
+    KvPair pair{"port", "13088"};
     ASSERT_STREQ("port", pair.getKey().c_str());
   }
 
   TEST_F(KvPairTest, getValue)
   {
-    ls::std::io::KvPair pair{"port", "13088"};
+    KvPair pair{"port", "13088"};
     ASSERT_STREQ("13088", pair.getValue().c_str());
   }
 
   TEST_F(KvPairTest, setValue)
   {
-    ls::std::io::KvPair pair{"port", "13088"};
+    KvPair pair{"port", "13088"};
     ASSERT_STREQ("13088", pair.getValue().c_str());
 
     pair.setValue("8080");
