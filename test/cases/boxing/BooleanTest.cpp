@@ -3,13 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2022-05-20
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std/ls_std_boxing.hpp>
+
+using namespace ls::std::boxing;
+using namespace ls::std::core;
+using namespace ::std;
 
 namespace
 {
@@ -31,7 +35,7 @@ namespace
 
   TEST_F(BooleanTest, operator_assignment_boolean)
   {
-    ls::std::boxing::Boolean expression{};
+    Boolean expression{};
     expression = true;
 
     ASSERT_TRUE(expression);
@@ -39,7 +43,7 @@ namespace
 
   TEST_F(BooleanTest, operator_assignment_integer)
   {
-    ls::std::boxing::Boolean expression{};
+    Boolean expression{};
     expression = 1;
 
     ASSERT_TRUE(expression);
@@ -49,8 +53,8 @@ namespace
 
   TEST_F(BooleanTest, operator_output_stream)
   {
-    ls::std::boxing::Boolean expression{true};
-    ::std::ostringstream _stream{};
+    Boolean expression{true};
+    ostringstream _stream{};
     _stream << expression;
 
     ASSERT_STREQ("true", _stream.str().c_str());
@@ -60,20 +64,20 @@ namespace
 
   TEST_F(BooleanTest, operator_negation_negative_value)
   {
-    ls::std::boxing::Boolean expression{};
+    Boolean expression{};
     ASSERT_TRUE(!expression);
   }
 
   TEST_F(BooleanTest, operator_negation_positive_value)
   {
-    ls::std::boxing::Boolean expression{true};
+    Boolean expression{true};
     ASSERT_FALSE(!expression);
   }
 
   TEST_F(BooleanTest, operator_and)
   {
-    ls::std::boxing::Boolean expressionA{true};
-    ls::std::boxing::Boolean expressionB{3 == 3};
+    Boolean expressionA{true};
+    Boolean expressionB{3 == 3};
 
     ASSERT_TRUE(expressionA && expressionB);
     ASSERT_TRUE(expressionB && expressionA);
@@ -84,8 +88,8 @@ namespace
 
   TEST_F(BooleanTest, operator_and_with_false_result)
   {
-    ls::std::boxing::Boolean expressionA{true};
-    ls::std::boxing::Boolean expressionB{3 == 4};
+    Boolean expressionA{true};
+    Boolean expressionB{3 == 4};
 
     ASSERT_FALSE(expressionA && expressionB);
     ASSERT_FALSE(expressionB && expressionA);
@@ -96,8 +100,8 @@ namespace
 
   TEST_F(BooleanTest, operator_or)
   {
-    ls::std::boxing::Boolean expressionA{false};
-    ls::std::boxing::Boolean expressionB{3 == 3};
+    Boolean expressionA{false};
+    Boolean expressionB{3 == 3};
 
     ASSERT_TRUE(expressionA || expressionB);
     ASSERT_TRUE(expressionB || expressionA);
@@ -108,8 +112,8 @@ namespace
 
   TEST_F(BooleanTest, operator_or_with_false_result)
   {
-    ls::std::boxing::Boolean expressionA{false};
-    ls::std::boxing::Boolean expressionB{3 == 4};
+    Boolean expressionA{false};
+    Boolean expressionB{3 == 4};
 
     ASSERT_FALSE(expressionA || expressionB);
     ASSERT_FALSE(expressionB || expressionA);
@@ -122,7 +126,7 @@ namespace
 
   TEST_F(BooleanTest, parse_true_value)
   {
-    ls::std::boxing::Boolean expression{};
+    Boolean expression{};
 
     expression.parse("true");
     ASSERT_TRUE(expression);
@@ -136,7 +140,7 @@ namespace
 
   TEST_F(BooleanTest, parse_false_value)
   {
-    ls::std::boxing::Boolean expression{};
+    Boolean expression{};
 
     expression.parse("false");
     ASSERT_FALSE(expression);
@@ -153,24 +157,24 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ls::std::boxing::Boolean expression{};
+                     Boolean expression{};
                      expression.parse("hello");
-                   } catch (const ls::std::core::IllegalArgumentException &_exception)
+                   } catch (const IllegalArgumentException &_exception)
                    {
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 
   TEST_F(BooleanTest, toString_true)
   {
-    ls::std::boxing::Boolean expression{2 < 3};
+    Boolean expression{2 < 3};
     ASSERT_STREQ("true", expression.toString().c_str());
   }
 
   TEST_F(BooleanTest, toString_false)
   {
-    ls::std::boxing::Boolean expression{4 < 3};
+    Boolean expression{4 < 3};
     ASSERT_STREQ("false", expression.toString().c_str());
   }
 
@@ -178,35 +182,35 @@ namespace
 
   TEST_F(BooleanTest, getValue)
   {
-    ls::std::boxing::Boolean x{2 < 3};
+    Boolean x{2 < 3};
     ASSERT_TRUE(x.getValue());
   }
 
   TEST_F(BooleanTest, XOR_with_positive_result)
   {
-    ls::std::boxing::Boolean x{2 < 3};
-    ls::std::boxing::Boolean y{4 < 3};
+    Boolean x{2 < 3};
+    Boolean y{4 < 3};
 
-    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(x, y));
-    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(y, x));
-    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(y, true));
-    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(true, y));
-    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(true, false));
-    ASSERT_TRUE(ls::std::boxing::Boolean::XOR(false, true));
+    ASSERT_TRUE(Boolean::XOR(x, y));
+    ASSERT_TRUE(Boolean::XOR(y, x));
+    ASSERT_TRUE(Boolean::XOR(y, true));
+    ASSERT_TRUE(Boolean::XOR(true, y));
+    ASSERT_TRUE(Boolean::XOR(true, false));
+    ASSERT_TRUE(Boolean::XOR(false, true));
   }
 
   TEST_F(BooleanTest, XOR_with_negative_result)
   {
-    ls::std::boxing::Boolean w{};
-    ls::std::boxing::Boolean x{true};
-    ls::std::boxing::Boolean y{};
-    ls::std::boxing::Boolean z{true};
+    Boolean w{};
+    Boolean x{true};
+    Boolean y{};
+    Boolean z{true};
 
-    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(x, z));
-    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(w, y));
-    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(true, true));
-    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(false, false));
-    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(w, false));
-    ASSERT_FALSE(ls::std::boxing::Boolean::XOR(false, w));
+    ASSERT_FALSE(Boolean::XOR(x, z));
+    ASSERT_FALSE(Boolean::XOR(w, y));
+    ASSERT_FALSE(Boolean::XOR(true, true));
+    ASSERT_FALSE(Boolean::XOR(false, false));
+    ASSERT_FALSE(Boolean::XOR(w, false));
+    ASSERT_FALSE(Boolean::XOR(false, w));
   }
 }

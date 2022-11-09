@@ -3,12 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-20
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_boxing.hpp>
+
+using namespace ls::std::boxing;
+using namespace ::std;
 
 namespace
 {
@@ -30,7 +33,7 @@ namespace
 
   TEST_F(StringTest, operator_assignment)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "Hi!";
 
     ASSERT_STREQ("Hi!", text.toString().c_str());
@@ -40,9 +43,9 @@ namespace
 
   TEST_F(StringTest, operator_add)
   {
-    ls::std::boxing::String greetings{"Hello! "};
-    ls::std::boxing::String question{"How are you? "};
-    const ::std::string& answer = "I'm good by the way!";
+    String greetings{"Hello! "};
+    String question{"How are you? "};
+    const string& answer = "I'm good by the way!";
 
     greetings = greetings + question + answer;
 
@@ -51,7 +54,7 @@ namespace
 
   TEST_F(StringTest, operator_minus)
   {
-    ls::std::boxing::String text{"abcdefghij"};
+    String text{"abcdefghij"};
     text = text - 5;
 
     ASSERT_STREQ("abcde", text.toString().c_str());
@@ -61,8 +64,8 @@ namespace
 
   TEST_F(StringTest, operator_add_assign_with_reference)
   {
-    ls::std::boxing::String text{};
-    ls::std::boxing::String hello{"Hi!"};
+    String text{};
+    String hello{"Hi!"};
 
     text += hello;
     ASSERT_STREQ("Hi!", text.toString().c_str());
@@ -70,7 +73,7 @@ namespace
 
   TEST_F(StringTest, operator_add_assign_with_value)
   {
-    ls::std::boxing::String text{};
+    String text{};
 
     text += "Hi!";
     ASSERT_STREQ("Hi!", text.toString().c_str());
@@ -80,8 +83,8 @@ namespace
 
   TEST_F(StringTest, operator_equals_with_reference)
   {
-    ls::std::boxing::String text{"Hi!"};
-    ls::std::boxing::String hello{"Hi!"};
+    String text{"Hi!"};
+    String hello{"Hi!"};
 
     ASSERT_TRUE(text == hello);
     ASSERT_TRUE(hello == text);
@@ -89,21 +92,21 @@ namespace
 
   TEST_F(StringTest, operator_equals_with_value)
   {
-    ls::std::boxing::String hello{"Hi!"};
+    String hello{"Hi!"};
     ASSERT_TRUE(hello == "Hi!");
   }
 
   TEST_F(StringTest, operator_not_equals_with_reference)
   {
-    ls::std::boxing::String text{"Hi!"};
-    ls::std::boxing::String hello{"Hello!"};
+    String text{"Hi!"};
+    String hello{"Hello!"};
 
     ASSERT_TRUE(text != hello);
   }
 
   TEST_F(StringTest, operator_not_equals_with_value)
   {
-    ls::std::boxing::String text{"Hi!"};
+    String text{"Hi!"};
     ASSERT_TRUE(text != "Hello!");
   }
 
@@ -111,7 +114,7 @@ namespace
 
   TEST_F(StringTest, parse)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text.parse("Hello!");
 
     ASSERT_STREQ("Hello!", text.toString().c_str());
@@ -119,7 +122,7 @@ namespace
 
   TEST_F(StringTest, toString)
   {
-    ls::std::boxing::String text{"Hello!"};
+    String text{"Hello!"};
     ASSERT_STREQ("Hello!", text.toString().c_str());
   }
 
@@ -127,7 +130,7 @@ namespace
 
   TEST_F(StringTest, contains)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "Hey, I'm searching for the keyword 'cake'!";
 
     ASSERT_TRUE(text.contains("cake"));
@@ -135,7 +138,7 @@ namespace
 
   TEST_F(StringTest, contains_does_not_contain_search_word)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "Hey, I'm searching for the keyword 'cake'!";
 
     ASSERT_FALSE(text.contains("butter"));
@@ -143,7 +146,7 @@ namespace
 
   TEST_F(StringTest, endsWith)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "abcdef";
 
     ASSERT_TRUE(text.endsWith("ef"));
@@ -151,7 +154,7 @@ namespace
 
   TEST_F(StringTest, endsWith_does_not_end_with_pattern)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "abcdef";
 
     ASSERT_FALSE(text.endsWith("efg"));
@@ -159,8 +162,8 @@ namespace
 
   TEST_F(StringTest, equalsIgnoreCase)
   {
-    ls::std::boxing::String text{"Hello!"};
-    ls::std::boxing::String hello{"HeLLo!"};
+    String text{"Hello!"};
+    String hello{"HeLLo!"};
 
     ASSERT_TRUE(text.equalsIgnoreCase(hello));
     ASSERT_TRUE(text.equalsIgnoreCase("HeLLO!"));
@@ -168,16 +171,16 @@ namespace
 
   TEST_F(StringTest, getByteData)
   {
-    ls::std::boxing::String text{"Hallo!"};
+    String text{"Hallo!"};
     ASSERT_STREQ("Hallo!", text.getByteData().data());
   }
 
   TEST_F(StringTest, padLeft)
   {
-    ls::std::boxing::String text{"abcdef"};
-    ls::std::boxing::String anotherText{"ab"};
-    ls::std::boxing::String emptyText{};
-    ls::std::boxing::String longText{"This text is too long to fill!"};
+    String text{"abcdef"};
+    String anotherText{"ab"};
+    String emptyText{};
+    String longText{"This text is too long to fill!"};
 
     ASSERT_STREQ("    abcdef", text.padLeft(10, ' ').c_str());
     ASSERT_STREQ("        ab", anotherText.padLeft(10, ' ').c_str());
@@ -187,10 +190,10 @@ namespace
 
   TEST_F(StringTest, padRight)
   {
-    ls::std::boxing::String text{"abcdef"};
-    ls::std::boxing::String anotherText{"ab"};
-    ls::std::boxing::String emptyText{};
-    ls::std::boxing::String longText{"This text is too long to fill!"};
+    String text{"abcdef"};
+    String anotherText{"ab"};
+    String emptyText{};
+    String longText{"This text is too long to fill!"};
 
     ASSERT_STREQ("abcdef    ", text.padRight(10, ' ').c_str());
     ASSERT_STREQ("ab        ", anotherText.padRight(10, ' ').c_str());
@@ -200,7 +203,7 @@ namespace
 
   TEST_F(StringTest, reverse)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "abcdef";
 
     ASSERT_STREQ("fedcba", text.reverse().c_str());
@@ -209,7 +212,7 @@ namespace
 
   TEST_F(StringTest, startsWith)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "abcdef";
 
     ASSERT_TRUE(text.startsWith("abc"));
@@ -217,7 +220,7 @@ namespace
 
   TEST_F(StringTest, startsWith_does_not_start_with_pattern)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "abcdef";
 
     ASSERT_FALSE(text.startsWith("bc"));
@@ -225,7 +228,7 @@ namespace
 
   TEST_F(StringTest, toLowerCase)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("abcdefghijklmn", text.toLowerCase().c_str());
@@ -234,7 +237,7 @@ namespace
 
   TEST_F(StringTest, toUpperCase)
   {
-    ls::std::boxing::String text{};
+    String text{};
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("ABCDEFGHIJKLMN", text.toUpperCase().c_str());
