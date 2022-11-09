@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-13
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
+
+using namespace ls::std::core;
 
 namespace
 {
@@ -31,13 +33,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::std::core::IllegalArgumentException{};
+                     throw IllegalArgumentException{};
                    }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
+                   catch (const IllegalArgumentException &_exception)
                    {
                      EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
                      throw;
                    }
-                 }, ls::std::core::IllegalArgumentException);
+                 }, IllegalArgumentException);
   }
 }

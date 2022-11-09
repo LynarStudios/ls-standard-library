@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2022-05-13
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
+
+using namespace ls::std::core;
 
 namespace
 {
@@ -31,13 +33,13 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     throw ls::std::core::EventNotHandledException{};
+                     throw EventNotHandledException{};
                    }
-                   catch (const ls::std::core::EventNotHandledException &_exception)
+                   catch (const EventNotHandledException &_exception)
                    {
                      EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", _exception.what());
                      throw;
                    }
-                 }, ls::std::core::EventNotHandledException);
+                 }, EventNotHandledException);
   }
 }

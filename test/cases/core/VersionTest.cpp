@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2022-05-13
+ * Changed:         2022-11-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_core.hpp>
+
+using namespace ls::std::core;
 
 namespace
 {
@@ -30,13 +32,13 @@ namespace
 
   TEST_F(VersionTest, marshal)
   {
-    ls::std::core::Version version{2020, 2, 0};
+    Version version{2020, 2, 0};
     ASSERT_STREQ("2020.2.0", version.marshal().c_str());
   }
 
   TEST_F(VersionTest, unmarshal)
   {
-    ls::std::core::Version version{0, 0, 0};
+    Version version{0, 0, 0};
     version.unmarshal("2020.2.13");
 
     ASSERT_EQ(2020, version.getMajorVersion());
@@ -48,44 +50,44 @@ namespace
 
   TEST_F(VersionTest, getMajorVersion)
   {
-    ls::std::core::Version version{13, 2, 4};
+    Version version{13, 2, 4};
     ASSERT_EQ(13, version.getMajorVersion());
   }
 
   TEST_F(VersionTest, getMinorVersion)
   {
-    ls::std::core::Version version{13, 2, 4};
+    Version version{13, 2, 4};
     ASSERT_EQ(2, version.getMinorVersion());
   }
 
   TEST_F(VersionTest, getPatchVersion)
   {
-    ls::std::core::Version version{13, 2, 4};
+    Version version{13, 2, 4};
     ASSERT_EQ(4, version.getPatchVersion());
   }
 
   TEST_F(VersionTest, isValid)
   {
-    ASSERT_TRUE(ls::std::core::Version::isValid("2020.1.2"));
-    ASSERT_TRUE(ls::std::core::Version::isValid("2.5.1"));
+    ASSERT_TRUE(Version::isValid("2020.1.2"));
+    ASSERT_TRUE(Version::isValid("2.5.1"));
   }
 
   TEST_F(VersionTest, isValid_emptyString)
   {
-    ASSERT_FALSE(ls::std::core::Version::isValid(""));
+    ASSERT_FALSE(Version::isValid(""));
   }
 
   TEST_F(VersionTest, isValid_noValidVersionString)
   {
-    ASSERT_FALSE(ls::std::core::Version::isValid("v2020.1.2"));
-    ASSERT_FALSE(ls::std::core::Version::isValid("2.5"));
-    ASSERT_FALSE(ls::std::core::Version::isValid("2020"));
-    ASSERT_FALSE(ls::std::core::Version::isValid("blaaaa"));
+    ASSERT_FALSE(Version::isValid("v2020.1.2"));
+    ASSERT_FALSE(Version::isValid("2.5"));
+    ASSERT_FALSE(Version::isValid("2020"));
+    ASSERT_FALSE(Version::isValid("blaaaa"));
   }
 
   TEST_F(VersionTest, setMajorVersion)
   {
-    ls::std::core::Version version{13, 2, 4};
+    Version version{13, 2, 4};
     ASSERT_EQ(13, version.getMajorVersion());
 
     version.setMajorVersion(14);
@@ -94,7 +96,7 @@ namespace
 
   TEST_F(VersionTest, setMinorVersion)
   {
-    ls::std::core::Version version{13, 2, 4};
+    Version version{13, 2, 4};
     ASSERT_EQ(2, version.getMinorVersion());
 
     version.setMinorVersion(3);
@@ -103,7 +105,7 @@ namespace
 
   TEST_F(VersionTest, setPatchVersion)
   {
-    ls::std::core::Version version{13, 2, 4};
+    Version version{13, 2, 4};
     ASSERT_EQ(4, version.getPatchVersion());
 
     version.setPatchVersion(5);
