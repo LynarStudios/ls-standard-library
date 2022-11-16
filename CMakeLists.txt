@@ -18,6 +18,7 @@ set(MODULE_NAME_CORE ls_std_core)
 set(MODULE_NAME_ENCODING ls_std_encoding)
 set(MODULE_NAME_EVENT ls_std_event)
 set(MODULE_NAME_IO ls_std_io)
+set(MODULE_NAME_NETWORK ls_std_network)
 set(MODULE_NAME_TIME ls_std_time)
 
 set(GOOGLE_TEST_MODULE googletest-1.11.0)
@@ -178,6 +179,9 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
 
+set(SOURCE_FILES_NETWORK
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp)
+
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
 
@@ -254,6 +258,9 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 
+    set(TEST_FILES_NETWORK
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/SocketTest.cpp)
+
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
@@ -315,6 +322,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Build Tests (network)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_NETWORK}: Building tests...")
+    add_executable(${MODULE_NAME_NETWORK}_test ${TEST_FILES_NETWORK})
+endif ()
+
+##########################################################
 # Build Tests (time)
 ##########################################################
 
@@ -335,6 +351,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${TEST_FILES_ENCODING}
             ${TEST_FILES_EVENT}
             ${TEST_FILES_IO}
+            ${TEST_FILES_NETWORK}
             ${TEST_FILES_SERIALIZATION}
             ${TEST_FILES_TIME})
 endif ()
@@ -463,6 +480,28 @@ if (${LS_STD_BUILD_MODULE})
 endif ()
 
 ##########################################################
+# Build Library (network)
+##########################################################
+
+message("${PROJECT_NAME}: Building ${MODULE_NAME_NETWORK} library version ${PROJECT_VERSION}...")
+
+if (${LS_STD_BUILD_STATIC})
+    add_library("${MODULE_NAME_NETWORK}" STATIC ${SOURCE_FILES_NETWORK})
+    set_target_properties("${MODULE_NAME_NETWORK}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_SHARED})
+    add_library("${MODULE_NAME_NETWORK}" SHARED ${SOURCE_FILES_NETWORK})
+    target_link_libraries("${MODULE_NAME_NETWORK}" ${MODULE_NAME_CORE})
+    set_target_properties("${MODULE_NAME_NETWORK}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+if (${LS_STD_BUILD_MODULE})
+    add_library("${MODULE_NAME_NETWORK}" MODULE ${SOURCE_FILES_NETWORK})
+    set_target_properties("${MODULE_NAME_NETWORK}" PROPERTIES DEBUG_POSTFIX "_d")
+endif ()
+
+##########################################################
 # Build Library (time)
 ##########################################################
 
@@ -562,6 +601,20 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
+# Linking (network)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_NETWORK}: Linking libraries for test application...")
+    target_link_libraries(${MODULE_NAME_NETWORK}_test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_NETWORK}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+##########################################################
 # Linking (time)
 ##########################################################
 
@@ -590,5 +643,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
+            "${MODULE_NAME_NETWORK}"
             "${MODULE_NAME_TIME}")
 endif ()
