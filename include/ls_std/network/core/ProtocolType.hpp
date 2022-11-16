@@ -14,7 +14,8 @@ namespace ls::std::network
 {
   enum ProtocolType
   {
-    TCP = 0
+    PROTOCOL_TYPE_NOT_INITIALIZED = 0,
+    PROTOCOL_TYPE_TCP
   };
 }
 
