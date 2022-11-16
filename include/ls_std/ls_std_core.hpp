@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2022-10-27
+ * Changed:         2022-11-16
  *
  * */
 
@@ -30,6 +30,7 @@
 
 #include <ls_std/core/types/EventTypes.hpp>
 #include <ls_std/core/types/KvTypes.hpp>
+#include <ls_std/core/types/SocketTypes.hpp>
 #include <ls_std/core/types/Types.hpp>
 
 #include <ls_std/core/utils/RegexUtils.hpp>
