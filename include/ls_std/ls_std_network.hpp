@@ -10,8 +10,12 @@
 #ifndef LS_STD_LS_STD_NETWORK_HPP
 #define LS_STD_LS_STD_NETWORK_HPP
 
+#include <ls_std/network/core/ProtocolFamily.hpp>
+#include <ls_std/network/core/ProtocolFamilyMapper.hpp>
+#include <ls_std/network/core/ProtocolFamilyType.hpp>
 #include <ls_std/network/core/ProtocolType.hpp>
 #include <ls_std/network/socket/Socket.hpp>
+#include <ls_std/network/socket/SocketAddress.hpp>
 #include <ls_std/network/socket/SocketParameter.hpp>
 
 #endif

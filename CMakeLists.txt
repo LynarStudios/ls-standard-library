@@ -180,6 +180,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
 
 set(SOURCE_FILES_NETWORK
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolFamilyMapper.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp)
 
 set(SOURCE_FILES_TIME
@@ -259,6 +260,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 
     set(TEST_FILES_NETWORK
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/core/ProtocolFamilyMapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/SocketTest.cpp)
 
     set(TEST_FILES_SERIALIZATION
