@@ -10,13 +10,15 @@
 #ifndef LS_STD_SOCKET_PARAMETER_HPP
 #define LS_STD_SOCKET_PARAMETER_HPP
 
-#include <ls_std/network/core/ProtocolType.hpp>
+#include <ls_std/network/core/ProtocolFamilyType.hpp>
+#include "SocketAddress.hpp"
 
 namespace ls::std::network
 {
   struct SocketParameter
   {
-    ProtocolType protocolType{};
+    ls::std::network::ProtocolFamilyType protocolFamilyType{};
+    ls::std::network::SocketAddress socketAddress{};
   };
 }
 
