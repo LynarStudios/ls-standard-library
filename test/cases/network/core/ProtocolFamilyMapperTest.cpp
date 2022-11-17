@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-11-16
+ * Changed:         2022-11-17
  *
  * */
 
@@ -47,7 +47,7 @@ namespace
     #endif
   }
 
-  TEST_F(ProtocolFamilyMapperTest, from_invalid_protocol_type)
+  TEST_F(ProtocolFamilyMapperTest, from_invalid_protocol_family_type)
   {
     EXPECT_THROW({
                    try

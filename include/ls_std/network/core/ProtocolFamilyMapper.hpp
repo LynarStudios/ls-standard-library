@@ -13,10 +13,11 @@
 #include <ls_std/core/Class.hpp>
 #include <ls_std/network/core/ProtocolFamily.hpp>
 #include <ls_std/network/core/ProtocolFamilyType.hpp>
+#include <ls_std/os/dynamic_goal.hpp>
 
 namespace ls::std::network
 {
-  class ProtocolFamilyMapper : public ls::std::core::Class
+  class LS_STD_DYNAMIC_GOAL ProtocolFamilyMapper : public ls::std::core::Class
   {
     public:
 
@@ -27,7 +28,9 @@ namespace ls::std::network
 
     private:
 
+      #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] static ls::std::network::ProtocolFamily _toUnixProtocolFamily(const ls::std::network::ProtocolFamilyType& _protocolFamilyType);
+      #endif
   };
 }
 
