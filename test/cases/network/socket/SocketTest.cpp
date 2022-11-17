@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-11-16
+ * Changed:         2022-11-17
  *
  * */
 
@@ -26,10 +26,28 @@ namespace
 
       void TearDown() override
       {}
+
+      static SocketParameter generateSocketParameter()
+      {
+        SocketParameter socketParameter{};
+        socketParameter.protocolFamilyType = ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_IPV4;
+
+        SocketAddress socketAddress{};
+        socketAddress.protocolType = ProtocolType::PROTOCOL_TYPE_TCP;
+        socketParameter.socketAddress = socketAddress;
+
+        return socketParameter;
+      }
   };
 
   TEST_F(SocketTest, getClassName)
   {
-    ASSERT_STREQ("Socket", Socket{SocketParameter{}}.getClassName().c_str());
+    ASSERT_STREQ("Socket", Socket{generateSocketParameter()}.getClassName().c_str());
+  }
+
+  TEST_F(SocketTest, isInitialized)
+  {
+    Socket socket{generateSocketParameter()};
+    ASSERT_TRUE(socket.isInitialized());
   }
 }
