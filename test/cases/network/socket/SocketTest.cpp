@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-11-17
+ * Changed:         2022-11-18
  *
  * */
 
@@ -34,6 +34,8 @@ namespace
 
         SocketAddress socketAddress{};
         socketAddress.protocolType = ProtocolType::PROTOCOL_TYPE_TCP;
+        socketAddress.ipAddress = "127.0.0.1";
+        socketAddress.port = 2220;
         socketParameter.socketAddress = socketAddress;
 
         return socketParameter;
@@ -43,6 +45,12 @@ namespace
   TEST_F(SocketTest, getClassName)
   {
     ASSERT_STREQ("Socket", Socket{generateSocketParameter()}.getClassName().c_str());
+  }
+
+  TEST_F(SocketTest, connect)
+  {
+    Socket socket{generateSocketParameter()};
+    ASSERT_TRUE(socket.connect());
   }
 
   TEST_F(SocketTest, isInitialized)

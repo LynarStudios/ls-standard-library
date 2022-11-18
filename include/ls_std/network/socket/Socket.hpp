@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-11-17
+ * Changed:         2022-11-18
  *
  * */
 
@@ -23,13 +23,20 @@ namespace ls::std::network
       explicit Socket(const ls::std::network::SocketParameter& _parameter);
       ~Socket() override = default;
 
+      [[nodiscard]] bool connect();
       [[nodiscard]] bool isInitialized() const;
 
     private:
 
       bool initialized{};
       ls::std::network::SocketParameter parameter{};
+      #if defined(unix) || defined(__APPLE__)
+      int unixDescriptor{};
+      #endif
 
+      #if defined(unix) || defined(__APPLE__)
+      [[nodiscard]] bool _connectUnix() const;
+      #endif
       [[nodiscard]] static bool _init(const ls::std::network::SocketParameter& _parameter);
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] static bool _initUnix(const ls::std::network::SocketParameter& _parameter);
