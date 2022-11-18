@@ -40,12 +40,12 @@ bool ls::std::network::Socket::isInitialized() const
 #if defined(unix) || defined(__APPLE__)
 bool ls::std::network::Socket::_connectUnix() const
 {
-  sockaddr_in socketAddressUnix{}; // TODO: put everything inside a dedicated mapper
+  ::sockaddr_in socketAddressUnix{}; // TODO: put everything inside a dedicated mapper
   socketAddressUnix.sin_port = htons(this->parameter.socketAddress.port);
 
   ls::std::network::ProtocolFamily protocolFamily = ls::std::network::ProtocolFamilyMapper::from(this->parameter.protocolFamilyType);
   socketAddressUnix.sin_family = protocolFamily.unixDomain;
-  inet_aton(this->parameter.socketAddress.ipAddress.c_str(), &socketAddressUnix.sin_addr);
+  ::inet_aton(this->parameter.socketAddress.ipAddress.c_str(), &socketAddressUnix.sin_addr);
 
   return ::connect(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&socketAddressUnix), sizeof(socketAddressUnix)) == 0;
 }
@@ -64,6 +64,6 @@ bool ls::std::network::Socket::_initUnix(const ls::std::network::SocketParameter
   ls::std::network::ProtocolFamily protocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(_parameter.socketAddress.protocolType);
 
-  return socket(protocolFamily.unixDomain, protocol.unixProtocol, 0);
+  return ::socket(protocolFamily.unixDomain, protocol.unixProtocol, 0);
 }
 #endif
