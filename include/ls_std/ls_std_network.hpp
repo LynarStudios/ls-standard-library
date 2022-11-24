@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-11-17
+ * Changed:         2022-11-18
  *
  * */
 
@@ -16,8 +16,11 @@
 #include <ls_std/network/core/ProtocolFamilyType.hpp>
 #include <ls_std/network/core/ProtocolMapper.hpp>
 #include <ls_std/network/core/ProtocolType.hpp>
+#include <ls_std/network/socket/ConvertedSocketAddress.hpp>
 #include <ls_std/network/socket/Socket.hpp>
 #include <ls_std/network/socket/SocketAddress.hpp>
+#include <ls_std/network/socket/SocketAddressMapper.hpp>
+#include <ls_std/network/socket/SocketAddressMapperParameter.hpp>
 #include <ls_std/network/socket/SocketParameter.hpp>
 
 #endif

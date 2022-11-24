@@ -182,7 +182,8 @@ set(SOURCE_FILES_IO
 set(SOURCE_FILES_NETWORK
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolFamilyMapper.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolMapper.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/SocketAddressMapper.cpp)
 
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
@@ -263,6 +264,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES_NETWORK
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/core/ProtocolFamilyMapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/core/ProtocolMapperTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/SocketAddressMapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/SocketTest.cpp)
 
     set(TEST_FILES_SERIALIZATION
