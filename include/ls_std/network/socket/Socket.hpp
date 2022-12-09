@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-11-18
+ * Changed:         2022-12-09
  *
  * */
 
@@ -13,6 +13,7 @@
 #include <ls_std/os/dynamic_goal.hpp>
 #include <ls_std/core/Class.hpp>
 #include "SocketParameter.hpp"
+#include "SocketAddressMapperParameter.hpp"
 
 namespace ls::std::network
 {
@@ -37,6 +38,7 @@ namespace ls::std::network
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] bool _connectUnix() const;
       #endif
+      [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;
       [[nodiscard]] static bool _init(const ls::std::network::SocketParameter& _parameter);
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] static bool _initUnix(const ls::std::network::SocketParameter& _parameter);
