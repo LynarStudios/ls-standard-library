@@ -3,14 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-11-18
+ * Changed:         2022-12-09
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_network.hpp>
+#include <ls_std_network_test.hpp>
 
 using namespace ls::std::network;
+using namespace ::testing;
+using namespace ls_std_network_test;
 
 namespace
 {
@@ -49,6 +52,12 @@ namespace
 
   TEST_F(SocketTest, connect)
   {
+    #if defined(unix) || defined(__APPLE__)
+    MockPosixSocket mockPosixSocket{};
+    EXPECT_CALL(mockPosixSocket, connect(_, _, _)).Times(1);
+    ON_CALL(mockPosixSocket, connect(_, _, _)).WillByDefault(Return(true));
+    #endif
+
     Socket socket{generateSocketParameter()};
     ASSERT_TRUE(socket.connect());
   }
