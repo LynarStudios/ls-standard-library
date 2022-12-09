@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-18
- * Changed:         2022-11-18
+ * Changed:         2022-12-09
  *
  * */
 
@@ -33,7 +33,7 @@ ls::std::network::ConvertedSocketAddress ls::std::network::SocketAddressMapper::
 ::sockaddr_in ls::std::network::SocketAddressMapper::_toSockAddressUnix(const ls::std::network::SocketAddressMapperParameter &_parameter)
 {
   ::sockaddr_in socketAddressUnix{};
-  socketAddressUnix.sin_port = htons(_parameter.socketAddress.port);
+  socketAddressUnix.sin_port = ::htons(_parameter.socketAddress.port);
 
   ls::std::network::ProtocolFamily protocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
   socketAddressUnix.sin_family = protocolFamily.unixDomain;
