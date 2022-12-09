@@ -8,7 +8,7 @@
  * */
 
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
-#include <ls_std/network/core/ProtocolFamily.hpp>
+#include <ls_std/network/core/ConvertedProtocolFamily.hpp>
 #include <ls_std/network/core/ProtocolFamilyMapper.hpp>
 #if defined(unix) || defined(__APPLE__)
 #include <netinet/in.h>
@@ -35,8 +35,8 @@ ls::std::network::ConvertedSocketAddress ls::std::network::SocketAddressMapper::
   ::sockaddr_in socketAddressUnix{};
   socketAddressUnix.sin_port = ::htons(_parameter.socketAddress.port);
 
-  ls::std::network::ProtocolFamily protocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
-  socketAddressUnix.sin_family = protocolFamily.unixDomain;
+  ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
+  socketAddressUnix.sin_family = convertedProtocolFamily.unixDomain;
   ::inet_aton(_parameter.socketAddress.ipAddress.c_str(), &socketAddressUnix.sin_addr);
 
   return socketAddressUnix;

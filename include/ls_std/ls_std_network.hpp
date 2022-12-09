@@ -3,15 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-11-18
+ * Changed:         2022-12-09
  *
  * */
 
 #ifndef LS_STD_LS_STD_NETWORK_HPP
 #define LS_STD_LS_STD_NETWORK_HPP
 
+#include <ls_std/network/core/ConvertedProtocolFamily.hpp>
 #include <ls_std/network/core/Protocol.hpp>
-#include <ls_std/network/core/ProtocolFamily.hpp>
 #include <ls_std/network/core/ProtocolFamilyMapper.hpp>
 #include <ls_std/network/core/ProtocolFamilyType.hpp>
 #include <ls_std/network/core/ProtocolMapper.hpp>

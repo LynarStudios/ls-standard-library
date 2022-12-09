@@ -64,9 +64,9 @@ bool ls::std::network::Socket::_init(const ls::std::network::SocketParameter &_p
 #if defined(unix) || defined(__APPLE__)
 bool ls::std::network::Socket::_initUnix(const ls::std::network::SocketParameter &_parameter)
 {
-  ls::std::network::ProtocolFamily protocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
+  ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(_parameter.socketAddress.protocolType);
 
-  return ::socket(protocolFamily.unixDomain, protocol.unixProtocol, 0);
+  return ::socket(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0);
 }
 #endif

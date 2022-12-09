@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-11-17
+ * Changed:         2022-12-09
  *
  * */
 
@@ -40,10 +40,10 @@ namespace
 
   TEST_F(ProtocolFamilyMapperTest, from)
   {
-    ProtocolFamily protocolFamily = ProtocolFamilyMapper::from(ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_IPV4);
+    ConvertedProtocolFamily convertedProtocolFamily = ProtocolFamilyMapper::from(ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_IPV4);
 
     #if defined(unix) || defined(__APPLE__)
-    ASSERT_EQ(AF_INET, protocolFamily.unixDomain);
+    ASSERT_EQ(AF_INET, convertedProtocolFamily.unixDomain);
     #endif
   }
 
@@ -52,7 +52,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     ProtocolFamily protocolFamily = ProtocolFamilyMapper::from(ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_NOT_INITIALIZED);
+                     ConvertedProtocolFamily convertedProtocolFamily = ProtocolFamilyMapper::from(ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_NOT_INITIALIZED);
                    }
                    catch (const IllegalArgumentException &_exception)
                    {
