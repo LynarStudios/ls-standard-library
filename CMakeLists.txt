@@ -179,11 +179,16 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
 
-set(SOURCE_FILES_NETWORK
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolFamilyMapper.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolMapper.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/SocketAddressMapper.cpp)
+if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
+        ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang OR
+        ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
+    set(SOURCE_FILES_NETWORK
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolFamilyMapper.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolMapper.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/PosixSocket.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/SocketAddressMapper.cpp)
+endif()
 
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)

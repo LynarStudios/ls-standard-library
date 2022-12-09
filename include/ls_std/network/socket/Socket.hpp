@@ -12,6 +12,9 @@
 
 #include <ls_std/os/dynamic_goal.hpp>
 #include <ls_std/core/Class.hpp>
+#if defined(unix) || defined(__APPLE__)
+#include "PosixSocket.hpp"
+#endif
 #include "SocketParameter.hpp"
 #include "SocketAddressMapperParameter.hpp"
 
@@ -32,16 +35,17 @@ namespace ls::std::network
       bool initialized{};
       ls::std::network::SocketParameter parameter{};
       #if defined(unix) || defined(__APPLE__)
+      ls::std::network::PosixSocket posixSocket{};
       int unixDescriptor{};
       #endif
 
       #if defined(unix) || defined(__APPLE__)
-      [[nodiscard]] bool _connectUnix() const;
+      [[nodiscard]] bool _connectUnix();
       #endif
       [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;
-      [[nodiscard]] static bool _init(const ls::std::network::SocketParameter& _parameter);
+      [[nodiscard]] bool _init(const ls::std::network::SocketParameter& _parameter);
       #if defined(unix) || defined(__APPLE__)
-      [[nodiscard]] static bool _initUnix(const ls::std::network::SocketParameter& _parameter);
+      [[nodiscard]] bool _initUnix(const ls::std::network::SocketParameter& _parameter);
       #endif
   };
 }

@@ -8,9 +8,6 @@
  * */
 
 #include <ls_std/network/socket/Socket.hpp>
-#if defined(unix) || defined(__APPLE__)
-#include <sys/socket.h>
-#endif
 #include <ls_std/network/core/ProtocolFamilyMapper.hpp>
 #include <ls_std/network/core/ProtocolMapper.hpp>
 #include <ls_std/network/socket/ConvertedSocketAddress.hpp>
@@ -38,10 +35,10 @@ bool ls::std::network::Socket::isInitialized() const
 }
 
 #if defined(unix) || defined(__APPLE__)
-bool ls::std::network::Socket::_connectUnix() const
+bool ls::std::network::Socket::_connectUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
-  return ::connect(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), sizeof(convertedSocketAddress.socketAddressUnix)) == 0;
+  return this->posixSocket.connect(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), sizeof(convertedSocketAddress.socketAddressUnix)) == 0;
 }
 #endif
 
@@ -57,7 +54,7 @@ ls::std::network::SocketAddressMapperParameter ls::std::network::Socket::_create
 bool ls::std::network::Socket::_init(const ls::std::network::SocketParameter &_parameter)
 {
   #if defined(unix) || defined(__APPLE__)
-  return ls::std::network::Socket::_initUnix(_parameter);
+  return this->_initUnix(_parameter);
   #endif
 }
 
@@ -67,6 +64,6 @@ bool ls::std::network::Socket::_initUnix(const ls::std::network::SocketParameter
   ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(_parameter.socketAddress.protocolType);
 
-  return ::socket(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0);
+  return this->posixSocket.create(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0);
 }
 #endif
