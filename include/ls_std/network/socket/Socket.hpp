@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-09
+ * Changed:         2022-12-10
  *
  * */
 
@@ -17,6 +17,7 @@
 #endif
 #include "SocketParameter.hpp"
 #include "SocketAddressMapperParameter.hpp"
+#include <memory>
 
 namespace ls::std::network
 {
@@ -35,7 +36,7 @@ namespace ls::std::network
       bool initialized{};
       ls::std::network::SocketParameter parameter{};
       #if defined(unix) || defined(__APPLE__)
-      ls::std::network::PosixSocket posixSocket{};
+      ::std::shared_ptr<ls::std::core::interface_type::IPosixSocket> posixSocket{};
       int unixDescriptor{};
       #endif
 
@@ -46,6 +47,7 @@ namespace ls::std::network
       [[nodiscard]] bool _init(const ls::std::network::SocketParameter& _parameter);
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] bool _initUnix(const ls::std::network::SocketParameter& _parameter);
+      void _selectUnixSocketApi(const ls::std::network::SocketParameter& _parameter);
       #endif
   };
 }

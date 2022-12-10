@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-09
+ * Changed:         2022-12-10
  *
  * */
 
@@ -12,6 +12,9 @@
 #include <ls_std/network/core/ProtocolMapper.hpp>
 #include <ls_std/network/socket/ConvertedSocketAddress.hpp>
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
+#include <ls_std/network/socket/MockPosixSocket.hpp>
+#include <ls_std/network/socket/PosixSocket.hpp>
+#include <memory>
 
 ls::std::network::Socket::Socket(const ls::std::network::SocketParameter& _parameter) : ls::std::core::Class("Socket"),
 parameter(_parameter)
@@ -38,7 +41,7 @@ bool ls::std::network::Socket::isInitialized() const
 bool ls::std::network::Socket::_connectUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
-  return this->posixSocket.connect(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), sizeof(convertedSocketAddress.socketAddressUnix)) == 0;
+  return this->posixSocket->connect(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), sizeof(convertedSocketAddress.socketAddressUnix)) == 0;
 }
 #endif
 
@@ -61,9 +64,22 @@ bool ls::std::network::Socket::_init(const ls::std::network::SocketParameter &_p
 #if defined(unix) || defined(__APPLE__)
 bool ls::std::network::Socket::_initUnix(const ls::std::network::SocketParameter &_parameter)
 {
+  this->_selectUnixSocketApi(_parameter);
   ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(_parameter.socketAddress.protocolType);
 
-  return this->posixSocket.create(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0);
+  return this->posixSocket->create(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0) != -1;
+}
+
+void ls::std::network::Socket::_selectUnixSocketApi(const ls::std::network::SocketParameter &_parameter)
+{
+  if (_parameter.mockSocketApi)
+  {
+    this->posixSocket = ::std::make_shared<ls_std_network_test::MockPosixSocket>();
+  }
+  else
+  {
+    this->posixSocket = ::std::make_shared<ls::std::network::PosixSocket>();
+  }
 }
 #endif

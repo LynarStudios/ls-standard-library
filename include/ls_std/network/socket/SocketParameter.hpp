@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-11-16
+ * Changed:         2022-12-10
  *
  * */
 
@@ -17,6 +17,7 @@ namespace ls::std::network
 {
   struct SocketParameter
   {
+    bool mockSocketApi{};
     ls::std::network::ProtocolFamilyType protocolFamilyType{};
     ls::std::network::SocketAddress socketAddress{};
   };
