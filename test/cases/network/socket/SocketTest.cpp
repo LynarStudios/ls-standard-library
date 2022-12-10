@@ -49,6 +49,23 @@ namespace
     ASSERT_STREQ("Socket", Socket{generateSocketParameter()}.getClassName().c_str());
   }
 
+  TEST_F(SocketTest, bind)
+  {
+    #if defined(unix) || defined(__APPLE__)
+    MockPosixSocket mockPosixSocket{};
+    EXPECT_CALL(mockPosixSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(mockPosixSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(mockPosixSocket, bind(_, _, _)).Times(AtLeast(1));
+    ON_CALL(mockPosixSocket, bind(_, _, _)).WillByDefault(Return(0));
+    #endif
+
+    SocketParameter parameter = generateSocketParameter();
+    parameter.mockSocketApi = true;
+    Socket socket{parameter};
+
+    ASSERT_TRUE(socket.bind());
+  }
+
   TEST_F(SocketTest, connect)
   {
     #if defined(unix) || defined(__APPLE__)
