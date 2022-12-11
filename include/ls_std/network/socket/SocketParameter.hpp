@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-10
+ * Changed:         2022-12-11
  *
  * */
 
@@ -12,12 +12,13 @@
 
 #include <ls_std/network/core/ProtocolFamilyType.hpp>
 #include "SocketAddress.hpp"
+#include <memory>
 
 namespace ls::std::network
 {
   struct SocketParameter
   {
-    bool mockSocketApi{};
+    ::std::shared_ptr<ls::std::core::interface_type::IPosixSocket> posixSocket{};
     ls::std::network::ProtocolFamilyType protocolFamilyType{};
     ls::std::network::SocketAddress socketAddress{};
   };

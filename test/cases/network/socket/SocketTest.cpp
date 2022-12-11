@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-12-10
+ * Changed:         2022-12-11
  *
  * */
 
@@ -51,35 +51,37 @@ namespace
 
   TEST_F(SocketTest, bind)
   {
+    SocketParameter parameter = generateSocketParameter();
+
     #if defined(unix) || defined(__APPLE__)
-    MockPosixSocket mockPosixSocket{};
-    EXPECT_CALL(mockPosixSocket, create(_, _, _)).Times(AtLeast(1));
-    ON_CALL(mockPosixSocket, create(_, _, _)).WillByDefault(Return(0));
-    EXPECT_CALL(mockPosixSocket, bind(_, _, _)).Times(AtLeast(1));
-    ON_CALL(mockPosixSocket, bind(_, _, _)).WillByDefault(Return(0));
+    ::std::shared_ptr<ls_std_network_test::MockPosixSocket> mockSocket = ::std::make_shared<ls_std_network_test::MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, bind(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, bind(_, _, _)).WillByDefault(Return(0));
     #endif
 
-    SocketParameter parameter = generateSocketParameter();
-    parameter.mockSocketApi = true;
     Socket socket{parameter};
-
     ASSERT_TRUE(socket.bind());
   }
 
   TEST_F(SocketTest, connect)
   {
+    SocketParameter parameter = generateSocketParameter();
+
     #if defined(unix) || defined(__APPLE__)
-    MockPosixSocket mockPosixSocket{};
-    EXPECT_CALL(mockPosixSocket, create(_, _, _)).Times(AtLeast(1));
-    ON_CALL(mockPosixSocket, create(_, _, _)).WillByDefault(Return(0));
-    EXPECT_CALL(mockPosixSocket, connect(_, _, _)).Times(AtLeast(1));
-    ON_CALL(mockPosixSocket, connect(_, _, _)).WillByDefault(Return(0));
+    ::std::shared_ptr<ls_std_network_test::MockPosixSocket> mockSocket = ::std::make_shared<ls_std_network_test::MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, connect(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, connect(_, _, _)).WillByDefault(Return(0));
     #endif
 
-    SocketParameter parameter = generateSocketParameter();
-    parameter.mockSocketApi = true;
     Socket socket{parameter};
-
     ASSERT_TRUE(socket.connect());
   }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-10
+ * Changed:         2022-12-11
  *
  * */
 
@@ -25,7 +25,7 @@ namespace ls::std::network
   {
     public:
 
-      explicit Socket(const ls::std::network::SocketParameter& _parameter);
+      explicit Socket(ls::std::network::SocketParameter _parameter);
       ~Socket() override = default;
 
       [[nodiscard]] bool bind();
@@ -37,7 +37,6 @@ namespace ls::std::network
       bool initialized{};
       ls::std::network::SocketParameter parameter{};
       #if defined(unix) || defined(__APPLE__)
-      ::std::shared_ptr<ls::std::core::interface_type::IPosixSocket> posixSocket{};
       int unixDescriptor{};
       #endif
 
@@ -46,10 +45,10 @@ namespace ls::std::network
       [[nodiscard]] bool _connectUnix();
       #endif
       [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;
-      [[nodiscard]] bool _init(const ls::std::network::SocketParameter& _parameter);
+      [[nodiscard]] bool _init();
       #if defined(unix) || defined(__APPLE__)
-      [[nodiscard]] bool _initUnix(const ls::std::network::SocketParameter& _parameter);
-      void _selectUnixSocketApi(const ls::std::network::SocketParameter& _parameter);
+      [[nodiscard]] bool _initUnix();
+      void _setUnixSocketApi();
       #endif
   };
 }
