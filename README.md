@@ -25,6 +25,10 @@ This submodule comes with an __Event__ class, as well as with handlers and manag
 To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
 Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
 
+#### Network ####
+
+This submodule provides networking functionalities. As a first feature - a socket class is being provided, which is supporting TCP.
+
 #### Time ####
 
 A __Date__ class comes with this submodule, which you can use to represent a date and do operations on it. 
@@ -35,6 +39,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 #### Features ####
 
 - __AppleClang__ compiler is now officially supported 
+- a __network__ module has been added, which is providing a socket class, supporting TCP
 
 #### Improvements ####
 
