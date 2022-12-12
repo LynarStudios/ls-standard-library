@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-11
+ * Changed:         2022-12-12
  *
  * */
 
@@ -14,6 +14,7 @@
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
 #include <ls_std/network/socket/MockPosixSocket.hpp>
 #include <ls_std/network/socket/PosixSocket.hpp>
+#include <ls_std/core/exception/WrongProtocolException.hpp>
 #include <memory>
 #include <utility>
 
@@ -45,8 +46,19 @@ bool ls::std::network::Socket::isInitialized() const
   return this->initialized;
 }
 
-#if defined(unix) || defined(__APPLE__)
+bool ls::std::network::Socket::listen()
+{
+  if (this->parameter.socketAddress.protocolType != PROTOCOL_TYPE_TCP)
+  {
+    throw ls::std::core::WrongProtocolException{};
+  }
 
+  #if defined(unix) || defined(__APPLE__)
+  return ls::std::network::Socket::_listenUnix();
+  #endif
+}
+
+#if defined(unix) || defined(__APPLE__)
 bool ls::std::network::Socket::_bindUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
@@ -84,6 +96,11 @@ bool ls::std::network::Socket::_initUnix()
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(this->parameter.socketAddress.protocolType);
 
   return this->parameter.posixSocket->create(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0) != -1;
+}
+
+bool ls::std::network::Socket::_listenUnix()
+{
+  return this->parameter.posixSocket->listen(this->unixDescriptor, this->parameter.queueSize) == 0;
 }
 
 void ls::std::network::Socket::_setUnixSocketApi()

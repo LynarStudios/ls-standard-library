@@ -14,6 +14,7 @@ using namespace ls::std::network;
 using namespace ::testing;
 using namespace ls_std_network_test;
 using namespace ::std;
+using namespace ls::std::core;
 
 namespace
 {
@@ -90,5 +91,50 @@ namespace
   {
     Socket socket{generateSocketParameter()};
     ASSERT_TRUE(socket.isInitialized());
+  }
+
+  TEST_F(SocketTest, listen)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, listen(_, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, listen(_, _)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+    ASSERT_TRUE(socket.listen());
+  }
+
+  TEST_F(SocketTest, listen_wrong_protocol)
+  {
+    SocketParameter parameter = generateSocketParameter();
+    parameter.socketAddress.protocolType = PROTOCOL_TYPE_UDP;
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     bool listened = socket.listen();
+                   }
+                   catch (const WrongProtocolException &_exception)
+                   {
+                     throw;
+                   }
+                 }, WrongProtocolException);
   }
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-09
- * Changed:         2022-12-10
+ * Changed:         2022-12-12
  *
  * */
 
@@ -25,6 +25,7 @@ namespace ls_std_network_test
       MOCK_METHOD(int, bind, (int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength), (override));
       MOCK_METHOD(int, connect, (int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength), (override));
       MOCK_METHOD(int, create, (int _domain, int _type, int _protocol), (override));
+      MOCK_METHOD(int, listen, (int _socketFileDescriptor, int _backlog), (override));
   };
 }
 

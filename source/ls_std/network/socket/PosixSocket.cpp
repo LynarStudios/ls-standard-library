@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-09
- * Changed:         2022-12-10
+ * Changed:         2022-12-12
  *
  * */
 
@@ -23,4 +23,9 @@ int ls::std::network::PosixSocket::connect(int _socketFileDescriptor, const stru
 int ls::std::network::PosixSocket::create(int _domain, int _type, int _protocol)
 {
   return ::socket(_domain, _type, _protocol);
+}
+
+int ls::std::network::PosixSocket::listen(int _socketFileDescriptor, int _backlog)
+{
+  return ::listen(_socketFileDescriptor, _backlog);
 }

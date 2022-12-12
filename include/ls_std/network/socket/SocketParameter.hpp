@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-11
+ * Changed:         2022-12-12
  *
  * */
 
@@ -21,6 +21,7 @@ namespace ls::std::network
     ::std::shared_ptr<ls::std::core::interface_type::IPosixSocket> posixSocket{};
     ls::std::network::ProtocolFamilyType protocolFamilyType{};
     ls::std::network::SocketAddress socketAddress{};
+    int queueSize{};
   };
 }
 

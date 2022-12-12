@@ -31,6 +31,7 @@ namespace ls::std::network
       [[nodiscard]] bool bind();
       [[nodiscard]] bool connect();
       [[nodiscard]] bool isInitialized() const;
+      [[nodiscard]] bool listen();
 
     private:
 
@@ -48,6 +49,7 @@ namespace ls::std::network
       [[nodiscard]] bool _init();
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] bool _initUnix();
+      [[nodiscard]] bool _listenUnix();
       void _setUnixSocketApi();
       #endif
   };

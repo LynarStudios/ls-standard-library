@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-17
- * Changed:         2022-11-17
+ * Changed:         2022-12-12
  *
  * */
 
@@ -30,6 +30,10 @@ ls::std::network::Protocol ls::std::network::ProtocolMapper::_toUnixProtocol(con
 
   switch (_protocolType)
   {
+    case ls::std::network::ProtocolType::PROTOCOL_TYPE_UDP:
+    {
+      protocol.unixProtocol = SOCK_DGRAM;
+    } break;
     case ls::std::network::ProtocolType::PROTOCOL_TYPE_TCP:
     {
       protocol.unixProtocol = SOCK_STREAM;
