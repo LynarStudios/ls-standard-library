@@ -69,6 +69,24 @@ namespace
     ASSERT_TRUE(socket.bind());
   }
 
+  TEST_F(SocketTest, close)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+    ASSERT_TRUE(socket.close());
+  }
+
   TEST_F(SocketTest, connect)
   {
     SocketParameter parameter = generateSocketParameter();

@@ -29,6 +29,7 @@ namespace ls::std::network
       ~Socket() override = default;
 
       [[nodiscard]] bool bind();
+      [[nodiscard]] bool close();
       [[nodiscard]] bool connect();
       [[nodiscard]] bool isInitialized() const;
       [[nodiscard]] bool listen();
@@ -43,6 +44,7 @@ namespace ls::std::network
 
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] bool _bindUnix();
+      [[nodiscard]] bool _closeUnix();
       [[nodiscard]] bool _connectUnix();
       #endif
       [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;

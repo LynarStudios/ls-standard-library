@@ -21,6 +21,7 @@ namespace ls::std::core::interface_type
       virtual ~IPosixSocket() = default;
 
       virtual int bind(int _socketFileDescriptor, const struct sockaddr* _address, socklen_t _addressLength) = 0;
+      virtual int close(int _socketFileDescriptor) = 0;
       virtual int connect(int _socketFileDescriptor, const struct sockaddr* _address, socklen_t _addressLength) = 0;
       virtual int create(int _domain, int _type, int _protocol) = 0; // constructor
       virtual int listen(int _socketFileDescriptor, int _backlog) = 0;

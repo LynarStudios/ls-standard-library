@@ -9,10 +9,16 @@
 
 #include <ls_std/network/socket/PosixSocket.hpp>
 #include <sys/socket.h>
+#include <unistd.h>
 
 int ls::std::network::PosixSocket::bind(int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength)
 {
   return ::bind(_socketFileDescriptor, _address, _addressLength);
+}
+
+int ls::std::network::PosixSocket::close(int _socketFileDescriptor)
+{
+  return ::close(_socketFileDescriptor);
 }
 
 int ls::std::network::PosixSocket::connect(int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength)

@@ -34,6 +34,13 @@ bool ls::std::network::Socket::bind()
   #endif
 }
 
+bool ls::std::network::Socket::close()
+{
+  #if defined(unix) || defined(__APPLE__)
+  return ls::std::network::Socket::_closeUnix();
+  #endif
+}
+
 bool ls::std::network::Socket::connect()
 {
   #if defined(unix) || defined(__APPLE__)
@@ -63,6 +70,11 @@ bool ls::std::network::Socket::_bindUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
   return this->parameter.posixSocket->bind(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), sizeof(convertedSocketAddress.socketAddressUnix)) == 0;
+}
+
+bool ls::std::network::Socket::_closeUnix()
+{
+  return this->parameter.posixSocket->close(this->unixDescriptor) == 0;
 }
 
 bool ls::std::network::Socket::_connectUnix()
