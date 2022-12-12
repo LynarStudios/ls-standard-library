@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-12-11
+ * Changed:         2022-12-12
  *
  * */
 
@@ -13,6 +13,7 @@
 using namespace ls::std::network;
 using namespace ::testing;
 using namespace ls_std_network_test;
+using namespace ::std;
 
 namespace
 {
@@ -54,7 +55,7 @@ namespace
     SocketParameter parameter = generateSocketParameter();
 
     #if defined(unix) || defined(__APPLE__)
-    ::std::shared_ptr<ls_std_network_test::MockPosixSocket> mockSocket = ::std::make_shared<ls_std_network_test::MockPosixSocket>();
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
     EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
@@ -72,7 +73,7 @@ namespace
     SocketParameter parameter = generateSocketParameter();
 
     #if defined(unix) || defined(__APPLE__)
-    ::std::shared_ptr<ls_std_network_test::MockPosixSocket> mockSocket = ::std::make_shared<ls_std_network_test::MockPosixSocket>();
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
     EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
