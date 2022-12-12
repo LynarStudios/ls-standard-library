@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-18
- * Changed:         2022-12-09
+ * Changed:         2022-12-12
  *
  * */
 
@@ -24,6 +24,7 @@ ls::std::network::ConvertedSocketAddress ls::std::network::SocketAddressMapper::
 
   #if defined(unix) || defined(__APPLE__)
   convertedSocketAddress.socketAddressUnix = ls::std::network::SocketAddressMapper::_toSockAddressUnix(_parameter);
+  convertedSocketAddress.addressLength = sizeof(convertedSocketAddress.socketAddressUnix);
   #endif
 
   return convertedSocketAddress;

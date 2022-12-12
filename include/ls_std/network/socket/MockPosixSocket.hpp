@@ -22,6 +22,7 @@ namespace ls_std_network_test
       MockPosixSocket() = default;
       ~MockPosixSocket() override = default;
 
+      MOCK_METHOD(int, accept, (int _socketFileDescriptor, struct sockaddr *_address, socklen_t* _addressLength), (override));
       MOCK_METHOD(int, bind, (int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength), (override));
       MOCK_METHOD(int, close, (int _socketFileDescriptor), (override));
       MOCK_METHOD(int, connect, (int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength), (override));

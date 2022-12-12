@@ -28,6 +28,7 @@ namespace ls::std::network
       explicit Socket(ls::std::network::SocketParameter _parameter);
       ~Socket() override = default;
 
+      [[nodiscard]] bool accept();
       [[nodiscard]] bool bind();
       [[nodiscard]] bool close();
       [[nodiscard]] bool connect();
@@ -43,6 +44,7 @@ namespace ls::std::network
       #endif
 
       #if defined(unix) || defined(__APPLE__)
+      [[nodiscard]] bool _acceptUnix();
       [[nodiscard]] bool _bindUnix();
       [[nodiscard]] bool _closeUnix();
       [[nodiscard]] bool _connectUnix();

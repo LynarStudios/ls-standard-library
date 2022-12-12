@@ -21,6 +21,7 @@ namespace ls::std::network
       PosixSocket() = default;
       ~PosixSocket() override = default;
 
+      int accept(int _socketFileDescriptor, struct sockaddr *_address, socklen_t* _addressLength) override;
       int bind(int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength) override;
       int close(int _socketFileDescriptor) override;
       int connect(int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength) override;

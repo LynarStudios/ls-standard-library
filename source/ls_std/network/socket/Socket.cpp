@@ -27,6 +27,18 @@ parameter(::std::move(_parameter))
   #endif
 }
 
+bool ls::std::network::Socket::accept()
+{
+  if (this->parameter.socketAddress.protocolType != PROTOCOL_TYPE_TCP)
+  {
+    throw ls::std::core::WrongProtocolException{};
+  }
+
+  #if defined(unix) || defined(__APPLE__)
+  return ls::std::network::Socket::_acceptUnix();
+  #endif
+}
+
 bool ls::std::network::Socket::bind()
 {
   #if defined(unix) || defined(__APPLE__)
@@ -66,10 +78,17 @@ bool ls::std::network::Socket::listen()
 }
 
 #if defined(unix) || defined(__APPLE__)
+
+bool ls::std::network::Socket::_acceptUnix()
+{
+  ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
+  return this->parameter.posixSocket->accept(this->unixDescriptor, reinterpret_cast<sockaddr *>(&convertedSocketAddress.socketAddressUnix), &convertedSocketAddress.addressLength) >= 0;
+}
+
 bool ls::std::network::Socket::_bindUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
-  return this->parameter.posixSocket->bind(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), sizeof(convertedSocketAddress.socketAddressUnix)) == 0;
+  return this->parameter.posixSocket->bind(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), convertedSocketAddress.addressLength) == 0;
 }
 
 bool ls::std::network::Socket::_closeUnix()
@@ -80,7 +99,7 @@ bool ls::std::network::Socket::_closeUnix()
 bool ls::std::network::Socket::_connectUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
-  return this->parameter.posixSocket->connect(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), sizeof(convertedSocketAddress.socketAddressUnix)) == 0;
+  return this->parameter.posixSocket->connect(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), convertedSocketAddress.addressLength) == 0;
 }
 #endif
 

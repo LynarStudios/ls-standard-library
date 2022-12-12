@@ -51,6 +51,51 @@ namespace
     ASSERT_STREQ("Socket", Socket{generateSocketParameter()}.getClassName().c_str());
   }
 
+  TEST_F(SocketTest, accept)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, accept(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, accept(_, _, _)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+    ASSERT_TRUE(socket.accept());
+  }
+
+  TEST_F(SocketTest, accept_wrong_protocol)
+  {
+    SocketParameter parameter = generateSocketParameter();
+    parameter.socketAddress.protocolType = PROTOCOL_TYPE_UDP;
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     bool listened = socket.accept();
+                   }
+                   catch (const WrongProtocolException &_exception)
+                   {
+                     throw;
+                   }
+                 }, WrongProtocolException);
+  }
+
   TEST_F(SocketTest, bind)
   {
     SocketParameter parameter = generateSocketParameter();

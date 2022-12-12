@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-18
- * Changed:         2022-11-18
+ * Changed:         2022-12-12
  *
  * */
 
@@ -20,6 +20,7 @@ namespace ls::std::network
   {
     #if defined(unix) || defined(__APPLE__)
     ::sockaddr_in socketAddressUnix{};
+    ::socklen_t addressLength{};
     #endif
   };
 }

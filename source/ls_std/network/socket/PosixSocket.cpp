@@ -11,6 +11,11 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+int ls::std::network::PosixSocket::accept(int _socketFileDescriptor, struct sockaddr *_address, socklen_t* _addressLength)
+{
+  return ::accept(_socketFileDescriptor, _address, _addressLength);
+}
+
 int ls::std::network::PosixSocket::bind(int _socketFileDescriptor, const struct sockaddr *_address, socklen_t _addressLength)
 {
   return ::bind(_socketFileDescriptor, _address, _addressLength);
