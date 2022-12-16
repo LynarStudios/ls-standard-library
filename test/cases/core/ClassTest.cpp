@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2022-11-09
+ * Changed:         2022-12-16
  *
  * */
 
@@ -47,7 +47,7 @@ namespace
 
   TEST_F(ClassTest, destructor)
   {
-    shared_ptr<ClassWrapper> object = make_shared<ClassWrapper>();
+    shared_ptr<MockClass> object = make_shared<MockClass>();
     EXPECT_CALL(*object, Die());
   }
 

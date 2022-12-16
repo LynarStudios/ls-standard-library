@@ -15,13 +15,13 @@
 
 namespace ls_std_core_test
 {
-  class ClassWrapper : public ls::std::core::Class
+  class MockClass : public ls::std::core::Class
   {
     public:
 
-      ClassWrapper() : ls::std::core::Class("ClassWrapper") {};
+      MockClass() : ls::std::core::Class("ClassWrapper") {};
       MOCK_METHOD0(Die, void());
-      ~ClassWrapper() override { Die(); }
+      ~MockClass() override { Die(); }
   };
 }
 

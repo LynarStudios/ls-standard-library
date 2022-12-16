@@ -12,6 +12,6 @@
 
 #include <classes/core/api/io/MockPosixReader.hpp>
 
-#include <classes/core/ClassWrapper.hpp>
+#include <classes/core/MockClass.hpp>
 
 #endif
