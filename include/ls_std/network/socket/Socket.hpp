@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-11
+ * Changed:         2022-12-16
  *
  * */
 
@@ -18,15 +18,23 @@
 #include "SocketParameter.hpp"
 #include "SocketAddressMapperParameter.hpp"
 #include <memory>
+#include <ls_std/core/types/Types.hpp>
+#include <ls_std/core/interface/IReader.hpp>
 
 namespace ls::std::network
 {
-  class LS_STD_DYNAMIC_GOAL Socket : public ls::std::core::Class
+  class LS_STD_DYNAMIC_GOAL Socket : public ls::std::core::Class, public ls::std::core::interface_type::IReader
   {
     public:
 
       explicit Socket(ls::std::network::SocketParameter _parameter);
-      ~Socket() override = default;
+      ~Socket() override;
+
+      // implementation
+
+      ls::std::core::type::byte_field read() override;
+
+      // other functionalities
 
       [[nodiscard]] bool accept();
       [[nodiscard]] bool bind();
@@ -39,6 +47,8 @@ namespace ls::std::network
 
       bool initialized{};
       ls::std::network::SocketParameter parameter{};
+      ls::std::core::type::byte* readBuffer{};
+      bool readBufferSet{};
       #if defined(unix) || defined(__APPLE__)
       int unixDescriptor{};
       #endif
@@ -51,9 +61,15 @@ namespace ls::std::network
       #endif
       [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;
       [[nodiscard]] bool _init();
+      void _initReadBuffer();
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] bool _initUnix();
       [[nodiscard]] bool _listenUnix();
+      #endif
+      ls::std::core::type::byte_field _read();
+      #if defined(unix) || defined(__APPLE__)
+      ls::std::core::type::byte_field _readUnix();
+      void _setPosixReaderApi();
       void _setUnixSocketApi();
       #endif
   };

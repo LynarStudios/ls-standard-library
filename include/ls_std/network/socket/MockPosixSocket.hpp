@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-09
- * Changed:         2022-12-12
+ * Changed:         2022-12-15
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <ls_std/ls_std_core.hpp>
 #include <gmock/gmock.h>
 
-namespace ls_std_network_test
+namespace ls_std_network_test // TODO: challenge location
 {
   class MockPosixSocket : public ls::std::core::interface_type::IPosixSocket
   {

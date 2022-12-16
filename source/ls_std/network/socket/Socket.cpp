@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-12
+ * Changed:         2022-12-16
  *
  * */
 
@@ -14,9 +14,9 @@
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
 #include <ls_std/network/socket/MockPosixSocket.hpp>
 #include <ls_std/network/socket/PosixSocket.hpp>
+#include <ls_std/core/api/io/PosixReader.hpp>
 #include <ls_std/core/exception/WrongProtocolException.hpp>
 #include <memory>
-#include <utility>
 
 ls::std::network::Socket::Socket(ls::std::network::SocketParameter _parameter) : ls::std::core::Class("Socket"),
 parameter(::std::move(_parameter))
@@ -25,6 +25,22 @@ parameter(::std::move(_parameter))
   this->unixDescriptor = ls::std::network::Socket::_initUnix();
   this->initialized = this->unixDescriptor != -1;
   #endif
+}
+
+ls::std::network::Socket::~Socket()
+{
+  delete[] this->readBuffer;
+}
+
+ls::std::core::type::byte_field ls::std::network::Socket::read()
+{
+  if (!this->readBufferSet)
+  {
+    this->_initReadBuffer(); // TODO: is this really wise to initialize once? what if reading second time wouldn't work?
+    this->readBufferSet = true;
+  }
+
+  return this->_read();
 }
 
 bool ls::std::network::Socket::accept()
@@ -119,10 +135,21 @@ bool ls::std::network::Socket::_init()
   #endif
 }
 
+void ls::std::network::Socket::_initReadBuffer()
+{
+  if (this->parameter.readBufferSize <= 0)
+  {
+    throw ls::std::core::IllegalArgumentException{};
+  }
+
+  this->readBuffer = new ls::std::core::type::byte[this->parameter.readBufferSize];
+}
+
 #if defined(unix) || defined(__APPLE__)
 bool ls::std::network::Socket::_initUnix()
 {
-  this->_setUnixSocketApi();
+  this->_setPosixReaderApi();
+  this->_setUnixSocketApi(); // TODO: rename to _setPosixSocketApi
   ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(this->parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(this->parameter.socketAddress.protocolType);
 
@@ -132,6 +159,35 @@ bool ls::std::network::Socket::_initUnix()
 bool ls::std::network::Socket::_listenUnix()
 {
   return this->parameter.posixSocket->listen(this->unixDescriptor, this->parameter.queueSize) == 0;
+}
+#endif
+
+ls::std::core::type::byte_field ls::std::network::Socket::_read()
+{
+  #if defined(unix) || defined(__APPLE__)
+  return this->_readUnix();
+  #endif
+}
+
+#if defined(unix) || defined(__APPLE__)
+ls::std::core::type::byte_field ls::std::network::Socket::_readUnix()
+{
+  size_t size = this->parameter.posixReader->read(this->unixDescriptor, this->readBuffer, this->parameter.readBufferSize);
+
+  if (size == -1)
+  {
+    throw ls::std::core::FileOperationException{};
+  }
+
+  return ls::std::core::type::byte_field{this->readBuffer, size};
+}
+
+void ls::std::network::Socket::_setPosixReaderApi()
+{
+  if (this->parameter.posixReader == nullptr)
+  {
+    this->parameter.posixReader = ::std::make_shared<ls::std::core::api::PosixReader>();
+  }
 }
 
 void ls::std::network::Socket::_setUnixSocketApi()
