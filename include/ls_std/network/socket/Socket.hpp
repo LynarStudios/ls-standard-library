@@ -67,7 +67,7 @@ namespace ls::std::network
       #if defined(unix) || defined(__APPLE__)
       ls::std::core::type::byte_field _readUnix();
       void _setPosixReaderApi();
-      void _setUnixSocketApi();
+      void _setPosixSocketApi();
       #endif
   };
 }

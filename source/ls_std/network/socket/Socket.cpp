@@ -150,7 +150,7 @@ void ls::std::network::Socket::_initReadBuffer()
 bool ls::std::network::Socket::_initUnix()
 {
   this->_setPosixReaderApi();
-  this->_setUnixSocketApi(); // TODO: rename to _setPosixSocketApi
+  this->_setPosixSocketApi();
   ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(this->parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(this->parameter.socketAddress.protocolType);
 
@@ -191,7 +191,7 @@ void ls::std::network::Socket::_setPosixReaderApi()
   }
 }
 
-void ls::std::network::Socket::_setUnixSocketApi()
+void ls::std::network::Socket::_setPosixSocketApi()
 {
   if (this->parameter.posixSocket == nullptr)
   {
