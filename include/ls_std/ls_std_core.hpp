@@ -3,12 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2022-12-12
+ * Changed:         2022-12-16
  *
  * */
 
 #ifndef LS_STD_LS_STD_CORE_HPP
 #define LS_STD_LS_STD_CORE_HPP
+
+#if defined(unix) || defined(__APPLE__)
+#include <ls_std/core/api/io/PosixReader.hpp>
+#endif
 
 #include <ls_std/core/exception/EventNotHandledException.hpp>
 #include <ls_std/core/exception/EventNotSubscribedException.hpp>

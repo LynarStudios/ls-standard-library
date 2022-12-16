@@ -145,9 +145,20 @@ set(SOURCE_FILES_BOXING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp)
 
-set(SOURCE_FILES_CORE
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
+        ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang OR
+        ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
+    set(SOURCE_FILES_CORE
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/api/io/PosixReader.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+endif()
+
+if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    set(SOURCE_FILES_CORE
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+endif()
 
 set(SOURCE_FILES_ENCODING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp)
