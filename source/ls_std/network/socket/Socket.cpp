@@ -12,10 +12,11 @@
 #include <ls_std/network/core/ProtocolMapper.hpp>
 #include <ls_std/network/socket/ConvertedSocketAddress.hpp>
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
-#include <ls_std/network/socket/MockPosixSocket.hpp>
-#include <ls_std/network/socket/PosixSocket.hpp>
+#include <ls_std/core/api/socket/PosixSocket.hpp>
 #include <ls_std/core/api/io/PosixReader.hpp>
 #include <ls_std/core/exception/WrongProtocolException.hpp>
+#include <ls_std/core/exception/IllegalArgumentException.hpp>
+#include <ls_std/core/exception/FileOperationException.hpp>
 #include <memory>
 
 ls::std::network::Socket::Socket(ls::std::network::SocketParameter _parameter) : ls::std::core::Class("Socket"),
@@ -194,7 +195,7 @@ void ls::std::network::Socket::_setUnixSocketApi()
 {
   if (this->parameter.posixSocket == nullptr)
   {
-    this->parameter.posixSocket = ::std::make_shared<ls::std::network::PosixSocket>();
+    this->parameter.posixSocket = ::std::make_shared<ls::std::core::api::PosixSocket>();
   }
 }
 #endif

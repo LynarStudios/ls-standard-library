@@ -11,6 +11,7 @@
 #define LS_STD_LS_STD_CORE_TEST_HPP
 
 #include <classes/core/api/io/MockPosixReader.hpp>
+#include <classes/core/api/socket/MockPosixSocket.hpp>
 
 #include <classes/core/MockClass.hpp>
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-10
+ * Changed:         2022-12-16
  *
  * */
 
@@ -18,8 +18,6 @@
 #include <ls_std/network/core/ProtocolType.hpp>
 
 #include <ls_std/network/socket/ConvertedSocketAddress.hpp>
-#include <ls_std/network/socket/MockPosixSocket.hpp>
-#include <ls_std/network/socket/PosixSocket.hpp>
 #include <ls_std/network/socket/Socket.hpp>
 #include <ls_std/network/socket/SocketAddress.hpp>
 #include <ls_std/network/socket/SocketAddressMapper.hpp>

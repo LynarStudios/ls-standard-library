@@ -3,18 +3,20 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-12-12
+ * Changed:         2022-12-16
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_network.hpp>
+#include <ls_std/ls_std_core.hpp>
+#include <ls_std_core_test.hpp>
 
 using namespace ls::std::network;
 using namespace ::testing;
-using namespace ls_std_network_test;
 using namespace ::std;
 using namespace ls::std::core;
+using namespace ls_std_core_test;
 
 namespace
 {

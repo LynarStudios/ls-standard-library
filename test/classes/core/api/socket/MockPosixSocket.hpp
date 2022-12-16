@@ -13,7 +13,7 @@
 #include <ls_std/ls_std_core.hpp>
 #include <gmock/gmock.h>
 
-namespace ls_std_network_test // TODO: challenge location
+namespace ls_std_core_test
 {
   class MockPosixSocket : public ls::std::core::interface_type::IPosixSocket
   {

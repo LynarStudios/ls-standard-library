@@ -12,6 +12,7 @@
 
 #if defined(unix) || defined(__APPLE__)
 #include <ls_std/core/api/io/PosixReader.hpp>
+#include <ls_std/core/api/socket/PosixSocket.hpp>
 #endif
 
 #include <ls_std/core/exception/EventNotHandledException.hpp>
@@ -28,6 +29,7 @@
 #include <ls_std/core/interface/IEncoding.hpp>
 #include <ls_std/core/interface/IEventSubscriber.hpp>
 #include <ls_std/core/interface/IListener.hpp>
+#include <ls_std/core/interface/IPosixReader.hpp>
 #include <ls_std/core/interface/IPosixSocket.hpp>
 #include <ls_std/core/interface/IReader.hpp>
 #include <ls_std/core/interface/ISerializable.hpp>

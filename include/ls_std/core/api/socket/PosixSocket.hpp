@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-09
- * Changed:         2022-12-12
+ * Changed:         2022-12-16
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <ls_std/core/interface/IPosixSocket.hpp>
 
-namespace ls::std::network
+namespace ls::std::core::api
 {
   class PosixSocket : public ls::std::core::interface_type::IPosixSocket
   {

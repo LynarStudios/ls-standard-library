@@ -12,9 +12,6 @@
 
 #include <ls_std/os/dynamic_goal.hpp>
 #include <ls_std/core/Class.hpp>
-#if defined(unix) || defined(__APPLE__)
-#include "PosixSocket.hpp"
-#endif
 #include "SocketParameter.hpp"
 #include "SocketAddressMapperParameter.hpp"
 #include <memory>

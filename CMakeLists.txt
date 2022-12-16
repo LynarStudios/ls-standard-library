@@ -150,6 +150,7 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
         ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
     set(SOURCE_FILES_CORE
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/api/io/PosixReader.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/api/socket/PosixSocket.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
 endif()
@@ -196,7 +197,6 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
     set(SOURCE_FILES_NETWORK
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolFamilyMapper.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolMapper.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/PosixSocket.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/SocketAddressMapper.cpp)
 endif()
