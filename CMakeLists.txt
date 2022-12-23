@@ -222,8 +222,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/StringTest.cpp)
 
 set(TEST_FILES_CORE
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/api/io/PosixReaderTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/api/socket/PosixSocketTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotHandledExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotSubscribedExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/FileNotFoundExceptionTest.cpp
