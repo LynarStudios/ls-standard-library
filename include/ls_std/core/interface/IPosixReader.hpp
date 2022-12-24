@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-15
- * Changed:         2022-12-16
+ * Changed:         2022-12-23
  *
  * */
 
@@ -18,7 +18,8 @@ namespace ls::std::core::interface_type
   {
     public:
 
-      virtual ~IPosixReader() = default;
+      IPosixReader();
+      virtual ~IPosixReader();
 
       virtual size_t read(int _unixFileDescriptor, void* _buffer, size_t _size) = 0;
   };

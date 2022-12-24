@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-09
- * Changed:         2022-12-12
+ * Changed:         2022-12-23
  *
  * */
 
@@ -18,7 +18,8 @@ namespace ls::std::core::interface_type
   {
     public:
 
-      virtual ~IPosixSocket() = default;
+      IPosixSocket();
+      virtual ~IPosixSocket();
 
       virtual int accept(int _socketFileDescriptor, struct sockaddr *_address, socklen_t* _addressLength) = 0;
       virtual int bind(int _socketFileDescriptor, const struct sockaddr* _address, socklen_t _addressLength) = 0;

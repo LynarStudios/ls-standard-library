@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-16
- * Changed:         2022-12-16
+ * Changed:         2022-12-23
  *
  * */
 
@@ -18,8 +18,8 @@ namespace ls::std::core::api
   {
     public:
 
-      PosixReader() = default;
-      ~PosixReader() override = default;
+      PosixReader();
+      ~PosixReader() override;
 
       size_t read(int _unixFileDescriptor, void* _buffer, size_t _size) override;
   };
