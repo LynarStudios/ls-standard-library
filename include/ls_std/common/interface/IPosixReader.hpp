@@ -14,7 +14,7 @@
 
 namespace ls::std::common::interface_type
 {
-  class IPosixReader
+  class IPosixReader // TODO: add dynamic goal
   {
     public:
 
