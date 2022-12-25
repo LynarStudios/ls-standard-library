@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-09
- * Changed:         2022-12-16
+ * Changed:         2022-12-25
  *
  * */
 
 #ifndef LS_STD_POSIX_SOCKET_HPP
 #define LS_STD_POSIX_SOCKET_HPP
 
-#include <ls_std/core/interface/IPosixSocket.hpp>
+#include <ls_std/common/interface/IPosixSocket.hpp>
 
-namespace ls::std::core::api
+namespace ls::std::common::api
 {
-  class PosixSocket : public ls::std::core::interface_type::IPosixSocket
+  class PosixSocket : public ls::std::common::interface_type::IPosixSocket
   {
     public:
 

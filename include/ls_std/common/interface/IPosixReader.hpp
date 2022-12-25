@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-15
- * Changed:         2022-12-23
+ * Changed:         2022-12-25
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include <unistd.h>
 
-namespace ls::std::core::interface_type
+namespace ls::std::common::interface_type
 {
   class IPosixReader
   {

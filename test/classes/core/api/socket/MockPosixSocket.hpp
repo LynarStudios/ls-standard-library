@@ -3,19 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-09
- * Changed:         2022-12-15
+ * Changed:         2022-12-25
  *
  * */
 
 #ifndef LS_STD_MOCK_POSIX_SOCKET_HPP
 #define LS_STD_MOCK_POSIX_SOCKET_HPP
 
-#include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_common.hpp>
 #include <gmock/gmock.h>
 
 namespace ls_std_core_test
 {
-  class MockPosixSocket : public ls::std::core::interface_type::IPosixSocket
+  class MockPosixSocket : public ls::std::common::interface_type::IPosixSocket
   {
     public:
 

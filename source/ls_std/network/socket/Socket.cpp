@@ -12,8 +12,8 @@
 #include <ls_std/network/core/ProtocolMapper.hpp>
 #include <ls_std/network/socket/ConvertedSocketAddress.hpp>
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
-#include <ls_std/core/api/socket/PosixSocket.hpp>
-#include <ls_std/core/api/io/PosixReader.hpp>
+#include <ls_std/common/api/socket/PosixSocket.hpp>
+#include <ls_std/common/api/io/PosixReader.hpp>
 #include <ls_std/core/exception/WrongProtocolException.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/core/exception/FileOperationException.hpp>
@@ -187,7 +187,7 @@ void ls::std::network::Socket::_setPosixReaderApi()
 {
   if (this->parameter.posixReader == nullptr)
   {
-    this->parameter.posixReader = ::std::make_shared<ls::std::core::api::PosixReader>();
+    this->parameter.posixReader = ::std::make_shared<ls::std::common::api::PosixReader>();
   }
 }
 
@@ -195,7 +195,7 @@ void ls::std::network::Socket::_setPosixSocketApi()
 {
   if (this->parameter.posixSocket == nullptr)
   {
-    this->parameter.posixSocket = ::std::make_shared<ls::std::core::api::PosixSocket>();
+    this->parameter.posixSocket = ::std::make_shared<ls::std::common::api::PosixSocket>();
   }
 }
 #endif
