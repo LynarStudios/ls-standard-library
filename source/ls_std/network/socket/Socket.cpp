@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-16
+ * Changed:         2022-12-25
  *
  * */
 
@@ -37,7 +37,7 @@ ls::std::core::type::byte_field ls::std::network::Socket::read()
 {
   if (!this->readBufferSet)
   {
-    this->_initReadBuffer(); // TODO: is this really wise to initialize once? what if reading second time wouldn't work?
+    this->_initReadBuffer(); // TODO: is this really wise to initialize once? what if reading second time wouldn't work? - test it with unit tests and remove it
     this->readBufferSet = true;
   }
 

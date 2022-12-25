@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-16
+ * Changed:         2022-12-25
  *
  * */
 
@@ -29,7 +29,7 @@ namespace ls::std::network
 
       // implementation
 
-      ls::std::core::type::byte_field read() override;
+      [[nodiscard]] ls::std::core::type::byte_field read() override;
 
       // other functionalities
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-12-16
+ * Changed:         2022-12-25
  *
  * */
 
@@ -16,6 +16,7 @@ using namespace ls::std::network;
 using namespace ::testing;
 using namespace ::std;
 using namespace ls::std::core;
+using namespace ls::std::core::type;
 using namespace ls_std_core_test;
 
 namespace
@@ -51,6 +52,54 @@ namespace
   TEST_F(SocketTest, getClassName)
   {
     ASSERT_STREQ("Socket", Socket{generateSocketParameter()}.getClassName().c_str());
+  }
+
+  TEST_F(SocketTest, read)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    shared_ptr<MockPosixReader> mockReader = make_shared<MockPosixReader>();
+    parameter.posixSocket = mockSocket;
+    parameter.posixReader = mockReader;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockReader, read(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockReader, read(_, _, _)).WillByDefault(Return(1));
+    #endif
+
+    parameter.readBufferSize = 32;
+    Socket socket{parameter};
+
+    ASSERT_FALSE(socket.read().empty());
+  }
+
+  TEST_F(SocketTest, read_no_buffer_size_set)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     byte_field data = socket.read();
+                   }
+                   catch (const IllegalArgumentException &_exception)
+                   {
+                     throw;
+                   }
+                 }, IllegalArgumentException);
   }
 
   TEST_F(SocketTest, accept)
