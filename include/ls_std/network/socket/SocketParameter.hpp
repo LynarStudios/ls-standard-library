@@ -13,6 +13,7 @@
 #include <ls_std/network/core/ProtocolFamilyType.hpp>
 #include <ls_std/common/interface/IPosixSocket.hpp>
 #include <ls_std/common/interface/IPosixReader.hpp>
+#include <ls_std/common/interface/IPosixWriter.hpp>
 #include "SocketAddress.hpp"
 #include <memory>
 
@@ -22,6 +23,7 @@ namespace ls::std::network
   {
     ::std::shared_ptr<ls::std::common::interface_type::IPosixReader> posixReader{};
     ::std::shared_ptr<ls::std::common::interface_type::IPosixSocket> posixSocket{};
+    ::std::shared_ptr<ls::std::common::interface_type::IPosixWriter> posixWriter{};
     ls::std::network::ProtocolFamilyType protocolFamilyType{};
     int queueSize{};
     size_t readBufferSize{};

@@ -15,7 +15,7 @@
 
 namespace ls_std_core_test
 {
-  class MockPosixReader : public ls::std::common::interface_type::IPosixReader
+  class MockPosixReader : public ls::std::common::interface_type::IPosixReader // TODO: move to "common" module
   {
     public:
 

@@ -14,6 +14,7 @@
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
 #include <ls_std/common/api/socket/PosixSocket.hpp>
 #include <ls_std/common/api/io/PosixReader.hpp>
+#include <ls_std/common/api/io/PosixWriter.hpp>
 #include <ls_std/core/exception/WrongProtocolException.hpp>
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/core/exception/FileOperationException.hpp>
@@ -42,6 +43,11 @@ ls::std::core::type::byte_field ls::std::network::Socket::read()
   }
 
   return this->_read();
+}
+
+bool ls::std::network::Socket::write(const ls::std::core::type::byte_field &_data)
+{
+  return this->_write(_data);
 }
 
 bool ls::std::network::Socket::accept()
@@ -151,6 +157,7 @@ bool ls::std::network::Socket::_initUnix()
 {
   this->_setPosixReaderApi();
   this->_setPosixSocketApi();
+  this->_setPosixWriterApi();
   ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(this->parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(this->parameter.socketAddress.protocolType);
 
@@ -177,7 +184,7 @@ ls::std::core::type::byte_field ls::std::network::Socket::_readUnix()
 
   if (size == -1)
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{}; // TODO: write test
   }
 
   return ls::std::core::type::byte_field{this->readBuffer, size};
@@ -197,5 +204,40 @@ void ls::std::network::Socket::_setPosixSocketApi()
   {
     this->parameter.posixSocket = ::std::make_shared<ls::std::common::api::PosixSocket>();
   }
+}
+
+void ls::std::network::Socket::_setPosixWriterApi()
+{
+  if (this->parameter.posixWriter == nullptr)
+  {
+    this->parameter.posixWriter = ::std::make_shared<ls::std::common::api::PosixWriter>();
+  }
+}
+#endif
+
+bool ls::std::network::Socket::_write(const ls::std::core::type::byte_field &_data)
+{
+  #if defined(unix) || defined(__APPLE__)
+  return this->_writeUnix(_data);
+  #endif
+}
+
+#if defined(unix) || defined(__APPLE__)
+bool ls::std::network::Socket::_writeUnix(const ls::std::core::type::byte_field &_data)
+{
+  bool written{};
+
+  if (!_data.empty())
+  {
+    size_t size = _data.size() + 1;
+    char* buffer = new char[size];
+    ::std::strcpy(buffer, _data.c_str());
+
+    written = this->parameter.posixWriter->write(this->unixDescriptor, buffer, size) != -1;
+
+    delete[] buffer;
+  }
+
+  return written;
 }
 #endif

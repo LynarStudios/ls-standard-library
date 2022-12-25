@@ -12,10 +12,12 @@
 
 #if defined(unix) || defined(__APPLE__)
 #include <ls_std/common/api/io/PosixReader.hpp>
+#include <ls_std/common/api/io/PosixWriter.hpp>
 #include <ls_std/common/api/socket/PosixSocket.hpp>
 
 #include <ls_std/common/interface/IPosixReader.hpp>
 #include <ls_std/common/interface/IPosixSocket.hpp>
+#include <ls_std/common/interface/IPosixWriter.hpp>
 #endif
 
 #endif

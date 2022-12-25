@@ -11,6 +11,7 @@
 #include <ls_std/ls_std_network.hpp>
 #include <ls_std/ls_std_core.hpp>
 #include <ls_std_core_test.hpp>
+#include <ls_std_common_test.hpp>
 
 using namespace ls::std::network;
 using namespace ::testing;
@@ -18,6 +19,7 @@ using namespace ::std;
 using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls_std_core_test;
+using namespace ls_std_common_test;
 
 namespace
 {
@@ -100,6 +102,27 @@ namespace
                      throw;
                    }
                  }, IllegalArgumentException);
+  }
+
+  TEST_F(SocketTest, write)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    shared_ptr<MockPosixWriter> mockWriter = make_shared<MockPosixWriter>();
+    parameter.posixSocket = mockSocket;
+    parameter.posixWriter = mockWriter;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockWriter, write(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockWriter, write(_, _, _)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+
+    ASSERT_TRUE(socket.write("Hello Server!"));
   }
 
   TEST_F(SocketTest, accept)

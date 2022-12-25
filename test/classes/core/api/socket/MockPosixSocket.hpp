@@ -15,7 +15,7 @@
 
 namespace ls_std_core_test
 {
-  class MockPosixSocket : public ls::std::common::interface_type::IPosixSocket
+  class MockPosixSocket : public ls::std::common::interface_type::IPosixSocket // TODO: move to "common" module
   {
     public:
 

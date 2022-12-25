@@ -17,10 +17,11 @@
 #include <memory>
 #include <ls_std/core/types/Types.hpp>
 #include <ls_std/core/interface/IReader.hpp>
+#include <ls_std/core/interface/IWriter.hpp>
 
 namespace ls::std::network
 {
-  class LS_STD_DYNAMIC_GOAL Socket : public ls::std::core::Class, public ls::std::core::interface_type::IReader
+  class LS_STD_DYNAMIC_GOAL Socket : public ls::std::core::Class, public ls::std::core::interface_type::IReader, public ls::std::core::interface_type::IWriter
   {
     public:
 
@@ -30,6 +31,7 @@ namespace ls::std::network
       // implementation
 
       [[nodiscard]] ls::std::core::type::byte_field read() override;
+      [[nodiscard]] bool write(const ls::std::core::type::byte_field &_data) override;
 
       // other functionalities
 
@@ -68,6 +70,11 @@ namespace ls::std::network
       ls::std::core::type::byte_field _readUnix();
       void _setPosixReaderApi();
       void _setPosixSocketApi();
+      void _setPosixWriterApi();
+      #endif
+      bool _write(const ls::std::core::type::byte_field &_data);
+      #if defined(unix) || defined(__APPLE__)
+      bool _writeUnix(const ls::std::core::type::byte_field &_data);
       #endif
   };
 }
