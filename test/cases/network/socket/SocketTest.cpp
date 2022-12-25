@@ -104,6 +104,37 @@ namespace
                  }, IllegalArgumentException);
   }
 
+  TEST_F(SocketTest, read_api_call_failed)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if defined(unix) || defined(__APPLE__)
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    shared_ptr<MockPosixReader> mockReader = make_shared<MockPosixReader>();
+    parameter.posixSocket = mockSocket;
+    parameter.posixReader = mockReader;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockReader, read(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockReader, read(_, _, _)).WillByDefault(Return(-1));
+    #endif
+
+    parameter.readBufferSize = 32;
+    Socket socket{parameter};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     byte_field data = socket.read();
+                   }
+                   catch (const FileOperationException &_exception)
+                   {
+                     throw;
+                   }
+                 }, FileOperationException);
+  }
+
   TEST_F(SocketTest, write)
   {
     SocketParameter parameter = generateSocketParameter();

@@ -184,7 +184,7 @@ ls::std::core::type::byte_field ls::std::network::Socket::_readUnix()
 
   if (size == -1)
   {
-    throw ls::std::core::FileOperationException{}; // TODO: write test
+    throw ls::std::core::FileOperationException{};
   }
 
   return ls::std::core::type::byte_field{this->readBuffer, size};
