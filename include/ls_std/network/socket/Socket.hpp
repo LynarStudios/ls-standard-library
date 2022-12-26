@@ -10,6 +10,7 @@
 #ifndef LS_STD_SOCKET_HPP
 #define LS_STD_SOCKET_HPP
 
+#include <ls_std/os/specification.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 #include <ls_std/core/Class.hpp>
 #include "SocketParameter.hpp"
@@ -48,11 +49,11 @@ namespace ls::std::network
       ls::std::network::SocketParameter parameter{};
       ls::std::core::type::byte* readBuffer{};
       bool readBufferSet{};
-      #if defined(unix) || defined(__APPLE__)
+      #if LS_STD_UNIX_PLATFORM
       int unixDescriptor{};
       #endif
 
-      #if defined(unix) || defined(__APPLE__)
+      #if LS_STD_UNIX_PLATFORM
       [[nodiscard]] bool _acceptUnix();
       [[nodiscard]] bool _bindUnix();
       [[nodiscard]] bool _closeUnix();
@@ -61,19 +62,19 @@ namespace ls::std::network
       [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;
       void _init();
       void _initReadBuffer();
-      #if defined(unix) || defined(__APPLE__)
+      #if LS_STD_UNIX_PLATFORM
       [[nodiscard]] bool _initUnix();
       [[nodiscard]] bool _listenUnix();
       #endif
       ls::std::core::type::byte_field _read();
-      #if defined(unix) || defined(__APPLE__)
+      #if LS_STD_UNIX_PLATFORM
       ls::std::core::type::byte_field _readUnix();
       void _setPosixReaderApi();
       void _setPosixSocketApi();
       void _setPosixWriterApi();
       #endif
       bool _write(const ls::std::core::type::byte_field &_data);
-      #if defined(unix) || defined(__APPLE__)
+      #if LS_STD_UNIX_PLATFORM
       bool _writeUnix(const ls::std::core::type::byte_field &_data);
       #endif
   };

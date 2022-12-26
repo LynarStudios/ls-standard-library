@@ -3,14 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-18
- * Changed:         2022-12-12
+ * Changed:         2022-12-26
  *
  * */
 
+#include <ls_std/os/specification.hpp>
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
 #include <ls_std/network/core/ConvertedProtocolFamily.hpp>
 #include <ls_std/network/core/ProtocolFamilyMapper.hpp>
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #endif
@@ -22,7 +23,7 @@ ls::std::network::ConvertedSocketAddress ls::std::network::SocketAddressMapper::
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress{};
 
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   convertedSocketAddress.socketAddressUnix = ls::std::network::SocketAddressMapper::_toSockAddressUnix(_parameter);
   convertedSocketAddress.addressLength = sizeof(convertedSocketAddress.socketAddressUnix);
   #endif
@@ -30,7 +31,7 @@ ls::std::network::ConvertedSocketAddress ls::std::network::SocketAddressMapper::
   return convertedSocketAddress;
 }
 
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 ::sockaddr_in ls::std::network::SocketAddressMapper::_toSockAddressUnix(const ls::std::network::SocketAddressMapperParameter &_parameter)
 {
   ::sockaddr_in socketAddressUnix{};

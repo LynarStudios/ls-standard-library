@@ -7,6 +7,7 @@
  *
  * */
 
+#include <ls_std/os/specification.hpp>
 #include <ls_std/network/socket/Socket.hpp>
 #include <ls_std/network/core/ProtocolFamilyMapper.hpp>
 #include <ls_std/network/core/ProtocolMapper.hpp>
@@ -54,28 +55,28 @@ bool ls::std::network::Socket::accept()
     throw ls::std::core::WrongProtocolException{};
   }
 
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   return ls::std::network::Socket::_acceptUnix();
   #endif
 }
 
 bool ls::std::network::Socket::bind()
 {
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   return ls::std::network::Socket::_bindUnix();
   #endif
 }
 
 bool ls::std::network::Socket::close()
 {
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   return ls::std::network::Socket::_closeUnix();
   #endif
 }
 
 bool ls::std::network::Socket::connect()
 {
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   return ls::std::network::Socket::_connectUnix();
   #endif
 }
@@ -92,12 +93,12 @@ bool ls::std::network::Socket::listen()
     throw ls::std::core::WrongProtocolException{};
   }
 
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   return ls::std::network::Socket::_listenUnix();
   #endif
 }
 
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 
 bool ls::std::network::Socket::_acceptUnix()
 {
@@ -134,7 +135,7 @@ ls::std::network::SocketAddressMapperParameter ls::std::network::Socket::_create
 
 void ls::std::network::Socket::_init()
 {
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   this->unixDescriptor = ls::std::network::Socket::_initUnix();
   this->initialized = this->unixDescriptor != -1;
   #endif
@@ -150,7 +151,7 @@ void ls::std::network::Socket::_initReadBuffer()
   this->readBuffer = new ls::std::core::type::byte[this->parameter.readBufferSize];
 }
 
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 bool ls::std::network::Socket::_initUnix()
 {
   this->_setPosixReaderApi();
@@ -170,12 +171,12 @@ bool ls::std::network::Socket::_listenUnix()
 
 ls::std::core::type::byte_field ls::std::network::Socket::_read()
 {
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   return this->_readUnix();
   #endif
 }
 
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 ls::std::core::type::byte_field ls::std::network::Socket::_readUnix()
 {
   size_t size = this->parameter.posixReader->read(this->unixDescriptor, this->readBuffer, this->parameter.readBufferSize);
@@ -215,12 +216,12 @@ void ls::std::network::Socket::_setPosixWriterApi()
 
 bool ls::std::network::Socket::_write(const ls::std::core::type::byte_field &_data)
 {
-  #if defined(unix) || defined(__APPLE__)
+  #if LS_STD_UNIX_PLATFORM
   return this->_writeUnix(_data);
   #endif
 }
 
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 bool ls::std::network::Socket::_writeUnix(const ls::std::core::type::byte_field &_data)
 {
   bool written{};

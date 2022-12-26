@@ -3,14 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-18
- * Changed:         2022-12-12
+ * Changed:         2022-12-26
  *
  * */
 
+#include <ls_std/ls_std_os.hpp>
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_network.hpp>
 
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 #include <sys/socket.h>
 #endif
 
@@ -55,7 +56,7 @@ namespace
   {
     ConvertedSocketAddress convertedSocketAddress = SocketAddressMapper::from(createSocketAddressMapperParameter());
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     ASSERT_EQ(36895, convertedSocketAddress.socketAddressUnix.sin_port); // expected: return value of htons()
     ASSERT_EQ(AF_INET, convertedSocketAddress.socketAddressUnix.sin_family);
     ASSERT_EQ(16777343, convertedSocketAddress.socketAddressUnix.sin_addr.s_addr); // expected: return value of inet_aton()

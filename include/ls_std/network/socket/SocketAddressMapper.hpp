@@ -3,18 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-18
- * Changed:         2022-11-18
+ * Changed:         2022-12-26
  *
  * */
 
 #ifndef LS_STD_SOCKET_ADDRESS_MAPPER_HPP
 #define LS_STD_SOCKET_ADDRESS_MAPPER_HPP
 
+#include <ls_std/os/specification.hpp>
 #include <ls_std/core/Class.hpp>
 #include <ls_std/os/dynamic_goal.hpp>
 #include "ConvertedSocketAddress.hpp"
 #include "SocketAddressMapperParameter.hpp"
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 #include <netinet/in.h>
 #endif
 
@@ -31,7 +32,7 @@ namespace ls::std::network
 
     private:
 
-      #if defined(unix) || defined(__APPLE__)
+      #if LS_STD_UNIX_PLATFORM
       [[nodiscard]] static ::sockaddr_in _toSockAddressUnix(const ls::std::network::SocketAddressMapperParameter& _parameter);
       #endif
   };

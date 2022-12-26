@@ -3,10 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-12-25
+ * Changed:         2022-12-26
  *
  * */
 
+#include <ls_std/ls_std_os.hpp>
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_network.hpp>
 #include <ls_std/ls_std_core.hpp>
@@ -60,7 +61,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     shared_ptr<MockPosixReader> mockReader = make_shared<MockPosixReader>();
     parameter.posixSocket = mockSocket;
@@ -82,7 +83,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
@@ -108,7 +109,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     shared_ptr<MockPosixReader> mockReader = make_shared<MockPosixReader>();
     parameter.posixSocket = mockSocket;
@@ -139,7 +140,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     shared_ptr<MockPosixWriter> mockWriter = make_shared<MockPosixWriter>();
     parameter.posixSocket = mockSocket;
@@ -160,7 +161,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
@@ -179,7 +180,7 @@ namespace
     SocketParameter parameter = generateSocketParameter();
     parameter.socketAddress.protocolType = PROTOCOL_TYPE_UDP;
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
@@ -205,7 +206,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
@@ -223,7 +224,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
@@ -241,7 +242,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
@@ -265,7 +266,7 @@ namespace
   {
     SocketParameter parameter = generateSocketParameter();
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 
@@ -284,7 +285,7 @@ namespace
     SocketParameter parameter = generateSocketParameter();
     parameter.socketAddress.protocolType = PROTOCOL_TYPE_UDP;
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
     parameter.posixSocket = mockSocket;
 

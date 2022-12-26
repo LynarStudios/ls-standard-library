@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-17
- * Changed:         2022-11-17
+ * Changed:         2022-12-26
  *
  * */
 
+#include <ls_std/ls_std_os.hpp>
 #include <gtest/gtest.h>
 #include <ls_std/ls_std_network.hpp>
-#if defined(unix) || defined(__APPLE__)
+#if LS_STD_UNIX_PLATFORM
 #include <sys/socket.h>
 #endif
 #include <ls_std/ls_std_core.hpp>
@@ -42,7 +43,7 @@ namespace
   {
     Protocol protocol = ProtocolMapper::from(ProtocolType::PROTOCOL_TYPE_TCP);
 
-    #if defined(unix) || defined(__APPLE__)
+    #if LS_STD_UNIX_PLATFORM
     ASSERT_EQ(SOCK_STREAM, protocol.unixProtocol);
     #endif
   }

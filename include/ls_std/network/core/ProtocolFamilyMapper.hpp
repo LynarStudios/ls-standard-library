@@ -3,13 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-09
+ * Changed:         2022-12-26
  *
  * */
 
 #ifndef LS_STD_PROTOCOL_FAMILY_MAPPER_HPP
 #define LS_STD_PROTOCOL_FAMILY_MAPPER_HPP
 
+#include <ls_std/os/specification.hpp>
 #include <ls_std/core/Class.hpp>
 #include <ls_std/network/core/ConvertedProtocolFamily.hpp>
 #include <ls_std/network/core/ProtocolFamilyType.hpp>
@@ -28,7 +29,7 @@ namespace ls::std::network
 
     private:
 
-      #if defined(unix) || defined(__APPLE__)
+      #if LS_STD_UNIX_PLATFORM
       [[nodiscard]] static ls::std::network::ConvertedProtocolFamily _toUnixProtocolFamily(const ls::std::network::ProtocolFamilyType& _protocolFamilyType);
       #endif
   };
