@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-25
+ * Changed:         2022-12-26
  *
  * */
 
@@ -23,10 +23,7 @@
 ls::std::network::Socket::Socket(ls::std::network::SocketParameter _parameter) : ls::std::core::Class("Socket"),
 parameter(::std::move(_parameter))
 {
-  #if defined(unix) || defined(__APPLE__)
-  this->unixDescriptor = ls::std::network::Socket::_initUnix();
-  this->initialized = this->unixDescriptor != -1;
-  #endif
+  this->_init();
 }
 
 ls::std::network::Socket::~Socket()
@@ -135,10 +132,11 @@ ls::std::network::SocketAddressMapperParameter ls::std::network::Socket::_create
   return mapperParameter;
 }
 
-bool ls::std::network::Socket::_init()
+void ls::std::network::Socket::_init()
 {
   #if defined(unix) || defined(__APPLE__)
-  return this->_initUnix();
+  this->unixDescriptor = ls::std::network::Socket::_initUnix();
+  this->initialized = this->unixDescriptor != -1;
   #endif
 }
 

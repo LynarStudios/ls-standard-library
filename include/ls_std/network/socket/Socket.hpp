@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-25
+ * Changed:         2022-12-26
  *
  * */
 
@@ -59,7 +59,7 @@ namespace ls::std::network
       [[nodiscard]] bool _connectUnix();
       #endif
       [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;
-      [[nodiscard]] bool _init();
+      void _init();
       void _initReadBuffer();
       #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] bool _initUnix();
