@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-12-15
- * Changed:         2022-12-25
+ * Changed:         2022-12-26
  *
  * */
 
@@ -14,7 +14,7 @@
 
 namespace ls::std::common::interface_type
 {
-  class IPosixReader // TODO: add dynamic goal
+  class IPosixReader
   {
     public:
 
