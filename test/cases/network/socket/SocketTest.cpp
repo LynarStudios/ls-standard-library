@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-12-26
+ * Changed:         2022-12-27
  *
  * */
 
@@ -71,6 +71,8 @@ namespace
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockReader, read(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockReader, read(_, _, _)).WillByDefault(Return(1));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     parameter.readBufferSize = 32;
@@ -89,6 +91,8 @@ namespace
 
     EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
@@ -119,6 +123,8 @@ namespace
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockReader, read(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockReader, read(_, _, _)).WillByDefault(Return(-1));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     parameter.readBufferSize = 32;
@@ -150,6 +156,8 @@ namespace
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockWriter, write(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockWriter, write(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
@@ -157,7 +165,7 @@ namespace
     ASSERT_TRUE(socket.write("Hello Server!"));
   }
 
-  TEST_F(SocketTest, accept)
+  TEST_F(SocketTest, accept) // TODO: adjust accept tests due to signature change
   {
     SocketParameter parameter = generateSocketParameter();
 
@@ -169,6 +177,8 @@ namespace
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockSocket, accept(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, accept(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
@@ -186,6 +196,8 @@ namespace
 
     EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
@@ -214,6 +226,8 @@ namespace
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockSocket, bind(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, bind(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
@@ -250,10 +264,51 @@ namespace
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockSocket, connect(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, connect(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
     ASSERT_TRUE(socket.connect());
+  }
+
+  TEST_F(SocketTest, handle)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if LS_STD_UNIX_PLATFORM
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, accept(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, accept(_, _, _)).WillByDefault(Return(5));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+    connection_id acceptedConnection = socket.accept();
+    ASSERT_TRUE(socket.handle(acceptedConnection));
+  }
+
+  TEST_F(SocketTest, handle_no_accepted_connection)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if LS_STD_UNIX_PLATFORM
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+    ASSERT_FALSE(socket.handle(13));
   }
 
   TEST_F(SocketTest, isInitialized)
@@ -274,6 +329,8 @@ namespace
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockSocket, listen(_, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, listen(_, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
@@ -291,6 +348,8 @@ namespace
 
     EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};

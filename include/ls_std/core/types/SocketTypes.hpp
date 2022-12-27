@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-11-16
+ * Changed:         2022-12-27
  *
  * */
 
@@ -14,8 +14,9 @@
 
 namespace ls::std::core::type
 {
-  using port = unsigned short;
+  using connection_id = int;
   using ip_address = ::std::string;
+  using port = unsigned short;
 }
 
 #endif

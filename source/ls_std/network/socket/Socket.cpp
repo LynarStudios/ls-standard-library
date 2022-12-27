@@ -20,6 +20,8 @@
 #include <ls_std/core/exception/IllegalArgumentException.hpp>
 #include <ls_std/core/exception/FileOperationException.hpp>
 #include <memory>
+#include <ls_std/core/exception/SocketOperationFailedException.hpp>
+#include <iostream>
 
 ls::std::network::Socket::Socket(ls::std::network::SocketParameter _parameter) : ls::std::core::Class("Socket"),
 parameter(::std::move(_parameter))
@@ -30,6 +32,21 @@ parameter(::std::move(_parameter))
 ls::std::network::Socket::~Socket()
 {
   delete[] this->readBuffer;
+
+  #if LS_STD_UNIX_PLATFORM
+  for (const auto& connection : this->unixAcceptDescriptors)
+  {
+    if (!this->_closeUnix(connection.second))
+    {
+      ::std::cerr << "could not close socket with id \"" << connection.first << "\"" << ::std::endl;
+    }
+  }
+
+  if (!this->_closeUnix(this->unixDescriptor))
+  {
+    ::std::cerr << "could not close socket with descriptor \"" << this->unixDescriptor << "\"" << ::std::endl;
+  }
+  #endif
 }
 
 ls::std::core::type::byte_field ls::std::network::Socket::read()
@@ -48,7 +65,7 @@ bool ls::std::network::Socket::write(const ls::std::core::type::byte_field &_dat
   return this->_write(_data);
 }
 
-bool ls::std::network::Socket::accept()
+ls::std::core::type::connection_id ls::std::network::Socket::accept()
 {
   if (this->parameter.socketAddress.protocolType != PROTOCOL_TYPE_TCP)
   {
@@ -69,9 +86,7 @@ bool ls::std::network::Socket::bind()
 
 bool ls::std::network::Socket::close()
 {
-  #if LS_STD_UNIX_PLATFORM
-  return ls::std::network::Socket::_closeUnix();
-  #endif
+  return this->_close();
 }
 
 bool ls::std::network::Socket::connect()
@@ -79,6 +94,19 @@ bool ls::std::network::Socket::connect()
   #if LS_STD_UNIX_PLATFORM
   return ls::std::network::Socket::_connectUnix();
   #endif
+}
+
+bool ls::std::network::Socket::handle(const ls::std::core::type::connection_id &_acceptedConnectionId)
+{
+  bool focusSet{};
+
+  if (this->_hasAcceptedConnection(_acceptedConnectionId))
+  {
+    this->currentAcceptedConnection = _acceptedConnectionId;
+    focusSet = true;
+  }
+
+  return focusSet;
 }
 
 bool ls::std::network::Socket::isInitialized() const
@@ -99,10 +127,23 @@ bool ls::std::network::Socket::listen()
 }
 
 #if LS_STD_UNIX_PLATFORM
-bool ls::std::network::Socket::_acceptUnix()
+ls::std::core::type::connection_id ls::std::network::Socket::_acceptUnix()
 {
-  ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
-  return this->parameter.posixSocket->accept(this->unixDescriptor, reinterpret_cast<sockaddr *>(&convertedSocketAddress.socketAddressUnix), &convertedSocketAddress.addressLength) >= 0;
+  ::sockaddr_in incoming{};
+  ::socklen_t length{};
+  ls::std::core::type::connection_id acceptedDescriptor = this->parameter.posixSocket->accept(this->unixDescriptor, reinterpret_cast<sockaddr *>(&incoming), &length);
+
+  if (acceptedDescriptor >= 0)
+  {
+    ++this->unixUniqueDescriptorId;
+    this->unixAcceptDescriptors.insert({this->unixUniqueDescriptorId, acceptedDescriptor});
+  }
+  else
+  {
+    throw ls::std::core::SocketOperationFailedException{};
+  }
+
+  return this->unixUniqueDescriptorId;
 }
 
 bool ls::std::network::Socket::_bindUnix()
@@ -110,10 +151,19 @@ bool ls::std::network::Socket::_bindUnix()
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
   return this->parameter.posixSocket->bind(this->unixDescriptor, reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), convertedSocketAddress.addressLength) == 0;
 }
+#endif
 
-bool ls::std::network::Socket::_closeUnix()
+bool ls::std::network::Socket::_close()
 {
-  return this->parameter.posixSocket->close(this->unixDescriptor) == 0;
+  #if LS_STD_UNIX_PLATFORM
+  return ls::std::network::Socket::_closeUnix(this->unixDescriptor);
+  #endif
+}
+
+#if LS_STD_UNIX_PLATFORM
+bool ls::std::network::Socket::_closeUnix(const int& _descriptor)
+{
+  return this->parameter.posixSocket->close(_descriptor) == 0;
 }
 
 bool ls::std::network::Socket::_connectUnix()
@@ -131,6 +181,20 @@ ls::std::network::SocketAddressMapperParameter ls::std::network::Socket::_create
 
   return mapperParameter;
 }
+
+bool ls::std::network::Socket::_hasAcceptedConnection(const ls::std::core::type::connection_id &_connectionId)
+{
+  #if LS_STD_UNIX_PLATFORM
+  return this->_hasAcceptedConnectionUnix(_connectionId);
+  #endif
+}
+
+#if LS_STD_UNIX_PLATFORM
+bool ls::std::network::Socket::_hasAcceptedConnectionUnix(const ls::std::core::type::connection_id &_connectionId)
+{
+  return this->unixAcceptDescriptors.find(_connectionId) != this->unixAcceptDescriptors.end();
+}
+#endif
 
 void ls::std::network::Socket::_init()
 {
