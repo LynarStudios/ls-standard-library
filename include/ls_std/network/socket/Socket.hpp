@@ -82,7 +82,7 @@ namespace ls::std::network
       #endif
       ls::std::core::type::byte_field _read();
       #if LS_STD_UNIX_PLATFORM
-      ls::std::core::type::byte_field _readUnix();
+      ls::std::core::type::byte_field _readUnix(const int& _descriptor);
       void _setPosixReaderApi();
       void _setPosixSocketApi();
       void _setPosixWriterApi();

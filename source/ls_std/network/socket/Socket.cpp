@@ -235,14 +235,14 @@ bool ls::std::network::Socket::_listenUnix()
 ls::std::core::type::byte_field ls::std::network::Socket::_read()
 {
   #if LS_STD_UNIX_PLATFORM
-  return this->_readUnix();
+  return this->_readUnix(this->unixAcceptDescriptors.at(this->currentAcceptedConnection));
   #endif
 }
 
 #if LS_STD_UNIX_PLATFORM
-ls::std::core::type::byte_field ls::std::network::Socket::_readUnix()
+ls::std::core::type::byte_field ls::std::network::Socket::_readUnix(const int& _descriptor)
 {
-  size_t size = this->parameter.posixReader->read(this->unixDescriptor, this->readBuffer, this->parameter.readBufferSize);
+  size_t size = this->parameter.posixReader->read(_descriptor, this->readBuffer, this->parameter.readBufferSize);
 
   if (size == -1)
   {
