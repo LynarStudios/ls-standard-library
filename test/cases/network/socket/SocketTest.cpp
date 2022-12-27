@@ -311,6 +311,24 @@ namespace
     ASSERT_FALSE(socket.handle(13));
   }
 
+  TEST_F(SocketTest, handleV2)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if LS_STD_UNIX_PLATFORM
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+    ASSERT_TRUE(socket.handle());
+  }
+
   TEST_F(SocketTest, isInitialized)
   {
     Socket socket{generateSocketParameter()};

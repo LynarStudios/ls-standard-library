@@ -42,8 +42,8 @@ namespace ls::std::network
       [[nodiscard]] bool bind();
       [[nodiscard]] bool close();
       [[nodiscard]] bool connect();
-      [[nodiscard]] bool handle(const ls::std::core::type::connection_id& _acceptedConnectionId);
-      // void handle() for this Socket
+      [[nodiscard]] bool handle(const ls::std::core::type::connection_id& _connectionId);
+      [[nodiscard]] bool handle();
       [[nodiscard]] bool isInitialized() const;
       [[nodiscard]] bool listen();
 
@@ -55,13 +55,13 @@ namespace ls::std::network
       ls::std::core::type::byte* readBuffer{};
       bool readBufferSet{};
       #if LS_STD_UNIX_PLATFORM
-      ::std::unordered_map<ls::std::core::type::connection_id, int> unixAcceptDescriptors{}; // TODO: provide a struct with connection information
-      int unixDescriptor{}; // TODO: also introduce "handle" usage - must be possible to set it for read and write
+      ::std::unordered_map<ls::std::core::type::connection_id, int> unixDescriptors{}; // TODO: provide a struct with connection information
       ls::std::core::type::connection_id unixUniqueDescriptorId{};
       #endif
 
       #if LS_STD_UNIX_PLATFORM
       [[nodiscard]] ls::std::core::type::connection_id _acceptUnix();
+      void _addUnixDescriptor(const int& _descriptor);
       [[nodiscard]] bool _bindUnix();
       #endif
       [[nodiscard]] bool _close();
@@ -74,6 +74,7 @@ namespace ls::std::network
       #if LS_STD_UNIX_PLATFORM
       [[nodiscard]] bool _hasAcceptedConnectionUnix(const ls::std::core::type::connection_id& _connectionId);
       #endif
+      [[nodiscard]] bool _handle(const ls::std::core::type::connection_id& _connectionId);
       void _init();
       void _initReadBuffer();
       #if LS_STD_UNIX_PLATFORM
