@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-18
- * Changed:         2022-12-26
+ * Changed:         2022-12-27
  *
  * */
 
@@ -13,6 +13,8 @@
 
 #if LS_STD_UNIX_PLATFORM
 #include <sys/socket.h>
+#include "ls_std/network/socket/Socket.hpp"
+
 #endif
 
 using namespace ls::std::network;
@@ -60,6 +62,20 @@ namespace
     ASSERT_EQ(36895, convertedSocketAddress.socketAddressUnix.sin_port); // expected: return value of htons()
     ASSERT_EQ(AF_INET, convertedSocketAddress.socketAddressUnix.sin_family);
     ASSERT_EQ(16777343, convertedSocketAddress.socketAddressUnix.sin_addr.s_addr); // expected: return value of inet_aton()
+    ASSERT_EQ(16, convertedSocketAddress.addressLength);
+    #endif
+  }
+
+  TEST_F(SocketAddressMapperTest, from_with_empty_address)
+  {
+    SocketAddressMapperParameter parameter = createSocketAddressMapperParameter();
+    parameter.socketAddress.ipAddress = "";
+    ConvertedSocketAddress convertedSocketAddress = SocketAddressMapper::from(parameter);
+
+    #if LS_STD_UNIX_PLATFORM
+    ASSERT_EQ(36895, convertedSocketAddress.socketAddressUnix.sin_port); // expected: return value of htons()
+    ASSERT_EQ(AF_INET, convertedSocketAddress.socketAddressUnix.sin_family);
+    ASSERT_EQ(INADDR_ANY, convertedSocketAddress.socketAddressUnix.sin_addr.s_addr); // expected: return value of inet_aton()
     ASSERT_EQ(16, convertedSocketAddress.addressLength);
     #endif
   }

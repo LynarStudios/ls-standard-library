@@ -39,7 +39,15 @@ ls::std::network::ConvertedSocketAddress ls::std::network::SocketAddressMapper::
 
   ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(_parameter.protocolFamilyType);
   socketAddressUnix.sin_family = convertedProtocolFamily.unixDomain;
-  ::inet_aton(_parameter.socketAddress.ipAddress.c_str(), &socketAddressUnix.sin_addr);
+
+  if (!_parameter.socketAddress.ipAddress.empty())
+  {
+    ::inet_aton(_parameter.socketAddress.ipAddress.c_str(), &socketAddressUnix.sin_addr);
+  }
+  else
+  {
+    socketAddressUnix.sin_addr.s_addr = INADDR_ANY;
+  }
 
   return socketAddressUnix;
 }
