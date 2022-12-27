@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2022-12-25
+ * Changed:         2022-12-27
  *
  * */
 
@@ -19,6 +19,7 @@
 #include <ls_std/core/exception/IncompleteJsonException.hpp>
 #include <ls_std/core/exception/NullPointerException.hpp>
 #include <ls_std/core/exception/WrongProtocolException.hpp>
+#include <ls_std/core/exception/SocketOperationFailedException.hpp>
 
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/core/interface/IEncoding.hpp>
