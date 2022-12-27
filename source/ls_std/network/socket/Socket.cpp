@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-26
+ * Changed:         2022-12-27
  *
  * */
 
@@ -99,7 +99,6 @@ bool ls::std::network::Socket::listen()
 }
 
 #if LS_STD_UNIX_PLATFORM
-
 bool ls::std::network::Socket::_acceptUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
@@ -136,8 +135,7 @@ ls::std::network::SocketAddressMapperParameter ls::std::network::Socket::_create
 void ls::std::network::Socket::_init()
 {
   #if LS_STD_UNIX_PLATFORM
-  this->unixDescriptor = ls::std::network::Socket::_initUnix();
-  this->initialized = this->unixDescriptor != -1;
+  this->initialized = ls::std::network::Socket::_initUnix();
   #endif
 }
 
@@ -159,8 +157,9 @@ bool ls::std::network::Socket::_initUnix()
   this->_setPosixWriterApi();
   ls::std::network::ConvertedProtocolFamily convertedProtocolFamily = ls::std::network::ProtocolFamilyMapper::from(this->parameter.protocolFamilyType);
   ls::std::network::Protocol protocol = ls::std::network::ProtocolMapper::from(this->parameter.socketAddress.protocolType);
+  this->unixDescriptor = this->parameter.posixSocket->create(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0);
 
-  return this->parameter.posixSocket->create(convertedProtocolFamily.unixDomain, protocol.unixProtocol, 0) != -1;
+  return this->unixDescriptor != -1;
 }
 
 bool ls::std::network::Socket::_listenUnix()
