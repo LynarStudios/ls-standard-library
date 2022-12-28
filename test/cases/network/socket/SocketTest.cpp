@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-12-27
+ * Changed:         2022-12-28
  *
  * */
 
@@ -54,7 +54,19 @@ namespace
 
   TEST_F(SocketTest, getClassName)
   {
-    ASSERT_STREQ("Socket", Socket{generateSocketParameter()}.getClassName().c_str());
+    SocketParameter parameter = generateSocketParameter();
+
+    #if LS_STD_UNIX_PLATFORM
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
+    #endif
+
+    ASSERT_STREQ("Socket", Socket{parameter}.getClassName().c_str());
   }
 
   TEST_F(SocketTest, read)
@@ -331,7 +343,19 @@ namespace
 
   TEST_F(SocketTest, isInitialized)
   {
-    Socket socket{generateSocketParameter()};
+    SocketParameter parameter = generateSocketParameter();
+
+    #if LS_STD_UNIX_PLATFORM
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
     ASSERT_TRUE(socket.isInitialized());
   }
 

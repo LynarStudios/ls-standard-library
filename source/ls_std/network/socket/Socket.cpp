@@ -41,11 +41,6 @@ ls::std::network::Socket::~Socket()
       ::std::cerr << "could not close socket with id \"" << connection.first << "\"" << ::std::endl;
     }
   }
-
-  if (!this->_closeUnix(this->unixDescriptors.at(1)))
-  {
-    ::std::cerr << "could not close socket with descriptor \"" << this->unixDescriptors.at(1) << "\"" << ::std::endl;
-  }
   #endif
 }
 
