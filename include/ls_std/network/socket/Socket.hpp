@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-27
+ * Changed:         2022-12-28
  *
  * */
 
@@ -33,8 +33,8 @@ namespace ls::std::network
 
       // implementation
 
-      [[nodiscard]] ls::std::core::type::byte_field read() override; // TODO: set write descriptor
-      [[nodiscard]] bool write(const ls::std::core::type::byte_field &_data) override; // TODO: set write descriptor
+      [[nodiscard]] ls::std::core::type::byte_field read() override;
+      [[nodiscard]] bool write(const ls::std::core::type::byte_field &_data) override;
 
       // other functionalities
 
@@ -90,7 +90,7 @@ namespace ls::std::network
       #endif
       bool _write(const ls::std::core::type::byte_field &_data);
       #if LS_STD_UNIX_PLATFORM
-      bool _writeUnix(const ls::std::core::type::byte_field &_data);
+      bool _writeUnix(const int& _descriptor, const ls::std::core::type::byte_field &_data);
       #endif
   };
 }

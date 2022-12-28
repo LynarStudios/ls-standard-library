@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-27
+ * Changed:         2022-12-28
  *
  * */
 
@@ -302,12 +302,12 @@ void ls::std::network::Socket::_setPosixWriterApi()
 bool ls::std::network::Socket::_write(const ls::std::core::type::byte_field &_data)
 {
   #if LS_STD_UNIX_PLATFORM
-  return this->_writeUnix(_data);
+  return this->_writeUnix(this->unixDescriptors.at(this->currentAcceptedConnection), _data);
   #endif
 }
 
 #if LS_STD_UNIX_PLATFORM
-bool ls::std::network::Socket::_writeUnix(const ls::std::core::type::byte_field &_data)
+bool ls::std::network::Socket::_writeUnix(const int& _descriptor, const ls::std::core::type::byte_field &_data)
 {
   bool written{};
 
@@ -317,7 +317,7 @@ bool ls::std::network::Socket::_writeUnix(const ls::std::core::type::byte_field 
     char* buffer = new char[size];
     ::std::strcpy(buffer, _data.c_str());
 
-    written = this->parameter.posixWriter->write(this->unixDescriptors.at(1), buffer, size) != -1;
+    written = this->parameter.posixWriter->write(_descriptor, buffer, size) != -1;
 
     delete[] buffer;
   }
