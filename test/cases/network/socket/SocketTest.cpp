@@ -177,7 +177,7 @@ namespace
     ASSERT_TRUE(socket.write("Hello Server!"));
   }
 
-  TEST_F(SocketTest, accept) // TODO: adjust accept tests due to signature change
+  TEST_F(SocketTest, accept)
   {
     SocketParameter parameter = generateSocketParameter();
 
@@ -188,13 +188,13 @@ namespace
     EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
     ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
     EXPECT_CALL(*mockSocket, accept(_, _, _)).Times(AtLeast(1));
-    ON_CALL(*mockSocket, accept(_, _, _)).WillByDefault(Return(0));
+    ON_CALL(*mockSocket, accept(_, _, _)).WillByDefault(Return(15));
     EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
     ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
     #endif
 
     Socket socket{parameter};
-    ASSERT_TRUE(socket.accept());
+    ASSERT_EQ(2, socket.accept());
   }
 
   TEST_F(SocketTest, accept_wrong_protocol)
@@ -217,7 +217,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     bool listened = socket.accept();
+                     connection_id listened = socket.accept();
                    }
                    catch (const WrongProtocolException &_exception)
                    {
