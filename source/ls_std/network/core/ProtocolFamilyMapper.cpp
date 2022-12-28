@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-26
+ * Changed:         2022-12-28
  *
  * */
 
@@ -31,11 +31,11 @@ ls::std::network::ConvertedProtocolFamily ls::std::network::ProtocolFamilyMapper
 
   switch(_protocolFamilyType)
   {
-    case ls::std::network::ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_IPV4:
+    case ls::std::network::ProtocolFamilyType::LS_STD_PROTOCOL_FAMILY_TYPE_IPV4:
     {
       convertedProtocolFamily.unixDomain = AF_INET;
     } break;
-    case ls::std::network::ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_NOT_INITIALIZED:
+    case ls::std::network::ProtocolFamilyType::LS_STD_PROTOCOL_FAMILY_TYPE_NOT_INITIALIZED:
     {
       throw ls::std::core::IllegalArgumentException{};
     }

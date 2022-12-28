@@ -62,7 +62,7 @@ bool ls::std::network::Socket::write(const ls::std::core::type::byte_field &_dat
 
 ls::std::core::type::connection_id ls::std::network::Socket::accept()
 {
-  if (this->parameter.socketAddress.protocolType != PROTOCOL_TYPE_TCP)
+  if (this->parameter.socketAddress.protocolType != LS_STD_PROTOCOL_TYPE_TCP)
   {
     throw ls::std::core::WrongProtocolException{};
   }
@@ -108,7 +108,7 @@ bool ls::std::network::Socket::isInitialized() const
 
 bool ls::std::network::Socket::listen()
 {
-  if (this->parameter.socketAddress.protocolType != PROTOCOL_TYPE_TCP)
+  if (this->parameter.socketAddress.protocolType != LS_STD_PROTOCOL_TYPE_TCP)
   {
     throw ls::std::core::WrongProtocolException{};
   }

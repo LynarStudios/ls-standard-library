@@ -40,10 +40,10 @@ namespace
       static SocketParameter generateSocketParameter()
       {
         SocketParameter socketParameter{};
-        socketParameter.protocolFamilyType = ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_IPV4;
+        socketParameter.protocolFamilyType = ProtocolFamilyType::LS_STD_PROTOCOL_FAMILY_TYPE_IPV4;
 
         SocketAddress socketAddress{};
-        socketAddress.protocolType = ProtocolType::PROTOCOL_TYPE_TCP;
+        socketAddress.protocolType = ProtocolType::LS_STD_PROTOCOL_TYPE_TCP;
         socketAddress.ipAddress = "127.0.0.1";
         socketAddress.port = 2220;
         socketParameter.socketAddress = socketAddress;
@@ -200,7 +200,7 @@ namespace
   TEST_F(SocketTest, accept_wrong_protocol)
   {
     SocketParameter parameter = generateSocketParameter();
-    parameter.socketAddress.protocolType = PROTOCOL_TYPE_UDP;
+    parameter.socketAddress.protocolType = LS_STD_PROTOCOL_TYPE_UDP;
 
     #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
@@ -382,7 +382,7 @@ namespace
   TEST_F(SocketTest, listen_wrong_protocol)
   {
     SocketParameter parameter = generateSocketParameter();
-    parameter.socketAddress.protocolType = PROTOCOL_TYPE_UDP;
+    parameter.socketAddress.protocolType = LS_STD_PROTOCOL_TYPE_UDP;
 
     #if LS_STD_UNIX_PLATFORM
     shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-17
- * Changed:         2022-12-26
+ * Changed:         2022-12-28
  *
  * */
 
@@ -41,7 +41,7 @@ namespace
 
   TEST_F(ProtocolMapperTest, from)
   {
-    Protocol protocol = ProtocolMapper::from(ProtocolType::PROTOCOL_TYPE_TCP);
+    Protocol protocol = ProtocolMapper::from(ProtocolType::LS_STD_PROTOCOL_TYPE_TCP);
 
     #if LS_STD_UNIX_PLATFORM
     ASSERT_EQ(SOCK_STREAM, protocol.unixProtocol);
@@ -53,7 +53,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     Protocol protocol = ProtocolMapper::from(ProtocolType::PROTOCOL_TYPE_NOT_INITIALIZED);
+                     Protocol protocol = ProtocolMapper::from(ProtocolType::LS_STD_PROTOCOL_TYPE_NOT_INITIALIZED);
                    }
                    catch (const IllegalArgumentException &_exception)
                    {

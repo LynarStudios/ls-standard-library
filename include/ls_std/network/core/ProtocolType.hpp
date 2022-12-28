@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-12
+ * Changed:         2022-12-28
  *
  * */
 
@@ -14,9 +14,9 @@ namespace ls::std::network
 {
   enum ProtocolType
   {
-    PROTOCOL_TYPE_NOT_INITIALIZED = 0,
-    PROTOCOL_TYPE_UDP,
-    PROTOCOL_TYPE_TCP
+    LS_STD_PROTOCOL_TYPE_NOT_INITIALIZED = 0,
+    LS_STD_PROTOCOL_TYPE_UDP,
+    LS_STD_PROTOCOL_TYPE_TCP
   };
 }
 

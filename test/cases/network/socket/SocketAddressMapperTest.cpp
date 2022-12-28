@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-18
- * Changed:         2022-12-27
+ * Changed:         2022-12-28
  *
  * */
 
@@ -37,11 +37,11 @@ namespace
       static SocketAddressMapperParameter createSocketAddressMapperParameter()
       {
         SocketAddressMapperParameter parameter{};
-        parameter.protocolFamilyType = ProtocolFamilyType::PROTOCOL_FAMILY_TYPE_IPV4;
+        parameter.protocolFamilyType = ProtocolFamilyType::LS_STD_PROTOCOL_FAMILY_TYPE_IPV4;
 
         SocketAddress socketAddress{};
         socketAddress.port = 8080;
-        socketAddress.protocolType = PROTOCOL_TYPE_TCP;
+        socketAddress.protocolType = LS_STD_PROTOCOL_TYPE_TCP;
         socketAddress.ipAddress = "127.0.0.1";
         parameter.socketAddress = socketAddress;
 

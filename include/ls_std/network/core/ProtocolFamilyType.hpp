@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-16
- * Changed:         2022-11-16
+ * Changed:         2022-12-28
  *
  * */
 
@@ -14,8 +14,8 @@ namespace ls::std::network
 {
   enum ProtocolFamilyType
   {
-    PROTOCOL_FAMILY_TYPE_NOT_INITIALIZED = 0,
-    PROTOCOL_FAMILY_TYPE_IPV4
+    LS_STD_PROTOCOL_FAMILY_TYPE_NOT_INITIALIZED = 0,
+    LS_STD_PROTOCOL_FAMILY_TYPE_IPV4
   };
 }
 

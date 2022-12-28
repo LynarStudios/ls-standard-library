@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-27
- * Changed:         2022-12-27
+ * Changed:         2022-12-28
  *
  * */
 
@@ -33,16 +33,16 @@ namespace
     // create server parameter
 
     SocketParameter serverParameter{};
-    serverParameter.protocolFamilyType = PROTOCOL_FAMILY_TYPE_IPV4; // TODO: add library prefix to constant value
-    serverParameter.socketAddress.protocolType = PROTOCOL_TYPE_TCP; // TODO: add library prefix to constant value
+    serverParameter.protocolFamilyType = LS_STD_PROTOCOL_FAMILY_TYPE_IPV4;
+    serverParameter.socketAddress.protocolType = LS_STD_PROTOCOL_TYPE_TCP;
     serverParameter.socketAddress.port = 5099;
     serverParameter.queueSize = 5;
 
     // create client parameter
 
     SocketParameter clientParameter{};
-    clientParameter.protocolFamilyType = PROTOCOL_FAMILY_TYPE_IPV4;
-    clientParameter.socketAddress.protocolType = PROTOCOL_TYPE_TCP;
+    clientParameter.protocolFamilyType = LS_STD_PROTOCOL_FAMILY_TYPE_IPV4;
+    clientParameter.socketAddress.protocolType = LS_STD_PROTOCOL_TYPE_TCP;
     clientParameter.socketAddress.ipAddress = "127.0.0.1";
     clientParameter.socketAddress.port = 5099;
 
