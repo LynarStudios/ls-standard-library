@@ -226,6 +226,36 @@ namespace
                  }, WrongProtocolException);
   }
 
+  TEST_F(SocketTest, accept_not_accepted)
+  {
+    SocketParameter parameter = generateSocketParameter();
+
+    #if LS_STD_UNIX_PLATFORM
+    shared_ptr<MockPosixSocket> mockSocket = make_shared<MockPosixSocket>();
+    parameter.posixSocket = mockSocket;
+
+    EXPECT_CALL(*mockSocket, create(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, create(_, _, _)).WillByDefault(Return(0));
+    EXPECT_CALL(*mockSocket, accept(_, _, _)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, accept(_, _, _)).WillByDefault(Return(-1));
+    EXPECT_CALL(*mockSocket, close(_)).Times(AtLeast(1));
+    ON_CALL(*mockSocket, close(_)).WillByDefault(Return(0));
+    #endif
+
+    Socket socket{parameter};
+
+    EXPECT_THROW({
+                   try
+                   {
+                     connection_id listened = socket.accept();
+                   }
+                   catch (const SocketOperationFailedException &_exception)
+                   {
+                     throw;
+                   }
+                 }, SocketOperationFailedException);
+  }
+
   TEST_F(SocketTest, bind)
   {
     SocketParameter parameter = generateSocketParameter();
