@@ -84,17 +84,17 @@ namespace ls::std::network
       [[nodiscard]] bool _initUnix();
       [[nodiscard]] bool _listenUnix();
       #endif
-      ls::std::core::type::byte_field _read();
+      [[nodiscard]] ls::std::core::type::byte_field _read();
       #if LS_STD_UNIX_PLATFORM
-      ls::std::core::type::byte_field _readUnix(const int& _descriptor);
+      [[nodiscard]] ls::std::core::type::byte_field _readUnix(const int& _descriptor);
       [[nodiscard]] bool _removeUnix(const ls::std::core::type::connection_id& _connectionId);
       void _setPosixReaderApi();
       void _setPosixSocketApi();
       void _setPosixWriterApi();
       #endif
-      bool _write(const ls::std::core::type::byte_field &_data);
+      [[nodiscard]] bool _write(const ls::std::core::type::byte_field &_data);
       #if LS_STD_UNIX_PLATFORM
-      bool _writeUnix(const int& _descriptor, const ls::std::core::type::byte_field &_data);
+      [[nodiscard]] bool _writeUnix(const int& _descriptor, const ls::std::core::type::byte_field &_data);
       #endif
   };
 }
