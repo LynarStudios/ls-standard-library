@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-18
- * Changed:         2022-12-28
+ * Changed:         2022-12-31
  *
  * */
 
@@ -14,7 +14,6 @@
 #if LS_STD_UNIX_PLATFORM
 #include <sys/socket.h>
 #include "ls_std/network/socket/Socket.hpp"
-
 #endif
 
 using namespace ls::std::network;

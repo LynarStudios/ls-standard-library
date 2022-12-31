@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-16
+ * Changed:         2022-12-31
  *
  * */
 
@@ -23,5 +23,6 @@
 #include <ls_std/network/socket/SocketAddressMapper.hpp>
 #include <ls_std/network/socket/SocketAddressMapperParameter.hpp>
 #include <ls_std/network/socket/SocketParameter.hpp>
+#include <ls_std/network/socket/UnixSocketDescriptor.hpp>
 
 #endif

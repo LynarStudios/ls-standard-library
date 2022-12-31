@@ -203,7 +203,8 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolFamilyMapper.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/core/ProtocolMapper.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/Socket.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/SocketAddressMapper.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/SocketAddressMapper.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/network/socket/UnixSocketDescriptor.cpp)
 endif()
 
 set(SOURCE_FILES_TIME
@@ -288,7 +289,8 @@ set(TEST_FILES_CORE
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/core/ProtocolFamilyMapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/core/ProtocolMapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/SocketAddressMapperTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/SocketTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/SocketTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/network/socket/UnixSocketDescriptorTest.cpp)
 
     set(TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
