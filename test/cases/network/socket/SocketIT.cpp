@@ -11,6 +11,7 @@
 #include <ls_std/ls_std_network.hpp>
 
 using namespace ls::std::network;
+using namespace ::std;
 
 namespace
 {
@@ -28,9 +29,9 @@ namespace
       {}
   };
 
-  TEST_F(SocketIT, local_server_client)
+  TEST_F(SocketIT, local_server_bind)
   {
-    // create server parameter
+    // SERVER: create parameter
 
     SocketParameter serverParameter{};
     serverParameter.protocolFamilyType = LS_STD_PROTOCOL_FAMILY_TYPE_IPV4;
@@ -38,30 +39,11 @@ namespace
     serverParameter.socketAddress.port = 5099;
     serverParameter.queueSize = 5;
 
-    // create client parameter
-
-    SocketParameter clientParameter{};
-    clientParameter.protocolFamilyType = LS_STD_PROTOCOL_FAMILY_TYPE_IPV4;
-    clientParameter.socketAddress.protocolType = LS_STD_PROTOCOL_TYPE_TCP;
-    clientParameter.socketAddress.ipAddress = "127.0.0.1";
-    clientParameter.socketAddress.port = 5099;
-
-    // start server
+    // SERVER: bind
 
     Socket serverSocket{serverParameter};
-
     ASSERT_TRUE(serverSocket.bind());
-    ASSERT_TRUE(serverSocket.listen());
 
-    // start client
-
-    Socket clientSocket{clientParameter};
-
-    ASSERT_TRUE(clientSocket.connect());
-
-    // close sockets
-
-    ASSERT_TRUE(clientSocket.close());
     ASSERT_TRUE(serverSocket.close());
   }
 }
