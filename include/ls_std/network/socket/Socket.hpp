@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-28
+ * Changed:         2022-12-31
  *
  * */
 
@@ -19,8 +19,11 @@
 #include <ls_std/core/types/Types.hpp>
 #include <ls_std/core/interface/IReader.hpp>
 #include <ls_std/core/interface/IWriter.hpp>
-#include <unordered_map>
+#include <list>
 #include <ls_std/core/types/SocketTypes.hpp>
+#if LS_STD_UNIX_PLATFORM
+#include "UnixSocketDescriptor.hpp"
+#endif
 
 namespace ls::std::network
 {
@@ -55,7 +58,7 @@ namespace ls::std::network
       ls::std::core::type::byte* readBuffer{};
       bool readBufferSet{};
       #if LS_STD_UNIX_PLATFORM
-      ::std::unordered_map<ls::std::core::type::connection_id, int> unixDescriptors{}; // TODO: provide a struct with connection information
+      ::std::list<ls::std::network::UnixSocketDescriptor> unixDescriptors{};
       ls::std::core::type::connection_id unixUniqueDescriptorId{};
       #endif
 
@@ -66,7 +69,7 @@ namespace ls::std::network
       #endif
       [[nodiscard]] bool _close();
       #if LS_STD_UNIX_PLATFORM
-      [[nodiscard]] bool _closeUnix(const int& _descriptor);
+      [[nodiscard]] bool _closeUnix(const ls::std::core::type::connection_id& _connectionId);
       [[nodiscard]] bool _connectUnix();
       #endif
       [[nodiscard]] SocketAddressMapperParameter _createSocketAddressMapperParameter() const;
@@ -84,6 +87,7 @@ namespace ls::std::network
       ls::std::core::type::byte_field _read();
       #if LS_STD_UNIX_PLATFORM
       ls::std::core::type::byte_field _readUnix(const int& _descriptor);
+      [[nodiscard]] bool _removeUnix(const ls::std::core::type::connection_id& _connectionId);
       void _setPosixReaderApi();
       void _setPosixSocketApi();
       void _setPosixWriterApi();

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-11-16
- * Changed:         2022-12-28
+ * Changed:         2022-12-31
  *
  * */
 
@@ -36,11 +36,13 @@ ls::std::network::Socket::~Socket()
   #if LS_STD_UNIX_PLATFORM
   for (const auto& connection : this->unixDescriptors)
   {
-    if (!this->_closeUnix(connection.second))
+    if (!this->_closeUnix(connection.getConnectionId()))
     {
-      ::std::cerr << "could not close socket with id \"" << connection.first << "\"" << ::std::endl;
+      ::std::cerr << "could not close socket with id \"" << connection.getConnectionId() << "\"" << ::std::endl;
     }
   }
+
+  this->unixDescriptors.clear();
   #endif
 }
 
@@ -81,7 +83,7 @@ bool ls::std::network::Socket::bind()
 
 bool ls::std::network::Socket::close()
 {
-  return this->_close();
+  return this->_close(); // TODO: what about other connections? should it be current handle?
 }
 
 bool ls::std::network::Socket::connect()
@@ -123,7 +125,7 @@ ls::std::core::type::connection_id ls::std::network::Socket::_acceptUnix()
 {
   ::sockaddr_in incoming{};
   ::socklen_t length{};
-  ls::std::core::type::connection_id acceptedDescriptor = this->parameter.posixSocket->accept(this->unixDescriptors.at(1), reinterpret_cast<sockaddr *>(&incoming), &length);
+  int acceptedDescriptor = this->parameter.posixSocket->accept(this->unixDescriptors.front().getDescriptor(), reinterpret_cast<sockaddr *>(&incoming), &length);
 
   if (acceptedDescriptor >= 0)
   {
@@ -140,33 +142,37 @@ ls::std::core::type::connection_id ls::std::network::Socket::_acceptUnix()
 void ls::std::network::Socket::_addUnixDescriptor(const int &_descriptor)
 {
   ++this->unixUniqueDescriptorId;
-  this->unixDescriptors.insert({this->unixUniqueDescriptorId, _descriptor});
+  this->unixDescriptors.emplace_back(this->unixUniqueDescriptorId, _descriptor);
 }
 
 bool ls::std::network::Socket::_bindUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
-  return this->parameter.posixSocket->bind(this->unixDescriptors.at(1), reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), convertedSocketAddress.addressLength) == 0;
+  return this->parameter.posixSocket->bind(this->unixDescriptors.front().getDescriptor(), reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), convertedSocketAddress.addressLength) == 0;
 }
 #endif
 
 bool ls::std::network::Socket::_close()
 {
   #if LS_STD_UNIX_PLATFORM
-  return ls::std::network::Socket::_closeUnix(this->unixDescriptors.at(1));
+  bool closed = ls::std::network::Socket::_closeUnix(this->unixDescriptors.front().getConnectionId());
+  bool erased = this->_removeUnix(this->unixDescriptors.front().getConnectionId());
   #endif
+
+  return closed && erased;
 }
 
 #if LS_STD_UNIX_PLATFORM
-bool ls::std::network::Socket::_closeUnix(const int& _descriptor)
+bool ls::std::network::Socket::_closeUnix(const ls::std::core::type::connection_id& _connectionId)
 {
-  return this->parameter.posixSocket->close(_descriptor) == 0;
+  auto iterator = ::std::find_if(this->unixDescriptors.begin(), this->unixDescriptors.end(), ls::std::network::UnixSocketDescriptor{_connectionId, 0});
+  return this->parameter.posixSocket->close(iterator->getDescriptor()) == 0;
 }
 
 bool ls::std::network::Socket::_connectUnix()
 {
   ls::std::network::ConvertedSocketAddress convertedSocketAddress = ls::std::network::SocketAddressMapper::from(ls::std::network::Socket::_createSocketAddressMapperParameter());
-  return this->parameter.posixSocket->connect(this->unixDescriptors.at(1), reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), convertedSocketAddress.addressLength) == 0;
+  return this->parameter.posixSocket->connect(this->unixDescriptors.front().getDescriptor(), reinterpret_cast<const sockaddr *>(&convertedSocketAddress.socketAddressUnix), convertedSocketAddress.addressLength) == 0;
 }
 #endif
 
@@ -187,9 +193,9 @@ bool ls::std::network::Socket::_hasAcceptedConnection(const ls::std::core::type:
 }
 
 #if LS_STD_UNIX_PLATFORM
-bool ls::std::network::Socket::_hasAcceptedConnectionUnix(const ls::std::core::type::connection_id &_connectionId)
+bool ls::std::network::Socket::_hasAcceptedConnectionUnix(const ls::std::core::type::connection_id &_connectionId) // TODO: improve method name
 {
-  return this->unixDescriptors.find(_connectionId) != this->unixDescriptors.end();
+  return ::std::any_of(this->unixDescriptors.begin(), this->unixDescriptors.end(), ls::std::network::UnixSocketDescriptor{_connectionId, 0});
 }
 #endif
 
@@ -245,14 +251,15 @@ bool ls::std::network::Socket::_initUnix()
 
 bool ls::std::network::Socket::_listenUnix()
 {
-  return this->parameter.posixSocket->listen(this->unixDescriptors.at(1), this->parameter.queueSize) == 0;
+  return this->parameter.posixSocket->listen(this->unixDescriptors.front().getDescriptor(), this->parameter.queueSize) == 0;
 }
 #endif
 
 ls::std::core::type::byte_field ls::std::network::Socket::_read()
 {
   #if LS_STD_UNIX_PLATFORM
-  return this->_readUnix(this->unixDescriptors.at(this->currentAcceptedConnection));
+  auto iterator = ::std::find_if(this->unixDescriptors.begin(), this->unixDescriptors.end(), ls::std::network::UnixSocketDescriptor{this->currentAcceptedConnection, 0});
+  return this->_readUnix(iterator->getDescriptor());
   #endif
 }
 
@@ -267,6 +274,14 @@ ls::std::core::type::byte_field ls::std::network::Socket::_readUnix(const int& _
   }
 
   return ls::std::core::type::byte_field{this->readBuffer, size};
+}
+
+bool ls::std::network::Socket::_removeUnix(const ls::std::core::type::connection_id &_connectionId)
+{
+  auto iterator = ::std::find_if(this->unixDescriptors.begin(), this->unixDescriptors.end(), ls::std::network::UnixSocketDescriptor{_connectionId, 0});
+  this->unixDescriptors.erase(iterator);
+
+  return !this->_hasAcceptedConnectionUnix(_connectionId);
 }
 
 void ls::std::network::Socket::_setPosixReaderApi()
@@ -297,7 +312,8 @@ void ls::std::network::Socket::_setPosixWriterApi()
 bool ls::std::network::Socket::_write(const ls::std::core::type::byte_field &_data)
 {
   #if LS_STD_UNIX_PLATFORM
-  return this->_writeUnix(this->unixDescriptors.at(this->currentAcceptedConnection), _data);
+  auto iterator = ::std::find_if(this->unixDescriptors.begin(), this->unixDescriptors.end(), ls::std::network::UnixSocketDescriptor{this->currentAcceptedConnection, 0});
+  return this->_writeUnix(iterator->getDescriptor(), _data);
   #endif
 }
 

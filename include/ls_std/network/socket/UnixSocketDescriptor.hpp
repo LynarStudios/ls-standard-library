@@ -21,8 +21,7 @@ namespace ls::std::network
       explicit UnixSocketDescriptor(const ls::std::core::type::connection_id& _connectionId, const int& _descriptor);
       ~UnixSocketDescriptor();
 
-      bool operator == (const ls::std::network::UnixSocketDescriptor& _socketDescriptor) const;
-      bool operator != (const ls::std::network::UnixSocketDescriptor& _socketDescriptor) const;
+      bool operator () (const ls::std::network::UnixSocketDescriptor& _socketDescriptor) const;
 
       [[nodiscard]] ls::std::core::type::connection_id getConnectionId() const;
       [[nodiscard]] int getDescriptor() const;

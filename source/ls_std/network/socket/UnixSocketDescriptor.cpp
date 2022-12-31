@@ -17,14 +17,9 @@ descriptor(_descriptor)
 ls::std::network::UnixSocketDescriptor::~UnixSocketDescriptor()
 = default;
 
-bool ls::std::network::UnixSocketDescriptor::operator==(const ls::std::network::UnixSocketDescriptor &_socketDescriptor) const
+bool ls::std::network::UnixSocketDescriptor::operator()(const ls::std::network::UnixSocketDescriptor &_socketDescriptor) const
 {
-  return this->connectionId == _socketDescriptor.getConnectionId();
-}
-
-bool ls::std::network::UnixSocketDescriptor::operator!=(const ls::std::network::UnixSocketDescriptor &_socketDescriptor) const
-{
-  return this->connectionId != _socketDescriptor.getDescriptor();
+  return _socketDescriptor.getConnectionId() == this->connectionId;
 }
 
 ls::std::core::type::connection_id ls::std::network::UnixSocketDescriptor::getConnectionId() const
