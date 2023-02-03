@@ -137,49 +137,49 @@ endif ()
 ####################################################################################################################
 
 set(SOURCE_FILES_BOXING
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Boolean.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Double.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Float.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Integer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Long.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/String.cpp)
 
 set(SOURCE_FILES_CORE
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Class.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
 set(SOURCE_FILES_ENCODING
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp)
 
 set(SOURCE_FILES_EVENT
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/serialization/SerializableJsonEvent.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Narrator.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/serialization/SerializableJsonEvent.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/Event.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/EventHandler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/EventManager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/Narrator.cpp)
 
 set(SOURCE_FILES_IO
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvFileReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvPair.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlAttribute.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDeclaration.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlNode.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvFileReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvPair.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvParser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/Logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/LogLevel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlAttribute.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDeclaration.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlNode.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlParser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/File.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileOutputStream.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StandardOutputWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StorableFile.cpp)
 
 set(SOURCE_FILES_TIME
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/Date.cpp)
 
 ####################################################################################################################
 ####################################################################################################################
@@ -414,9 +414,9 @@ endif ()
 # CLI base64
 
 add_executable(cli_base64
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/cli/cli_base64_main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
 ##########################################################
 # Build Library (event)

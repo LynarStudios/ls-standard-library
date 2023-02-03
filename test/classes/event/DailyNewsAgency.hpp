@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-20
+ * Changed:         2023-02-03
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <string>
 #include <memory>
 #include <map>
-#include <ls_std/ls_std_core.hpp>
+#include <ls-std/ls-std-core.hpp>
 #include "NewsAgency.hpp"
 
 namespace ls_std_event_test
