@@ -7,9 +7,9 @@
  *
  * */
 
-#include <ls-std/io/xml/XmlNode.hpp>
-#include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/utils/StlUtils.hpp>
+#include <ls-std/io/xml/XmlNode.hpp>
 
 ls::std::io::XmlNode::XmlNode(::std::string _name)
     : ls::std::core::Class("XmlNode"),

@@ -7,8 +7,8 @@
  *
  * */
 
-#include <ls-std/encoding/Base64.hpp>
 #include <bitset>
+#include <ls-std/encoding/Base64.hpp>
 
 ::std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
 {

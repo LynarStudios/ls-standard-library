@@ -10,9 +10,9 @@
 #ifndef LS_STD_I_EVENT_SUBSCRIBER_HPP
 #define LS_STD_I_EVENT_SUBSCRIBER_HPP
 
+#include "IListener.hpp"
 #include <ls-std/core/types/EventTypes.hpp>
 #include <memory>
-#include "IListener.hpp"
 
 namespace ls::std::core::interface_type
 {

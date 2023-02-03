@@ -10,10 +10,10 @@
 #ifndef LS_STD_INTEGER_HPP
 #define LS_STD_INTEGER_HPP
 
-#include <memory>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IBoxing.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::boxing
 {

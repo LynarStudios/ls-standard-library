@@ -7,9 +7,9 @@
  *
  * */
 
-#include <ls-std/io/FileOutputStream.hpp>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
+#include <ls-std/io/FileOutputStream.hpp>
 
 ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file)
     : ls::std::core::Class("FileOutputStream"),

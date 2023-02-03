@@ -10,11 +10,11 @@
 #ifndef LS_STD_BASE64_HPP
 #define LS_STD_BASE64_HPP
 
-#include <ls-std/core/interface/IEncoding.hpp>
 #include <bitset>
-#include <vector>
-#include <unordered_map>
+#include <ls-std/core/interface/IEncoding.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <unordered_map>
+#include <vector>
 
 namespace ls::std::encoding
 {

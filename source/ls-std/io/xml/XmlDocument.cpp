@@ -7,8 +7,8 @@
  *
  * */
 
-#include <ls-std/io/xml/XmlDocument.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/xml/XmlDocument.hpp>
 
 ls::std::io::XmlDocument::XmlDocument() : ls::std::core::Class("XmlDocument")
 {}

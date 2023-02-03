@@ -10,9 +10,9 @@
 #ifndef LS_STD_FILE_WRITER_HPP
 #define LS_STD_FILE_WRITER_HPP
 
+#include "File.hpp"
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IWriter.hpp>
-#include "File.hpp"
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io

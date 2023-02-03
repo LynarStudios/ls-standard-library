@@ -10,8 +10,8 @@
 #ifndef LS_STD_FILE_READER_HPP
 #define LS_STD_FILE_READER_HPP
 
-#include <ls-std/core/Class.hpp>
 #include "File.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IReader.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 

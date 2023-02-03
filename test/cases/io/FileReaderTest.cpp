@@ -7,10 +7,10 @@
  *
  * */
 
+#include "TestHelper.hpp"
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
-#include "TestHelper.hpp"
 
 using namespace ls::std::core;
 using namespace ls::std::core::type;

@@ -11,6 +11,7 @@
 #define LS_STD_LS_STD_EVENT_HPP
 
 #include <ls-std/event/serialization/SerializableJsonEvent.hpp>
+
 #include <ls-std/event/Event.hpp>
 #include <ls-std/event/EventHandler.hpp>
 #include <ls-std/event/EventManager.hpp>

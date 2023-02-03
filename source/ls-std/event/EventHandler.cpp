@@ -7,8 +7,8 @@
  *
  * */
 
-#include <ls-std/event/EventHandler.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/event/EventHandler.hpp>
 
 ls::std::event::EventHandler::EventHandler(const ls::std::core::type::event_id& _id) : ls::std::event::Narrator()
 {

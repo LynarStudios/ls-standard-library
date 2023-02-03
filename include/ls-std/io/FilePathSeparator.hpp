@@ -10,8 +10,8 @@
 #ifndef FILE_PATH_SEPARATOR_HPP
 #define FILE_PATH_SEPARATOR_HPP
 
-#include <string>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::io
 {

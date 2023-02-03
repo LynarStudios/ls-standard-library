@@ -8,8 +8,8 @@
  * */
 
 #include <gtest/gtest.h>
-#include <ls-std/ls-std-event.hpp>
 #include <ls-std-event-test.hpp>
+#include <ls-std/ls-std-event.hpp>
 
 using namespace ls::std::core;
 using namespace ls::std::core::type;

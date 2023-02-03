@@ -3,23 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-21
+ * Changed:         2023-02-03
  *
  * */
 
 #ifndef LS_STD_IO_TEST_HELPER_HPP
 #define LS_STD_IO_TEST_HELPER_HPP
 
-#include <string>
-#include <vector>
-#include <stdexcept>
 #include <algorithm>
-#include <sstream>
 #include <climits>
+#include <fstream>
+#include <ls-std/core/types/Types.hpp>
+#include <stdexcept>
+#include <sstream>
+#include <string>
 #if defined(unix) || defined(__APPLE__)
+#include <sys/stat.h>
 #include <unistd.h>
 #endif
-#include <fstream>
+#include <vector>
 
 namespace ls_std_test
 {

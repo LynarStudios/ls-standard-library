@@ -7,8 +7,8 @@
  *
  * */
 
-#include <ls-std/io/xml/XmlParser.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/xml/XmlParser.hpp>
 
 ls::std::io::XmlParser::XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document) : ls::std::core::Class("XmlParser")
 {

@@ -7,9 +7,9 @@
  *
  * */
 
-#include <ls-std/io/StorableFile.hpp>
 #include <ls-std/io/FileReader.hpp>
 #include <ls-std/io/FileWriter.hpp>
+#include <ls-std/io/StorableFile.hpp>
 
 ls::std::io::StorableFile::StorableFile(const ::std::string &_path)
 {

@@ -7,15 +7,14 @@
  *
  * */
 
-#include <ls-std/io/logging/Logger.hpp>
 #include <ctime>
 #include <iomanip>
+#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/NewLine.hpp>
+#include <ls-std/io/logging/Logger.hpp>
 #ifdef _MSC_VER
 #include <sstream>
 #endif
-#include <ls-std/io/NewLine.hpp>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
-#include <sstream>
 
 ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer)
     : ls::std::core::Class("Logger"),

@@ -10,11 +10,11 @@
 #ifndef LS_STD_KV_DOCUMENT_HPP
 #define LS_STD_KV_DOCUMENT_HPP
 
-#include <ls-std/core/Class.hpp>
 #include "KvPair.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/core/types/KvTypes.hpp>
-#include <map>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <map>
 
 namespace ls::std::io
 {

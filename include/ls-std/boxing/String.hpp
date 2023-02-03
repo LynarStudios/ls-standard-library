@@ -10,13 +10,13 @@
 #ifndef LS_STD_STRING_HPP
 #define LS_STD_STRING_HPP
 
-#include <ls-std/core/interface/IBoxing.hpp>
 #include <ls-std/core/Class.hpp>
+#include <ls-std/core/interface/IBoxing.hpp>
 #include <ls-std/core/types/Types.hpp>
-#include <string>
-#include <memory>
-#include <vector>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace ls::std::boxing
 {

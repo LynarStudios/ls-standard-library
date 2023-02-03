@@ -8,8 +8,8 @@
  * */
 
 #include <gtest/gtest.h>
-#include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-boxing.hpp>
+#include <ls-std/ls-std-core.hpp>
 
 using namespace ls::std::boxing;
 using namespace ls::std::core;

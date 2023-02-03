@@ -10,13 +10,13 @@
 #ifndef LS_STD_EVENT_HANDLER_HPP
 #define LS_STD_EVENT_HANDLER_HPP
 
-#include <ls-std/core/Class.hpp>
-#include <list>
-#include <memory>
-#include <ls-std/core/interface/IListener.hpp>
-#include <ls-std/os/dynamic-goal.hpp>
 #include "Event.hpp"
 #include "Narrator.hpp"
+#include <list>
+#include <ls-std/core/Class.hpp>
+#include <ls-std/core/interface/IListener.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::event
 {

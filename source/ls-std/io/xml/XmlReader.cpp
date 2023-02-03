@@ -7,10 +7,10 @@
  *
  * */
 
-#include <ls-std/io/xml/XmlReader.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/FileReader.hpp>
 #include <ls-std/io/xml/XmlParser.hpp>
+#include <ls-std/io/xml/XmlReader.hpp>
 
 ls::std::io::XmlReader::XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath)
     : ls::std::core::Class("XmlReader"),

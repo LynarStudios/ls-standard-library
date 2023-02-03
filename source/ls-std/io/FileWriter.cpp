@@ -8,9 +8,9 @@
  * */
 
 #include <fstream>
-#include <ls-std/io/FileWriter.hpp>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
+#include <ls-std/io/FileWriter.hpp>
 
 ls::std::io::FileWriter::FileWriter(ls::std::io::File &_file)
     : ls::std::core::Class("FileWriter"),

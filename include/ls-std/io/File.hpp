@@ -10,13 +10,13 @@
 #ifndef LS_STD_FILE_HPP
 #define LS_STD_FILE_HPP
 
+#include <ctime>
+#include <list>
 #include <ls-std/core/Class.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
+#include <regex>
 #include <string>
 #include <vector>
-#include <list>
-#include <ctime>
-#include <regex>
-#include <ls-std/os/dynamic-goal.hpp>
 
 #if defined(unix) || defined(__APPLE__)
 

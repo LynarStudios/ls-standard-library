@@ -8,9 +8,9 @@
  * */
 
 #include <gtest/gtest.h>
+#include <ls-std-io-test.hpp>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
-#include <ls-std-io-test.hpp>
 
 using namespace ls::std::core;
 using namespace ls::std::io;

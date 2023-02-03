@@ -8,10 +8,10 @@
  * */
 
 #include <iostream>
-#include <vector>
-#include <string>
-#include <ls-std/ls-std-encoding.hpp>
 #include <ls-std/ls-std-core.hpp>
+#include <ls-std/ls-std-encoding.hpp>
+#include <string>
+#include <vector>
 
 using CLICommand = std::vector<std::string>;
 

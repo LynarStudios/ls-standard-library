@@ -10,8 +10,8 @@
 #ifndef LS_STD_TYPES_HPP
 #define LS_STD_TYPES_HPP
 
-#include <string>
 #include <ls-std/lib/nlohmann_json/include/nlohmann/json.hpp>
+#include <string>
 
 namespace ls::std::core::type
 {

@@ -10,8 +10,8 @@
 #ifndef LS_STD_IO_TEST_DATA_FACTORY_HPP
 #define LS_STD_IO_TEST_DATA_FACTORY_HPP
 
-#include <memory>
 #include <ls-std/ls-std-io.hpp>
+#include <memory>
 
 namespace ls_std_io_test
 {

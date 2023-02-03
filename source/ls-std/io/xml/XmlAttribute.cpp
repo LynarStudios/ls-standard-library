@@ -7,8 +7,8 @@
  *
  * */
 
-#include <ls-std/io/xml/XmlAttribute.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/xml/XmlAttribute.hpp>
 
 ls::std::io::XmlAttribute::XmlAttribute(const ::std::string& _name) : ls::std::core::Class("XmlAttribute")
 {

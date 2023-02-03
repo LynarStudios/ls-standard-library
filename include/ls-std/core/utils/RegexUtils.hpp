@@ -10,8 +10,8 @@
 #ifndef LS_STD_REGEX_UTILS_HPP
 #define LS_STD_REGEX_UTILS_HPP
 
-#include <string>
 #include <regex>
+#include <string>
 
 namespace ls::std::core
 {

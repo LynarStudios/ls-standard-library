@@ -10,10 +10,10 @@
 #ifndef LS_STD_FILE_OUTPUT_STREAM_HPP
 #define LS_STD_FILE_OUTPUT_STREAM_HPP
 
-#include <ls-std/core/Class.hpp>
 #include "File.hpp"
-#include <ls-std/core/interface/IWriter.hpp>
 #include <fstream>
+#include <ls-std/core/Class.hpp>
+#include <ls-std/core/interface/IWriter.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io

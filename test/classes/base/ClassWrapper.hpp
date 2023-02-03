@@ -10,8 +10,8 @@
 #ifndef LS_STD_CLASS_MOCK_HPP
 #define LS_STD_CLASS_MOCK_HPP
 
-#include <ls-std/ls-std-core.hpp>
 #include <gmock/gmock.h>
+#include <ls-std/ls-std-core.hpp>
 
 namespace ls_std_core_test
 {

@@ -10,11 +10,11 @@
 #ifndef LS_STD_GOSSIP_NEWS_AGENCY_HPP
 #define LS_STD_GOSSIP_NEWS_AGENCY_HPP
 
-#include <string>
-#include <memory>
-#include <map>
-#include <ls-std/ls-std-core.hpp>
 #include "NewsAgency.hpp"
+#include <ls-std/ls-std-core.hpp>
+#include <map>
+#include <memory>
+#include <string>
 
 namespace ls_std_event_test
 {

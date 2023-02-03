@@ -7,8 +7,8 @@
  *
  * */
 
-#include <ls-std/event/Event.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/event/Event.hpp>
 
 ls::std::event::Event::Event(const ls::std::core::type::event_id &_id) : ls::std::core::Class("Event")
 {

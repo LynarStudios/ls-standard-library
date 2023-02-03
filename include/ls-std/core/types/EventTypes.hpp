@@ -10,9 +10,9 @@
 #ifndef LS_STD_EVENT_TYPES_HPP
 #define LS_STD_EVENT_TYPES_HPP
 
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 namespace ls::std::core::type
 {

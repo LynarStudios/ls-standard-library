@@ -8,8 +8,8 @@
  * */
 
 #include <gtest/gtest.h>
-#include <regex>
 #include <ls-std/ls-std-time.hpp>
+#include <regex>
 
 using namespace ls::std::time;
 using namespace ::std;

@@ -7,10 +7,10 @@
  *
  * */
 
-#include <ls-std/event/EventManager.hpp>
-#include <ls-std/core/exception/EventNotSubscribedException.hpp>
 #include <ls-std/core/exception/EventNotHandledException.hpp>
+#include <ls-std/core/exception/EventNotSubscribedException.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/event/EventManager.hpp>
 
 ls::std::event::EventManager::EventManager() : ls::std::core::Class("EventManager")
 {}

@@ -10,11 +10,11 @@
 #ifndef LS_STD_BOOLEAN_HPP
 #define LS_STD_BOOLEAN_HPP
 
-#include <memory>
-#include <sstream>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IBoxing.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
+#include <sstream>
 
 namespace ls::std::boxing
 {

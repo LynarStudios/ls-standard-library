@@ -12,9 +12,9 @@
 
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/ISerializable.hpp>
-#include <memory>
 #include <ls-std/core/types/EventTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::event
 {

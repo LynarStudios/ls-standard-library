@@ -10,12 +10,12 @@
 #ifndef LS_STD_SERIALIZABLE_JSON_EVENT_HPP
 #define LS_STD_SERIALIZABLE_JSON_EVENT_HPP
 
-#include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/core/Class.hpp>
-#include <ls-std/event/Event.hpp>
-#include <memory>
+#include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/core/types/Types.hpp>
+#include <ls-std/event/Event.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::event
 {

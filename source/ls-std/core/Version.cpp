@@ -7,8 +7,8 @@
  *
  * */
 
-#include <regex>
 #include <ls-std/core/Version.hpp>
+#include <regex>
 
 ls::std::core::Version::Version(ls::std::core::type::version_type _majorVersion, ls::std::core::type::version_type _minorVersion, ls::std::core::type::version_type _patchVersion)
     : majorVersion(_majorVersion),

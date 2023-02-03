@@ -10,13 +10,13 @@
 #ifndef LS_STD_EVENT_MANAGER_HPP
 #define LS_STD_EVENT_MANAGER_HPP
 
-#include <ls-std/core/Class.hpp>
-#include <map>
-#include <ls-std/core/types/EventTypes.hpp>
-#include <memory>
 #include "EventHandler.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IEventSubscriber.hpp>
+#include <ls-std/core/types/EventTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <map>
+#include <memory>
 
 namespace ls::std::event
 {

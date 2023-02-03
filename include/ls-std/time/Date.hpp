@@ -10,9 +10,9 @@
 #ifndef LS_STD_DATE_HPP
 #define LS_STD_DATE_HPP
 
+#include <ctime>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
-#include <ctime>
 
 namespace ls::std::time
 {

@@ -8,9 +8,9 @@
  * */
 
 #include <fstream>
-#include <ls-std/io/FileReader.hpp>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
+#include <ls-std/io/FileReader.hpp>
 
 ls::std::io::FileReader::FileReader(ls::std::io::File &_file)
     : ls::std::core::Class("FileReader"),

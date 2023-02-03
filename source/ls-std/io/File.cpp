@@ -7,28 +7,24 @@
  *
  * */
 
-#include <ls-std/io/File.hpp>
-#include <ls-std/core/exception/FileOperationException.hpp>
-#include <ls-std/io/FilePathSeparatorMatch.hpp>
-#include <fstream>
 #include <algorithm>
-#include <sstream>
-#include <vector>
 #include <cstdio>
-#include <sys/stat.h>
-
-#if defined(unix) || defined(__APPLE__)
-
-#include <unistd.h>
-
-#endif
-
 #ifdef _WIN32
-
 #include <direct.h>
-#include <tchar.h>
-
 #endif
+#include <fstream>
+#include <ls-std/core/exception/FileOperationException.hpp>
+#include <ls-std/io/File.hpp>
+#include <ls-std/io/FilePathSeparatorMatch.hpp>
+#include <sys/stat.h>
+#include <sstream>
+#ifdef _WIN32
+#include <tchar.h>
+#endif
+#if defined(unix) || defined(__APPLE__)
+#include <unistd.h>
+#endif
+#include <vector>
 
 ls::std::io::File::File(::std::string _absoluteFilePath)
     : ls::std::core::Class("File"),

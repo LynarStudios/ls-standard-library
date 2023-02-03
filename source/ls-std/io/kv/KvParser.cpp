@@ -7,9 +7,9 @@
  *
  * */
 
+#include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/kv/KvParser.hpp>
 #include <ls-std/io/NewLine.hpp>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::io::KvParser::KvParser(const ::std::shared_ptr<ls::std::io::KvDocument> &_document) : ls::std::core::Class("KvParser")
 {

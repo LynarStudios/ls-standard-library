@@ -10,8 +10,8 @@
 #ifndef LS_STD_I_WRITER_HPP
 #define LS_STD_I_WRITER_HPP
 
-#include <vector>
 #include <ls-std/core/types/Types.hpp>
+#include <vector>
 
 namespace ls::std::core::interface_type
 {

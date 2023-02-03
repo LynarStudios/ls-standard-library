@@ -12,10 +12,10 @@
 
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IReader.hpp>
-#include <ls-std/io/kv/KvDocument.hpp>
 #include <ls-std/io/File.hpp>
-#include <memory>
+#include <ls-std/io/kv/KvDocument.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::io
 {

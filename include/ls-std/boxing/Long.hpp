@@ -10,11 +10,11 @@
 #ifndef LS_STD_LONG_HPP
 #define LS_STD_LONG_HPP
 
-#include <memory>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IBoxing.hpp>
 #include <ls-std/core/types/Types.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::boxing
 {

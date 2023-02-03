@@ -11,7 +11,7 @@
 #define LS_STD_KV_PAIR_HPP
 
 #include <ls-std/core/Class.hpp>
-#include "ls-std/core/types/KvTypes.hpp"
+#include <ls-std/core/types/KvTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io

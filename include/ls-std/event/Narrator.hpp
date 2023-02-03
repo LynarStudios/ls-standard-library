@@ -10,10 +10,10 @@
 #ifndef LS_STD_NARRATOR_HPP
 #define LS_STD_NARRATOR_HPP
 
+#include <list>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IListener.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
-#include <list>
 #include <memory>
 
 namespace ls::std::event

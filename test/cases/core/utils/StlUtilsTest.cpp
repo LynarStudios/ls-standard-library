@@ -8,10 +8,10 @@
  * */
 
 #include <gtest/gtest.h>
-#include <ls-std/ls-std-core.hpp>
-#include <vector>
 #include <list>
+#include <ls-std/ls-std-core.hpp>
 #include <string>
+#include <vector>
 
 using namespace ls::std::core;
 using namespace ::std;

@@ -10,8 +10,8 @@
 #ifndef LS_STD_CLASS_HPP
 #define LS_STD_CLASS_HPP
 
-#include <string>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::core
 {

@@ -7,9 +7,9 @@
  *
  * */
 
+#include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/event/Narrator.hpp>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::event::Narrator::Narrator() : ls::std::core::Class("Narrator")
 {}

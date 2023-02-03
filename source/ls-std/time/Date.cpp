@@ -8,7 +8,6 @@
  * */
 
 #include <iomanip>
-#include <sstream>
 #include <ls-std/time/Date.hpp>
 
 ls::std::time::Date::Date() : ls::std::core::Class("Date")
