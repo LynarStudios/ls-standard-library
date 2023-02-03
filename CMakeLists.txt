@@ -11,14 +11,14 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-project(ls_std VERSION 2023.1.0)
+project(ls-std VERSION 2023.1.0)
 
-set(MODULE_NAME_BOXING ls_std_boxing)
-set(MODULE_NAME_CORE ls_std_core)
-set(MODULE_NAME_ENCODING ls_std_encoding)
-set(MODULE_NAME_EVENT ls_std_event)
-set(MODULE_NAME_IO ls_std_io)
-set(MODULE_NAME_TIME ls_std_time)
+set(MODULE_NAME_BOXING ls-std-boxing)
+set(MODULE_NAME_CORE ls-std-core)
+set(MODULE_NAME_ENCODING ls-std-encoding)
+set(MODULE_NAME_EVENT ls-std-event)
+set(MODULE_NAME_IO ls-std-io)
+set(MODULE_NAME_TIME ls-std-time)
 
 set(GOOGLE_TEST_MODULE googletest-1.11.0)
 
@@ -28,9 +28,9 @@ set(GOOGLE_TEST_MODULE googletest-1.11.0)
 
 option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
 option(LS_STD_BUILD_WITH_SUPPORTED_COMPILER "Build project with supported compiler only..." ON)
-option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
-option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
-option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)
+option(LS_STD_BUILD_STATIC "Build ls-std static library..." ON)
+option(LS_STD_BUILD_SHARED "Build ls-std shared library..." OFF)
+option(LS_STD_BUILD_MODULE "Build ls-std module library..." OFF)
 
 set(TARGET_COUNTER 0)
 
@@ -275,7 +275,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_BOXING}: Building tests...")
-    add_executable(${MODULE_NAME_BOXING}_test ${TEST_FILES_BOXING})
+    add_executable(${MODULE_NAME_BOXING}-test ${TEST_FILES_BOXING})
 endif ()
 
 ##########################################################
@@ -284,7 +284,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_CORE}: Building tests...")
-    add_executable(${MODULE_NAME_CORE}_test ${TEST_FILES_CORE})
+    add_executable(${MODULE_NAME_CORE}-test ${TEST_FILES_CORE})
 endif ()
 
 ##########################################################
@@ -293,7 +293,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_ENCODING}: Building tests...")
-    add_executable(${MODULE_NAME_ENCODING}_test ${TEST_FILES_ENCODING})
+    add_executable(${MODULE_NAME_ENCODING}-test ${TEST_FILES_ENCODING})
 endif ()
 
 ##########################################################
@@ -302,7 +302,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_EVENT}: Building tests...")
-    add_executable(${MODULE_NAME_EVENT}_test ${TEST_FILES_EVENT})
+    add_executable(${MODULE_NAME_EVENT}-test ${TEST_FILES_EVENT})
 endif ()
 
 ##########################################################
@@ -311,7 +311,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_IO}: Building tests...")
-    add_executable(${MODULE_NAME_IO}_test ${TEST_FILES_IO})
+    add_executable(${MODULE_NAME_IO}-test ${TEST_FILES_IO})
 endif ()
 
 ##########################################################
@@ -320,7 +320,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_TIME}: Building tests...")
-    add_executable(${MODULE_NAME_TIME}_test ${TEST_FILES_TIME})
+    add_executable(${MODULE_NAME_TIME}-test ${TEST_FILES_TIME})
 endif ()
 
 ##########################################################
@@ -329,7 +329,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Building tests...")
-    add_executable(${PROJECT_NAME}_test
+    add_executable(${PROJECT_NAME}-test
             ${TEST_FILES_BOXING}
             ${TEST_FILES_CORE}
             ${TEST_FILES_ENCODING}
@@ -355,18 +355,18 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_BOXING} library version ${PROJE
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_BOXING}" STATIC ${SOURCE_FILES_BOXING})
-    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_BOXING}" SHARED ${SOURCE_FILES_BOXING})
     target_link_libraries("${MODULE_NAME_BOXING}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
     add_library("${MODULE_NAME_BOXING}" MODULE ${SOURCE_FILES_BOXING})
-    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -377,17 +377,17 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_CORE} library version ${PROJECT
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_CORE}" STATIC ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
     add_library("${MODULE_NAME_CORE}" MODULE ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -398,17 +398,17 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_ENCODING} library version ${PRO
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_ENCODING}" STATIC ${SOURCE_FILES_ENCODING})
-    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_ENCODING}" SHARED ${SOURCE_FILES_ENCODING})
-    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
     add_library("${MODULE_NAME_ENCODING}" MODULE ${SOURCE_FILES_ENCODING})
-    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 # CLI base64
@@ -426,18 +426,18 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_EVENT} library version ${PROJEC
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_EVENT}" STATIC ${SOURCE_FILES_EVENT})
-    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_EVENT}" SHARED ${SOURCE_FILES_EVENT})
     target_link_libraries("${MODULE_NAME_EVENT}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
     add_library("${MODULE_NAME_EVENT}" MODULE ${SOURCE_FILES_EVENT})
-    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -448,18 +448,18 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_IO} library version ${PROJECT_V
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_IO}" STATIC ${SOURCE_FILES_IO})
-    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_IO}" SHARED ${SOURCE_FILES_IO})
     target_link_libraries("${MODULE_NAME_IO}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
     add_library("${MODULE_NAME_IO}" MODULE ${SOURCE_FILES_IO})
-    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -470,18 +470,18 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_TIME} library version ${PROJECT
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_TIME}" STATIC ${SOURCE_FILES_TIME})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
     target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_MODULE})
     add_library("${MODULE_NAME_TIME}" MODULE ${SOURCE_FILES_TIME})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ####################################################################################################################
@@ -498,7 +498,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_BOXING}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_BOXING}_test
+    target_link_libraries(${MODULE_NAME_BOXING}-test
             gtest
             gmock
             gtest_main
@@ -512,7 +512,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_CORE}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_CORE}_test
+    target_link_libraries(${MODULE_NAME_CORE}-test
             gtest
             gmock
             gtest_main
@@ -525,7 +525,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_ENCODING}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_ENCODING}_test
+    target_link_libraries(${MODULE_NAME_ENCODING}-test
             gtest
             gmock
             gtest_main
@@ -539,7 +539,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_EVENT}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_EVENT}_test
+    target_link_libraries(${MODULE_NAME_EVENT}-test
             gtest
             gmock
             gtest_main
@@ -553,7 +553,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_IO}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_IO}_test
+    target_link_libraries(${MODULE_NAME_IO}-test
             gtest
             gmock
             gtest_main
@@ -567,7 +567,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_TIME}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_TIME}_test
+    target_link_libraries(${MODULE_NAME_TIME}-test
             gtest
             gmock
             gtest_main
@@ -581,7 +581,7 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Linking libraries for test application...")
-    target_link_libraries(${PROJECT_NAME}_test
+    target_link_libraries(${PROJECT_NAME}-test
             gtest
             gmock
             gtest_main
