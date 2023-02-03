@@ -11,7 +11,7 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-project(ls_std VERSION 2022.3.0)
+project(ls_std VERSION 2023.1.0)
 
 set(MODULE_NAME_BOXING ls_std_boxing)
 set(MODULE_NAME_CORE ls_std_core)
