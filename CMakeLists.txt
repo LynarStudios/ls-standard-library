@@ -413,7 +413,7 @@ endif ()
 
 # CLI base64
 
-add_executable(cli_base64
+add_executable(cli-base64
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)

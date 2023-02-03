@@ -13,14 +13,14 @@
 #include <string>
 #include <vector>
 
-using CLICommand = std::vector<std::string>;
+using CliCommand = std::vector<std::string>;
 
 void printHelp();
-bool isValidCommand(const CLICommand &_command);
+bool isValidCommand(const CliCommand &_command);
 
 int main(int argc, char *argv[])
 {
-  CLICommand command(argv, argv + argc);
+  CliCommand command(argv, argv + argc);
 
   if (isValidCommand(command))
   {
@@ -58,7 +58,7 @@ void printHelp()
   std::cout << help << std::endl;
 }
 
-bool isValidCommand(const CLICommand &_command)
+bool isValidCommand(const CliCommand &_command)
 {
   return _command.size() == 3 && _command[1] == "--encode" && !_command[2].empty() || _command.size() == 3 && _command[1] == "--decode" && !_command[2].empty() || _command.size() == 2 && _command[1] == "--help";
 }
