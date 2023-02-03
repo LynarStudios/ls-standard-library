@@ -90,7 +90,7 @@ namespace
     byte_field content = reader.read();
     ASSERT_TRUE(content == expectedUnix || content == expectedWindows);
 
-    File anotherFile{TestHelper::getResourcesFolderLocation() + "list_test/bla.txt"};
+    File anotherFile{TestHelper::getResourcesFolderLocation() + "list-test/bla.txt"};
     reader.reset(anotherFile);
     expectedUnix = "nothing to say!" + NewLine::getUnixNewLine();
     expectedWindows = "nothing to say!" + NewLine::getWindowsNewLine();

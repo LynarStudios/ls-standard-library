@@ -34,7 +34,7 @@ namespace
 
       static shared_ptr<KvFileReader> createTestKVFileReader()
       {
-        string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+        string kvPath = TestHelper::getResourcesFolderLocation() + "server-settings.kv";
         shared_ptr<KvDocument> document = make_shared<KvDocument>();
 
         return make_shared<KvFileReader>(document, kvPath);
@@ -46,7 +46,7 @@ namespace
     EXPECT_THROW({
                    try
                    {
-                     string kvPath = TestHelper::getResourcesFolderLocation() + "server_settings.kv";
+                     string kvPath = TestHelper::getResourcesFolderLocation() + "server-settings.kv";
                      KvFileReader reader = KvFileReader(nullptr, kvPath);
                    }
                    catch (const IllegalArgumentException &_exception)

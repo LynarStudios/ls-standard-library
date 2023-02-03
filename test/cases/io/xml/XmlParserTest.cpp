@@ -29,7 +29,7 @@ namespace
 
       static byte_field readXmlStateMachine()
       {
-        string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+        string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
         File file{xmlPath};
         byte_field data = FileReader{file}.read();
 

@@ -64,7 +64,7 @@ namespace
 
     // reset
 
-    string anotherFileLocation = TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
+    string anotherFileLocation = TestHelper::getResourcesFolderLocation() + "list-test/bla.txt";
     storableFile.reset(anotherFileLocation);
     content = storableFile.load();
 

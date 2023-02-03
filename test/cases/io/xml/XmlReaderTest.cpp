@@ -35,7 +35,7 @@ namespace
 
   TEST_F(XmlReaderTest, read)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(!xmlReader.read().empty());
@@ -43,7 +43,7 @@ namespace
 
   TEST_F(XmlReaderTest, getDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
 
     ASSERT_TRUE(xmlReader.getDocument() != nullptr);
@@ -51,7 +51,7 @@ namespace
 
   TEST_F(XmlReaderTest, setDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
     XmlReader xmlReader{document, xmlPath};
     ASSERT_TRUE(xmlReader.getDocument() == document);
@@ -63,7 +63,7 @@ namespace
 
   TEST_F(XmlReaderTest, setDocument_no_reference)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
     XmlReader xmlReader{document, xmlPath};
 
@@ -81,7 +81,7 @@ namespace
 
   TEST_F(XmlReaderTest, setFile)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
     File xmlFile{xmlPath};
     xmlReader.setFile(xmlFile);
@@ -91,7 +91,7 @@ namespace
 
   TEST_F(XmlReaderTest, setFile_does_not_exist)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
     File xmlFile{xmlPath};
 

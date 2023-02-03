@@ -97,10 +97,10 @@ namespace
   TEST_F(FileOutputStreamTest, write_no_permission_to_write)
   {
     #if defined(unix) || defined(__APPLE__)
-    File file{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "no-writable.txt"};
     #endif
     #ifdef _WIN32
-    File file{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "no-writable-windows.txt"};
     #endif
 
     FileOutputStream outputStream{file};
