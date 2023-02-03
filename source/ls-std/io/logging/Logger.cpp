@@ -12,7 +12,7 @@
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/NewLine.hpp>
 #include <ls-std/io/logging/Logger.hpp>
-#ifdef _MSC_VER
+#if defined(_MSC_VER) || defined(__APPLE__)
 #include <sstream>
 #endif
 
