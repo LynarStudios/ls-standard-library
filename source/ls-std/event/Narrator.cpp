@@ -7,7 +7,7 @@
  *
  * */
 
-#include <ls-std/core/utils/STLUtils.hpp>
+#include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/event/Narrator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
@@ -24,7 +24,7 @@ bool ls::std::event::Narrator::addListener(const ::std::shared_ptr<ls::std::core
   }
   else
   {
-    if (!ls::std::core::STLUtils::contains(this->listeners, _listener))
+    if (!ls::std::core::StlUtils::contains(this->listeners, _listener))
     {
       this->listeners.push_back(_listener);
       wasAdded = true;
@@ -54,7 +54,7 @@ bool ls::std::event::Narrator::removeListener(const ::std::shared_ptr<ls::std::c
   }
   else
   {
-    if (ls::std::core::STLUtils::contains(this->listeners, _listener))
+    if (ls::std::core::StlUtils::contains(this->listeners, _listener))
     {
       this->listeners.remove(_listener);
       wasRemoved = true;

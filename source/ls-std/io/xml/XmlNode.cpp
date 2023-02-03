@@ -8,7 +8,7 @@
  * */
 
 #include <ls-std/io/xml/XmlNode.hpp>
-#include <ls-std/core/utils/STLUtils.hpp>
+#include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::io::XmlNode::XmlNode(::std::string _name)
@@ -390,7 +390,7 @@ bool ls::std::io::XmlNode::_hasAttribute(const ::std::string &_name)
 bool ls::std::io::XmlNode::_hasChild(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
 {
   _checkIfNodeReferenceIsValid(_child);
-  return ls::std::core::STLUtils::contains(this->children, _child);
+  return ls::std::core::StlUtils::contains(this->children, _child);
 }
 
 bool ls::std::io::XmlNode::_hasChild(const ::std::string &_name)

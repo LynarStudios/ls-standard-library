@@ -15,12 +15,12 @@
 
 namespace ls::std::core
 {
-  class STLUtils
+  class StlUtils
   {
     public:
 
-      STLUtils() = default;
-      ~STLUtils() = default;
+      StlUtils() = default;
+      ~StlUtils() = default;
 
       template<class container, class dataType>
       static bool contains(container _container, const dataType &_value)
