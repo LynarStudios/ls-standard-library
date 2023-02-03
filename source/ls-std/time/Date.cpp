@@ -9,7 +9,9 @@
 
 #include <iomanip>
 #include <ls-std/time/Date.hpp>
-#include <sstream>
+#ifdef _WIN32
+#include <sstream> // only MSVC needs this
+#endif
 
 ls::std::time::Date::Date() : ls::std::core::Class("Date")
 {
