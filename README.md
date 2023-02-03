@@ -40,6 +40,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - __logic__ module has been removed from library and can now be found in __ls-game-tool-kit__ library
 - namespaces have been completely removed from module tests to improve readability
+- a new naming convention for files and directories has been introduced, where underscores were replaced by dashes entirely
 
 #### Fixes ####
 
