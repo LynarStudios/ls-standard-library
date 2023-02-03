@@ -16,7 +16,7 @@ using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
-using namespace ls_std_test;
+using namespace ls::std::test;
 
 namespace
 {
