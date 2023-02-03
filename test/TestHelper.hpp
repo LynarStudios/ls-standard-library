@@ -22,6 +22,9 @@
 #include <unistd.h>
 #endif
 #include <vector>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 namespace ls_std_test
 {
@@ -138,7 +141,6 @@ namespace ls_std_test
       }
 
       #if defined(unix) || defined(__APPLE__)
-
       static ::std::string _getWorkingDirectoryUnix()
       {
         ::std::string workingDirectory{};
@@ -155,11 +157,9 @@ namespace ls_std_test
 
         return workingDirectory;
       }
-
       #endif
 
       #ifdef _WIN32
-
       static ::std::string _getWorkingDirectoryWindows()
       {
         ::std::string workingDirectory{};
@@ -176,7 +176,6 @@ namespace ls_std_test
 
         return workingDirectory;
       }
-
       #endif
 
       static ::std::string _normalizePath(::std::string _path)
