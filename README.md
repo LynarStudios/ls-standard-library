@@ -84,10 +84,11 @@ Find below a table of compiler/OS combinations which have been tested during lib
 
 | Supported Compiler | OS              | Compiler Version        |
 |--------------------|-----------------|-------------------------|
-| GCC                | Linux Mint 20.3 | 12.1.0                  |
+| GCC                | Linux Mint 20.3 | 12.2.0                  |
 | Clang              | Linux Mint 20.3 | 12.0.0-3ubuntu1~20.04.5 |
 | MinGW-w64 / GCC    | Windows 10      | 11.2.0                  |
 | MSVC               | Windows 10      | 19.32.31332.0           |
+| AppleClang         | MacOS Monterey  | 14.0.0                  |
 
 ---
 ### Add Library To Your CMake Project ###
@@ -101,7 +102,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/path/to/this/library/include)
 Then link the libraries' binary file inside your __CMakeLists.txt__ file:
 
 ```
-target_link_libraries(... libls_std_core libls_std_boxing ...)
+target_link_libraries(... libls-std-core libls-std-boxing ...)
 ```
 
 ---
