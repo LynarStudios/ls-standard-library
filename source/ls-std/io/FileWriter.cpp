@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -18,6 +18,8 @@ ls::std::io::FileWriter::FileWriter(ls::std::io::File &_file)
 {
   ls::std::io::FileWriter::_init(_file);
 }
+
+ls::std::io::FileWriter::~FileWriter() = default;
 
 void ls::std::io::FileWriter::reset(ls::std::io::File &_file)
 {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,7 +14,7 @@
 
 namespace ls::std::io
 {
-  struct FilePathSeparatorMatch
+  struct FilePathSeparatorMatch // TODO: turn to class, rather than keeping it as struct
   {
     bool operator()(char _char) const
     {

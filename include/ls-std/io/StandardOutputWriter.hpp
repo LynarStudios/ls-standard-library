@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -19,8 +19,8 @@ namespace ls::std::io
   {
     public:
 
-      StandardOutputWriter() = default;
-      ~StandardOutputWriter() = default;
+      StandardOutputWriter();
+      ~StandardOutputWriter();
 
       bool write(const ls::std::core::type::byte_field &_data) override;
   };

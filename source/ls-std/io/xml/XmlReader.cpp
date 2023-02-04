@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -12,13 +12,13 @@
 #include <ls-std/io/xml/XmlParser.hpp>
 #include <ls-std/io/xml/XmlReader.hpp>
 
-ls::std::io::XmlReader::XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath)
-    : ls::std::core::Class("XmlReader"),
-      xmlFile(ls::std::io::File{""})
+ls::std::io::XmlReader::XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath) : ls::std::core::Class("XmlReader"), xmlFile(ls::std::io::File{""})
 {
   this->_assignDocument(_document);
   this->_assignFile(ls::std::io::File{_absolutePath});
 }
+
+ls::std::io::XmlReader::~XmlReader() = default;
 
 ls::std::core::type::byte_field ls::std::io::XmlReader::read()
 {

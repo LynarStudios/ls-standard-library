@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -25,7 +25,7 @@ namespace ls::std::io
     public:
 
       explicit XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
-      ~XmlParser() override = default;
+      ~XmlParser() override;
 
       ::std::shared_ptr<ls::std::io::XmlDocument> getDocument();
       void parse(const ls::std::core::type::byte_field &_data);

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -13,6 +13,8 @@ ls::std::io::XmlDeclaration::XmlDeclaration(const ::std::string& _version) : ls:
 {
   this->version.setValue(_version);
 }
+
+ls::std::io::XmlDeclaration::~XmlDeclaration() = default;
 
 ::std::string ls::std::io::XmlDeclaration::getEncoding()
 {

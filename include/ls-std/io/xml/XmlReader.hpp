@@ -3,20 +3,20 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #ifndef LS_STD_XML_READER_HPP
 #define LS_STD_XML_READER_HPP
 
-#include <ls-std/core/Class.hpp>
 #include "XmlDocument.hpp"
-#include <ls-std/core/interface/IReader.hpp>
-#include <ls-std/io/File.hpp>
 #include "XmlParseMode.hpp"
 #include "XmlParseParameter.hpp"
 #include <list>
+#include <ls-std/core/Class.hpp>
+#include <ls-std/core/interface/IReader.hpp>
+#include <ls-std/io/File.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io
@@ -26,7 +26,7 @@ namespace ls::std::io
     public:
 
       explicit XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath);
-      ~XmlReader() override = default;
+      ~XmlReader() override;
 
       // implementation
 

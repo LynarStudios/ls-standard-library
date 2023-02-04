@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #ifndef LS_STD_XML_DOCUMENT_HPP
 #define LS_STD_XML_DOCUMENT_HPP
 
-#include <memory>
-#include <ls-std/core/Class.hpp>
-#include "XmlNode.hpp"
 #include "XmlDeclaration.hpp"
+#include "XmlNode.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::io
 {
@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       XmlDocument();
-      ~XmlDocument() override = default;
+      ~XmlDocument() override;
 
       ::std::shared_ptr<ls::std::io::XmlDeclaration> getDeclaration();
       ::std::shared_ptr<ls::std::io::XmlNode> getRootElement();

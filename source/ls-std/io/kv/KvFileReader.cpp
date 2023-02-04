@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -19,6 +19,8 @@ ls::std::io::KvFileReader::KvFileReader(const ::std::shared_ptr<ls::std::io::KvD
   this->_assignDocument(_document);
   this->_assignFile(ls::std::io::File{_absolutePath});
 }
+
+ls::std::io::KvFileReader::~KvFileReader() = default;
 
 ls::std::core::type::byte_field ls::std::io::KvFileReader::read()
 {

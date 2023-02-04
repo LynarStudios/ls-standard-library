@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,6 +14,8 @@ ls::std::io::XmlAttribute::XmlAttribute(const ::std::string& _name) : ls::std::c
 {
   this->_assignName(_name);
 }
+
+ls::std::io::XmlAttribute::~XmlAttribute() = default;
 
 ::std::string ls::std::io::XmlAttribute::getName()
 {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls::std::io
     public:
 
       explicit KvParser(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
-      ~KvParser() override = default;
+      ~KvParser() override;
 
       ::std::shared_ptr<ls::std::io::KvDocument> getDocument();
       void parse(const ls::std::core::type::byte_field &_data);

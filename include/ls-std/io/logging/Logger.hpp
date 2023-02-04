@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -25,7 +25,7 @@ namespace ls::std::io
     public:
 
       explicit Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer);
-      ~Logger() override = default;
+      ~Logger() override;
 
       void debug(const ls::std::core::type::byte *_data);
       void error(const ls::std::core::type::byte *_data);

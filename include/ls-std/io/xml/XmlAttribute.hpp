@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -11,8 +11,8 @@
 #define LS_STD_XML_ATTRIBUTE_HPP
 
 #include <ls-std/core/Class.hpp>
-#include <string>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::io
 {
@@ -21,7 +21,7 @@ namespace ls::std::io
     public:
 
       explicit XmlAttribute(const ::std::string &_name);
-      ~XmlAttribute() override = default;
+      ~XmlAttribute() override;
 
       ::std::string getName();
       ::std::string getValue();
