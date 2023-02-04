@@ -3,12 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #include <bitset>
 #include <ls-std/encoding/Base64.hpp>
+
+ls::std::encoding::Base64::Base64() = default;
+
+ls::std::encoding::Base64::~Base64() = default;
 
 ::std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
 {
