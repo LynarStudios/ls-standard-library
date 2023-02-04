@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls::std::time
     public:
 
       Date();
-      ~Date() override = default;
+      ~Date() override;
 
       // arithmetic operators
 
