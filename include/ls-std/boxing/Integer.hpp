@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls::std::boxing
 
       explicit Integer(int _value);
       Integer();
-      ~Integer() override = default;
+      ~Integer() override;
 
       // conversion operator
 

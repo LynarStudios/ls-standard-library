@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -17,6 +17,8 @@ ls::std::boxing::Long::Long(ls::std::core::type::long_type _value)
 
 ls::std::boxing::Long::Long() : ls::std::core::Class("Long")
 {}
+
+ls::std::boxing::Long::~Long() = default;
 
 ls::std::boxing::Long::operator ls::std::core::type::long_type() const
 {

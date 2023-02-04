@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -21,6 +21,8 @@ ls::std::boxing::Float::Float(float _value)
       epsilon(0.00001f),
       value(_value)
 {}
+
+ls::std::boxing::Float::~Float() = default;
 
 ls::std::boxing::Float::operator float() const
 {

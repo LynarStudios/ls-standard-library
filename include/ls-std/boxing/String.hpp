@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -26,7 +26,7 @@ namespace ls::std::boxing
 
       String();
       explicit String(::std::string _value);
-      ~String() override = default;
+      ~String() override;
 
       // conversion operator
 
