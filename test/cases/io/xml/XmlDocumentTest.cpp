@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -60,16 +60,18 @@ namespace
   {
     XmlDocument document{};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     document.setDeclaration(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            document.setDeclaration(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlDocumentTest, setRootElement)
@@ -87,16 +89,18 @@ namespace
   {
     XmlDocument document{};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     document.setRootElement(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            document.setRootElement(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlDocumentTest, toXml)

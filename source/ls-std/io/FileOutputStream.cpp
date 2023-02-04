@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -11,17 +11,12 @@
 #include <ls-std/core/exception/FileOperationException.hpp>
 #include <ls-std/io/FileOutputStream.hpp>
 
-ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file)
-    : ls::std::core::Class("FileOutputStream"),
-      file(_file)
+ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file) : ls::std::core::Class("FileOutputStream"), file(_file)
 {
   this->_init();
 }
 
-ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file, bool _append)
-    : ls::std::core::Class("FileOutputStream"),
-      append(_append),
-      file(_file)
+ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file, bool _append) : ls::std::core::Class("FileOutputStream"), append(_append), file(_file)
 {
   this->_init();
 }

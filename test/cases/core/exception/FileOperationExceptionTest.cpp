@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -30,16 +30,18 @@ namespace
 
   TEST_F(FileOperationExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw FileOperationException{};
-                   }
-                   catch (const FileOperationException &_exception)
-                   {
-                     EXPECT_STREQ("FileOperationException thrown - file operation failed!", _exception.what());
-                     throw;
-                   }
-                 }, FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw FileOperationException{};
+          }
+          catch (const FileOperationException &_exception)
+          {
+            EXPECT_STREQ("FileOperationException thrown - file operation failed!", _exception.what());
+            throw;
+          }
+        },
+        FileOperationException);
   }
 }

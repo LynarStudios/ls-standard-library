@@ -12,9 +12,7 @@
 #include <ls-std/core/exception/FileOperationException.hpp>
 #include <ls-std/io/FileWriter.hpp>
 
-ls::std::io::FileWriter::FileWriter(ls::std::io::File &_file)
-    : ls::std::core::Class("FileWriter"),
-      file(_file)
+ls::std::io::FileWriter::FileWriter(ls::std::io::File &_file) : ls::std::core::Class("FileWriter"), file(_file)
 {
   ls::std::io::FileWriter::_init(_file);
 }

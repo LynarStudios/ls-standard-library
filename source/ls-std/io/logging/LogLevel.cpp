@@ -10,9 +10,7 @@
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/logging/LogLevel.hpp>
 
-ls::std::io::LogLevel::LogLevel(const ls::std::io::LogLevelValue &_value)
-    : ls::std::core::Class("LogLevel"),
-      value(_value)
+ls::std::io::LogLevel::LogLevel(const ls::std::io::LogLevelValue &_value) : ls::std::core::Class("LogLevel"), value(_value)
 {
   this->_init();
 }

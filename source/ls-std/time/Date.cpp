@@ -10,7 +10,7 @@
 #include <iomanip>
 #include <ls-std/time/Date.hpp>
 #if defined(_WIN32) || defined(__APPLE__)
-#include <sstream> // only MSVC and Apple need this
+  #include <sstream> // only MSVC and Apple need this
 #endif
 
 ls::std::time::Date::Date() : ls::std::core::Class("Date")

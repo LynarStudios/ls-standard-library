@@ -30,7 +30,7 @@ namespace ls::std::boxing
 
       // conversion operator
 
-      operator const char *() const; // do not make explicit!
+      operator const char *() const;  // do not make explicit!
       operator ::std::string() const; // do not make explicit!
 
       // assignment operators

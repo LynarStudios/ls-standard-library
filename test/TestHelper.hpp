@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,21 +14,21 @@
 #include <climits>
 #include <fstream>
 #include <ls-std/core/types/Types.hpp>
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #if defined(unix) || defined(__APPLE__)
-#include <sys/stat.h>
-#include <unistd.h>
+  #include <sys/stat.h>
+  #include <unistd.h>
 #endif
 #include <vector>
 #ifdef _WIN32
-#include <windows.h>
+  #include <windows.h>
 #endif
 
 namespace ls::std::test
 {
-  class TestHelper
+  class TestHelper // TODO: create source file & move to "classes" location
   {
     public:
 
@@ -77,7 +77,9 @@ namespace ls::std::test
 
       static bool _fileExists(const ::std::string &_path)
       {
-        struct stat _stat{};
+        struct stat _stat
+        {
+        };
         return (stat(_path.c_str(), &_stat) == 0);
       }
 
@@ -85,12 +87,12 @@ namespace ls::std::test
       {
         char separator;
 
-        #ifdef _WIN32
+#ifdef _WIN32
         separator = '\\';
-        #endif
-        #if defined(unix) || defined(__APPLE__)
+#endif
+#if defined(unix) || defined(__APPLE__)
         separator = '/';
-        #endif
+#endif
 
         return separator;
       }
@@ -118,7 +120,7 @@ namespace ls::std::test
         const char separator = ls::std::test::TestHelper::_getFilePathSeparator();
         subDirectoryNames.pop_back();
 
-        for (auto const &subDirectoryName: subDirectoryNames)
+        for (auto const &subDirectoryName : subDirectoryNames)
         {
           parent += subDirectoryName + separator;
         }
@@ -130,17 +132,17 @@ namespace ls::std::test
       {
         ::std::string workingDirectory{};
 
-        #if defined(unix) || defined(__APPLE__)
+#if defined(unix) || defined(__APPLE__)
         workingDirectory = ls::std::test::TestHelper::_getWorkingDirectoryUnix();
-        #endif
-        #ifdef _WIN32
+#endif
+#ifdef _WIN32
         workingDirectory = ls::std::test::TestHelper::_getWorkingDirectoryWindows();
-        #endif
+#endif
 
         return workingDirectory;
       }
 
-      #if defined(unix) || defined(__APPLE__)
+#if defined(unix) || defined(__APPLE__)
       static ::std::string _getWorkingDirectoryUnix()
       {
         ::std::string workingDirectory{};
@@ -157,9 +159,9 @@ namespace ls::std::test
 
         return workingDirectory;
       }
-      #endif
+#endif
 
-      #ifdef _WIN32
+#ifdef _WIN32
       static ::std::string _getWorkingDirectoryWindows()
       {
         ::std::string workingDirectory{};
@@ -176,7 +178,7 @@ namespace ls::std::test
 
         return workingDirectory;
       }
-      #endif
+#endif
 
       static ::std::string _normalizePath(::std::string _path)
       {
@@ -218,13 +220,13 @@ namespace ls::std::test
         static const char unixSeparator = '/';
         static const char windowsSeparator = '\\';
 
-        #if defined(unix) || defined(__APPLE__)
+#if defined(unix) || defined(__APPLE__)
         ::std::replace(_path.begin(), _path.end(), windowsSeparator, unixSeparator);
-        #endif
+#endif
 
-        #ifdef _WIN32
+#ifdef _WIN32
         ::std::replace(_path.begin(), _path.end(), unixSeparator, windowsSeparator);
-        #endif
+#endif
 
         return _path;
       }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -32,16 +32,18 @@ namespace
 
   TEST_F(EventHandlerTest, constructor_empty_parameter)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventHandler eventHandler{""};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventHandler eventHandler{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventHandlerTest, getId)

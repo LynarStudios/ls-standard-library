@@ -10,9 +10,7 @@
 #include <ls-std/boxing/Integer.hpp>
 #include <ls-std/core/exception/IllegalArithmeticOperationException.hpp>
 
-ls::std::boxing::Integer::Integer(int _value)
-    : ls::std::core::Class("Integer"),
-      value(_value)
+ls::std::boxing::Integer::Integer(int _value) : ls::std::core::Class("Integer"), value(_value)
 {}
 
 ls::std::boxing::Integer::Integer() : ls::std::core::Class("Integer")

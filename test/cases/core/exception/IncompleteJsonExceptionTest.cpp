@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -30,16 +30,18 @@ namespace
 
   TEST_F(IncompleteJsonExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw IncompleteJsonException{};
-                   }
-                   catch (const IncompleteJsonException &_exception)
-                   {
-                     EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", _exception.what());
-                     throw;
-                   }
-                 }, IncompleteJsonException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IncompleteJsonException{};
+          }
+          catch (const IncompleteJsonException &_exception)
+          {
+            EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", _exception.what());
+            throw;
+          }
+        },
+        IncompleteJsonException);
   }
 }

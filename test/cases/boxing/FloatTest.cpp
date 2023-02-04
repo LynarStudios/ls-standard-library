@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -337,15 +337,17 @@ namespace
   {
     Float x{};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     x.setEpsilon(0.0f);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            x.setEpsilon(0.0f);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

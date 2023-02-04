@@ -13,12 +13,10 @@
 #include <ls-std/io/NewLine.hpp>
 #include <ls-std/io/logging/Logger.hpp>
 #if defined(_MSC_VER) || defined(__APPLE__)
-#include <sstream>
+  #include <sstream>
 #endif
 
-ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer)
-    : ls::std::core::Class("Logger"),
-      logLevel(ls::std::io::LogLevelValue::INFO)
+ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer) : ls::std::core::Class("Logger"), logLevel(ls::std::io::LogLevelValue::INFO)
 {
   this->_assignWriter(_writer);
 }
@@ -137,7 +135,7 @@ void ls::std::io::Logger::_log(const ls::std::core::type::byte *_data, const ls:
   this->writer->write(message);
 }
 
-::std::string ls::std::io::Logger::_padRight(const ::std::string& _text)
+::std::string ls::std::io::Logger::_padRight(const ::std::string &_text)
 {
   return _text + ls::std::io::Logger::_createFillContent(_text);
 }

@@ -10,13 +10,13 @@
 #ifndef LS_STD_LOGGER_HPP
 #define LS_STD_LOGGER_HPP
 
-#include <ls-std/core/Class.hpp>
 #include "LogLevel.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IWriter.hpp>
 #include <ls-std/io/File.hpp>
 #include <ls-std/io/FileOutputStream.hpp>
-#include <string>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::io
 {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -33,16 +33,18 @@ namespace
 
   TEST_F(KvPairTest, constructor_with_empty_key)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     KvPair pair = KvPair("", "1989");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            KvPair pair = KvPair("", "1989");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvPairTest, getKey)

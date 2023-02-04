@@ -11,9 +11,7 @@
 #include <ls-std/boxing/Boolean.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::boxing::Boolean::Boolean(bool _value)
-    : ls::std::core::Class("Boolean"),
-      value(_value)
+ls::std::boxing::Boolean::Boolean(bool _value) : ls::std::core::Class("Boolean"), value(_value)
 {}
 
 ls::std::boxing::Boolean::Boolean() : ls::std::core::Class("Boolean")

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -41,16 +41,18 @@ namespace
 
   TEST_F(EventTest, constructor_empty_parameter)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Event event{""};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Event event{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventTest, addParameter)
@@ -126,16 +128,18 @@ namespace
 
   TEST_F(EventTest, setId_empty_parameter)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Event event{"TMP_ID"};
-                     event.setId("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Event event{"TMP_ID"};
+            event.setId("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

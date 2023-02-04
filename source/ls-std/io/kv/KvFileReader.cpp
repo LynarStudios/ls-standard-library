@@ -12,9 +12,7 @@
 #include <ls-std/io/kv/KvFileReader.hpp>
 #include <ls-std/io/kv/KvParser.hpp>
 
-ls::std::io::KvFileReader::KvFileReader(const ::std::shared_ptr<ls::std::io::KvDocument> &_document, const ::std::string &_absolutePath)
-    : ls::std::core::Class("KvFileReader"),
-      kvFile(ls::std::io::File{""})
+ls::std::io::KvFileReader::KvFileReader(const ::std::shared_ptr<ls::std::io::KvDocument> &_document, const ::std::string &_absolutePath) : ls::std::core::Class("KvFileReader"), kvFile(ls::std::io::File{""})
 {
   this->_assignDocument(_document);
   this->_assignFile(ls::std::io::File{_absolutePath});

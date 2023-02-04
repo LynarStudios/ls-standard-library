@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -38,16 +38,18 @@ namespace
   {
     File file{TestHelper::getResourcesFolderLocation() + "does_not_exist.txt"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     FileReader reader{file};
-                   }
-                   catch (const FileNotFoundException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileNotFoundException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            FileReader reader{file};
+          }
+          catch (const FileNotFoundException &_exception)
+          {
+            throw;
+          }
+        },
+        FileNotFoundException);
   }
 
   TEST_F(FileReaderTest, read)
@@ -68,16 +70,18 @@ namespace
     FileReader reader{file};
     file.remove();
 
-    EXPECT_THROW({
-                   try
-                   {
-                     byte_field content = reader.read();
-                   }
-                   catch (const FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            byte_field content = reader.read();
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 
   TEST_F(FileReaderTest, reset)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-20
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -34,16 +34,18 @@ namespace
 
   TEST_F(SerializableJsonEventTest, constructor_parameter_not_set)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     SerializableJsonEvent serializable{nullptr};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            SerializableJsonEvent serializable{nullptr};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(SerializableJsonEventTest, marshal)
@@ -81,15 +83,17 @@ namespace
     Event event{"TMP_EVENT"};
     SerializableJsonEvent serializable{make_shared<Event>(event)};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     serializable.setValue(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            serializable.setValue(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

@@ -100,7 +100,7 @@ bool ls::std::io::XmlParser::_contains(const ::std::string &_text, const ::std::
   ::std::shared_ptr<ls::std::io::XmlNode> node = ::std::make_shared<ls::std::io::XmlNode>(_name);
   ::std::shared_ptr<ls::std::io::XmlAttribute> attribute{};
 
-  for (const auto &parsedAttribute: _attributes)
+  for (const auto &parsedAttribute : _attributes)
   {
     attribute = ::std::make_shared<ls::std::io::XmlAttribute>(parsedAttribute.first);
     attribute->setValue(parsedAttribute.second);
@@ -119,7 +119,7 @@ bool ls::std::io::XmlParser::_endsWith(const ::std::string &_text, const ::std::
 {
   ::std::pair<::std::string, ::std::string> attribute{};
 
-  for (const auto &currentAttribute: _attributes)
+  for (const auto &currentAttribute : _attributes)
   {
     if (currentAttribute.first == _name)
     {
@@ -136,7 +136,7 @@ size_t ls::std::io::XmlParser::_findAttributeEndPosition(const ls::std::core::ty
   ::std::string::size_type position = ::std::string::npos;
   ::std::string::size_type counter{};
 
-  for (char letter: _data)
+  for (char letter : _data)
   {
     if (letter == '"')
     {
@@ -269,35 +269,35 @@ void ls::std::io::XmlParser::_parse(const ls::std::core::type::byte_field &_data
       {
         this->_analyze(_data, index);
       }
-        break;
+      break;
       case XML_PARSE_MODE_DECLARATION:
       {
         --index;
         index = this->_parseDeclaration(_data, index);
         this->mode = XML_PARSE_MODE_ANALYZE;
       }
-        break;
+      break;
       case XML_PARSE_MODE_OPENING_TAG:
       {
         --index;
         index = ls::std::io::XmlParser::_parseOpeningTag(_data, index);
         this->mode = XML_PARSE_MODE_ANALYZE;
       }
-        break;
+      break;
       case XML_PARSE_MODE_VALUE:
       {
         --index;
         index = ls::std::io::XmlParser::_parseValue(_data, index);
         this->mode = XML_PARSE_MODE_ANALYZE;
       }
-        break;
+      break;
       case XML_PARSE_MODE_CLOSING_TAG:
       {
         --index;
         index = ls::std::io::XmlParser::_parseClosingTag(_data, index);
         this->mode = XML_PARSE_MODE_ANALYZE;
       }
-        break;
+      break;
     }
   }
 }

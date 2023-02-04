@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -78,32 +78,36 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addAttributeAfter(nullptr, "assets");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addAttributeAfter(nullptr, "assets");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeAfter_empty_name)
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addAttributeAfter(make_shared<XmlAttribute>("id"), "");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addAttributeAfter(make_shared<XmlAttribute>("id"), "");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeBefore)
@@ -151,32 +155,36 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addAttributeBefore(nullptr, "assets");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addAttributeBefore(nullptr, "assets");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeBefore_empty_name)
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addAttributeBefore(make_shared<XmlAttribute>("id"), "");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addAttributeBefore(make_shared<XmlAttribute>("id"), "");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeToBeginning)
@@ -210,16 +218,18 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addAttributeToBeginning(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addAttributeToBeginning(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addAttributeToEnd)
@@ -253,16 +263,18 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addAttributeToEnd(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addAttributeToEnd(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildAfter)
@@ -320,32 +332,36 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addChildAfter(nullptr, make_shared<XmlNode>("children"));
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addChildAfter(nullptr, make_shared<XmlNode>("children"));
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildAfter_no_search_reference)
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addChildAfter(make_shared<XmlNode>("newChild"), nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addChildAfter(make_shared<XmlNode>("newChild"), nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildBefore)
@@ -403,32 +419,36 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addChildBefore(nullptr, make_shared<XmlNode>("children"));
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addChildBefore(nullptr, make_shared<XmlNode>("children"));
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildBefore_no_search_reference)
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addChildBefore(make_shared<XmlNode>("newChild"), nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addChildBefore(make_shared<XmlNode>("newChild"), nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildToBeginning)
@@ -477,16 +497,18 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addChildToBeginning(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addChildToBeginning(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, addChildToEnd)
@@ -535,16 +557,18 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.addChildToEnd(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.addChildToEnd(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, clearValue)
@@ -626,16 +650,18 @@ namespace
   {
     XmlNode dialogNode{"dialogNode"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.hasAttribute("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.hasAttribute("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, hasChild)
@@ -660,16 +686,18 @@ namespace
   {
     XmlNode dialogNode{"dialogNode"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.hasChild("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.hasChild("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, hasChildV2)
@@ -696,16 +724,18 @@ namespace
     XmlNode dialogNode{"dialog"};
     shared_ptr<XmlNode> searchNode{};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.hasChild(searchNode);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.hasChild(searchNode);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, removeFirstAttribute)
@@ -860,16 +890,18 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.setName("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.setName("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, setValue)
@@ -884,16 +916,18 @@ namespace
   {
     XmlNode dialogNode{"dialog"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     dialogNode.setValue("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            dialogNode.setValue("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlNodeTest, toXml)

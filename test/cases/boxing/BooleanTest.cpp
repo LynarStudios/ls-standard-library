@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -154,16 +154,19 @@ namespace
 
   TEST_F(BooleanTest, parse_with_invalid_parameter)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Boolean expression{};
-                     expression.parse("hello");
-                   } catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Boolean expression{};
+            expression.parse("hello");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(BooleanTest, toString_true)

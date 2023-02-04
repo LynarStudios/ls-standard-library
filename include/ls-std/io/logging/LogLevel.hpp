@@ -10,10 +10,10 @@
 #ifndef LS_STD_LOG_LEVEL_HPP
 #define LS_STD_LOG_LEVEL_HPP
 
-#include <unordered_map>
-#include <ls-std/core/Class.hpp>
 #include "LogLevelValue.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <unordered_map>
 
 namespace ls::std::io
 {

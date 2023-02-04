@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -69,17 +69,19 @@ namespace
 
   TEST_F(NarratorTest, addListener_no_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Narrator paintingMachine{};
-                     paintingMachine.addListener(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Narrator paintingMachine{};
+            paintingMachine.addListener(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, clear)
@@ -124,17 +126,19 @@ namespace
 
   TEST_F(NarratorTest, removeListener_no_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Narrator paintingMachine{};
-                     paintingMachine.removeListener(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Narrator paintingMachine{};
+            paintingMachine.removeListener(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, tell)

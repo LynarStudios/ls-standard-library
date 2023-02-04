@@ -11,15 +11,10 @@
 #include <ls-std/boxing/Float.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::boxing::Float::Float()
-    : ls::std::core::Class("Float"),
-      epsilon(0.00001f)
+ls::std::boxing::Float::Float() : ls::std::core::Class("Float"), epsilon(0.00001f)
 {}
 
-ls::std::boxing::Float::Float(float _value)
-    : ls::std::core::Class("Float"),
-      epsilon(0.00001f),
-      value(_value)
+ls::std::boxing::Float::Float(float _value) : ls::std::core::Class("Float"), epsilon(0.00001f), value(_value)
 {}
 
 ls::std::boxing::Float::~Float() = default;

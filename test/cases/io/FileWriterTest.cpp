@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -38,16 +38,18 @@ namespace
     string path = TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
     File file{path};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     FileWriter writer{file};
-                   }
-                   catch (const FileNotFoundException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileNotFoundException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            FileWriter writer{file};
+          }
+          catch (const FileNotFoundException &_exception)
+          {
+            throw;
+          }
+        },
+        FileNotFoundException);
   }
 
   TEST_F(FileWriterTest, reset)

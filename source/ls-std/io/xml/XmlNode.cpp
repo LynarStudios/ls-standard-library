@@ -11,9 +11,7 @@
 #include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/io/xml/XmlNode.hpp>
 
-ls::std::io::XmlNode::XmlNode(::std::string _name)
-    : ls::std::core::Class("XmlNode"),
-      name(::std::move(_name))
+ls::std::io::XmlNode::XmlNode(::std::string _name) : ls::std::core::Class("XmlNode"), name(::std::move(_name))
 {}
 
 ls::std::io::XmlNode::~XmlNode() = default;

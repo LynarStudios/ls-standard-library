@@ -10,7 +10,7 @@
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/xml/XmlAttribute.hpp>
 
-ls::std::io::XmlAttribute::XmlAttribute(const ::std::string& _name) : ls::std::core::Class("XmlAttribute")
+ls::std::io::XmlAttribute::XmlAttribute(const ::std::string &_name) : ls::std::core::Class("XmlAttribute")
 {
   this->_assignName(_name);
 }
@@ -27,12 +27,12 @@ ls::std::io::XmlAttribute::~XmlAttribute() = default;
   return this->value;
 }
 
-void ls::std::io::XmlAttribute::setName(const ::std::string& _name)
+void ls::std::io::XmlAttribute::setName(const ::std::string &_name)
 {
   this->_assignName(_name);
 }
 
-void ls::std::io::XmlAttribute::setValue(const ::std::string& _value)
+void ls::std::io::XmlAttribute::setValue(const ::std::string &_value)
 {
   this->_assignValue(_value);
 }

@@ -10,9 +10,7 @@
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/kv/KvPair.hpp>
 
-ls::std::io::KvPair::KvPair(const ls::std::core::type::kv_key &_key, ls::std::core::type::kv_value _value)
-    : ls::std::core::Class("KvPair"),
-      value(::std::move(_value))
+ls::std::io::KvPair::KvPair(const ls::std::core::type::kv_key &_key, ls::std::core::type::kv_value _value) : ls::std::core::Class("KvPair"), value(::std::move(_value))
 {
   this->_assignKey(_key);
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -43,31 +43,35 @@ namespace
 
   TEST_F(KvFileReaderTest, constructor_no_document_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     string kvPath = TestHelper::getResourcesFolderLocation() + "server-settings.kv";
-                     KvFileReader reader = KvFileReader(nullptr, kvPath);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            string kvPath = TestHelper::getResourcesFolderLocation() + "server-settings.kv";
+            KvFileReader reader = KvFileReader(nullptr, kvPath);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, constructor_invalid_file_path)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     KvFileReader reader = KvFileReader(make_shared<KvDocument>(), "invalid_path");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            KvFileReader reader = KvFileReader(make_shared<KvDocument>(), "invalid_path");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, getDocument)
@@ -101,16 +105,18 @@ namespace
   {
     const shared_ptr<KvFileReader> &reader = createTestKVFileReader();
 
-    EXPECT_THROW({
-                   try
-                   {
-                     reader->setFile(File{"invalid_path"});
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            reader->setFile(File{"invalid_path"});
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, setDocument)
@@ -130,15 +136,17 @@ namespace
   {
     const shared_ptr<KvFileReader> &reader = createTestKVFileReader();
 
-    EXPECT_THROW({
-                   try
-                   {
-                     reader->setDocument(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            reader->setDocument(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

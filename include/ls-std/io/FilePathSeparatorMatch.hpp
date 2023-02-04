@@ -16,10 +16,12 @@ namespace ls::std::io
 {
   struct FilePathSeparatorMatch // TODO: turn to class, rather than keeping it as struct
   {
-    bool operator()(char _char) const
-    {
-      return _char == ls::std::io::FilePathSeparator::getWindowsFilePathSeparator() || _char == ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
-    }
+    public:
+
+      bool operator()(char _char) const
+      {
+        return _char == ls::std::io::FilePathSeparator::getWindowsFilePathSeparator() || _char == ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
+      }
   };
 }
 

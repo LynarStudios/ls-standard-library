@@ -10,9 +10,7 @@
 #include <ls-std/boxing/Long.hpp>
 #include <ls-std/core/exception/IllegalArithmeticOperationException.hpp>
 
-ls::std::boxing::Long::Long(ls::std::core::type::long_type _value)
-    : ls::std::core::Class("Long"),
-      value(_value)
+ls::std::boxing::Long::Long(ls::std::core::type::long_type _value) : ls::std::core::Class("Long"), value(_value)
 {}
 
 ls::std::boxing::Long::Long() : ls::std::core::Class("Long")

@@ -8,8 +8,8 @@
  * */
 
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
-#include <ls-std/io/kv/KvParser.hpp>
 #include <ls-std/io/NewLine.hpp>
+#include <ls-std/io/kv/KvParser.hpp>
 
 ls::std::io::KvParser::KvParser(const ::std::shared_ptr<ls::std::io::KvDocument> &_document) : ls::std::core::Class("KvParser")
 {
@@ -48,7 +48,7 @@ bool ls::std::io::KvParser::_contains(const ::std::string &_text, const ::std::s
   return _text.find(_searchText) != ::std::string::npos;
 }
 
-bool ls::std::io::KvParser::_lineHasPair(const ls::std::io::KvParseParameter& _parseParameter)
+bool ls::std::io::KvParser::_lineHasPair(const ls::std::io::KvParseParameter &_parseParameter)
 {
   return ls::std::io::KvParser::_contains(_parseParameter.line, "=") && ls::std::io::KvParser::_contains(_parseParameter.line, ";");
 }
@@ -63,7 +63,7 @@ void ls::std::io::KvParser::_parse(const ls::std::core::type::byte_field &_data)
   }
 }
 
-void ls::std::io::KvParser::_parsePair(const ls::std::io::KvParseParameter& _parseParameter)
+void ls::std::io::KvParser::_parsePair(const ls::std::io::KvParseParameter &_parseParameter)
 {
   if (ls::std::io::KvParser::_lineHasPair(_parseParameter))
   {

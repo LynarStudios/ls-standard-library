@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -30,16 +30,18 @@ namespace
 
   TEST_F(EventNotHandledExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw EventNotHandledException{};
-                   }
-                   catch (const EventNotHandledException &_exception)
-                   {
-                     EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", _exception.what());
-                     throw;
-                   }
-                 }, EventNotHandledException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotHandledException{};
+          }
+          catch (const EventNotHandledException &_exception)
+          {
+            EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", _exception.what());
+            throw;
+          }
+        },
+        EventNotHandledException);
   }
 }

@@ -10,12 +10,12 @@
 #ifndef LS_STD_XML_PARSER_HPP
 #define LS_STD_XML_PARSER_HPP
 
-#include <ls-std/core/Class.hpp>
-#include <ls-std/core/types/Types.hpp>
 #include "XmlDocument.hpp"
 #include "XmlParseMode.hpp"
 #include "XmlParseParameter.hpp"
 #include <list>
+#include <ls-std/core/Class.hpp>
+#include <ls-std/core/types/Types.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io

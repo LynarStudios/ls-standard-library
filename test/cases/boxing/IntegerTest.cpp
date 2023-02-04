@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -118,32 +118,38 @@ namespace
 
   TEST_F(IntegerTest, operator_div_by_zero_with_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Integer x{9};
-                     Integer y{0};
+    EXPECT_THROW(
+        {
+          try
+          {
+            Integer x{9};
+            Integer y{0};
 
-                     x = x / y;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+            x = x / y;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   TEST_F(IntegerTest, operator_div_by_zero_with_value)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Integer x{9};
-                     x = x / 0;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Integer x{9};
+            x = x / 0;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   TEST_F(IntegerTest, operator_mod_with_reference)
@@ -232,32 +238,38 @@ namespace
 
   TEST_F(IntegerTest, operator_div_assign_by_zero_with_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Integer x{9};
-                     Integer y{0};
+    EXPECT_THROW(
+        {
+          try
+          {
+            Integer x{9};
+            Integer y{0};
 
-                     x = x /= y;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+            x = x /= y;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   TEST_F(IntegerTest, operator_div_assign_by_zero_with_value)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Integer x{9};
-                     x = x /= 0;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Integer x{9};
+            x = x /= 0;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   // comparison operators

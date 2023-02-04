@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -30,16 +30,18 @@ namespace
 
   TEST_F(IllegalArithmeticOperationExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw IllegalArithmeticOperationException{};
-                   }
-                   catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     EXPECT_STREQ("IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!", _exception.what());
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArithmeticOperationException{};
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            EXPECT_STREQ("IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!", _exception.what());
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 }
