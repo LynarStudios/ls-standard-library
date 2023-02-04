@@ -606,10 +606,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gtest
             gmock
             gtest_main
-            "${MODULE_NAME_CORE}"
             "${MODULE_NAME_BOXING}"
             "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
-            "${MODULE_NAME_TIME}")
+            "${MODULE_NAME_TIME}"
+            "${MODULE_NAME_CORE}")
 endif ()
