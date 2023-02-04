@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,6 +14,8 @@ ls::std::event::Event::Event(const ls::std::core::type::event_id &_id) : ls::std
 {
   this->_assignId(_id);
 }
+
+ls::std::event::Event::~Event() = default;
 
 bool ls::std::event::Event::addParameter(const ls::std::core::type::event_parameter &_eventParameter)
 {

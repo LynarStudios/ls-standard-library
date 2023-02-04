@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,6 +14,8 @@
 
 ls::std::event::EventManager::EventManager() : ls::std::core::Class("EventManager")
 {}
+
+ls::std::event::EventManager::~EventManager() = default;
 
 void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {

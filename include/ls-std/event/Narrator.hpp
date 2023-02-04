@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls::std::event
     public:
 
       Narrator();
-      ~Narrator() override = default;
+      ~Narrator() override;
 
       bool addListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
       void clear();

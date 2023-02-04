@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,6 +14,8 @@ ls::std::event::EventHandler::EventHandler(const ls::std::core::type::event_id& 
 {
   this->_assignId(_id);
 }
+
+ls::std::event::EventHandler::~EventHandler() = default;
 
 ls::std::core::type::event_id ls::std::event::EventHandler::getId()
 {

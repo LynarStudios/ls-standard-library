@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls::std::event
     public:
 
       explicit Event(const ls::std::core::type::event_id &_id);
-      ~Event() override = default;
+      ~Event() override;
 
       // additional functionality
 
