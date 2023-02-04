@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-08
- * Changed:         2022-11-09
+ * Changed:         2023-02-03
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_encoding.hpp>
+#include <ls-std/ls-std-encoding.hpp>
 
 using namespace ls::std::encoding;
 

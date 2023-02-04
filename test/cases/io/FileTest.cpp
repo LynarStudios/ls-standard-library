@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-11-09
+ * Changed:         2023-02-03
  *
  * */
 
-#include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_io.hpp>
 #include "TestHelper.hpp"
+#include <gtest/gtest.h>
+#include <ls-std/ls-std-core.hpp>
+#include <ls-std/ls-std-io.hpp>
 
 using namespace ls::std::core;
 using namespace ls::std::io;
-using namespace ls_std_test;
+using namespace ls::std::test;
 using namespace ::std;
 
 namespace
@@ -110,11 +110,11 @@ namespace
   TEST_F(FileTest, canWrite_not_writable)
   {
     #if defined(unix) || defined(__APPLE__)
-    File noWritableFile{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    File noWritableFile{TestHelper::getResourcesFolderLocation() + "no-writable.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
     #endif
     #ifdef _WIN32
-    File noWritableFile{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    File noWritableFile{TestHelper::getResourcesFolderLocation() + "no-writable-windows.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
     #endif
   }
@@ -226,7 +226,7 @@ namespace
     File file{this->fileLocation};
     ASSERT_TRUE(file.isFile());
 
-    File file2{TestHelper::getResourcesFolderLocation() + "list_test" + separator + "bla.txt"};
+    File file2{TestHelper::getResourcesFolderLocation() + "list-test" + separator + "bla.txt"};
     ASSERT_TRUE(file2.isFile());
   }
 
@@ -244,7 +244,7 @@ namespace
 
   TEST_F(FileTest, list)
   {
-    File file{TestHelper::getResourcesFolderLocation() + "list_test"};
+    File file{TestHelper::getResourcesFolderLocation() + "list-test"};
     list<string> filesInDirectory = file.list();
     string expectedFile{};
     const char separator = FilePathSeparator::get();
@@ -255,24 +255,24 @@ namespace
     ASSERT_EQ(7, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + ".";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "..";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getAbsoluteFilePath() + separator + "another-file.txt";
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + "list_test_sub";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getAbsoluteFilePath() + separator + "list-test-sub";
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden-file.txt";
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
   }
 
   TEST_F(FileTest, listFiles)
   {
-    File file{TestHelper::getResourcesFolderLocation() + "list_test"};
+    File file{TestHelper::getResourcesFolderLocation() + "list-test"};
     list<string> filesInDirectory = file.listFiles();
     string expectedFile{};
     const char separator = FilePathSeparator::get();
@@ -280,14 +280,14 @@ namespace
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(4, filesInDirectory.size());
 
-    expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getAbsoluteFilePath() + separator + "another-file.txt";
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden-file.txt";
+    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
   }
 
   TEST_F(FileTest, makeDirectory)
@@ -304,7 +304,7 @@ namespace
 
   TEST_F(FileTest, makeDirectory_directory_already_exists)
   {
-    File directory{TestHelper::getResourcesFolderLocation() + "list_test"};
+    File directory{TestHelper::getResourcesFolderLocation() + "list-test"};
 
     EXPECT_THROW({
                    try
@@ -372,7 +372,7 @@ namespace
     File file{this->fileLocation};
     ASSERT_TRUE(file.exists());
 
-    file.reset(TestHelper::getResourcesFolderLocation() + "list_test/hello.txt");
+    file.reset(TestHelper::getResourcesFolderLocation() + "list-test/hello.txt");
     ASSERT_TRUE(file.exists());
   }
 }

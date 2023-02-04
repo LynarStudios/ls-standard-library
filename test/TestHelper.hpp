@@ -3,25 +3,30 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-21
+ * Changed:         2023-02-03
  *
  * */
 
 #ifndef LS_STD_IO_TEST_HELPER_HPP
 #define LS_STD_IO_TEST_HELPER_HPP
 
-#include <string>
-#include <vector>
-#include <stdexcept>
 #include <algorithm>
-#include <sstream>
 #include <climits>
+#include <fstream>
+#include <ls-std/core/types/Types.hpp>
+#include <stdexcept>
+#include <sstream>
+#include <string>
 #if defined(unix) || defined(__APPLE__)
+#include <sys/stat.h>
 #include <unistd.h>
 #endif
-#include <fstream>
+#include <vector>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
-namespace ls_std_test
+namespace ls::std::test
 {
   class TestHelper
   {
@@ -32,27 +37,27 @@ namespace ls_std_test
 
       static ::std::string getResourcesFolderLocation()
       {
-        return TestHelper::getTestFolderLocation() + "resources" + ls_std_test::TestHelper::_getFilePathSeparator();
+        return TestHelper::getTestFolderLocation() + "resources" + ls::std::test::TestHelper::_getFilePathSeparator();
       }
 
       static ::std::string getTestFolderLocation()
       {
-        ::std::string buildDirectory = ls_std_test::TestHelper::_getWorkingDirectory();
-        buildDirectory = ls_std_test::TestHelper::_normalizePath(buildDirectory);
+        ::std::string buildDirectory = ls::std::test::TestHelper::_getWorkingDirectory();
+        buildDirectory = ls::std::test::TestHelper::_normalizePath(buildDirectory);
 
-        return ls_std_test::TestHelper::_getParent(buildDirectory) + "test" + ls_std_test::TestHelper::_getFilePathSeparator();
+        return ls::std::test::TestHelper::_getParent(buildDirectory) + "test" + ls::std::test::TestHelper::_getFilePathSeparator();
       }
 
       static ::std::string normalize(const ::std::string &_path)
       {
-        return ls_std_test::TestHelper::_normalizePath(_path);
+        return ls::std::test::TestHelper::_normalizePath(_path);
       }
 
       static ::std::string readFile(const ::std::string &_absoluteFilePath)
       {
         char *data;
         ::std::ifstream inputStream{_absoluteFilePath, ::std::ifstream::binary};
-        int length = (int) ls_std_test::TestHelper::_getFileSize(_absoluteFilePath);
+        int length = (int) ls::std::test::TestHelper::_getFileSize(_absoluteFilePath);
         data = new ls::std::core::type::byte[length];
         inputStream.read(data, length);
 
@@ -62,7 +67,7 @@ namespace ls_std_test
         }
 
         inputStream.close();
-        ls::std::core::type::byte_field readData = ls::std::core::type::byte_field{data, (size_t) ls_std_test::TestHelper::_getFileSize(_absoluteFilePath)};
+        ls::std::core::type::byte_field readData = ls::std::core::type::byte_field{data, (size_t) ls::std::test::TestHelper::_getFileSize(_absoluteFilePath)};
         delete[] data;
 
         return readData;
@@ -94,7 +99,7 @@ namespace ls_std_test
       {
         ::std::streampos fileSize{};
 
-        if (ls_std_test::TestHelper::_fileExists(_absoluteFilePath))
+        if (ls::std::test::TestHelper::_fileExists(_absoluteFilePath))
         {
           ::std::ifstream fileHandler{_absoluteFilePath, ::std::ios::in};
           fileSize = fileHandler.tellg();
@@ -106,11 +111,11 @@ namespace ls_std_test
         return (long) fileSize;
       }
 
-      static std::string _getParent(const ::std::string &_path)
+      static ::std::string _getParent(const ::std::string &_path)
       {
         ::std::string parent{};
-        ::std::vector<::std::string> subDirectoryNames = ls_std_test::TestHelper::_splitIntoSubDirectoryNames(_path);
-        const char separator = ls_std_test::TestHelper::_getFilePathSeparator();
+        ::std::vector<::std::string> subDirectoryNames = ls::std::test::TestHelper::_splitIntoSubDirectoryNames(_path);
+        const char separator = ls::std::test::TestHelper::_getFilePathSeparator();
         subDirectoryNames.pop_back();
 
         for (auto const &subDirectoryName: subDirectoryNames)
@@ -126,17 +131,16 @@ namespace ls_std_test
         ::std::string workingDirectory{};
 
         #if defined(unix) || defined(__APPLE__)
-        workingDirectory = ls_std_test::TestHelper::_getWorkingDirectoryUnix();
+        workingDirectory = ls::std::test::TestHelper::_getWorkingDirectoryUnix();
         #endif
         #ifdef _WIN32
-        workingDirectory = ls_std_test::TestHelper::_getWorkingDirectoryWindows();
+        workingDirectory = ls::std::test::TestHelper::_getWorkingDirectoryWindows();
         #endif
 
         return workingDirectory;
       }
 
       #if defined(unix) || defined(__APPLE__)
-
       static ::std::string _getWorkingDirectoryUnix()
       {
         ::std::string workingDirectory{};
@@ -153,11 +157,9 @@ namespace ls_std_test
 
         return workingDirectory;
       }
-
       #endif
 
       #ifdef _WIN32
-
       static ::std::string _getWorkingDirectoryWindows()
       {
         ::std::string workingDirectory{};
@@ -174,20 +176,19 @@ namespace ls_std_test
 
         return workingDirectory;
       }
-
       #endif
 
       static ::std::string _normalizePath(::std::string _path)
       {
-        _path = ls_std_test::TestHelper::_replaceWrongSeparator(_path);
-        _path = ls_std_test::TestHelper::_reduceSeparators(_path);
+        _path = ls::std::test::TestHelper::_replaceWrongSeparator(_path);
+        _path = ls::std::test::TestHelper::_reduceSeparators(_path);
 
         return _path;
       }
 
       static ::std::string _reduceSeparators(const ::std::string &_path)
       {
-        static const char separator = {ls_std_test::TestHelper::_getFilePathSeparator()};
+        static const char separator = {ls::std::test::TestHelper::_getFilePathSeparator()};
         ::std::string normalizedPath{};
         int index{};
 
@@ -233,7 +234,7 @@ namespace ls_std_test
         ::std::vector<::std::string> subDirectoryNames{};
         ::std::stringstream _stream{_path};
         ::std::string subDirectoryName{};
-        const char separator = ls_std_test::TestHelper::_getFilePathSeparator();
+        const char separator = ls::std::test::TestHelper::_getFilePathSeparator();
 
         while (::std::getline(_stream, subDirectoryName, separator))
         {

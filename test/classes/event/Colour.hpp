@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2022-07-02
+ * Changed:         2023-02-03
  *
  * */
 
 #ifndef LS_STD_COLOUR_HPP
 #define LS_STD_COLOUR_HPP
 
-#include <ls_std/ls_std_core.hpp>
+#include <ls-std/ls-std-core.hpp>
 
 namespace ls_std_event_test
 {

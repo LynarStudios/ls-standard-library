@@ -3,18 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2022-11-09
+ * Changed:         2023-02-03
  *
  * */
 
-#include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_io.hpp>
 #include "TestHelper.hpp"
+#include <gtest/gtest.h>
+#include <ls-std/ls-std-io.hpp>
 
 using namespace ls::std::core::type;
 using namespace ls::std::io;
-using namespace ls_std_test;
+using namespace ls::std::test;
 using namespace ::std;
 
 namespace
@@ -64,7 +63,7 @@ namespace
 
     // reset
 
-    string anotherFileLocation = TestHelper::getResourcesFolderLocation() + "list_test/bla.txt";
+    string anotherFileLocation = TestHelper::getResourcesFolderLocation() + "list-test/bla.txt";
     storableFile.reset(anotherFileLocation);
     content = storableFile.load();
 

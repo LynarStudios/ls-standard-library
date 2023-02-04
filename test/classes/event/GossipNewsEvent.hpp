@@ -3,14 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-20
+ * Changed:         2023-02-03
  *
  * */
 
 #ifndef LS_STD_GOSSIP_NEWS_EVENT_HPP
 #define LS_STD_GOSSIP_NEWS_EVENT_HPP
 
-#include <ls_std/ls_std_event.hpp>
+#include <ls-std/ls-std-event.hpp>
 #include <string>
 
 namespace ls_std_event_test

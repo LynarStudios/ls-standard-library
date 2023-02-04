@@ -3,19 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-11-09
+ * Changed:         2023-02-03
  *
  * */
 
-#include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_io.hpp>
 #include "TestHelper.hpp"
+#include <gtest/gtest.h>
+#include <ls-std/ls-std-core.hpp>
+#include <ls-std/ls-std-io.hpp>
 
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
-using namespace ls_std_test;
+using namespace ls::std::test;
 
 namespace
 {
@@ -97,10 +97,10 @@ namespace
   TEST_F(FileOutputStreamTest, write_no_permission_to_write)
   {
     #if defined(unix) || defined(__APPLE__)
-    File file{TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "no-writable.txt"};
     #endif
     #ifdef _WIN32
-    File file{TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "no-writable-windows.txt"};
     #endif
 
     FileOutputStream outputStream{file};
