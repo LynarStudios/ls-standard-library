@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-06
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -16,7 +16,7 @@
 
 namespace ls::std::core
 {
-  class WindowsUtils
+  class WindowsUtils // TODO: migrate to header / source split approach
   {
     public:
 

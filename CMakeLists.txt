@@ -145,6 +145,23 @@ set(SOURCE_FILES_BOXING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/String.cpp)
 
 set(SOURCE_FILES_CORE
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotHandledException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotSubscribedException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileNotFoundException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileOperationException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArgumentException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArithmeticOperationException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IncompleteJsonException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEventSubscriber.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IListener.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/ISerializable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IStorable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/utils/RegexUtils.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
@@ -414,9 +431,11 @@ endif ()
 # CLI base64
 
 add_executable(cli-base64
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/ISerializable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp)
 
 ##########################################################
 # Build Library (event)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -15,7 +15,7 @@
 
 namespace ls::std::core
 {
-  class StlUtils
+  class StlUtils // TODO: remove this class entirely
   {
     public:
 

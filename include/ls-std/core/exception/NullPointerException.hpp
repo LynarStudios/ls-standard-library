@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -18,12 +18,10 @@ namespace ls::std::core
   {
     public:
 
-      explicit NullPointerException() = default;
+      NullPointerException();
+      ~NullPointerException() override;
 
-      [[nodiscard]] const char *what() const noexcept override
-      {
-        return "NullPointerException thrown - reference is null!";
-      }
+      [[nodiscard]] const char *what() const noexcept override;
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,7 +14,7 @@
 
 namespace ls::std::core
 {
-  static ::std::string getVersion()
+  static ::std::string getVersion() // TODO: create class to split up header / source files
   {
     return "2023.1.0";
   }

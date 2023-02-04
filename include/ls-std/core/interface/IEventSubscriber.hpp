@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -20,8 +20,8 @@ namespace ls::std::core::interface_type
   {
     public:
 
-      IEventSubscriber() = default;
-      ~IEventSubscriber() = default;
+      IEventSubscriber();
+      ~IEventSubscriber();
 
       virtual void subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;
       virtual void unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener) = 0;

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -18,12 +18,10 @@ namespace ls::std::core
   {
     public:
 
-      EventNotSubscribedException() = default;
+      EventNotSubscribedException();
+      ~EventNotSubscribedException() override;
 
-      [[nodiscard]] const char *what() const noexcept override
-      {
-        return "EventNotSubscribedException thrown - event was not subscribed!";
-      };
+      [[nodiscard]] const char *what() const noexcept override;
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -18,8 +18,8 @@ namespace ls::std::core::interface_type
   {
     public:
 
-      IStorable() = default;
-      ~IStorable() = default;
+      IStorable();
+      ~IStorable();
 
       virtual ls::std::core::type::byte_field load() = 0;
       virtual void save(const ls::std::core::type::byte_field &_data) = 0;

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -17,6 +17,9 @@ namespace ls::std::core::interface_type
   class IEncoding
   {
     public:
+
+      IEncoding();
+      ~IEncoding();
 
       virtual ::std::string encode(const ::std::string &_sequence) = 0;
       virtual ::std::string decode(const ::std::string &_sequence) = 0;

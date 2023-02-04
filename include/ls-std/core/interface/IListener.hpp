@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -18,8 +18,8 @@ namespace ls::std::core::interface_type
   {
     public:
 
-      IListener() = default;
-      ~IListener() = default;
+      IListener();
+      ~IListener();
 
       virtual void listen(const ls::std::core::Class &_info) = 0;
   };
