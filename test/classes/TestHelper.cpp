@@ -107,7 +107,7 @@ char ls::std::test::TestHelper::_getFilePathSeparator()
 #endif
 
 #ifdef _WIN32
-static ::std::string _getWorkingDirectoryWindows()
+::std::string ls::std::test::TestHelper::_getWorkingDirectoryWindows()
 {
   ::std::string workingDirectory{};
   TCHAR buffer[MAX_PATH];
