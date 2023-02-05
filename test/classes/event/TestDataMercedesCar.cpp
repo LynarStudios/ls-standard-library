@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -14,6 +14,8 @@ ls_std_event_test::TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
 {
   this->setColor("blue");
 }
+
+ls_std_event_test::TestDataMercedesCar::~TestDataMercedesCar() = default;
 
 void ls_std_event_test::TestDataMercedesCar::listen(const ls::std::core::Class &_info)
 {

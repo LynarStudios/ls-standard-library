@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -12,6 +12,8 @@
 
 ls_std_event_test::GossipNewsAgency::GossipNewsAgency() : ls_std_event_test::NewsAgency("GossipNewsAgency")
 {}
+
+ls_std_event_test::GossipNewsAgency::~GossipNewsAgency() = default;
 
 void ls_std_event_test::GossipNewsAgency::listen(const ls::std::core::Class &_info)
 {

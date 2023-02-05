@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls::std::core
     public:
 
       explicit Version(ls::std::core::type::version_type _majorVersion, ls::std::core::type::version_type _minorVersion, ls::std::core::type::version_type _patchVersion);
-      ~Version();
+      ~Version() override;
 
       // implementation
 

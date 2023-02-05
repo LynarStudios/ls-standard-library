@@ -3,15 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
 #include "DailyNewsAgency.hpp"
 #include <ls-std/ls-std-event.hpp>
 
+// TODO: rename namespace
+
 ls_std_event_test::DailyNewsAgency::DailyNewsAgency() : ls_std_event_test::NewsAgency("DailyNewsAgency")
 {}
+
+ls_std_event_test::DailyNewsAgency::~DailyNewsAgency() = default;
 
 void ls_std_event_test::DailyNewsAgency::listen(const ls::std::core::Class &_info)
 {

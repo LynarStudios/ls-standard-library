@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -19,7 +19,7 @@ namespace ls::std::core::interface_type
     public:
 
       IReader();
-      ~IReader();
+      virtual ~IReader();
 
       virtual ls::std::core::type::byte_field read() = 0;
   };

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std_event_test
     public:
 
       TestDataMercedesCar();
-      ~TestDataMercedesCar() = default;
+      ~TestDataMercedesCar() override;
 
       void listen(const ls::std::core::Class &_info) override;
   };

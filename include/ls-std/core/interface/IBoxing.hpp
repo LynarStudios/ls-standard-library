@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -19,7 +19,7 @@ namespace ls::std::core::interface_type
     public:
 
       IBoxing();
-      ~IBoxing();
+      virtual ~IBoxing();
 
       virtual void parse(::std::string _parseText) = 0;
       virtual ::std::string toString() = 0;

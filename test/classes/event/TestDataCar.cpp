@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-20
+ * Changed:         2023-02-05
  *
  * */
 
@@ -11,6 +11,8 @@
 
 ls_std_event_test::TestDataCar::TestDataCar() : color("white")
 {}
+
+ls_std_event_test::TestDataCar::~TestDataCar() = default;
 
 ::std::string ls_std_event_test::TestDataCar::getColor()
 {
