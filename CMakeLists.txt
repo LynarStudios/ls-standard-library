@@ -180,6 +180,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvFileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvPair.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvParseParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/LogLevel.cpp
@@ -256,6 +257,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvFileReaderTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvPairTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParseParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LogLevelTest.cpp

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -21,7 +21,6 @@ namespace
     protected:
 
       KvPairTest() = default;
-
       ~KvPairTest() override = default;
 
       void SetUp() override

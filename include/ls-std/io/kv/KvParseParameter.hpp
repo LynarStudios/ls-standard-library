@@ -14,9 +14,19 @@
 
 namespace ls::std::io
 {
-  struct KvParseParameter // TODO: turn to class, rather than keeping it as struct
+  class KvParseParameter
   {
     public:
+
+      KvParseParameter();
+      ~KvParseParameter();
+
+      [[nodiscard]] ::std::string::size_type getIndex() const;
+      [[nodiscard]] ::std::string getLine();
+      void setIndex(const ::std::string::size_type &_index);
+      void setLine(const ::std::string &_line);
+
+    private:
 
       ::std::string::size_type index{};
       ::std::string line{};
