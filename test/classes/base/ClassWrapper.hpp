@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -13,9 +13,9 @@
 #include <gmock/gmock.h>
 #include <ls-std/ls-std-core.hpp>
 
-namespace ls_std_core_test
+namespace ls_std_core_test // TODO: fix namespace
 {
-  class ClassWrapper : public ls::std::core::Class
+  class ClassWrapper : public ls::std::core::Class // TODO: split header and source
   {
     public:
 

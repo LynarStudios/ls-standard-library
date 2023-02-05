@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -15,7 +15,7 @@
 
 namespace ls::std::core
 {
-  class LS_STD_DYNAMIC_GOAL Class
+  class LS_STD_DYNAMIC_GOAL Class // TODO: check if LS_STD_DYNAMIC_GOAL is set properly project wide
   {
     public:
 

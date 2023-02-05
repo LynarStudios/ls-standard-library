@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -16,7 +16,7 @@
 
 namespace ls::std::io
 {
-  struct XmlParseParameter
+  struct XmlParseParameter // TODO: turn to class, rather than keeping it as struct
   {
     public:
 
