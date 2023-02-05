@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -32,16 +32,18 @@ namespace
 
   TEST_F(XmlDeclarationTest, constructor_empty_version)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     XmlDeclaration declaration{""};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            XmlDeclaration declaration{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, getEncoding)
@@ -76,16 +78,18 @@ namespace
   {
     XmlDeclaration declaration{"1.0"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     declaration.setEncoding("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            declaration.setEncoding("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, setStandalone)
@@ -102,16 +106,18 @@ namespace
   {
     XmlDeclaration declaration{"1.0"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     declaration.setStandalone("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            declaration.setStandalone("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, setVersion)
@@ -129,16 +135,18 @@ namespace
   {
     XmlDeclaration declaration{"1.0"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     declaration.setVersion("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            declaration.setVersion("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlDeclarationTest, toXml)

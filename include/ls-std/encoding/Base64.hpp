@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -22,8 +22,8 @@ namespace ls::std::encoding
   {
     public:
 
-      Base64() = default;
-      ~Base64() = default;
+      Base64();
+      ~Base64() override;
 
       // implementation
 

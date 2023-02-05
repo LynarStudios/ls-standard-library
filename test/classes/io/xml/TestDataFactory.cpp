@@ -3,13 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2022-05-20
+ * Changed:         2023-02-05
  *
  * */
 
 #include "TestDataFactory.hpp"
 
-::std::shared_ptr<ls::std::io::XmlNode> ls_std_io_test::TestDataFactory::createXmlContent()
+test::io::TestDataFactory::TestDataFactory() = default;
+
+test::io::TestDataFactory::~TestDataFactory() = default;
+
+::std::shared_ptr<ls::std::io::XmlNode> test::io::TestDataFactory::createXmlContent()
 {
   ::std::shared_ptr<ls::std::io::XmlNode> root = ::std::make_shared<ls::std::io::XmlNode>("dialog");
   ::std::shared_ptr<ls::std::io::XmlAttribute> attribute{};

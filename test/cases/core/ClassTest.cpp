@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -13,7 +13,7 @@
 
 using namespace ls::std::core;
 using namespace ::std;
-using namespace ls_std_core_test;
+using namespace test::core;
 
 namespace
 {
@@ -33,16 +33,18 @@ namespace
 
   TEST_F(ClassTest, constructor_empty_parameter)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Class object{""};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Class object{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(ClassTest, destructor)

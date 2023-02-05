@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -16,14 +16,14 @@
 #include <memory>
 #include <string>
 
-namespace ls_std_event_test
+namespace test::event
 {
-  class DailyNewsAgency : public ls_std_event_test::NewsAgency, public ls::std::core::interface_type::IListener
+  class DailyNewsAgency : public test::event::NewsAgency, public ls::std::core::interface_type::IListener
   {
     public:
 
       DailyNewsAgency();
-      ~DailyNewsAgency() = default;
+      ~DailyNewsAgency() override;
 
       // implementation
 

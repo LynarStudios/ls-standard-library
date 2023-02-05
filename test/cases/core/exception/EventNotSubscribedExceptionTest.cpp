@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -30,16 +30,18 @@ namespace
 
   TEST_F(EventNotSubscribedExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw EventNotSubscribedException{};
-                   }
-                   catch (const EventNotSubscribedException &_exception)
-                   {
-                     EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", _exception.what());
-                     throw;
-                   }
-                 }, EventNotSubscribedException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotSubscribedException{};
+          }
+          catch (const EventNotSubscribedException &_exception)
+          {
+            EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", _exception.what());
+            throw;
+          }
+        },
+        EventNotSubscribedException);
   }
 }

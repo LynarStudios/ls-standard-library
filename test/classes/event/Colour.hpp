@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -12,14 +12,14 @@
 
 #include <ls-std/ls-std-core.hpp>
 
-namespace ls_std_event_test
+namespace test::event
 {
   class Colour : public ls::std::core::Class
   {
     public:
 
       explicit Colour(const ::std::string &_value);
-      ~Colour() override = default;
+      ~Colour() override;
 
       [[nodiscard]] ::std::string getValue() const;
 

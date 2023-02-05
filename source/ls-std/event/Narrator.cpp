@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -13,6 +13,8 @@
 
 ls::std::event::Narrator::Narrator() : ls::std::core::Class("Narrator")
 {}
+
+ls::std::event::Narrator::~Narrator() = default;
 
 bool ls::std::event::Narrator::addListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {

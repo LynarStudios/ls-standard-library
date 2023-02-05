@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -12,12 +12,12 @@
 #include <ls-std/core/exception/FileOperationException.hpp>
 #include <ls-std/io/FileReader.hpp>
 
-ls::std::io::FileReader::FileReader(ls::std::io::File &_file)
-    : ls::std::core::Class("FileReader"),
-      file(_file)
+ls::std::io::FileReader::FileReader(ls::std::io::File &_file) : ls::std::core::Class("FileReader"), file(_file)
 {
   ls::std::io::FileReader::_init(_file);
 }
+
+ls::std::io::FileReader::~FileReader() = default;
 
 ls::std::core::type::byte_field ls::std::io::FileReader::read()
 {

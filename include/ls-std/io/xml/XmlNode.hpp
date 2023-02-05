@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #ifndef LS_STD_XML_NODE_HPP
 #define LS_STD_XML_NODE_HPP
 
-#include <list>
-#include <memory>
-#include <ls-std/core/Class.hpp>
 #include "XmlAttribute.hpp"
+#include <list>
+#include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::io
 {
@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       explicit XmlNode(::std::string _name);
-      ~XmlNode() override = default;
+      ~XmlNode() override;
 
       bool addAttributeAfter(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute, const ::std::string &_name);
       bool addAttributeBefore(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute, const ::std::string &_name);

@@ -3,21 +3,23 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-20
+ * Changed:         2023-02-05
  *
  * */
 
 #include "TestDataCar.hpp"
 
-ls_std_event_test::TestDataCar::TestDataCar() : color("white")
+test::event::TestDataCar::TestDataCar() : color("white")
 {}
 
-::std::string ls_std_event_test::TestDataCar::getColor()
+test::event::TestDataCar::~TestDataCar() = default;
+
+::std::string test::event::TestDataCar::getColor()
 {
   return this->color;
 }
 
-void ls_std_event_test::TestDataCar::setColor(::std::string _color)
+void test::event::TestDataCar::setColor(::std::string _color)
 {
   this->color = ::std::move(_color);
 }

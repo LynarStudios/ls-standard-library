@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -119,32 +119,38 @@ namespace
 
   TEST_F(LongTest, operator_div_by_zero_with_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Long x{9};
-                     Long y{0};
+    EXPECT_THROW(
+        {
+          try
+          {
+            Long x{9};
+            Long y{0};
 
-                     x = x / y;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+            x = x / y;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   TEST_F(LongTest, operator_div_by_zero_with_value)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Long x{9};
-                     x = x / (type::long_type) 0;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Long x{9};
+            x = x / (type::long_type) 0;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   TEST_F(LongTest, operator_mod_with_reference)
@@ -233,32 +239,38 @@ namespace
 
   TEST_F(LongTest, operator_div_equals_by_zero_with_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Long x{9};
-                     Long y{0};
+    EXPECT_THROW(
+        {
+          try
+          {
+            Long x{9};
+            Long y{0};
 
-                     x = x /= y;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+            x = x /= y;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   TEST_F(LongTest, operator_div_equals_by_zero_with_value)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Long x{9};
-                     x = x /= (type::long_type) 0;
-                   } catch (const IllegalArithmeticOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArithmeticOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Long x{9};
+            x = x /= (type::long_type) 0;
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
   }
 
   // comparison operators

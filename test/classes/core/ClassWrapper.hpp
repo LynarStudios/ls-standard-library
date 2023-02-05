@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -13,15 +13,16 @@
 #include <gmock/gmock.h>
 #include <ls-std/ls-std-core.hpp>
 
-namespace ls_std_core_test
+namespace test::core
 {
   class ClassWrapper : public ls::std::core::Class
   {
     public:
 
-      ClassWrapper() : ls::std::core::Class("ClassWrapper") {};
+      ClassWrapper();
+      ~ClassWrapper() override;
+
       MOCK_METHOD0(Die, void());
-      ~ClassWrapper() override { Die(); }
   };
 }
 

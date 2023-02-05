@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -34,16 +34,18 @@ namespace
 
   TEST_F(KvParserTest, constructor_no_document_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     KvParser parser{nullptr};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            KvParser parser{nullptr};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvParserTest, getDocument)
@@ -88,15 +90,17 @@ namespace
     shared_ptr<KvDocument> document = make_shared<KvDocument>();
     KvParser parser{document};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     parser.setDocument(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            parser.setDocument(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

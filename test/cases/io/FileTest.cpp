@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
-#include "TestHelper.hpp"
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
@@ -63,12 +63,12 @@ namespace
 
   TEST_F(FileTest, canExecute)
   {
-    #ifdef _WIN32
+#ifdef _WIN32
     File executableFile{TestHelper::getResourcesFolderLocation() + "app.exe"};
-    #endif
-    #if defined(unix) || defined(__APPLE__)
+#endif
+#if defined(unix) || defined(__APPLE__)
     File executableFile{TestHelper::getResourcesFolderLocation() + "app"};
-    #endif
+#endif
 
     ASSERT_TRUE(executableFile.canExecute());
   }
@@ -89,16 +89,18 @@ namespace
   {
     File file{""};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     file.canRead();
-                   }
-                   catch (const FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            file.canRead();
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 
   TEST_F(FileTest, canWrite)
@@ -109,14 +111,14 @@ namespace
 
   TEST_F(FileTest, canWrite_not_writable)
   {
-    #if defined(unix) || defined(__APPLE__)
+#if defined(unix) || defined(__APPLE__)
     File noWritableFile{TestHelper::getResourcesFolderLocation() + "no-writable.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
-    #endif
-    #ifdef _WIN32
+#endif
+#ifdef _WIN32
     File noWritableFile{TestHelper::getResourcesFolderLocation() + "no-writable-windows.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
-    #endif
+#endif
   }
 
   TEST_F(FileTest, createNewFile)
@@ -135,16 +137,18 @@ namespace
   {
     File file{TestHelper::getResourcesFolderLocation() + "simple.txt"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     file.createNewFile();
-                   }
-                   catch (const FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            file.createNewFile();
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 
   TEST_F(FileTest, exists)
@@ -306,16 +310,18 @@ namespace
   {
     File directory{TestHelper::getResourcesFolderLocation() + "list-test"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     directory.makeDirectory();
-                   }
-                   catch (const FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            directory.makeDirectory();
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 
   TEST_F(FileTest, makeDirectories)

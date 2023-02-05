@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -16,12 +16,12 @@ ls::std::boxing::Double::Double() : ls::std::core::Class("Double")
   this->_assignEpsilon(0.00000001);
 }
 
-ls::std::boxing::Double::Double(double _value)
-    : ls::std::core::Class("Double"),
-      value(_value)
+ls::std::boxing::Double::Double(double _value) : ls::std::core::Class("Double"), value(_value)
 {
   this->_assignEpsilon(0.00000001);
 }
+
+ls::std::boxing::Double::~Double() = default;
 
 ls::std::boxing::Double::operator double() const
 {

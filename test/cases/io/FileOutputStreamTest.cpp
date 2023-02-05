@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
-#include "TestHelper.hpp"
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
@@ -38,16 +38,18 @@ namespace
     string path = TestHelper::getResourcesFolderLocation() + "not_existing.txt";
     File file{path};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     FileOutputStream outputStream{file};
-                   }
-                   catch (const FileNotFoundException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileNotFoundException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            FileOutputStream outputStream{file};
+          }
+          catch (const FileNotFoundException &_exception)
+          {
+            throw;
+          }
+        },
+        FileNotFoundException);
   }
 
   TEST_F(FileOutputStreamTest, write)
@@ -96,24 +98,26 @@ namespace
 
   TEST_F(FileOutputStreamTest, write_no_permission_to_write)
   {
-    #if defined(unix) || defined(__APPLE__)
+#if defined(unix) || defined(__APPLE__)
     File file{TestHelper::getResourcesFolderLocation() + "no-writable.txt"};
-    #endif
-    #ifdef _WIN32
+#endif
+#ifdef _WIN32
     File file{TestHelper::getResourcesFolderLocation() + "no-writable-windows.txt"};
-    #endif
+#endif
 
     FileOutputStream outputStream{file};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     outputStream.write("something");
-                   }
-                   catch (const FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            outputStream.write("something");
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 }

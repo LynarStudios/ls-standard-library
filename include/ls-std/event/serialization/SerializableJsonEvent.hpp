@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls::std::event
     public:
 
       explicit SerializableJsonEvent(const ::std::shared_ptr<ls::std::event::Event> &_value);
-      ~SerializableJsonEvent() override = default;
+      ~SerializableJsonEvent() override;
 
       // implementation
 

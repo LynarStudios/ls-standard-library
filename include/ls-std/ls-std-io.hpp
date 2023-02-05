@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -16,9 +16,9 @@
 #include <ls-std/io/kv/KvParseParameter.hpp>
 #include <ls-std/io/kv/KvParser.hpp>
 
-#include <ls-std/io/logging/Logger.hpp>
 #include <ls-std/io/logging/LogLevel.hpp>
 #include <ls-std/io/logging/LogLevelValue.hpp>
+#include <ls-std/io/logging/Logger.hpp>
 
 #include <ls-std/io/xml/XmlAttribute.hpp>
 #include <ls-std/io/xml/XmlDeclaration.hpp>

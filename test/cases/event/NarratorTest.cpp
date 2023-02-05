@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -16,7 +16,7 @@ using namespace ls::std::core;
 using namespace ls::std::core::interface_type;
 using namespace ls::std::event;
 using namespace ::std;
-using namespace ls_std_event_test;
+using namespace test::event;
 
 namespace
 {
@@ -69,17 +69,19 @@ namespace
 
   TEST_F(NarratorTest, addListener_no_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Narrator paintingMachine{};
-                     paintingMachine.addListener(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Narrator paintingMachine{};
+            paintingMachine.addListener(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, clear)
@@ -124,17 +126,19 @@ namespace
 
   TEST_F(NarratorTest, removeListener_no_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     Narrator paintingMachine{};
-                     paintingMachine.removeListener(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Narrator paintingMachine{};
+            paintingMachine.removeListener(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(NarratorTest, tell)

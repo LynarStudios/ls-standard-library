@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
-#include "TestHelper.hpp"
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
@@ -67,16 +67,18 @@ namespace
     shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
     XmlReader xmlReader{document, xmlPath};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     xmlReader.setDocument(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            xmlReader.setDocument(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlReaderTest, setFile)
@@ -95,15 +97,17 @@ namespace
     XmlReader xmlReader{make_shared<XmlDocument>(), xmlPath};
     File xmlFile{xmlPath};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     xmlReader.setFile(File{""});
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            xmlReader.setFile(File{""});
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

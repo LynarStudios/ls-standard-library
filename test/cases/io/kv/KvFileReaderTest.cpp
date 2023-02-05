@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
-#include "TestHelper.hpp"
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
@@ -32,7 +32,7 @@ namespace
       void TearDown() override
       {}
 
-      static shared_ptr<KvFileReader> createTestKVFileReader()
+      static shared_ptr<KvFileReader> createTestKvFileReader()
       {
         string kvPath = TestHelper::getResourcesFolderLocation() + "server-settings.kv";
         shared_ptr<KvDocument> document = make_shared<KvDocument>();
@@ -43,36 +43,40 @@ namespace
 
   TEST_F(KvFileReaderTest, constructor_no_document_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     string kvPath = TestHelper::getResourcesFolderLocation() + "server-settings.kv";
-                     KvFileReader reader = KvFileReader(nullptr, kvPath);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            string kvPath = TestHelper::getResourcesFolderLocation() + "server-settings.kv";
+            KvFileReader reader = KvFileReader(nullptr, kvPath);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, constructor_invalid_file_path)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     KvFileReader reader = KvFileReader(make_shared<KvDocument>(), "invalid_path");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            KvFileReader reader = KvFileReader(make_shared<KvDocument>(), "invalid_path");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, getDocument)
   {
-    const shared_ptr<KvFileReader> &reader = createTestKVFileReader();
+    const shared_ptr<KvFileReader> &reader = createTestKvFileReader();
     ASSERT_TRUE(reader->getDocument() != nullptr);
   }
 
@@ -80,7 +84,7 @@ namespace
   {
     // preparation
 
-    const shared_ptr<KvFileReader> &reader = createTestKVFileReader();
+    const shared_ptr<KvFileReader> &reader = createTestKvFileReader();
 
     // read file and check
 
@@ -99,25 +103,27 @@ namespace
 
   TEST_F(KvFileReaderTest, setFile_no_existing_file)
   {
-    const shared_ptr<KvFileReader> &reader = createTestKVFileReader();
+    const shared_ptr<KvFileReader> &reader = createTestKvFileReader();
 
-    EXPECT_THROW({
-                   try
-                   {
-                     reader->setFile(File{"invalid_path"});
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            reader->setFile(File{"invalid_path"});
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(KvFileReaderTest, setDocument)
   {
     // preparation
 
-    const shared_ptr<KvFileReader> &reader = createTestKVFileReader();
+    const shared_ptr<KvFileReader> &reader = createTestKvFileReader();
 
     // set new document and check
 
@@ -128,17 +134,19 @@ namespace
 
   TEST_F(KvFileReaderTest, setDocument_no_reference)
   {
-    const shared_ptr<KvFileReader> &reader = createTestKVFileReader();
+    const shared_ptr<KvFileReader> &reader = createTestKvFileReader();
 
-    EXPECT_THROW({
-                   try
-                   {
-                     reader->setDocument(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            reader->setDocument(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

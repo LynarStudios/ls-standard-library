@@ -3,17 +3,17 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #ifndef LS_STD_LOG_LEVEL_HPP
 #define LS_STD_LOG_LEVEL_HPP
 
-#include <unordered_map>
-#include <ls-std/core/Class.hpp>
 #include "LogLevelValue.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <unordered_map>
 
 namespace ls::std::io
 {
@@ -23,7 +23,7 @@ namespace ls::std::io
 
       explicit LogLevel(const ls::std::io::LogLevelValue &_value);
       LogLevel();
-      ~LogLevel() override = default;
+      ~LogLevel() override;
 
       operator unsigned char() const;
       ls::std::io::LogLevel &operator=(const ls::std::io::LogLevelValue &_value);

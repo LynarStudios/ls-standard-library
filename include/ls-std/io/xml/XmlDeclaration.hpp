@@ -3,15 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #ifndef LS_STD_XML_DECLARATION_HPP
 #define LS_STD_XML_DECLARATION_HPP
 
-#include <ls-std/core/Class.hpp>
 #include "XmlAttribute.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io
@@ -21,7 +21,7 @@ namespace ls::std::io
     public:
 
       explicit XmlDeclaration(const ::std::string &_version);
-      ~XmlDeclaration() override = default;
+      ~XmlDeclaration() override;
 
       ::std::string getEncoding();
       ::std::string getStandalone();

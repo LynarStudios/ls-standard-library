@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -11,16 +11,17 @@
 #define LS_STD_I_WRITER_HPP
 
 #include <ls-std/core/types/Types.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <vector>
 
 namespace ls::std::core::interface_type
 {
-  class IWriter
+  class LS_STD_DYNAMIC_GOAL IWriter
   {
     public:
 
-      IWriter() = default;
-      ~IWriter() = default;
+      IWriter();
+      virtual ~IWriter();
 
       virtual bool write(const ls::std::core::type::byte_field &_data) = 0;
   };

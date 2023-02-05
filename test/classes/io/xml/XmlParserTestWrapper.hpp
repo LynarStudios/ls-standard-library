@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -12,14 +12,14 @@
 
 #include <ls-std/ls-std-io.hpp>
 
-namespace ls_std_io_test
+namespace test::io
 {
   class XmlParserTestWrapper : public ls::std::io::XmlParser
   {
     public:
 
       XmlParserTestWrapper();
-      ~XmlParserTestWrapper() override = default;
+      ~XmlParserTestWrapper() override;
 
       static ::std::pair<::std::string, ::std::string> readAttribute(const ls::std::core::type::byte_field &_data);
       static ::std::list<::std::pair<::std::string, ::std::string>> readAttributes(ls::std::core::type::byte_field _data);

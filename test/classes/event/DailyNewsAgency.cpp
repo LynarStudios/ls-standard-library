@@ -3,17 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
 #include "DailyNewsAgency.hpp"
 #include <ls-std/ls-std-event.hpp>
 
-ls_std_event_test::DailyNewsAgency::DailyNewsAgency() : ls_std_event_test::NewsAgency("DailyNewsAgency")
+test::event::DailyNewsAgency::DailyNewsAgency() : test::event::NewsAgency("DailyNewsAgency")
 {}
 
-void ls_std_event_test::DailyNewsAgency::listen(const ls::std::core::Class &_info)
+test::event::DailyNewsAgency::~DailyNewsAgency() = default;
+
+void test::event::DailyNewsAgency::listen(const ls::std::core::Class &_info)
 {
   ls::std::event::Event event = dynamic_cast<const ls::std::event::Event &>(_info);
 
@@ -23,12 +25,12 @@ void ls_std_event_test::DailyNewsAgency::listen(const ls::std::core::Class &_inf
   }
 }
 
-void ls_std_event_test::DailyNewsAgency::clear()
+void test::event::DailyNewsAgency::clear()
 {
   this->news.clear();
 }
 
-::std::string ls_std_event_test::DailyNewsAgency::getNews()
+::std::string test::event::DailyNewsAgency::getNews()
 {
   return this->news;
 }

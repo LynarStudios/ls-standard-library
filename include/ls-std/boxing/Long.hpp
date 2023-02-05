@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls::std::boxing
 
       explicit Long(ls::std::core::type::long_type _value);
       Long();
-      ~Long() override = default;
+      ~Long() override;
 
       // conversion operator
 

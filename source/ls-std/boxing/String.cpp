@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -14,10 +14,10 @@
 ls::std::boxing::String::String() : ls::std::core::Class("String")
 {}
 
-ls::std::boxing::String::String(::std::string _value)
-    : ls::std::core::Class("String"),
-      value(::std::move(_value))
+ls::std::boxing::String::String(::std::string _value) : ls::std::core::Class("String"), value(::std::move(_value))
 {}
+
+ls::std::boxing::String::~String() = default;
 
 ls::std::boxing::String::operator const char *() const
 {
@@ -179,10 +179,7 @@ bool ls::std::boxing::String::startsWith(const ::std::string &_text)
 {
   ::std::string fillContent{};
 
-  for (size_t iteration{}; iteration < _amount; iteration++)
-  {
-    fillContent += _fillCharacter;
-  }
+  for (size_t iteration{}; iteration < _amount; iteration++) { fillContent += _fillCharacter; }
 
   return fillContent;
 }

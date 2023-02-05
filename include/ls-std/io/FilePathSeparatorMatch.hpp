@@ -3,23 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
 #ifndef LS_STD_FILE_PATH_MATCH_HPP
 #define LS_STD_FILE_PATH_MATCH_HPP
 
-#include "FilePathSeparator.hpp"
+#include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io
 {
-  struct FilePathSeparatorMatch
+  class LS_STD_DYNAMIC_GOAL FilePathSeparatorMatch
   {
-    bool operator()(char _char) const
-    {
-      return _char == ls::std::io::FilePathSeparator::getWindowsFilePathSeparator() || _char == ls::std::io::FilePathSeparator::getUnixFilePathSeparator();
-    }
+    public:
+
+      FilePathSeparatorMatch();
+      ~FilePathSeparatorMatch();
+
+      bool operator()(char _char) const;
   };
 }
 

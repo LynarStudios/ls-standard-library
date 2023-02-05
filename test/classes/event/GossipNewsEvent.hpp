@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -13,14 +13,14 @@
 #include <ls-std/ls-std-event.hpp>
 #include <string>
 
-namespace ls_std_event_test
+namespace test::event
 {
   class GossipNewsEvent : public ls::std::event::Event
   {
     public:
 
       explicit GossipNewsEvent(const ::std::string &_news);
-      ~GossipNewsEvent() override = default;
+      ~GossipNewsEvent() override;
   };
 }
 

@@ -3,20 +3,20 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #include <ls-std/boxing/Integer.hpp>
 #include <ls-std/core/exception/IllegalArithmeticOperationException.hpp>
 
-ls::std::boxing::Integer::Integer(int _value)
-    : ls::std::core::Class("Integer"),
-      value(_value)
+ls::std::boxing::Integer::Integer(int _value) : ls::std::core::Class("Integer"), value(_value)
 {}
 
 ls::std::boxing::Integer::Integer() : ls::std::core::Class("Integer")
 {}
+
+ls::std::boxing::Integer::~Integer() = default;
 
 ls::std::boxing::Integer::operator int() const
 {

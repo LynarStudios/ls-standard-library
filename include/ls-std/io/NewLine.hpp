@@ -3,47 +3,28 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
 #ifndef LS_STD_NEW_LINE_HPP
 #define LS_STD_NEW_LINE_HPP
 
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::io
 {
-  class NewLine
+  class LS_STD_DYNAMIC_GOAL NewLine
   {
     public:
 
-      NewLine() = default;
-      ~NewLine() = default;
+      NewLine();
+      ~NewLine();
 
-      static ::std::string get()
-      {
-        ::std::string newLine{};
-
-        #if defined(unix) || defined(__APPLE__)
-        newLine = ls::std::io::NewLine::getUnixNewLine();
-        #endif
-        #ifdef _WIN32
-        newLine = ls::std::io::NewLine::getWindowsNewLine();
-        #endif
-
-        return newLine;
-      }
-
-      static ::std::string getUnixNewLine()
-      {
-        return "\n";
-      }
-
-      static ::std::string getWindowsNewLine()
-      {
-        return "\r\n";
-      }
+      static ::std::string get();
+      static ::std::string getUnixNewLine();
+      static ::std::string getWindowsNewLine();
   };
 }
 

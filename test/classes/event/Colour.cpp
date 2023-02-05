@@ -3,18 +3,20 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2022-05-14
+ * Changed:         2023-02-05
  *
  * */
 
 #include "Colour.hpp"
 
-ls_std_event_test::Colour::Colour(const ::std::string &_value) : ls::std::core::Class("Colour")
+test::event::Colour::Colour(const ::std::string &_value) : ls::std::core::Class("Colour")
 {
   this->value = _value;
 }
 
-::std::string ls_std_event_test::Colour::getValue() const
+test::event::Colour::~Colour() = default;
+
+::std::string test::event::Colour::getValue() const
 {
   return this->value;
 }

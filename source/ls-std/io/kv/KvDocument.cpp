@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -11,6 +11,8 @@
 
 ls::std::io::KvDocument::KvDocument() : ls::std::core::Class("KvDocument")
 {}
+
+ls::std::io::KvDocument::~KvDocument() = default;
 
 bool ls::std::io::KvDocument::addPair(ls::std::io::KvPair _pair)
 {

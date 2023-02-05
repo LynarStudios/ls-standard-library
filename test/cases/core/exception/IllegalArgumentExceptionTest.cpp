@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -30,16 +30,18 @@ namespace
 
   TEST_F(IllegalArgumentExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw IllegalArgumentException{};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArgumentException{};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

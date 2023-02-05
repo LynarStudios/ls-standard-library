@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -30,16 +30,18 @@ namespace
 
   TEST_F(FileNotFoundExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw FileNotFoundException{};
-                   }
-                   catch (const FileNotFoundException &_exception)
-                   {
-                     EXPECT_STREQ("FileNotFoundException thrown - file not found!", _exception.what());
-                     throw;
-                   }
-                 }, FileNotFoundException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw FileNotFoundException{};
+          }
+          catch (const FileNotFoundException &_exception)
+          {
+            EXPECT_STREQ("FileNotFoundException thrown - file not found!", _exception.what());
+            throw;
+          }
+        },
+        FileNotFoundException);
   }
 }

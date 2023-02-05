@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
-#include "TestHelper.hpp"
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
@@ -38,16 +38,18 @@ namespace
     string path = TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
     File file{path};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     FileWriter writer{file};
-                   }
-                   catch (const FileNotFoundException &_exception)
-                   {
-                     throw;
-                   }
-                 }, FileNotFoundException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            FileWriter writer{file};
+          }
+          catch (const FileNotFoundException &_exception)
+          {
+            throw;
+          }
+        },
+        FileNotFoundException);
   }
 
   TEST_F(FileWriterTest, reset)

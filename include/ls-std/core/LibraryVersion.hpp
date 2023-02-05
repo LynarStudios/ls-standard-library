@@ -3,21 +3,27 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
 #ifndef LS_STD_LIBRARY_VERSION_HPP
 #define LS_STD_LIBRARY_VERSION_HPP
 
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::core
 {
-  static ::std::string getVersion()
+  class LS_STD_DYNAMIC_GOAL LibraryVersion
   {
-    return "2023.1.0";
-  }
+    public:
+
+      LibraryVersion();
+      ~LibraryVersion();
+
+      static ::std::string getVersion();
+  };
 }
 
 #endif

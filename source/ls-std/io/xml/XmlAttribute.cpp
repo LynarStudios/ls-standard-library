@@ -3,17 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/xml/XmlAttribute.hpp>
 
-ls::std::io::XmlAttribute::XmlAttribute(const ::std::string& _name) : ls::std::core::Class("XmlAttribute")
+ls::std::io::XmlAttribute::XmlAttribute(const ::std::string &_name) : ls::std::core::Class("XmlAttribute")
 {
   this->_assignName(_name);
 }
+
+ls::std::io::XmlAttribute::~XmlAttribute() = default;
 
 ::std::string ls::std::io::XmlAttribute::getName()
 {
@@ -25,12 +27,12 @@ ls::std::io::XmlAttribute::XmlAttribute(const ::std::string& _name) : ls::std::c
   return this->value;
 }
 
-void ls::std::io::XmlAttribute::setName(const ::std::string& _name)
+void ls::std::io::XmlAttribute::setName(const ::std::string &_name)
 {
   this->_assignName(_name);
 }
 
-void ls::std::io::XmlAttribute::setValue(const ::std::string& _value)
+void ls::std::io::XmlAttribute::setValue(const ::std::string &_value)
 {
   this->_assignValue(_value);
 }

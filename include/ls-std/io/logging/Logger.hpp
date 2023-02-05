@@ -3,20 +3,20 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #ifndef LS_STD_LOGGER_HPP
 #define LS_STD_LOGGER_HPP
 
-#include <ls-std/core/Class.hpp>
 #include "LogLevel.hpp"
+#include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IWriter.hpp>
 #include <ls-std/io/File.hpp>
 #include <ls-std/io/FileOutputStream.hpp>
-#include <string>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::io
 {
@@ -25,7 +25,7 @@ namespace ls::std::io
     public:
 
       explicit Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer);
-      ~Logger() override = default;
+      ~Logger() override;
 
       void debug(const ls::std::core::type::byte *_data);
       void error(const ls::std::core::type::byte *_data);

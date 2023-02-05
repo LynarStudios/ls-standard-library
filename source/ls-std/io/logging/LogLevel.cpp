@@ -3,16 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/logging/LogLevel.hpp>
 
-ls::std::io::LogLevel::LogLevel(const ls::std::io::LogLevelValue &_value)
-    : ls::std::core::Class("LogLevel"),
-      value(_value)
+ls::std::io::LogLevel::LogLevel(const ls::std::io::LogLevelValue &_value) : ls::std::core::Class("LogLevel"), value(_value)
 {
   this->_init();
 }
@@ -21,6 +19,8 @@ ls::std::io::LogLevel::LogLevel() : ls::std::core::Class("LogLevel")
 {
   this->_init();
 }
+
+ls::std::io::LogLevel::~LogLevel() = default;
 
 ls::std::io::LogLevel::operator unsigned char() const
 {

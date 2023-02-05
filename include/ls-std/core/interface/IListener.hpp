@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -11,15 +11,16 @@
 #define LS_STD_I_LISTENER_HPP
 
 #include <ls-std/core/Class.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::core::interface_type
 {
-  class IListener
+  class LS_STD_DYNAMIC_GOAL IListener
   {
     public:
 
-      IListener() = default;
-      ~IListener() = default;
+      IListener();
+      virtual ~IListener();
 
       virtual void listen(const ls::std::core::Class &_info) = 0;
   };

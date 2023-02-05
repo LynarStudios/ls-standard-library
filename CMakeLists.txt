@@ -22,6 +22,8 @@ set(MODULE_NAME_TIME ls-std-time)
 
 set(GOOGLE_TEST_MODULE googletest-1.11.0)
 
+set(CLI_NAME_BASE64 cli-base64)
+
 ##########################################################
 # Options
 ##########################################################
@@ -145,7 +147,25 @@ set(SOURCE_FILES_BOXING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/String.cpp)
 
 set(SOURCE_FILES_CORE
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotHandledException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotSubscribedException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileNotFoundException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileOperationException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArgumentException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArithmeticOperationException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IncompleteJsonException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEventSubscriber.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IListener.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/ISerializable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IStorable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/utils/RegexUtils.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Class.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
 set(SOURCE_FILES_ENCODING
@@ -162,6 +182,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvFileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvPair.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvParseParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/LogLevel.cpp
@@ -169,12 +190,16 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlNode.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlParseParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/File.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileOutputStream.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FilePathSeparator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FilePathSeparatorMatch.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/NewLine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StandardOutputWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StorableFile.cpp)
 
@@ -211,7 +236,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/utils/StlUtilsTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/ClassWrapper.cpp)
 
     set(TEST_FILES_ENCODING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
@@ -235,6 +261,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvFileReaderTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvPairTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParseParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LogLevelTest.cpp
@@ -242,6 +269,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDeclarationTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlNodeTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParseParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTestWrapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlReaderTest.cpp
@@ -311,7 +339,9 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_IO}: Building tests...")
-    add_executable(${MODULE_NAME_IO}-test ${TEST_FILES_IO})
+    add_executable(${MODULE_NAME_IO}-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+            ${TEST_FILES_IO})
 endif ()
 
 ##########################################################
@@ -330,6 +360,7 @@ endif ()
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Building tests...")
     add_executable(${PROJECT_NAME}-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
             ${TEST_FILES_BOXING}
             ${TEST_FILES_CORE}
             ${TEST_FILES_ENCODING}
@@ -413,10 +444,8 @@ endif ()
 
 # CLI base64
 
-add_executable(cli-base64
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
+add_executable(${CLI_NAME_BASE64}
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp)
 
 ##########################################################
 # Build Library (event)
@@ -585,10 +614,22 @@ if (${LS_STD_BUILD_WITH_TESTS})
             gtest
             gmock
             gtest_main
-            "${MODULE_NAME_CORE}"
             "${MODULE_NAME_BOXING}"
             "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
-            "${MODULE_NAME_TIME}")
+            "${MODULE_NAME_TIME}"
+            "${MODULE_NAME_CORE}")
 endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# CLI - Base64: Linking
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+target_link_libraries(${CLI_NAME_BASE64}
+        "${MODULE_NAME_ENCODING}"
+        "${MODULE_NAME_CORE}")

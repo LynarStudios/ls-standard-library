@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -11,10 +11,10 @@
 #include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/io/xml/XmlNode.hpp>
 
-ls::std::io::XmlNode::XmlNode(::std::string _name)
-    : ls::std::core::Class("XmlNode"),
-      name(::std::move(_name))
+ls::std::io::XmlNode::XmlNode(::std::string _name) : ls::std::core::Class("XmlNode"), name(::std::move(_name))
 {}
+
+ls::std::io::XmlNode::~XmlNode() = default;
 
 bool ls::std::io::XmlNode::addAttributeAfter(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute, const ::std::string &_name)
 {

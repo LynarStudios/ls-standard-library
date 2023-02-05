@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -15,7 +15,7 @@ using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls::std::event;
 using namespace ::std;
-using namespace ls_std_event_test;
+using namespace test::event;
 
 namespace
 {
@@ -41,77 +41,87 @@ namespace
 
   TEST_F(EventManagerTest, subscribe_empty_id)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.subscribe("", make_shared<DailyNewsAgency>());
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.subscribe("", make_shared<DailyNewsAgency>());
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, subscribe_no_listener)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.subscribe("TMP_ID", nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.subscribe("TMP_ID", nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, subscribe_no_event_handler_available)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.subscribe("TMP_DIR", make_shared<DailyNewsAgency>());
-                   }
-                   catch (const EventNotSubscribedException &_exception)
-                   {
-                     throw;
-                   }
-                 }, EventNotSubscribedException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.subscribe("TMP_DIR", make_shared<DailyNewsAgency>());
+          }
+          catch (const EventNotSubscribedException &_exception)
+          {
+            throw;
+          }
+        },
+        EventNotSubscribedException);
   }
 
   TEST_F(EventManagerTest, unsubscribe_empty_id)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.unsubscribe("", make_shared<DailyNewsAgency>());
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.unsubscribe("", make_shared<DailyNewsAgency>());
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, unsubscribe_no_listener)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.unsubscribe("TMP_ID", nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.unsubscribe("TMP_ID", nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, addEventHandler)
@@ -129,32 +139,36 @@ namespace
 
   TEST_F(EventManagerTest, addEventHandler_no_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.addEventHandler(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.addEventHandler(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, fire_event_handler_not_available)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.fire(Event{"TMP_ID"});
-                   }
-                   catch (const EventNotHandledException &_exception)
-                   {
-                     throw;
-                   }
-                 }, EventNotHandledException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.fire(Event{"TMP_ID"});
+          }
+          catch (const EventNotHandledException &_exception)
+          {
+            throw;
+          }
+        },
+        EventNotHandledException);
   }
 
   TEST_F(EventManagerTest, hasEventHandler)
@@ -172,17 +186,19 @@ namespace
 
   TEST_F(EventManagerTest, hasEventHandler_empty_id)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.hasEventHandler("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.hasEventHandler("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, removeEventHandler)
@@ -202,17 +218,19 @@ namespace
 
   TEST_F(EventManagerTest, removeEventHandler_no_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     EventManager eventManager{};
-                     eventManager.removeEventHandler(nullptr);
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventManager eventManager{};
+            eventManager.removeEventHandler(nullptr);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventManagerTest, production_example)
@@ -223,8 +241,8 @@ namespace
 
     // create event handler
 
-    shared_ptr<EventHandler> seriousNewsEventHandler = make_shared<EventHandler>(seriousNewsEventId);   // event id
-    shared_ptr<EventHandler> gossipNewsEventHandler = make_shared<EventHandler>(gossipNewsEventId);     // event id
+    shared_ptr<EventHandler> seriousNewsEventHandler = make_shared<EventHandler>(seriousNewsEventId); // event id
+    shared_ptr<EventHandler> gossipNewsEventHandler = make_shared<EventHandler>(gossipNewsEventId);   // event id
 
     // create and fill event manager with handler
 

@@ -3,18 +3,22 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #include <bitset>
 #include <ls-std/encoding/Base64.hpp>
 
+ls::std::encoding::Base64::Base64() = default;
+
+ls::std::encoding::Base64::~Base64() = default;
+
 ::std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
 {
   ::std::string encodedString{};
 
-  for(size_t index = 0 ; index < _sequence.size() ; index += 3)
+  for (size_t index = 0; index < _sequence.size(); index += 3)
   {
     ::std::string byteTriple = ls::std::encoding::Base64::_getNextByteTriple(_sequence, index);
     encodedString += ls::std::encoding::Base64::_encodeByteTriple(byteTriple);
@@ -27,7 +31,7 @@
 {
   ::std::string decodedString{};
 
-  for (int index{} ; index < _sequence.size() ; index += 4)
+  for (int index{}; index < _sequence.size(); index += 4)
   {
     ::std::string quadruple = ls::std::encoding::Base64::_getNextByteQuadruple(_sequence, index);
     decodedString += ls::std::encoding::Base64::_decodeByteQuadruple(quadruple);
@@ -54,7 +58,7 @@
   return _encodedString;
 }
 
-::std::string ls::std::encoding::Base64::_decodeByteQuadruple(const ::std::string& _quadruple)
+::std::string ls::std::encoding::Base64::_decodeByteQuadruple(const ::std::string &_quadruple)
 {
   ::std::string decodedText{};
   uint8_t shiftValue = 16;
@@ -73,7 +77,7 @@
   return decodedText;
 }
 
-::std::string ls::std::encoding::Base64::_encodeByteTriple(const ::std::string& _byteTriple)
+::std::string ls::std::encoding::Base64::_encodeByteTriple(const ::std::string &_byteTriple)
 {
   ::std::string encodedText{};
   uint32_t bitStorage = ls::std::encoding::Base64::_toEncodingBitStorage(_byteTriple);
@@ -81,7 +85,7 @@
   static ::std::unordered_map<uint8_t, char> encodingMap = ls::std::encoding::Base64::_getEncodingMap();
   uint8_t shiftValue = 18;
 
-  for (uint8_t bitMaskIndex = 0 ; bitMaskIndex < 4 ; bitMaskIndex++)
+  for (uint8_t bitMaskIndex = 0; bitMaskIndex < 4; bitMaskIndex++)
   {
     uint32_t extractedBitSequence = ls::std::encoding::Base64::_extractBitSequence(bitMaskStorage[bitMaskIndex], bitStorage);
     extractedBitSequence = extractedBitSequence >> shiftValue;
@@ -99,12 +103,12 @@ uint32_t ls::std::encoding::Base64::_extractBitSequence(uint32_t _bitMask, uint3
 
 uint32_t ls::std::encoding::Base64::_generateBitMask(uint32_t _maskValue, uint8_t _shiftValue)
 {
-  if(_shiftValue == 0)
+  if (_shiftValue == 0)
   {
     return _maskValue;
   }
 
-  if(_shiftValue < 0)
+  if (_shiftValue < 0)
   {
     return _maskValue >> _shiftValue;
   }
@@ -167,7 +171,7 @@ uint32_t ls::std::encoding::Base64::_toDecodingBitStorage(const ::std::string &_
   uint8_t letterCounter = 1;
   ::std::unordered_map<char, uint8_t> decodingMap = ls::std::encoding::Base64::_getDecodingMap();
 
-  for(char letter : _quadruple)
+  for (char letter : _quadruple)
   {
     uint32_t bitMask = ls::std::encoding::Base64::_generateBitMask(decodingMap[(char) letter], (4 - letterCounter) * 6); // must be hardcoded - even in case of less than 4 characters, so that conversion is correct
     ls::std::encoding::Base64::_mergeBitSequence(bitStorage, bitMask);
@@ -182,7 +186,7 @@ uint32_t ls::std::encoding::Base64::_toEncodingBitStorage(const ::std::string &_
   uint32_t bitStorage{};
   uint8_t shiftValue = 16;
 
-  for(char letter : _triple)
+  for (char letter : _triple)
   {
     uint32_t bitMask = ls::std::encoding::Base64::_generateBitMask((uint8_t) letter, shiftValue);
     ls::std::encoding::Base64::_mergeBitSequence(bitStorage, bitMask);

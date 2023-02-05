@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -32,16 +32,18 @@ namespace
 
   TEST_F(XmlAttributeTest, constructor_empty_name)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     XmlAttribute attribute{""};
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            XmlAttribute attribute{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlAttributeTest, getName)
@@ -66,17 +68,19 @@ namespace
 
   TEST_F(XmlAttributeTest, setName_empty_name)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     XmlAttribute attribute{"id"};
-                     attribute.setName("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            XmlAttribute attribute{"id"};
+            attribute.setName("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlAttributeTest, setValue)
@@ -89,17 +93,19 @@ namespace
 
   TEST_F(XmlAttributeTest, setValue_empty_value)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     XmlAttribute attribute{"id"};
-                     attribute.setValue("");
-                   }
-                   catch (const IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            XmlAttribute attribute{"id"};
+            attribute.setValue("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(XmlAttributeTest, toXml)

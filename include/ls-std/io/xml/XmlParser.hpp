@@ -3,19 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-25
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
 #ifndef LS_STD_XML_PARSER_HPP
 #define LS_STD_XML_PARSER_HPP
 
-#include <ls-std/core/Class.hpp>
-#include <ls-std/core/types/Types.hpp>
 #include "XmlDocument.hpp"
 #include "XmlParseMode.hpp"
 #include "XmlParseParameter.hpp"
 #include <list>
+#include <ls-std/core/Class.hpp>
+#include <ls-std/core/types/Types.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io
@@ -25,7 +25,7 @@ namespace ls::std::io
     public:
 
       explicit XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
-      ~XmlParser() override = default;
+      ~XmlParser() override;
 
       ::std::shared_ptr<ls::std::io::XmlDocument> getDocument();
       void parse(const ls::std::core::type::byte_field &_data);

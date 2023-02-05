@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -11,19 +11,18 @@
 #define LS_STD_NULL_POINTER_EXCEPTION_HPP
 
 #include <exception>
+#include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::core
 {
-  class NullPointerException : public ::std::exception
+  class LS_STD_DYNAMIC_GOAL NullPointerException : public ::std::exception
   {
     public:
 
-      explicit NullPointerException() = default;
+      NullPointerException();
+      ~NullPointerException() override;
 
-      [[nodiscard]] const char *what() const noexcept override
-      {
-        return "NullPointerException thrown - reference is null!";
-      }
+      [[nodiscard]] const char *what() const noexcept override;
   };
 }
 

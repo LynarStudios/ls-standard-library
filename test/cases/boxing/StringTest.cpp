@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -45,7 +45,7 @@ namespace
   {
     String greetings{"Hello! "};
     String question{"How are you? "};
-    const string& answer = "I'm good by the way!";
+    const string &answer = "I'm good by the way!";
 
     greetings = greetings + question + answer;
 

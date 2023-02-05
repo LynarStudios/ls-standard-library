@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-04
  *
  * */
 
@@ -11,16 +11,13 @@
 #include <ls-std/boxing/Float.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::boxing::Float::Float()
-    : ls::std::core::Class("Float"),
-      epsilon(0.00001f)
+ls::std::boxing::Float::Float() : ls::std::core::Class("Float"), epsilon(0.00001f)
 {}
 
-ls::std::boxing::Float::Float(float _value)
-    : ls::std::core::Class("Float"),
-      epsilon(0.00001f),
-      value(_value)
+ls::std::boxing::Float::Float(float _value) : ls::std::core::Class("Float"), epsilon(0.00001f), value(_value)
 {}
+
+ls::std::boxing::Float::~Float() = default;
 
 ls::std::boxing::Float::operator float() const
 {
