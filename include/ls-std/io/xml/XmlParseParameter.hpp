@@ -16,12 +16,24 @@
 
 namespace ls::std::io
 {
-  struct XmlParseParameter // TODO: turn to class, rather than keeping it as struct
+  class XmlParseParameter
   {
     public:
 
+      XmlParseParameter();
+      ~XmlParseParameter();
+
+      [[nodiscard]] uint8_t getLevel() const;
+      [[nodiscard]] ::std::shared_ptr<ls::std::io::XmlNode> getNode();
+      void setLevel(const uint8_t &_level);
+      void setNode(const ::std::shared_ptr<ls::std::io::XmlNode> &_node);
+
+    private:
+
       uint8_t level{};
       ::std::shared_ptr<ls::std::io::XmlNode> node{};
+
+      void _setNode(const ::std::shared_ptr<ls::std::io::XmlNode> &_node);
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -218,7 +218,7 @@ void ls::std::io::XmlParser::_mergeNodes()
     this->maxLevel -= 1;
   }
 
-  this->document->setRootElement(this->parseParameters.front().node);
+  this->document->setRootElement(this->parseParameters.front().getNode());
 }
 
 void ls::std::io::XmlParser::_mergeChildrenToParentNode(const ::std::shared_ptr<ls::std::io::XmlNode> &_parent, ::std::list<ls::std::io::XmlParseParameter>::iterator &_iterator, uint8_t _parentLevel)
@@ -233,12 +233,12 @@ void ls::std::io::XmlParser::_mergeChildrenToParentNode(const ::std::shared_ptr<
     }
     else
     {
-      if (_iterator->level == this->maxLevel)
+      if (_iterator->getLevel() == this->maxLevel)
       {
-        _parent->addChildToEnd(_iterator->node);
+        _parent->addChildToEnd(_iterator->getNode());
       }
     }
-  } while (_iterator->level > _parentLevel);
+  } while (_iterator->getLevel() > _parentLevel);
 }
 
 void ls::std::io::XmlParser::_mergeNodesOnCurrentLevel()
@@ -248,9 +248,9 @@ void ls::std::io::XmlParser::_mergeNodesOnCurrentLevel()
 
   while (iterator != this->parseParameters.end())
   {
-    if (iterator->level == parentLevel)
+    if (iterator->getLevel() == parentLevel)
     {
-      this->_mergeChildrenToParentNode(iterator->node, iterator, parentLevel);
+      this->_mergeChildrenToParentNode(iterator->getNode(), iterator, parentLevel);
     }
     else
     {
@@ -369,8 +369,8 @@ size_t ls::std::io::XmlParser::_parseOpeningTag(const ls::std::core::type::byte_
   {
     ::std::shared_ptr<ls::std::io::XmlNode> node = ls::std::io::XmlParser::_createNode(ls::std::io::XmlParser::_parseAttributes(tagString), ls::std::io::XmlParser::_parseTagName(tagString));
 
-    singleParseParameter.level = this->currentLevel;
-    singleParseParameter.node = node;
+    singleParseParameter.setLevel(this->currentLevel);
+    singleParseParameter.setNode(node);
     this->parseParameters.push_back(singleParseParameter);
 
     if (!ls::std::io::XmlParser::_endsWith(tagString, "/>"))
@@ -398,7 +398,7 @@ ls::std::core::type::byte_field ls::std::io::XmlParser::_parseTagName(const ls::
 size_t ls::std::io::XmlParser::_parseValue(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index)
 {
   ls::std::core::type::byte_field value = _data.substr(_index, _data.substr(_index).find('<'));
-  this->parseParameters.back().node->setValue(value);
+  this->parseParameters.back().getNode()->setValue(value);
 
   return _index + (value.size() - 1);
 }

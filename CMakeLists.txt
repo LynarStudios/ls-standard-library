@@ -188,6 +188,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlNode.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlParseParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/File.cpp
@@ -265,6 +266,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDeclarationTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlNodeTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParseParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTestWrapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlReaderTest.cpp

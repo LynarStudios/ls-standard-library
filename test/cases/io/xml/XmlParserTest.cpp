@@ -51,7 +51,7 @@ namespace
         {
           try
           {
-            XmlParser xmlParser{document};
+            XmlParser xmlParser = XmlParser{document};
           }
           catch (const IllegalArgumentException &_exception)
           {
