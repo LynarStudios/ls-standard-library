@@ -9,17 +9,17 @@
 
 #include "XmlParserTestWrapper.hpp"
 
-ls_std_io_test::XmlParserTestWrapper::XmlParserTestWrapper() : ls::std::io::XmlParser(nullptr)
+test::io::XmlParserTestWrapper::XmlParserTestWrapper() : ls::std::io::XmlParser(nullptr)
 {}
 
-ls_std_io_test::XmlParserTestWrapper::~XmlParserTestWrapper() = default;
+test::io::XmlParserTestWrapper::~XmlParserTestWrapper() = default;
 
-::std::pair<::std::string, ::std::string> ls_std_io_test::XmlParserTestWrapper::readAttribute(const ls::std::core::type::byte_field &_data)
+::std::pair<::std::string, ::std::string> test::io::XmlParserTestWrapper::readAttribute(const ls::std::core::type::byte_field &_data)
 {
   return ls::std::io::XmlParser::_readAttribute_(_data);
 }
 
-::std::list<::std::pair<::std::string, ::std::string>> ls_std_io_test::XmlParserTestWrapper::readAttributes(ls::std::core::type::byte_field _data)
+::std::list<::std::pair<::std::string, ::std::string>> test::io::XmlParserTestWrapper::readAttributes(ls::std::core::type::byte_field _data)
 {
   return ls::std::io::XmlParser::_readAttributes_(::std::move(_data));
 }

@@ -12,7 +12,7 @@
 
 #include <ls-std/ls-std-io.hpp>
 
-namespace ls_std_io_test
+namespace test::io
 {
   class XmlParserTestWrapper : public ls::std::io::XmlParser
   {

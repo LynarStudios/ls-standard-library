@@ -9,11 +9,11 @@
 
 #include "TestDataFactory.hpp"
 
-ls_std_io_test::TestDataFactory::TestDataFactory() = default;
+test::io::TestDataFactory::TestDataFactory() = default;
 
-ls_std_io_test::TestDataFactory::~TestDataFactory() = default;
+test::io::TestDataFactory::~TestDataFactory() = default;
 
-::std::shared_ptr<ls::std::io::XmlNode> ls_std_io_test::TestDataFactory::createXmlContent()
+::std::shared_ptr<ls::std::io::XmlNode> test::io::TestDataFactory::createXmlContent()
 {
   ::std::shared_ptr<ls::std::io::XmlNode> root = ::std::make_shared<ls::std::io::XmlNode>("dialog");
   ::std::shared_ptr<ls::std::io::XmlAttribute> attribute{};

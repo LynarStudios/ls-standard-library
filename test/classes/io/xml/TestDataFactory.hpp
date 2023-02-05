@@ -13,7 +13,7 @@
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
 
-namespace ls_std_io_test
+namespace test::io
 {
   class TestDataFactory
   {
