@@ -330,7 +330,9 @@ endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_IO}: Building tests...")
-    add_executable(${MODULE_NAME_IO}-test ${TEST_FILES_IO})
+    add_executable(${MODULE_NAME_IO}-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+            ${TEST_FILES_IO})
 endif ()
 
 ##########################################################
@@ -349,6 +351,7 @@ endif ()
 if (${LS_STD_BUILD_WITH_TESTS})
     message("${PROJECT_NAME}: Building tests...")
     add_executable(${PROJECT_NAME}-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
             ${TEST_FILES_BOXING}
             ${TEST_FILES_CORE}
             ${TEST_FILES_ENCODING}
