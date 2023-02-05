@@ -15,16 +15,14 @@
 
 namespace ls_std_core_test // TODO: fix namespace
 {
-  class ClassWrapper : public ls::std::core::Class // TODO: split header and source
+  class ClassWrapper : public ls::std::core::Class
   {
     public:
 
-      ClassWrapper() : ls::std::core::Class("ClassWrapper"){};
+      ClassWrapper();
+      ~ClassWrapper() override;
+
       MOCK_METHOD0(Die, void());
-      ~ClassWrapper() override
-      {
-        Die();
-      }
   };
 }
 

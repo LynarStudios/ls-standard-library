@@ -234,7 +234,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/utils/StlUtilsTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/ClassWrapper.cpp)
 
     set(TEST_FILES_ENCODING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
