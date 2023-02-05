@@ -12,11 +12,12 @@
 
 #include "IListener.hpp"
 #include <ls-std/core/types/EventTypes.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 
 namespace ls::std::core::interface_type
 {
-  class IEventSubscriber
+  class LS_STD_DYNAMIC_GOAL IEventSubscriber
   {
     public:
 

@@ -11,11 +11,12 @@
 #define LS_STD_I_WRITER_HPP
 
 #include <ls-std/core/types/Types.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <vector>
 
 namespace ls::std::core::interface_type
 {
-  class IWriter
+  class LS_STD_DYNAMIC_GOAL IWriter
   {
     public:
 

@@ -15,7 +15,7 @@
 
 namespace ls::std::core
 {
-  class LS_STD_DYNAMIC_GOAL Class // TODO: check if LS_STD_DYNAMIC_GOAL is set properly project wide
+  class LS_STD_DYNAMIC_GOAL Class
   {
     public:
 

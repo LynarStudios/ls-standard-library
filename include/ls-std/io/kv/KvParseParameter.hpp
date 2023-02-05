@@ -10,11 +10,12 @@
 #ifndef LS_STD_KV_PARSE_DATA_HPP
 #define LS_STD_KV_PARSE_DATA_HPP
 
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::io
 {
-  class KvParseParameter
+  class LS_STD_DYNAMIC_GOAL KvParseParameter
   {
     public:
 

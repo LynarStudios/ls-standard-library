@@ -11,10 +11,11 @@
 #define LS_STD_I_LISTENER_HPP
 
 #include <ls-std/core/Class.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::core::interface_type
 {
-  class IListener
+  class LS_STD_DYNAMIC_GOAL IListener
   {
     public:
 

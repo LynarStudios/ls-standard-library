@@ -12,11 +12,12 @@
 
 #include "XmlNode.hpp"
 #include <cstdint>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 
 namespace ls::std::io
 {
-  class XmlParseParameter
+  class LS_STD_DYNAMIC_GOAL XmlParseParameter
   {
     public:
 

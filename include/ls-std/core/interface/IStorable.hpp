@@ -11,10 +11,11 @@
 #define LS_STD_I_STORABLE_HPP
 
 #include <ls-std/core/types/Types.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::core::interface_type
 {
-  class IStorable
+  class LS_STD_DYNAMIC_GOAL IStorable
   {
     public:
 

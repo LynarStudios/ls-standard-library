@@ -10,9 +10,11 @@
 #ifndef LS_STD_FILE_PATH_MATCH_HPP
 #define LS_STD_FILE_PATH_MATCH_HPP
 
+#include <ls-std/os/dynamic-goal.hpp>
+
 namespace ls::std::io
 {
-  class FilePathSeparatorMatch
+  class LS_STD_DYNAMIC_GOAL FilePathSeparatorMatch
   {
     public:
 

@@ -10,11 +10,12 @@
 #ifndef LS_STD_I_ENCODING_HPP
 #define LS_STD_I_ENCODING_HPP
 
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::core::interface_type
 {
-  class IEncoding
+  class LS_STD_DYNAMIC_GOAL IEncoding
   {
     public:
 
