@@ -22,6 +22,8 @@ set(MODULE_NAME_TIME ls-std-time)
 
 set(GOOGLE_TEST_MODULE googletest-1.11.0)
 
+set(CLI_NAME_BASE64 cli-base64)
+
 ##########################################################
 # Options
 ##########################################################
@@ -442,12 +444,7 @@ endif ()
 
 # CLI base64
 
-add_executable(cli-base64
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/ISerializable.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp
+add_executable(${CLI_NAME_BASE64}
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp)
 
 ##########################################################
@@ -624,3 +621,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
             "${MODULE_NAME_TIME}"
             "${MODULE_NAME_CORE}")
 endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# CLI - Base64: Linking
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+target_link_libraries(${CLI_NAME_BASE64}
+        "${MODULE_NAME_ENCODING}"
+        "${MODULE_NAME_CORE}")
