@@ -13,7 +13,7 @@
 #include <gmock/gmock.h>
 #include <ls-std/ls-std-core.hpp>
 
-namespace ls_std_core_test // TODO: fix namespace
+namespace test::core
 {
   class ClassWrapper : public ls::std::core::Class
   {

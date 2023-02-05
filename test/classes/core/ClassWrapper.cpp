@@ -9,10 +9,10 @@
 
 #include <classes/core/ClassWrapper.hpp>
 
-ls_std_core_test::ClassWrapper::ClassWrapper() : ls::std::core::Class("ClassWrapper")
+test::core::ClassWrapper::ClassWrapper() : ls::std::core::Class("ClassWrapper")
 {}
 
-ls_std_core_test::ClassWrapper::~ClassWrapper()
+test::core::ClassWrapper::~ClassWrapper()
 {
   Die();
 }

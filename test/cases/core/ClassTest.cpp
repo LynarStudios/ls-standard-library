@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2023-02-04
+ * Changed:         2023-02-05
  *
  * */
 
@@ -13,7 +13,7 @@
 
 using namespace ls::std::core;
 using namespace ::std;
-using namespace ls_std_core_test;
+using namespace test::core;
 
 namespace
 {
