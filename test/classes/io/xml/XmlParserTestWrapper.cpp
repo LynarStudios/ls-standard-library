@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2022-05-20
+ * Changed:         2023-02-05
  *
  * */
 
@@ -11,6 +11,8 @@
 
 ls_std_io_test::XmlParserTestWrapper::XmlParserTestWrapper() : ls::std::io::XmlParser(nullptr)
 {}
+
+ls_std_io_test::XmlParserTestWrapper::~XmlParserTestWrapper() = default;
 
 ::std::pair<::std::string, ::std::string> ls_std_io_test::XmlParserTestWrapper::readAttribute(const ls::std::core::type::byte_field &_data)
 {

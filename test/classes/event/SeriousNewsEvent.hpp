@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -20,7 +20,7 @@ namespace ls_std_event_test
     public:
 
       explicit SeriousNewsEvent(const ::std::string &_news);
-      ~SeriousNewsEvent() override = default;
+      ~SeriousNewsEvent() override;
   };
 }
 

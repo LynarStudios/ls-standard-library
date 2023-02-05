@@ -3,11 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2022-05-20
+ * Changed:         2023-02-05
  *
  * */
 
 #include "TestDataFactory.hpp"
+
+ls_std_io_test::TestDataFactory::TestDataFactory() = default;
+
+ls_std_io_test::TestDataFactory::~TestDataFactory() = default;
 
 ::std::shared_ptr<ls::std::io::XmlNode> ls_std_io_test::TestDataFactory::createXmlContent()
 {
