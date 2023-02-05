@@ -163,6 +163,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/utils/RegexUtils.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Class.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
 set(SOURCE_FILES_ENCODING
@@ -436,6 +437,7 @@ endif ()
 # CLI base64
 
 add_executable(cli-base64
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/ISerializable.cpp

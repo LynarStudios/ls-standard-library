@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-07-03
- * Changed:         2023-02-03
+ * Changed:         2023-02-05
  *
  * */
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 
 void printHelp()
 {
-  std::string help = "Base 64 CLI - " + ls::std::core::getVersion() + "\n\n";
+  std::string help = "Base 64 CLI - " + ls::std::core::LibraryVersion::getVersion() + "\n\n";
   help += "(1) encode a string:\t\t";
   help += "--encode [string]\n";
   help += "(2) decode a string:\t\t";
