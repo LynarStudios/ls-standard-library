@@ -192,6 +192,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/File.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileOutputStream.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FilePathSeparator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FilePathSeparatorMatch.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/NewLine.cpp
