@@ -9,12 +9,12 @@
 
 #include "NewsAgency.hpp"
 
-ls_std_event_test::NewsAgency::NewsAgency(::std::string _agencyName) : agencyName(::std::move(_agencyName))
+test::event::NewsAgency::NewsAgency(::std::string _agencyName) : agencyName(::std::move(_agencyName))
 {}
 
-ls_std_event_test::NewsAgency::~NewsAgency() = default;
+test::event::NewsAgency::~NewsAgency() = default;
 
-::std::string ls_std_event_test::NewsAgency::getName()
+::std::string test::event::NewsAgency::getName()
 {
   return this->agencyName;
 }

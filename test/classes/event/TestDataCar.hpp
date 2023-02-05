@@ -12,7 +12,7 @@
 
 #include <string>
 
-namespace ls_std_event_test
+namespace test::event
 {
   class TestDataCar
   {

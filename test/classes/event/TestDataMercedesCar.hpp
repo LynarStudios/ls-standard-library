@@ -13,9 +13,9 @@
 #include "TestDataCar.hpp"
 #include <ls-std/ls-std-core.hpp>
 
-namespace ls_std_event_test
+namespace test::event
 {
-  class TestDataMercedesCar : public ls_std_event_test::TestDataCar, public ls::std::core::interface_type::IListener
+  class TestDataMercedesCar : public test::event::TestDataCar, public ls::std::core::interface_type::IListener
   {
     public:
 

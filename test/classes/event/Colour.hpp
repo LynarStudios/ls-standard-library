@@ -12,7 +12,7 @@
 
 #include <ls-std/ls-std-core.hpp>
 
-namespace ls_std_event_test
+namespace test::event
 {
   class Colour : public ls::std::core::Class
   {

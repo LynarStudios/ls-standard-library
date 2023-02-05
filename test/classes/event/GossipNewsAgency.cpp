@@ -10,12 +10,12 @@
 #include "GossipNewsAgency.hpp"
 #include <ls-std/ls-std-event.hpp>
 
-ls_std_event_test::GossipNewsAgency::GossipNewsAgency() : ls_std_event_test::NewsAgency("GossipNewsAgency")
+test::event::GossipNewsAgency::GossipNewsAgency() : test::event::NewsAgency("GossipNewsAgency")
 {}
 
-ls_std_event_test::GossipNewsAgency::~GossipNewsAgency() = default;
+test::event::GossipNewsAgency::~GossipNewsAgency() = default;
 
-void ls_std_event_test::GossipNewsAgency::listen(const ls::std::core::Class &_info)
+void test::event::GossipNewsAgency::listen(const ls::std::core::Class &_info)
 {
   ls::std::event::Event event = dynamic_cast<const ls::std::event::Event &>(_info);
 
@@ -30,12 +30,12 @@ void ls_std_event_test::GossipNewsAgency::listen(const ls::std::core::Class &_in
   }
 }
 
-void ls_std_event_test::GossipNewsAgency::clear()
+void test::event::GossipNewsAgency::clear()
 {
   this->news.clear();
 }
 
-::std::string ls_std_event_test::GossipNewsAgency::getNews()
+::std::string test::event::GossipNewsAgency::getNews()
 {
   return this->news;
 }

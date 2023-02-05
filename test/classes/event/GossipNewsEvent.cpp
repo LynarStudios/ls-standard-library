@@ -9,10 +9,10 @@
 
 #include "GossipNewsEvent.hpp"
 
-ls_std_event_test::GossipNewsEvent::GossipNewsEvent(const ::std::string &_news) : ls::std::event::Event("GossipNewsEvent")
+test::event::GossipNewsEvent::GossipNewsEvent(const ::std::string &_news) : ls::std::event::Event("GossipNewsEvent")
 {
   ls::std::core::type::event_parameter newsParameter = ::std::make_pair("news", _news);
   this->addParameter(newsParameter);
 }
 
-ls_std_event_test::GossipNewsEvent::~GossipNewsEvent() = default;
+test::event::GossipNewsEvent::~GossipNewsEvent() = default;

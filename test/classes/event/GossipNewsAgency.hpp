@@ -16,9 +16,9 @@
 #include <memory>
 #include <string>
 
-namespace ls_std_event_test
+namespace test::event
 {
-  class GossipNewsAgency : public ls_std_event_test::NewsAgency, public ls::std::core::interface_type::IListener
+  class GossipNewsAgency : public test::event::NewsAgency, public ls::std::core::interface_type::IListener
   {
     public:
 

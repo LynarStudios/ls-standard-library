@@ -9,14 +9,14 @@
 
 #include "Colour.hpp"
 
-ls_std_event_test::Colour::Colour(const ::std::string &_value) : ls::std::core::Class("Colour")
+test::event::Colour::Colour(const ::std::string &_value) : ls::std::core::Class("Colour")
 {
   this->value = _value;
 }
 
-ls_std_event_test::Colour::~Colour() = default;
+test::event::Colour::~Colour() = default;
 
-::std::string ls_std_event_test::Colour::getValue() const
+::std::string test::event::Colour::getValue() const
 {
   return this->value;
 }

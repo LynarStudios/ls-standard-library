@@ -10,14 +10,14 @@
 #include "TestDataMercedesCar.hpp"
 #include "Colour.hpp"
 
-ls_std_event_test::TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
+test::event::TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
 {
   this->setColor("blue");
 }
 
-ls_std_event_test::TestDataMercedesCar::~TestDataMercedesCar() = default;
+test::event::TestDataMercedesCar::~TestDataMercedesCar() = default;
 
-void ls_std_event_test::TestDataMercedesCar::listen(const ls::std::core::Class &_info)
+void test::event::TestDataMercedesCar::listen(const ls::std::core::Class &_info)
 {
-  this->setColor(dynamic_cast<const ls_std_event_test::Colour &>(_info).getValue());
+  this->setColor(dynamic_cast<const test::event::Colour &>(_info).getValue());
 }
