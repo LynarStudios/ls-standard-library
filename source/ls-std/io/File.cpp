@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -200,7 +200,7 @@ void ls::std::io::File::makeDirectories()
 
     if (!ls::std::io::File::_exists(currentHierarchy))
     {
-      ls::std::io::File::_mkdir(currentHierarchy);
+      ls::std::io::File::_mkdir(currentHierarchy); // TODO: think of return type usage, maybe change to bool?
     }
 
     currentHierarchy += separator;

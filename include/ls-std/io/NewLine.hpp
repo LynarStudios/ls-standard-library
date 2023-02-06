@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -22,9 +22,9 @@ namespace ls::std::io
       NewLine();
       ~NewLine();
 
-      static ::std::string get();
-      static ::std::string getUnixNewLine();
-      static ::std::string getWindowsNewLine();
+      [[nodiscard]] static ::std::string get();
+      [[nodiscard]] static ::std::string getUnixNewLine();
+      [[nodiscard]] static ::std::string getWindowsNewLine();
   };
 }
 

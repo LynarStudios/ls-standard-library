@@ -98,7 +98,7 @@ namespace
         {
           try
           {
-            file.canRead();
+            bool isReadable = file.canRead();
           }
           catch (const FileOperationException &_exception)
           {

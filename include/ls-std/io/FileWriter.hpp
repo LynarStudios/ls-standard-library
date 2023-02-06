@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -25,7 +25,7 @@ namespace ls::std::io
       ~FileWriter() override;
 
       void reset(ls::std::io::File &_file);
-      bool write(const ls::std::core::type::byte_field &_data) override;
+      bool write(const ls::std::core::type::byte_field &_data) override; // nodiscard is optional here
 
     private:
 

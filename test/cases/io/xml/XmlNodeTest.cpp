@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -654,7 +654,7 @@ namespace
         {
           try
           {
-            dialogNode.hasAttribute("");
+            bool hasAttribute = dialogNode.hasAttribute("");
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -690,7 +690,7 @@ namespace
         {
           try
           {
-            dialogNode.hasChild("");
+            bool hasChild = dialogNode.hasChild("");
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -728,7 +728,7 @@ namespace
         {
           try
           {
-            dialogNode.hasChild(searchNode);
+            bool hasChild = dialogNode.hasChild(searchNode);
           }
           catch (const IllegalArgumentException &_exception)
           {

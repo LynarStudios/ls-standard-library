@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -30,7 +30,7 @@ namespace ls::std::io
       void debug(const ls::std::core::type::byte *_data);
       void error(const ls::std::core::type::byte *_data);
       void fatal(const ls::std::core::type::byte *_data);
-      ls::std::io::LogLevel getLogLevel();
+      [[nodiscard]] ls::std::io::LogLevel getLogLevel();
       void info(const ls::std::core::type::byte *_data);
       void setLogLevel(const ls::std::io::LogLevelValue &_logLevelValue);
       void trace(const ls::std::core::type::byte *_data);
@@ -42,11 +42,11 @@ namespace ls::std::io
       ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer{};
 
       void _assignWriter(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer);
-      static ::std::string _buildCharacterChain(size_t _amount);
-      static ::std::string _createFillContent(const ::std::string &_text);
-      static ::std::string _generateTimeString(tm *_localTime);
+      [[nodiscard]] static ::std::string _buildCharacterChain(size_t _amount);
+      [[nodiscard]] static ::std::string _createFillContent(const ::std::string &_text);
+      [[nodiscard]] static ::std::string _generateTimeString(tm *_localTime);
       void _log(const ls::std::core::type::byte *_data, const ls::std::io::LogLevel &_logLevel);
-      static ::std::string _padRight(const ::std::string &_text);
+      [[nodiscard]] static ::std::string _padRight(const ::std::string &_text);
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -26,7 +26,7 @@ namespace ls::std::io
       explicit KvParser(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
       ~KvParser() override;
 
-      ::std::shared_ptr<ls::std::io::KvDocument> getDocument();
+      [[nodiscard]] ::std::shared_ptr<ls::std::io::KvDocument> getDocument();
       void parse(const ls::std::core::type::byte_field &_data);
       void setDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
 
@@ -35,11 +35,11 @@ namespace ls::std::io
       ::std::shared_ptr<ls::std::io::KvDocument> document{};
 
       void _assignDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document);
-      static bool _contains(const ::std::string &_text, const ::std::string &_searchText);
-      static bool _lineHasPair(ls::std::io::KvParseParameter &_parseParameter);
+      [[nodiscard]] static bool _contains(const ::std::string &_text, const ::std::string &_searchText);
+      [[nodiscard]] static bool _lineHasPair(ls::std::io::KvParseParameter &_parseParameter);
       void _parse(const ls::std::core::type::byte_field &_data);
       void _parsePair(ls::std::io::KvParseParameter &_parseParameter);
-      static ls::std::io::KvParseParameter _readLine(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index);
+      [[nodiscard]] static ls::std::io::KvParseParameter _readLine(const ls::std::core::type::byte_field &_data, ::std::string::size_type _index);
       static void _readLineWithUnixLineBreak(ls::std::io::KvParseParameter &_parseParameter);
       static void _readLineWithWindowsLineBreak(ls::std::io::KvParseParameter &_parseParameter);
   };

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -23,11 +23,11 @@ namespace ls::std::io
       explicit XmlAttribute(const ::std::string &_name);
       ~XmlAttribute() override;
 
-      ::std::string getName();
-      ::std::string getValue();
+      [[nodiscard]] ::std::string getName();
+      [[nodiscard]] ::std::string getValue();
       void setName(const ::std::string &_name);
       void setValue(const ::std::string &_value);
-      ::std::string toXml();
+      [[nodiscard]] ::std::string toXml();
 
     private:
 
