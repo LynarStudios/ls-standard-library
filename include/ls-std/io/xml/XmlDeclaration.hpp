@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -23,13 +23,13 @@ namespace ls::std::io
       explicit XmlDeclaration(const ::std::string &_version);
       ~XmlDeclaration() override;
 
-      ::std::string getEncoding();
-      ::std::string getStandalone();
-      ::std::string getVersion();
+      [[nodiscard]] ::std::string getEncoding();
+      [[nodiscard]] ::std::string getStandalone();
+      [[nodiscard]] ::std::string getVersion();
       void setEncoding(const ::std::string &_encoding);
       void setStandalone(const ::std::string &_standalone);
       void setVersion(const ::std::string &_version);
-      ::std::string toXml();
+      [[nodiscard]] ::std::string toXml();
 
     private:
 
@@ -37,7 +37,7 @@ namespace ls::std::io
       ls::std::io::XmlAttribute standalone{"standalone"};
       ls::std::io::XmlAttribute version{"version"};
 
-      static ::std::string _toXmlAttribute(ls::std::io::XmlAttribute _attribute);
+      [[nodiscard]] static ::std::string _toXmlAttribute(ls::std::io::XmlAttribute _attribute);
   };
 }
 

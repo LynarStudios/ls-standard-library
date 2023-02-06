@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -95,7 +95,7 @@ namespace ls::std::boxing
       // implementation
 
       void parse(::std::string _parseText) override;
-      ::std::string toString() override;
+      [[nodiscard]] ::std::string toString() override;
 
       // additional functionality
 

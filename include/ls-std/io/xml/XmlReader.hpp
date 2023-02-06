@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -30,11 +30,11 @@ namespace ls::std::io
 
       // implementation
 
-      ls::std::core::type::byte_field read() override;
+      ls::std::core::type::byte_field read() override; // nodiscard is optional here
 
       // additional functionality
 
-      ::std::shared_ptr<ls::std::io::XmlDocument> getDocument();
+      [[nodiscard]] ::std::shared_ptr<ls::std::io::XmlDocument> getDocument();
       void setDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document);
       void setFile(const ls::std::io::File &_xmlFile);
 

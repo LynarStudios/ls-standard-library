@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -27,11 +27,11 @@ namespace ls::std::event
 
       // additional functionality
 
-      bool addParameter(const ls::std::core::type::event_parameter &_eventParameter);
+      bool addParameter(const ls::std::core::type::event_parameter &_eventParameter); // nodiscard is optional here
       void clearParameterList();
-      ls::std::core::type::event_id getId();
-      ls::std::core::type::event_parameter_list getParameterList();
-      bool removeParameter(const ls::std::core::type::event_parameter_id &_id);
+      [[nodiscard]] ls::std::core::type::event_id getId();
+      [[nodiscard]] ls::std::core::type::event_parameter_list getParameterList();
+      bool removeParameter(const ls::std::core::type::event_parameter_id &_id); // nodiscard is optional here
       void setId(const ls::std::core::type::event_id &_id);
 
     private:
@@ -40,7 +40,7 @@ namespace ls::std::event
       ls::std::core::type::event_parameter_list parameterList{};
 
       void _assignId(const ls::std::core::type::event_id &_id);
-      bool _hasParameter(const ls::std::core::type::event_id &_id);
+      [[nodiscard]] bool _hasParameter(const ls::std::core::type::event_id &_id);
   };
 }
 

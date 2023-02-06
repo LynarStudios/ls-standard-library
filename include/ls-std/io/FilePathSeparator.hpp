@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -22,9 +22,9 @@ namespace ls::std::io
       FilePathSeparator();
       ~FilePathSeparator();
 
-      static char get();
-      static char getUnixFilePathSeparator();
-      static char getWindowsFilePathSeparator();
+      [[nodiscard]] static char get();
+      [[nodiscard]] static char getUnixFilePathSeparator();
+      [[nodiscard]] static char getWindowsFilePathSeparator();
   };
 }
 

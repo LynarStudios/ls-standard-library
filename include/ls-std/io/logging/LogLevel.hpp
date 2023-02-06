@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -35,16 +35,16 @@ namespace ls::std::io
 
       void setLogLevel(const ls::std::io::LogLevelValue &_value);
       void setLogLevel(const ::std::string &_value);
-      ::std::string toString() const;
+      [[nodiscard]] ::std::string toString() const;
 
     private:
 
       ::std::unordered_map<uint8_t, ::std::string> level{};
       ls::std::io::LogLevelValue value{};
 
-      ls::std::io::LogLevelValue _getValueFromString(const ::std::string &_value);
+      [[nodiscard]] ls::std::io::LogLevelValue _getValueFromString(const ::std::string &_value);
       void _init();
-      bool _isValidLogLevelString(const ::std::string &_value);
+      [[nodiscard]] bool _isValidLogLevelString(const ::std::string &_value);
   };
 }
 

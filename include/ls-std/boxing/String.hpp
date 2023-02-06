@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -61,28 +61,28 @@ namespace ls::std::boxing
       // implementation
 
       void parse(::std::string _parseText) override;
-      ::std::string toString() override;
+      [[nodiscard]] ::std::string toString() override;
 
       // additional functionality
 
-      bool contains(const ::std::string &_text);
-      bool endsWith(const ::std::string &_text);
-      bool equalsIgnoreCase(ls::std::boxing::String _string);
-      bool equalsIgnoreCase(::std::string _text);
-      ::std::vector<ls::std::core::type::byte> getByteData();
-      ::std::string padLeft(size_t _width, char _fillCharacter);
-      ::std::string padRight(size_t _width, char _fillCharacter);
-      ::std::string reverse();
-      bool startsWith(const ::std::string &_text);
-      ::std::string toLowerCase();
-      ::std::string toUpperCase();
+      [[nodiscard]] bool contains(const ::std::string &_text);
+      [[nodiscard]] bool endsWith(const ::std::string &_text);
+      [[nodiscard]] bool equalsIgnoreCase(ls::std::boxing::String _string);
+      [[nodiscard]] bool equalsIgnoreCase(::std::string _text);
+      [[nodiscard]] ::std::vector<ls::std::core::type::byte> getByteData();
+      [[nodiscard]] ::std::string padLeft(size_t _width, char _fillCharacter);
+      [[nodiscard]] ::std::string padRight(size_t _width, char _fillCharacter);
+      [[nodiscard]] ::std::string reverse();
+      [[nodiscard]] bool startsWith(const ::std::string &_text);
+      [[nodiscard]] ::std::string toLowerCase();
+      [[nodiscard]] ::std::string toUpperCase();
 
     private:
 
       ::std::string value{};
 
-      static ::std::string _buildCharacterChain(size_t _amount, char _fillCharacter);
-      static ::std::string _createFillContent(const ::std::string &_text, size_t _width, char _fillCharacter);
+      [[nodiscard]] static ::std::string _buildCharacterChain(size_t _amount, char _fillCharacter);
+      [[nodiscard]] static ::std::string _createFillContent(const ::std::string &_text, size_t _width, char _fillCharacter);
   };
 }
 

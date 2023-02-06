@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -191,7 +191,7 @@ namespace
           try
           {
             EventManager eventManager{};
-            eventManager.hasEventHandler("");
+            bool hasHandler = eventManager.hasEventHandler("");
           }
           catch (const IllegalArgumentException &_exception)
           {

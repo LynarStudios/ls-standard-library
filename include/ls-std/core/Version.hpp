@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -26,7 +26,7 @@ namespace ls::std::core
 
       // implementation
 
-      ls::std::core::type::byte_field marshal() override;
+      [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
       // other functionality
@@ -34,7 +34,7 @@ namespace ls::std::core
       [[nodiscard]] ls::std::core::type::version_type getMajorVersion() const;
       [[nodiscard]] ls::std::core::type::version_type getMinorVersion() const;
       [[nodiscard]] ls::std::core::type::version_type getPatchVersion() const;
-      static bool isValid(const ::std::string &_versionString);
+      [[nodiscard]] static bool isValid(const ::std::string &_versionString);
       void setMajorVersion(ls::std::core::type::version_type _major);
       void setMinorVersion(ls::std::core::type::version_type _minor);
       void setPatchVersion(ls::std::core::type::version_type _patch);
@@ -45,7 +45,7 @@ namespace ls::std::core
       ls::std::core::type::version_type minorVersion{};
       ls::std::core::type::version_type patchVersion{};
 
-      static bool _isValid(const ::std::string &_versionString);
+      [[nodiscard]] static bool _isValid(const ::std::string &_versionString);
   };
 }
 

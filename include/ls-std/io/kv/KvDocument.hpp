@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -25,17 +25,17 @@ namespace ls::std::io
       KvDocument();
       ~KvDocument() override;
 
-      bool addPair(ls::std::io::KvPair _pair);
+      bool addPair(ls::std::io::KvPair _pair); // nodiscard is optional here
       void clear();
-      ::std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> getPairs();
-      bool hasPair(const ls::std::core::type::kv_key &_key);
-      bool removePair(const ls::std::core::type::kv_key &_key);
+      [[nodiscard]] ::std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> getPairs();
+      [[nodiscard]] bool hasPair(const ls::std::core::type::kv_key &_key);
+      bool removePair(const ls::std::core::type::kv_key &_key); // nodiscard is optional here
 
     private:
 
       ::std::map<ls::std::core::type::kv_key, ls::std::io::KvPair> pairs{};
 
-      bool _hasPair(const ls::std::core::type::kv_key &_key);
+      [[nodiscard]] bool _hasPair(const ls::std::core::type::kv_key &_key);
   };
 }
 

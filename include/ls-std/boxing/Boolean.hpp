@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -61,15 +61,15 @@ namespace ls::std::boxing
       // implementation
 
       void parse(::std::string _parseText) override;
-      ::std::string toString() override;
+      [[nodiscard]] ::std::string toString() override;
 
       // additional functionality
 
       [[nodiscard]] bool getValue() const;
-      static bool XOR(const ls::std::boxing::Boolean &_leftExpression, const ls::std::boxing::Boolean &_rightExpression);
-      static bool XOR(const ls::std::boxing::Boolean &_leftExpression, bool _rightExpression);
-      static bool XOR(bool _leftExpression, const ls::std::boxing::Boolean &_rightExpression);
-      static bool XOR(bool _leftExpression, bool _rightExpression);
+      [[nodiscard]] static bool XOR(const ls::std::boxing::Boolean &_leftExpression, const ls::std::boxing::Boolean &_rightExpression);
+      [[nodiscard]] static bool XOR(const ls::std::boxing::Boolean &_leftExpression, bool _rightExpression);
+      [[nodiscard]] static bool XOR(bool _leftExpression, const ls::std::boxing::Boolean &_rightExpression);
+      [[nodiscard]] static bool XOR(bool _leftExpression, bool _rightExpression);
 
     private:
 
