@@ -198,7 +198,7 @@ void ls::std::io::File::makeDirectories()
   {
     currentHierarchy += subDirectory;
 
-    if (!ls::std::io::File::_exists(currentHierarchy) && !currentHierarchy.empty())
+    if (!ls::std::io::File::_exists(currentHierarchy + separator) && !currentHierarchy.empty())
     {
       if (!ls::std::io::File::_mkdir(currentHierarchy))
       {

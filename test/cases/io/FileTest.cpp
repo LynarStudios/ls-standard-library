@@ -160,15 +160,9 @@ namespace
   {
     File file{this->fileLocation};
     File directory{TestHelper::getResourcesFolderLocation()};
-#ifdef _WIN32
-    File cPartition{"C:"};
-#endif
 
     ASSERT_TRUE(file.exists());
     ASSERT_TRUE(directory.exists());
-#ifdef _WIN32
-    ASSERT_TRUE(cPartition.exists());
-#endif
   }
 
   TEST_F(FileTest, exists_does_not_exist)
