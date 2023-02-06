@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -75,7 +75,7 @@ namespace
 
   TEST_F(StorableFileTest, save)
   {
-    string path = TestHelper::getResourcesFolderLocation() + "tmp_storable_file.txt";
+    string path = TestHelper::getResourcesFolderLocation() + "tmp-storable-file.txt";
     File file{path};
     file.createNewFile();
 

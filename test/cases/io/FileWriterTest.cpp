@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -35,7 +35,7 @@ namespace
 
   TEST_F(FileWriterTest, constructor_file_does_not_exist)
   {
-    string path = TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
+    string path = TestHelper::getResourcesFolderLocation() + "not-existing-file.txt";
     File file{path};
 
     EXPECT_THROW(
@@ -54,7 +54,7 @@ namespace
 
   TEST_F(FileWriterTest, reset)
   {
-    string path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
+    string path = TestHelper::getResourcesFolderLocation() + "tmp-file-writer-test.txt";
     File file{path};
     file.createNewFile();
     FileWriter writer{file};
@@ -62,7 +62,7 @@ namespace
 
     // reset
 
-    path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test2.txt";
+    path = TestHelper::getResourcesFolderLocation() + "tmp-file-writer-test2.txt";
     File anotherFile{path};
     anotherFile.createNewFile();
 
@@ -79,7 +79,7 @@ namespace
 
   TEST_F(FileWriterTest, write)
   {
-    string path = TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
+    string path = TestHelper::getResourcesFolderLocation() + "tmp-file-writer-test.txt";
     File file{path};
 
     ASSERT_FALSE(file.exists());

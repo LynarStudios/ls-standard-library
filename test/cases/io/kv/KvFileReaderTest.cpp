@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -64,7 +64,7 @@ namespace
         {
           try
           {
-            KvFileReader reader = KvFileReader(make_shared<KvDocument>(), "invalid_path");
+            KvFileReader reader = KvFileReader(make_shared<KvDocument>(), "invalid-path");
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -109,7 +109,7 @@ namespace
         {
           try
           {
-            reader->setFile(File{"invalid_path"});
+            reader->setFile(File{"invalid-path"});
           }
           catch (const IllegalArgumentException &_exception)
           {

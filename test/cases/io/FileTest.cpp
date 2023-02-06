@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -345,7 +345,7 @@ namespace
 
   TEST_F(FileTest, remove)
   {
-    string fileName = TestHelper::getResourcesFolderLocation() + "removable_file.txt";
+    string fileName = TestHelper::getResourcesFolderLocation() + "removable-file.txt";
     File file{fileName};
     file.createNewFile();
 
@@ -357,8 +357,8 @@ namespace
 
   TEST_F(FileTest, renameTo)
   {
-    string currentName = TestHelper::getResourcesFolderLocation() + "tmp_rename_to.txt";
-    string newName = TestHelper::getResourcesFolderLocation() + "tmp_rename_to_better_name.txt";
+    string currentName = TestHelper::getResourcesFolderLocation() + "tmp-rename-to.txt";
+    string newName = TestHelper::getResourcesFolderLocation() + "tmp-rename-to-better-name.txt";
 
     File file{currentName};
     file.createNewFile();

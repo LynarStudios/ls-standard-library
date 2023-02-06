@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -230,7 +230,7 @@ namespace
 
   TEST_F(XmlParserTest, getDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     XmlParser xmlParser{make_shared<XmlDocument>()};
 
     ASSERT_TRUE(xmlParser.getDocument() != nullptr);
@@ -238,7 +238,7 @@ namespace
 
   TEST_F(XmlParserTest, setDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state_machine_test.xml";
+    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
     XmlParser xmlParser{document};
     ASSERT_TRUE(xmlParser.getDocument() == document);
