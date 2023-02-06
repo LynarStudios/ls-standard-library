@@ -32,10 +32,6 @@
 #include <ls-std/core/types/KvTypes.hpp>
 #include <ls-std/core/types/Types.hpp>
 
-#if _WIN32
-  #include <ls-std/core/utils/WindowsUtils.hpp>
-#endif
-
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/LibraryVersion.hpp>
 #include <ls-std/core/Version.hpp>
