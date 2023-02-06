@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -31,12 +31,6 @@
 #include <ls-std/core/types/EventTypes.hpp>
 #include <ls-std/core/types/KvTypes.hpp>
 #include <ls-std/core/types/Types.hpp>
-
-#include <ls-std/core/utils/RegexUtils.hpp>
-#include <ls-std/core/utils/StlUtils.hpp>
-#if _WIN32
-  #include <ls-std/core/utils/WindowsUtils.hpp>
-#endif
 
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/LibraryVersion.hpp>

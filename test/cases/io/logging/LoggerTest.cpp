@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -79,7 +79,7 @@ namespace
   {
     // write to log file
 
-    string logName = "output_debug.log";
+    string logName = "output-debug.log";
     shared_ptr<IWriter> writer = createFileLogger(logName);
 
     Logger logger{writer};
@@ -108,7 +108,7 @@ namespace
   {
     // write to log file
 
-    string logName = "output_error.log";
+    string logName = "output-error.log";
     shared_ptr<IWriter> writer = createFileLogger(logName);
 
     Logger logger{writer};
@@ -137,7 +137,7 @@ namespace
   {
     // write to log file
 
-    string logName = "output_fatal.log";
+    string logName = "output-fatal.log";
     shared_ptr<IWriter> writer = createFileLogger(logName);
 
     Logger logger{writer};
@@ -172,7 +172,7 @@ namespace
   {
     // write to log file
 
-    string logName = "output_info.log";
+    string logName = "output-info.log";
     shared_ptr<IWriter> writer = createFileLogger(logName);
 
     Logger logger{writer};
@@ -209,7 +209,7 @@ namespace
   {
     // write to log file
 
-    string logName = "output_trace.log";
+    string logName = "output-trace.log";
     shared_ptr<IWriter> writer = createFileLogger(logName);
 
     Logger logger{writer};
@@ -238,7 +238,7 @@ namespace
   {
     // write to log file
 
-    string logName = "output_warn.log";
+    string logName = "output-warn.log";
     shared_ptr<IWriter> writer = createFileLogger(logName);
 
     Logger logger{writer};

@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
+#include <algorithm>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
-#include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/io/xml/XmlNode.hpp>
 
 ls::std::io::XmlNode::XmlNode(::std::string _name) : ls::std::core::Class("XmlNode"), name(::std::move(_name))
@@ -390,7 +390,7 @@ bool ls::std::io::XmlNode::_hasAttribute(const ::std::string &_name)
 bool ls::std::io::XmlNode::_hasChild(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
 {
   _checkIfNodeReferenceIsValid(_child);
-  return ls::std::core::StlUtils::contains(this->children, _child);
+  return ::std::find(this->children.begin(), this->children.end(), _child) != this->children.end();
 }
 
 bool ls::std::io::XmlNode::_hasChild(const ::std::string &_name)

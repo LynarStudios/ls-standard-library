@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -34,6 +34,8 @@ namespace ls::std::event
     private:
 
       ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> listeners{};
+
+      bool _hasListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
   };
 }
 

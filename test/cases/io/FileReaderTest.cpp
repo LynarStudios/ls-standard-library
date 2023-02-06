@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -36,7 +36,7 @@ namespace
 
   TEST_F(FileReaderTest, constructor_file_does_not_exist)
   {
-    File file{TestHelper::getResourcesFolderLocation() + "does_not_exist.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "does-not-exist.txt"};
 
     EXPECT_THROW(
         {
@@ -65,7 +65,7 @@ namespace
 
   TEST_F(FileReaderTest, read_file_gets_lost_in_between)
   {
-    File file{TestHelper::getResourcesFolderLocation() + "lost_readable_file.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "lost-readable-file.txt"};
     file.createNewFile();
     FileReader reader{file};
     file.remove();
