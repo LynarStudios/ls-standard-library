@@ -99,7 +99,7 @@ namespace ls::std::io
 #ifdef _WIN32
       [[nodiscard]] static ::std::list<::std::string> _listWindows(const ::std::string &_path, bool withDirectories);
 #endif
-      [[nodiscard]] static bool _mkdir(const ::std::string &_path);
+      [[nodiscard]] static bool _makeDirectory(const ::std::string &_path);
       [[nodiscard]] static ::std::string _normalizePath(::std::string _path);
       [[nodiscard]] static ::std::string _reduceSeparators(const ::std::string &_path);
       static void _remove(const ::std::string &_path);

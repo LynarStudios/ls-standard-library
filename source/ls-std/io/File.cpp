@@ -182,7 +182,7 @@ time_t ls::std::io::File::lastModified()
 
 void ls::std::io::File::makeDirectory()
 {
-  if (!ls::std::io::File::_mkdir(this->absoluteFilePath))
+  if (!ls::std::io::File::_makeDirectory(this->absoluteFilePath))
   {
     throw ls::std::core::FileOperationException{};
   }
@@ -200,7 +200,7 @@ void ls::std::io::File::makeDirectories()
 
     if (!ls::std::io::File::_exists(currentHierarchy + separator) && !currentHierarchy.empty())
     {
-      if (!ls::std::io::File::_mkdir(currentHierarchy))
+      if (!ls::std::io::File::_makeDirectory(currentHierarchy))
       {
         throw ls::std::core::FileOperationException{}; // TODO: add missing test
       }
@@ -567,12 +567,12 @@ time_t ls::std::io::File::_lastModified(const ::std::string &_path)
 
 #endif
 
-bool ls::std::io::File::_mkdir(const ::std::string &_path)
+bool ls::std::io::File::_makeDirectory(const ::std::string &_path)
 {
   int result;
 
 #ifdef _WIN32
-  result = mkdir(_path.c_str());
+  result = _mkdir(_path.c_str());
 #endif
 
 #if defined(unix) || defined(__APPLE__)
