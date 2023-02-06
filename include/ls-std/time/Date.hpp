@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -34,15 +34,15 @@ namespace ls::std::time
 
       [[nodiscard]] bool after(const ls::std::time::Date &_foreignDate) const;
       [[nodiscard]] bool before(const ls::std::time::Date &_foreignDate) const;
-      int getDay();
-      int getHour();
-      int getMinute();
-      int getMonth();
-      int getSecond();
+      [[nodiscard]] int getDay();
+      [[nodiscard]] int getHour();
+      [[nodiscard]] int getMinute();
+      [[nodiscard]] int getMonth();
+      [[nodiscard]] int getSecond();
       [[nodiscard]] time_t getTime() const;
-      int getYear();
+      [[nodiscard]] int getYear();
       void setTime(time_t _timestamp);
-      ::std::string toString();
+      [[nodiscard]] ::std::string toString();
 
     private:
 
