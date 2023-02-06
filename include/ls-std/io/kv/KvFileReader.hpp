@@ -28,7 +28,7 @@ namespace ls::std::io
 
       // implementation
 
-      [[nodiscard]] ls::std::core::type::byte_field read() override;
+      ls::std::core::type::byte_field read() override; // nodiscard is optional here
 
       // additional functionality
 
