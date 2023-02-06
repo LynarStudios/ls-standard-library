@@ -33,6 +33,11 @@ namespace
 
       void TearDown() override
       {}
+
+      static bool hasFileInDirectory(const list<string> &_fileNamesInDirectory, const string &_fileName)
+      {
+        return find(_fileNamesInDirectory.begin(), _fileNamesInDirectory.end(), _fileName) != _fileNamesInDirectory.end();
+      }
   };
 
   // comparison operators
@@ -259,19 +264,19 @@ namespace
     ASSERT_EQ(7, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + ".";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "..";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "another-file.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "list-test-sub";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + ".hidden-file.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
   }
 
   TEST_F(FileTest, listFiles)
@@ -285,13 +290,13 @@ namespace
     ASSERT_EQ(4, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + "another-file.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + ".hidden-file.txt";
-    ASSERT_TRUE((StlUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
   }
 
   TEST_F(FileTest, makeDirectory)

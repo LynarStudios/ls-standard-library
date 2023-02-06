@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
+#include <algorithm>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
-#include <ls-std/core/utils/StlUtils.hpp>
 #include <ls-std/event/Narrator.hpp>
 
 ls::std::event::Narrator::Narrator() : ls::std::core::Class("Narrator")
@@ -26,7 +26,7 @@ bool ls::std::event::Narrator::addListener(const ::std::shared_ptr<ls::std::core
   }
   else
   {
-    if (!ls::std::core::StlUtils::contains(this->listeners, _listener))
+    if (!this->_hasListener(_listener))
     {
       this->listeners.push_back(_listener);
       wasAdded = true;
@@ -56,7 +56,7 @@ bool ls::std::event::Narrator::removeListener(const ::std::shared_ptr<ls::std::c
   }
   else
   {
-    if (ls::std::core::StlUtils::contains(this->listeners, _listener))
+    if (this->_hasListener(_listener))
     {
       this->listeners.remove(_listener);
       wasRemoved = true;
@@ -72,4 +72,9 @@ void ls::std::event::Narrator::tell(const ls::std::core::Class &_info)
   {
     listener->listen(_info);
   }
+}
+
+bool ls::std::event::Narrator::_hasListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
+{
+  return ::std::find(this->listeners.begin(), this->listeners.end(), _listener) != this->listeners.end();
 }

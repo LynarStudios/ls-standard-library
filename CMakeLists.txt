@@ -231,7 +231,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IllegalArithmeticOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IncompleteJsonExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/NullPointerExceptionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/utils/StlUtilsTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp

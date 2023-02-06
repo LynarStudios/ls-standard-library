@@ -27,6 +27,50 @@ namespace
       XmlParserTest() = default;
       ~XmlParserTest() override = default;
 
+      static shared_ptr<XmlAttribute> getAttributeAtPosition(const list<shared_ptr<XmlAttribute>> &_attributes, size_t _index)
+      {
+        shared_ptr<XmlAttribute> attribute{};
+        size_t counter{};
+
+        if (_index < _attributes.size())
+        {
+          for (const auto &_value: _attributes)
+          {
+            if (counter == _index)
+            {
+              attribute = _value;
+              break;
+            }
+
+            counter++;
+          }
+        }
+
+        return attribute;
+      }
+
+      static shared_ptr<XmlNode> getChildAtPosition(const list<shared_ptr<XmlNode>> &_children, size_t _index)
+      {
+        shared_ptr<XmlNode> node{};
+        size_t counter{};
+
+        if (_index < _children.size())
+        {
+          for (const auto &_value: _children)
+          {
+            if (counter == _index)
+            {
+              node = _value;
+              break;
+            }
+
+            counter++;
+          }
+        }
+
+        return node;
+      }
+
       static byte_field readXmlStateMachine()
       {
         string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
@@ -88,144 +132,144 @@ namespace
 
     children = root->getChildren();
     ASSERT_EQ(3, children.size());
-    ASSERT_STREQ("states", StlUtils::getListElementAt(children, 0)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(children, 0)->getAttributes().empty());
-    ASSERT_STREQ("currentState", StlUtils::getListElementAt(children, 1)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(children, 1)->getAttributes().empty());
-    ASSERT_STREQ("memory", StlUtils::getListElementAt(children, 2)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(children, 2)->getAttributes().empty());
+    ASSERT_STREQ("states", XmlParserTest::getChildAtPosition(children, 0)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(children, 0)->getAttributes().empty());
+    ASSERT_STREQ("currentState", XmlParserTest::getChildAtPosition(children, 1)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(children, 1)->getAttributes().empty());
+    ASSERT_STREQ("memory", XmlParserTest::getChildAtPosition(children, 2)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(children, 2)->getAttributes().empty());
 
     // states
 
-    statesChildren = StlUtils::getListElementAt(children, 0)->getChildren();
+    statesChildren = XmlParserTest::getChildAtPosition(children, 0)->getChildren();
     ASSERT_EQ(5, statesChildren.size());
 
-    ASSERT_STREQ("state", StlUtils::getListElementAt(statesChildren, 0)->getName().c_str());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 0)->getAttributes().size());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(statesChildren, 0)->getAttributes().front()->getName().c_str());
-    ASSERT_STREQ("A", StlUtils::getListElementAt(statesChildren, 0)->getAttributes().front()->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 0)->getValue().empty());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 0)->getChildren().size());
-    ASSERT_STREQ("connections", StlUtils::getListElementAt(statesChildren, 0)->getChildren().front()->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 0)->getChildren().front()->getValue().empty());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 0)->getChildren().front()->getAttributes().empty());
-    connectionChildren = StlUtils::getListElementAt(statesChildren, 0)->getChildren().front()->getChildren();
+    ASSERT_STREQ("state", XmlParserTest::getChildAtPosition(statesChildren, 0)->getName().c_str());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 0)->getAttributes().size());
+    ASSERT_STREQ("id", XmlParserTest::getChildAtPosition(statesChildren, 0)->getAttributes().front()->getName().c_str());
+    ASSERT_STREQ("A", XmlParserTest::getChildAtPosition(statesChildren, 0)->getAttributes().front()->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 0)->getValue().empty());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 0)->getChildren().size());
+    ASSERT_STREQ("connections", XmlParserTest::getChildAtPosition(statesChildren, 0)->getChildren().front()->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 0)->getChildren().front()->getValue().empty());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 0)->getChildren().front()->getAttributes().empty());
+    connectionChildren = XmlParserTest::getChildAtPosition(statesChildren, 0)->getChildren().front()->getChildren();
     ASSERT_EQ(1, connectionChildren.size());
-    ASSERT_STREQ("connection", StlUtils::getListElementAt(connectionChildren, 0)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(connectionChildren, 0)->getValue().empty());
-    attributes = StlUtils::getListElementAt(connectionChildren, 0)->getAttributes();
+    ASSERT_STREQ("connection", XmlParserTest::getChildAtPosition(connectionChildren, 0)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(connectionChildren, 0)->getValue().empty());
+    attributes = XmlParserTest::getChildAtPosition(connectionChildren, 0)->getAttributes();
     ASSERT_EQ(3, attributes.size());
-    ASSERT_STREQ("connectionId", StlUtils::getListElementAt(attributes, 0)->getName().c_str());
-    ASSERT_STREQ("AB", StlUtils::getListElementAt(attributes, 0)->getValue().c_str());
-    ASSERT_STREQ("condition", StlUtils::getListElementAt(attributes, 1)->getName().c_str());
-    ASSERT_STREQ("false", StlUtils::getListElementAt(attributes, 1)->getValue().c_str());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(attributes, 2)->getName().c_str());
-    ASSERT_STREQ("B", StlUtils::getListElementAt(attributes, 2)->getValue().c_str());
+    ASSERT_STREQ("connectionId", XmlParserTest::getAttributeAtPosition(attributes, 0)->getName().c_str());
+    ASSERT_STREQ("AB", XmlParserTest::getAttributeAtPosition(attributes, 0)->getValue().c_str());
+    ASSERT_STREQ("condition", XmlParserTest::getAttributeAtPosition(attributes, 1)->getName().c_str());
+    ASSERT_STREQ("false", XmlParserTest::getAttributeAtPosition(attributes, 1)->getValue().c_str());
+    ASSERT_STREQ("id", XmlParserTest::getAttributeAtPosition(attributes, 2)->getName().c_str());
+    ASSERT_STREQ("B", XmlParserTest::getAttributeAtPosition(attributes, 2)->getValue().c_str());
 
-    ASSERT_STREQ("state", StlUtils::getListElementAt(statesChildren, 1)->getName().c_str());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 1)->getAttributes().size());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(statesChildren, 1)->getAttributes().front()->getName().c_str());
-    ASSERT_STREQ("B", StlUtils::getListElementAt(statesChildren, 1)->getAttributes().front()->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 1)->getValue().empty());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 1)->getChildren().size());
-    ASSERT_STREQ("connections", StlUtils::getListElementAt(statesChildren, 1)->getChildren().front()->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 1)->getChildren().front()->getValue().empty());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 1)->getChildren().front()->getAttributes().empty());
-    connectionChildren = StlUtils::getListElementAt(statesChildren, 1)->getChildren().front()->getChildren();
+    ASSERT_STREQ("state", XmlParserTest::getChildAtPosition(statesChildren, 1)->getName().c_str());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 1)->getAttributes().size());
+    ASSERT_STREQ("id", XmlParserTest::getChildAtPosition(statesChildren, 1)->getAttributes().front()->getName().c_str());
+    ASSERT_STREQ("B", XmlParserTest::getChildAtPosition(statesChildren, 1)->getAttributes().front()->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 1)->getValue().empty());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 1)->getChildren().size());
+    ASSERT_STREQ("connections", XmlParserTest::getChildAtPosition(statesChildren, 1)->getChildren().front()->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 1)->getChildren().front()->getValue().empty());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 1)->getChildren().front()->getAttributes().empty());
+    connectionChildren = XmlParserTest::getChildAtPosition(statesChildren, 1)->getChildren().front()->getChildren();
     ASSERT_EQ(2, connectionChildren.size());
-    ASSERT_STREQ("connection", StlUtils::getListElementAt(connectionChildren, 0)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(connectionChildren, 0)->getValue().empty());
-    attributes = StlUtils::getListElementAt(connectionChildren, 0)->getAttributes();
+    ASSERT_STREQ("connection", XmlParserTest::getChildAtPosition(connectionChildren, 0)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(connectionChildren, 0)->getValue().empty());
+    attributes = XmlParserTest::getChildAtPosition(connectionChildren, 0)->getAttributes();
     ASSERT_EQ(3, attributes.size());
-    ASSERT_STREQ("connectionId", StlUtils::getListElementAt(attributes, 0)->getName().c_str());
-    ASSERT_STREQ("BC", StlUtils::getListElementAt(attributes, 0)->getValue().c_str());
-    ASSERT_STREQ("condition", StlUtils::getListElementAt(attributes, 1)->getName().c_str());
-    ASSERT_STREQ("false", StlUtils::getListElementAt(attributes, 1)->getValue().c_str());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(attributes, 2)->getName().c_str());
-    ASSERT_STREQ("C", StlUtils::getListElementAt(attributes, 2)->getValue().c_str());
-    ASSERT_STREQ("connection", StlUtils::getListElementAt(connectionChildren, 1)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(connectionChildren, 1)->getValue().empty());
-    attributes = StlUtils::getListElementAt(connectionChildren, 1)->getAttributes();
+    ASSERT_STREQ("connectionId", XmlParserTest::getAttributeAtPosition(attributes, 0)->getName().c_str());
+    ASSERT_STREQ("BC", XmlParserTest::getAttributeAtPosition(attributes, 0)->getValue().c_str());
+    ASSERT_STREQ("condition", XmlParserTest::getAttributeAtPosition(attributes, 1)->getName().c_str());
+    ASSERT_STREQ("false", XmlParserTest::getAttributeAtPosition(attributes, 1)->getValue().c_str());
+    ASSERT_STREQ("id", XmlParserTest::getAttributeAtPosition(attributes, 2)->getName().c_str());
+    ASSERT_STREQ("C", XmlParserTest::getAttributeAtPosition(attributes, 2)->getValue().c_str());
+    ASSERT_STREQ("connection", XmlParserTest::getChildAtPosition(connectionChildren, 1)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(connectionChildren, 1)->getValue().empty());
+    attributes = XmlParserTest::getChildAtPosition(connectionChildren, 1)->getAttributes();
     ASSERT_EQ(3, attributes.size());
-    ASSERT_STREQ("connectionId", StlUtils::getListElementAt(attributes, 0)->getName().c_str());
-    ASSERT_STREQ("BD", StlUtils::getListElementAt(attributes, 0)->getValue().c_str());
-    ASSERT_STREQ("condition", StlUtils::getListElementAt(attributes, 1)->getName().c_str());
-    ASSERT_STREQ("false", StlUtils::getListElementAt(attributes, 1)->getValue().c_str());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(attributes, 2)->getName().c_str());
-    ASSERT_STREQ("D", StlUtils::getListElementAt(attributes, 2)->getValue().c_str());
+    ASSERT_STREQ("connectionId", XmlParserTest::getAttributeAtPosition(attributes, 0)->getName().c_str());
+    ASSERT_STREQ("BD", XmlParserTest::getAttributeAtPosition(attributes, 0)->getValue().c_str());
+    ASSERT_STREQ("condition", XmlParserTest::getAttributeAtPosition(attributes, 1)->getName().c_str());
+    ASSERT_STREQ("false", XmlParserTest::getAttributeAtPosition(attributes, 1)->getValue().c_str());
+    ASSERT_STREQ("id", XmlParserTest::getAttributeAtPosition(attributes, 2)->getName().c_str());
+    ASSERT_STREQ("D", XmlParserTest::getAttributeAtPosition(attributes, 2)->getValue().c_str());
 
-    ASSERT_STREQ("state", StlUtils::getListElementAt(statesChildren, 2)->getName().c_str());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 2)->getAttributes().size());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(statesChildren, 2)->getAttributes().front()->getName().c_str());
-    ASSERT_STREQ("C", StlUtils::getListElementAt(statesChildren, 2)->getAttributes().front()->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 2)->getValue().empty());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 2)->getChildren().size());
-    ASSERT_STREQ("connections", StlUtils::getListElementAt(statesChildren, 2)->getChildren().front()->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 2)->getChildren().front()->getValue().empty());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 2)->getChildren().front()->getAttributes().empty());
-    connectionChildren = StlUtils::getListElementAt(statesChildren, 2)->getChildren().front()->getChildren();
+    ASSERT_STREQ("state", XmlParserTest::getChildAtPosition(statesChildren, 2)->getName().c_str());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 2)->getAttributes().size());
+    ASSERT_STREQ("id", XmlParserTest::getChildAtPosition(statesChildren, 2)->getAttributes().front()->getName().c_str());
+    ASSERT_STREQ("C", XmlParserTest::getChildAtPosition(statesChildren, 2)->getAttributes().front()->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 2)->getValue().empty());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 2)->getChildren().size());
+    ASSERT_STREQ("connections", XmlParserTest::getChildAtPosition(statesChildren, 2)->getChildren().front()->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 2)->getChildren().front()->getValue().empty());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 2)->getChildren().front()->getAttributes().empty());
+    connectionChildren = XmlParserTest::getChildAtPosition(statesChildren, 2)->getChildren().front()->getChildren();
     ASSERT_EQ(1, connectionChildren.size());
-    ASSERT_STREQ("connection", StlUtils::getListElementAt(connectionChildren, 0)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(connectionChildren, 0)->getValue().empty());
-    attributes = StlUtils::getListElementAt(connectionChildren, 0)->getAttributes();
+    ASSERT_STREQ("connection", XmlParserTest::getChildAtPosition(connectionChildren, 0)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(connectionChildren, 0)->getValue().empty());
+    attributes = XmlParserTest::getChildAtPosition(connectionChildren, 0)->getAttributes();
     ASSERT_EQ(3, attributes.size());
-    ASSERT_STREQ("connectionId", StlUtils::getListElementAt(attributes, 0)->getName().c_str());
-    ASSERT_STREQ("CE", StlUtils::getListElementAt(attributes, 0)->getValue().c_str());
-    ASSERT_STREQ("condition", StlUtils::getListElementAt(attributes, 1)->getName().c_str());
-    ASSERT_STREQ("false", StlUtils::getListElementAt(attributes, 1)->getValue().c_str());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(attributes, 2)->getName().c_str());
-    ASSERT_STREQ("E", StlUtils::getListElementAt(attributes, 2)->getValue().c_str());
+    ASSERT_STREQ("connectionId", XmlParserTest::getAttributeAtPosition(attributes, 0)->getName().c_str());
+    ASSERT_STREQ("CE", XmlParserTest::getAttributeAtPosition(attributes, 0)->getValue().c_str());
+    ASSERT_STREQ("condition", XmlParserTest::getAttributeAtPosition(attributes, 1)->getName().c_str());
+    ASSERT_STREQ("false", XmlParserTest::getAttributeAtPosition(attributes, 1)->getValue().c_str());
+    ASSERT_STREQ("id", XmlParserTest::getAttributeAtPosition(attributes, 2)->getName().c_str());
+    ASSERT_STREQ("E", XmlParserTest::getAttributeAtPosition(attributes, 2)->getValue().c_str());
 
-    ASSERT_STREQ("state", StlUtils::getListElementAt(statesChildren, 3)->getName().c_str());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 3)->getAttributes().size());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(statesChildren, 3)->getAttributes().front()->getName().c_str());
-    ASSERT_STREQ("D", StlUtils::getListElementAt(statesChildren, 3)->getAttributes().front()->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 3)->getChildren().front()->getAttributes().empty());
-    connectionChildren = StlUtils::getListElementAt(statesChildren, 3)->getChildren().front()->getChildren();
+    ASSERT_STREQ("state", XmlParserTest::getChildAtPosition(statesChildren, 3)->getName().c_str());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 3)->getAttributes().size());
+    ASSERT_STREQ("id", XmlParserTest::getChildAtPosition(statesChildren, 3)->getAttributes().front()->getName().c_str());
+    ASSERT_STREQ("D", XmlParserTest::getChildAtPosition(statesChildren, 3)->getAttributes().front()->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 3)->getChildren().front()->getAttributes().empty());
+    connectionChildren = XmlParserTest::getChildAtPosition(statesChildren, 3)->getChildren().front()->getChildren();
     ASSERT_EQ(1, connectionChildren.size());
-    ASSERT_STREQ("connection", StlUtils::getListElementAt(connectionChildren, 0)->getName().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(connectionChildren, 0)->getValue().empty());
-    attributes = StlUtils::getListElementAt(connectionChildren, 0)->getAttributes();
+    ASSERT_STREQ("connection", XmlParserTest::getChildAtPosition(connectionChildren, 0)->getName().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(connectionChildren, 0)->getValue().empty());
+    attributes = XmlParserTest::getChildAtPosition(connectionChildren, 0)->getAttributes();
     ASSERT_EQ(3, attributes.size());
-    ASSERT_STREQ("connectionId", StlUtils::getListElementAt(attributes, 0)->getName().c_str());
-    ASSERT_STREQ("DE", StlUtils::getListElementAt(attributes, 0)->getValue().c_str());
-    ASSERT_STREQ("condition", StlUtils::getListElementAt(attributes, 1)->getName().c_str());
-    ASSERT_STREQ("false", StlUtils::getListElementAt(attributes, 1)->getValue().c_str());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(attributes, 2)->getName().c_str());
-    ASSERT_STREQ("E", StlUtils::getListElementAt(attributes, 2)->getValue().c_str());
+    ASSERT_STREQ("connectionId", XmlParserTest::getAttributeAtPosition(attributes, 0)->getName().c_str());
+    ASSERT_STREQ("DE", XmlParserTest::getAttributeAtPosition(attributes, 0)->getValue().c_str());
+    ASSERT_STREQ("condition", XmlParserTest::getAttributeAtPosition(attributes, 1)->getName().c_str());
+    ASSERT_STREQ("false", XmlParserTest::getAttributeAtPosition(attributes, 1)->getValue().c_str());
+    ASSERT_STREQ("id", XmlParserTest::getAttributeAtPosition(attributes, 2)->getName().c_str());
+    ASSERT_STREQ("E", XmlParserTest::getAttributeAtPosition(attributes, 2)->getValue().c_str());
 
-    ASSERT_STREQ("state", StlUtils::getListElementAt(statesChildren, 4)->getName().c_str());
-    ASSERT_EQ(1, StlUtils::getListElementAt(statesChildren, 4)->getAttributes().size());
-    ASSERT_STREQ("id", StlUtils::getListElementAt(statesChildren, 4)->getAttributes().front()->getName().c_str());
-    ASSERT_STREQ("E", StlUtils::getListElementAt(statesChildren, 4)->getAttributes().front()->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(statesChildren, 4)->getChildren().empty());
+    ASSERT_STREQ("state", XmlParserTest::getChildAtPosition(statesChildren, 4)->getName().c_str());
+    ASSERT_EQ(1, XmlParserTest::getChildAtPosition(statesChildren, 4)->getAttributes().size());
+    ASSERT_STREQ("id", XmlParserTest::getChildAtPosition(statesChildren, 4)->getAttributes().front()->getName().c_str());
+    ASSERT_STREQ("E", XmlParserTest::getChildAtPosition(statesChildren, 4)->getAttributes().front()->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(statesChildren, 4)->getChildren().empty());
 
     // current state
 
-    ASSERT_STREQ("currentState", StlUtils::getListElementAt(children, 1)->getName().c_str());
-    ASSERT_STREQ("A", StlUtils::getListElementAt(children, 1)->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(children, 1)->getChildren().empty());
-    ASSERT_TRUE(StlUtils::getListElementAt(children, 1)->getAttributes().empty());
+    ASSERT_STREQ("currentState", XmlParserTest::getChildAtPosition(children, 1)->getName().c_str());
+    ASSERT_STREQ("A", XmlParserTest::getChildAtPosition(children, 1)->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(children, 1)->getChildren().empty());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(children, 1)->getAttributes().empty());
 
     // memory
 
-    memoryChildren = StlUtils::getListElementAt(children, 2)->getChildren();
+    memoryChildren = XmlParserTest::getChildAtPosition(children, 2)->getChildren();
     ASSERT_EQ(3, memoryChildren.size());
 
-    ASSERT_STREQ("location", StlUtils::getListElementAt(memoryChildren, 0)->getName().c_str());
-    ASSERT_STREQ("A", StlUtils::getListElementAt(memoryChildren, 0)->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(memoryChildren, 0)->getChildren().empty());
-    ASSERT_TRUE(StlUtils::getListElementAt(memoryChildren, 0)->getAttributes().empty());
+    ASSERT_STREQ("location", XmlParserTest::getChildAtPosition(memoryChildren, 0)->getName().c_str());
+    ASSERT_STREQ("A", XmlParserTest::getChildAtPosition(memoryChildren, 0)->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(memoryChildren, 0)->getChildren().empty());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(memoryChildren, 0)->getAttributes().empty());
 
-    ASSERT_STREQ("location", StlUtils::getListElementAt(memoryChildren, 1)->getName().c_str());
-    ASSERT_STREQ("B", StlUtils::getListElementAt(memoryChildren, 1)->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(memoryChildren, 1)->getChildren().empty());
-    ASSERT_TRUE(StlUtils::getListElementAt(memoryChildren, 1)->getAttributes().empty());
+    ASSERT_STREQ("location", XmlParserTest::getChildAtPosition(memoryChildren, 1)->getName().c_str());
+    ASSERT_STREQ("B", XmlParserTest::getChildAtPosition(memoryChildren, 1)->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(memoryChildren, 1)->getChildren().empty());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(memoryChildren, 1)->getAttributes().empty());
 
-    ASSERT_STREQ("location", StlUtils::getListElementAt(memoryChildren, 2)->getName().c_str());
-    ASSERT_STREQ("C", StlUtils::getListElementAt(memoryChildren, 2)->getValue().c_str());
-    ASSERT_TRUE(StlUtils::getListElementAt(memoryChildren, 2)->getChildren().empty());
-    ASSERT_TRUE(StlUtils::getListElementAt(memoryChildren, 2)->getAttributes().empty());
+    ASSERT_STREQ("location", XmlParserTest::getChildAtPosition(memoryChildren, 2)->getName().c_str());
+    ASSERT_STREQ("C", XmlParserTest::getChildAtPosition(memoryChildren, 2)->getValue().c_str());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(memoryChildren, 2)->getChildren().empty());
+    ASSERT_TRUE(XmlParserTest::getChildAtPosition(memoryChildren, 2)->getAttributes().empty());
   }
 
   TEST_F(XmlParserTest, getDocument)
