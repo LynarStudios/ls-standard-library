@@ -62,54 +62,91 @@ This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ f
 ---
 ### Building ###
 
-To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__ or __MinGW__ installed.  
-Inside project's root directory create the following folder:
+Building this library would result into providing binaries for each library module and CLI tool: 
+
+| binary              | type                       |
+|---------------------|----------------------------|
+| __cli-base64__      | CLI executable             |
+| __ls-std-boxing__   | library (static / dynamic) |
+| __ls-std-core__     | library (static / dynamic) |
+| __ls-std-encoding__ | library (static / dynamic) |
+| __ls-std-event__    | library (static / dynamic) |
+| __ls-std-io__       | library (static / dynamic) |
+| __time__            | library (static / dynamic) |
+
+#### Prerequisites ####
+
+To build this library you'd need a supported __toolchain__ in place, consisting of a build tool and compiler. The following table is a listing of supported compilers and build tools associated with operating systems, where this library has been tested:
+
+| Supported Compiler<br/>(mandatory) | OS              | Supported Compiler Version<br/>(mandatory) | Build Tool<br/>(mandatory) | Build Tool Version (mandatory) |
+|------------------------------------|-----------------|--------------------------------------------|----------------------------|--------------------------------|
+| GCC                                | Linux Mint 20.3 | 12.2.0                                     | CMake                      | \>= 3.24.0                     |
+| Clang                              | Linux Mint 20.3 | 12.0.0-3ubuntu1~20.04.5                    | CMake                      | \>= 3.24.0                     |
+| MinGW-w64 / GCC                    | Windows 10      | 11.2.0                                     | CMake                      | \>= 3.24.0                     |
+| MSVC                               | Windows 10      | 19.32.31332.0                              | CMake                      | \>= 3.24.0                     |
+| AppleClang                         | MacOS Monterey  | 14.0.0                                     | CMake                      | \>= 3.24.0                     |
+
+Please note, that where the underlying operating system is optional in this listing, the toolchain itself is not! This means, that by default you should use one of the supported listed toolchains.  
+In case you'd like to use an unsupported toolchain, you can enforce this during CMake project generation. For that have a look at the CMake flag usage section below.
+
+#### Generate CMake Project (Unix) ####
+
+To prepare a CMake project, create a build folder within the project's root folder (where the CMakeLists.txt file is located) via CLI and navigate to it:
 
 ```
-cmake_build_release
+mkdir cmake-build-release
+cd cmake-build-release
 ```
 
-Open your OS specific command line interface (CLI) and navigate to this new folder and run the following command to configure the project and generate a native build system:  
+Inside this folder generate the CMake project:
 
 ```
 cmake ../
 ```
 
-Inside __cmake_build_release__ folder you will now find cmake generated files. To compile the library now, just run:   
+Alternatively, the CMake project generation can be controlled by providing library specific CMake flags. The following table is a listing of available flags:
+
+| CMake Flag                               | Default Value | Description                                                                                                                                          |
+|------------------------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| __LS_STD_BUILD_WITH_TESTS__              | OFF           | This flag can be enabled to build automated tests, like unit or integration tests.                                                                   |
+| __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ | ON            | This flag enforces the usage of supported compilers, only.<br/>For usage of an unsupported toolchain, set this flag to __OFF__.                      |
+| __LS_STD_BUILD_STATIC__                  | ON            | This flag indicates, that all library modules should be built as static goals.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned off. |
+| __LS_STD_BUILD_SHARED__                  | OFF           | This flag indicates, that all library modules should be built as shared goals.  <br/>Please note, that __LS_STD_BUILD_STATIC__ has to be turned off. |
+
+To use one or more of these flags, you'd have to adjust previous command, like:
+
+```
+cmake -DLS_STD_BUILD_WITH_TESTS=ON ../
+```
+
+#### Compile Project ####
+
+Now, that the CMake project is generated, you should find CMake generated files inside previously created build folder. In order to compile the project run:   
 
 ```
 cmake --build . --config Release
 ```
 
-__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.  
-
-Find below a table of compiler/OS combinations which have been tested during library version development:
-
-| Supported Compiler | OS              | Compiler Version        |
-|--------------------|-----------------|-------------------------|
-| GCC                | Linux Mint 20.3 | 12.2.0                  |
-| Clang              | Linux Mint 20.3 | 12.0.0-3ubuntu1~20.04.5 |
-| MinGW-w64 / GCC    | Windows 10      | 11.2.0                  |
-| MSVC               | Windows 10      | 19.32.31332.0           |
-| AppleClang         | MacOS Monterey  | 14.0.0                  |
+Once compilation is done, you should find generated binaries within __cmake-build-release__ folder.
 
 ---
-### Add Library To Your CMake Project ###
+### Link ls-std Libraries (CMake) ###
 
-If you would like to add this library to your CMake project (__CMakeLists.txt__ file), make sure that you would add the libraries' include directory:
+If you would like to add this library's modules to your own CMake project, make sure that you would add the libraries' include directory:
 
 ```
 include_directories(${CMAKE_CURRENT_LIST_DIR}/path/to/this/library/include)
 ```
 
-Then link the libraries' binary file inside your __CMakeLists.txt__ file:
+Then link the libraries' binary files, like:
 
 ```
-target_link_libraries(... libls-std-core libls-std-boxing ...)
+target_link_libraries(... ls-std-core ls-std-boxing ...)
 ```
 
 ---
-### Testing ###
 
-This project contains unit tests to provide test coverage.  
-To run those tests you have to build this project with option __LS_STD_BUILD_WITH_TESTS__ set to __ON__ - then reset and reload the CMake project.
+### Run Automated Tests ###
+
+When enabling test build CMake flag during CMake project generation, executable test suite binaries will be generated during project compilation.  
+You would then find individual module test suites, as well as a whole project test suite, which can be run via CLI.
