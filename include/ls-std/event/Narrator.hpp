@@ -25,17 +25,17 @@ namespace ls::std::event
       Narrator();
       ~Narrator() override;
 
-      bool addListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
+      bool addListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener); // nodiscard is optional here
       void clear();
-      ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> getListeners();
-      bool removeListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
+      [[nodiscard]] ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> getListeners();
+      bool removeListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener); // nodiscard is optional here
       void tell(const ls::std::core::Class &_info);
 
     private:
 
       ::std::list<::std::shared_ptr<ls::std::core::interface_type::IListener>> listeners{};
 
-      bool _hasListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
+      [[nodiscard]] bool _hasListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener);
   };
 }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -28,12 +28,12 @@ namespace ls::std::event
 
       // implementation
 
-      ls::std::core::type::byte_field marshal() override;
+      [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
       // additional functionality
 
-      ::std::shared_ptr<ls::std::event::Event> getValue();
+      [[nodiscard]] ::std::shared_ptr<ls::std::event::Event> getValue();
       void setValue(const ::std::shared_ptr<ls::std::event::Event> &_value);
 
     private:

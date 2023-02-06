@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-06
  *
  * */
 
@@ -34,17 +34,17 @@ namespace ls::std::event
 
       // additional functionality
 
-      bool addEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
+      bool addEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler); // nodiscard is optional here
       void fire(ls::std::event::Event _event);
-      bool hasEventHandler(const ls::std::core::type::event_id &_id);
-      bool removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
+      [[nodiscard]] bool hasEventHandler(const ls::std::core::type::event_id &_id);
+      bool removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler); // nodiscard is optional here
 
     private:
 
       ::std::map<ls::std::core::type::event_id, ::std::shared_ptr<ls::std::event::EventHandler>> eventHandlers{};
 
-      bool _hasEventHandler(const ls::std::core::type::event_id &_id);
-      bool _removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
+      [[nodiscard]] bool _hasEventHandler(const ls::std::core::type::event_id &_id);
+      [[nodiscard]] bool _removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler);
   };
 }
 
