@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-05
+ * Changed:         2023-02-06
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls::std::core
       explicit Class(const ::std::string &_name);
       virtual ~Class();
 
-      ::std::string getClassName();
+      [[nodiscard]] ::std::string getClassName();
 
     private:
 
