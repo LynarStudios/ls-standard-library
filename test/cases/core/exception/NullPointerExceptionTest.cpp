@@ -46,4 +46,22 @@ namespace
         },
         NullPointerException);
   }
+
+  TEST_F(NullPointerExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw NullPointerException{"_value is null"};
+          }
+          catch (const NullPointerException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("NullPointerException thrown - _value is null", message.c_str());
+            throw;
+          }
+        },
+        NullPointerException);
+  }
 }

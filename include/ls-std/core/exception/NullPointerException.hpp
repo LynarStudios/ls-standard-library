@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2023-02-05
+ * Changed:         2023-02-07
  *
  * */
 
@@ -12,6 +12,7 @@
 
 #include <exception>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::core
 {
@@ -20,9 +21,14 @@ namespace ls::std::core
     public:
 
       NullPointerException();
+      explicit NullPointerException(::std::string _message);
       ~NullPointerException() override;
 
       [[nodiscard]] const char *what() const noexcept override;
+
+    private:
+
+      ::std::string message{};
   };
 }
 
