@@ -30,7 +30,7 @@ void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id
   }
   else
   {
-    throw ls::std::core::EventNotSubscribedException{};
+    throw ls::std::core::EventNotSubscribedException{"id: " + _id};
   }
 }
 
