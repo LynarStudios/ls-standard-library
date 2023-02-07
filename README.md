@@ -34,7 +34,8 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- __AppleClang__ compiler is now officially supported 
+- __AppleClang__ compiler is now officially supported
+- exceptions provided by __core__ submodule now offer a constructor for passing dedicated messages
 
 #### Improvements ####
 
@@ -48,6 +49,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 #### Fixes ####
 
 - potential memory leaks have been resolved by strictly splitting prototypes and implementation project-wide, which enabled the usage of virtual or overridden destructors
+- memory leaks inside exception test suite have been fixed
 
 ---
 ### Documentation ###
