@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -38,6 +38,6 @@ void ls::std::io::FileWriter::_init(ls::std::io::File &_file)
 {
   if (!_file.exists())
   {
-    throw ls::std::core::FileNotFoundException{};
+    throw ls::std::core::FileNotFoundException{"name: " + _file.getAbsoluteFilePath()};
   }
 }
