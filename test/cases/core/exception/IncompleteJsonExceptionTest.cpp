@@ -53,12 +53,12 @@ namespace
         {
           try
           {
-            throw IncompleteJsonException{R"(incomplete: {"name":"})"};
+            throw IncompleteJsonException{"incomplete: {\"name\":\"}"};
           }
           catch (const IncompleteJsonException &_exception)
           {
             ::std::string message = _exception.what();
-            EXPECT_STREQ(R"(IncompleteJsonException thrown - incomplete: {"name":"})", message.c_str());
+            EXPECT_STREQ("IncompleteJsonException thrown - incomplete: {\"name\":\"}", message.c_str());
             throw;
           }
         },
