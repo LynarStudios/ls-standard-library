@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -73,7 +73,7 @@ void ls::std::event::EventManager::fire(ls::std::event::Event _event)
   }
   else
   {
-    throw ls::std::core::EventNotHandledException{};
+    throw ls::std::core::EventNotHandledException{"id: " + _event.getId()};
   }
 }
 
