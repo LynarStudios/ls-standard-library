@@ -29,7 +29,7 @@ ls::std::core::type::byte_field ls::std::io::FileReader::read()
 
   if (inputStream.fail())
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: read"};
   }
 
   inputStream.close();

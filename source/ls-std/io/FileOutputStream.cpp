@@ -44,7 +44,7 @@ bool ls::std::io::FileOutputStream::write(const ls::std::core::type::byte_field 
   }
   else
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: write"};
   }
 
   return succeeded;
