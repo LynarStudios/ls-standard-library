@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-06
+ * Changed:         2023-02-07
  *
  * */
 
@@ -22,7 +22,7 @@ bool ls::std::event::Narrator::addListener(const ::std::shared_ptr<ls::std::core
 
   if (_listener == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_listener is null"};
   }
   else
   {
@@ -52,7 +52,7 @@ bool ls::std::event::Narrator::removeListener(const ::std::shared_ptr<ls::std::c
 
   if (_listener == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_listener is null"};
   }
   else
   {

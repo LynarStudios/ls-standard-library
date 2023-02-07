@@ -19,9 +19,14 @@ ls::std::event::EventManager::~EventManager() = default;
 
 void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
-  if (_id.empty() || _listener == nullptr)
+  if (_id.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_id is empty"};
+  }
+
+  if (_listener == nullptr)
+  {
+    throw ls::std::core::IllegalArgumentException{"_listener is null"};
   }
 
   if (this->_hasEventHandler(_id))
@@ -36,9 +41,14 @@ void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id
 
 void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
-  if (_id.empty() || _listener == nullptr)
+  if (_id.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_id is empty"};
+  }
+
+  if (_listener == nullptr)
+  {
+    throw ls::std::core::IllegalArgumentException{"_listener is null"};
   }
 
   if (this->_hasEventHandler(_id))
@@ -53,7 +63,7 @@ bool ls::std::event::EventManager::addEventHandler(const ::std::shared_ptr<ls::s
 
   if (_eventHandler == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_eventHandler is null"};
   }
 
   if (!this->_hasEventHandler(_eventHandler->getId()))
@@ -81,7 +91,7 @@ bool ls::std::event::EventManager::hasEventHandler(const ls::std::core::type::ev
 {
   if (_id.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_id is empty"};
   }
 
   return this->_hasEventHandler(_id);
@@ -91,7 +101,7 @@ bool ls::std::event::EventManager::removeEventHandler(const ::std::shared_ptr<ls
 {
   if (_eventHandler == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_eventHandler is null"};
   }
 
   return this->_removeEventHandler(_eventHandler);

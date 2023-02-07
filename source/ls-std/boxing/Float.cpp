@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -222,7 +222,7 @@ void ls::std::boxing::Float::_assignEpsilon(float _epsilon)
 {
   if (_epsilon <= 0.0)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"epsilon is less than or equal zero"};
   }
 
   this->epsilon = _epsilon;

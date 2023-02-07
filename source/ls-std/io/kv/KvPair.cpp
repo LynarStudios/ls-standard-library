@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -36,7 +36,7 @@ void ls::std::io::KvPair::_assignKey(const ls::std::core::type::kv_key &_key)
 {
   if (_key.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_key is empty"};
   }
 
   this->key = _key;

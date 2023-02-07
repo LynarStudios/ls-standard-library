@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-05
-* Changed:         2023-02-05
+* Changed:         2023-02-07
 *
 * */
 
@@ -38,7 +38,7 @@ void ls::std::io::XmlParseParameter::_setNode(const ::std::shared_ptr<ls::std::i
 {
   if (_node == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_node is null"};
   }
 
   this->node = _node;

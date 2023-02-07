@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -45,7 +45,7 @@ void ls::std::event::SerializableJsonEvent::_assignValue(const ::std::shared_ptr
 {
   if (_value == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_value is null"};
   }
 
   this->value = _value;

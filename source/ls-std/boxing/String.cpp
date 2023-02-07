@@ -3,13 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
 #include <algorithm>
 #include <ls-std/boxing/String.hpp>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
 
 ls::std::boxing::String::String() : ls::std::core::Class("String")
 {}

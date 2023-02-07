@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -58,7 +58,7 @@ void ls::std::event::Event::_assignId(const ls::std::core::type::event_id &_id)
 {
   if (_id.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_id is empty"};
   }
 
   this->id = _id;

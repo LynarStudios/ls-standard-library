@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -56,7 +56,7 @@ void ls::std::io::XmlDocument::_assignDeclaration(const ::std::shared_ptr<ls::st
 {
   if (_declaration == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_declaration is null"};
   }
 
   this->declaration = _declaration;
@@ -66,7 +66,7 @@ void ls::std::io::XmlDocument::_assignRootElement(const ::std::shared_ptr<ls::st
 {
   if (_rootElement == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_rootElement is null"};
   }
 
   this->rootElement = _rootElement;
