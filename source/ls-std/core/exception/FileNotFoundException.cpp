@@ -7,8 +7,8 @@
  *
  * */
 
+#include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
-#include <utility>
 
 ls::std::core::FileNotFoundException::FileNotFoundException() = default;
 
@@ -30,14 +30,5 @@ const char *ls::std::core::FileNotFoundException::what() const noexcept
     concatenatedMessage = concatenatedMessage + this->message;
   }
 
-  return ls::std::core::FileNotFoundException::_mapMessageToRawPointer(concatenatedMessage);
-}
-
-char *ls::std::core::FileNotFoundException::_mapMessageToRawPointer(const ::std::string &_message)
-{
-  char *rawPointerMessage = new char[_message.size() + 1];
-  strcpy(rawPointerMessage, _message.c_str());
-  rawPointerMessage[_message.size()] = '\0';
-
-  return rawPointerMessage;
+  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
 }

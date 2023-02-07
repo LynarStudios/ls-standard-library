@@ -22,7 +22,7 @@ namespace ls::std::core
     public:
 
       FileNotFoundException();
-      explicit FileNotFoundException(::std::string   _message);
+      explicit FileNotFoundException(::std::string _message);
       ~FileNotFoundException() override;
 
       [[nodiscard]] const char *what() const noexcept override;
@@ -30,8 +30,6 @@ namespace ls::std::core
     private:
 
       ::std::string message{};
-
-      static char* _mapMessageToRawPointer(const ::std::string& _message);
   };
 }
 

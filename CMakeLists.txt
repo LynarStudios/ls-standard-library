@@ -129,6 +129,7 @@ set(SOURCE_FILES_BOXING
 set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotHandledException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotSubscribedException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/ExceptionMessage.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileNotFoundException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileOperationException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArgumentException.cpp
@@ -205,6 +206,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
     set(TEST_FILES_CORE
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotHandledExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotSubscribedExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/ExceptionMessageTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/FileNotFoundExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/FileOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IllegalArgumentExceptionTest.cpp

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2023-02-06
+ * Changed:         2023-02-07
  *
  * */
 
@@ -12,6 +12,7 @@
 
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>
+#include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
