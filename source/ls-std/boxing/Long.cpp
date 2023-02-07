@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -68,7 +68,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator/(const ls::std::b
 {
   if (_long == (ls::std::core::type::long_type) 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   return this->value / _long;
@@ -78,7 +78,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator/(ls::std::core::t
 {
   if (_value == 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   return this->value / _value;
@@ -134,7 +134,7 @@ ls::std::boxing::Long &ls::std::boxing::Long::operator/=(const ls::std::boxing::
 {
   if (_long == (ls::std::core::type::long_type) 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   this->value /= _long;
@@ -145,7 +145,7 @@ ls::std::boxing::Long &ls::std::boxing::Long::operator/=(ls::std::core::type::lo
 {
   if (_value == 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   this->value /= _value;

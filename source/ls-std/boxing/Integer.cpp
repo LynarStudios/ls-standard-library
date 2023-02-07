@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -68,7 +68,7 @@ int ls::std::boxing::Integer::operator/(const ls::std::boxing::Integer &_integer
 {
   if (_integer == 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   return this->value / _integer;
@@ -78,7 +78,7 @@ int ls::std::boxing::Integer::operator/(int _value) const
 {
   if (_value == 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   return this->value / _value;
@@ -134,7 +134,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator/=(const ls::std::bo
 {
   if (_integer == 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   this->value /= _integer;
@@ -145,7 +145,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator/=(int _value)
 {
   if (_value == 0)
   {
-    throw ls::std::core::IllegalArithmeticOperationException{};
+    throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
   this->value /= _value;
