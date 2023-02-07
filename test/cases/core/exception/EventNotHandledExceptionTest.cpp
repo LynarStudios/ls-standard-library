@@ -46,4 +46,22 @@ namespace
         },
         EventNotHandledException);
   }
+
+  TEST_F(EventNotHandledExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotHandledException{"id: OPEN_DOOR"};
+          }
+          catch (const EventNotHandledException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("EventNotHandledException thrown - id: OPEN_DOOR", message.c_str());
+            throw;
+          }
+        },
+        EventNotHandledException);
+  }
 }
