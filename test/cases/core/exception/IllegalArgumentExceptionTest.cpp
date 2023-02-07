@@ -46,4 +46,22 @@ namespace
         },
         IllegalArgumentException);
   }
+
+  TEST_F(IllegalArgumentExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArgumentException{"value is empty"};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("IllegalArgumentException thrown - value is empty", message.c_str());
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
 }
