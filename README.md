@@ -2,28 +2,28 @@
 
 This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
 This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
-Following a modularized approach the following submodules are defined in scope of this library, which are independent:
+Following a modularized approach the following independent submodules are defined in scope of this library:
  
 #### Boxing ####
 
-This library module provides boxing classes for primitive data types (e.g. string, int, long, float...) to provide additional functionalities.
+This library module provides boxing classes for primitive data types (e.g. string, int, long, float...), adding additional functionalities.
 
 #### Core ####
 
-The core module is a base module providing a base __Class__, exceptions, data types and interfaces. Usually the other submodules are dependent on this module. 
+The core module is a base module providing common functionalities being shared among other library submodules. Functionalities provided by this module include interfaces, exceptions and base classes, which provide basic reflection functionalities.
 
 #### Encoding ####
 
-To encode a byte field (e.g. a binary file) for transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
+To encode a byte field (e.g. a binary file) for network transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
 
 #### Event ####
 
-This submodule comes with an __Event__ class, as well as with handlers and managers to provide an intuitive event handling for your application.
+This submodule comes with events in a primitive form, as well as with handlers and managers to provide an intuitive event handling for your application.
 
 #### IO ####
 
 To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
-Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
+Additionally __XML__ and __KV__ parsing functionalities are provided.
 
 #### Time ####
 
