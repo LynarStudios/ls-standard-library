@@ -13,9 +13,9 @@
 #include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
-namespace LS_STD_DYNAMIC_GOAL ls::std::core
+namespace ls::std::core
 {
-  class ExceptionMessage
+  class LS_STD_DYNAMIC_GOAL ExceptionMessage
   {
     public:
 
