@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
+#include <string>
 
 using namespace ls::std::core;
 
@@ -38,7 +39,8 @@ namespace
           }
           catch (const EventNotSubscribedException &_exception)
           {
-            EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", _exception.what());
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", message.c_str());
             throw;
           }
         },

@@ -36,7 +36,7 @@ namespace
     char *characterPointer = message.toCharacterPointer();
     ASSERT_STREQ(text.c_str(), characterPointer);
 
-    delete[] characterPointer;
+    delete characterPointer;
   }
 
   TEST_F(ExceptionMessageTest, toCharacterPointer_empty)

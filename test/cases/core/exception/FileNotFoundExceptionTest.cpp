@@ -9,6 +9,7 @@
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
+#include <string>
 
 using namespace ls::std::core;
 
@@ -38,7 +39,8 @@ namespace
           }
           catch (const FileNotFoundException &_exception)
           {
-            EXPECT_STREQ("FileNotFoundException thrown - file not found!", _exception.what());
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("FileNotFoundException thrown - file not found!", message.c_str());
             throw;
           }
         },
@@ -55,7 +57,8 @@ namespace
           }
           catch (const FileNotFoundException &_exception)
           {
-            EXPECT_STREQ(R"(FileNotFoundException thrown - "settings.txt" not found!)", _exception.what());
+            ::std::string message = _exception.what();
+            EXPECT_STREQ(R"(FileNotFoundException thrown - "settings.txt" not found!)", message.c_str());
             throw;
           }
         },
