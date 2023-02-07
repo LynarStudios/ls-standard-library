@@ -46,4 +46,22 @@ namespace
         },
         IncompleteJsonException);
   }
+
+  TEST_F(IncompleteJsonExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IncompleteJsonException{R"(incomplete: {"name":"})"};
+          }
+          catch (const IncompleteJsonException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ(R"(IncompleteJsonException thrown - incomplete: {"name":"})", message.c_str());
+            throw;
+          }
+        },
+        IncompleteJsonException);
+  }
 }
