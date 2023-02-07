@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -39,6 +39,23 @@ namespace
           catch (const FileNotFoundException &_exception)
           {
             EXPECT_STREQ("FileNotFoundException thrown - file not found!", _exception.what());
+            throw;
+          }
+        },
+        FileNotFoundException);
+  }
+
+  TEST_F(FileNotFoundExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw FileNotFoundException{R"("settings.txt" not found!)"};
+          }
+          catch (const FileNotFoundException &_exception)
+          {
+            EXPECT_STREQ(R"(FileNotFoundException thrown - "settings.txt" not found!)", _exception.what());
             throw;
           }
         },
