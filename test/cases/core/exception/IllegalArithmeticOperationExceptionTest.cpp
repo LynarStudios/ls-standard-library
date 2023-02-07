@@ -46,4 +46,22 @@ namespace
         },
         IllegalArithmeticOperationException);
   }
+
+  TEST_F(IllegalArithmeticOperationExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArithmeticOperationException{"division by zero"};
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("IllegalArithmeticOperationException thrown - division by zero", message.c_str());
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
+  }
 }
