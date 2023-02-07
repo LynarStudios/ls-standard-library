@@ -32,7 +32,6 @@ option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
 option(LS_STD_BUILD_WITH_SUPPORTED_COMPILER "Build project with supported compiler only..." ON)
 option(LS_STD_BUILD_STATIC "Build ls-std static library..." ON)
 option(LS_STD_BUILD_SHARED "Build ls-std shared library..." OFF)
-option(LS_STD_BUILD_MODULE "Build ls-std module library..." OFF)
 
 set(TARGET_COUNTER 0)
 
@@ -44,11 +43,6 @@ endif ()
 if (${LS_STD_BUILD_SHARED})
     math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
     set(GOAL "shared library")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
-    set(GOAL "module library")
 endif ()
 
 message("${PROJECT_NAME}: [Goal] ${GOAL}")
@@ -90,21 +84,7 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
         message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
         return()
     endif ()
-
-    # define which compilers are supported for shared or module goal
-
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_MODULE})
-        message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
-        return()
-    endif ()
 endif()
-
-# define which goals can run tests
-
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_MODULE})
-    message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with tests is not supported... terminated!")
-    return()
-endif ()
 
 ######################################################
 # Include Directories
@@ -392,11 +372,6 @@ if (${LS_STD_BUILD_SHARED})
     set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_BOXING}" MODULE ${SOURCE_FILES_BOXING})
-    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "-d")
-endif ()
-
 ##########################################################
 # Build Library (core)
 ##########################################################
@@ -413,11 +388,6 @@ if (${LS_STD_BUILD_SHARED})
     set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_CORE}" MODULE ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
-endif ()
-
 ##########################################################
 # Build Library (encoding)
 ##########################################################
@@ -431,11 +401,6 @@ endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_ENCODING}" SHARED ${SOURCE_FILES_ENCODING})
-    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_ENCODING}" MODULE ${SOURCE_FILES_ENCODING})
     set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
@@ -461,11 +426,6 @@ if (${LS_STD_BUILD_SHARED})
     set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_EVENT}" MODULE ${SOURCE_FILES_EVENT})
-    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "-d")
-endif ()
-
 ##########################################################
 # Build Library (io)
 ##########################################################
@@ -483,11 +443,6 @@ if (${LS_STD_BUILD_SHARED})
     set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_IO}" MODULE ${SOURCE_FILES_IO})
-    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "-d")
-endif ()
-
 ##########################################################
 # Build Library (time)
 ##########################################################
@@ -502,11 +457,6 @@ endif ()
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
     target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_TIME}" MODULE ${SOURCE_FILES_TIME})
     set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
