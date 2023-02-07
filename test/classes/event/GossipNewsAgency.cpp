@@ -16,6 +16,7 @@ ls_std_event_test::GossipNewsAgency::GossipNewsAgency(::std::string agencyName, 
   : NewsAgency(agencyName),
   m_eventManager(eventManager)
   {
+  // subscribe listener at construction
     m_eventManager.subscribe(ls_std_event_test::GossipNewsEvent::EVENT_ID, )
   }
 
@@ -36,5 +37,5 @@ void ls_std_event_test::GossipNewsAgency::onGossipNews(ls_std_event_test::Gossip
 
 ls_std_event_test::GossipNewsAgency::~GossipNewsAgency()
 {
-
+  //destructor should unsubscribe all methods to avoid nllptr when send Event
 }
