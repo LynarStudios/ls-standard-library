@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-05
+ * Changed:         2023-02-07
  *
  * */
 
@@ -12,6 +12,7 @@
 
 #include <exception>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::core
 {
@@ -20,9 +21,14 @@ namespace ls::std::core
     public:
 
       EventNotSubscribedException();
+      explicit EventNotSubscribedException(::std::string _message);
       ~EventNotSubscribedException() override;
 
       [[nodiscard]] const char *what() const noexcept override;
+
+    private:
+
+      ::std::string message{};
   };
 }
 

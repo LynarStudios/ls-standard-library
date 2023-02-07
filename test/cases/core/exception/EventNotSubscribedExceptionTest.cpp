@@ -46,4 +46,22 @@ namespace
         },
         EventNotSubscribedException);
   }
+
+  TEST_F(EventNotSubscribedExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotSubscribedException{"id: OPEN_DOOR"};
+          }
+          catch (const EventNotSubscribedException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("EventNotSubscribedException thrown - id: OPEN_DOOR", message.c_str());
+            throw;
+          }
+        },
+        EventNotSubscribedException);
+  }
 }
