@@ -18,7 +18,7 @@
 
 namespace ls_std_event_test
 {
-  class DailyNewsAgency : public ls_std_event_test::NewsAgency, public ls::std::core::interface_type::IListener
+  class DailyNewsAgency : public ls_std_event_test::NewsAgency
   {
     public:
 
@@ -27,7 +27,7 @@ namespace ls_std_event_test
 
       // implementation
 
-      void listen(const ls::std::core::Class &_info) override;
+      void listen(const ls::std::core::Class &_info);
 
       // additional functionality
 

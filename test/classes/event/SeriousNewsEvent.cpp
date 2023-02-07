@@ -11,6 +11,6 @@
 
 ls_std_event_test::SeriousNewsEvent::SeriousNewsEvent(const ::std::string &_news) : ls::std::event::Event("SeriousNewsEvent")
 {
-  ls::std::core::type::event_parameter newsParameter = ::std::make_pair("news", _news);
+  ls::std::event::type::event_parameter newsParameter = ::std::make_pair("news", _news);
   this->addParameter(newsParameter);
 }

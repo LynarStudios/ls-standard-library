@@ -54,8 +54,8 @@ namespace
     ls::std::event::Event event{"TMP_ID"};
     ASSERT_TRUE(event.getParameterList().empty());
 
-    ASSERT_TRUE(event.addParameter(ls::std::core::type::event_parameter("key", "yes")));
-    ASSERT_TRUE(event.addParameter(ls::std::core::type::event_parameter("facing_door", "yes")));
+    ASSERT_TRUE(event.addParameter(ls::std::event::type::event_parameter("key", "yes")));
+    ASSERT_TRUE(event.addParameter(ls::std::event::type::event_parameter("facing_door", "yes")));
   }
 
   TEST_F(EventTest, addParameter_element_already_exists)
@@ -63,15 +63,15 @@ namespace
     ls::std::event::Event event{"TMP_ID"};
     ASSERT_TRUE(event.getParameterList().empty());
 
-    ASSERT_TRUE(event.addParameter(ls::std::core::type::event_parameter("key", "yes")));
-    ASSERT_FALSE(event.addParameter(ls::std::core::type::event_parameter("key", "yes")));
+    ASSERT_TRUE(event.addParameter(ls::std::event::type::event_parameter("key", "yes")));
+    ASSERT_FALSE(event.addParameter(ls::std::event::type::event_parameter("key", "yes")));
   }
 
   TEST_F(EventTest, clearParameterList)
   {
     ls::std::event::Event event{"OPEN_DOOR_EVENT"};
-    event.addParameter(ls::std::core::type::event_parameter("key", "yes"));
-    event.addParameter(ls::std::core::type::event_parameter("facing_door", "yes"));
+    event.addParameter(ls::std::event::type::event_parameter("key", "yes"));
+    event.addParameter(ls::std::event::type::event_parameter("facing_door", "yes"));
     ASSERT_EQ(2, event.getParameterList().size());
 
     event.clearParameterList();
@@ -96,8 +96,8 @@ namespace
     ls::std::event::Event event{"OPEN_DOOR_EVENT"};
     ASSERT_TRUE(event.getParameterList().empty());
 
-    event.addParameter(ls::std::core::type::event_parameter("key", "yes"));
-    event.addParameter(ls::std::core::type::event_parameter("facing_door", "yes"));
+    event.addParameter(ls::std::event::type::event_parameter("key", "yes"));
+    event.addParameter(ls::std::event::type::event_parameter("facing_door", "yes"));
 
     ASSERT_TRUE(event.removeParameter("key"));
     ASSERT_TRUE(event.removeParameter("facing_door"));

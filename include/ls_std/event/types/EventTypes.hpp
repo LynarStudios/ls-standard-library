@@ -14,13 +14,13 @@
 #include <vector>
 #include <map>
 
-namespace ls::std::core::type
+namespace ls::std::event::type
 {
   using event_id = ::std::string;
   using event_parameter_id = ::std::string;
   using event_parameter_value = ::std::string;
   using event_parameter = ::std::pair<::std::string, ::std::string>;
-  using event_parameter_list = ::std::map<ls::std::core::type::event_parameter_id, ls::std::core::type::event_parameter_value>;
+  using event_parameter_list = ::std::map<event_parameter_id, event_parameter_value>;
 }
 
 #endif

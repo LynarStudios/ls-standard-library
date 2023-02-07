@@ -15,14 +15,14 @@
 
 namespace ls_std_event_test
 {
-  class TestDataMercedesCar : public ls_std_event_test::TestDataCar, public ls::std::core::interface_type::IListener
+  class TestDataMercedesCar : public ls_std_event_test::TestDataCar
   {
     public:
 
       TestDataMercedesCar();
       ~TestDataMercedesCar() = default;
 
-      void listen(const ls::std::core::Class &_info) override;
+      void listen(const ls::std::core::Class &_info);
   };
 }
 

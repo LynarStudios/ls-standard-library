@@ -154,9 +154,7 @@ set(SOURCE_FILES_ENCODING
 set(SOURCE_FILES_EVENT
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/serialization/SerializableJsonEvent.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Narrator.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp)
 
 set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvDocument.cpp
@@ -218,10 +216,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
 
     set(TEST_FILES_EVENT
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/serialization/SerializableJsonEventTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/NarratorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/Colour.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/DailyNewsAgency.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/GossipNewsAgency.cpp

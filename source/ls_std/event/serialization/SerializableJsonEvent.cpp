@@ -55,7 +55,7 @@ void ls::std::event::SerializableJsonEvent::_unmarshalParameterList()
 
   for (const auto &parameterJson : this->jsonObject["parameterList"])
   {
-    ls::std::core::type::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
+    ls::std::event::type::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
     this->value->addParameter(parameter);
   }
 }

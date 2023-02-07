@@ -44,8 +44,8 @@ namespace
   TEST_F(SerializableJsonEventTest, marshal)
   {
     ls::std::event::Event event{"OPEN_DOOR_EVENT"};
-    event.addParameter(ls::std::core::type::event_parameter{"key_available", "true"});
-    event.addParameter(ls::std::core::type::event_parameter{"door_id", "16675"});
+    event.addParameter(ls::std::event::type::event_parameter{"key_available", "true"});
+    event.addParameter(ls::std::event::type::event_parameter{"door_id", "16675"});
 
     ls::std::event::SerializableJsonEvent serializable{::std::make_shared<ls::std::event::Event>(event)};
 
@@ -63,7 +63,7 @@ namespace
 
     serializable.unmarshal(jsonString);
     ASSERT_STREQ("OPEN_DOOR_EVENT", serializable.getValue()->getId().c_str());
-    ls::std::core::type::event_parameter_list parameterList = serializable.getValue()->getParameterList();
+    ls::std::event::type::event_parameter_list parameterList = serializable.getValue()->getParameterList();
 
     ASSERT_FALSE(parameterList.empty());
     ASSERT_EQ(2, parameterList.size());

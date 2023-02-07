@@ -8,25 +8,16 @@
  * */
 
 #include "GossipNewsAgency.hpp"
+#include "GossipNewsEvent.hpp"
 #include <ls_std/ls_std_event.hpp>
+#include <iostream>
 
-ls_std_event_test::GossipNewsAgency::GossipNewsAgency() : ls_std_event_test::NewsAgency("GossipNewsAgency")
-{}
-
-void ls_std_event_test::GossipNewsAgency::listen(const ls::std::core::Class &_info)
-{
-  ls::std::event::Event event = dynamic_cast<const ls::std::event::Event &>(_info);
-
-  if (event.getId() == "SeriousNewsEvent")
+ls_std_event_test::GossipNewsAgency::GossipNewsAgency(::std::string agencyName, EventManager eventManager)
+  : NewsAgency(agencyName),
+  m_eventManager(eventManager)
   {
-    this->news = this->getName() + ": " + event.getParameterList().at("news");
+    m_eventManager.subscribe(ls_std_event_test::GossipNewsEvent::EVENT_ID, )
   }
-
-  if (event.getId() == "GossipNewsEvent")
-  {
-    this->news = this->getName() + ": " + event.getParameterList().at("news");
-  }
-}
 
 void ls_std_event_test::GossipNewsAgency::clear()
 {
@@ -36,4 +27,14 @@ void ls_std_event_test::GossipNewsAgency::clear()
 ::std::string ls_std_event_test::GossipNewsAgency::getNews()
 {
   return this->news;
+}
+
+void ls_std_event_test::GossipNewsAgency::onGossipNews(ls_std_event_test::GossipNewsEvent event)
+{
+  ::std::cout << event.getParameterList().at("news");
+}
+
+ls_std_event_test::GossipNewsAgency::~GossipNewsAgency()
+{
+
 }

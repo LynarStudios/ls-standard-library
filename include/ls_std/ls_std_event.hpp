@@ -12,8 +12,6 @@
 
 #include <ls_std/event/serialization/SerializableJsonEvent.hpp>
 #include <ls_std/event/Event.hpp>
-#include <ls_std/event/EventHandler.hpp>
 #include <ls_std/event/EventManager.hpp>
-#include <ls_std/event/Narrator.hpp>
 
 #endif

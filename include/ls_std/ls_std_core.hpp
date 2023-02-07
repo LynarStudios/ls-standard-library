@@ -21,14 +21,13 @@
 
 #include <ls_std/core/interface/IBoxing.hpp>
 #include <ls_std/core/interface/IEncoding.hpp>
-#include <ls_std/core/interface/IEventSubscriber.hpp>
-#include <ls_std/core/interface/IListener.hpp>
+#include <ls_std/event/interface/IEventManager.hpp>
 #include <ls_std/core/interface/IReader.hpp>
 #include <ls_std/core/interface/ISerializable.hpp>
 #include <ls_std/core/interface/IStorable.hpp>
 #include <ls_std/core/interface/IWriter.hpp>
 
-#include <ls_std/core/types/EventTypes.hpp>
+#include <ls_std/event/types/EventTypes.hpp>
 #include <ls_std/core/types/KvTypes.hpp>
 #include <ls_std/core/types/Types.hpp>
 

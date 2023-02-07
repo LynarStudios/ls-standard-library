@@ -14,20 +14,24 @@
 #include <memory>
 #include <map>
 #include <ls_std/ls_std_core.hpp>
+#include <ls_std/ls_std_event.hpp>
 #include "NewsAgency.hpp"
+#include "GossipNewsEvent.hpp"
+
+using ls::std::event::interface_type::IEventManager;
 
 namespace ls_std_event_test
 {
-  class GossipNewsAgency : public ls_std_event_test::NewsAgency, public ls::std::core::interface_type::IListener
+  class GossipNewsAgency : public ls_std_event_test::NewsAgency
   {
     public:
 
-      GossipNewsAgency();
-      ~GossipNewsAgency() = default;
+      GossipNewsAgency(::std::string agencyName, EventManager eventManager);
+      ~GossipNewsAgency();
 
       // implementation
 
-      void listen(const ls::std::core::Class &_info) override;
+      void onGossipNews(ls_std_event_test::GossipNewsEvent event);
 
       // additional functionality
 
@@ -36,6 +40,7 @@ namespace ls_std_event_test
 
     private:
 
+      EventManager m_eventManager;
       ::std::string news{};
   };
 }

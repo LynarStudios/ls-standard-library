@@ -19,6 +19,7 @@ namespace ls::std::core
     public:
 
       IllegalArgumentException() = default;
+      //ToDo: possibility to pass argument name
 
       [[nodiscard]] const char *what() const noexcept override
       {

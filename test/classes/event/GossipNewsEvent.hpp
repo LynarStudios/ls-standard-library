@@ -21,6 +21,7 @@ namespace ls_std_event_test
 
       explicit GossipNewsEvent(const ::std::string &_news);
       ~GossipNewsEvent() override = default;
+      static const std::string EVENT_ID;
   };
 }
 
