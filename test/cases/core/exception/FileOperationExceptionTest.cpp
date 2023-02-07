@@ -46,4 +46,22 @@ namespace
         },
         FileOperationException);
   }
+
+  TEST_F(FileOperationExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw FileOperationException{R"(creating directory "tmp")"};
+          }
+          catch (const FileOperationException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ(R"(FileOperationException thrown - creating directory "tmp")", message.c_str());
+            throw;
+          }
+        },
+        FileOperationException);
+  }
 }
