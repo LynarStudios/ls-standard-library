@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
+#include <string>
 
 using namespace ls::std::core;
 
@@ -38,7 +39,26 @@ namespace
           }
           catch (const EventNotSubscribedException &_exception)
           {
-            EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", _exception.what());
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", message.c_str());
+            throw;
+          }
+        },
+        EventNotSubscribedException);
+  }
+
+  TEST_F(EventNotSubscribedExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotSubscribedException{"id: OPEN_DOOR"};
+          }
+          catch (const EventNotSubscribedException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("EventNotSubscribedException thrown - id: OPEN_DOOR", message.c_str());
             throw;
           }
         },

@@ -3,13 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
 #include <fstream>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
-#include <ls-std/core/exception/FileOperationException.hpp>
 #include <ls-std/io/FileWriter.hpp>
 
 ls::std::io::FileWriter::FileWriter(ls::std::io::File &_file) : ls::std::core::Class("FileWriter"), file(_file)
@@ -38,6 +37,6 @@ void ls::std::io::FileWriter::_init(ls::std::io::File &_file)
 {
   if (!_file.exists())
   {
-    throw ls::std::core::FileNotFoundException{};
+    throw ls::std::core::FileNotFoundException{"name: " + _file.getAbsoluteFilePath()};
   }
 }

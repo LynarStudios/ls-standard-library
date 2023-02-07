@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -47,7 +47,7 @@ void ls::std::io::KvFileReader::_assignDocument(const ::std::shared_ptr<ls::std:
 {
   if (_document == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_document is null"};
   }
 
   this->document = _document;
@@ -57,7 +57,7 @@ void ls::std::io::KvFileReader::_assignFile(ls::std::io::File _kvFile)
 {
   if (!_kvFile.exists())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"file does not exist: " + _kvFile.getAbsoluteFilePath()};
   }
 
   this->kvFile = _kvFile;

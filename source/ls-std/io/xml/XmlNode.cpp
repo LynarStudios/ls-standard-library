@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2023-02-06
+ * Changed:         2023-02-07
  *
  * */
 
@@ -312,7 +312,7 @@ void ls::std::io::XmlNode::_assignName(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_name is empty"};
   }
 
   this->name = _name;
@@ -322,7 +322,7 @@ void ls::std::io::XmlNode::_assignValue(const ::std::string &_value)
 {
   if (_value.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_value is empty"};
   }
 
   this->value = _value;
@@ -332,7 +332,7 @@ void ls::std::io::XmlNode::_checkIfAttributeReferenceIsValid(const ::std::shared
 {
   if (_attribute == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_attribute is null"};
   }
 }
 
@@ -340,7 +340,7 @@ void ls::std::io::XmlNode::_checkIfNameIsNotEmpty(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_name is empty"};
   }
 }
 
@@ -348,7 +348,7 @@ void ls::std::io::XmlNode::_checkIfNodeReferenceIsValid(const ::std::shared_ptr<
 {
   if (_child == nullptr)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_child is null"};
   }
 }
 
@@ -370,7 +370,7 @@ bool ls::std::io::XmlNode::_hasAttribute(const ::std::string &_name)
 
   if (_name.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_name is empty"};
   }
   else
   {
@@ -399,7 +399,7 @@ bool ls::std::io::XmlNode::_hasChild(const ::std::string &_name)
 
   if (_name.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_name is empty"};
   }
   else
   {

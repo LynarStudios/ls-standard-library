@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -29,7 +29,7 @@ ls::std::core::type::byte_field ls::std::io::FileReader::read()
 
   if (inputStream.fail())
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: read"};
   }
 
   inputStream.close();
@@ -49,6 +49,6 @@ void ls::std::io::FileReader::_init(ls::std::io::File &_file)
 {
   if (!_file.exists())
   {
-    throw ls::std::core::FileNotFoundException{};
+    throw ls::std::core::FileNotFoundException{"name: " + _file.getAbsoluteFilePath()};
   }
 }

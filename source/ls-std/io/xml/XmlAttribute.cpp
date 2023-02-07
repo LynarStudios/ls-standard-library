@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -46,7 +46,7 @@ void ls::std::io::XmlAttribute::_assignName(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_name is empty"};
   }
 
   this->name = _name;
@@ -56,7 +56,7 @@ void ls::std::io::XmlAttribute::_assignValue(const ::std::string &_value)
 {
   if (_value.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_value is empty"};
   }
 
   this->value = _value;

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -44,7 +44,7 @@ bool ls::std::io::FileOutputStream::write(const ls::std::core::type::byte_field 
   }
   else
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: write"};
   }
 
   return succeeded;
@@ -62,7 +62,7 @@ void ls::std::io::FileOutputStream::_init()
 {
   if (!this->file.exists())
   {
-    throw ls::std::core::FileNotFoundException{};
+    throw ls::std::core::FileNotFoundException{"name: " + this->file.getAbsoluteFilePath()};
   }
   else
   {

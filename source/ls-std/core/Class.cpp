@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -26,7 +26,7 @@ void ls::std::core::Class::_assignClassName(const ::std::string &_name)
 {
   if (_name.empty())
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{"_name is empty"};
   }
 
   this->name = _name;

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-06
+ * Changed:         2023-02-07
  *
  * */
 
@@ -75,7 +75,7 @@ void ls::std::io::File::createNewFile()
   }
   else
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: create new file"};
   }
 }
 
@@ -184,7 +184,7 @@ void ls::std::io::File::makeDirectory()
 {
   if (!ls::std::io::File::_makeDirectory(this->absoluteFilePath))
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: create directory"};
   }
 }
 
@@ -202,7 +202,7 @@ void ls::std::io::File::makeDirectories()
     {
       if (!ls::std::io::File::_makeDirectory(currentHierarchy))
       {
-        throw ls::std::core::FileOperationException{}; // TODO: add missing test
+        throw ls::std::core::FileOperationException{"operation: create directory"}; // TODO: add missing test
       }
     }
 
@@ -330,7 +330,7 @@ bool ls::std::io::File::_exists(const ::std::string &_path)
 
   if (getcwd(buffer, sizeof(buffer)) == nullptr)
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: get working directory"};
   }
   else
   {
@@ -351,7 +351,7 @@ bool ls::std::io::File::_exists(const ::std::string &_path)
 
   if (!GetCurrentDirectory(MAX_PATH, buffer))
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: get working directory"};
   }
   else
   {
@@ -431,7 +431,7 @@ bool ls::std::io::File::_isReadableUnix(const ::std::string &_path)
   }
   else
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: fetch permissions"};
   }
 
   return readable;
@@ -453,7 +453,7 @@ bool ls::std::io::File::_isReadableWindows(const ::std::string &_path)
   }
   else
   {
-    throw ls::std::core::FileOperationException{};
+    throw ls::std::core::FileOperationException{"operation: fetch permissions"};
   }
 
   return readable;

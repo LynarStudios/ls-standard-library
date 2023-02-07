@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
+#include <string>
 
 using namespace ls::std::core;
 
@@ -38,7 +39,26 @@ namespace
           }
           catch (const EventNotHandledException &_exception)
           {
-            EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", _exception.what());
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", message.c_str());
+            throw;
+          }
+        },
+        EventNotHandledException);
+  }
+
+  TEST_F(EventNotHandledExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotHandledException{"id: OPEN_DOOR"};
+          }
+          catch (const EventNotHandledException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("EventNotHandledException thrown - id: OPEN_DOOR", message.c_str());
             throw;
           }
         },

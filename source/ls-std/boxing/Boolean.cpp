@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -72,7 +72,7 @@ void ls::std::boxing::Boolean::parse(::std::string _parseText)
 
   if (_parseText != this->TRUE_STRING && _parseText != this->FALSE_STRING)
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{_parseText + " is not a valid string representation"};
   }
   else
   {

@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
+#include <string>
 
 using namespace ls::std::core;
 
@@ -38,7 +39,26 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
-            EXPECT_STREQ("FileOperationException thrown - file operation failed!", _exception.what());
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("FileOperationException thrown - file operation failed!", message.c_str());
+            throw;
+          }
+        },
+        FileOperationException);
+  }
+
+  TEST_F(FileOperationExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw FileOperationException{R"(creating directory "tmp")"};
+          }
+          catch (const FileOperationException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ(R"(FileOperationException thrown - creating directory "tmp")", message.c_str());
             throw;
           }
         },

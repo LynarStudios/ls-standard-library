@@ -3,12 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
+#include <string>
 
 using namespace ls::std::core;
 
@@ -38,7 +39,26 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", message.c_str());
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_F(IllegalArgumentExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArgumentException{"value is empty"};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            ::std::string message = _exception.what();
+            EXPECT_STREQ("IllegalArgumentException thrown - value is empty", message.c_str());
             throw;
           }
         },

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-05
+ * Changed:         2023-02-07
  *
  * */
 
@@ -21,9 +21,14 @@ namespace ls::std::core
     public:
 
       FileOperationException();
+      explicit FileOperationException(::std::string _message);
       ~FileOperationException() override;
 
       [[nodiscard]] const char *what() const noexcept override;
+
+    private:
+
+      ::std::string message{};
   };
 }
 

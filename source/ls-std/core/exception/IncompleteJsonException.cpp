@@ -3,17 +3,32 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
+#include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/IncompleteJsonException.hpp>
 
 ls::std::core::IncompleteJsonException::IncompleteJsonException() = default;
+
+ls::std::core::IncompleteJsonException::IncompleteJsonException(::std::string _message) : message(::std::move(_message))
+{}
 
 ls::std::core::IncompleteJsonException::~IncompleteJsonException() = default;
 
 const char *ls::std::core::IncompleteJsonException::what() const noexcept
 {
-  return "IncompleteJsonException thrown - this JSON string is incomplete.";
+  ::std::string concatenatedMessage = "IncompleteJsonException thrown - ";
+
+  if (this->message.empty())
+  {
+    concatenatedMessage = concatenatedMessage + "this JSON string is incomplete.";
+  }
+  else
+  {
+    concatenatedMessage = concatenatedMessage + this->message;
+  }
+
+  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-04
+ * Changed:         2023-02-07
  *
  * */
 
@@ -71,7 +71,7 @@ void ls::std::io::LogLevel::setLogLevel(const ::std::string &_value)
   }
   else
   {
-    throw ls::std::core::IllegalArgumentException{};
+    throw ls::std::core::IllegalArgumentException{_value + " is not a valid log level string"};
   }
 }
 
