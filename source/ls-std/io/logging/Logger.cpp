@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
 #include <ctime>
 #include <iomanip>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/NewLine.hpp>
 #include <ls-std/io/logging/Logger.hpp>
 #if defined(_MSC_VER) || defined(__APPLE__)
@@ -83,11 +83,7 @@ void ls::std::io::Logger::warn(const ls::std::core::type::byte *_data)
 
 void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer)
 {
-  if (_writer == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_writer is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_writer, "writer reference is null!"}.evaluate();
   this->writer = _writer;
 }
 

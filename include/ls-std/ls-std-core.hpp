@@ -11,6 +11,7 @@
 #define LS_STD_LS_STD_CORE_HPP
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>

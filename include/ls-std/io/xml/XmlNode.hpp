@@ -64,8 +64,6 @@ namespace ls::std::io
 
       void _assignName(const ::std::string &_name);
       void _assignValue(const ::std::string &_value);
-      static void _checkIfAttributeReferenceIsValid(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute);
-      static void _checkIfNodeReferenceIsValid(const ::std::shared_ptr<ls::std::io::XmlNode> &_child);
       [[nodiscard]] static ::std::string _getTab(uint8_t _tabSize);
       [[nodiscard]] bool _hasAttribute(const ::std::string &_name);
       [[nodiscard]] bool _hasChild(const ::std::shared_ptr<ls::std::io::XmlNode> &_child);

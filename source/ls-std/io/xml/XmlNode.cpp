@@ -9,7 +9,7 @@
 
 #include <algorithm>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/xml/XmlNode.hpp>
 
 ls::std::io::XmlNode::XmlNode(::std::string _name) : ls::std::core::Class("XmlNode"), name(::std::move(_name))
@@ -21,7 +21,7 @@ bool ls::std::io::XmlNode::addAttributeAfter(const ::std::shared_ptr<ls::std::io
 {
   bool added{};
   auto iterator = this->attributes.begin();
-  _checkIfAttributeReferenceIsValid(_attribute);
+  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
   ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
 
   if (!this->_hasAttribute(_attribute->getName()))
@@ -47,7 +47,7 @@ bool ls::std::io::XmlNode::addAttributeBefore(const ::std::shared_ptr<ls::std::i
 {
   bool added{};
   auto iterator = this->attributes.begin();
-  _checkIfAttributeReferenceIsValid(_attribute);
+  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
   ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
 
   if (!this->_hasAttribute(_attribute->getName()))
@@ -71,7 +71,8 @@ bool ls::std::io::XmlNode::addAttributeBefore(const ::std::shared_ptr<ls::std::i
 bool ls::std::io::XmlNode::addAttributeToBeginning(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute)
 {
   bool added{};
-  _checkIfAttributeReferenceIsValid(_attribute);
+  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
+  ;
 
   if (!_hasAttribute(_attribute->getName()))
   {
@@ -85,7 +86,7 @@ bool ls::std::io::XmlNode::addAttributeToBeginning(const ::std::shared_ptr<ls::s
 bool ls::std::io::XmlNode::addAttributeToEnd(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute)
 {
   bool added{};
-  _checkIfAttributeReferenceIsValid(_attribute);
+  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
 
   if (!_hasAttribute(_attribute->getName()))
   {
@@ -100,8 +101,8 @@ bool ls::std::io::XmlNode::addChildAfter(const ::std::shared_ptr<ls::std::io::Xm
 {
   bool added{};
   auto iterator = this->children.begin();
-  _checkIfNodeReferenceIsValid(_child);
-  _checkIfNodeReferenceIsValid(_search);
+  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
+  ls::std::core::NullPointerArgumentEvaluator{_search, "passed search node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -126,8 +127,8 @@ bool ls::std::io::XmlNode::addChildBefore(const ::std::shared_ptr<ls::std::io::X
 {
   bool added{};
   auto iterator = this->children.begin();
-  _checkIfNodeReferenceIsValid(_child);
-  _checkIfNodeReferenceIsValid(_search);
+  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
+  ls::std::core::NullPointerArgumentEvaluator{_search, "passed search node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -150,7 +151,7 @@ bool ls::std::io::XmlNode::addChildBefore(const ::std::shared_ptr<ls::std::io::X
 bool ls::std::io::XmlNode::addChildToBeginning(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
 {
   bool added{};
-  _checkIfNodeReferenceIsValid(_child);
+  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -164,7 +165,7 @@ bool ls::std::io::XmlNode::addChildToBeginning(const ::std::shared_ptr<ls::std::
 bool ls::std::io::XmlNode::addChildToEnd(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
 {
   bool added{};
-  _checkIfNodeReferenceIsValid(_child);
+  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -321,22 +322,6 @@ void ls::std::io::XmlNode::_assignValue(const ::std::string &_value)
   this->value = _value;
 }
 
-void ls::std::io::XmlNode::_checkIfAttributeReferenceIsValid(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute)
-{
-  if (_attribute == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_attribute is null"};
-  }
-}
-
-void ls::std::io::XmlNode::_checkIfNodeReferenceIsValid(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
-{
-  if (_child == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_child is null"};
-  }
-}
-
 std::string ls::std::io::XmlNode::_getTab(uint8_t _tabSize)
 {
   ::std::string tab{};
@@ -368,7 +353,7 @@ bool ls::std::io::XmlNode::_hasAttribute(const ::std::string &_name)
 
 bool ls::std::io::XmlNode::_hasChild(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
 {
-  _checkIfNodeReferenceIsValid(_child);
+  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for check attempt is null!"}.evaluate();
   return ::std::find(this->children.begin(), this->children.end(), _child) != this->children.end();
 }
 

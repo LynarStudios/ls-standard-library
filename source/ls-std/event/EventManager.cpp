@@ -8,9 +8,9 @@
  * */
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/event/EventManager.hpp>
 
 ls::std::event::EventManager::EventManager() : ls::std::core::Class("EventManager")
@@ -21,11 +21,7 @@ ls::std::event::EventManager::~EventManager() = default;
 void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be subscribed!"}.evaluate();
-
-  if (_listener == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_listener is null"};
-  }
+  ls::std::core::NullPointerArgumentEvaluator{_listener, "listener reference for subscribe attempt is null!"}.evaluate();
 
   if (this->_hasEventHandler(_id))
   {
@@ -40,11 +36,7 @@ void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id
 void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be unsubscribed!"}.evaluate();
-
-  if (_listener == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_listener is null"};
-  }
+  ls::std::core::NullPointerArgumentEvaluator{_listener, "listener reference for unsubscribe attempt is null!"}.evaluate();
 
   if (this->_hasEventHandler(_id))
   {
@@ -55,11 +47,7 @@ void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_
 bool ls::std::event::EventManager::addEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
 {
   bool wasAdded{};
-
-  if (_eventHandler == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_eventHandler is null"};
-  }
+  ls::std::core::NullPointerArgumentEvaluator{_eventHandler, "event handler reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasEventHandler(_eventHandler->getId()))
   {
@@ -90,11 +78,7 @@ bool ls::std::event::EventManager::hasEventHandler(const ls::std::core::type::ev
 
 bool ls::std::event::EventManager::removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
 {
-  if (_eventHandler == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_eventHandler is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_eventHandler, "event handler reference for remove attempt is null!"}.evaluate();
   return this->_removeEventHandler(_eventHandler);
 }
 
