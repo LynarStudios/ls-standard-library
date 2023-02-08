@@ -3,11 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
 #include <algorithm>
+#include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/xml/XmlNode.hpp>
 
@@ -21,7 +22,7 @@ bool ls::std::io::XmlNode::addAttributeAfter(const ::std::shared_ptr<ls::std::io
   bool added{};
   auto iterator = this->attributes.begin();
   _checkIfAttributeReferenceIsValid(_attribute);
-  _checkIfNameIsNotEmpty(_name);
+  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
 
   if (!this->_hasAttribute(_attribute->getName()))
   {
@@ -47,7 +48,7 @@ bool ls::std::io::XmlNode::addAttributeBefore(const ::std::shared_ptr<ls::std::i
   bool added{};
   auto iterator = this->attributes.begin();
   _checkIfAttributeReferenceIsValid(_attribute);
-  _checkIfNameIsNotEmpty(_name);
+  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
 
   if (!this->_hasAttribute(_attribute->getName()))
   {
@@ -310,21 +311,13 @@ std::string ls::std::io::XmlNode::_toXml_(uint8_t _tabSize)
 
 void ls::std::io::XmlNode::_assignName(const ::std::string &_name)
 {
-  if (_name.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_name is empty"};
-  }
-
+  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
   this->name = _name;
 }
 
 void ls::std::io::XmlNode::_assignValue(const ::std::string &_value)
 {
-  if (_value.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_value is empty"};
-  }
-
+  ls::std::core::EmptyStringArgumentEvaluator{_value, "xml node value is empty!"}.evaluate();
   this->value = _value;
 }
 
@@ -333,14 +326,6 @@ void ls::std::io::XmlNode::_checkIfAttributeReferenceIsValid(const ::std::shared
   if (_attribute == nullptr)
   {
     throw ls::std::core::IllegalArgumentException{"_attribute is null"};
-  }
-}
-
-void ls::std::io::XmlNode::_checkIfNameIsNotEmpty(const ::std::string &_name)
-{
-  if (_name.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_name is empty"};
   }
 }
 
@@ -367,20 +352,14 @@ std::string ls::std::io::XmlNode::_getTab(uint8_t _tabSize)
 bool ls::std::io::XmlNode::_hasAttribute(const ::std::string &_name)
 {
   bool exists{};
+  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml attribute name is empty!"}.evaluate();
 
-  if (_name.empty())
+  for (const auto &attribute : this->attributes)
   {
-    throw ls::std::core::IllegalArgumentException{"_name is empty"};
-  }
-  else
-  {
-    for (const auto &attribute : this->attributes)
+    if (attribute->getName() == _name)
     {
-      if (attribute->getName() == _name)
-      {
-        exists = true;
-        break;
-      }
+      exists = true;
+      break;
     }
   }
 
@@ -396,20 +375,14 @@ bool ls::std::io::XmlNode::_hasChild(const ::std::shared_ptr<ls::std::io::XmlNod
 bool ls::std::io::XmlNode::_hasChild(const ::std::string &_name)
 {
   bool exists{};
+  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml child node name is empty!"}.evaluate();
 
-  if (_name.empty())
+  for (const auto &attribute : this->children)
   {
-    throw ls::std::core::IllegalArgumentException{"_name is empty"};
-  }
-  else
-  {
-    for (const auto &attribute : this->children)
+    if (attribute->getName() == _name)
     {
-      if (attribute->getName() == _name)
-      {
-        exists = true;
-        break;
-      }
+      exists = true;
+      break;
     }
   }
 

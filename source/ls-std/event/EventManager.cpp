@@ -3,10 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
+#include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
@@ -19,10 +20,7 @@ ls::std::event::EventManager::~EventManager() = default;
 
 void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
-  if (_id.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_id is empty"};
-  }
+  ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be subscribed!"}.evaluate();
 
   if (_listener == nullptr)
   {
@@ -41,10 +39,7 @@ void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id
 
 void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
-  if (_id.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_id is empty"};
-  }
+  ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be unsubscribed!"}.evaluate();
 
   if (_listener == nullptr)
   {
@@ -89,11 +84,7 @@ void ls::std::event::EventManager::fire(ls::std::event::Event _event)
 
 bool ls::std::event::EventManager::hasEventHandler(const ls::std::core::type::event_id &_id)
 {
-  if (_id.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_id is empty"};
-  }
-
+  ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be passed!"}.evaluate();
   return this->_hasEventHandler(_id);
 }
 
