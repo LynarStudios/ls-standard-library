@@ -138,6 +138,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEvaluator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEventSubscriber.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IListener.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IReader.cpp
