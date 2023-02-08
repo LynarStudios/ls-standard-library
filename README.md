@@ -36,6 +36,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - __AppleClang__ compiler is now officially supported
 - exceptions provided by __core__ submodule now offer a constructor for passing dedicated messages
+- evaluators have been added, which can check a state of variables and throw a dedicated exception in a single line and more convenient way
 
 #### Improvements ####
 
