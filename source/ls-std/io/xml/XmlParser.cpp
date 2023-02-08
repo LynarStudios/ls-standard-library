@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/xml/XmlParser.hpp>
 
 ls::std::io::XmlParser::XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document) : ls::std::core::Class("XmlParser")
@@ -55,11 +55,7 @@ void ls::std::io::XmlParser::_analyze(const ls::std::core::type::byte_field &_da
 
 void ls::std::io::XmlParser::_assignDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document)
 {
-  if (_document == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_document is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_document, "passed document reference is null!"}.evaluate();
   this->document = _document;
 }
 

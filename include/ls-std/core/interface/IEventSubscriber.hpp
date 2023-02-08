@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-05
+ * Changed:         2023-02-08
  *
  * */
 
@@ -11,7 +11,7 @@
 #define LS_STD_I_EVENT_SUBSCRIBER_HPP
 
 #include "IListener.hpp"
-#include <ls-std/core/types/EventTypes.hpp>
+#include <ls-std/core/type/EventTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 

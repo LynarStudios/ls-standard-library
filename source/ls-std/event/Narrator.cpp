@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
 #include <algorithm>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/event/Narrator.hpp>
 
 ls::std::event::Narrator::Narrator() : ls::std::core::Class("Narrator")
@@ -19,18 +19,12 @@ ls::std::event::Narrator::~Narrator() = default;
 bool ls::std::event::Narrator::addListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
   bool wasAdded{};
+  ls::std::core::NullPointerArgumentEvaluator{_listener, "listener reference for add attempt is null!"}.evaluate();
 
-  if (_listener == nullptr)
+  if (!this->_hasListener(_listener))
   {
-    throw ls::std::core::IllegalArgumentException{"_listener is null"};
-  }
-  else
-  {
-    if (!this->_hasListener(_listener))
-    {
-      this->listeners.push_back(_listener);
-      wasAdded = true;
-    }
+    this->listeners.push_back(_listener);
+    wasAdded = true;
   }
 
   return wasAdded;
@@ -49,18 +43,12 @@ void ls::std::event::Narrator::clear()
 bool ls::std::event::Narrator::removeListener(const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
 {
   bool wasRemoved{};
+  ls::std::core::NullPointerArgumentEvaluator{_listener, "listener reference for remove attempt is null!"}.evaluate();
 
-  if (_listener == nullptr)
+  if (this->_hasListener(_listener))
   {
-    throw ls::std::core::IllegalArgumentException{"_listener is null"};
-  }
-  else
-  {
-    if (this->_hasListener(_listener))
-    {
-      this->listeners.remove(_listener);
-      wasRemoved = true;
-    }
+    this->listeners.remove(_listener);
+    wasRemoved = true;
   }
 
   return wasRemoved;

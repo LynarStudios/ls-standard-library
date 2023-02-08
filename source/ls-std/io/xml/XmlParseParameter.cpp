@@ -3,11 +3,11 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-05
-* Changed:         2023-02-07
+* Changed:         2023-02-08
 *
 * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/xml/XmlParseParameter.hpp>
 
 ls::std::io::XmlParseParameter::XmlParseParameter() = default;
@@ -36,10 +36,6 @@ void ls::std::io::XmlParseParameter::setNode(const ::std::shared_ptr<ls::std::io
 
 void ls::std::io::XmlParseParameter::_setNode(const ::std::shared_ptr<ls::std::io::XmlNode> &_node)
 {
-  if (_node == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_node is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_node, "passed node reference is null!"}.evaluate();
   this->node = _node;
 }

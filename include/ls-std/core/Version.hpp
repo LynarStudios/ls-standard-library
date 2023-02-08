@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-06
+ * Changed:         2023-02-08
  *
  * */
 
@@ -12,7 +12,7 @@
 
 #include "Class.hpp"
 #include <ls-std/core/interface/ISerializable.hpp>
-#include <ls-std/core/types/Types.hpp>
+#include <ls-std/core/type/Types.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::core

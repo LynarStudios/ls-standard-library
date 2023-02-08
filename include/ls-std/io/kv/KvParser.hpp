@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-06
+ * Changed:         2023-02-08
  *
  * */
 
@@ -13,7 +13,7 @@
 #include "KvDocument.hpp"
 #include "KvParseParameter.hpp"
 #include <ls-std/core/Class.hpp>
-#include <ls-std/core/types/Types.hpp>
+#include <ls-std/core/type/Types.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 

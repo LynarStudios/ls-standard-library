@@ -127,6 +127,9 @@ set(SOURCE_FILES_BOXING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/String.cpp)
 
 set(SOURCE_FILES_CORE
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/EmptyStringArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/NullPointerArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/NullPointerEvaluator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotHandledException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotSubscribedException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/ExceptionMessage.cpp
@@ -138,6 +141,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEvaluator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEventSubscriber.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IListener.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IReader.cpp
@@ -205,6 +209,9 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/StringTest.cpp)
 
     set(TEST_FILES_CORE
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/evaluator/EmptyStringArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/evaluator/NullPointerArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/evaluator/NullPointerEvaluatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotHandledExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotSubscribedExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/ExceptionMessageTest.cpp

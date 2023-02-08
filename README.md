@@ -36,6 +36,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - __AppleClang__ compiler is now officially supported
 - exceptions provided by __core__ submodule now offer a constructor for passing dedicated messages
+- evaluators have been added, which can check a state of variables and throw a dedicated exception in a single line and more convenient way
 
 #### Improvements ####
 
@@ -45,6 +46,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 - a new naming convention for files and directories has been introduced, where underscores were replaced by dashes entirely
 - fetching the library version can now be achieved by using a dedicated __LibraryVersion__ class - the usage of a static function for this purpose has been removed completely
 - missing nodiscard attributes have been added to library classes
+- rename "types" folder in __core__ submodule to stick to naming convention
 
 #### Fixes ####
 

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-05
-* Changed:         2023-02-05
+* Changed:         2023-02-08
 *
 * */
 
@@ -11,7 +11,7 @@
 #include <classes/TestHelper.hpp>
 #include <climits>
 #include <fstream>
-#include <ls-std/core/types/Types.hpp>
+#include <ls-std/core/type/Types.hpp>
 #include <sstream>
 #include <stdexcept>
 #include <string>

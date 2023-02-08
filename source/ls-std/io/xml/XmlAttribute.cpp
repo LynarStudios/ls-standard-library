@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-23
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/io/xml/XmlAttribute.hpp>
 
 ls::std::io::XmlAttribute::XmlAttribute(const ::std::string &_name) : ls::std::core::Class("XmlAttribute")
@@ -44,20 +44,12 @@ void ls::std::io::XmlAttribute::setValue(const ::std::string &_value)
 
 void ls::std::io::XmlAttribute::_assignName(const ::std::string &_name)
 {
-  if (_name.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_name is empty"};
-  }
-
+  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml attribute name is empty!"}.evaluate();
   this->name = _name;
 }
 
 void ls::std::io::XmlAttribute::_assignValue(const ::std::string &_value)
 {
-  if (_value.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_value is empty"};
-  }
-
+  ls::std::core::EmptyStringArgumentEvaluator{_value, "xml attribute value is empty!"}.evaluate();
   this->value = _value;
 }

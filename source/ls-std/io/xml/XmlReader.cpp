@@ -3,10 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/FileReader.hpp>
 #include <ls-std/io/xml/XmlParser.hpp>
@@ -45,11 +46,7 @@ void ls::std::io::XmlReader::setFile(const ls::std::io::File &_xmlFile)
 
 void ls::std::io::XmlReader::_assignDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document)
 {
-  if (_document == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_document is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_document, "xml document reference is null!"}.evaluate();
   this->document = _document;
 }
 

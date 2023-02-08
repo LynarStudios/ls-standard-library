@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/NewLine.hpp>
 #include <ls-std/io/kv/KvParser.hpp>
 
@@ -35,11 +35,7 @@ void ls::std::io::KvParser::setDocument(const ::std::shared_ptr<ls::std::io::KvD
 
 void ls::std::io::KvParser::_assignDocument(const ::std::shared_ptr<ls::std::io::KvDocument> &_document)
 {
-  if (_document == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_document is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_document, "reference to document is null!"}.evaluate();
   this->document = _document;
 }
 

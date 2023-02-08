@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/xml/XmlDocument.hpp>
 
 ls::std::io::XmlDocument::XmlDocument() : ls::std::core::Class("XmlDocument")
@@ -54,20 +54,12 @@ void ls::std::io::XmlDocument::setRootElement(const ::std::shared_ptr<ls::std::i
 
 void ls::std::io::XmlDocument::_assignDeclaration(const ::std::shared_ptr<ls::std::io::XmlDeclaration> &_declaration)
 {
-  if (_declaration == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_declaration is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_declaration, "xml declaration reference is null!"}.evaluate();
   this->declaration = _declaration;
 }
 
 void ls::std::io::XmlDocument::_assignRootElement(const ::std::shared_ptr<ls::std::io::XmlNode> &_rootElement)
 {
-  if (_rootElement == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_rootElement is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_rootElement, "xml root node reference is null!"}.evaluate();
   this->rootElement = _rootElement;
 }

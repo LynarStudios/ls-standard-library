@@ -3,12 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
 #ifndef LS_STD_LS_STD_CORE_HPP
 #define LS_STD_LS_STD_CORE_HPP
+
+#include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
+#include <ls-std/core/evaluator/NullPointerEvaluator.hpp>
 
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>
@@ -29,9 +33,9 @@
 #include <ls-std/core/interface/IStorable.hpp>
 #include <ls-std/core/interface/IWriter.hpp>
 
-#include <ls-std/core/types/EventTypes.hpp>
-#include <ls-std/core/types/KvTypes.hpp>
-#include <ls-std/core/types/Types.hpp>
+#include <ls-std/core/type/EventTypes.hpp>
+#include <ls-std/core/type/KvTypes.hpp>
+#include <ls-std/core/type/Types.hpp>
 
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/LibraryVersion.hpp>
