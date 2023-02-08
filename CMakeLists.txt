@@ -166,6 +166,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/kv/KvParser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/Logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/LogLevel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/SectionPairRow.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlAttribute.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDocument.cpp
@@ -244,6 +245,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LogLevelTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/SectionPairRowTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlAttributeTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDeclarationTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDocumentTest.cpp
