@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/event/serialization/SerializableJsonEvent.hpp>
 
 ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared_ptr<ls::std::event::Event> &_value) : ls::std::core::Class("SerializableJsonEvent")
@@ -43,11 +43,7 @@ void ls::std::event::SerializableJsonEvent::setValue(const ::std::shared_ptr<ls:
 
 void ls::std::event::SerializableJsonEvent::_assignValue(const ::std::shared_ptr<ls::std::event::Event> &_value)
 {
-  if (_value == nullptr)
-  {
-    throw ls::std::core::IllegalArgumentException{"_value is null"};
-  }
-
+  ls::std::core::NullPointerArgumentEvaluator{_value, "event reference for serialization attempt is null!"}.evaluate();
   this->value = _value;
 }
 

@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/event/Event.hpp>
 
 ls::std::event::Event::Event(const ls::std::core::type::event_id &_id) : ls::std::core::Class("Event")
@@ -56,11 +56,7 @@ void ls::std::event::Event::setId(const ls::std::core::type::event_id &_id)
 
 void ls::std::event::Event::_assignId(const ls::std::core::type::event_id &_id)
 {
-  if (_id.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_id is empty"};
-  }
-
+  ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty!"}.evaluate();
   this->id = _id;
 }
 

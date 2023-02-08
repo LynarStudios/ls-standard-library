@@ -3,12 +3,16 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
 #ifndef LS_STD_LS_STD_CORE_HPP
 #define LS_STD_LS_STD_CORE_HPP
+
+#include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
+#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
+#include <ls-std/core/evaluator/NullPointerEvaluator.hpp>
 
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>

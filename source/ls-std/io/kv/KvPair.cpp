@@ -3,11 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-25
- * Changed:         2023-02-07
+ * Changed:         2023-02-08
  *
  * */
 
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/io/kv/KvPair.hpp>
 
 ls::std::io::KvPair::KvPair(const ls::std::core::type::kv_key &_key, ls::std::core::type::kv_value _value) : ls::std::core::Class("KvPair"), value(::std::move(_value))
@@ -34,10 +34,6 @@ void ls::std::io::KvPair::setValue(const ls::std::core::type::kv_value &_value)
 
 void ls::std::io::KvPair::_assignKey(const ls::std::core::type::kv_key &_key)
 {
-  if (_key.empty())
-  {
-    throw ls::std::core::IllegalArgumentException{"_key is empty"};
-  }
-
+  ls::std::core::EmptyStringArgumentEvaluator{_key, "key is empty!"}.evaluate();
   this->key = _key;
 }
