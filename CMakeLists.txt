@@ -147,6 +147,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/ISerializable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IStorable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Class.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp

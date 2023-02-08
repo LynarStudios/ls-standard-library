@@ -31,6 +31,7 @@
 #include <ls-std/core/interface/IReader.hpp>
 #include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/core/interface/IStorable.hpp>
+#include <ls-std/core/interface/IValidator.hpp>
 #include <ls-std/core/interface/IWriter.hpp>
 
 #include <ls-std/core/type/EventTypes.hpp>
