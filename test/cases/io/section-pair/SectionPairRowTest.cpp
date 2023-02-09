@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-09
 *
 * */
 
@@ -33,23 +33,63 @@ namespace
 
   TEST_F(SectionPairRowTest, getClassName)
   {
-    ASSERT_STREQ("SectionPairRow", SectionPairRow{"TMP_KEY"}.getClassName().c_str());
+    ASSERT_STREQ("SectionPairRow", SectionPairRow{"tmp-key"}.getClassName().c_str());
+  }
+
+  TEST_F(SectionPairRowTest, constructor_empty_key)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            SectionPairRow row{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_F(SectionPairRowTest, constructor_invalid_key)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            SectionPairRow row{"-tmp-key"};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_F(SectionPairRowTest, getKey)
+  {
+    ::std::string key = "tmp-key";
+
+    SectionPairRow row{key};
+    ASSERT_STREQ(key.c_str(), row.getKey().c_str());
   }
 
   TEST_F(SectionPairRowTest, getValue)
   {
-    SectionPairRow row{"TMP_KEY"};
+    SectionPairRow row{"tmp-key"};
     ASSERT_TRUE(row.getValue().empty());
   }
 
   TEST_F(SectionPairRowTest, isKeyValue)
   {
-    ASSERT_FALSE(SectionPairRow{"TMP_KEY"}.isKeyValue());
+    ASSERT_FALSE(SectionPairRow{"tmp-key"}.isKeyValue());
   }
 
   TEST_F(SectionPairRowTest, isList)
   {
-    ASSERT_FALSE(SectionPairRow{"TMP_KEY"}.isList());
+    ASSERT_FALSE(SectionPairRow{"tmp-key"}.isList());
   }
 
   TEST_F(SectionPairRowTest, setValue_key_value)
@@ -58,5 +98,23 @@ namespace
     row.setValue("blue");
 
     ASSERT_STREQ("blue", row.getValue().c_str());
+  }
+
+  TEST_F(SectionPairRowTest, setValue_key_value_empty_value)
+  {
+    SectionPairRow row{"color"};
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            row.setValue("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }
