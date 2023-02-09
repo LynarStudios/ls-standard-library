@@ -24,6 +24,7 @@
 #include <ls-std/io/section-pair/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
+#include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
 
 #include <ls-std/io/xml/XmlAttribute.hpp>
 #include <ls-std/io/xml/XmlDeclaration.hpp>
