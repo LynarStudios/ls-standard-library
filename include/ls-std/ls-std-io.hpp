@@ -20,6 +20,7 @@
 #include <ls-std/io/logging/LogLevelValue.hpp>
 #include <ls-std/io/logging/Logger.hpp>
 
+#include <ls-std/io/section-pair/SectionPairIdentifierArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
