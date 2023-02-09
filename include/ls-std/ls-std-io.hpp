@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-08
+ * Changed:         2023-02-09
  *
  * */
 
@@ -20,6 +20,7 @@
 #include <ls-std/io/logging/LogLevelValue.hpp>
 #include <ls-std/io/logging/Logger.hpp>
 
+#include <ls-std/io/section-pair/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
 
