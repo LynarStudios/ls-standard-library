@@ -15,7 +15,7 @@ namespace ls::std::io
   enum SectionPairRowEnumType
   {
     SECTION_PAIR_ROW_NOT_IMPLEMENTED = 0,
-    SECTION_PAIR_ROW_LIST,
+    SECTION_PAIR_ROW_LIST_VALUE,
     SECTION_PAIR_ROW_SINGLE_VALUE
   };
 }

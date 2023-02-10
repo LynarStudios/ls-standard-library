@@ -11,6 +11,7 @@
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/section-pair/SectionPairIdentifierArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
+#include <ls-std/io/section-pair/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/SectionPairRowSingleValue.hpp>
 
 ls::std::io::SectionPairRow::SectionPairRow(const ls::std::io::section_pair_identifier &_key, const ls::std::io::SectionPairRowEnumType &_type) : ls::std::core::Class("SectionPairRow")
@@ -28,7 +29,7 @@ ls::std::io::section_pair_row_value ls::std::io::SectionPairRow::getKey()
 
 bool ls::std::io::SectionPairRow::isList()
 {
-  return this->value->getType() == ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST;
+  return this->value->getType() == ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE;
 }
 
 bool ls::std::io::SectionPairRow::isSingleValue()
@@ -44,8 +45,9 @@ void ls::std::io::SectionPairRow::_initValue(const ls::std::io::SectionPairRowEn
     {
       throw ls::std::core::IllegalArgumentException{"default row enum type can not be set!"};
     }
-    case SECTION_PAIR_ROW_LIST:
+    case SECTION_PAIR_ROW_LIST_VALUE:
     {
+      this->value = ::std::make_shared<ls::std::io::SectionPairRowListValue>();
     }
     break;
     case SECTION_PAIR_ROW_SINGLE_VALUE:
