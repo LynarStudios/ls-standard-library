@@ -33,7 +33,7 @@ namespace
 
   TEST_F(SectionPairRowTest, getClassName)
   {
-    ASSERT_STREQ("SectionPairRow", SectionPairRow{"tmp-key"}.getClassName().c_str());
+    ASSERT_STREQ("SectionPairRow", SectionPairRow("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE).getClassName().c_str());
   }
 
   TEST_F(SectionPairRowTest, constructor_empty_key)
@@ -42,7 +42,7 @@ namespace
         {
           try
           {
-            SectionPairRow row{""};
+            SectionPairRow row("", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -58,7 +58,7 @@ namespace
         {
           try
           {
-            SectionPairRow row{"-tmp-key"};
+            SectionPairRow row("-tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -72,17 +72,17 @@ namespace
   {
     ls::std::io::section_pair_identifier key = "tmp-key";
 
-    SectionPairRow row{key};
+    SectionPairRow row(key, SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
     ASSERT_STREQ(key.c_str(), row.getKey().c_str());
   }
 
   TEST_F(SectionPairRowTest, isSingleValue)
   {
-    ASSERT_FALSE(SectionPairRow{"tmp-key"}.isSingleValue());
+    ASSERT_TRUE(SectionPairRow("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE).isSingleValue());
   }
 
   TEST_F(SectionPairRowTest, isList)
   {
-    ASSERT_FALSE(SectionPairRow{"tmp-key"}.isList());
+    ASSERT_FALSE(SectionPairRow("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE).isList());
   }
 }

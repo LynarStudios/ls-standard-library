@@ -26,10 +26,13 @@ namespace ls::std::io
 
       [[nodiscard]] ls::std::io::section_pair_row_value get();
       [[nodiscard]] ls::std::io::SectionPairRowEnumType getType() override;
+      void set(const ls::std::io::section_pair_row_value &_value);
 
     private:
 
       ls::std::io::section_pair_row_value value{};
+
+      void _set(const ls::std::io::section_pair_row_value &_value);
   };
 }
 

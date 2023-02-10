@@ -11,10 +11,11 @@
 #define LS_STD_SECTION_PAIR_ROW_HPP
 
 #include "SectionPairRowEnumType.hpp"
+#include "SectionPairRowValue.hpp"
 #include "SectionPairTypes.hpp"
-#include <list>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::io
 {
@@ -22,7 +23,7 @@ namespace ls::std::io
   {
     public:
 
-      explicit SectionPairRow(const ls::std::io::section_pair_identifier &_key);
+      explicit SectionPairRow(const ls::std::io::section_pair_identifier &_key, const ls::std::io::SectionPairRowEnumType &_type);
       ~SectionPairRow() override;
 
       [[nodiscard]] ls::std::io::section_pair_identifier getKey();
@@ -32,7 +33,10 @@ namespace ls::std::io
     private:
 
       ls::std::io::section_pair_identifier key{};
-      ls::std::io::SectionPairRowEnumType type{};
+      ::std::shared_ptr<ls::std::io::SectionPairRowValue> value{};
+
+      void _initValue(const ls::std::io::SectionPairRowEnumType &_type);
+      void _setKey(const ls::std::io::section_pair_identifier &_key);
   };
 }
 

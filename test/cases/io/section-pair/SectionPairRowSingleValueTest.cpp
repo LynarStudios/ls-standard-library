@@ -79,4 +79,40 @@ namespace
     SectionPairRowSingleValue value{"blue"};
     ASSERT_EQ(ls::std::io::SECTION_PAIR_ROW_SINGLE_VALUE, value.getType());
   }
+
+  TEST_F(SectionPairRowSingleValueTest, set_empty_value)
+  {
+    SectionPairRowSingleValue value{"empty"};
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            value.set("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_F(SectionPairRowSingleValueTest, set_invalid_value)
+  {
+    SectionPairRowSingleValue value{"empty"};
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            value.set("=33");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
 }
