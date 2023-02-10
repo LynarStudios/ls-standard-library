@@ -24,6 +24,8 @@
 #include <ls-std/io/section-pair/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
+#include <ls-std/io/section-pair/SectionPairRowSingleValue.hpp>
+#include <ls-std/io/section-pair/SectionPairRowValue.hpp>
 #include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
