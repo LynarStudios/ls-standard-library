@@ -27,6 +27,7 @@ namespace ls::std::io
       ~SectionPairRow() override;
 
       [[nodiscard]] ls::std::io::section_pair_identifier getKey();
+      [[nodiscard]] ::std::shared_ptr<ls::std::io::SectionPairRowValue> getValue();
       [[nodiscard]] bool isList();
       [[nodiscard]] bool isSingleValue();
 

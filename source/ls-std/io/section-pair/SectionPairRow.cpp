@@ -27,6 +27,11 @@ ls::std::io::section_pair_row_value ls::std::io::SectionPairRow::getKey()
   return this->key;
 }
 
+::std::shared_ptr<ls::std::io::SectionPairRowValue> ls::std::io::SectionPairRow::getValue()
+{
+  return this->value;
+}
+
 bool ls::std::io::SectionPairRow::isList()
 {
   return this->value->getType() == ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE;

@@ -76,6 +76,15 @@ namespace
     ASSERT_STREQ(key.c_str(), row.getKey().c_str());
   }
 
+  TEST_F(SectionPairRowTest, getValue)
+  {
+    SectionPairRow row("hobbies", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
+    shared_ptr<SectionPairRowValue> value = row.getValue();
+
+    ASSERT_TRUE(value != nullptr);
+    ASSERT_EQ(SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE, value->getType());
+  }
+
   TEST_F(SectionPairRowTest, isSingleValue)
   {
     ASSERT_TRUE(SectionPairRow("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE).isSingleValue());
