@@ -25,7 +25,7 @@ namespace ls::std::io
       explicit SectionPairIdentifierValidator(ls::std::io::section_pair_identifier _identifier);
       ~SectionPairIdentifierValidator() override;
 
-      bool isValid() override;
+      [[nodiscard]] bool isValid() override;
 
     private:
 

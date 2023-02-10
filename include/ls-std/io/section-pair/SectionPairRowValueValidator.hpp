@@ -25,7 +25,7 @@ namespace ls::std::io
       explicit SectionPairRowValueValidator(ls::std::io::section_pair_row_value _value);
       ~SectionPairRowValueValidator() override;
 
-      bool isValid() override;
+      [[nodiscard]] bool isValid() override;
 
     private:
 
