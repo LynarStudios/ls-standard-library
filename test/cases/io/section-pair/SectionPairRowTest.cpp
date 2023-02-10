@@ -117,4 +117,22 @@ namespace
         },
         IllegalArgumentException);
   }
+
+  TEST_F(SectionPairRowTest, setValue_key_value_invalid_value)
+  {
+    SectionPairRow row{"color"};
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            row.setValue("=33");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
 }

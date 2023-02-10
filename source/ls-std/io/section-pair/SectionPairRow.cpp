@@ -10,6 +10,7 @@
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairIdentifierArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
+#include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
 
 ls::std::io::SectionPairRow::SectionPairRow(const ls::std::io::section_pair_identifier &_key) : ls::std::core::Class("SectionPairRow")
 {
@@ -43,7 +44,7 @@ bool ls::std::io::SectionPairRow::isList()
 void ls::std::io::SectionPairRow::setValue(const ls::std::io::section_pair_row_value &_value)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_value, "passed value for section pair row is empty!"}.evaluate();
-  //TODO: add SectionPairRowValueArgumentEvaluator
+  ls::std::io::SectionPairRowValueArgumentEvaluator{_value, "passed value for section pair row \"" + _value + "\" contains invalid characters!"}.evaluate();
   this->_setType(ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_KEY_VALUE);
   this->_setValue(_value);
 }
