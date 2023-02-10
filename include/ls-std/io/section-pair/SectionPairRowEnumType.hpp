@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-10
 *
 * */
 
@@ -16,7 +16,7 @@ namespace ls::std::io
   {
     SECTION_PAIR_ROW_NOT_IMPLEMENTED = 0,
     SECTION_PAIR_ROW_LIST,
-    SECTION_PAIR_ROW_KEY_VALUE
+    SECTION_PAIR_ROW_SINGLE_VALUE
   };
 }
 

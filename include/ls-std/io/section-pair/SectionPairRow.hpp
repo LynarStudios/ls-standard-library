@@ -26,19 +26,13 @@ namespace ls::std::io
       ~SectionPairRow() override;
 
       [[nodiscard]] ls::std::io::section_pair_identifier getKey();
-      [[nodiscard]] ls::std::io::section_pair_row_value getValue();
-      [[nodiscard]] bool isKeyValue();
       [[nodiscard]] bool isList();
-      void setValue(const ls::std::io::section_pair_row_value &_value);
+      [[nodiscard]] bool isSingleValue();
 
     private:
 
       ls::std::io::section_pair_identifier key{};
       ls::std::io::SectionPairRowEnumType type{};
-      ::std::list<ls::std::io::section_pair_row_value> values{};
-
-      void _setType(const ls::std::io::SectionPairRowEnumType &_type);
-      void _setValue(const ls::std::io::section_pair_row_value &_value);
   };
 }
 

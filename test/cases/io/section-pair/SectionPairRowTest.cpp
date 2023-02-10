@@ -76,63 +76,13 @@ namespace
     ASSERT_STREQ(key.c_str(), row.getKey().c_str());
   }
 
-  TEST_F(SectionPairRowTest, getValue)
+  TEST_F(SectionPairRowTest, isSingleValue)
   {
-    SectionPairRow row{"tmp-key"};
-    ASSERT_TRUE(row.getValue().empty());
-  }
-
-  TEST_F(SectionPairRowTest, isKeyValue)
-  {
-    ASSERT_FALSE(SectionPairRow{"tmp-key"}.isKeyValue());
+    ASSERT_FALSE(SectionPairRow{"tmp-key"}.isSingleValue());
   }
 
   TEST_F(SectionPairRowTest, isList)
   {
     ASSERT_FALSE(SectionPairRow{"tmp-key"}.isList());
-  }
-
-  TEST_F(SectionPairRowTest, setValue_key_value)
-  {
-    SectionPairRow row{"color"};
-    row.setValue("blue");
-
-    ASSERT_STREQ("blue", row.getValue().c_str());
-  }
-
-  TEST_F(SectionPairRowTest, setValue_key_value_empty_value)
-  {
-    SectionPairRow row{"color"};
-
-    EXPECT_THROW(
-        {
-          try
-          {
-            row.setValue("");
-          }
-          catch (const IllegalArgumentException &_exception)
-          {
-            throw;
-          }
-        },
-        IllegalArgumentException);
-  }
-
-  TEST_F(SectionPairRowTest, setValue_key_value_invalid_value)
-  {
-    SectionPairRow row{"color"};
-
-    EXPECT_THROW(
-        {
-          try
-          {
-            row.setValue("=33");
-          }
-          catch (const IllegalArgumentException &_exception)
-          {
-            throw;
-          }
-        },
-        IllegalArgumentException);
   }
 }
