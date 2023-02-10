@@ -139,6 +139,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArithmeticOperationException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IncompleteJsonException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/WrongCallException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEvaluator.cpp
@@ -226,6 +227,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IllegalArithmeticOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IncompleteJsonExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/NullPointerExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/WrongCallExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp
