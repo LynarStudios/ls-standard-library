@@ -13,11 +13,12 @@
 #include "SectionPairTypes.hpp"
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/IValidator.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::io
 {
-  class SectionPairIdentifierValidator : public ls::std::core::Class, public ls::std::core::interface_type::IValidator
+  class LS_STD_DYNAMIC_GOAL SectionPairIdentifierValidator : public ls::std::core::Class, public ls::std::core::interface_type::IValidator
   {
     public:
 

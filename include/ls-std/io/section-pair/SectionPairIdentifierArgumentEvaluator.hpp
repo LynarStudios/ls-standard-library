@@ -12,11 +12,12 @@
 
 #include "SectionPairTypes.hpp"
 #include <ls-std/core/interface/IEvaluator.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::io
 {
-  class SectionPairIdentifierArgumentEvaluator : public ls::std::core::interface_type::IEvaluator
+  class LS_STD_DYNAMIC_GOAL SectionPairIdentifierArgumentEvaluator : public ls::std::core::interface_type::IEvaluator
   {
     public:
 

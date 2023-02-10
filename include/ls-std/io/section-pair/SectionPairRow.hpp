@@ -14,10 +14,11 @@
 #include "SectionPairTypes.hpp"
 #include <list>
 #include <ls-std/core/Class.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io
 {
-  class SectionPairRow : public ls::std::core::Class
+  class LS_STD_DYNAMIC_GOAL SectionPairRow : public ls::std::core::Class
   {
     public:
 
