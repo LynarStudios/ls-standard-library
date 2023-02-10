@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-09
+* Changed:         2023-02-10
 *
 * */
 
@@ -70,7 +70,7 @@ namespace
 
   TEST_F(SectionPairRowTest, getKey)
   {
-    ::std::string key = "tmp-key";
+    ls::std::io::section_pair_identifier key = "tmp-key";
 
     SectionPairRow row{key};
     ASSERT_STREQ(key.c_str(), row.getKey().c_str());

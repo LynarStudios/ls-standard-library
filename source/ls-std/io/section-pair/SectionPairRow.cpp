@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-09
+* Changed:         2023-02-10
 *
 * */
 
@@ -11,7 +11,7 @@
 #include <ls-std/io/section-pair/SectionPairIdentifierArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
 
-ls::std::io::SectionPairRow::SectionPairRow(const ::std::string &_key) : ls::std::core::Class("SectionPairRow")
+ls::std::io::SectionPairRow::SectionPairRow(const ls::std::io::section_pair_identifier &_key) : ls::std::core::Class("SectionPairRow")
 {
   ls::std::core::EmptyStringArgumentEvaluator{_key, "passed key identifier for section pair row is empty!"}.evaluate();
   ls::std::io::SectionPairIdentifierArgumentEvaluator(_key, "section pair key identifier \"" + _key + "\" contains invalid characters!").evaluate();
@@ -20,7 +20,7 @@ ls::std::io::SectionPairRow::SectionPairRow(const ::std::string &_key) : ls::std
 
 ls::std::io::SectionPairRow::~SectionPairRow() = default;
 
-::std::string ls::std::io::SectionPairRow::getKey()
+ls::std::io::section_pair_row_value ls::std::io::SectionPairRow::getKey()
 {
   return this->key;
 }
@@ -40,7 +40,7 @@ bool ls::std::io::SectionPairRow::isList()
   return this->type == ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST;
 }
 
-void ls::std::io::SectionPairRow::setValue(const ::std::string &_value)
+void ls::std::io::SectionPairRow::setValue(const ls::std::io::section_pair_row_value &_value)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_value, "passed value for section pair row is empty!"}.evaluate();
   //TODO: add SectionPairRowValueArgumentEvaluator
@@ -56,7 +56,7 @@ void ls::std::io::SectionPairRow::_setType(const ls::std::io::SectionPairRowEnum
   }
 }
 
-void ls::std::io::SectionPairRow::_setValue(const ::std::string &_value)
+void ls::std::io::SectionPairRow::_setValue(const ls::std::io::section_pair_row_value &_value)
 {
   if (!this->values.empty())
   {

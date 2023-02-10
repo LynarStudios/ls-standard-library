@@ -11,7 +11,7 @@
 #include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
 
-ls::std::io::SectionPairRowValueArgumentEvaluator::SectionPairRowValueArgumentEvaluator(::std::string _value, ::std::string _message) : value(::std::move(_value)) , message(::std::move(_message))
+ls::std::io::SectionPairRowValueArgumentEvaluator::SectionPairRowValueArgumentEvaluator(ls::std::io::section_pair_row_value _value, ::std::string _message) : value(::std::move(_value)) , message(::std::move(_message))
 {}
 
 ls::std::io::SectionPairRowValueArgumentEvaluator::~SectionPairRowValueArgumentEvaluator() = default;

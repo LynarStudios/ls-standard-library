@@ -3,13 +3,14 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-09
+* Changed:         2023-02-10
 *
 * */
 
 #ifndef LS_STD_SECTION_PAIR_IDENTIFIER_ARGUMENT_EVALUATOR_HPP
 #define LS_STD_SECTION_PAIR_IDENTIFIER_ARGUMENT_EVALUATOR_HPP
 
+#include "SectionPairTypes.hpp"
 #include <ls-std/core/interface/IEvaluator.hpp>
 #include <string>
 
@@ -19,14 +20,14 @@ namespace ls::std::io
   {
     public:
 
-      SectionPairIdentifierArgumentEvaluator(::std::string _identifier, ::std::string _message);
+      explicit SectionPairIdentifierArgumentEvaluator(ls::std::io::section_pair_identifier _identifier, ::std::string _message);
       ~SectionPairIdentifierArgumentEvaluator() override;
 
       void evaluate() override;
 
     private:
 
-      ::std::string identifier{};
+      ls::std::io::section_pair_identifier identifier{};
       ::std::string message{};
   };
 }

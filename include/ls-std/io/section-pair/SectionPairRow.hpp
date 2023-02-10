@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-09
+* Changed:         2023-02-10
 *
 * */
 
@@ -11,9 +11,9 @@
 #define LS_STD_SECTION_PAIR_ROW_HPP
 
 #include "SectionPairRowEnumType.hpp"
+#include "SectionPairTypes.hpp"
 #include <list>
 #include <ls-std/core/Class.hpp>
-#include <string>
 
 namespace ls::std::io
 {
@@ -21,23 +21,23 @@ namespace ls::std::io
   {
     public:
 
-      explicit SectionPairRow(const ::std::string &_key);
+      explicit SectionPairRow(const ls::std::io::section_pair_identifier &_key);
       ~SectionPairRow() override;
 
-      [[nodiscard]] ::std::string getKey();
-      [[nodiscard]] ::std::string getValue();
+      [[nodiscard]] ls::std::io::section_pair_identifier getKey();
+      [[nodiscard]] ls::std::io::section_pair_row_value getValue();
       [[nodiscard]] bool isKeyValue();
       [[nodiscard]] bool isList();
-      void setValue(const ::std::string &_value);
+      void setValue(const ls::std::io::section_pair_row_value &_value);
 
     private:
 
-      ::std::string key{};
+      ls::std::io::section_pair_identifier key{};
       ls::std::io::SectionPairRowEnumType type{};
-      ::std::list<::std::string> values{};
+      ::std::list<ls::std::io::section_pair_row_value> values{};
 
-      void _setType(const ls::std::io::SectionPairRowEnumType& _type);
-      void _setValue(const ::std::string &_value);
+      void _setType(const ls::std::io::SectionPairRowEnumType &_type);
+      void _setValue(const ls::std::io::section_pair_row_value &_value);
   };
 }
 
