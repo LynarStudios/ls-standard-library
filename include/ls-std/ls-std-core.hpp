@@ -22,6 +22,7 @@
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/core/exception/IllegalArithmeticOperationException.hpp>
 #include <ls-std/core/exception/IncompleteJsonException.hpp>
+#include <ls-std/core/exception/IndexOutOfBoundsException.hpp>
 #include <ls-std/core/exception/NullPointerException.hpp>
 #include <ls-std/core/exception/WrongCallException.hpp>
 
