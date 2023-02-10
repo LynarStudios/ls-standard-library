@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-09
+ * Changed:         2023-02-10
  *
  * */
 
@@ -24,6 +24,7 @@
 #include <ls-std/io/section-pair/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
+#include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
 
 #include <ls-std/io/xml/XmlAttribute.hpp>

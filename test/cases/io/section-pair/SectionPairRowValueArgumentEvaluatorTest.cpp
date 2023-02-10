@@ -2,7 +2,7 @@
 * Author:          Patrick-Christopher Mattulat
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
-* Created:         2023-02-09
+* Created:         2023-02-10
 * Changed:         2023-02-10
 *
 * */
@@ -18,12 +18,12 @@ using namespace ::std;
 
 namespace
 {
-  class SectionPairIdentifierArgumentEvaluatorTest : public ::testing::Test
+  class SectionPairRowValueArgumentEvaluatorTest : public ::testing::Test
   {
     protected:
 
-      SectionPairIdentifierArgumentEvaluatorTest() = default;
-      ~SectionPairIdentifierArgumentEvaluatorTest() override = default;
+      SectionPairRowValueArgumentEvaluatorTest() = default;
+      ~SectionPairRowValueArgumentEvaluatorTest() override = default;
 
       void SetUp() override
       {}
@@ -32,18 +32,18 @@ namespace
       {}
   };
 
-  TEST_F(SectionPairIdentifierArgumentEvaluatorTest, evaluate)
+  TEST_F(SectionPairRowValueArgumentEvaluatorTest, evaluate)
   {
     EXPECT_THROW(
         {
           try
           {
-            SectionPairIdentifierArgumentEvaluator("_color", "section pair identifier contains invalid characters!").evaluate();
+            SectionPairRowValueArgumentEvaluator("=33", "section pair value contains invalid characters!").evaluate();
           }
           catch (const IllegalArgumentException &_exception)
           {
             ::std::string message = _exception.what();
-            ASSERT_STREQ("IllegalArgumentException thrown - section pair identifier contains invalid characters!", message.c_str());
+            ASSERT_STREQ("IllegalArgumentException thrown - section pair value contains invalid characters!", message.c_str());
             throw;
           }
         },
