@@ -12,8 +12,10 @@
 
 #include "SectionPairRowValue.hpp"
 #include <ls-std/core/Class.hpp>
+#include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::io
 {
@@ -26,11 +28,15 @@ namespace ls::std::io
 
       [[nodiscard]] ls::std::io::section_pair_row_value get();
       [[nodiscard]] ls::std::io::SectionPairRowEnumType getType() override;
+      [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void set(const ls::std::io::section_pair_row_value &_value);
+      void setSerializable(const ::std::shared_ptr<ls::std::core::interface_type::ISerializable>& _serializable);
+      void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
 
-      ls::std::io::section_pair_row_value value{};
+    ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
+    ls::std::io::section_pair_row_value value{};
 
       void _set(const ls::std::io::section_pair_row_value &_value);
   };

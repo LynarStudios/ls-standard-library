@@ -13,3 +13,11 @@ ls::std::io::SectionPairRowValue::SectionPairRowValue(const ls::std::io::Section
 {}
 
 ls::std::io::SectionPairRowValue::~SectionPairRowValue() = default;
+
+ls::std::core::type::byte_field ls::std::io::SectionPairRowValue::marshal()
+{
+  return ls::std::core::type::byte_field{};
+}
+
+void ls::std::io::SectionPairRowValue::unmarshal(const ls::std::core::type::byte_field &_data)
+{}
