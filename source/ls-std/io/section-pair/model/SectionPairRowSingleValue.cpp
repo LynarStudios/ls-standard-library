@@ -3,13 +3,13 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
-#include <ls-std/io/section-pair/SectionPairRowSingleValue.hpp>
-#include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 
 ls::std::io::SectionPairRowSingleValue::SectionPairRowSingleValue(const ls::std::io::section_pair_row_value &_value) : ls::std::core::Class("SectionPairRowSingleValue"), ls::std::io::SectionPairRowValue(ls::std::io::SECTION_PAIR_ROW_SINGLE_VALUE)
 {

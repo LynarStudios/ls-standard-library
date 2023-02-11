@@ -20,18 +20,18 @@
 #include <ls-std/io/logging/LogLevelValue.hpp>
 #include <ls-std/io/logging/Logger.hpp>
 
-#include <ls-std/io/section-pair/SectionPairIdentifierArgumentEvaluator.hpp>
-#include <ls-std/io/section-pair/SectionPairIdentifierValidator.hpp>
-#include <ls-std/io/section-pair/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
-#include <ls-std/io/section-pair/SectionPairRowListValue.hpp>
-#include <ls-std/io/section-pair/SectionPairRowSingleValue.hpp>
-#include <ls-std/io/section-pair/SectionPairRowValue.hpp>
-#include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
-#include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
-#include <ls-std/io/section-pair/SerializableSectionPairRowListValue.hpp>
-#include <ls-std/io/section-pair/SerializableSectionPairRowSingleValue.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRow.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowValue.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairRowValueValidator.hpp>
 
 #include <ls-std/io/xml/XmlAttribute.hpp>
 #include <ls-std/io/xml/XmlDeclaration.hpp>

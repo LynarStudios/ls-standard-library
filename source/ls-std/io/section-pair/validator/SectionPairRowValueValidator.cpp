@@ -3,11 +3,11 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
-#include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairRowValueValidator.hpp>
 
 ls::std::io::SectionPairRowValueValidator::SectionPairRowValueValidator(ls::std::io::section_pair_row_value _value) : ls::std::core::Class("SectionPairRowValueValidator"), value(::std::move(_value))
 {}

@@ -3,16 +3,16 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
-#include <ls-std/io/section-pair/SectionPairIdentifierArgumentEvaluator.hpp>
-#include <ls-std/io/section-pair/SectionPairRow.hpp>
-#include <ls-std/io/section-pair/SectionPairRowListValue.hpp>
-#include <ls-std/io/section-pair/SectionPairRowSingleValue.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRow.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 
 ls::std::io::SectionPairRow::SectionPairRow(const ls::std::io::section_pair_identifier &_key, const ls::std::io::SectionPairRowEnumType &_type) : ls::std::core::Class("SectionPairRow")
 {

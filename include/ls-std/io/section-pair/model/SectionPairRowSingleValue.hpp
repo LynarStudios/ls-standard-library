@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
@@ -11,8 +11,8 @@
 #define LS_STD_SECTION_PAIR_ROW_SINGLE_VALUE_HPP
 
 #include "SectionPairRowValue.hpp"
-#include "SectionPairTypes.hpp"
 #include <ls-std/core/Class.hpp>
+#include <ls-std/io/section-pair/SectionPairTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io

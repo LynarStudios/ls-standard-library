@@ -9,8 +9,8 @@
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
-#include <ls-std/io/section-pair/SectionPairRowListValue.hpp>
-#include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 
 ls::std::io::SectionPairRowListValue::SectionPairRowListValue() : ls::std::core::Class("SectionPairRowListValue"), ls::std::io::SectionPairRowValue(ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE)
 {}

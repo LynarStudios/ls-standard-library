@@ -3,15 +3,15 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
-#include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
-#include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairRowValueValidator.hpp>
 
-ls::std::io::SectionPairRowValueArgumentEvaluator::SectionPairRowValueArgumentEvaluator(ls::std::io::section_pair_row_value _value, ::std::string _message) : value(::std::move(_value)) , message(::std::move(_message))
+ls::std::io::SectionPairRowValueArgumentEvaluator::SectionPairRowValueArgumentEvaluator(ls::std::io::section_pair_row_value _value, ::std::string _message) : value(::std::move(_value)), message(::std::move(_message))
 {}
 
 ls::std::io::SectionPairRowValueArgumentEvaluator::~SectionPairRowValueArgumentEvaluator() = default;

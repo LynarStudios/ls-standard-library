@@ -9,7 +9,7 @@
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
-#include <ls-std/io/section-pair/SerializableSectionPairRowSingleValue.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>
 
 ls::std::io::SerializableSectionPairRowSingleValue::SerializableSectionPairRowSingleValue(const ::std::shared_ptr<ls::std::io::SectionPairRowSingleValue> &_value)
 {

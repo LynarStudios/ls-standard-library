@@ -10,7 +10,7 @@
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/NewLine.hpp>
-#include <ls-std/io/section-pair/SerializableSectionPairRowListValue.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 
 ls::std::io::SerializableSectionPairRowListValue::SerializableSectionPairRowListValue(const ::std::shared_ptr<ls::std::io::SectionPairRowListValue> &_value)
 {

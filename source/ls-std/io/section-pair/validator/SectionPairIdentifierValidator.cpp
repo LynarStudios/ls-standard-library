@@ -3,11 +3,11 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
-#include <ls-std/io/section-pair/SectionPairIdentifierValidator.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
 
 ls::std::io::SectionPairIdentifierValidator::SectionPairIdentifierValidator(ls::std::io::section_pair_identifier _identifier) : ls::std::core::Class("SectionPairIdentifierValidator"), identifier(::std::move(_identifier))
 {}

@@ -3,17 +3,17 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
 #ifndef LS_STD_SECTION_PAIR_ROW_HPP
 #define LS_STD_SECTION_PAIR_ROW_HPP
 
-#include "SectionPairRowEnumType.hpp"
-#include "SectionPairRowValue.hpp"
-#include "SectionPairTypes.hpp"
 #include <ls-std/core/Class.hpp>
+#include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
+#include <ls-std/io/section-pair/SectionPairTypes.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowValue.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 

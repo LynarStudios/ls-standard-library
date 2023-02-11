@@ -11,9 +11,9 @@
 #define LS_STD_SECTION_PAIR_ROW_LIST_VALUE_HPP
 
 #include "SectionPairRowValue.hpp"
-#include "SectionPairTypes.hpp"
 #include <list>
 #include <ls-std/core/Class.hpp>
+#include <ls-std/io/section-pair/SectionPairTypes.hpp>
 
 namespace ls::std::io
 {
