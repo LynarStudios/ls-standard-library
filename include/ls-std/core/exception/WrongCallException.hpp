@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
@@ -16,7 +16,7 @@
 
 namespace ls::std::core
 {
-  class LS_STD_DYNAMIC_GOAL WrongCallException : public ::std::exception
+  class LS_STD_DYNAMIC_GOAL WrongCallException : public ::std::exception // TODO: remove, really makes no sense :D
   {
     public:
 

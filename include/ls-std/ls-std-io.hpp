@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-10
+ * Changed:         2023-02-11
  *
  * */
 
@@ -30,6 +30,7 @@
 #include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
+#include <ls-std/io/section-pair/SerializableSectionPairRowSingleValue.hpp>
 
 #include <ls-std/io/xml/XmlAttribute.hpp>
 #include <ls-std/io/xml/XmlDeclaration.hpp>
