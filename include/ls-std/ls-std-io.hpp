@@ -30,6 +30,7 @@
 #include <ls-std/io/section-pair/SectionPairRowValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairRowValueValidator.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
+#include <ls-std/io/section-pair/SerializableSectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/SerializableSectionPairRowSingleValue.hpp>
 
 #include <ls-std/io/xml/XmlAttribute.hpp>

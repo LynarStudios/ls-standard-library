@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-11
 *
 * */
 
@@ -42,6 +42,11 @@ ls::std::io::section_pair_row_value ls::std::io::SectionPairRowListValue::get(si
   }
 
   return value;
+}
+
+::std::list<ls::std::io::section_pair_row_value> ls::std::io::SectionPairRowListValue::getList()
+{
+  return this->values;
 }
 
 size_t ls::std::io::SectionPairRowListValue::getSize()
