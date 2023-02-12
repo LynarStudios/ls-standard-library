@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-11
+* Changed:         2023-02-12
 *
 * */
 
@@ -30,6 +30,7 @@ namespace ls::std::io
       [[nodiscard]] ::std::shared_ptr<ls::std::io::SectionPairRowValue> getValue();
       [[nodiscard]] bool isList();
       [[nodiscard]] bool isSingleValue();
+      void setKey(const ls::std::io::section_pair_identifier &_key);
 
     private:
 

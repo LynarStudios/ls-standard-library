@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-11
+* Changed:         2023-02-12
 *
 * */
 
@@ -40,6 +40,11 @@ bool ls::std::io::SectionPairRow::isList()
 bool ls::std::io::SectionPairRow::isSingleValue()
 {
   return this->value->getType() == ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE;
+}
+
+void ls::std::io::SectionPairRow::setKey(const ls::std::io::section_pair_identifier &_key)
+{
+  this->_setKey(_key);
 }
 
 void ls::std::io::SectionPairRow::_initValue(const ls::std::io::SectionPairRowEnumType &_type)

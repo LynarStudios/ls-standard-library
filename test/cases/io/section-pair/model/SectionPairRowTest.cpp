@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-11
+* Changed:         2023-02-12
 *
 * */
 
@@ -93,5 +93,13 @@ namespace
   TEST_F(SectionPairRowTest, isList)
   {
     ASSERT_FALSE(SectionPairRow("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE).isList());
+  }
+
+  TEST_F(SectionPairRowTest, setKey)
+  {
+    SectionPairRow row("hobbies", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
+    row.setKey("colors");
+
+    ASSERT_STREQ("colors", row.getKey().c_str());
   }
 }
