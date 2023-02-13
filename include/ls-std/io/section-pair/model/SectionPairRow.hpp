@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-12
+* Changed:         2023-02-13
 *
 * */
 
@@ -11,6 +11,7 @@
 #define LS_STD_SECTION_PAIR_ROW_HPP
 
 #include <ls-std/core/Class.hpp>
+#include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowValue.hpp>
@@ -19,7 +20,7 @@
 
 namespace ls::std::io
 {
-  class LS_STD_DYNAMIC_GOAL SectionPairRow : public ls::std::core::Class
+  class LS_STD_DYNAMIC_GOAL SectionPairRow : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
   {
     public:
 
@@ -30,11 +31,15 @@ namespace ls::std::io
       [[nodiscard]] ::std::shared_ptr<ls::std::io::SectionPairRowValue> getValue();
       [[nodiscard]] bool isList();
       [[nodiscard]] bool isSingleValue();
+      [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void setKey(const ls::std::io::section_pair_identifier &_key);
+      void setSerializable(const ::std::shared_ptr<ls::std::core::interface_type::ISerializable>& _serializable);
+      void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
 
       ls::std::io::section_pair_identifier key{};
+      ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
       ::std::shared_ptr<ls::std::io::SectionPairRowValue> value{};
 
       void _initValue(const ls::std::io::SectionPairRowEnumType &_type);

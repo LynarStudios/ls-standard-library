@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-12
-* Changed:         2023-02-12
+* Changed:         2023-02-13
 *
 * */
 
@@ -57,7 +57,7 @@ namespace
   TEST_F(SerializableSectionPairRowTest, marshal_single_value)
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("favourite-color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-    shared_ptr<SectionPairRowSingleValue> singleValue = ::std::dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
+    shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
     singleValue->set("blue");
     singleValue->setSerializable(make_shared<SerializableSectionPairRowSingleValue>(singleValue));
     SerializableSectionPairRow serializable{row};
@@ -68,7 +68,7 @@ namespace
   TEST_F(SerializableSectionPairRowTest, marshal_list_value)
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("favourite-colors", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
-    shared_ptr<SectionPairRowListValue> listValue = ::std::dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
+    shared_ptr<SectionPairRowListValue> listValue = dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
     listValue->add("blue");
     listValue->add("red");
     listValue->add("purple");
@@ -83,7 +83,7 @@ namespace
   TEST_F(SerializableSectionPairRowTest, unmarshal_single_value)
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-    shared_ptr<SectionPairRowSingleValue> singleValue = ::std::dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
+    shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
     singleValue->setSerializable(make_shared<SerializableSectionPairRowSingleValue>(singleValue));
     SerializableSectionPairRow serializable{row};
 
@@ -96,7 +96,7 @@ namespace
   TEST_F(SerializableSectionPairRowTest, unmarshal_list_value)
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
-    shared_ptr<SectionPairRowListValue> listValue = ::std::dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
+    shared_ptr<SectionPairRowListValue> listValue = dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
     listValue->setSerializable(make_shared<SerializableSectionPairRowListValue>(listValue));
     SerializableSectionPairRow serializable{row};
 
