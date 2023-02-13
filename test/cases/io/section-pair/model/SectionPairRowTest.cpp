@@ -101,7 +101,6 @@ namespace
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("favourite-color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
     shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
     singleValue->set("blue");
-    row->setSerializable(make_shared<SerializableSectionPairRow>(row));
 
     ASSERT_STREQ("favourite-color=blue", row->marshal().c_str());
   }
@@ -113,29 +112,10 @@ namespace
     listValue->add("blue");
     listValue->add("red");
     listValue->add("purple");
-    row->setSerializable(make_shared<SerializableSectionPairRow>(row));
 
     string expected = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();
 
     ASSERT_STREQ(expected.c_str(), row->marshal().c_str());
-  }
-
-  TEST_F(SectionPairRowTest, marshal_no_serializable)
-  {
-    SectionPairRow row("hobbies", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
-
-    EXPECT_THROW(
-        {
-          try
-          {
-            byte_field data = row.marshal();
-          }
-          catch (const NullPointerException &_exception)
-          {
-            throw;
-          }
-        },
-        NullPointerException);
   }
 
   TEST_F(SectionPairRowTest, setKey)
@@ -182,28 +162,9 @@ namespace
         IllegalArgumentException);
   }
 
-  TEST_F(SectionPairRowTest, setSerializable_no_reference)
-  {
-    SectionPairRow row("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-
-    EXPECT_THROW(
-        {
-          try
-          {
-            row.setSerializable(nullptr);
-          }
-          catch (const IllegalArgumentException &_exception)
-          {
-            throw;
-          }
-        },
-        IllegalArgumentException);
-  }
-
   TEST_F(SectionPairRowTest, unmarshal_single_value)
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-    row->setSerializable(make_shared<SerializableSectionPairRow>(row));
     shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
 
     row->unmarshal("favourite-color=blue");
@@ -215,7 +176,6 @@ namespace
   TEST_F(SectionPairRowTest, unmarshal_list_value)
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
-    row->setSerializable(make_shared<SerializableSectionPairRow>(row));
     shared_ptr<SectionPairRowListValue> listValue = dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
 
     string data = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();
@@ -226,23 +186,5 @@ namespace
     ASSERT_STREQ("red", listValue->get(1).c_str());
     ASSERT_STREQ("purple", listValue->get(2).c_str());
     ASSERT_EQ(3, listValue->getSize());
-  }
-
-  TEST_F(SectionPairRowTest, unmarshal_no_serializable)
-  {
-    SectionPairRow row("hobbies", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-
-    EXPECT_THROW(
-        {
-          try
-          {
-            row.unmarshal("hobbies:");
-          }
-          catch (const NullPointerException &_exception)
-          {
-            throw;
-          }
-        },
-        NullPointerException);
   }
 }

@@ -20,7 +20,7 @@
 
 namespace ls::std::io
 {
-  class LS_STD_DYNAMIC_GOAL SectionPairRow : public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
+  class LS_STD_DYNAMIC_GOAL SectionPairRow : public ::std::enable_shared_from_this<SectionPairRow>, public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
   {
     public:
 
@@ -33,7 +33,6 @@ namespace ls::std::io
       [[nodiscard]] bool isSingleValue();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void setKey(const ls::std::io::section_pair_identifier &_key);
-      void setSerializable(const ::std::shared_ptr<ls::std::core::interface_type::ISerializable>& _serializable);
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
@@ -42,6 +41,7 @@ namespace ls::std::io
       ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
       ::std::shared_ptr<ls::std::io::SectionPairRowValue> value{};
 
+      void _createSerializable();
       void _initValue(const ls::std::io::SectionPairRowEnumType &_type);
       void _setKey(const ls::std::io::section_pair_identifier &_key);
   };
