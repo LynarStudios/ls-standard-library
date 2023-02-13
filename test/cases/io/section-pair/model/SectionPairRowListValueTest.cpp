@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-11
+* Changed:         2023-02-12
 *
 * */
 
@@ -131,7 +131,7 @@ namespace
     ASSERT_STREQ(expected.c_str(), value->marshal().c_str());
   }
 
-  TEST_F(SectionPairRowListValueTest, marshal_no_reference)
+  TEST_F(SectionPairRowListValueTest, marshal_no_serializable)
   {
     SectionPairRowListValue list{};
 
@@ -180,7 +180,7 @@ namespace
     ASSERT_STREQ("Coding", value->get(2).c_str());
   }
 
-  TEST_F(SectionPairRowListValueTest, unmarshal_no_reference)
+  TEST_F(SectionPairRowListValueTest, unmarshal_no_serializable)
   {
     SectionPairRowListValue list{};
 
