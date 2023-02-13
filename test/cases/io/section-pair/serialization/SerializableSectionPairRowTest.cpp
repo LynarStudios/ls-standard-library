@@ -59,7 +59,6 @@ namespace
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("favourite-color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
     shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
     singleValue->set("blue");
-    singleValue->setSerializable(make_shared<SerializableSectionPairRowSingleValue>(singleValue));
     SerializableSectionPairRow serializable{row};
 
     ASSERT_STREQ("favourite-color=blue", serializable.marshal().c_str());
@@ -84,7 +83,6 @@ namespace
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
     shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
-    singleValue->setSerializable(make_shared<SerializableSectionPairRowSingleValue>(singleValue));
     SerializableSectionPairRow serializable{row};
 
     serializable.unmarshal("favourite-color=blue");

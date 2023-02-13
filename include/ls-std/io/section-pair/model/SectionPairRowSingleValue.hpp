@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-11
+* Changed:         2023-02-13
 *
 * */
 
@@ -19,7 +19,7 @@
 
 namespace ls::std::io
 {
-  class LS_STD_DYNAMIC_GOAL SectionPairRowSingleValue : public ls::std::core::Class, public ls::std::io::SectionPairRowValue
+  class LS_STD_DYNAMIC_GOAL SectionPairRowSingleValue : public ::std::enable_shared_from_this<SectionPairRowSingleValue>, public ls::std::core::Class, public ls::std::io::SectionPairRowValue
   {
     public:
 
@@ -30,14 +30,14 @@ namespace ls::std::io
       [[nodiscard]] ls::std::io::SectionPairRowEnumType getType() override;
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void set(const ls::std::io::section_pair_row_value &_value);
-      void setSerializable(const ::std::shared_ptr<ls::std::core::interface_type::ISerializable>& _serializable);
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
 
-    ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
-    ls::std::io::section_pair_row_value value{};
+      ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
+      ls::std::io::section_pair_row_value value{};
 
+      void _createSerializable();
       void _set(const ls::std::io::section_pair_row_value &_value);
   };
 }
