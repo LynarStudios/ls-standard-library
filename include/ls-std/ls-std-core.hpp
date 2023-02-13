@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2023-02-10
+ * Changed:         2023-02-13
  *
  * */
 
@@ -42,6 +42,7 @@
 #include <ls-std/core/type/Types.hpp>
 
 #include <ls-std/core/Class.hpp>
+#include <ls-std/core/ConditionalFunctionExecutor.hpp>
 #include <ls-std/core/LibraryVersion.hpp>
 #include <ls-std/core/Version.hpp>
 

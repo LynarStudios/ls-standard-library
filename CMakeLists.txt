@@ -153,6 +153,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IWriter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Class.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/ConditionalFunctionExecutor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
@@ -239,9 +240,11 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/NullPointerExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/WrongCallExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ConditionalFunctionExecutorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/ClassWrapper.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/ClassWrapper.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/MathOddValidator.cpp)
 
     set(TEST_FILES_ENCODING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
