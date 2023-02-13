@@ -3,23 +3,24 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-11
+* Changed:         2023-02-13
 *
 * */
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/NewLine.hpp>
+#include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 
-ls::std::io::SerializableSectionPairRowListValue::SerializableSectionPairRowListValue(const ::std::shared_ptr<ls::std::io::SectionPairRowListValue> &_value)
+ls::std::io::SerializableSectionPairRowListValue::SerializableSectionPairRowListValue(const ::std::shared_ptr<ls::std::core::Class> &_value)
 {
   this->_setValue(_value);
 }
 
 ls::std::io::SerializableSectionPairRowListValue::~SerializableSectionPairRowListValue() = default;
 
-::std::shared_ptr<ls::std::io::SectionPairRowListValue> ls::std::io::SerializableSectionPairRowListValue::getValue()
+::std::shared_ptr<ls::std::core::Class> ls::std::io::SerializableSectionPairRowListValue::getValue()
 {
   return this->value;
 }
@@ -28,7 +29,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairRowListValue
 {
   ls::std::core::type::byte_field data{};
 
-  for (const auto &_value : this->value->getList())
+  for (const auto &_value : ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowListValue>(this->value)->getList())
   {
     data += "  " + _value + ls::std::io::NewLine::get();
   }
@@ -46,7 +47,7 @@ void ls::std::io::SerializableSectionPairRowListValue::unmarshal(const ls::std::
     ::std::string::size_type positionOfNewLine = searchText.find(ls::std::io::NewLine::get());
     ::std::string line = ls::std::io::SerializableSectionPairRowListValue::_getLine(positionOfNewLine, searchText);
     line = line.substr(2);
-    this->value->add(line);
+    ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowListValue>(this->value)->add(line);
     ls::std::io::SerializableSectionPairRowListValue::_updateSearchText(positionOfNewLine, searchText);
   }
 }
@@ -67,7 +68,7 @@ void ls::std::io::SerializableSectionPairRowListValue::unmarshal(const ls::std::
   return line;
 }
 
-void ls::std::io::SerializableSectionPairRowListValue::_setValue(const ::std::shared_ptr<ls::std::io::SectionPairRowListValue> &_value)
+void ls::std::io::SerializableSectionPairRowListValue::_setValue(const ::std::shared_ptr<ls::std::core::Class> &_value)
 {
   ls::std::core::NullPointerArgumentEvaluator{_value}.evaluate();
   this->value = _value;

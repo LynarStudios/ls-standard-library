@@ -71,7 +71,6 @@ namespace
     listValue->add("blue");
     listValue->add("red");
     listValue->add("purple");
-    listValue->setSerializable(make_shared<SerializableSectionPairRowListValue>(listValue));
     SerializableSectionPairRow serializable{row};
 
     string expected = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();
@@ -95,7 +94,6 @@ namespace
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
     shared_ptr<SectionPairRowListValue> listValue = dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
-    listValue->setSerializable(make_shared<SerializableSectionPairRowListValue>(listValue));
     SerializableSectionPairRow serializable{row};
 
     string data = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();

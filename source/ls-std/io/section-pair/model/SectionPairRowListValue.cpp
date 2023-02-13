@@ -3,16 +3,16 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-11
+* Changed:         2023-02-13
 *
 * */
 
+#include <ls-std/core/ConditionalFunctionExecutor.hpp>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
-#include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
-#include <ls-std/core/evaluator/NullPointerEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 #include <string>
 
 ls::std::io::SectionPairRowListValue::SectionPairRowListValue() : ls::std::core::Class("SectionPairRowListValue"), ls::std::io::SectionPairRowValue(ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE)
@@ -64,20 +64,17 @@ ls::std::io::SectionPairRowEnumType ls::std::io::SectionPairRowListValue::getTyp
 
 ls::std::core::type::byte_field ls::std::io::SectionPairRowListValue::marshal()
 {
-  ::std::string message = "member \"serializable\" for marshal attempt is null!";
-  ls::std::core::NullPointerEvaluator{::std::reinterpret_pointer_cast<void>(this->serializable)}.evaluate();
+  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   return this->serializable->marshal();
-}
-
-void ls::std::io::SectionPairRowListValue::setSerializable(const ::std::shared_ptr<ls::std::core::interface_type::ISerializable> &_serializable)
-{
-  ls::std::core::NullPointerArgumentEvaluator{::std::reinterpret_pointer_cast<void>(_serializable)}.evaluate();
-  this->serializable = _serializable;
 }
 
 void ls::std::io::SectionPairRowListValue::unmarshal(const ls::std::core::type::byte_field &_data)
 {
-  ::std::string message = "member \"serializable\" for unmarshal attempt is null!";
-  ls::std::core::NullPointerEvaluator{::std::reinterpret_pointer_cast<void>(this->serializable)}.evaluate();
+  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   this->serializable->unmarshal(_data);
+}
+
+void ls::std::io::SectionPairRowListValue::_createSerializable()
+{
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRowListValue>(shared_from_this());
 }
