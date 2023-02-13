@@ -102,4 +102,40 @@ namespace
 
     ASSERT_STREQ("colors", row.getKey().c_str());
   }
+
+  TEST_F(SectionPairRowTest, setKey_empty_key)
+  {
+    SectionPairRow row("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            row.setKey("");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_F(SectionPairRowTest, setKey_invalid_key)
+  {
+    SectionPairRow row("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            row.setKey("=33");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
 }
