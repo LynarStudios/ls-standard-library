@@ -302,6 +302,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StandardOutputWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SectionPairSectionProvider.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
 

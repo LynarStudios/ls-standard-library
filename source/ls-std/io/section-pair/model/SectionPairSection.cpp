@@ -7,12 +7,14 @@
 *
 * */
 
+#include <ls-std/core/ConditionalFunctionExecutor.hpp>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
 
 ls::std::io::SectionPairSection::SectionPairSection(const ls::std::io::section_pair_identifier &_sectionId) : ls::std::core::Class("SectionPairSection")
 {
@@ -63,9 +65,26 @@ ls::std::io::section_pair_identifier ls::std::io::SectionPairSection::getSection
   return this->sectionId;
 }
 
+ls::std::core::type::byte_field ls::std::io::SectionPairSection::marshal()
+{
+  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  return this->serializable->marshal();
+}
+
 void ls::std::io::SectionPairSection::setSectionId(const ls::std::io::section_pair_identifier &_sectionId)
 {
   this->_setSectionId(_sectionId);
+}
+
+void ls::std::io::SectionPairSection::unmarshal(const ls::std::core::type::byte_field &_data)
+{
+  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  this->serializable->unmarshal(_data);
+}
+
+void ls::std::io::SectionPairSection::_createSerializable()
+{
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairSection>(shared_from_this());
 }
 
 bool ls::std::io::SectionPairSection::_hasRow(const ls::std::io::section_pair_identifier &_key)

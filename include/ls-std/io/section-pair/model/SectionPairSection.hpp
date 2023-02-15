@@ -12,13 +12,15 @@
 
 #include <list>
 #include <ls-std/core/Class.hpp>
+#include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
 #include <ls-std/io/section-pair/type/SectionPairSectionTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <memory>
 
 namespace ls::std::io
 {
-  class LS_STD_DYNAMIC_GOAL SectionPairSection : public ls::std::core::Class
+  class LS_STD_DYNAMIC_GOAL SectionPairSection : public ::std::enable_shared_from_this<SectionPairSection>, public ls::std::core::Class, public ls::std::core::interface_type::ISerializable
   {
     public:
 
@@ -30,13 +32,17 @@ namespace ls::std::io
       [[nodiscard]] ls::std::io::section_pair_row_list getList();
       [[nodiscard]] size_t getRowAmount();
       [[nodiscard]] ls::std::io::section_pair_identifier getSectionId();
+      [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void setSectionId(const ls::std::io::section_pair_identifier &_sectionId);
+      void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
 
       ls::std::io::section_pair_row_list rows{};
       ls::std::io::section_pair_identifier sectionId{};
+      ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
 
+      void _createSerializable();
       [[nodiscard]] bool _hasRow(const ls::std::io::section_pair_identifier &_key);
       void _rowExistenceCheck(const ls::std::io::section_pair_identifier &_key);
       void _setSectionId(const ls::std::io::section_pair_identifier &_sectionId);

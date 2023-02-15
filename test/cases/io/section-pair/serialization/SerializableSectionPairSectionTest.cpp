@@ -8,6 +8,7 @@
 * */
 
 #include <gtest/gtest.h>
+#include <ls-std-io-test.hpp>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
@@ -16,6 +17,7 @@ using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace test::io;
 
 namespace
 {
@@ -31,37 +33,6 @@ namespace
 
       void TearDown() override
       {}
-
-      static shared_ptr<SectionPairSection> createSection()
-      {
-        shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
-
-        shared_ptr<SectionPairRow> name = make_shared<SectionPairRow>("name", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-        dynamic_pointer_cast<SectionPairRowSingleValue>(name->getValue())->set("Tom");
-        section->add(name);
-
-        shared_ptr<SectionPairRow> jobs = make_shared<SectionPairRow>("jobs", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
-        shared_ptr<SectionPairRowListValue> jobList = dynamic_pointer_cast<SectionPairRowListValue>(jobs->getValue());
-        jobList->add("Farmer");
-        jobList->add("Bounty Hunter");
-        section->add(jobs);
-
-        shared_ptr<SectionPairRow> age = make_shared<SectionPairRow>("age", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-        dynamic_pointer_cast<SectionPairRowSingleValue>(age->getValue())->set("33");
-        section->add(age);
-
-        return section;
-      }
-
-      static byte_field createSerializedSection()
-      {
-        byte_field serializedSection = NewLine::get() + "[general]" + NewLine::get();
-        byte_field serializedNameRow = "name=Tom" + NewLine::get();
-        byte_field serializedJobsRow = "jobs:" + NewLine::get() + "  Farmer" + NewLine::get() + "  Bounty Hunter" + NewLine::get();
-        byte_field serializedAgeRow = "age=33" + NewLine::get();
-
-        return serializedSection + serializedNameRow + serializedJobsRow + serializedAgeRow;
-      }
   };
 
   TEST_F(SerializableSectionPairSectionTest, constructor_no_reference)
@@ -88,9 +59,9 @@ namespace
 
   TEST_F(SerializableSectionPairSectionTest, marshal)
   {
-    shared_ptr<SectionPairSection> section = SerializableSectionPairSectionTest::createSection();
+    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSection();
     SerializableSectionPairSection serializable{section};
-    byte_field expected = SerializableSectionPairSectionTest::createSerializedSection();
+    byte_field expected = SectionPairSectionProvider::createSerializedSection();
     byte_field actual = serializable.marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
@@ -100,7 +71,7 @@ namespace
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("tmp-id");
     SerializableSectionPairSection serializable{section};
-    serializable.unmarshal(SerializableSectionPairSectionTest::createSerializedSection());
+    serializable.unmarshal(SectionPairSectionProvider::createSerializedSection());
 
     ASSERT_STREQ("general", section->getSectionId().c_str());
     ASSERT_EQ(3, section->getRowAmount());
