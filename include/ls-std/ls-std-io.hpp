@@ -24,6 +24,7 @@
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/model/SectionPairDocument.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
@@ -33,6 +34,7 @@
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
+#include <ls-std/io/section-pair/type/SectionPairDocumentTypes.hpp>
 #include <ls-std/io/section-pair/type/SectionPairSectionTypes.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowValueValidator.hpp>

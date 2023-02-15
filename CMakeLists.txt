@@ -177,6 +177,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/LogLevel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairRow.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairRowListValue.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairRowSingleValue.cpp
@@ -280,6 +281,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairIdentifierValidatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowValueValidatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairSectionIdUnmarshalValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowListValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowSingleValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowTest.cpp
