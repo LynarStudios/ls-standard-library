@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-13
+* Changed:         2023-02-15
 *
 * */
 
@@ -101,8 +101,10 @@ namespace
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("favourite-color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
     shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
     singleValue->set("blue");
+    byte_field expected = "favourite-color=blue" + NewLine::get();
+    byte_field actual = row->marshal();
 
-    ASSERT_STREQ("favourite-color=blue", row->marshal().c_str());
+    ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
   TEST_F(SectionPairRowTest, marshal_list_value)

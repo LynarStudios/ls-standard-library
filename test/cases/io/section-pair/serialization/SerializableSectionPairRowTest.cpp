@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-12
-* Changed:         2023-02-13
+* Changed:         2023-02-15
 *
 * */
 
@@ -13,6 +13,7 @@
 #include <memory>
 
 using namespace ls::std::core;
+using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
 
@@ -60,8 +61,10 @@ namespace
     shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
     singleValue->set("blue");
     SerializableSectionPairRow serializable{row};
+    byte_field expected = "favourite-color=blue" + NewLine::get();
+    byte_field actual = serializable.marshal();
 
-    ASSERT_STREQ("favourite-color=blue", serializable.marshal().c_str());
+    ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
   TEST_F(SerializableSectionPairRowTest, marshal_list_value)

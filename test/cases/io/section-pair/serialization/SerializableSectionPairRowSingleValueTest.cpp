@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-11
+* Changed:         2023-02-15
 *
 * */
 
@@ -13,6 +13,7 @@
 #include <memory>
 
 using namespace ls::std::core;
+using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
 
@@ -59,7 +60,10 @@ namespace
   TEST_F(SerializableSectionPairRowSingleValueTest, marshal)
   {
     SerializableSectionPairRowSingleValue serializable(make_shared<SectionPairRowSingleValue>("empty"));
-    ASSERT_STREQ("empty", serializable.marshal().c_str());
+    byte_field expected = "empty" + NewLine::get();
+    byte_field actual = serializable.marshal();
+
+    ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
   TEST_F(SerializableSectionPairRowSingleValueTest, unmarshal)

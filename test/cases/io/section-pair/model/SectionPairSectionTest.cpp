@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-14
+* Changed:         2023-02-15
 *
 * */
 
@@ -125,6 +125,12 @@ namespace
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
     ASSERT_EQ(0, section->getRowAmount());
+  }
+
+  TEST_F(SectionPairSectionTest, getList)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    ASSERT_TRUE(section->getList().empty());
   }
 
   TEST_F(SectionPairSectionTest, getSectionId)

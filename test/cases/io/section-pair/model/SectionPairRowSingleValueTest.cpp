@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-13
+* Changed:         2023-02-15
 *
 * */
 
@@ -84,7 +84,10 @@ namespace
   TEST_F(SectionPairRowSingleValueTest, marshal)
   {
     shared_ptr<SectionPairRowSingleValue> value = make_shared<SectionPairRowSingleValue>("empty");
-    ASSERT_STREQ("empty", value->marshal().c_str());
+    byte_field expected = "empty" + NewLine::get();
+    byte_field actual = value->marshal();
+
+    ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
   TEST_F(SectionPairRowSingleValueTest, set_empty_value)

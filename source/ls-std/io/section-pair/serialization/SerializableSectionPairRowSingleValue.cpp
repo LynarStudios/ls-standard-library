@@ -3,12 +3,13 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-13
+* Changed:         2023-02-15
 *
 * */
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
+#include <ls-std/io/NewLine.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>
 
@@ -26,7 +27,7 @@ ls::std::io::SerializableSectionPairRowSingleValue::~SerializableSectionPairRowS
 
 ls::std::core::type::byte_field ls::std::io::SerializableSectionPairRowSingleValue::marshal()
 {
-  return ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(this->value)->get();
+  return ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(this->value)->get() + ls::std::io::NewLine::get();
 }
 
 void ls::std::io::SerializableSectionPairRowSingleValue::unmarshal(const ls::std::core::type::byte_field &_data)

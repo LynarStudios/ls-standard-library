@@ -3,12 +3,13 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-13
+* Changed:         2023-02-15
 *
 * */
 
 #include <ls-std/core/ConditionalFunctionExecutor.hpp>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
+#include <ls-std/io/NewLine.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>
@@ -55,6 +56,12 @@ void ls::std::io::SectionPairRowSingleValue::_createSerializable()
 void ls::std::io::SectionPairRowSingleValue::_set(const ls::std::io::section_pair_row_value &_value)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
-  ls::std::io::SectionPairRowValueArgumentEvaluator(_value, "section pair single value \"" + _value + "\" contains invalid characters!").evaluate();
+  ls::std::io::SectionPairRowValueArgumentEvaluator(_value, this->getClassName() + ": section pair single value \"" + _value + "\" contains invalid characters!").evaluate();
+  ::std::string newLine = ls::std::io::NewLine::get();
   this->value = _value;
+
+  if (this->value.find(newLine) != ::std::string::npos)
+  {
+    this->value.replace(this->value.find(newLine), newLine.size(), "");
+  }
 }
