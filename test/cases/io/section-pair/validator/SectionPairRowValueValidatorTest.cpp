@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-11
+* Changed:         2023-02-16
 *
 * */
 
@@ -42,6 +42,7 @@ namespace
     ASSERT_TRUE(SectionPairRowValueValidator{"Age"}.isValid());
     ASSERT_TRUE(SectionPairRowValueValidator{"Tom"}.isValid());
     ASSERT_TRUE(SectionPairRowValueValidator{"\"Tom\""}.isValid());
+    ASSERT_TRUE(SectionPairRowValueValidator{"Hello!" + NewLine::get()}.isValid());
   }
 
   TEST_F(SectionPairRowValueValidatorTest, isValid_not_valid)
