@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -28,6 +28,11 @@ void ls::std::io::SectionPairSection::add(const section_pair_row_list_element &_
   ls::std::core::NullPointerArgumentEvaluator{::std::reinterpret_pointer_cast<void>(_row)}.evaluate();
   this->_rowExistenceCheck(_row->getKey());
   this->rows.push_back(_row);
+}
+
+void ls::std::io::SectionPairSection::clear()
+{
+  this->rows.clear();
 }
 
 ls::std::io::section_pair_row_list_element ls::std::io::SectionPairSection::get(size_t _index)

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-13
+* Changed:         2023-02-16
 *
 * */
 
@@ -25,6 +25,7 @@ namespace ls::std::io
       ~SectionPairRowListValue() override;
 
       void add(const ls::std::io::section_pair_row_value &_value);
+      void clear();
       [[nodiscard]] ls::std::io::section_pair_row_value get(size_t _index);
       [[nodiscard]] ::std::list<ls::std::io::section_pair_row_value> getList();
       [[nodiscard]] size_t getSize();

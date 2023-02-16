@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-11
+* Changed:         2023-02-16
 *
 * */
 
@@ -23,9 +23,9 @@ namespace ls::std::io
       explicit SectionPairRowValue(const ls::std::io::SectionPairRowEnumType &_type);
       ~SectionPairRowValue() override;
 
-    virtual ls::std::io::SectionPairRowEnumType getType() = 0;
-    [[nodiscard]] ls::std::core::type::byte_field marshal() override;
-    void unmarshal(const ls::std::core::type::byte_field &_data) override;
+      virtual ls::std::io::SectionPairRowEnumType getType() = 0;
+      [[nodiscard]] ls::std::core::type::byte_field marshal() override;
+      void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     protected:
 

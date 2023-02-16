@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -66,11 +66,6 @@ namespace
         IllegalArgumentException);
   }
 
-  TEST_F(SectionPairSectionTest, getClassName)
-  {
-    ASSERT_STREQ("SectionPairSection", SectionPairSection{"general"}.getClassName().c_str());
-  }
-
   TEST_F(SectionPairSectionTest, add)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
@@ -96,6 +91,16 @@ namespace
           }
         },
         IllegalArgumentException);
+  }
+
+  TEST_F(SectionPairSectionTest, clear)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_EQ(1, section->getRowAmount());
+    section->clear();
+    ASSERT_TRUE(section->getList().empty());
   }
 
   TEST_F(SectionPairSectionTest, get)
@@ -128,6 +133,11 @@ namespace
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
     ASSERT_EQ(0, section->getRowAmount());
+  }
+
+  TEST_F(SectionPairSectionTest, getClassName)
+  {
+    ASSERT_STREQ("SectionPairSection", SectionPairSection{"general"}.getClassName().c_str());
   }
 
   TEST_F(SectionPairSectionTest, getList)

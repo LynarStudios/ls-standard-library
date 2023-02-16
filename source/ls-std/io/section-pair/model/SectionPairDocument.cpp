@@ -27,6 +27,11 @@ void ls::std::io::SectionPairDocument::add(const section_pair_document_section_l
   this->sections.push_back(_section);
 }
 
+void ls::std::io::SectionPairDocument::clear()
+{
+  this->sections.clear();
+}
+
 ls::std::io::section_pair_document_section_list_element ls::std::io::SectionPairDocument::get(size_t _index)
 {
   ls::std::io::section_pair_document_section_list_element element{};

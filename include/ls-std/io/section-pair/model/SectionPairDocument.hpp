@@ -27,6 +27,7 @@ namespace ls::std::io
       ~SectionPairDocument() override;
 
       void add(const section_pair_document_section_list_element &_section);
+      void clear();
       [[nodiscard]] section_pair_document_section_list_element get(size_t _index);
       [[nodiscard]] size_t getAmountOfSections();
       [[nodiscard]] ::std::string getHeader();

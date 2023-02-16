@@ -63,6 +63,16 @@ namespace
         IllegalArgumentException);
   }
 
+  TEST_F(SectionPairDocumentTest, clear)
+  {
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    document->add(make_shared<SectionPairSection>("general"));
+
+    ASSERT_EQ(1, document->getAmountOfSections());
+    document->clear();
+    ASSERT_TRUE(document->getSectionList().empty());
+  }
+
   TEST_F(SectionPairDocumentTest, get)
   {
     shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-13
+* Changed:         2023-02-16
 *
 * */
 
@@ -25,6 +25,11 @@ void ls::std::io::SectionPairRowListValue::add(const ls::std::io::section_pair_r
   ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
   ls::std::io::SectionPairRowValueArgumentEvaluator{_value, "section pair row list value \"" + _value + "\" contains invalid characters!"}.evaluate();
   this->values.push_back(_value);
+}
+
+void ls::std::io::SectionPairRowListValue::clear()
+{
+  this->values.clear();
 }
 
 ls::std::io::section_pair_row_value ls::std::io::SectionPairRowListValue::get(size_t _index)

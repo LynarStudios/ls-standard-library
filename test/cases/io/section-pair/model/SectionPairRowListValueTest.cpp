@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-13
+* Changed:         2023-02-16
 *
 * */
 
@@ -75,6 +75,16 @@ namespace
           }
         },
         IllegalArgumentException);
+  }
+
+  TEST_F(SectionPairRowListValueTest, clear)
+  {
+    SectionPairRowListValue list{};
+    list.add("Music");
+
+    ASSERT_EQ(1, list.getSize());
+    list.clear();
+    ASSERT_TRUE(list.getList().empty());
   }
 
   TEST_F(SectionPairRowListValueTest, getClassName)
