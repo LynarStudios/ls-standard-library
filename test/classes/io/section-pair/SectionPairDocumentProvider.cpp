@@ -47,8 +47,8 @@ test::io::SectionPairDocumentProvider::~SectionPairDocumentProvider() = default;
 
 ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSerializedDocument()
 {
-  ls::std::core::type::byte_field serializedDocument{};
   ::std::string newLine = ls::std::io::NewLine::get();
+  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + newLine + newLine;
 
   // general section
 

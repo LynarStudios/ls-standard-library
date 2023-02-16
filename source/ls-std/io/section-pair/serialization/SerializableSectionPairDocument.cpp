@@ -26,9 +26,11 @@ ls::std::io::SerializableSectionPairDocument::~SerializableSectionPairDocument()
 
 ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::marshal()
 {
-  ls::std::core::type::byte_field serializedDocument{};
+  ::std::shared_ptr<ls::std::io::SectionPairDocument> document = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->value);
+  ::std::string newLine = ls::std::io::NewLine::get();
+  ls::std::core::type::byte_field serializedDocument = document->getHeader() + newLine + newLine;
 
-  for (const auto &_section : ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->value)->getSectionList())
+  for (const auto &_section : document->getSectionList())
   {
     serializedDocument += _section->marshal();
   }
@@ -39,6 +41,8 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::ma
 void ls::std::io::SerializableSectionPairDocument::unmarshal(const ls::std::core::type::byte_field &_data)
 {
   ls::std::core::type::byte_field serializedDocument = _data;
+  size_t headerSize = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->value)->getHeader().size() + 2 * ls::std::io::NewLine::get().size();
+  serializedDocument = serializedDocument.substr(headerSize);
   ls::std::core::type::byte_field serializedSection{};
 
   do

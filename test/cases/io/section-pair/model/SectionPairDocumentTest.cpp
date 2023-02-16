@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -93,6 +93,12 @@ namespace
     document->add(make_shared<SectionPairSection>("general"));
 
     ASSERT_EQ(1, document->getAmountOfSections());
+  }
+
+  TEST_F(SectionPairDocumentTest, getHeader)
+  {
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    ASSERT_STREQ("# section-pair document", document->getHeader().c_str());
   }
 
   TEST_F(SectionPairDocumentTest, getSectionList)

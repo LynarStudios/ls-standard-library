@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -48,6 +48,11 @@ ls::std::io::section_pair_document_section_list_element ls::std::io::SectionPair
 size_t ls::std::io::SectionPairDocument::getAmountOfSections()
 {
   return this->sections.size();
+}
+
+::std::string ls::std::io::SectionPairDocument::getHeader()
+{
+  return this->header;
 }
 
 ls::std::io::section_pair_document_section_list ls::std::io::SectionPairDocument::getSectionList()

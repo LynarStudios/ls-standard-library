@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -27,10 +27,12 @@ namespace ls::std::io
       void add(const section_pair_document_section_list_element &_section);
       [[nodiscard]] section_pair_document_section_list_element get(size_t _index);
       [[nodiscard]] size_t getAmountOfSections();
+      [[nodiscard]] ::std::string getHeader();
       [[nodiscard]] section_pair_document_section_list getSectionList();
 
     private:
 
+      const ::std::string header = "# section-pair document";
       ls::std::io::section_pair_document_section_list sections{};
 
       void _checkSectionExistence(const ls::std::io::section_pair_identifier &_sectionId);
