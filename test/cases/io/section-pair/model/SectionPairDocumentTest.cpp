@@ -8,6 +8,7 @@
 * */
 
 #include <gtest/gtest.h>
+#include <ls-std-io-test.hpp>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
@@ -16,6 +17,7 @@ using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace test::io;
 
 namespace
 {
@@ -105,5 +107,55 @@ namespace
   {
     shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
     ASSERT_TRUE(document->getSectionList().empty());
+  }
+
+  TEST_F(SectionPairDocumentTest, marshal)
+  {
+    shared_ptr<SectionPairDocument> document = SectionPairDocumentProvider::createDocument();
+    byte_field expected = SectionPairDocumentProvider::createSerializedDocument();
+
+    ASSERT_STREQ(expected.c_str(), document->marshal().c_str());
+  }
+
+  TEST_F(SectionPairDocumentTest, unmarshal)
+  {
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    document->unmarshal(SectionPairDocumentProvider::createSerializedDocument());
+
+    ASSERT_EQ(2, document->getAmountOfSections());
+
+    // check general section
+
+    shared_ptr<SectionPairSection> general = document->get(0);
+    ASSERT_STREQ("general", general->getSectionId().c_str());
+    ASSERT_EQ(3, general->getRowAmount());
+
+    ASSERT_STREQ("name", general->get(0)->getKey().c_str());
+    ASSERT_STREQ("Sandra", dynamic_pointer_cast<SectionPairRowSingleValue>(general->get(0)->getValue())->get().c_str());
+
+    ASSERT_STREQ("age", general->get(1)->getKey().c_str());
+    ASSERT_STREQ("24", dynamic_pointer_cast<SectionPairRowSingleValue>(general->get(1)->getValue())->get().c_str());
+
+    ASSERT_STREQ("hobbies", general->get(2)->getKey().c_str());
+    shared_ptr<SectionPairRowListValue> hobbies = dynamic_pointer_cast<SectionPairRowListValue>(general->get(2)->getValue());
+    ASSERT_EQ(3, hobbies->getSize());
+    ASSERT_STREQ("swimming", hobbies->get(0).c_str());
+    ASSERT_STREQ("cycling", hobbies->get(1).c_str());
+    ASSERT_STREQ("singing", hobbies->get(2).c_str());
+
+    // check physical section
+
+    shared_ptr<SectionPairSection> physical = document->get(1);
+    ASSERT_STREQ("physical", physical->getSectionId().c_str());
+    ASSERT_EQ(3, physical->getRowAmount());
+
+    ASSERT_STREQ("eye-color", physical->get(0)->getKey().c_str());
+    ASSERT_STREQ("blue", dynamic_pointer_cast<SectionPairRowSingleValue>(physical->get(0)->getValue())->get().c_str());
+
+    ASSERT_STREQ("hair-color", physical->get(1)->getKey().c_str());
+    ASSERT_STREQ("red", dynamic_pointer_cast<SectionPairRowSingleValue>(physical->get(1)->getValue())->get().c_str());
+
+    ASSERT_STREQ("height", physical->get(2)->getKey().c_str());
+    ASSERT_STREQ("167", dynamic_pointer_cast<SectionPairRowSingleValue>(physical->get(2)->getValue())->get().c_str());
   }
 }

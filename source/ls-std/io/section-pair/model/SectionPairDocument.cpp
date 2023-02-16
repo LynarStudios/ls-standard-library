@@ -7,10 +7,12 @@
 *
 * */
 
+#include <ls-std/core/ConditionalFunctionExecutor.hpp>
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/section-pair/model/SectionPairDocument.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairDocument.hpp>
 
 ls::std::io::SectionPairDocument::SectionPairDocument() : ls::std::core::Class("SectionPairDocument")
 {}
@@ -60,12 +62,29 @@ ls::std::io::section_pair_document_section_list ls::std::io::SectionPairDocument
   return this->sections;
 }
 
+ls::std::core::type::byte_field ls::std::io::SectionPairDocument::marshal()
+{
+  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  return this->serializable->marshal();
+}
+
+void ls::std::io::SectionPairDocument::unmarshal(const ls::std::core::type::byte_field &_data)
+{
+  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  this->serializable->unmarshal(_data);
+}
+
 void ls::std::io::SectionPairDocument::_checkSectionExistence(const ls::std::io::section_pair_identifier &_sectionId)
 {
   if (this->_hasSection(_sectionId))
   {
     throw ls::std::core::IllegalArgumentException{this->getClassName() + "section ID \"" + _sectionId + "\" already exists in document!"};
   }
+}
+
+void ls::std::io::SectionPairDocument::_createSerializable()
+{
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairDocument>(shared_from_this());
 }
 
 bool ls::std::io::SectionPairDocument::_hasSection(const ls::std::io::section_pair_identifier &_identifier)
