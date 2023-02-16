@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -57,21 +57,53 @@ namespace
     ASSERT_TRUE(serializable.getValue() != nullptr);
   }
 
-  TEST_F(SerializableSectionPairSectionTest, marshal)
+  TEST_F(SerializableSectionPairSectionTest, marshal_sandra)
   {
-    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSection();
+    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSectionWithSandraExample();
     SerializableSectionPairSection serializable{section};
-    byte_field expected = SectionPairSectionProvider::createSerializedSection();
+    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithSandraExample();
     byte_field actual = serializable.marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_F(SerializableSectionPairSectionTest, unmarshal)
+  TEST_F(SerializableSectionPairSectionTest, marshal_tom)
+  {
+    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSectionWithTomExample();
+    SerializableSectionPairSection serializable{section};
+    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithTomExample();
+    byte_field actual = serializable.marshal();
+
+    ASSERT_STREQ(expected.c_str(), actual.c_str());
+  }
+
+  TEST_F(SerializableSectionPairSectionTest, unmarshal_sandra)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("tmp-id");
     SerializableSectionPairSection serializable{section};
-    serializable.unmarshal(SectionPairSectionProvider::createSerializedSection());
+    serializable.unmarshal(SectionPairSectionProvider::createSerializedSectionWithSandraExample());
+
+    ASSERT_STREQ("general", section->getSectionId().c_str());
+    ASSERT_EQ(3, section->getRowAmount());
+    ASSERT_STREQ("name", section->get(0)->getKey().c_str());
+    ASSERT_STREQ("Sandra", dynamic_pointer_cast<SectionPairRowSingleValue>(section->get(0)->getValue())->get().c_str());
+
+    ASSERT_STREQ("age", section->get(1)->getKey().c_str());
+    ASSERT_STREQ("24", dynamic_pointer_cast<SectionPairRowSingleValue>(section->get(1)->getValue())->get().c_str());
+
+    ASSERT_STREQ("hobbies", section->get(2)->getKey().c_str());
+    shared_ptr<SectionPairRowListValue> listRow = dynamic_pointer_cast<SectionPairRowListValue>(section->get(2)->getValue());
+    ASSERT_EQ(3, listRow->getSize());
+    ASSERT_STREQ("swimming", listRow->get(0).c_str());
+    ASSERT_STREQ("cycling", listRow->get(1).c_str());
+    ASSERT_STREQ("singing", listRow->get(2).c_str());
+  }
+
+  TEST_F(SerializableSectionPairSectionTest, unmarshal_tom)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("tmp-id");
+    SerializableSectionPairSection serializable{section};
+    serializable.unmarshal(SectionPairSectionProvider::createSerializedSectionWithTomExample());
 
     ASSERT_STREQ("general", section->getSectionId().c_str());
     ASSERT_EQ(3, section->getRowAmount());

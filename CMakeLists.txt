@@ -186,6 +186,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairIdentifierValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairRowValueValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairSectionIdUnmarshalValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairDocument.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRow.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.cpp
@@ -286,6 +287,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowSingleValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairSectionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowListValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowSingleValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowTest.cpp
@@ -304,6 +306,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StandardOutputWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SectionPairDocumentProvider.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SectionPairSectionProvider.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)

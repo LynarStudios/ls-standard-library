@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -20,11 +20,11 @@ bool ls::std::io::SectionPairSectionIdUnmarshalValidator::isValid()
 {
   ::std::string newLine = ls::std::io::NewLine::get();
   bool isValidSectionId = this->data.rfind(newLine, 0) == 0;
-  isValidSectionId = isValidSectionId && this->data.rfind(newLine) == (this->data.size() - newLine.size());
+  isValidSectionId = isValidSectionId && this->data.rfind(newLine + newLine) == (this->data.size() - 2 * newLine.size());
 
   if (isValidSectionId)
   {
-    isValidSectionId = ls::std::io::SectionPairSectionIdUnmarshalValidator::_isValidSection(ls::std::io::SectionPairSectionIdUnmarshalValidator::_trimStartAndEnd(this->data, newLine, newLine));
+    isValidSectionId = ls::std::io::SectionPairSectionIdUnmarshalValidator::_isValidSection(ls::std::io::SectionPairSectionIdUnmarshalValidator::_trimStartAndEnd(this->data, newLine, newLine + newLine));
   }
 
   return isValidSectionId;

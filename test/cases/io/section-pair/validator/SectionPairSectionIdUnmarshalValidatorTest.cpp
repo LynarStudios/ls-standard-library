@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -14,6 +14,7 @@
 using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls::std::io;
+using namespace ::std;
 
 namespace
 {
@@ -38,8 +39,9 @@ namespace
 
   TEST_F(SectionPairSectionIdUnmarshalValidatorTest, isValid)
   {
-    byte_field generalSection = NewLine::get() + "[general]" + NewLine::get();
-    byte_field localServerSection = NewLine::get() + "[local-server]" + NewLine::get();
+    string newLine = NewLine::get();
+    byte_field generalSection = newLine + "[general]" + newLine + newLine;
+    byte_field localServerSection = newLine + "[local-server]" + newLine + newLine;
 
     ASSERT_TRUE(SectionPairSectionIdUnmarshalValidator{generalSection}.isValid());
     ASSERT_TRUE(SectionPairSectionIdUnmarshalValidator{localServerSection}.isValid());
@@ -47,9 +49,10 @@ namespace
 
   TEST_F(SectionPairSectionIdUnmarshalValidatorTest, isValid_not_valid)
   {
-    byte_field generalSection = "[general]" + NewLine::get();
-    byte_field localServerSection = NewLine::get() + "[local-server]";
-    byte_field position = NewLine::get() + "position" + NewLine::get();
+    string newLine = NewLine::get();
+    byte_field generalSection = newLine + "[general]" + newLine;
+    byte_field localServerSection = newLine + "[local-server]";
+    byte_field position = newLine + "position" + newLine;
 
     ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator{generalSection}.isValid());
     ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator{localServerSection}.isValid());

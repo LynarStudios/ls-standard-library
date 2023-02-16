@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-15
+* Changed:         2023-02-16
 *
 * */
 
@@ -81,6 +81,11 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_co
 
   do
   {
+    if (currentRows.empty() && iterations > 1)
+    {
+      break;
+    }
+
     ++iterations;
     currentRow = currentRows.substr(0, currentRows.find(newLine) + newLine.size());
     currentRows = currentRows.substr(currentRow.size());
@@ -131,7 +136,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_ge
 
   if (position != -1)
   {
-    sectionHeader = _data.substr(0, position + newLine.size());
+    sectionHeader = _data.substr(0, position + 2 * newLine.size());
   }
 
   return sectionHeader;
@@ -175,7 +180,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_ma
 
 ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_marshalSectionId()
 {
-  return ls::std::io::NewLine::get() + "[" + ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->value)->getSectionId() + "]" + ls::std::io::NewLine::get();
+  return ls::std::io::NewLine::get() + "[" + ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->value)->getSectionId() + "]" + ls::std::io::NewLine::get() + ls::std::io::NewLine::get();
 }
 
 void ls::std::io::SerializableSectionPairSection::_setValue(const ::std::shared_ptr<ls::std::core::Class> &_value)

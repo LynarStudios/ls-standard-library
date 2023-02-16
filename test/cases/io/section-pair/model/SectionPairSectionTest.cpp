@@ -144,8 +144,8 @@ namespace
 
   TEST_F(SectionPairSectionTest, marshal)
   {
-    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSection();
-    byte_field expected = SectionPairSectionProvider::createSerializedSection();
+    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSectionWithTomExample();
+    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithTomExample();
     byte_field actual = section->marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
@@ -198,7 +198,7 @@ namespace
   TEST_F(SectionPairSectionTest, unmarshal)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("tmp-id");
-    section->unmarshal(SectionPairSectionProvider::createSerializedSection());
+    section->unmarshal(SectionPairSectionProvider::createSerializedSectionWithTomExample());
 
     ASSERT_STREQ("general", section->getSectionId().c_str());
     ASSERT_EQ(3, section->getRowAmount());
