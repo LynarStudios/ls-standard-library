@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-12
-* Changed:         2023-02-15
+* Changed:         2023-02-17
 *
 * */
 
@@ -47,6 +47,11 @@ namespace
           }
         },
         IllegalArgumentException);
+  }
+
+  TEST_F(SerializableSectionPairRowTest, getClassName)
+  {
+    ASSERT_STREQ("SerializableSectionPairRow", SerializableSectionPairRow{make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE)}.getClassName().c_str());
   }
 
   TEST_F(SerializableSectionPairRowTest, getValue)

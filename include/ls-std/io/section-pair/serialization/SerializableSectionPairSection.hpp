@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-15
+* Changed:         2023-02-17
 *
 * */
 
@@ -17,7 +17,7 @@
 
 namespace ls::std::io
 {
-  class LS_STD_DYNAMIC_GOAL SerializableSectionPairSection : public ls::std::core::interface_type::ISerializable
+  class LS_STD_DYNAMIC_GOAL SerializableSectionPairSection : public ls::std::core::interface_type::ISerializable, public ls::std::core::Class
   {
     public:
 

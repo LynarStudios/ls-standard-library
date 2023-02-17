@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-15
+* Changed:         2023-02-17
 *
 * */
 
@@ -31,11 +31,6 @@ namespace
       void TearDown() override
       {}
   };
-
-  TEST_F(SectionPairRowSingleValueTest, getClassName)
-  {
-    ASSERT_STREQ("SectionPairRowSingleValue", SectionPairRowSingleValue{"blue"}.getClassName().c_str());
-  }
 
   TEST_F(SectionPairRowSingleValueTest, constructor_empty_value)
   {
@@ -73,6 +68,11 @@ namespace
   {
     SectionPairRowSingleValue value{"blue"};
     ASSERT_STREQ("blue", value.get().c_str());
+  }
+
+  TEST_F(SectionPairRowSingleValueTest, getClassName)
+  {
+    ASSERT_STREQ("SectionPairRowSingleValue", SectionPairRowSingleValue{"blue"}.getClassName().c_str());
   }
 
   TEST_F(SectionPairRowSingleValueTest, getType)

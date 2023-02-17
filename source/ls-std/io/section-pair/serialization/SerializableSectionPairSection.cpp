@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -15,7 +15,7 @@
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairSectionIdUnmarshalValidator.hpp>
 
-ls::std::io::SerializableSectionPairSection::SerializableSectionPairSection(const ::std::shared_ptr<ls::std::core::Class> &_value)
+ls::std::io::SerializableSectionPairSection::SerializableSectionPairSection(const ::std::shared_ptr<ls::std::core::Class> &_value) : ls::std::core::Class("SerializableSectionPairSection")
 {
   this->_setValue(_value);
 }

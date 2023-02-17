@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-11
+* Changed:         2023-02-17
 *
 * */
 
@@ -31,6 +31,12 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(SectionPairIdentifierArgumentEvaluatorTest, getClassName)
+  {
+    shared_ptr<SectionPairIdentifierArgumentEvaluator> evaluator = make_shared<SectionPairIdentifierArgumentEvaluator>("_id", "not valid!");
+    ASSERT_STREQ("SectionPairIdentifierArgumentEvaluator", evaluator->getClassName().c_str());
+  }
 
   TEST_F(SectionPairIdentifierArgumentEvaluatorTest, evaluate)
   {

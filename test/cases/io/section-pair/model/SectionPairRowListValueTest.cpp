@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -87,11 +87,6 @@ namespace
     ASSERT_TRUE(list.getList().empty());
   }
 
-  TEST_F(SectionPairRowListValueTest, getClassName)
-  {
-    ASSERT_STREQ("SectionPairRowListValue", SectionPairRowListValue{}.getClassName().c_str());
-  }
-
   TEST_F(SectionPairRowListValueTest, get_no_elements)
   {
     SectionPairRowListValue list{};
@@ -108,6 +103,11 @@ namespace
           }
         },
         IndexOutOfBoundsException);
+  }
+
+  TEST_F(SectionPairRowListValueTest, getClassName)
+  {
+    ASSERT_STREQ("SectionPairRowListValue", SectionPairRowListValue{}.getClassName().c_str());
   }
 
   TEST_F(SectionPairRowListValueTest, getList)

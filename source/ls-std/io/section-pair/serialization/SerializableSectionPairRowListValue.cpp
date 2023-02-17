@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-13
+* Changed:         2023-02-17
 *
 * */
 
@@ -13,7 +13,7 @@
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 
-ls::std::io::SerializableSectionPairRowListValue::SerializableSectionPairRowListValue(const ::std::shared_ptr<ls::std::core::Class> &_value)
+ls::std::io::SerializableSectionPairRowListValue::SerializableSectionPairRowListValue(const ::std::shared_ptr<ls::std::core::Class> &_value) : ls::std::core::Class("SerializableSectionPairRowListValue")
 {
   this->_setValue(_value);
 }
@@ -39,7 +39,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairRowListValue
 
 void ls::std::io::SerializableSectionPairRowListValue::unmarshal(const ls::std::core::type::byte_field &_data)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_data}.evaluate(); // TODO necessary? evaluators should be used outside of serializable
+  ls::std::core::EmptyStringArgumentEvaluator{_data}.evaluate();
   ls::std::core::type::byte_field searchText = _data;
 
   while (!searchText.empty() && searchText != ls::std::io::NewLine::get())

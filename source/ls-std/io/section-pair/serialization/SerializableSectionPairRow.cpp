@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-13
+* Changed:         2023-02-17
 *
 * */
 
@@ -14,7 +14,7 @@
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRow.hpp>
 
-ls::std::io::SerializableSectionPairRow::SerializableSectionPairRow(const ::std::shared_ptr<ls::std::core::Class> &_value)
+ls::std::io::SerializableSectionPairRow::SerializableSectionPairRow(const ::std::shared_ptr<ls::std::core::Class> &_value) : ls::std::core::Class("SerializableSectionPairRow")
 {
   this->_setValue(_value);
 }

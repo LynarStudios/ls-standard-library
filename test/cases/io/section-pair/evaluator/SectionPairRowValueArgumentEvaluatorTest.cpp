@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-11
+* Changed:         2023-02-17
 *
 * */
 
@@ -31,6 +31,12 @@ namespace
       void TearDown() override
       {}
   };
+
+  TEST_F(SectionPairRowValueArgumentEvaluatorTest, getClassName)
+  {
+    shared_ptr<SectionPairRowValueArgumentEvaluator> evaluator = make_shared<SectionPairRowValueArgumentEvaluator>("=33", "section pair value contains invalid characters!");
+    ASSERT_STREQ("SectionPairRowValueArgumentEvaluator", evaluator->getClassName().c_str());
+  }
 
   TEST_F(SectionPairRowValueArgumentEvaluatorTest, evaluate)
   {
