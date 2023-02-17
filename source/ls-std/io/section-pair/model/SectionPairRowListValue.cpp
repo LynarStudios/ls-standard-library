@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -81,5 +81,13 @@ void ls::std::io::SectionPairRowListValue::unmarshal(const ls::std::core::type::
 
 void ls::std::io::SectionPairRowListValue::_createSerializable()
 {
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRowListValue>(shared_from_this());
+  ls::std::io::SerializableSectionPairParameter parameter{};
+  parameter.setValue(shared_from_this());
+
+  if (!this->reservedNewLine.empty())
+  {
+    parameter.setNewLine(this->reservedNewLine);
+  }
+
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRowListValue>(parameter);
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -25,10 +25,12 @@ namespace ls::std::io
 
       virtual ls::std::io::SectionPairRowEnumType getType() = 0;
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
+      void reserveNewLine(const ::std::string &_reservedNewLine);
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     protected:
 
+      ::std::string reservedNewLine{};
       ls::std::io::SectionPairRowEnumType type{};
   };
 }

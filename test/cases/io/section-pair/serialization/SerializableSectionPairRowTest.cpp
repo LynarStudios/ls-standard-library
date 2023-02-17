@@ -8,14 +8,17 @@
 * */
 
 #include <gtest/gtest.h>
+#include <ls-std-io-test.hpp>
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
 
 using namespace ls::std::core;
+using namespace ls::std::core::interface_type;
 using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace test::io;
 
 namespace
 {
@@ -33,13 +36,23 @@ namespace
       {}
   };
 
+  class SerializableSectionPairRowSerializationTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SerializableSectionPairRowSerializationTest() = default;
+      ~SerializableSectionPairRowSerializationTest() override = default;
+  };
+
   TEST_F(SerializableSectionPairRowTest, constructor_no_reference)
   {
+    SerializableSectionPairParameter parameter{};
+
     EXPECT_THROW(
         {
           try
           {
-            SerializableSectionPairRow serializable(nullptr);
+            SerializableSectionPairRow serializable(parameter);
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -51,66 +64,67 @@ namespace
 
   TEST_F(SerializableSectionPairRowTest, getClassName)
   {
-    ASSERT_STREQ("SerializableSectionPairRow", SerializableSectionPairRow{make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE)}.getClassName().c_str());
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_STREQ("SerializableSectionPairRow", SerializableSectionPairRow{parameter}.getClassName().c_str());
   }
 
   TEST_F(SerializableSectionPairRowTest, getValue)
   {
-    SerializableSectionPairRow serializable{make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE)};
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+    SerializableSectionPairRow serializable{parameter};
+
     ASSERT_TRUE(serializable.getValue() != nullptr);
   }
 
-  TEST_F(SerializableSectionPairRowTest, marshal_single_value)
+  TEST_P(SerializableSectionPairRowSerializationTest, marshal_single_value)
   {
-    shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("favourite-color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-    shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
-    singleValue->set("blue");
-    SerializableSectionPairRow serializable{row};
-    byte_field expected = "favourite-color=blue" + NewLine::get();
-    byte_field actual = serializable.marshal();
+    string newLine = GetParam();
+    shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createSingleValueForMarshal(newLine);
+
+    byte_field expected = "favourite-color=blue" + newLine;
+    byte_field actual = serializable->marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_F(SerializableSectionPairRowTest, marshal_list_value)
+  TEST_P(SerializableSectionPairRowSerializationTest, marshal_list_value)
   {
-    shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("favourite-colors", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
-    shared_ptr<SectionPairRowListValue> listValue = dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
-    listValue->add("blue");
-    listValue->add("red");
-    listValue->add("purple");
-    SerializableSectionPairRow serializable{row};
+    string newLine = GetParam();
+    shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createListValueForMarshal(newLine);
 
-    string expected = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();
+    string expected = "favourite-colors:" + newLine + "  blue" + newLine + "  red" + newLine + "  purple" + newLine;
 
-    ASSERT_STREQ(expected.c_str(), serializable.marshal().c_str());
+    ASSERT_STREQ(expected.c_str(), serializable->marshal().c_str());
   }
 
-  TEST_F(SerializableSectionPairRowTest, unmarshal_single_value)
+  TEST_P(SerializableSectionPairRowSerializationTest, unmarshal_single_value)
   {
-    shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-    shared_ptr<SectionPairRowSingleValue> singleValue = dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue());
-    SerializableSectionPairRow serializable{row};
-
-    serializable.unmarshal("favourite-color=blue");
+    shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createSingleValueForUnmarshal(GetParam());
+    serializable->unmarshal("favourite-color=blue");
+    shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(serializable->getValue());
 
     ASSERT_STREQ("favourite-color", row->getKey().c_str());
-    ASSERT_STREQ("blue", singleValue->get().c_str());
+    ASSERT_STREQ("blue", dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue())->get().c_str());
   }
 
-  TEST_F(SerializableSectionPairRowTest, unmarshal_list_value)
+  TEST_P(SerializableSectionPairRowSerializationTest, unmarshal_list_value)
   {
-    shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
-    shared_ptr<SectionPairRowListValue> listValue = dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
-    SerializableSectionPairRow serializable{row};
+    string newLine = GetParam();
+    shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createListValueForUnmarshal(newLine);
 
-    string data = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();
-    serializable.unmarshal(data);
+    string data = "favourite-colors:" + newLine + "  blue" + newLine + "  red" + newLine + "  purple" + newLine;
+    serializable->unmarshal(data);
+    shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(serializable->getValue());
 
     ASSERT_STREQ("favourite-colors", row->getKey().c_str());
-    ASSERT_EQ(3, listValue->getSize());
-    ASSERT_STREQ("blue", listValue->get(0).c_str());
-    ASSERT_STREQ("red", listValue->get(1).c_str());
-    ASSERT_STREQ("purple", listValue->get(2).c_str());
+    ASSERT_EQ(3, dynamic_pointer_cast<SectionPairRowListValue>(row->getValue())->getSize());
+    ASSERT_STREQ("blue", dynamic_pointer_cast<SectionPairRowListValue>(row->getValue())->get(0).c_str());
+    ASSERT_STREQ("red", dynamic_pointer_cast<SectionPairRowListValue>(row->getValue())->get(1).c_str());
+    ASSERT_STREQ("purple", dynamic_pointer_cast<SectionPairRowListValue>(row->getValue())->get(2).c_str());
   }
+
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowTest, SerializableSectionPairRowSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

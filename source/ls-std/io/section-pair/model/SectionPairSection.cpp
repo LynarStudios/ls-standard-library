@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-16
+* Changed:         2023-02-18
 *
 * */
 
@@ -76,6 +76,11 @@ ls::std::core::type::byte_field ls::std::io::SectionPairSection::marshal()
   return this->serializable->marshal();
 }
 
+void ls::std::io::SectionPairSection::reserveNewLine(const ::std::string &_reservedNewLine)
+{
+  this->reservedNewLine = _reservedNewLine;
+}
+
 void ls::std::io::SectionPairSection::setSectionId(const ls::std::io::section_pair_identifier &_sectionId)
 {
   this->_setSectionId(_sectionId);
@@ -89,7 +94,15 @@ void ls::std::io::SectionPairSection::unmarshal(const ls::std::core::type::byte_
 
 void ls::std::io::SectionPairSection::_createSerializable()
 {
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairSection>(shared_from_this());
+  ls::std::io::SerializableSectionPairParameter parameter{};
+  parameter.setValue(shared_from_this());
+
+  if (!this->reservedNewLine.empty())
+  {
+    parameter.setNewLine(this->reservedNewLine);
+  }
+
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairSection>(parameter);
 }
 
 bool ls::std::io::SectionPairSection::_hasRow(const ls::std::io::section_pair_identifier &_key)

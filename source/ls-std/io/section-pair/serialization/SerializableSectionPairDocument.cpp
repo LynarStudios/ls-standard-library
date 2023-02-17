@@ -3,35 +3,38 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-17
+* Changed:         2023-02-18
 *
 * */
 
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
-#include <ls-std/io/NewLine.hpp>
 #include <ls-std/io/section-pair/model/SectionPairDocument.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairDocument.hpp>
+#include <string>
 
-ls::std::io::SerializableSectionPairDocument::SerializableSectionPairDocument(const ::std::shared_ptr<ls::std::core::Class> &_value) : ls::std::core::Class("SerializableSectionPairDocument")
+ls::std::io::SerializableSectionPairDocument::SerializableSectionPairDocument(const ls::std::io::SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairDocument")
 {
-  this->_setValue(_value);
+  ::std::string message = this->getClassName() + ": model reference is null!";
+  ls::std::core::NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();
+  this->parameter = _parameter;
 }
 
 ls::std::io::SerializableSectionPairDocument::~SerializableSectionPairDocument() = default;
 
 ::std::shared_ptr<ls::std::core::Class> ls::std::io::SerializableSectionPairDocument::getValue()
 {
-  return this->value;
+  return this->parameter.getValue();
 }
 
 ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::marshal()
 {
-  ::std::shared_ptr<ls::std::io::SectionPairDocument> document = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->value);
-  ::std::string newLine = ls::std::io::NewLine::get();
+  ::std::shared_ptr<ls::std::io::SectionPairDocument> document = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->parameter.getValue());
+  ::std::string newLine = this->parameter.getNewLine();
   ls::std::core::type::byte_field serializedDocument = document->getHeader() + newLine + newLine;
 
   for (const auto &_section : document->getSectionList())
   {
+    _section->reserveNewLine(this->parameter.getNewLine());
     serializedDocument += _section->marshal();
   }
 
@@ -41,13 +44,13 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::ma
 void ls::std::io::SerializableSectionPairDocument::unmarshal(const ls::std::core::type::byte_field &_data)
 {
   ls::std::core::type::byte_field serializedDocument = _data;
-  size_t headerSize = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->value)->getHeader().size() + 2 * ls::std::io::NewLine::get().size();
+  size_t headerSize = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->parameter.getValue())->getHeader().size() + 2 * this->parameter.getNewLine().size();
   serializedDocument = serializedDocument.substr(headerSize);
   ls::std::core::type::byte_field serializedSection{};
 
   do
   {
-    serializedSection = ls::std::io::SerializableSectionPairDocument::_getNextSerializedSection(serializedDocument);
+    serializedSection = this->_getNextSerializedSection(serializedDocument);
     this->_addSection(serializedSection);
     serializedDocument = serializedDocument.substr(serializedSection.size());
   } while (!serializedDocument.empty());
@@ -56,13 +59,14 @@ void ls::std::io::SerializableSectionPairDocument::unmarshal(const ls::std::core
 void ls::std::io::SerializableSectionPairDocument::_addSection(const ls::std::core::type::byte_field &_serializedSection)
 {
   ::std::shared_ptr<ls::std::io::SectionPairSection> section = ::std::make_shared<ls::std::io::SectionPairSection>("tmp-id");
+  section->reserveNewLine(this->parameter.getNewLine());
   section->unmarshal(_serializedSection);
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->value)->add(section);
+  ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->parameter.getValue())->add(section);
 }
 
 ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::_getCurrentRow(size_t _iterations, const ls::std::core::type::byte_field &_serializedDocument)
 {
-  ::std::string newLine = ls::std::io::NewLine::get();
+  ::std::string newLine = this->parameter.getNewLine();
   ::std::string currentRow{};
 
   if (_iterations == 1 || _serializedDocument.find('[') != ::std::string::npos)
@@ -83,13 +87,13 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::_g
   size_t iterations{};
   ls::std::core::type::byte_field serializedDocument = _serializedDocument;
   bool isNotNewSection{};
-  ::std::string newLine = ls::std::io::NewLine::get();
+  ::std::string newLine = this->parameter.getNewLine();
 
   do
   {
     ++iterations;
-    currentRow = ls::std::io::SerializableSectionPairDocument::_getCurrentRow(iterations, serializedDocument);
-    isNotNewSection = ls::std::io::SerializableSectionPairDocument::_isNotNewSection(currentRow) && !serializedDocument.empty() || iterations == 1;
+    currentRow = this->_getCurrentRow(iterations, serializedDocument);
+    isNotNewSection = this->_isNotNewSection(currentRow) && !serializedDocument.empty() || iterations == 1;
     serializedDocument = serializedDocument.substr(currentRow.size());
     serializedSection += currentRow;
   } while (isNotNewSection);
@@ -99,12 +103,6 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::_g
 
 bool ls::std::io::SerializableSectionPairDocument::_isNotNewSection(const ls::std::core::type::byte_field &_currentRow)
 {
-  ::std::string newLine = ls::std::io::NewLine::get();
+  ::std::string newLine = this->parameter.getNewLine();
   return _currentRow.find(newLine + newLine) == ::std::string::npos;
-}
-
-void ls::std::io::SerializableSectionPairDocument::_setValue(const ::std::shared_ptr<ls::std::core::Class> &_value)
-{
-  ls::std::core::NullPointerArgumentEvaluator{_value}.evaluate();
-  this->value = _value;
 }

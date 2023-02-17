@@ -35,13 +35,23 @@ namespace
       {}
   };
 
+  class SerializableSectionPairSectionSerializationTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SerializableSectionPairSectionSerializationTest() = default;
+      ~SerializableSectionPairSectionSerializationTest() override = default;
+  };
+
   TEST_F(SerializableSectionPairSectionTest, constructor_no_reference)
   {
+    SerializableSectionPairParameter parameter{};
+
     EXPECT_THROW(
         {
           try
           {
-            SerializableSectionPairSection serializable(nullptr);
+            SerializableSectionPairSection serializable(parameter);
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -53,40 +63,56 @@ namespace
 
   TEST_F(SerializableSectionPairSectionTest, getClassName)
   {
-    ASSERT_STREQ("SerializableSectionPairSection", SerializableSectionPairSection{make_shared<SectionPairSection>("general")}.getClassName().c_str());
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairSection>("general"));
+
+    ASSERT_STREQ("SerializableSectionPairSection", SerializableSectionPairSection{parameter}.getClassName().c_str());
   }
 
   TEST_F(SerializableSectionPairSectionTest, getValue)
   {
-    SerializableSectionPairSection serializable{make_shared<SectionPairSection>("general")};
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairSection>("general"));
+    SerializableSectionPairSection serializable{parameter};
+
     ASSERT_TRUE(serializable.getValue() != nullptr);
   }
 
-  TEST_F(SerializableSectionPairSectionTest, marshal_sandra)
+  TEST_P(SerializableSectionPairSectionSerializationTest, marshal_sandra)
   {
-    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSectionWithSandraExample();
-    SerializableSectionPairSection serializable{section};
-    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithSandraExample();
+    string newLine = GetParam();
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(SectionPairSectionProvider::createSectionWithSandraExample());
+    parameter.setNewLine(newLine);
+    SerializableSectionPairSection serializable{parameter};
+    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithSandraExample(newLine);
     byte_field actual = serializable.marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_F(SerializableSectionPairSectionTest, marshal_tom)
+  TEST_P(SerializableSectionPairSectionSerializationTest, marshal_tom)
   {
-    shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSectionWithTomExample();
-    SerializableSectionPairSection serializable{section};
-    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithTomExample();
+    string newLine = GetParam();
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(SectionPairSectionProvider::createSectionWithTomExample());
+    parameter.setNewLine(newLine);
+    SerializableSectionPairSection serializable{parameter};
+    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithTomExample(newLine);
     byte_field actual = serializable.marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_F(SerializableSectionPairSectionTest, unmarshal_sandra)
+  TEST_P(SerializableSectionPairSectionSerializationTest, unmarshal_sandra)
   {
+    string newLine = GetParam();
+    SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("tmp-id");
-    SerializableSectionPairSection serializable{section};
-    serializable.unmarshal(SectionPairSectionProvider::createSerializedSectionWithSandraExample());
+    parameter.setValue(section);
+    parameter.setNewLine(newLine);
+    SerializableSectionPairSection serializable{parameter};
+    serializable.unmarshal(SectionPairSectionProvider::createSerializedSectionWithSandraExample(newLine));
 
     ASSERT_STREQ("general", section->getSectionId().c_str());
     ASSERT_EQ(3, section->getRowAmount());
@@ -104,11 +130,15 @@ namespace
     ASSERT_STREQ("singing", listRow->get(2).c_str());
   }
 
-  TEST_F(SerializableSectionPairSectionTest, unmarshal_tom)
+  TEST_P(SerializableSectionPairSectionSerializationTest, unmarshal_tom)
   {
+    string newLine = GetParam();
+    SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("tmp-id");
-    SerializableSectionPairSection serializable{section};
-    serializable.unmarshal(SectionPairSectionProvider::createSerializedSectionWithTomExample());
+    parameter.setValue(section);
+    parameter.setNewLine(newLine);
+    SerializableSectionPairSection serializable{parameter};
+    serializable.unmarshal(SectionPairSectionProvider::createSerializedSectionWithTomExample(newLine));
 
     ASSERT_STREQ("general", section->getSectionId().c_str());
     ASSERT_EQ(3, section->getRowAmount());
@@ -122,4 +152,6 @@ namespace
     ASSERT_STREQ("age", section->get(2)->getKey().c_str());
     ASSERT_STREQ("33", dynamic_pointer_cast<SectionPairRowSingleValue>(section->get(2)->getValue())->get().c_str());
   }
+
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairSectionTest, SerializableSectionPairSectionSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

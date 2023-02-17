@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-17
+* Changed:         2023-02-18
 *
 * */
 
@@ -35,13 +35,23 @@ namespace
       {}
   };
 
+  class SerializableSectionPairDocumentSerializationTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SerializableSectionPairDocumentSerializationTest() = default;
+      ~SerializableSectionPairDocumentSerializationTest() override = default;
+  };
+
   TEST_F(SerializableSectionPairDocumentTest, constructor_no_value)
   {
+    SerializableSectionPairParameter parameter{};
+
     EXPECT_THROW(
         {
           try
           {
-            SerializableSectionPairDocument serializable = SerializableSectionPairDocument(nullptr);
+            SerializableSectionPairDocument serializable = SerializableSectionPairDocument(parameter);
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -53,27 +63,41 @@ namespace
 
   TEST_F(SerializableSectionPairDocumentTest, getClassName)
   {
-    ASSERT_STREQ("SerializableSectionPairDocument", SerializableSectionPairDocument{make_shared<SectionPairDocument>()}.getClassName().c_str());
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairDocument>());
+
+    ASSERT_STREQ("SerializableSectionPairDocument", SerializableSectionPairDocument{parameter}.getClassName().c_str());
   }
 
   TEST_F(SerializableSectionPairDocumentTest, getValue)
   {
-    SerializableSectionPairDocument serializable(make_shared<SectionPairDocument>());
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairDocument>());
+    SerializableSectionPairDocument serializable(parameter);
+
     ASSERT_TRUE(serializable.getValue() != nullptr);
   }
 
-  TEST_F(SerializableSectionPairDocumentTest, marshal)
+  TEST_P(SerializableSectionPairDocumentSerializationTest, marshal)
   {
-    SerializableSectionPairDocument serializable(SectionPairDocumentProvider::createDocument());
-    byte_field expected = SectionPairDocumentProvider::createSerializedDocument();
+    string newLine = GetParam();
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(SectionPairDocumentProvider::createDocument());
+    parameter.setNewLine(newLine);
+    SerializableSectionPairDocument serializable(parameter);
+    byte_field expected = SectionPairDocumentProvider::createSerializedDocument(newLine);
 
     ASSERT_STREQ(expected.c_str(), serializable.marshal().c_str());
   }
 
-  TEST_F(SerializableSectionPairDocumentTest, unmarshal)
+  TEST_P(SerializableSectionPairDocumentSerializationTest, unmarshal)
   {
-    SerializableSectionPairDocument serializable(make_shared<SectionPairDocument>());
-    serializable.unmarshal(SectionPairDocumentProvider::createSerializedDocument());
+    string newLine = GetParam();
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairDocument>());
+    parameter.setNewLine(newLine);
+    SerializableSectionPairDocument serializable(parameter);
+    serializable.unmarshal(SectionPairDocumentProvider::createSerializedDocument(newLine));
     shared_ptr<SectionPairDocument> document = dynamic_pointer_cast<SectionPairDocument>(serializable.getValue());
 
     ASSERT_EQ(2, document->getAmountOfSections());
@@ -112,4 +136,6 @@ namespace
     ASSERT_STREQ("height", physical->get(2)->getKey().c_str());
     ASSERT_STREQ("167", dynamic_pointer_cast<SectionPairRowSingleValue>(physical->get(2)->getValue())->get().c_str());
   }
+
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairDocumentTest, SerializableSectionPairDocumentSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

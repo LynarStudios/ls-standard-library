@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-16
+* Changed:         2023-02-18
 *
 * */
 
@@ -45,21 +45,20 @@ test::io::SectionPairDocumentProvider::~SectionPairDocumentProvider() = default;
   return document;
 }
 
-ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSerializedDocument()
+ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSerializedDocument(const ::std::string &_newLine)
 {
-  ::std::string newLine = ls::std::io::NewLine::get();
-  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + newLine + newLine;
+  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + _newLine + _newLine;
 
   // general section
 
-  serializedDocument += test::io::SectionPairSectionProvider::createSerializedSectionWithSandraExample();
+  serializedDocument += test::io::SectionPairSectionProvider::createSerializedSectionWithSandraExample(_newLine);
 
   // physical
 
-  serializedDocument += newLine + "[physical]" + newLine + newLine;
-  serializedDocument += "eye-color=blue" + newLine;
-  serializedDocument += "hair-color=red" + newLine;
-  serializedDocument += "height=167" + newLine;
+  serializedDocument += _newLine + "[physical]" + _newLine + _newLine;
+  serializedDocument += "eye-color=blue" + _newLine;
+  serializedDocument += "hair-color=red" + _newLine;
+  serializedDocument += "height=167" + _newLine;
 
   return serializedDocument;
 }

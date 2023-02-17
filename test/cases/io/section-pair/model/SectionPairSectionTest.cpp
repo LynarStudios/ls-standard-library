@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -155,7 +155,7 @@ namespace
   TEST_F(SectionPairSectionTest, marshal)
   {
     shared_ptr<SectionPairSection> section = SectionPairSectionProvider::createSectionWithTomExample();
-    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithTomExample();
+    byte_field expected = SectionPairSectionProvider::createSerializedSectionWithTomExample(NewLine::get());
     byte_field actual = section->marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
@@ -208,7 +208,7 @@ namespace
   TEST_F(SectionPairSectionTest, unmarshal)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("tmp-id");
-    section->unmarshal(SectionPairSectionProvider::createSerializedSectionWithTomExample());
+    section->unmarshal(SectionPairSectionProvider::createSerializedSectionWithTomExample(NewLine::get()));
 
     ASSERT_STREQ("general", section->getSectionId().c_str());
     ASSERT_EQ(3, section->getRowAmount());

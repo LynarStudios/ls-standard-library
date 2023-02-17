@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-17
+* Changed:         2023-02-18
 *
 * */
 
@@ -32,13 +32,23 @@ namespace
       {}
   };
 
+  class SerializableSectionPairRowListValueSerializationTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SerializableSectionPairRowListValueSerializationTest() = default;
+      ~SerializableSectionPairRowListValueSerializationTest() override = default;
+  };
+
   TEST_F(SerializableSectionPairRowListValueTest, constructor_no_reference)
   {
+    SerializableSectionPairParameter parameter{};
+
     EXPECT_THROW(
         {
           try
           {
-            SerializableSectionPairRowListValue serializable(nullptr);
+            SerializableSectionPairRowListValue serializable(parameter);
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -50,35 +60,48 @@ namespace
 
   TEST_F(SerializableSectionPairRowListValueTest, getClassName)
   {
-    ASSERT_STREQ("SerializableSectionPairRowListValue", SerializableSectionPairRowListValue{make_shared<SectionPairRowListValue>()}.getClassName().c_str());
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRowListValue>());
+
+    ASSERT_STREQ("SerializableSectionPairRowListValue", SerializableSectionPairRowListValue{parameter}.getClassName().c_str());
   }
 
   TEST_F(SerializableSectionPairRowListValueTest, getValue)
   {
+    SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairRowListValue> value = make_shared<SectionPairRowListValue>();
-    SerializableSectionPairRowListValue serializable(value);
+    parameter.setValue(value);
+    SerializableSectionPairRowListValue serializable(parameter);
 
     ASSERT_TRUE(value == serializable.getValue());
   }
 
-  TEST_F(SerializableSectionPairRowListValueTest, marshal)
+  TEST_P(SerializableSectionPairRowListValueSerializationTest, marshal)
   {
+    SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairRowListValue> value = make_shared<SectionPairRowListValue>();
     value->add("Drumming");
     value->add("Reading");
     value->add("Coding");
-    SerializableSectionPairRowListValue serializable(value);
+    parameter.setValue(value);
+    string newLine = GetParam();
+    parameter.setNewLine(newLine);
+    SerializableSectionPairRowListValue serializable(parameter);
 
-    ::std::string expected = "  Drumming" + NewLine::get() + "  Reading" + NewLine::get() + "  Coding" + NewLine::get();
+    string expected = "  Drumming" + newLine + "  Reading" + newLine + "  Coding" + newLine;
 
     ASSERT_STREQ(expected.c_str(), serializable.marshal().c_str());
   }
 
-  TEST_F(SerializableSectionPairRowListValueTest, unmarshal)
+  TEST_P(SerializableSectionPairRowListValueSerializationTest, unmarshal)
   {
+    SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairRowListValue> value = make_shared<SectionPairRowListValue>();
-    SerializableSectionPairRowListValue serializable(value);
-    ::std::string serializedListValue = "  Drumming" + NewLine::get() + "  Reading" + NewLine::get() + "  Coding" + NewLine::get();
+    parameter.setValue(value);
+    string newLine = GetParam();
+    parameter.setNewLine(newLine);
+    SerializableSectionPairRowListValue serializable(parameter);
+    string serializedListValue = "  Drumming" + newLine + "  Reading" + newLine + "  Coding" + newLine;
     serializable.unmarshal(serializedListValue);
 
     ASSERT_EQ(3, value->getSize());
@@ -89,7 +112,9 @@ namespace
 
   TEST_F(SerializableSectionPairRowListValueTest, unmarshal_empty_string)
   {
-    SerializableSectionPairRowListValue serializable(make_shared<SectionPairRowListValue>());
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRowListValue>());
+    SerializableSectionPairRowListValue serializable(parameter);
 
     EXPECT_THROW(
         {
@@ -104,4 +129,6 @@ namespace
         },
         IllegalArgumentException);
   }
+
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowListValueTest, SerializableSectionPairRowListValueSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

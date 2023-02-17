@@ -10,6 +10,7 @@
 #ifndef LS_STD_SERIALIZABLE_SECTION_PAIR_ROW_HPP
 #define LS_STD_SERIALIZABLE_SECTION_PAIR_ROW_HPP
 
+#include "SerializableSectionPairParameter.hpp"
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/ISerializable.hpp>
 #include <memory>
@@ -21,7 +22,7 @@ namespace ls::std::io
   {
     public:
 
-      explicit SerializableSectionPairRow(const ::std::shared_ptr<ls::std::core::Class> &_value);
+      explicit SerializableSectionPairRow(const ls::std::io::SerializableSectionPairParameter &_parameter);
       ~SerializableSectionPairRow() override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::core::Class> getValue();
@@ -30,10 +31,9 @@ namespace ls::std::io
 
     private:
 
-      ::std::shared_ptr<ls::std::core::Class> value{};
+      ls::std::io::SerializableSectionPairParameter parameter{};
 
       [[nodiscard]] ::std::string _marshalKey();
-      void _setValue(const ::std::shared_ptr<ls::std::core::Class> &_value);
       void _unmarshalListValue(const ls::std::core::type::byte_field &_data);
       void _unmarshalSingleValue(const ls::std::core::type::byte_field &_data);
   };

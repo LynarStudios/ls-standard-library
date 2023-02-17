@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -13,6 +13,7 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
+#include <string>
 
 namespace test::io
 {
@@ -25,8 +26,8 @@ namespace test::io
 
       static ::std::shared_ptr<ls::std::io::SectionPairSection> createSectionWithSandraExample();
       static ::std::shared_ptr<ls::std::io::SectionPairSection> createSectionWithTomExample();
-      static ls::std::core::type::byte_field createSerializedSectionWithSandraExample();
-      static ls::std::core::type::byte_field createSerializedSectionWithTomExample();
+      static ls::std::core::type::byte_field createSerializedSectionWithSandraExample(const ::std::string &_newLine);
+      static ls::std::core::type::byte_field createSerializedSectionWithTomExample(const ::std::string &_newLine);
   };
 }
 

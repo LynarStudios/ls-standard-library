@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-17
+* Changed:         2023-02-18
 *
 * */
 
@@ -128,7 +128,7 @@ namespace
   TEST_F(SectionPairDocumentTest, marshal)
   {
     shared_ptr<SectionPairDocument> document = SectionPairDocumentProvider::createDocument();
-    byte_field expected = SectionPairDocumentProvider::createSerializedDocument();
+    byte_field expected = SectionPairDocumentProvider::createSerializedDocument(NewLine::get());
 
     ASSERT_STREQ(expected.c_str(), document->marshal().c_str());
   }
@@ -136,7 +136,7 @@ namespace
   TEST_F(SectionPairDocumentTest, unmarshal)
   {
     shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
-    document->unmarshal(SectionPairDocumentProvider::createSerializedDocument());
+    document->unmarshal(SectionPairDocumentProvider::createSerializedDocument(NewLine::get()));
 
     ASSERT_EQ(2, document->getAmountOfSections());
 

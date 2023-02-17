@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-13
+* Changed:         2023-02-17
 *
 * */
 
@@ -50,6 +50,11 @@ ls::std::core::type::byte_field ls::std::io::SectionPairRow::marshal()
   return this->serializable->marshal();
 }
 
+void ls::std::io::SectionPairRow::reserveNewLine(const ::std::string &_reservedNewLine)
+{
+  this->reservedNewLine = _reservedNewLine;
+}
+
 void ls::std::io::SectionPairRow::setKey(const ls::std::io::section_pair_identifier &_key)
 {
   this->_setKey(_key);
@@ -63,7 +68,15 @@ void ls::std::io::SectionPairRow::unmarshal(const ls::std::core::type::byte_fiel
 
 void ls::std::io::SectionPairRow::_createSerializable()
 {
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRow>(shared_from_this());
+  ls::std::io::SerializableSectionPairParameter parameter{};
+  parameter.setValue(shared_from_this());
+
+  if (!this->reservedNewLine.empty())
+  {
+    parameter.setNewLine(this->reservedNewLine);
+  }
+
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRow>(parameter);
 }
 
 void ls::std::io::SectionPairRow::_initValue(const ls::std::io::SectionPairRowEnumType &_type)

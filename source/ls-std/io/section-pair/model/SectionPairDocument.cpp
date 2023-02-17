@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-16
+* Changed:         2023-02-18
 *
 * */
 
@@ -89,7 +89,9 @@ void ls::std::io::SectionPairDocument::_checkSectionExistence(const ls::std::io:
 
 void ls::std::io::SectionPairDocument::_createSerializable()
 {
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairDocument>(shared_from_this());
+  ls::std::io::SerializableSectionPairParameter parameter{};
+  parameter.setValue(shared_from_this());
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairDocument>(parameter);
 }
 
 bool ls::std::io::SectionPairDocument::_hasSection(const ls::std::io::section_pair_identifier &_identifier)

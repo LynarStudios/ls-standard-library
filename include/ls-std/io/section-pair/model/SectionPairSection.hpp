@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-16
+* Changed:         2023-02-18
 *
 * */
 
@@ -17,6 +17,7 @@
 #include <ls-std/io/section-pair/type/SectionPairSectionTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
+#include <string>
 
 namespace ls::std::io
 {
@@ -34,11 +35,13 @@ namespace ls::std::io
       [[nodiscard]] size_t getRowAmount();
       [[nodiscard]] ls::std::io::section_pair_identifier getSectionId();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
+      void reserveNewLine(const ::std::string &_reservedNewLine);
       void setSectionId(const ls::std::io::section_pair_identifier &_sectionId);
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
 
+      ::std::string reservedNewLine{};
       ls::std::io::section_pair_row_list rows{};
       ls::std::io::section_pair_identifier sectionId{};
       ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
