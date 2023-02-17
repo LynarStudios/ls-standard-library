@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-11
- * Changed:         2023-02-16
+ * Changed:         2023-02-17
  *
  * */
 
@@ -25,6 +25,7 @@
 #include <ls-std/io/section-pair/model/SectionPairRowValue.hpp>
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairDocument.hpp>
+#include <ls-std/io/section-pair/serialization/SerializableSectionPairParameter.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRow.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>

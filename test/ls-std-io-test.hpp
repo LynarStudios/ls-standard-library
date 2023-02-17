@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-16
+ * Changed:         2023-02-17
  *
  * */
 
@@ -12,6 +12,7 @@
 
 #include <classes/io/section-pair/SectionPairDocumentProvider.hpp>
 #include <classes/io/section-pair/SectionPairSectionProvider.hpp>
+#include <classes/io/section-pair/SerializableSectionPairRowProvider.hpp>
 
 #include <classes/io/xml/TestDataFactory.hpp>
 #include <classes/io/xml/XmlParserTestWrapper.hpp>

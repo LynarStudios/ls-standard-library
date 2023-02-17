@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -55,30 +55,27 @@ test::io::SectionPairSectionProvider::~SectionPairSectionProvider() = default;
   return section;
 }
 
-ls::std::core::type::byte_field test::io::SectionPairSectionProvider::createSerializedSectionWithSandraExample()
+ls::std::core::type::byte_field test::io::SectionPairSectionProvider::createSerializedSectionWithSandraExample(const ::std::string &_newLine)
 {
   ls::std::core::type::byte_field serializedDocument{};
-  ::std::string newLine = ls::std::io::NewLine::get();
 
-  serializedDocument += newLine + "[general]" + newLine + newLine;
-  serializedDocument += "name=Sandra" + newLine;
-  serializedDocument += "age=24" + newLine;
-  serializedDocument += "hobbies:" + newLine;
-  serializedDocument += "  swimming" + newLine;
-  serializedDocument += "  cycling" + newLine;
-  serializedDocument += "  singing" + newLine;
+  serializedDocument += _newLine + "[general]" + _newLine + _newLine;
+  serializedDocument += "name=Sandra" + _newLine;
+  serializedDocument += "age=24" + _newLine;
+  serializedDocument += "hobbies:" + _newLine;
+  serializedDocument += "  swimming" + _newLine;
+  serializedDocument += "  cycling" + _newLine;
+  serializedDocument += "  singing" + _newLine;
 
   return serializedDocument;
 }
 
-ls::std::core::type::byte_field test::io::SectionPairSectionProvider::createSerializedSectionWithTomExample()
+ls::std::core::type::byte_field test::io::SectionPairSectionProvider::createSerializedSectionWithTomExample(const ::std::string &_newLine)
 {
-  ::std::string newLine = ls::std::io::NewLine::get();
-
-  ls::std::core::type::byte_field serializedSection = newLine + "[general]" + newLine + newLine;
-  ls::std::core::type::byte_field serializedNameRow = "name=Tom" + newLine;
-  ls::std::core::type::byte_field serializedJobsRow = "jobs:" + newLine + "  Farmer" + newLine + "  Bounty Hunter" + newLine;
-  ls::std::core::type::byte_field serializedAgeRow = "age=33" + newLine;
+  ls::std::core::type::byte_field serializedSection = _newLine + "[general]" + _newLine + _newLine;
+  ls::std::core::type::byte_field serializedNameRow = "name=Tom" + _newLine;
+  ls::std::core::type::byte_field serializedJobsRow = "jobs:" + _newLine + "  Farmer" + _newLine + "  Bounty Hunter" + _newLine;
+  ls::std::core::type::byte_field serializedAgeRow = "age=33" + _newLine;
 
   return serializedSection + serializedNameRow + serializedJobsRow + serializedAgeRow;
 }

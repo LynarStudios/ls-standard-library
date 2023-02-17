@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-15
+* Changed:         2023-02-17
 *
 * */
 
@@ -14,6 +14,7 @@
 #include <ls-std/core/interface/IValidator.hpp>
 #include <ls-std/core/type/Types.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <string>
 
 namespace ls::std::io
 {
@@ -21,7 +22,7 @@ namespace ls::std::io
   {
     public:
 
-      explicit SectionPairSectionIdUnmarshalValidator(ls::std::core::type::byte_field _data);
+      explicit SectionPairSectionIdUnmarshalValidator(ls::std::core::type::byte_field _data, ::std::string _newLine);
       ~SectionPairSectionIdUnmarshalValidator() override;
 
       [[nodiscard]] bool isValid() override;
@@ -29,6 +30,7 @@ namespace ls::std::io
     private:
 
       ls::std::core::type::byte_field data{};
+      ::std::string newLine{};
 
       [[nodiscard]] static bool _isValidSection(const ls::std::core::type::byte_field &_bracketsNotation);
       [[nodiscard]] static ls::std::core::type::byte_field _trimStartAndEnd(const ls::std::core::type::byte_field &_trimmedWord, const ls::std::core::type::byte_field &_beginningTrimWord, const ls::std::core::type::byte_field &_endingTrimWord);

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-17
+* Changed:         2023-02-18
 *
 * */
 
@@ -33,13 +33,23 @@ namespace
       {}
   };
 
+  class SerializableSectionPairRowSingleValueSerializationTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SerializableSectionPairRowSingleValueSerializationTest() = default;
+      ~SerializableSectionPairRowSingleValueSerializationTest() override = default;
+  };
+
   TEST_F(SerializableSectionPairRowSingleValueTest, constructor_no_reference)
   {
+    SerializableSectionPairParameter parameter{};
+
     EXPECT_THROW(
         {
           try
           {
-            SerializableSectionPairRowSingleValue serializable(nullptr);
+            SerializableSectionPairRowSingleValue serializable(parameter);
           }
           catch (const IllegalArgumentException &_exception)
           {
@@ -51,21 +61,31 @@ namespace
 
   TEST_F(SerializableSectionPairRowSingleValueTest, getClassName)
   {
-    ASSERT_STREQ("SerializableSectionPairRowSingleValue", SerializableSectionPairRowSingleValue{make_shared<SectionPairRowSingleValue>("empty")}.getClassName().c_str());
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRowSingleValue>("empty"));
+
+    ASSERT_STREQ("SerializableSectionPairRowSingleValue", SerializableSectionPairRowSingleValue{parameter}.getClassName().c_str());
   }
 
   TEST_F(SerializableSectionPairRowSingleValueTest, getValue)
   {
+    SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairRowSingleValue> value = make_shared<SectionPairRowSingleValue>("empty");
-    SerializableSectionPairRowSingleValue serializable(value);
+    parameter.setValue(value);
+    SerializableSectionPairRowSingleValue serializable(parameter);
 
     ASSERT_TRUE(value == serializable.getValue());
   }
 
-  TEST_F(SerializableSectionPairRowSingleValueTest, marshal)
+  TEST_P(SerializableSectionPairRowSingleValueSerializationTest, marshal)
   {
-    SerializableSectionPairRowSingleValue serializable(make_shared<SectionPairRowSingleValue>("empty"));
-    byte_field expected = "empty" + NewLine::get();
+    string newLine = GetParam();
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRowSingleValue>("empty"));
+    parameter.setNewLine(newLine);
+    SerializableSectionPairRowSingleValue serializable(parameter);
+
+    byte_field expected = "empty" + newLine;
     byte_field actual = serializable.marshal();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
@@ -73,16 +93,19 @@ namespace
 
   TEST_F(SerializableSectionPairRowSingleValueTest, unmarshal)
   {
-    shared_ptr<SectionPairRowSingleValue> value = make_shared<SectionPairRowSingleValue>("empty");
-    SerializableSectionPairRowSingleValue serializable(value);
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRowSingleValue>("empty"));
+    SerializableSectionPairRowSingleValue serializable(parameter);
     serializable.unmarshal("blue");
 
-    ASSERT_STREQ("blue", value->get().c_str());
+    ASSERT_STREQ("blue", dynamic_pointer_cast<SectionPairRowSingleValue>(parameter.getValue())->get().c_str());
   }
 
   TEST_F(SerializableSectionPairRowSingleValueTest, unmarshal_empty_string)
   {
-    SerializableSectionPairRowSingleValue serializable(make_shared<SectionPairRowSingleValue>("empty"));
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairRowSingleValue>("empty"));
+    SerializableSectionPairRowSingleValue serializable(parameter);
 
     EXPECT_THROW(
         {
@@ -97,4 +120,6 @@ namespace
         },
         IllegalArgumentException);
   }
+
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowSingleValueTest, SerializableSectionPairRowSingleValueSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

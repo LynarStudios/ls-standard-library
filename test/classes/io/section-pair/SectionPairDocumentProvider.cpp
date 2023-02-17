@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -52,7 +52,7 @@ ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSer
 
   // general section
 
-  serializedDocument += test::io::SectionPairSectionProvider::createSerializedSectionWithSandraExample();
+  serializedDocument += test::io::SectionPairSectionProvider::createSerializedSectionWithSandraExample(newLine);
 
   // physical
 

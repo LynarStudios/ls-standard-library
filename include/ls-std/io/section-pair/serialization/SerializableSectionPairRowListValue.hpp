@@ -10,6 +10,7 @@
 #ifndef LS_STD_SERIALIZABLE_SECTION_PAIR_ROW_LIST_VALUE_HPP
 #define LS_STD_SERIALIZABLE_SECTION_PAIR_ROW_LIST_VALUE_HPP
 
+#include "SerializableSectionPairParameter.hpp"
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
@@ -21,7 +22,7 @@ namespace ls::std::io
   {
     public:
 
-      explicit SerializableSectionPairRowListValue(const ::std::shared_ptr<ls::std::core::Class> &_value);
+      explicit SerializableSectionPairRowListValue(const ls::std::io::SerializableSectionPairParameter &_parameter);
       ~SerializableSectionPairRowListValue() override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::core::Class> getValue();
@@ -30,11 +31,10 @@ namespace ls::std::io
 
     private:
 
-      ::std::shared_ptr<ls::std::core::Class> value{};
+      ls::std::io::SerializableSectionPairParameter parameter{};
 
       [[nodiscard]] static ::std::string _getLine(::std::string::size_type _position, const ls::std::core::type::byte_field &_searchText);
-      void _setValue(const ::std::shared_ptr<ls::std::core::Class> &_value);
-      static void _updateSearchText(::std::string::size_type _position, ls::std::core::type::byte_field &_searchText);
+      void _updateSearchText(::std::string::size_type _position, ls::std::core::type::byte_field &_searchText);
   };
 }
 

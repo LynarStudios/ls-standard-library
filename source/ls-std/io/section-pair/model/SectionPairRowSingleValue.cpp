@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-15
+* Changed:         2023-02-17
 *
 * */
 
@@ -50,14 +50,22 @@ void ls::std::io::SectionPairRowSingleValue::unmarshal(const ls::std::core::type
 
 void ls::std::io::SectionPairRowSingleValue::_createSerializable()
 {
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRowSingleValue>(shared_from_this());
+  SerializableSectionPairParameter parameter{};
+  parameter.setValue(shared_from_this());
+
+  if (!this->reservedNewLine.empty())
+  {
+    parameter.setNewLine(this->reservedNewLine);
+  }
+
+  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRowSingleValue>(parameter);
 }
 
 void ls::std::io::SectionPairRowSingleValue::_set(const ls::std::io::section_pair_row_value &_value)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
   ls::std::io::SectionPairRowValueArgumentEvaluator(_value, this->getClassName() + ": section pair single value \"" + _value + "\" contains invalid characters!").evaluate();
-  ::std::string newLine = ls::std::io::NewLine::get();
+  ::std::string newLine = this->reservedNewLine.empty() ? NewLine::get() : this->reservedNewLine;
   this->value = _value;
 
   if (this->value.find(newLine) != ::std::string::npos)

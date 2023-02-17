@@ -10,6 +10,7 @@
 #ifndef LS_STD_SERIALIZABLE_SECTION_PAIR_ROW_SINGLE_VALUE_HPP
 #define LS_STD_SERIALIZABLE_SECTION_PAIR_ROW_SINGLE_VALUE_HPP
 
+#include "SerializableSectionPairParameter.hpp"
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/ISerializable.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
@@ -21,7 +22,7 @@ namespace ls::std::io
   {
     public:
 
-      explicit SerializableSectionPairRowSingleValue(const ::std::shared_ptr<ls::std::core::Class> &_value);
+      explicit SerializableSectionPairRowSingleValue(const ls::std::io::SerializableSectionPairParameter &_parameter);
       ~SerializableSectionPairRowSingleValue() override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::core::Class> getValue();
@@ -30,9 +31,7 @@ namespace ls::std::io
 
     private:
 
-      ::std::shared_ptr<ls::std::core::Class> value{};
-
-      void _setValue(const ::std::shared_ptr<ls::std::core::Class> &_value);
+      ls::std::io::SerializableSectionPairParameter parameter{};
   };
 }
 

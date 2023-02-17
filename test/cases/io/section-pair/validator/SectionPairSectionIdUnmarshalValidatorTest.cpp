@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-16
+* Changed:         2023-02-17
 *
 * */
 
@@ -34,7 +34,7 @@ namespace
 
   TEST_F(SectionPairSectionIdUnmarshalValidatorTest, getClassName)
   {
-    ASSERT_STREQ("SectionPairSectionIdUnmarshalValidator", SectionPairSectionIdUnmarshalValidator{"\n[general]\n"}.getClassName().c_str());
+    ASSERT_STREQ("SectionPairSectionIdUnmarshalValidator", SectionPairSectionIdUnmarshalValidator("\n[general]\n", NewLine::get()).getClassName().c_str());
   }
 
   TEST_F(SectionPairSectionIdUnmarshalValidatorTest, isValid)
@@ -43,8 +43,8 @@ namespace
     byte_field generalSection = newLine + "[general]" + newLine + newLine;
     byte_field localServerSection = newLine + "[local-server]" + newLine + newLine;
 
-    ASSERT_TRUE(SectionPairSectionIdUnmarshalValidator{generalSection}.isValid());
-    ASSERT_TRUE(SectionPairSectionIdUnmarshalValidator{localServerSection}.isValid());
+    ASSERT_TRUE(SectionPairSectionIdUnmarshalValidator(generalSection, newLine).isValid());
+    ASSERT_TRUE(SectionPairSectionIdUnmarshalValidator(localServerSection, newLine).isValid());
   }
 
   TEST_F(SectionPairSectionIdUnmarshalValidatorTest, isValid_not_valid)
@@ -54,8 +54,8 @@ namespace
     byte_field localServerSection = newLine + "[local-server]";
     byte_field position = newLine + "position" + newLine;
 
-    ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator{generalSection}.isValid());
-    ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator{localServerSection}.isValid());
-    ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator{position}.isValid());
+    ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator(generalSection, newLine).isValid());
+    ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator(localServerSection, newLine).isValid());
+    ASSERT_FALSE(SectionPairSectionIdUnmarshalValidator(position, newLine).isValid());
   }
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-13
+* Changed:         2023-02-17
 *
 * */
 
@@ -17,6 +17,7 @@
 #include <ls-std/io/section-pair/model/SectionPairRowValue.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
+#include <string>
 
 namespace ls::std::io
 {
@@ -32,12 +33,14 @@ namespace ls::std::io
       [[nodiscard]] bool isList();
       [[nodiscard]] bool isSingleValue();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
+      void reserveNewLine(const ::std::string &_reservedNewLine);
       void setKey(const ls::std::io::section_pair_identifier &_key);
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
 
       ls::std::io::section_pair_identifier key{};
+      ::std::string reservedNewLine{};
       ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
       ::std::shared_ptr<ls::std::io::SectionPairRowValue> value{};
 
