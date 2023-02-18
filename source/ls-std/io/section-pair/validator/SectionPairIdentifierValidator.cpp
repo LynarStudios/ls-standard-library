@@ -3,28 +3,30 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-11
+* Changed:         2023-02-18
 *
 * */
 
 #include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
+#include <regex>
 
 ls::std::io::SectionPairIdentifierValidator::SectionPairIdentifierValidator(ls::std::io::section_pair_identifier _identifier) : ls::std::core::Class("SectionPairIdentifierValidator"), identifier(::std::move(_identifier))
 {}
 
 ls::std::io::SectionPairIdentifierValidator::~SectionPairIdentifierValidator() = default;
 
+::std::string ls::std::io::SectionPairIdentifierValidator::getValidationRegex()
+{
+  return ls::std::io::SectionPairIdentifierValidator::_getValidationRegex();
+}
+
 bool ls::std::io::SectionPairIdentifierValidator::isValid()
 {
-  bool startsWithValidCharacter{}, containsValidCharacters{}, doesNotExceedMaxSize{};
+  static ::std::regex identifierRegex("^" + ls::std::io::SectionPairIdentifierValidator::_getValidationRegex());
+  return ::std::regex_match(this->identifier, identifierRegex);
+}
 
-  if (!this->identifier.empty())
-  {
-    size_t foundPosition = this->identifier.find_first_not_of("abcdefghijklmnopqrstuvwxyz-0123456789");
-    startsWithValidCharacter = ls::std::io::section_pair_identifier{this->identifier[0]}.find_first_not_of("abcdefghijklmnopqrstuvwxyz") == ::std::string::npos;
-    containsValidCharacters = foundPosition == ls::std::io::section_pair_identifier::npos;
-    doesNotExceedMaxSize = this->identifier.size() <= 16;
-  }
-
-  return startsWithValidCharacter && containsValidCharacters && doesNotExceedMaxSize;
+::std::string ls::std::io::SectionPairIdentifierValidator::_getValidationRegex()
+{
+  return R"([a-z]([a-z0-9-]){1,15})";
 }
