@@ -16,13 +16,23 @@ ls::std::io::SectionPairRowValueValidator::SectionPairRowValueValidator(ls::std:
 
 ls::std::io::SectionPairRowValueValidator::~SectionPairRowValueValidator() = default;
 
+::std::string ls::std::io::SectionPairRowValueValidator::getValidationRegex()
+{
+  ::std::string validationRegex = ls::std::io::SectionPairRowValueValidator::_getValidationRegex();
+  return "(" + validationRegex + ")|(" + validationRegex + "\\n{1})|(" + validationRegex + "\\r{1}\\n{1})";
+}
+
 bool ls::std::io::SectionPairRowValueValidator::isValid()
 {
-  static ::std::regex windowsLineBreakRegex{ls::std::io::NewLine::getWindowsNewLine()};
-  static ::std::regex unixLineBreakRegex{ls::std::io::NewLine::getUnixNewLine()};
+  ::std::string validationRegex = ls::std::io::SectionPairRowValueValidator::_getValidationRegex();
+  ::std::string concatenation = "(^" + validationRegex + ")|(^" + validationRegex + R"(\n{1})|(^)" + validationRegex + R"(\r{1}\n{1}))";
+  static ::std::regex valueRegex{concatenation};
 
-  this->value = ::std::regex_replace(this->value, windowsLineBreakRegex, "");
-  this->value = ::std::regex_replace(this->value, unixLineBreakRegex, "");
-  size_t foundPosition = this->value.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789_#![]{}()/$€§%?<>+:;., *\"");
-  return foundPosition == ls::std::io::section_pair_row_value::npos;
+  return ::std::regex_match(this->value, valueRegex);
+}
+
+::std::string ls::std::io::SectionPairRowValueValidator::_getValidationRegex()
+{
+  ::std::string value = R"([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32})";
+  return value;
 }
