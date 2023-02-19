@@ -23,7 +23,7 @@ ls::std::io::SectionPairRowListValue::~SectionPairRowListValue() = default;
 void ls::std::io::SectionPairRowListValue::add(const ls::std::io::section_pair_row_value &_value)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
-  ls::std::io::SectionPairValueArgumentEvaluator{_value, "section pair row list value \"" + _value + "\" contains invalid characters!"}.evaluate();
+  ls::std::io::SectionPairValueArgumentEvaluator{_value}.evaluate();
   this->values.push_back(_value);
 }
 

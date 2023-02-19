@@ -22,14 +22,13 @@ namespace ls::std::io
   {
     public:
 
-      explicit SectionPairValueArgumentEvaluator(ls::std::io::section_pair_row_value _value, ::std::string _message);
+      explicit SectionPairValueArgumentEvaluator(ls::std::io::section_pair_row_value _value);
       ~SectionPairValueArgumentEvaluator() override;
 
       void evaluate() override;
 
     private:
 
-      ::std::string message{};
       ls::std::io::section_pair_row_value value{};
   };
 }

@@ -32,27 +32,39 @@ namespace
       {}
   };
 
+  class SectionPairValueArgumentEvaluatorNotValidTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SectionPairValueArgumentEvaluatorNotValidTest() = default;
+      ~SectionPairValueArgumentEvaluatorNotValidTest() override = default;
+  };
+
   TEST_F(SectionPairValueArgumentEvaluatorTest, getClassName)
   {
-    shared_ptr<SectionPairValueArgumentEvaluator> evaluator = make_shared<SectionPairValueArgumentEvaluator>("=33", "section pair value contains invalid characters!");
+    shared_ptr<SectionPairValueArgumentEvaluator> evaluator = make_shared<SectionPairValueArgumentEvaluator>("=33");
     ASSERT_STREQ("SectionPairValueArgumentEvaluator", evaluator->getClassName().c_str());
   }
 
-  TEST_F(SectionPairValueArgumentEvaluatorTest, evaluate)
+  TEST_P(SectionPairValueArgumentEvaluatorNotValidTest, evaluate)
   {
     EXPECT_THROW(
         {
           try
           {
-            SectionPairValueArgumentEvaluator("=33", "section pair value contains invalid characters!").evaluate();
+            SectionPairValueArgumentEvaluator(GetParam()).evaluate();
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string message = _exception.what();
-            ASSERT_STREQ("IllegalArgumentException thrown - section pair value contains invalid characters!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = "IllegalArgumentException thrown - \"" + GetParam() + "\" is not a valid value!";
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
         IllegalArgumentException);
   }
+
+  INSTANTIATE_TEST_SUITE_P(SectionPairValueArgumentEvaluatorTest, SectionPairValueArgumentEvaluatorNotValidTest, ::testing::Values("=33", "\\empty"));
 }

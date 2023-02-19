@@ -64,7 +64,7 @@ void ls::std::io::SectionPairRowSingleValue::_createSerializable()
 void ls::std::io::SectionPairRowSingleValue::_set(const ls::std::io::section_pair_row_value &_value)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
-  ls::std::io::SectionPairValueArgumentEvaluator(_value, this->getClassName() + ": section pair single value \"" + _value + "\" contains invalid characters!").evaluate();
+  ls::std::io::SectionPairValueArgumentEvaluator(_value).evaluate();
   ::std::string newLine = this->reservedNewLine.empty() ? NewLine::get() : this->reservedNewLine;
   this->value = _value;
 
