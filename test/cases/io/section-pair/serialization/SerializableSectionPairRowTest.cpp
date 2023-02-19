@@ -3,10 +3,11 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-12
-* Changed:         2023-02-17
+* Changed:         2023-02-19
 *
 * */
 
+#include <array>
 #include <gtest/gtest.h>
 #include <ls-std-io-test.hpp>
 #include <ls-std/ls-std-core.hpp>
@@ -36,12 +37,28 @@ namespace
       {}
   };
 
-  class SerializableSectionPairRowSerializationTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairRowSerializationLineBreakTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SerializableSectionPairRowSerializationTest() = default;
-      ~SerializableSectionPairRowSerializationTest() override = default;
+      SerializableSectionPairRowSerializationLineBreakTest() = default;
+      ~SerializableSectionPairRowSerializationLineBreakTest() override = default;
+  };
+
+  class SerializableSectionPairRowSerializationValidTest : public ::testing::TestWithParam<array<string, 3>>
+  {
+    protected:
+
+      SerializableSectionPairRowSerializationValidTest() = default;
+      ~SerializableSectionPairRowSerializationValidTest() override = default;
+  };
+
+  class SerializableSectionPairRowSerializationNotValidTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SerializableSectionPairRowSerializationNotValidTest() = default;
+      ~SerializableSectionPairRowSerializationNotValidTest() override = default;
   };
 
   TEST_F(SerializableSectionPairRowTest, constructor_no_reference)
@@ -79,7 +96,7 @@ namespace
     ASSERT_TRUE(serializable.getValue() != nullptr);
   }
 
-  TEST_P(SerializableSectionPairRowSerializationTest, marshal_single_value)
+  TEST_P(SerializableSectionPairRowSerializationLineBreakTest, marshal_single_value)
   {
     string newLine = GetParam();
     shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createSingleValueForMarshal(newLine);
@@ -90,7 +107,7 @@ namespace
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_P(SerializableSectionPairRowSerializationTest, marshal_list_value)
+  TEST_P(SerializableSectionPairRowSerializationLineBreakTest, marshal_list_value)
   {
     string newLine = GetParam();
     shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createListValueForMarshal(newLine);
@@ -100,7 +117,7 @@ namespace
     ASSERT_STREQ(expected.c_str(), serializable->marshal().c_str());
   }
 
-  TEST_P(SerializableSectionPairRowSerializationTest, unmarshal_single_value)
+  TEST_P(SerializableSectionPairRowSerializationLineBreakTest, unmarshal_single_value)
   {
     shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createSingleValueForUnmarshal(GetParam());
     serializable->unmarshal("favourite-color=blue");
@@ -110,7 +127,35 @@ namespace
     ASSERT_STREQ("blue", dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue())->get().c_str());
   }
 
-  TEST_P(SerializableSectionPairRowSerializationTest, unmarshal_list_value)
+  TEST_P(SerializableSectionPairRowSerializationValidTest, unmarshal_single_value)
+  {
+    shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createSingleValueForUnmarshal(NewLine::getWindowsNewLine());
+    serializable->unmarshal(GetParam().at(0));
+    shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(serializable->getValue());
+
+    ASSERT_STREQ(GetParam().at(1).c_str(), row->getKey().c_str());
+    ASSERT_STREQ(GetParam().at(2).c_str(), dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue())->get().c_str());
+  }
+
+  TEST_P(SerializableSectionPairRowSerializationNotValidTest, unmarshal_single_value)
+  {
+    shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createSingleValueForUnmarshal(NewLine::get());
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            serializable->unmarshal(GetParam());
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_P(SerializableSectionPairRowSerializationLineBreakTest, unmarshal_list_value)
   {
     string newLine = GetParam();
     shared_ptr<SerializableSectionPairRow> serializable = SerializableSectionPairRowProvider::createListValueForUnmarshal(newLine);
@@ -126,5 +171,7 @@ namespace
     ASSERT_STREQ("purple", dynamic_pointer_cast<SectionPairRowListValue>(row->getValue())->get(2).c_str());
   }
 
-  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowTest, SerializableSectionPairRowSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowTest, SerializableSectionPairRowSerializationLineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowTest, SerializableSectionPairRowSerializationValidTest, ::testing::Values(array<string, 3>{"favourite-color=blue", "favourite-color", "blue"}, array<string, 3>{"hair-color=red" + NewLine::getWindowsNewLine(), "hair-color", "red"}));
+  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowTest, SerializableSectionPairRowSerializationNotValidTest, ::testing::Values("favourite-color", "color="));
 }
