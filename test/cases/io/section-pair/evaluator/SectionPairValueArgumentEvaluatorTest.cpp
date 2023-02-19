@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-17
+* Changed:         2023-02-19
 *
 * */
 
@@ -18,12 +18,12 @@ using namespace ::std;
 
 namespace
 {
-  class SectionPairRowValueArgumentEvaluatorTest : public ::testing::Test
+  class SectionPairValueArgumentEvaluatorTest : public ::testing::Test
   {
     protected:
 
-      SectionPairRowValueArgumentEvaluatorTest() = default;
-      ~SectionPairRowValueArgumentEvaluatorTest() override = default;
+      SectionPairValueArgumentEvaluatorTest() = default;
+      ~SectionPairValueArgumentEvaluatorTest() override = default;
 
       void SetUp() override
       {}
@@ -32,19 +32,19 @@ namespace
       {}
   };
 
-  TEST_F(SectionPairRowValueArgumentEvaluatorTest, getClassName)
+  TEST_F(SectionPairValueArgumentEvaluatorTest, getClassName)
   {
-    shared_ptr<SectionPairRowValueArgumentEvaluator> evaluator = make_shared<SectionPairRowValueArgumentEvaluator>("=33", "section pair value contains invalid characters!");
-    ASSERT_STREQ("SectionPairRowValueArgumentEvaluator", evaluator->getClassName().c_str());
+    shared_ptr<SectionPairValueArgumentEvaluator> evaluator = make_shared<SectionPairValueArgumentEvaluator>("=33", "section pair value contains invalid characters!");
+    ASSERT_STREQ("SectionPairValueArgumentEvaluator", evaluator->getClassName().c_str());
   }
 
-  TEST_F(SectionPairRowValueArgumentEvaluatorTest, evaluate)
+  TEST_F(SectionPairValueArgumentEvaluatorTest, evaluate)
   {
     EXPECT_THROW(
         {
           try
           {
-            SectionPairRowValueArgumentEvaluator("=33", "section pair value contains invalid characters!").evaluate();
+            SectionPairValueArgumentEvaluator("=33", "section pair value contains invalid characters!").evaluate();
           }
           catch (const IllegalArgumentException &_exception)
           {

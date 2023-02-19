@@ -3,14 +3,14 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-17
+* Changed:         2023-02-19
 *
 * */
 
 #include <ls-std/core/ConditionalFunctionExecutor.hpp>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
-#include <ls-std/io/section-pair/evaluator/SectionPairRowValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 #include <string>
@@ -23,7 +23,7 @@ ls::std::io::SectionPairRowListValue::~SectionPairRowListValue() = default;
 void ls::std::io::SectionPairRowListValue::add(const ls::std::io::section_pair_row_value &_value)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
-  ls::std::io::SectionPairRowValueArgumentEvaluator{_value, "section pair row list value \"" + _value + "\" contains invalid characters!"}.evaluate();
+  ls::std::io::SectionPairValueArgumentEvaluator{_value, "section pair row list value \"" + _value + "\" contains invalid characters!"}.evaluate();
   this->values.push_back(_value);
 }
 
