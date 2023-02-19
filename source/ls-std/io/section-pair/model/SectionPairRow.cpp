@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-17
+* Changed:         2023-02-19
 *
 * */
 
@@ -103,6 +103,6 @@ void ls::std::io::SectionPairRow::_initValue(const ls::std::io::SectionPairRowEn
 void ls::std::io::SectionPairRow::_setKey(const ls::std::io::section_pair_identifier &_key)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_key, this->getClassName() + ": passed key identifier is empty!"}.evaluate();
-  ls::std::io::SectionPairIdentifierArgumentEvaluator(_key, this->getClassName() + ": section pair key identifier \"" + _key + "\" contains invalid characters!").evaluate();
+  ls::std::io::SectionPairIdentifierArgumentEvaluator(_key).evaluate();
   this->key = _key;
 }

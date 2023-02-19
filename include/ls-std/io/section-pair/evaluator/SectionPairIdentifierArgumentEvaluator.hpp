@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-17
+* Changed:         2023-02-19
 *
 * */
 
@@ -14,7 +14,6 @@
 #include <ls-std/core/interface/IEvaluator.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
-#include <string>
 
 namespace ls::std::io
 {
@@ -22,7 +21,7 @@ namespace ls::std::io
   {
     public:
 
-      explicit SectionPairIdentifierArgumentEvaluator(ls::std::io::section_pair_identifier _identifier, ::std::string _message);
+      explicit SectionPairIdentifierArgumentEvaluator(ls::std::io::section_pair_identifier _identifier);
       ~SectionPairIdentifierArgumentEvaluator() override;
 
       void evaluate() override;
@@ -30,7 +29,6 @@ namespace ls::std::io
     private:
 
       ls::std::io::section_pair_identifier identifier{};
-      ::std::string message{};
   };
 }
 

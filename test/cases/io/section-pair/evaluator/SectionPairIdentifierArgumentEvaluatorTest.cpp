@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-17
+* Changed:         2023-02-19
 *
 * */
 
@@ -32,27 +32,39 @@ namespace
       {}
   };
 
+  class SectionPairIdentifierArgumentEvaluatorNotValidTest : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SectionPairIdentifierArgumentEvaluatorNotValidTest() = default;
+      ~SectionPairIdentifierArgumentEvaluatorNotValidTest() override = default;
+  };
+
   TEST_F(SectionPairIdentifierArgumentEvaluatorTest, getClassName)
   {
-    shared_ptr<SectionPairIdentifierArgumentEvaluator> evaluator = make_shared<SectionPairIdentifierArgumentEvaluator>("_id", "not valid!");
+    shared_ptr<SectionPairIdentifierArgumentEvaluator> evaluator = make_shared<SectionPairIdentifierArgumentEvaluator>("_id");
     ASSERT_STREQ("SectionPairIdentifierArgumentEvaluator", evaluator->getClassName().c_str());
   }
 
-  TEST_F(SectionPairIdentifierArgumentEvaluatorTest, evaluate)
+  TEST_P(SectionPairIdentifierArgumentEvaluatorNotValidTest, evaluate)
   {
     EXPECT_THROW(
         {
           try
           {
-            SectionPairIdentifierArgumentEvaluator("_color", "section pair identifier contains invalid characters!").evaluate();
+            SectionPairIdentifierArgumentEvaluator(GetParam()).evaluate();
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string message = _exception.what();
-            ASSERT_STREQ("IllegalArgumentException thrown - section pair identifier contains invalid characters!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = "IllegalArgumentException thrown - \"" + GetParam() + "\" is not a valid identifier!";
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
         IllegalArgumentException);
   }
+
+  INSTANTIATE_TEST_SUITE_P(SectionPairIdentifierArgumentEvaluatorTest, SectionPairIdentifierArgumentEvaluatorNotValidTest, ::testing::Values("_color", "Color", "another_color"));
 }

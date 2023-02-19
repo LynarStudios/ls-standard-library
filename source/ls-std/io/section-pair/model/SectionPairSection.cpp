@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-18
+* Changed:         2023-02-19
 *
 * */
 
@@ -132,6 +132,6 @@ void ls::std::io::SectionPairSection::_rowExistenceCheck(const ls::std::io::sect
 void ls::std::io::SectionPairSection::_setSectionId(const ls::std::io::section_pair_identifier &_sectionId)
 {
   ls::std::core::EmptyStringArgumentEvaluator{_sectionId}.evaluate();
-  ls::std::io::SectionPairIdentifierArgumentEvaluator(_sectionId, this->getClassName() + ": argument \"_sectionId\" contains invalid characters!").evaluate();
+  ls::std::io::SectionPairIdentifierArgumentEvaluator(_sectionId).evaluate();
   this->sectionId = _sectionId;
 }
