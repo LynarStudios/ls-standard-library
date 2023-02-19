@@ -31,5 +31,5 @@ bool ls::std::io::SectionPairRowSingleValueValidator::isValid()
   ::std::string identifierRegex = ls::std::io::SectionPairIdentifierValidator::getValidationRegex();
   ::std::string valueRegex = ls::std::io::SectionPairValueValidator::getValidationRegex();
 
-  return "(" + identifierRegex + R"(={1})" + valueRegex + ")";
+  return "((" + identifierRegex + R"()={1}()" + valueRegex + "))";
 }

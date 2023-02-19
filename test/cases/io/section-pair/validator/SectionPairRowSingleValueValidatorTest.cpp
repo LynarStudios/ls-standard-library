@@ -64,5 +64,5 @@ namespace
   }
 
   INSTANTIATE_TEST_SUITE_P(SectionPairRowSingleValueValidatorTest, SectionPairRowSingleValueValidatorIsValidTest, ::testing::Values("favourite-color=blue" + NewLine::getUnixNewLine(), "hair-color=red" + NewLine::getWindowsNewLine(), "height=167"));
-  INSTANTIATE_TEST_SUITE_P(SectionPairRowSingleValueValidatorTest, SectionPairRowSingleValueValidatorNotValidTest, ::testing::Values("color blue"));
+  INSTANTIATE_TEST_SUITE_P(SectionPairRowSingleValueValidatorTest, SectionPairRowSingleValueValidatorNotValidTest, ::testing::Values("color blue", "a value\n"));
 }
