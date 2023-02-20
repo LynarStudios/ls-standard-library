@@ -40,6 +40,7 @@
 #include <ls-std/io/section-pair/validator/SectionPairRowSingleValueValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairSectionIdUnmarshalValidator.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairSectionValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairValueValidator.hpp>
 
 #include <ls-std/io/xml/XmlAttribute.hpp>

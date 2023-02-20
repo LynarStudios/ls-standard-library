@@ -69,6 +69,6 @@ namespace
     ASSERT_FALSE(SectionPairRowValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowValidatorTest_ValidArgumentTest, ::testing::Values("favourite-color=blue\n", "color=red\r\n", "colors:\n  red\n  blue\n", "colors:\r\n  red\r\n  yellow\r\n"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowValidatorTest_ValidArgumentTest, ::testing::Values("favourite-color=blue\n", "color=red\r\n", "colors:\n  red\n  blue\n", "colors:\r\n  red\r\n  yellow\r\n", "graphics-card=GTX 720\n"));
   INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowValidatorTest_InvalidArgumentTest, ::testing::Values("color blue", "a row\nand so on"));
 }

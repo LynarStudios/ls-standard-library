@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-17
+* Changed:         2023-02-20
 *
 * */
 
@@ -24,10 +24,10 @@ namespace test::io
       SectionPairSectionProvider();
       ~SectionPairSectionProvider();
 
-      static ::std::shared_ptr<ls::std::io::SectionPairSection> createSectionWithSandraExample();
-      static ::std::shared_ptr<ls::std::io::SectionPairSection> createSectionWithTomExample();
-      static ls::std::core::type::byte_field createSerializedSectionWithSandraExample(const ::std::string &_newLine);
-      static ls::std::core::type::byte_field createSerializedSectionWithTomExample(const ::std::string &_newLine);
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::SectionPairSection> createSectionWithSandraExample();
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::SectionPairSection> createSectionWithTomExample();
+      [[nodiscard]] static ls::std::core::type::byte_field createSerializedSectionWithSandraExample(const ::std::string &_newLine);
+      [[nodiscard]] static ls::std::core::type::byte_field createSerializedSectionWithTomExample(const ::std::string &_newLine);
   };
 }
 
