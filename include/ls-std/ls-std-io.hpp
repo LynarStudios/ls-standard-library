@@ -17,6 +17,7 @@
 #include <ls-std/io/section-pair/SectionPairRowEnumType.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairRowArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowListValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowSingleValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairValueArgumentEvaluator.hpp>
