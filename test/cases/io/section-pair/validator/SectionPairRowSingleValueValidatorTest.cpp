@@ -50,7 +50,13 @@ namespace
 
   TEST_F(SectionPairRowSingleValueValidatorTest, getClassName)
   {
-    ASSERT_STREQ("SectionPairRowSingleValueValidator", SectionPairRowSingleValueValidator{"tmp-key"}.getClassName().c_str());
+    ASSERT_STREQ("SectionPairRowSingleValueValidator", SectionPairRowSingleValueValidator{"empty"}.getClassName().c_str());
+  }
+
+  TEST_F(SectionPairRowSingleValueValidatorTest, getValidationRegex)
+  {
+    ::std::string expected = R"(([a-z]([a-z0-9-]){1,15})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}){1}($|\n{1}|\r{1}\n{1}))";
+    ASSERT_STREQ(expected.c_str(), SectionPairRowSingleValueValidator::getValidationRegex().c_str());
   }
 
   TEST_P(SectionPairRowSingleValueValidatorTest_ValidArgumentTest, isValid)

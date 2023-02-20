@@ -34,10 +34,8 @@ bool ls::std::io::SectionPairRowListValueValidator::isValid()
 {
   ::std::string identifierRegex = ls::std::io::SectionPairIdentifierValidator::getValidationRegex();
   ::std::string valueRegex = ls::std::io::SectionPairValueValidator::getValidationRegex();
-  ::std::string windowsFirstLine = R"(((()" + identifierRegex + R"():{1})\r{1}\n{1}))";
-  ::std::string unixFirstLine = R"(((()" + identifierRegex + R"():{1})\n{1}))";
-  ::std::string windowsValidationRegex = R"((()" + windowsFirstLine + R"(( {2})" + valueRegex + R"(\r{1}\n{1})){1}(( {2})" + valueRegex + R"(\r{1}\n{1})*)))";
-  ::std::string unixValidationRegex = R"(|(()" + unixFirstLine + R"(( {2})" + valueRegex + R"(\n{1})){1}(( {2})" + valueRegex + R"(\n{1})*)))";
+  ::std::string lineBreak = R"(((\n{1})|(\r{1}\n{1})))";
+  ::std::string firstLine = R"(((()" + identifierRegex + R"():{1}))" + lineBreak + R"())";
 
-  return windowsValidationRegex + unixValidationRegex;
+  return R"((()" + firstLine + R"(( {2})" + valueRegex + R"()" + lineBreak + R"()){1}(( {2})" + valueRegex + R"()" + lineBreak + R"()*)))";
 }

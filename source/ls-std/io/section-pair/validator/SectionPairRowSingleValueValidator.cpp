@@ -17,11 +17,15 @@ ls::std::io::SectionPairRowSingleValueValidator::SectionPairRowSingleValueValida
 
 ls::std::io::SectionPairRowSingleValueValidator::~SectionPairRowSingleValueValidator() = default;
 
+::std::string ls::std::io::SectionPairRowSingleValueValidator::getValidationRegex()
+{
+  return ls::std::io::SectionPairRowSingleValueValidator::_getValidationRegex();
+}
+
 bool ls::std::io::SectionPairRowSingleValueValidator::isValid()
 {
   ::std::string validationRegex = ls::std::io::SectionPairRowSingleValueValidator::_getValidationRegex();
-  ::std::string concatenation = "(^" + validationRegex + ")|(^" + validationRegex + R"(\n{1})|(^)" + validationRegex + R"(\r{1}\n{1}))";
-  static ::std::regex singleValueRowRegex{concatenation};
+  static ::std::regex singleValueRowRegex = ::std::regex{"^" + validationRegex};
 
   return ::std::regex_match(this->singleValueRow, singleValueRowRegex);
 }
@@ -30,7 +34,6 @@ bool ls::std::io::SectionPairRowSingleValueValidator::isValid()
 {
   ::std::string identifierRegex = ls::std::io::SectionPairIdentifierValidator::getValidationRegex();
   ::std::string valueRegex = ls::std::io::SectionPairValueValidator::getValidationRegex();
-  ::std::string valueRegexConcatenation = "(" + valueRegex + ")|(" + valueRegex + "\\n{1})|(" + valueRegex + "\\r{1}\\n{1})";
 
-  return "((" + identifierRegex + R"()={1}()" + valueRegexConcatenation + "))";
+  return R"(()" + identifierRegex + R"()={1}()" + valueRegex + R"(){1}($|\n{1}|\r{1}\n{1}))";
 }

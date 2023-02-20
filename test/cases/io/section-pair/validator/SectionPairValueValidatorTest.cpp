@@ -50,7 +50,7 @@ namespace
 
   TEST_F(SectionPairValueValidatorTest, getClassName)
   {
-    ASSERT_STREQ("SectionPairValueValidator", SectionPairValueValidator{"any value"}.getClassName().c_str());
+    ASSERT_STREQ("SectionPairValueValidator", SectionPairValueValidator{"empty"}.getClassName().c_str());
   }
 
   TEST_F(SectionPairValueValidatorTest, getValidationRegex)

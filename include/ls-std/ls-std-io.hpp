@@ -37,6 +37,7 @@
 #include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowListValueValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowSingleValueValidator.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairRowValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairSectionIdUnmarshalValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairValueValidator.hpp>
 

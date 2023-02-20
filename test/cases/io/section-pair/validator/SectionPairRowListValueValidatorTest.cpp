@@ -50,12 +50,12 @@ namespace
 
   TEST_F(SectionPairRowListValueValidatorTest, getClassName)
   {
-    ASSERT_STREQ("SectionPairRowListValueValidator", SectionPairRowListValueValidator{"tmp-key"}.getClassName().c_str());
+    ASSERT_STREQ("SectionPairRowListValueValidator", SectionPairRowListValueValidator{"empty"}.getClassName().c_str());
   }
 
   TEST_F(SectionPairRowListValueValidatorTest, getValidationRegex)
   {
-    string expected = R"(((((([a-z]([a-z0-9-]){1,15}):{1})\r{1}\n{1})( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}\r{1}\n{1})){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}\r{1}\n{1})*))|((((([a-z]([a-z0-9-]){1,15}):{1})\n{1})( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}\n{1})){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}\n{1})*)))";
+    string expected = R"(((((([a-z]([a-z0-9-]){1,15}):{1})((\n{1})|(\r{1}\n{1})))( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))*)))";
     string actual = SectionPairRowListValueValidator::getValidationRegex();
 
     ASSERT_STREQ(expected.c_str(), actual.c_str());
