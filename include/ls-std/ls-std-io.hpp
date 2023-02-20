@@ -20,6 +20,7 @@
 #include <ls-std/io/section-pair/evaluator/SectionPairRowArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowListValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowSingleValueArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairSectionArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairDocument.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRow.hpp>

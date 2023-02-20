@@ -3,12 +3,13 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-17
+* Changed:         2023-02-20
 *
 * */
 
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairSectionArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
@@ -40,6 +41,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::mar
 
 void ls::std::io::SerializableSectionPairSection::unmarshal(const ls::std::core::type::byte_field &_data)
 {
+  ls::std::io::SectionPairSectionArgumentEvaluator{_data}.evaluate();
   size_t sectionHeaderSize = this->_unmarshalSectionHeader(_data);
   this->_unmarshalRows(_data.substr(sectionHeaderSize));
 }

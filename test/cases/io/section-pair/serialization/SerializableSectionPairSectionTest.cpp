@@ -153,5 +153,25 @@ namespace
     ASSERT_STREQ("33", dynamic_pointer_cast<SectionPairRowSingleValue>(section->get(2)->getValue())->get().c_str());
   }
 
+  TEST_F(SerializableSectionPairSectionTest, unmarshal_invalid_input)
+  {
+    SerializableSectionPairParameter parameter{};
+    parameter.setValue(make_shared<SectionPairSection>("tmp-key"));
+    SerializableSectionPairSection serializable(parameter);
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            serializable.unmarshal(R"(\n[general]\n\n)");
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
   INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairSectionTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }
