@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-19
+* Changed:         2023-02-20
 *
 * */
 
@@ -18,8 +18,7 @@ ls::std::io::SectionPairValueValidator::~SectionPairValueValidator() = default;
 
 ::std::string ls::std::io::SectionPairValueValidator::getValidationRegex()
 {
-  ::std::string validationRegex = ls::std::io::SectionPairValueValidator::_getValidationRegex();
-  return "(" + validationRegex + ")|(" + validationRegex + "\\n{1})|(" + validationRegex + "\\r{1}\\n{1})";
+  return ls::std::io::SectionPairValueValidator::_getValidationRegex();
 }
 
 bool ls::std::io::SectionPairValueValidator::isValid()

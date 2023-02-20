@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-19
+* Changed:         2023-02-20
 *
 * */
 
@@ -30,6 +30,7 @@ bool ls::std::io::SectionPairRowSingleValueValidator::isValid()
 {
   ::std::string identifierRegex = ls::std::io::SectionPairIdentifierValidator::getValidationRegex();
   ::std::string valueRegex = ls::std::io::SectionPairValueValidator::getValidationRegex();
+  ::std::string valueRegexConcatenation = "(" + valueRegex + ")|(" + valueRegex + "\\n{1})|(" + valueRegex + "\\r{1}\\n{1})";
 
-  return "((" + identifierRegex + R"()={1}()" + valueRegex + "))";
+  return "((" + identifierRegex + R"()={1}()" + valueRegexConcatenation + "))";
 }
