@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-17
+* Changed:         2023-02-20
 *
 * */
 
@@ -33,7 +33,6 @@ namespace ls::std::io
 
       ls::std::io::SerializableSectionPairParameter parameter{};
 
-      void _checkSectionHeader(const ls::std::core::type::byte_field &_sectionHeader);
       [[nodiscard]] ls::std::core::type::byte_field _collectSectionRow(const ls::std::core::type::byte_field &_currentRows, ls::std::io::SectionPairRowEnumType &_type);
       [[nodiscard]] ls::std::core::type::byte_field _collectSectionListValueRow(const core::type::byte_field &_currentRows, SectionPairRowEnumType &_type);
       [[nodiscard]] static core::type::byte_field _collectSectionSingleValueRow(const ls::std::core::type::byte_field &_firstRow, SectionPairRowEnumType &type);

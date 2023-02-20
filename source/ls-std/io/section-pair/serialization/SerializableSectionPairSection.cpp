@@ -8,12 +8,10 @@
 * */
 
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
-#include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairSectionArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
-#include <ls-std/io/section-pair/validator/SectionPairSectionIdUnmarshalValidator.hpp>
 
 ls::std::io::SerializableSectionPairSection::SerializableSectionPairSection(const ls::std::io::SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairSection")
 {
@@ -44,14 +42,6 @@ void ls::std::io::SerializableSectionPairSection::unmarshal(const ls::std::core:
   ls::std::io::SectionPairSectionArgumentEvaluator{_data}.evaluate();
   size_t sectionHeaderSize = this->_unmarshalSectionHeader(_data);
   this->_unmarshalRows(_data.substr(sectionHeaderSize));
-}
-
-void ls::std::io::SerializableSectionPairSection::_checkSectionHeader(const ls::std::core::type::byte_field &_sectionHeader)
-{
-  if (!ls::std::io::SectionPairSectionIdUnmarshalValidator{_sectionHeader, this->parameter.getNewLine()}.isValid())
-  {
-    throw ls::std::core::IllegalArgumentException{"serialized section header is not valid!"};
-  }
 }
 
 ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_collectSectionRow(const ls::std::core::type::byte_field &_currentRows, ls::std::io::SectionPairRowEnumType &_type)
@@ -213,7 +203,6 @@ void ls::std::io::SerializableSectionPairSection::_unmarshalRows(const ls::std::
 size_t ls::std::io::SerializableSectionPairSection::_unmarshalSectionHeader(const ls::std::core::type::byte_field &_data)
 {
   ls::std::core::type::byte_field sectionHeader = this->_getSectionHeader(_data);
-  this->_checkSectionHeader(sectionHeader);
   ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->parameter.getValue())->setSectionId(ls::std::io::SerializableSectionPairSection::_getSectionId(sectionHeader));
 
   return sectionHeader.size();
