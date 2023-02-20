@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-17
+* Changed:         2023-02-20
 *
 * */
 
@@ -35,12 +35,12 @@ namespace
       {}
   };
 
-  class SerializableSectionPairSectionSerializationTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairSectionTest_LineBreakTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SerializableSectionPairSectionSerializationTest() = default;
-      ~SerializableSectionPairSectionSerializationTest() override = default;
+      SerializableSectionPairSectionTest_LineBreakTest() = default;
+      ~SerializableSectionPairSectionTest_LineBreakTest() override = default;
   };
 
   TEST_F(SerializableSectionPairSectionTest, constructor_no_reference)
@@ -78,7 +78,7 @@ namespace
     ASSERT_TRUE(serializable.getValue() != nullptr);
   }
 
-  TEST_P(SerializableSectionPairSectionSerializationTest, marshal_sandra)
+  TEST_P(SerializableSectionPairSectionTest_LineBreakTest, marshal_sandra)
   {
     string newLine = GetParam();
     SerializableSectionPairParameter parameter{};
@@ -91,7 +91,7 @@ namespace
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_P(SerializableSectionPairSectionSerializationTest, marshal_tom)
+  TEST_P(SerializableSectionPairSectionTest_LineBreakTest, marshal_tom)
   {
     string newLine = GetParam();
     SerializableSectionPairParameter parameter{};
@@ -104,7 +104,7 @@ namespace
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_P(SerializableSectionPairSectionSerializationTest, unmarshal_sandra)
+  TEST_P(SerializableSectionPairSectionTest_LineBreakTest, unmarshal_sandra)
   {
     string newLine = GetParam();
     SerializableSectionPairParameter parameter{};
@@ -130,7 +130,7 @@ namespace
     ASSERT_STREQ("singing", listRow->get(2).c_str());
   }
 
-  TEST_P(SerializableSectionPairSectionSerializationTest, unmarshal_tom)
+  TEST_P(SerializableSectionPairSectionTest_LineBreakTest, unmarshal_tom)
   {
     string newLine = GetParam();
     SerializableSectionPairParameter parameter{};
@@ -153,5 +153,5 @@ namespace
     ASSERT_STREQ("33", dynamic_pointer_cast<SectionPairRowSingleValue>(section->get(2)->getValue())->get().c_str());
   }
 
-  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairSectionTest, SerializableSectionPairSectionSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairSectionTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

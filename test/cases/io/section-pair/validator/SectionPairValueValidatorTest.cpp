@@ -32,20 +32,20 @@ namespace
       {}
   };
 
-  class SectionPairValueValidatorValidTest : public ::testing::TestWithParam<string>
+  class SectionPairValueValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairValueValidatorValidTest() = default;
-      ~SectionPairValueValidatorValidTest() override = default;
+      SectionPairValueValidatorTest_ValidArgumentTest() = default;
+      ~SectionPairValueValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairValueValidatorNotValidTest : public ::testing::TestWithParam<string>
+  class SectionPairValueValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairValueValidatorNotValidTest() = default;
-      ~SectionPairValueValidatorNotValidTest() override = default;
+      SectionPairValueValidatorTest_InvalidArgumentTest() = default;
+      ~SectionPairValueValidatorTest_InvalidArgumentTest() override = default;
   };
 
   TEST_F(SectionPairValueValidatorTest, getClassName)
@@ -61,16 +61,16 @@ namespace
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_P(SectionPairValueValidatorValidTest, isValid)
+  TEST_P(SectionPairValueValidatorTest_ValidArgumentTest, isValid)
   {
     ASSERT_TRUE(SectionPairValueValidator{GetParam()}.isValid());
   }
 
-  TEST_P(SectionPairValueValidatorNotValidTest, isValid_not_valid)
+  TEST_P(SectionPairValueValidatorTest_InvalidArgumentTest, isValid_not_valid)
   {
     ASSERT_FALSE(SectionPairValueValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(SectionPairValueValidatorTest, SectionPairValueValidatorValidTest, ::testing::Values("blue is my favourite color!", "Age", "Tom", "\"Tom\"", "Hello!" + NewLine::getUnixNewLine(), "Hello!" + NewLine::getWindowsNewLine()));
-  INSTANTIATE_TEST_SUITE_P(SectionPairValueValidatorTest, SectionPairValueValidatorNotValidTest, ::testing::Values("1+2=3", "\\escape"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairValueValidatorTest_ValidArgumentTest, ::testing::Values("blue is my favourite color!", "Age", "Tom", "\"Tom\"", "Hello!" + NewLine::getUnixNewLine(), "Hello!" + NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairValueValidatorTest_InvalidArgumentTest, ::testing::Values("1+2=3", "\\escape"));
 }

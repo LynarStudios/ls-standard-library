@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-18
+* Changed:         2023-02-20
 *
 * */
 
@@ -32,20 +32,20 @@ namespace
       {}
   };
 
-  class SectionPairIdentifierValidatorIsValidTest : public ::testing::TestWithParam<string>
+  class SectionPairIdentifierValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairIdentifierValidatorIsValidTest() = default;
-      ~SectionPairIdentifierValidatorIsValidTest() override = default;
+      SectionPairIdentifierValidatorTest_ValidArgumentTest() = default;
+      ~SectionPairIdentifierValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairIdentifierValidatorIsNotValidTest : public ::testing::TestWithParam<string>
+  class SectionPairIdentifierValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairIdentifierValidatorIsNotValidTest() = default;
-      ~SectionPairIdentifierValidatorIsNotValidTest() override = default;
+      SectionPairIdentifierValidatorTest_InvalidArgumentTest() = default;
+      ~SectionPairIdentifierValidatorTest_InvalidArgumentTest() override = default;
   };
 
   TEST_F(SectionPairIdentifierValidatorTest, getClassName)
@@ -58,16 +58,16 @@ namespace
     ASSERT_STREQ(R"([a-z]([a-z0-9-]){1,15})", SectionPairIdentifierValidator{"tmp-key"}.getValidationRegex().c_str());
   }
 
-  TEST_P(SectionPairIdentifierValidatorIsValidTest, isValid)
+  TEST_P(SectionPairIdentifierValidatorTest_ValidArgumentTest, isValid)
   {
     ASSERT_TRUE(SectionPairIdentifierValidator{GetParam()}.isValid());
   }
 
-  TEST_P(SectionPairIdentifierValidatorIsNotValidTest, isValid_not_valid)
+  TEST_P(SectionPairIdentifierValidatorTest_InvalidArgumentTest, isValid_not_valid)
   {
     ASSERT_FALSE(SectionPairIdentifierValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(SectionPairIdentifierValidatorTest, SectionPairIdentifierValidatorIsValidTest, ::testing::Values("color", "favourite-color", "age", "name"));
-  INSTANTIATE_TEST_SUITE_P(SectionPairIdentifierValidatorTest, SectionPairIdentifierValidatorIsNotValidTest, ::testing::Values("_color", "8color", "colOr", "color:", "-color", "color-is-valid-but-too-long"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairIdentifierValidatorTest_ValidArgumentTest, ::testing::Values("color", "favourite-color", "age", "name"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierValidatorTest_InvalidArgumentTest, ::testing::Values("_color", "8color", "colOr", "color:", "-color", "color-is-valid-but-too-long"));
 }

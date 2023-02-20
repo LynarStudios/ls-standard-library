@@ -32,20 +32,20 @@ namespace
       {}
   };
 
-  class SectionPairRowListValueValidatorIsValidTest : public ::testing::TestWithParam<string>
+  class SectionPairRowListValueValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairRowListValueValidatorIsValidTest() = default;
-      ~SectionPairRowListValueValidatorIsValidTest() override = default;
+      SectionPairRowListValueValidatorTest_ValidArgumentTest() = default;
+      ~SectionPairRowListValueValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairRowListValueValidatorNotValidTest : public ::testing::TestWithParam<string>
+  class SectionPairRowListValueValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairRowListValueValidatorNotValidTest() = default;
-      ~SectionPairRowListValueValidatorNotValidTest() override = default;
+      SectionPairRowListValueValidatorTest_InvalidArgumentTest() = default;
+      ~SectionPairRowListValueValidatorTest_InvalidArgumentTest() override = default;
   };
 
   TEST_F(SectionPairRowListValueValidatorTest, getClassName)
@@ -61,16 +61,16 @@ namespace
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  TEST_P(SectionPairRowListValueValidatorIsValidTest, isValid)
+  TEST_P(SectionPairRowListValueValidatorTest_ValidArgumentTest, isValid)
   {
     ASSERT_TRUE(SectionPairRowListValueValidator{GetParam()}.isValid());
   }
 
-  TEST_P(SectionPairRowListValueValidatorNotValidTest, isValid_not_valid)
+  TEST_P(SectionPairRowListValueValidatorTest_InvalidArgumentTest, isValid_not_valid)
   {
     ASSERT_FALSE(SectionPairRowListValueValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(SectionPairRowListValueValidatorTest, SectionPairRowListValueValidatorIsValidTest, ::testing::Values("colors:\n  blue\n  red\n", "colors:\r\n  blue\r\n  green\r\n  yellow\r\n"));
-  INSTANTIATE_TEST_SUITE_P(SectionPairRowListValueValidatorTest, SectionPairRowListValueValidatorNotValidTest, ::testing::Values("colors:\nblue", "colors:\r\n hello!"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowListValueValidatorTest_ValidArgumentTest, ::testing::Values("colors:\n  blue\n  red\n", "colors:\r\n  blue\r\n  green\r\n  yellow\r\n"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowListValueValidatorTest_InvalidArgumentTest, ::testing::Values("colors:\nblue", "colors:\r\n hello!"));
 }

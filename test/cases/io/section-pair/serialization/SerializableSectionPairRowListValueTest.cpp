@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-18
+* Changed:         2023-02-20
 *
 * */
 
@@ -32,12 +32,12 @@ namespace
       {}
   };
 
-  class SerializableSectionPairRowListValueSerializationTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairRowListValueTest_LineBreakTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SerializableSectionPairRowListValueSerializationTest() = default;
-      ~SerializableSectionPairRowListValueSerializationTest() override = default;
+      SerializableSectionPairRowListValueTest_LineBreakTest() = default;
+      ~SerializableSectionPairRowListValueTest_LineBreakTest() override = default;
   };
 
   TEST_F(SerializableSectionPairRowListValueTest, constructor_no_reference)
@@ -76,7 +76,7 @@ namespace
     ASSERT_TRUE(value == serializable.getValue());
   }
 
-  TEST_P(SerializableSectionPairRowListValueSerializationTest, marshal)
+  TEST_P(SerializableSectionPairRowListValueTest_LineBreakTest, marshal)
   {
     SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairRowListValue> value = make_shared<SectionPairRowListValue>();
@@ -93,7 +93,7 @@ namespace
     ASSERT_STREQ(expected.c_str(), serializable.marshal().c_str());
   }
 
-  TEST_P(SerializableSectionPairRowListValueSerializationTest, unmarshal)
+  TEST_P(SerializableSectionPairRowListValueTest_LineBreakTest, unmarshal)
   {
     SerializableSectionPairParameter parameter{};
     shared_ptr<SectionPairRowListValue> value = make_shared<SectionPairRowListValue>();
@@ -130,5 +130,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowListValueTest, SerializableSectionPairRowListValueSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairRowListValueTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

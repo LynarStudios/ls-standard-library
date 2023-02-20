@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-19
+* Changed:         2023-02-20
 *
 * */
 
@@ -32,12 +32,12 @@ namespace
       {}
   };
 
-  class SectionPairValueArgumentEvaluatorNotValidTest : public ::testing::TestWithParam<string>
+  class SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairValueArgumentEvaluatorNotValidTest() = default;
-      ~SectionPairValueArgumentEvaluatorNotValidTest() override = default;
+      SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest() = default;
+      ~SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest() override = default;
   };
 
   TEST_F(SectionPairValueArgumentEvaluatorTest, getClassName)
@@ -46,7 +46,7 @@ namespace
     ASSERT_STREQ("SectionPairValueArgumentEvaluator", evaluator->getClassName().c_str());
   }
 
-  TEST_P(SectionPairValueArgumentEvaluatorNotValidTest, evaluate)
+  TEST_P(SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest, evaluate)
   {
     EXPECT_THROW(
         {
@@ -66,5 +66,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(SectionPairValueArgumentEvaluatorTest, SectionPairValueArgumentEvaluatorNotValidTest, ::testing::Values("=33", "\\empty"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("=33", "\\empty"));
 }

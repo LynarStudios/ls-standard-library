@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-19
+* Changed:         2023-02-20
 *
 * */
 
@@ -32,12 +32,12 @@ namespace
       {}
   };
 
-  class SectionPairRowSingleValueArgumentEvaluatorNotValidTest : public ::testing::TestWithParam<string>
+  class SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairRowSingleValueArgumentEvaluatorNotValidTest() = default;
-      ~SectionPairRowSingleValueArgumentEvaluatorNotValidTest() override = default;
+      SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest() = default;
+      ~SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest() override = default;
   };
 
   TEST_F(SectionPairRowSingleValueArgumentEvaluatorTest, getClassName)
@@ -46,7 +46,7 @@ namespace
     ASSERT_STREQ("SectionPairRowSingleValueArgumentEvaluator", evaluator->getClassName().c_str());
   }
 
-  TEST_P(SectionPairRowSingleValueArgumentEvaluatorNotValidTest, evaluate)
+  TEST_P(SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest, evaluate)
   {
     EXPECT_THROW(
         {
@@ -66,5 +66,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(SectionPairRowSingleValueArgumentEvaluatorTest, SectionPairRowSingleValueArgumentEvaluatorNotValidTest, ::testing::Values("favourite-color", "a value\n"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("favourite-color", "a value\n"));
 }

@@ -32,12 +32,12 @@ namespace
       {}
   };
 
-  class SectionPairRowListValueArgumentEvaluatorNotValidTest : public ::testing::TestWithParam<string>
+  class SectionPairRowListValueArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairRowListValueArgumentEvaluatorNotValidTest() = default;
-      ~SectionPairRowListValueArgumentEvaluatorNotValidTest() override = default;
+      SectionPairRowListValueArgumentEvaluatorTest_InvalidArgumentTest() = default;
+      ~SectionPairRowListValueArgumentEvaluatorTest_InvalidArgumentTest() override = default;
   };
 
   TEST_F(SectionPairRowListValueArgumentEvaluatorTest, getClassName)
@@ -46,7 +46,7 @@ namespace
     ASSERT_STREQ("SectionPairRowListValueArgumentEvaluator", evaluator->getClassName().c_str());
   }
 
-  TEST_P(SectionPairRowListValueArgumentEvaluatorNotValidTest, evaluate)
+  TEST_P(SectionPairRowListValueArgumentEvaluatorTest_InvalidArgumentTest, evaluate)
   {
     EXPECT_THROW(
         {
@@ -66,5 +66,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(SectionPairRowListValueArgumentEvaluatorTest, SectionPairRowListValueArgumentEvaluatorNotValidTest, ::testing::Values("colors:", "colors:\n red", "colors:\r\n  red"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowListValueArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("colors:", "colors:\n red", "colors:\r\n  red"));
 }

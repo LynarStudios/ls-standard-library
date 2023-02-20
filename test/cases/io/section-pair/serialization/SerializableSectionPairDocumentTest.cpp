@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-18
+* Changed:         2023-02-20
 *
 * */
 
@@ -35,12 +35,12 @@ namespace
       {}
   };
 
-  class SerializableSectionPairDocumentSerializationTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairDocumentTest_LineBreakTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SerializableSectionPairDocumentSerializationTest() = default;
-      ~SerializableSectionPairDocumentSerializationTest() override = default;
+      SerializableSectionPairDocumentTest_LineBreakTest() = default;
+      ~SerializableSectionPairDocumentTest_LineBreakTest() override = default;
   };
 
   TEST_F(SerializableSectionPairDocumentTest, constructor_no_value)
@@ -78,7 +78,7 @@ namespace
     ASSERT_TRUE(serializable.getValue() != nullptr);
   }
 
-  TEST_P(SerializableSectionPairDocumentSerializationTest, marshal)
+  TEST_P(SerializableSectionPairDocumentTest_LineBreakTest, marshal)
   {
     string newLine = GetParam();
     SerializableSectionPairParameter parameter{};
@@ -90,7 +90,7 @@ namespace
     ASSERT_STREQ(expected.c_str(), serializable.marshal().c_str());
   }
 
-  TEST_P(SerializableSectionPairDocumentSerializationTest, unmarshal)
+  TEST_P(SerializableSectionPairDocumentTest_LineBreakTest, unmarshal)
   {
     string newLine = GetParam();
     SerializableSectionPairParameter parameter{};
@@ -137,5 +137,5 @@ namespace
     ASSERT_STREQ("167", dynamic_pointer_cast<SectionPairRowSingleValue>(physical->get(2)->getValue())->get().c_str());
   }
 
-  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairDocumentTest, SerializableSectionPairDocumentSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairDocumentTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

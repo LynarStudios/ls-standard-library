@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-18
+* Changed:         2023-02-20
 *
 * */
 
@@ -33,12 +33,12 @@ namespace
       {}
   };
 
-  class SerializableSectionPairRowSingleValueSerializationTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairRowSingleValueTest_LineBreakTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SerializableSectionPairRowSingleValueSerializationTest() = default;
-      ~SerializableSectionPairRowSingleValueSerializationTest() override = default;
+      SerializableSectionPairRowSingleValueTest_LineBreakTest() = default;
+      ~SerializableSectionPairRowSingleValueTest_LineBreakTest() override = default;
   };
 
   TEST_F(SerializableSectionPairRowSingleValueTest, constructor_no_reference)
@@ -77,7 +77,7 @@ namespace
     ASSERT_TRUE(value == serializable.getValue());
   }
 
-  TEST_P(SerializableSectionPairRowSingleValueSerializationTest, marshal)
+  TEST_P(SerializableSectionPairRowSingleValueTest_LineBreakTest, marshal)
   {
     string newLine = GetParam();
     SerializableSectionPairParameter parameter{};
@@ -121,5 +121,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(SerializableSectionPairRowSingleValueTest, SerializableSectionPairRowSingleValueSerializationTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairRowSingleValueTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

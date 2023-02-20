@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-19
+* Changed:         2023-02-20
 *
 * */
 
@@ -32,20 +32,20 @@ namespace
       {}
   };
 
-  class SectionPairRowSingleValueValidatorIsValidTest : public ::testing::TestWithParam<string>
+  class SectionPairRowSingleValueValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairRowSingleValueValidatorIsValidTest() = default;
-      ~SectionPairRowSingleValueValidatorIsValidTest() override = default;
+      SectionPairRowSingleValueValidatorTest_ValidArgumentTest() = default;
+      ~SectionPairRowSingleValueValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairRowSingleValueValidatorNotValidTest : public ::testing::TestWithParam<string>
+  class SectionPairRowSingleValueValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
   {
     protected:
 
-      SectionPairRowSingleValueValidatorNotValidTest() = default;
-      ~SectionPairRowSingleValueValidatorNotValidTest() override = default;
+      SectionPairRowSingleValueValidatorTest_InvalidArgumentTest() = default;
+      ~SectionPairRowSingleValueValidatorTest_InvalidArgumentTest() override = default;
   };
 
   TEST_F(SectionPairRowSingleValueValidatorTest, getClassName)
@@ -53,16 +53,16 @@ namespace
     ASSERT_STREQ("SectionPairRowSingleValueValidator", SectionPairRowSingleValueValidator{"tmp-key"}.getClassName().c_str());
   }
 
-  TEST_P(SectionPairRowSingleValueValidatorIsValidTest, isValid)
+  TEST_P(SectionPairRowSingleValueValidatorTest_ValidArgumentTest, isValid)
   {
     ASSERT_TRUE(SectionPairRowSingleValueValidator{GetParam()}.isValid());
   }
 
-  TEST_P(SectionPairRowSingleValueValidatorNotValidTest, isValid_not_valid)
+  TEST_P(SectionPairRowSingleValueValidatorTest_InvalidArgumentTest, isValid_not_valid)
   {
     ASSERT_FALSE(SectionPairRowSingleValueValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(SectionPairRowSingleValueValidatorTest, SectionPairRowSingleValueValidatorIsValidTest, ::testing::Values("favourite-color=blue" + NewLine::getUnixNewLine(), "hair-color=red" + NewLine::getWindowsNewLine(), "height=167"));
-  INSTANTIATE_TEST_SUITE_P(SectionPairRowSingleValueValidatorTest, SectionPairRowSingleValueValidatorNotValidTest, ::testing::Values("color blue", "a value\n"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowSingleValueValidatorTest_ValidArgumentTest, ::testing::Values("favourite-color=blue" + NewLine::getUnixNewLine(), "hair-color=red" + NewLine::getWindowsNewLine(), "height=167"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowSingleValueValidatorTest_InvalidArgumentTest, ::testing::Values("color blue", "a value\n"));
 }
