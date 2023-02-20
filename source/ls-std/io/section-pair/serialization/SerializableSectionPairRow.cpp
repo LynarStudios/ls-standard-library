@@ -3,11 +3,12 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-19
+* Changed:         2023-02-20
 *
 * */
 
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
+#include <ls-std/io/section-pair/evaluator/SectionPairRowListValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowSingleValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRow.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
@@ -72,6 +73,7 @@ void ls::std::io::SerializableSectionPairRow::unmarshal(const ls::std::core::typ
 
 void ls::std::io::SerializableSectionPairRow::_unmarshalListValue(const ls::std::core::type::byte_field &_data)
 {
+  ls::std::io::SectionPairRowListValueArgumentEvaluator{_data}.evaluate();
   ::std::string::size_type separatorPosition = _data.find(':');
   ::std::string newLine = this->parameter.getNewLine();
 
