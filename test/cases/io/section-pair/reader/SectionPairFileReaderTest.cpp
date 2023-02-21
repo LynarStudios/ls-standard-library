@@ -39,6 +39,7 @@ namespace
         SectionPairFileReaderParameter parameter{};
         parameter.setFileExistenceEvaluator(make_shared<MockFileExistenceEvaluator>(_fileExists));
         parameter.setReader(make_shared<MockFileReader>());
+        parameter.setDocument(make_shared<SectionPairDocument>());
 
         return parameter;
       }
@@ -87,6 +88,7 @@ namespace
   TEST_F(SectionPairFileReaderTest, read)
   {
     SectionPairFileReaderParameter parameter = SectionPairFileReaderTest::createMockParameter(true);
+    parameter.getDocument()->reserveNewLine(NewLine::getUnixNewLine());
     SectionPairFileReader reader{parameter};
     shared_ptr<MockFileReader> mockFileReader = dynamic_pointer_cast<MockFileReader>(parameter.getReader());
 
