@@ -75,6 +75,9 @@ namespace
   TEST_F(SectionPairFileReaderIT, read)
   {
     SectionPairFileReaderParameter parameter{};
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    document->reserveNewLine(NewLine::getUnixNewLine());
+    parameter.setDocument(document);
     parameter.setFilePath(SectionPairFileReaderIT::getSectionPairFileLocation());
     SectionPairFileReader reader{parameter};
     reader.read();
