@@ -30,8 +30,8 @@
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowValue.hpp>
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
-//#include <ls-std/io/section-pair/reader/SectionPairFileReader.hpp>
-//#include <ls-std/io/section-pair/reader/SectionPairFileReaderParameter.hpp>
+#include <ls-std/io/section-pair/reader/SectionPairFileReader.hpp>
+#include <ls-std/io/section-pair/reader/SectionPairFileReaderParameter.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairDocument.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairParameter.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRow.hpp>

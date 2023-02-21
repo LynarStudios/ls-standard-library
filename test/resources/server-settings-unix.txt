@@ -1,0 +1,9 @@
+# section-pair document
+
+[general]
+
+ports:
+  9090
+  8001
+  1989
+host=localhost
