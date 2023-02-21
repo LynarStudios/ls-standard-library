@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-20
+* Changed:         2023-02-21
 *
 * */
 
@@ -190,7 +190,6 @@ void ls::std::io::SerializableSectionPairSection::_unmarshalRows(const ls::std::
 {
   ::std::string currentRows = _serializedRows;
   ls::std::io::SectionPairRowEnumType type{};
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->parameter.getValue());
 
   while (!currentRows.empty())
   {
