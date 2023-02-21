@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-11
- * Changed:         2023-02-20
+ * Changed:         2023-02-21
  *
  * */
 
@@ -36,6 +36,7 @@
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
 #include <ls-std/io/section-pair/type/SectionPairDocumentTypes.hpp>
 #include <ls-std/io/section-pair/type/SectionPairSectionTypes.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairDocumentValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowListValueValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowSingleValueValidator.hpp>

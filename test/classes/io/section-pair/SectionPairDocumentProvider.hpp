@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-18
+* Changed:         2023-02-21
 *
 * */
 
@@ -26,6 +26,7 @@ namespace test::io
 
       static ::std::shared_ptr<ls::std::io::SectionPairDocument> createDocument();
       static ls::std::core::type::byte_field createSerializedDocument(const ::std::string &_newLine);
+      static ls::std::core::type::byte_field createSerializedDocumentComputerExample(const ::std::string &_newLine);
   };
 }
 

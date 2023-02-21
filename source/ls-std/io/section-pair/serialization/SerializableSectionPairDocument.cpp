@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-18
+* Changed:         2023-02-21
 *
 * */
 
@@ -30,7 +30,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::ma
 {
   ::std::shared_ptr<ls::std::io::SectionPairDocument> document = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->parameter.getValue());
   ::std::string newLine = this->parameter.getNewLine();
-  ls::std::core::type::byte_field serializedDocument = document->getHeader() + newLine + newLine;
+  ls::std::core::type::byte_field serializedDocument = document->getHeader() + newLine;
 
   for (const auto &_section : document->getSectionList())
   {
@@ -44,7 +44,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairDocument::ma
 void ls::std::io::SerializableSectionPairDocument::unmarshal(const ls::std::core::type::byte_field &_data)
 {
   ls::std::core::type::byte_field serializedDocument = _data;
-  size_t headerSize = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->parameter.getValue())->getHeader().size() + 2 * this->parameter.getNewLine().size();
+  size_t headerSize = ::std::dynamic_pointer_cast<ls::std::io::SectionPairDocument>(this->parameter.getValue())->getHeader().size() + this->parameter.getNewLine().size();
   serializedDocument = serializedDocument.substr(headerSize);
   ls::std::core::type::byte_field serializedSection{};
 

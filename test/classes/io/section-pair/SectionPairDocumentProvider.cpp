@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-18
+* Changed:         2023-02-21
 *
 * */
 
@@ -47,7 +47,7 @@ test::io::SectionPairDocumentProvider::~SectionPairDocumentProvider() = default;
 
 ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSerializedDocument(const ::std::string &_newLine)
 {
-  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + _newLine + _newLine;
+  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + _newLine;
 
   // general section
 
@@ -59,6 +59,26 @@ ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSer
   serializedDocument += "eye-color=blue" + _newLine;
   serializedDocument += "hair-color=red" + _newLine;
   serializedDocument += "height=167" + _newLine;
+
+  return serializedDocument;
+}
+
+ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSerializedDocumentComputerExample(const ::std::string &_newLine)
+{
+  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + _newLine;
+  serializedDocument += _newLine + "[model]" + _newLine + _newLine;
+  serializedDocument += "graphics-card=GTX 720" + _newLine;
+  serializedDocument += "ram-size=4096" + _newLine;
+  serializedDocument += "graphics-ram-size=4096" + _newLine;
+  serializedDocument += "cpu=Intel i7" + _newLine;
+
+  serializedDocument += _newLine + "[requirements]" + _newLine + _newLine;
+  serializedDocument += "graphics-ram-size=2048" + _newLine;
+  serializedDocument += "io-devices:" + _newLine;
+  serializedDocument += "  mouse" + _newLine;
+  serializedDocument += "  keyboard" + _newLine;
+  serializedDocument += "  screen" + _newLine;
+  serializedDocument += "  headset" + _newLine;
 
   return serializedDocument;
 }
