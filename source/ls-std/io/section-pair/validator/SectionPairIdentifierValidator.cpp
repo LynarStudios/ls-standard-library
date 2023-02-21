@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-18
+* Changed:         2023-02-21
 *
 * */
 
@@ -28,5 +28,5 @@ bool ls::std::io::SectionPairIdentifierValidator::isValid()
 
 ::std::string ls::std::io::SectionPairIdentifierValidator::_getValidationRegex()
 {
-  return R"([a-z]([a-z0-9-]){1,15})";
+  return R"([a-z]([a-z0-9-]){1,31})";
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-20
+* Changed:         2023-02-21
 *
 * */
 
@@ -55,7 +55,7 @@ namespace
 
   TEST_F(SectionPairIdentifierValidatorTest, getValidationRegex)
   {
-    ASSERT_STREQ(R"([a-z]([a-z0-9-]){1,15})", SectionPairIdentifierValidator{"tmp-key"}.getValidationRegex().c_str());
+    ASSERT_STREQ(R"([a-z]([a-z0-9-]){1,31})", SectionPairIdentifierValidator{"tmp-key"}.getValidationRegex().c_str());
   }
 
   TEST_P(SectionPairIdentifierValidatorTest_ValidArgumentTest, isValid)
@@ -69,5 +69,5 @@ namespace
   }
 
   INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairIdentifierValidatorTest_ValidArgumentTest, ::testing::Values("color", "favourite-color", "age", "name"));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierValidatorTest_InvalidArgumentTest, ::testing::Values("_color", "8color", "colOr", "color:", "-color", "color-is-valid-but-too-long"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierValidatorTest_InvalidArgumentTest, ::testing::Values("_color", "8color", "colOr", "color:", "-color", "color-is-valid-but-too-long-because-it-exceeds-32-characters"));
 }
