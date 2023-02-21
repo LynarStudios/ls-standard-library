@@ -14,10 +14,11 @@
 #include <ls-std/io/section-pair/reader/SectionPairFileReader.hpp>
 #include <memory>
 
-ls::std::io::SectionPairFileReader::SectionPairFileReader(SectionPairFileReaderParameter _parameter) : ls::std::core::Class("SectionPairFileReader")
+ls::std::io::SectionPairFileReader::SectionPairFileReader(const ls::std::io::SectionPairFileReaderParameter &_parameter) : ls::std::core::Class("SectionPairFileReader")
 {
-  ls::std::io::FileExistenceEvaluator{_parameter.getFilePath()}.evaluate();
   this->parameter = _parameter;
+  ls::std::core::ConditionalFunctionExecutor{this->parameter.getFileExistenceEvaluator() == nullptr}.execute([this] { _createFileExistenceEvaluator(); });
+  this->parameter.getFileExistenceEvaluator()->evaluate();
   ls::std::core::ConditionalFunctionExecutor{this->parameter.getReader() == nullptr}.execute([this] { _createReader(); });
   ls::std::core::ConditionalFunctionExecutor{this->parameter.getDocument() == nullptr}.execute([this] { _createDocument(); });
 }
@@ -41,6 +42,11 @@ ls::std::core::type::byte_field ls::std::io::SectionPairFileReader::read()
 void ls::std::io::SectionPairFileReader::_createDocument()
 {
   this->parameter.setDocument(::std::make_shared<ls::std::io::SectionPairDocument>());
+}
+
+void ls::std::io::SectionPairFileReader::_createFileExistenceEvaluator()
+{
+  this->parameter.setFileExistenceEvaluator(::std::make_shared<FileExistenceEvaluator>(this->parameter.getFilePath()));
 }
 
 void ls::std::io::SectionPairFileReader::_createReader()

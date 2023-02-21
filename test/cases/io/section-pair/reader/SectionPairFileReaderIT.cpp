@@ -39,39 +39,6 @@ namespace
       }
   };
 
-  TEST_F(SectionPairFileReaderIT, constructor_file_does_not_exist)
-  {
-    EXPECT_THROW(
-        {
-          try
-          {
-            SectionPairFileReader reader{SectionPairFileReaderParameter{}};
-          }
-          catch (const FileNotFoundException &_exception)
-          {
-            throw;
-          }
-        },
-        FileNotFoundException);
-  }
-
-  TEST_F(SectionPairFileReaderIT, getClassName)
-  {
-    SectionPairFileReaderParameter parameter{};
-    parameter.setFilePath(SectionPairFileReaderIT::getSectionPairFileLocation());
-
-    ASSERT_STREQ("SectionPairFileReader", SectionPairFileReader{parameter}.getClassName().c_str());
-  }
-
-  TEST_F(SectionPairFileReaderIT, getDocument)
-  {
-    SectionPairFileReaderParameter parameter{};
-    parameter.setFilePath(SectionPairFileReaderIT::getSectionPairFileLocation());
-    SectionPairFileReader reader{parameter};
-
-    ASSERT_FALSE(reader.getDocument() == nullptr);
-  }
-
   TEST_F(SectionPairFileReaderIT, read)
   {
     SectionPairFileReaderParameter parameter{};

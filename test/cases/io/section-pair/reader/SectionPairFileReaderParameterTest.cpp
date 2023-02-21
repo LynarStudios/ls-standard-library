@@ -34,6 +34,11 @@ namespace
     ASSERT_TRUE(SectionPairFileReaderParameter{}.getDocument() == nullptr);
   }
 
+  TEST_F(SectionPairFileReaderParameterTest, getFileExistenceEvaluator)
+  {
+    ASSERT_TRUE(SectionPairFileReaderParameter{}.getFileExistenceEvaluator() == nullptr);
+  }
+
   TEST_F(SectionPairFileReaderParameterTest, getFilePath)
   {
     ASSERT_TRUE(SectionPairFileReaderParameter{}.getFilePath().empty());
@@ -50,6 +55,14 @@ namespace
     parameter.setDocument(make_shared<SectionPairDocument>());
 
     ASSERT_FALSE(parameter.getDocument() == nullptr);
+  }
+
+  TEST_F(SectionPairFileReaderParameterTest, setFileExistenceEvaluator)
+  {
+    SectionPairFileReaderParameter parameter{};
+    parameter.setFileExistenceEvaluator(make_shared<FileExistenceEvaluator>("/var/log/file.txt"));
+
+    ASSERT_FALSE(parameter.getFileExistenceEvaluator() == nullptr);
   }
 
   TEST_F(SectionPairFileReaderParameterTest, setFilePath)

@@ -22,7 +22,7 @@ namespace ls::std::io
   {
     public:
 
-      explicit SectionPairFileReader(ls::std::io::SectionPairFileReaderParameter _parameter);
+      explicit SectionPairFileReader(const ls::std::io::SectionPairFileReaderParameter &_parameter);
       ~SectionPairFileReader() override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::io::SectionPairDocument> getDocument();
@@ -33,6 +33,7 @@ namespace ls::std::io
       ls::std::io::SectionPairFileReaderParameter parameter{};
 
       void _createDocument();
+      void _createFileExistenceEvaluator();
       void _createReader();
   };
 }

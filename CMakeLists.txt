@@ -299,6 +299,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairSectionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/reader/SectionPairFileReaderParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/reader/SectionPairFileReaderTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowListValueTest.cpp
@@ -323,7 +324,9 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SectionPairSectionProvider.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SerializableSectionPairRowProvider.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/MockFileExistenceEvaluator.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/MockFileReader.cpp)
 
     set(UNIT_TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
@@ -648,6 +651,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_IO}: Linking libraries for unit test application...")
     target_link_libraries(${MODULE_NAME_IO}-unit-test
             gtest
+            gmock
             gtest_main
             "${MODULE_NAME_IO}"
             "${MODULE_NAME_CORE}")

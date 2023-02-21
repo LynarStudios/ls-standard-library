@@ -18,6 +18,11 @@ ls::std::io::SectionPairFileReaderParameter::~SectionPairFileReaderParameter() =
   return this->document;
 }
 
+::std::shared_ptr<ls::std::core::interface_type::IEvaluator> ls::std::io::SectionPairFileReaderParameter::getFileExistenceEvaluator()
+{
+  return this->fileExistenceEvaluator;
+}
+
 ::std::string ls::std::io::SectionPairFileReaderParameter::getFilePath()
 {
   return this->filePath;
@@ -33,12 +38,17 @@ void ls::std::io::SectionPairFileReaderParameter::setDocument(const ::std::share
   this->document = _document;
 }
 
+void ls::std::io::SectionPairFileReaderParameter::setFileExistenceEvaluator(const ::std::shared_ptr<ls::std::core::interface_type::IEvaluator> &_fileExistenceEvaluator)
+{
+  this->fileExistenceEvaluator = _fileExistenceEvaluator;
+}
+
 void ls::std::io::SectionPairFileReaderParameter::setFilePath(const ::std::string &_filePath)
 {
   this->filePath = _filePath;
 }
 
-void ls::std::io::SectionPairFileReaderParameter::setReader(const ::std::shared_ptr<core::interface_type::IReader> &_reader)
+void ls::std::io::SectionPairFileReaderParameter::setReader(const ::std::shared_ptr<ls::std::core::interface_type::IReader> &_reader)
 {
   this->reader = _reader;
 }
