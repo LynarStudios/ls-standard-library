@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-13
+* Changed:         2023-02-21
 *
 * */
 
@@ -22,7 +22,7 @@ namespace ls::std::core
       explicit ConditionalFunctionExecutor(bool _condition);
       ~ConditionalFunctionExecutor();
 
-      void execute(const ::std::function<void()> &_function);
+      void execute(const ::std::function<void()> &_function) const;
 
     private:
 
