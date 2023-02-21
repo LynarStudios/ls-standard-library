@@ -186,6 +186,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/reader/SectionPairFileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/reader/SectionPairFileReaderParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairDocumentValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairFileExtensionValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairIdentifierValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairRowListValueValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairRowSingleValueValidator.cpp
@@ -287,6 +288,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairSectionArgumentEvaluatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairValueArgumentEvaluatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairDocumentValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairFileExtensionValidatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairIdentifierValidatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowListValueValidatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowSingleValueValidatorTest.cpp

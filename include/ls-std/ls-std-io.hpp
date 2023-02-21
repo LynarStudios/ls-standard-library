@@ -41,6 +41,7 @@
 #include <ls-std/io/section-pair/type/SectionPairDocumentTypes.hpp>
 #include <ls-std/io/section-pair/type/SectionPairSectionTypes.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairDocumentValidator.hpp>
+#include <ls-std/io/section-pair/validator/SectionPairFileExtensionValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowListValueValidator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowSingleValueValidator.hpp>

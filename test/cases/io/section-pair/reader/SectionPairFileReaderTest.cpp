@@ -34,16 +34,6 @@ namespace
       void TearDown() override
       {}
 
-      static SectionPairFileReaderParameter createMockParameter(bool _fileExists)
-      {
-        SectionPairFileReaderParameter parameter{};
-        parameter.setFileExistenceEvaluator(make_shared<MockFileExistenceEvaluator>(_fileExists));
-        parameter.setReader(make_shared<MockFileReader>());
-        parameter.setDocument(make_shared<SectionPairDocument>());
-
-        return parameter;
-      }
-
       static string getMockSectionPairFileContent()
       {
         return "# section-pair document\n"
@@ -56,6 +46,27 @@ namespace
                "  1989\n"
                "host=localhost\n";
       }
+
+    public:
+
+      static SectionPairFileReaderParameter createMockParameter(bool _fileExists)
+      {
+        SectionPairFileReaderParameter parameter{};
+        parameter.setFileExistenceEvaluator(make_shared<MockFileExistenceEvaluator>(_fileExists));
+        parameter.setReader(make_shared<MockFileReader>());
+        parameter.setDocument(make_shared<SectionPairDocument>());
+        parameter.setFilePath("settings.txt");
+
+        return parameter;
+      }
+  };
+
+  class SectionPairFileReaderTest_NotValidFileExtension : public ::testing::TestWithParam<string>
+  {
+    protected:
+
+      SectionPairFileReaderTest_NotValidFileExtension() = default;
+      ~SectionPairFileReaderTest_NotValidFileExtension() override = default;
   };
 
   TEST_F(SectionPairFileReaderTest, constructor_file_does_not_exist)
@@ -72,6 +83,29 @@ namespace
           }
         },
         FileNotFoundException);
+  }
+
+  TEST_P(SectionPairFileReaderTest_NotValidFileExtension, constructor_no_valid_file_extension)
+  {
+    SectionPairFileReaderParameter parameter = SectionPairFileReaderTest::createMockParameter(true);
+    parameter.setFilePath(GetParam());
+
+    EXPECT_THROW(
+        {
+          try
+          {
+            SectionPairFileReader reader{parameter};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            string message = _exception.what();
+            string expected = "IllegalArgumentException thrown - \"" + GetParam() + "\" does not have a valid section pair file extension (.txt or .sp)!";
+
+            ASSERT_STREQ(expected.c_str(), message.c_str());
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(SectionPairFileReaderTest, getClassName)
@@ -101,4 +135,6 @@ namespace
     ASSERT_STREQ("general", reader.getDocument()->get(0)->getSectionId().c_str());
     ASSERT_EQ(2, reader.getDocument()->get(0)->getRowAmount());
   }
+
+  INSTANTIATE_TEST_SUITE_P(NotValidFileExtension, SectionPairFileReaderTest_NotValidFileExtension, ::testing::Values("settings.json", "/var/log/document.html"));
 }

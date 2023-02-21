@@ -32,6 +32,7 @@ namespace ls::std::io
 
       ls::std::io::SectionPairFileReaderParameter parameter{};
 
+      void _checkFileExtension();
       void _createDocument();
       void _createFileExistenceEvaluator();
       void _createReader();
