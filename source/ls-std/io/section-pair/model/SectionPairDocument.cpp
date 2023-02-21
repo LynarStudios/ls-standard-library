@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-18
+* Changed:         2023-02-21
 *
 * */
 
@@ -73,6 +73,11 @@ ls::std::core::type::byte_field ls::std::io::SectionPairDocument::marshal()
   return this->serializable->marshal();
 }
 
+void ls::std::io::SectionPairDocument::reserveNewLine(const ::std::string &_reservedNewLine)
+{
+  this->reservedNewLine = _reservedNewLine;
+}
+
 void ls::std::io::SectionPairDocument::unmarshal(const ls::std::core::type::byte_field &_data)
 {
   ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
@@ -91,6 +96,12 @@ void ls::std::io::SectionPairDocument::_createSerializable()
 {
   ls::std::io::SerializableSectionPairParameter parameter{};
   parameter.setValue(shared_from_this());
+
+  if (!this->reservedNewLine.empty())
+  {
+    parameter.setNewLine(this->reservedNewLine);
+  }
+
   this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairDocument>(parameter);
 }
 

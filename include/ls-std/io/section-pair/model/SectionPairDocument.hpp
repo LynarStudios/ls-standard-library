@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-16
+* Changed:         2023-02-21
 *
 * */
 
@@ -33,11 +33,13 @@ namespace ls::std::io
       [[nodiscard]] ::std::string getHeader();
       [[nodiscard]] section_pair_document_section_list getSectionList();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
+      void reserveNewLine(const ::std::string &_reservedNewLine);
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
 
     private:
 
       const ::std::string header = "# section-pair document";
+      ::std::string reservedNewLine{};
       ls::std::io::section_pair_document_section_list sections{};
       ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
 
