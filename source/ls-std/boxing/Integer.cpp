@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -18,11 +18,6 @@ ls::std::boxing::Integer::Integer() : ls::std::core::Class("Integer")
 
 ls::std::boxing::Integer::~Integer() = default;
 
-ls::std::boxing::Integer::operator int() const
-{
-  return this->value;
-}
-
 ls::std::boxing::Integer &ls::std::boxing::Integer::operator=(int _value)
 {
   this->value = _value;
@@ -36,7 +31,7 @@ int ls::std::boxing::Integer::operator-() const
 
 int ls::std::boxing::Integer::operator+(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value + _integer;
+  return this->value + _integer.getValue();
 }
 
 int ls::std::boxing::Integer::operator+(int _value) const
@@ -46,7 +41,7 @@ int ls::std::boxing::Integer::operator+(int _value) const
 
 int ls::std::boxing::Integer::operator*(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value * _integer;
+  return this->value * _integer.getValue();
 }
 
 int ls::std::boxing::Integer::operator*(int _value) const
@@ -56,7 +51,7 @@ int ls::std::boxing::Integer::operator*(int _value) const
 
 int ls::std::boxing::Integer::operator-(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value - _integer;
+  return this->value - _integer.getValue();
 }
 
 int ls::std::boxing::Integer::operator-(int _value) const
@@ -71,7 +66,7 @@ int ls::std::boxing::Integer::operator/(const ls::std::boxing::Integer &_integer
     throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
-  return this->value / _integer;
+  return this->value / _integer.getValue();
 }
 
 int ls::std::boxing::Integer::operator/(int _value) const
@@ -86,7 +81,7 @@ int ls::std::boxing::Integer::operator/(int _value) const
 
 int ls::std::boxing::Integer::operator%(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value % _integer;
+  return this->value % _integer.getValue();
 }
 
 int ls::std::boxing::Integer::operator%(int _value) const
@@ -96,7 +91,7 @@ int ls::std::boxing::Integer::operator%(int _value) const
 
 ls::std::boxing::Integer &ls::std::boxing::Integer::operator+=(const ls::std::boxing::Integer &_integer)
 {
-  this->value += _integer;
+  this->value += _integer.getValue();
   return *this;
 }
 
@@ -108,7 +103,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator+=(int _value)
 
 ls::std::boxing::Integer &ls::std::boxing::Integer::operator-=(const ls::std::boxing::Integer &_integer)
 {
-  this->value -= _integer;
+  this->value -= _integer.getValue();
   return *this;
 }
 
@@ -120,7 +115,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator-=(int _value)
 
 ls::std::boxing::Integer &ls::std::boxing::Integer::operator*=(const ls::std::boxing::Integer &_integer)
 {
-  this->value *= _integer;
+  this->value *= _integer.getValue();
   return *this;
 }
 
@@ -137,7 +132,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator/=(const ls::std::bo
     throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
-  this->value /= _integer;
+  this->value /= _integer.getValue();
   return *this;
 }
 
@@ -154,7 +149,7 @@ ls::std::boxing::Integer &ls::std::boxing::Integer::operator/=(int _value)
 
 bool ls::std::boxing::Integer::operator==(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value == _integer;
+  return this->value == _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator==(int _value) const
@@ -164,7 +159,7 @@ bool ls::std::boxing::Integer::operator==(int _value) const
 
 bool ls::std::boxing::Integer::operator!=(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value != _integer;
+  return this->value != _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator!=(int _value) const
@@ -174,7 +169,7 @@ bool ls::std::boxing::Integer::operator!=(int _value) const
 
 bool ls::std::boxing::Integer::operator>(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value > _integer;
+  return this->value > _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator>(int _value) const
@@ -184,7 +179,7 @@ bool ls::std::boxing::Integer::operator>(int _value) const
 
 bool ls::std::boxing::Integer::operator>=(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value >= _integer;
+  return this->value >= _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator>=(int _value) const
@@ -194,7 +189,7 @@ bool ls::std::boxing::Integer::operator>=(int _value) const
 
 bool ls::std::boxing::Integer::operator<(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value < _integer;
+  return this->value < _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator<(int _value) const
@@ -204,7 +199,7 @@ bool ls::std::boxing::Integer::operator<(int _value) const
 
 bool ls::std::boxing::Integer::operator<=(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value <= _integer;
+  return this->value <= _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator<=(int _value) const
@@ -214,7 +209,7 @@ bool ls::std::boxing::Integer::operator<=(int _value) const
 
 bool ls::std::boxing::Integer::operator&&(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value && _integer;
+  return this->value && _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator&&(int _value) const
@@ -229,7 +224,7 @@ bool ls::std::boxing::Integer::operator&&(bool _expression) const
 
 bool ls::std::boxing::Integer::operator||(const ls::std::boxing::Integer &_integer) const
 {
-  return this->value || _integer;
+  return this->value || _integer.getValue();
 }
 
 bool ls::std::boxing::Integer::operator||(int _value) const
