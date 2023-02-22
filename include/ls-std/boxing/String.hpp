@@ -26,7 +26,7 @@ namespace ls::std::boxing
 
       String();
       explicit String(::std::string _value);
-      ~String() override;
+      ~String() noexcept override;
 
       // assignment operators
 

@@ -16,7 +16,7 @@ ls::std::boxing::Long::Long(ls::std::core::type::long_type _value) : ls::std::co
 ls::std::boxing::Long::Long() : ls::std::core::Class("Long")
 {}
 
-ls::std::boxing::Long::~Long() = default;
+ls::std::boxing::Long::~Long() noexcept = default;
 
 ls::std::boxing::Long &ls::std::boxing::Long::operator=(ls::std::core::type::long_type _value)
 {

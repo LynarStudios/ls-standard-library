@@ -23,7 +23,7 @@ namespace ls::std::boxing
 
       Double();
       explicit Double(double _value);
-      ~Double() override;
+      ~Double() noexcept override;
 
       // assignment operators
 

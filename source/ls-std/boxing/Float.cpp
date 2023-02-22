@@ -17,7 +17,7 @@ ls::std::boxing::Float::Float() : ls::std::core::Class("Float"), epsilon(0.00001
 ls::std::boxing::Float::Float(float _value) : ls::std::core::Class("Float"), epsilon(0.00001f), value(_value)
 {}
 
-ls::std::boxing::Float::~Float() = default;
+ls::std::boxing::Float::~Float() noexcept = default;
 
 ls::std::boxing::Float &ls::std::boxing::Float::operator=(float _value)
 {

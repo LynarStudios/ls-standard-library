@@ -24,7 +24,7 @@ namespace ls::std::boxing
 
       explicit Boolean(bool _value);
       Boolean();
-      ~Boolean() override;
+      ~Boolean() noexcept override;
 
       // assignment operators
 

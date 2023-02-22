@@ -16,7 +16,7 @@ ls::std::boxing::String::String() : ls::std::core::Class("String")
 ls::std::boxing::String::String(::std::string _value) : ls::std::core::Class("String"), value(::std::move(_value))
 {}
 
-ls::std::boxing::String::~String() = default;
+ls::std::boxing::String::~String() noexcept = default;
 
 ls::std::boxing::String &ls::std::boxing::String::operator=(::std::string _value)
 {

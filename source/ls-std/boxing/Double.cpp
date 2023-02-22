@@ -21,7 +21,7 @@ ls::std::boxing::Double::Double(double _value) : ls::std::core::Class("Double"),
   this->_assignEpsilon(0.00000001);
 }
 
-ls::std::boxing::Double::~Double() = default;
+ls::std::boxing::Double::~Double() noexcept = default;
 
 ls::std::boxing::Double &ls::std::boxing::Double::operator=(double _value)
 {

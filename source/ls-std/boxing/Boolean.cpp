@@ -17,7 +17,7 @@ ls::std::boxing::Boolean::Boolean(bool _value) : ls::std::core::Class("Boolean")
 ls::std::boxing::Boolean::Boolean() : ls::std::core::Class("Boolean")
 {}
 
-ls::std::boxing::Boolean::~Boolean() = default;
+ls::std::boxing::Boolean::~Boolean() noexcept = default;
 
 ls::std::boxing::Boolean &ls::std::boxing::Boolean::operator=(int _value)
 {

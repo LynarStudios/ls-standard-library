@@ -16,7 +16,7 @@ ls::std::boxing::Integer::Integer(int _value) : ls::std::core::Class("Integer"),
 ls::std::boxing::Integer::Integer() : ls::std::core::Class("Integer")
 {}
 
-ls::std::boxing::Integer::~Integer() = default;
+ls::std::boxing::Integer::~Integer() noexcept = default;
 
 ls::std::boxing::Integer &ls::std::boxing::Integer::operator=(int _value)
 {

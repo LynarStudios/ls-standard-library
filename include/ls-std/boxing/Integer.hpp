@@ -23,7 +23,7 @@ namespace ls::std::boxing
 
       explicit Integer(int _value);
       Integer();
-      ~Integer() override;
+      ~Integer() noexcept override;
 
       // assignment operators
 

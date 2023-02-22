@@ -24,7 +24,7 @@ namespace ls::std::boxing
 
       explicit Long(ls::std::core::type::long_type _value);
       Long();
-      ~Long() override;
+      ~Long() noexcept override;
 
       // assignment operators
 

@@ -23,7 +23,7 @@ namespace ls::std::boxing
 
       Float();
       explicit Float(float _value);
-      ~Float() override;
+      ~Float() noexcept override;
 
       // assignment operators
 
