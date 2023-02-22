@@ -7,8 +7,8 @@
  *
  * */
 
-#ifndef LS_STD_ILLEGAL_OPERATION_EXCEPTION_HPP
-#define LS_STD_ILLEGAL_OPERATION_EXCEPTION_HPP
+#ifndef LS_STD_ILLEGAL_ARITHMETIC_OPERATION_EXCEPTION_HPP
+#define LS_STD_ILLEGAL_ARITHMETIC_OPERATION_EXCEPTION_HPP
 
 #include <ls-std/core/exception/Exception.hpp>
 #include <ls-std/os/dynamic-goal.hpp>

@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-17
- * Changed:         2023-02-05
+ * Changed:         2023-02-22
  *
  * */
 
-#ifndef LS_STD_XML_PARSE_DATA_HPP
-#define LS_STD_XML_PARSE_DATA_HPP
+#ifndef LS_STD_XML_PARSE_PARAMETER_HPP
+#define LS_STD_XML_PARSE_PARAMETER_HPP
 
 #include "XmlNode.hpp"
 #include <cstdint>
