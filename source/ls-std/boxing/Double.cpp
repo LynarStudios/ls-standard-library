@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -23,11 +23,6 @@ ls::std::boxing::Double::Double(double _value) : ls::std::core::Class("Double"),
 
 ls::std::boxing::Double::~Double() = default;
 
-ls::std::boxing::Double::operator double() const
-{
-  return this->value;
-}
-
 ls::std::boxing::Double &ls::std::boxing::Double::operator=(double _value)
 {
   this->value = _value;
@@ -41,7 +36,7 @@ double ls::std::boxing::Double::operator-() const
 
 double ls::std::boxing::Double::operator+(const ls::std::boxing::Double &_double) const
 {
-  return this->value + _double;
+  return this->value + _double.getValue();
 }
 
 double ls::std::boxing::Double::operator+(double _value) const
@@ -51,7 +46,7 @@ double ls::std::boxing::Double::operator+(double _value) const
 
 double ls::std::boxing::Double::operator*(const ls::std::boxing::Double &_double) const
 {
-  return this->value * _double;
+  return this->value * _double.getValue();
 }
 
 double ls::std::boxing::Double::operator*(double _value) const
@@ -61,7 +56,7 @@ double ls::std::boxing::Double::operator*(double _value) const
 
 double ls::std::boxing::Double::operator-(const ls::std::boxing::Double &_double) const
 {
-  return this->value - _double;
+  return this->value - _double.getValue();
 }
 
 double ls::std::boxing::Double::operator-(double _value) const
@@ -71,7 +66,7 @@ double ls::std::boxing::Double::operator-(double _value) const
 
 double ls::std::boxing::Double::operator/(const ls::std::boxing::Double &_double) const
 {
-  return this->value / _double;
+  return this->value / _double.getValue();
 }
 
 double ls::std::boxing::Double::operator/(double _value) const
@@ -81,7 +76,7 @@ double ls::std::boxing::Double::operator/(double _value) const
 
 ls::std::boxing::Double &ls::std::boxing::Double::operator+=(const ls::std::boxing::Double &_double)
 {
-  this->value += _double;
+  this->value += _double.getValue();
   return *this;
 }
 
@@ -93,7 +88,7 @@ ls::std::boxing::Double &ls::std::boxing::Double::operator+=(double _value)
 
 ls::std::boxing::Double &ls::std::boxing::Double::operator-=(const ls::std::boxing::Double &_double)
 {
-  this->value -= _double;
+  this->value -= _double.getValue();
   return *this;
 }
 
@@ -105,7 +100,7 @@ ls::std::boxing::Double &ls::std::boxing::Double::operator-=(double _value)
 
 ls::std::boxing::Double &ls::std::boxing::Double::operator*=(const ls::std::boxing::Double &_double)
 {
-  this->value *= _double;
+  this->value *= _double.getValue();
   return *this;
 }
 
@@ -117,7 +112,7 @@ ls::std::boxing::Double &ls::std::boxing::Double::operator*=(double _value)
 
 ls::std::boxing::Double &ls::std::boxing::Double::operator/=(const ls::std::boxing::Double &_double)
 {
-  this->value /= _double;
+  this->value /= _double.getValue();
   return *this;
 }
 
@@ -129,7 +124,7 @@ ls::std::boxing::Double &ls::std::boxing::Double::operator/=(double _value)
 
 bool ls::std::boxing::Double::operator==(const ls::std::boxing::Double &_double) const
 {
-  return ::std::fabs(this->value - _double) < this->epsilon;
+  return ::std::fabs(this->value - _double.getValue()) < this->epsilon;
 }
 
 bool ls::std::boxing::Double::operator==(double _value) const
@@ -139,7 +134,7 @@ bool ls::std::boxing::Double::operator==(double _value) const
 
 bool ls::std::boxing::Double::operator!=(const ls::std::boxing::Double &_double) const
 {
-  return ::std::fabs(this->value - _double) >= this->epsilon;
+  return ::std::fabs(this->value - _double.getValue()) >= this->epsilon;
 }
 
 bool ls::std::boxing::Double::operator!=(double _value) const
@@ -149,7 +144,7 @@ bool ls::std::boxing::Double::operator!=(double _value) const
 
 bool ls::std::boxing::Double::operator>(const ls::std::boxing::Double &_double) const
 {
-  return this->value > _double;
+  return this->value > _double.getValue();
 }
 
 bool ls::std::boxing::Double::operator>(double _value) const
@@ -159,7 +154,7 @@ bool ls::std::boxing::Double::operator>(double _value) const
 
 bool ls::std::boxing::Double::operator>=(const ls::std::boxing::Double &_double) const
 {
-  return this->value >= _double;
+  return this->value >= _double.getValue();
 }
 
 bool ls::std::boxing::Double::operator>=(double _value) const
@@ -169,7 +164,7 @@ bool ls::std::boxing::Double::operator>=(double _value) const
 
 bool ls::std::boxing::Double::operator<(const ls::std::boxing::Double &_double) const
 {
-  return this->value < _double;
+  return this->value < _double.getValue();
 }
 
 bool ls::std::boxing::Double::operator<(double _value) const
@@ -179,7 +174,7 @@ bool ls::std::boxing::Double::operator<(double _value) const
 
 bool ls::std::boxing::Double::operator<=(const ls::std::boxing::Double &_double) const
 {
-  return this->value <= _double;
+  return this->value <= _double.getValue();
 }
 
 bool ls::std::boxing::Double::operator<=(double _value) const
@@ -207,12 +202,12 @@ void ls::std::boxing::Double::parse(::std::string _parseText)
   return ::std::to_string(this->value);
 }
 
-double ls::std::boxing::Double::getEpsilon()
+double ls::std::boxing::Double::getEpsilon() const
 {
   return this->epsilon;
 }
 
-double ls::std::boxing::Double::getValue()
+double ls::std::boxing::Double::getValue() const
 {
   return this->value;
 }

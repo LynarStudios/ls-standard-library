@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -24,10 +24,6 @@ namespace ls::std::boxing
       Double();
       explicit Double(double _value);
       ~Double() override;
-
-      // conversion operator
-
-      operator double() const; // do not make explicit!
 
       // assignment operators
 
@@ -83,8 +79,8 @@ namespace ls::std::boxing
 
       // additional functionality
 
-      [[nodiscard]] double getEpsilon();
-      [[nodiscard]] double getValue();
+      [[nodiscard]] double getEpsilon() const;
+      [[nodiscard]] double getValue() const;
       void setEpsilon(double _epsilon);
 
     private:
