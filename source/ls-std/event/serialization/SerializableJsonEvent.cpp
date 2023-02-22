@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2023-02-08
+ * Changed:         2023-02-22
  *
  * */
 
@@ -15,7 +15,7 @@ ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared
   this->_assignValue(_value);
 }
 
-ls::std::event::SerializableJsonEvent::~SerializableJsonEvent() = default;
+ls::std::event::SerializableJsonEvent::~SerializableJsonEvent() noexcept = default;
 
 ls::std::core::type::byte_field ls::std::event::SerializableJsonEvent::marshal()
 {
