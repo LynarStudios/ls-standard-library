@@ -40,6 +40,8 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
   more convenient way
 - a section-pair file standard has been implemented and is provided via __ls-std-io__ module, a definition of this
   standard can be found in the libraries __doc__ folder
+- a base Exception class has been added, which provides basic reflection functionality - all existing library exceptions
+  inherit from this class now
 
 #### Improvements ####
 
