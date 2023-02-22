@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-22
 *
 * */
 
@@ -40,8 +40,10 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            string message = _exception.what();
-            ASSERT_STREQ("NullPointerException thrown - reference in use is null!", message.c_str());
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - reference in use is null!";
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -58,8 +60,10 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            string message = _exception.what();
-            ASSERT_STREQ("NullPointerException thrown - this reference is not set and causes this exception!", message.c_str());
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - this reference is not set and causes this exception!";
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

@@ -39,8 +39,10 @@ namespace
           }
           catch (const IllegalArithmeticOperationException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - arithmetic operation is not allowed!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,8 +59,10 @@ namespace
           }
           catch (const IllegalArithmeticOperationException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IllegalArithmeticOperationException thrown - division by zero", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - division by zero";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

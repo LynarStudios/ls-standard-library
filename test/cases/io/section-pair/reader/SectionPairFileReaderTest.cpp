@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -99,7 +99,7 @@ namespace
           catch (const IllegalArgumentException &_exception)
           {
             string message = _exception.what();
-            string expected = "IllegalArgumentException thrown - \"" + GetParam() + "\" does not have a valid section pair file extension (.txt or .sp)!";
+            string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" does not have a valid section pair file extension (.txt or .sp)!";
 
             ASSERT_STREQ(expected.c_str(), message.c_str());
             throw;

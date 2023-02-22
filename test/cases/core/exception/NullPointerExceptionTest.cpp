@@ -39,8 +39,10 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("NullPointerException thrown - reference is null!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - reference is null!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,8 +59,10 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("NullPointerException thrown - _value is null", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - _value is null";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

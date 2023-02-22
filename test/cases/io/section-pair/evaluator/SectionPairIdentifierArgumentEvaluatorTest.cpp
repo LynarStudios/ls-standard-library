@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -57,7 +57,7 @@ namespace
           catch (const IllegalArgumentException &_exception)
           {
             ::std::string actual = _exception.what();
-            ::std::string expected = "IllegalArgumentException thrown - \"" + GetParam() + "\" is not a valid identifier!";
+            ::std::string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid identifier!";
 
             ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;

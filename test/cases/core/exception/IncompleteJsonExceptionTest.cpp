@@ -39,8 +39,10 @@ namespace
           }
           catch (const IncompleteJsonException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IncompleteJsonException thrown - this JSON string is incomplete.", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - this JSON string is incomplete.";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,8 +59,10 @@ namespace
           }
           catch (const IncompleteJsonException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IncompleteJsonException thrown - incomplete: {\"name\":\"}", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - incomplete: {\"name\":\"}";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

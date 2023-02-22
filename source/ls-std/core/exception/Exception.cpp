@@ -14,7 +14,7 @@ ls::std::core::Exception::Exception(::std::string _name) : name(::std::move(_nam
 
 ls::std::core::Exception::~Exception() = default;
 
-::std::string ls::std::core::Exception::getName()
+::std::string ls::std::core::Exception::getName() const
 {
   return this->name;
 }

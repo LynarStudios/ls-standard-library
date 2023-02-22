@@ -22,8 +22,8 @@ namespace ls::std::core
 
       explicit Exception(::std::string _name);
       ~Exception() override;
-      
-      [[nodiscard]] ::std::string getName();
+
+      [[nodiscard]] ::std::string getName() const;
       [[nodiscard]] const char *what() const noexcept override;
 
     protected:

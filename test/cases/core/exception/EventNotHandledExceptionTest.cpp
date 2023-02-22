@@ -39,8 +39,10 @@ namespace
           }
           catch (const EventNotHandledException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - event was not handled - nothing happened!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,8 +59,10 @@ namespace
           }
           catch (const EventNotHandledException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("EventNotHandledException thrown - id: OPEN_DOOR", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - id: OPEN_DOOR";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

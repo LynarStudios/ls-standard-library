@@ -39,8 +39,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - passed argument is not valid!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,8 +59,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IllegalArgumentException thrown - value is empty", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - value is empty";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

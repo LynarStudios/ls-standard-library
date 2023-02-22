@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-22
 *
 * */
 
@@ -40,8 +40,10 @@ namespace
           }
           catch (const IndexOutOfBoundsException &_exception)
           {
-            string message = _exception.what();
-            ASSERT_STREQ("IndexOutOfBoundsException thrown - provided index is out of bounds!", message.c_str());
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - provided index is out of bounds!";
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -58,8 +60,10 @@ namespace
           }
           catch (const IndexOutOfBoundsException &_exception)
           {
-            string message = _exception.what();
-            ASSERT_STREQ("IndexOutOfBoundsException thrown - index 3 is not in range of the containers size, which is 2!", message.c_str());
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - index 3 is not in range of the containers size, which is 2!";
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
