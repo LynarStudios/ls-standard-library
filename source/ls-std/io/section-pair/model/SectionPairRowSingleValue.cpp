@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-19
+* Changed:         2023-02-22
 *
 * */
 
@@ -19,7 +19,7 @@ ls::std::io::SectionPairRowSingleValue::SectionPairRowSingleValue(const ls::std:
   this->_set(_value);
 }
 
-ls::std::io::SectionPairRowSingleValue::~SectionPairRowSingleValue() = default;
+ls::std::io::SectionPairRowSingleValue::~SectionPairRowSingleValue() noexcept = default;
 
 ls::std::io::section_pair_row_value ls::std::io::SectionPairRowSingleValue::get()
 {

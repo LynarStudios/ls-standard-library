@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -30,7 +30,7 @@
 ls::std::io::File::File(::std::string _absoluteFilePath) : ls::std::core::Class("File"), absoluteFilePath(ls::std::io::File::_normalizePath(::std::move(_absoluteFilePath)))
 {}
 
-ls::std::io::File::~File() = default;
+ls::std::io::File::~File() noexcept = default;
 
 bool ls::std::io::File::operator==(ls::std::io::File &_file)
 {

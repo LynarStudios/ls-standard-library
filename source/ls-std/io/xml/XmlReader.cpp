@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2023-02-08
+ * Changed:         2023-02-22
  *
  * */
 
@@ -19,7 +19,7 @@ ls::std::io::XmlReader::XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocume
   this->_assignFile(ls::std::io::File{_absolutePath});
 }
 
-ls::std::io::XmlReader::~XmlReader() = default;
+ls::std::io::XmlReader::~XmlReader() noexcept = default;
 
 ls::std::core::type::byte_field ls::std::io::XmlReader::read()
 {

@@ -22,7 +22,7 @@ namespace ls::std::io
     public:
 
       explicit FileWriter(ls::std::io::File &_file);
-      ~FileWriter() override;
+      ~FileWriter() noexcept override;
 
       void reset(ls::std::io::File &_file);
       bool write(const ls::std::core::type::byte_field &_data) override; // nodiscard is optional here

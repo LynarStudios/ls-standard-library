@@ -21,7 +21,7 @@ ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file, bool _
   this->_init();
 }
 
-ls::std::io::FileOutputStream::~FileOutputStream()
+ls::std::io::FileOutputStream::~FileOutputStream() noexcept
 {
   this->_close();
 }

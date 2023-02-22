@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-18
+* Changed:         2023-02-22
 *
 * */
 
@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       explicit SerializableSectionPairDocument(const ls::std::io::SerializableSectionPairParameter &_parameter);
-      ~SerializableSectionPairDocument() override;
+      ~SerializableSectionPairDocument() noexcept override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::core::Class> getValue();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;

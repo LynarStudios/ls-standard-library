@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-08
+ * Changed:         2023-02-22
  *
  * */
 
@@ -16,7 +16,7 @@ ls::std::io::XmlParser::XmlParser(const ::std::shared_ptr<ls::std::io::XmlDocume
   this->_reset();
 }
 
-ls::std::io::XmlParser::~XmlParser() = default;
+ls::std::io::XmlParser::~XmlParser() noexcept = default;
 
 ::std::shared_ptr<ls::std::io::XmlDocument> ls::std::io::XmlParser::getDocument()
 {

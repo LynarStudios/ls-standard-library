@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -21,7 +21,7 @@ namespace ls::std::io
     public:
 
       explicit XmlDeclaration(const ::std::string &_version);
-      ~XmlDeclaration() override;
+      ~XmlDeclaration() noexcept override;
 
       [[nodiscard]] ::std::string getEncoding();
       [[nodiscard]] ::std::string getStandalone();

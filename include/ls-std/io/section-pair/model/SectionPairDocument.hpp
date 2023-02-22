@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -24,7 +24,7 @@ namespace ls::std::io
     public:
 
       SectionPairDocument();
-      ~SectionPairDocument() override;
+      ~SectionPairDocument() noexcept override;
 
       void add(const section_pair_document_section_list_element &_section);
       void clear();

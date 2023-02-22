@@ -16,7 +16,7 @@
 ls::std::io::SectionPairIdentifierArgumentEvaluator::SectionPairIdentifierArgumentEvaluator(ls::std::io::section_pair_identifier _identifier) : ls::std::core::Class("SectionPairIdentifierArgumentEvaluator"), identifier(::std::move(_identifier))
 {}
 
-ls::std::io::SectionPairIdentifierArgumentEvaluator::~SectionPairIdentifierArgumentEvaluator() = default;
+ls::std::io::SectionPairIdentifierArgumentEvaluator::~SectionPairIdentifierArgumentEvaluator() noexcept = default;
 
 void ls::std::io::SectionPairIdentifierArgumentEvaluator::evaluate()
 {

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -15,7 +15,7 @@
 ls::std::io::FileExistenceEvaluator::FileExistenceEvaluator(::std::string _filePath) : ls::std::core::Class("FileExistenceEvaluator"), filePath(::std::move(_filePath))
 {}
 
-ls::std::io::FileExistenceEvaluator::~FileExistenceEvaluator() = default;
+ls::std::io::FileExistenceEvaluator::~FileExistenceEvaluator() noexcept = default;
 
 void ls::std::io::FileExistenceEvaluator::evaluate()
 {

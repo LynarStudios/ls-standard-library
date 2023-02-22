@@ -16,7 +16,7 @@ ls::std::io::FileWriter::FileWriter(ls::std::io::File &_file) : ls::std::core::C
   ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
 }
 
-ls::std::io::FileWriter::~FileWriter() = default;
+ls::std::io::FileWriter::~FileWriter() noexcept = default;
 
 void ls::std::io::FileWriter::reset(ls::std::io::File &_file)
 {

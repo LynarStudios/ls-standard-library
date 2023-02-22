@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-08
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -26,7 +26,7 @@ namespace ls::std::io
     public:
 
       explicit XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath);
-      ~XmlReader() override;
+      ~XmlReader() noexcept override;
 
       // implementation
 

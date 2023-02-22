@@ -20,7 +20,7 @@ ls::std::io::LogLevel::LogLevel() : ls::std::core::Class("LogLevel")
   this->_init();
 }
 
-ls::std::io::LogLevel::~LogLevel() = default;
+ls::std::io::LogLevel::~LogLevel() noexcept = default;
 
 ls::std::io::LogLevel &ls::std::io::LogLevel::operator=(const ls::std::io::LogLevelValue &_value)
 {

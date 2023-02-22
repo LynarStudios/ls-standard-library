@@ -18,7 +18,7 @@
 ls::std::io::SectionPairDocument::SectionPairDocument() : ls::std::core::Class("SectionPairDocument")
 {}
 
-ls::std::io::SectionPairDocument::~SectionPairDocument() = default;
+ls::std::io::SectionPairDocument::~SectionPairDocument() noexcept = default;
 
 void ls::std::io::SectionPairDocument::add(const section_pair_document_section_list_element &_section)
 {

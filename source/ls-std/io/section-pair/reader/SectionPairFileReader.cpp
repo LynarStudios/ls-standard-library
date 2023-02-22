@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -26,7 +26,7 @@ ls::std::io::SectionPairFileReader::SectionPairFileReader(const ls::std::io::Sec
   ls::std::core::ConditionalFunctionExecutor{this->parameter.getDocument() == nullptr}.execute([this] { _createDocument(); });
 }
 
-ls::std::io::SectionPairFileReader::~SectionPairFileReader() = default;
+ls::std::io::SectionPairFileReader::~SectionPairFileReader() noexcept = default;
 
 ::std::shared_ptr<ls::std::io::SectionPairDocument> ls::std::io::SectionPairFileReader::getDocument()
 {

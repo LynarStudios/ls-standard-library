@@ -15,7 +15,7 @@
 ls::std::io::SectionPairValueArgumentEvaluator::SectionPairValueArgumentEvaluator(ls::std::io::section_pair_row_value _value) : ls::std::core::Class("SectionPairValueArgumentEvaluator"), value(::std::move(_value))
 {}
 
-ls::std::io::SectionPairValueArgumentEvaluator::~SectionPairValueArgumentEvaluator() = default;
+ls::std::io::SectionPairValueArgumentEvaluator::~SectionPairValueArgumentEvaluator() noexcept = default;
 
 void ls::std::io::SectionPairValueArgumentEvaluator::evaluate()
 {

@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       explicit SerializableSectionPairSection(const ls::std::io::SerializableSectionPairParameter &_parameter);
-      ~SerializableSectionPairSection() override;
+      ~SerializableSectionPairSection() noexcept override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::core::Class> getValue();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;

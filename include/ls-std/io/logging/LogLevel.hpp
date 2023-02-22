@@ -23,7 +23,7 @@ namespace ls::std::io
 
       explicit LogLevel(const ls::std::io::LogLevelValue &_value);
       LogLevel();
-      ~LogLevel() override;
+      ~LogLevel() noexcept override;
       ;
       ls::std::io::LogLevel &operator=(const ls::std::io::LogLevelValue &_value);
       bool operator<(const ls::std::io::LogLevelValue &_value);

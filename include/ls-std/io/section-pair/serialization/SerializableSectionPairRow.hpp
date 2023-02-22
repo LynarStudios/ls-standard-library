@@ -24,7 +24,7 @@ namespace ls::std::io
     public:
 
       explicit SerializableSectionPairRow(const ls::std::io::SerializableSectionPairParameter &_parameter);
-      ~SerializableSectionPairRow() override;
+      ~SerializableSectionPairRow() noexcept override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::core::Class> getValue();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;

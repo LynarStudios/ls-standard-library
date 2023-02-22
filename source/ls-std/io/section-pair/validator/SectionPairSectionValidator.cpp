@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -16,7 +16,7 @@
 ls::std::io::SectionPairSectionValidator::SectionPairSectionValidator(::std::string _section) : ls::std::core::Class("SectionPairSectionValidator"), section(::std::move(_section))
 {}
 
-ls::std::io::SectionPairSectionValidator::~SectionPairSectionValidator() = default;
+ls::std::io::SectionPairSectionValidator::~SectionPairSectionValidator() noexcept = default;
 
 ::std::string ls::std::io::SectionPairSectionValidator::getValidationRegex()
 {

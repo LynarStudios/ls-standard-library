@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -22,7 +22,7 @@ namespace ls::std::io
     public:
 
       explicit SectionPairRowListValueValidator(::std::string _listValueRow);
-      ~SectionPairRowListValueValidator() override;
+      ~SectionPairRowListValueValidator() noexcept override;
 
       [[nodiscard]] static ::std::string getValidationRegex();
       [[nodiscard]] bool isValid() override;

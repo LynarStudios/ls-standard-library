@@ -17,7 +17,7 @@
 ls::std::io::SectionPairRowListValue::SectionPairRowListValue() : ls::std::core::Class("SectionPairRowListValue"), ls::std::io::SectionPairRowValue(ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE)
 {}
 
-ls::std::io::SectionPairRowListValue::~SectionPairRowListValue() = default;
+ls::std::io::SectionPairRowListValue::~SectionPairRowListValue() noexcept = default;
 
 void ls::std::io::SectionPairRowListValue::add(const ls::std::io::section_pair_row_value &_value)
 {

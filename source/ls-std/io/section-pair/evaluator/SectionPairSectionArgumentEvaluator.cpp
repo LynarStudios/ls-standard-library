@@ -15,7 +15,7 @@
 ls::std::io::SectionPairSectionArgumentEvaluator::SectionPairSectionArgumentEvaluator(::std::string _section) : ls::std::core::Class("SectionPairSectionArgumentEvaluator"), section(::std::move(_section))
 {}
 
-ls::std::io::SectionPairSectionArgumentEvaluator::~SectionPairSectionArgumentEvaluator() = default;
+ls::std::io::SectionPairSectionArgumentEvaluator::~SectionPairSectionArgumentEvaluator() noexcept = default;
 
 void ls::std::io::SectionPairSectionArgumentEvaluator::evaluate()
 {

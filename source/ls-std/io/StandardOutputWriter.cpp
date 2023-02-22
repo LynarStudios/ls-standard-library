@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-06
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -12,7 +12,7 @@
 
 ls::std::io::StandardOutputWriter::StandardOutputWriter() = default;
 
-ls::std::io::StandardOutputWriter::~StandardOutputWriter() = default;
+ls::std::io::StandardOutputWriter::~StandardOutputWriter() noexcept = default;
 
 bool ls::std::io::StandardOutputWriter::write(const ls::std::core::type::byte_field &_data)
 {

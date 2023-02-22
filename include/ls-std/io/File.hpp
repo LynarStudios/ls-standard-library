@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-18
+ * Changed:         2023-02-22
  *
  * */
 
@@ -30,7 +30,7 @@ namespace ls::std::io
     public:
 
       explicit File(::std::string _absoluteFilePath);
-      ~File() override;
+      ~File() noexcept override;
 
       // comparison operators
 

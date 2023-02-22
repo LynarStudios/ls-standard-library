@@ -12,7 +12,7 @@
 ls::std::io::SectionPairFileExtensionValidator::SectionPairFileExtensionValidator(::std::string _fileName) : ls::std::core::Class("SectionPairFileExtensionValidator"), fileName(::std::move(_fileName))
 {}
 
-ls::std::io::SectionPairFileExtensionValidator::~SectionPairFileExtensionValidator() = default;
+ls::std::io::SectionPairFileExtensionValidator::~SectionPairFileExtensionValidator() noexcept = default;
 
 bool ls::std::io::SectionPairFileExtensionValidator::isValid()
 {

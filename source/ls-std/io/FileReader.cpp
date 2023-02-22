@@ -17,7 +17,7 @@ ls::std::io::FileReader::FileReader(ls::std::io::File &_file) : ls::std::core::C
   ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
 }
 
-ls::std::io::FileReader::~FileReader() = default;
+ls::std::io::FileReader::~FileReader() noexcept = default;
 
 ls::std::core::type::byte_field ls::std::io::FileReader::read()
 {

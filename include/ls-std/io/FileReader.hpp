@@ -22,7 +22,7 @@ namespace ls::std::io
     public:
 
       explicit FileReader(ls::std::io::File &_file);
-      ~FileReader() override;
+      ~FileReader() noexcept override;
 
       [[nodiscard]] ls::std::core::type::byte_field read() override;
       void reset(ls::std::io::File &_file);

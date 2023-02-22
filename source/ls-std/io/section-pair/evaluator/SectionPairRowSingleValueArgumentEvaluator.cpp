@@ -15,7 +15,7 @@
 ls::std::io::SectionPairRowSingleValueArgumentEvaluator::SectionPairRowSingleValueArgumentEvaluator(::std::string _singleValueRow) : ls::std::core::Class("SectionPairRowSingleValueArgumentEvaluator"), singleValueRow(::std::move(_singleValueRow))
 {}
 
-ls::std::io::SectionPairRowSingleValueArgumentEvaluator::~SectionPairRowSingleValueArgumentEvaluator() = default;
+ls::std::io::SectionPairRowSingleValueArgumentEvaluator::~SectionPairRowSingleValueArgumentEvaluator() noexcept = default;
 
 void ls::std::io::SectionPairRowSingleValueArgumentEvaluator::evaluate()
 {

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -22,7 +22,7 @@ ls::std::io::SerializableSectionPairRow::SerializableSectionPairRow(const Serial
   this->parameter = _parameter;
 }
 
-ls::std::io::SerializableSectionPairRow::~SerializableSectionPairRow() = default;
+ls::std::io::SerializableSectionPairRow::~SerializableSectionPairRow() noexcept = default;
 
 ::std::shared_ptr<ls::std::core::Class> ls::std::io::SerializableSectionPairRow::getValue()
 {

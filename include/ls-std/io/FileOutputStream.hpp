@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -24,7 +24,7 @@ namespace ls::std::io
 
       explicit FileOutputStream(ls::std::io::File &_file);
       explicit FileOutputStream(ls::std::io::File &_file, bool _append);
-      ~FileOutputStream() override;
+      ~FileOutputStream() noexcept override;
 
       void close();
       bool write(const ls::std::core::type::byte_field &_data) override; // nodiscard is optional here

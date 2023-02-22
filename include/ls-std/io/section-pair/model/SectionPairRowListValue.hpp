@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       SectionPairRowListValue();
-      ~SectionPairRowListValue() override;
+      ~SectionPairRowListValue() noexcept override;
 
       void add(const ls::std::io::section_pair_row_value &_value);
       void clear();

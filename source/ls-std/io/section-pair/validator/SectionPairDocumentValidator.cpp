@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -14,7 +14,7 @@
 ls::std::io::SectionPairDocumentValidator::SectionPairDocumentValidator(::std::string _document) : ls::std::core::Class("SectionPairDocumentValidator"), document(::std::move(_document))
 {}
 
-ls::std::io::SectionPairDocumentValidator::~SectionPairDocumentValidator() = default;
+ls::std::io::SectionPairDocumentValidator::~SectionPairDocumentValidator() noexcept = default;
 
 bool ls::std::io::SectionPairDocumentValidator::isValid()
 {

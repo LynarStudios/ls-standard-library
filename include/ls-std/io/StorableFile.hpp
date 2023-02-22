@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       explicit StorableFile(const ::std::string &_path);
-      ~StorableFile() override;
+      ~StorableFile() noexcept override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::io::File> getFile();
       [[nodiscard]] ls::std::core::type::byte_field load() override;

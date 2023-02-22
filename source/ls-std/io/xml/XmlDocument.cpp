@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2023-02-08
+ * Changed:         2023-02-22
  *
  * */
 
@@ -13,7 +13,7 @@
 ls::std::io::XmlDocument::XmlDocument() : ls::std::core::Class("XmlDocument")
 {}
 
-ls::std::io::XmlDocument::~XmlDocument() = default;
+ls::std::io::XmlDocument::~XmlDocument() noexcept = default;
 
 ::std::shared_ptr<ls::std::io::XmlDeclaration> ls::std::io::XmlDocument::getDeclaration()
 {

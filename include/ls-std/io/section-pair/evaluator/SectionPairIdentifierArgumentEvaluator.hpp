@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-19
+* Changed:         2023-02-22
 *
 * */
 
@@ -22,7 +22,7 @@ namespace ls::std::io
     public:
 
       explicit SectionPairIdentifierArgumentEvaluator(ls::std::io::section_pair_identifier _identifier);
-      ~SectionPairIdentifierArgumentEvaluator() override;
+      ~SectionPairIdentifierArgumentEvaluator() noexcept override;
 
       void evaluate() override;
 

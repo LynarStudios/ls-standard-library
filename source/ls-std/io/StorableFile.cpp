@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -16,7 +16,7 @@ ls::std::io::StorableFile::StorableFile(const ::std::string &_path)
   this->_init(_path);
 }
 
-ls::std::io::StorableFile::~StorableFile() = default;
+ls::std::io::StorableFile::~StorableFile() noexcept = default;
 
 ::std::shared_ptr<ls::std::io::File> ls::std::io::StorableFile::getFile()
 {

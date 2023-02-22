@@ -22,7 +22,7 @@ ls::std::io::SectionPairSection::SectionPairSection(const ls::std::io::section_p
   this->_setSectionId(_sectionId);
 }
 
-ls::std::io::SectionPairSection::~SectionPairSection() = default;
+ls::std::io::SectionPairSection::~SectionPairSection() noexcept = default;
 
 void ls::std::io::SectionPairSection::add(const section_pair_row_list_element &_row)
 {

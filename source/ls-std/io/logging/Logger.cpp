@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-08
+ * Changed:         2023-02-22
  *
  * */
 
@@ -21,7 +21,7 @@ ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface_typ
   this->_assignWriter(_writer);
 }
 
-ls::std::io::Logger::~Logger() = default;
+ls::std::io::Logger::~Logger() noexcept = default;
 
 void ls::std::io::Logger::debug(const ls::std::core::type::byte *_data)
 {
