@@ -36,7 +36,10 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - __AppleClang__ compiler is now officially supported
 - exceptions provided by __core__ submodule now offer a constructor for passing dedicated messages
-- evaluators have been added, which can check a state of variables and throw a dedicated exception in a single line and more convenient way
+- evaluators have been added, which can check a state of variables and throw a dedicated exception in a single line and
+  more convenient way
+- a section-pair file standard has been implemented and is provided via __ls-std-io__ module, a definition of this
+  standard can be found in the libraries __doc__ folder
 
 #### Improvements ####
 
@@ -47,6 +50,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 - fetching the library version can now be achieved by using a dedicated __LibraryVersion__ class - the usage of a static function for this purpose has been removed completely
 - missing nodiscard attributes have been added to library classes
 - rename "types" folder in __core__ submodule to stick to naming convention
+- key-value file standard has been removed from this library and is replaced by section-pair file standard
 
 #### Fixes ####
 
@@ -76,7 +80,7 @@ Building this library would result into providing binaries for each library modu
 | __ls-std-encoding__ | library (static / dynamic) |
 | __ls-std-event__    | library (static / dynamic) |
 | __ls-std-io__       | library (static / dynamic) |
-| __time__            | library (static / dynamic) |
+| __ls-std-time__     | library (static / dynamic) |
 
 #### Prerequisites ####
 
