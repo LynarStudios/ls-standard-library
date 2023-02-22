@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -39,8 +39,10 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("FileOperationException thrown - file operation failed!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - file operation failed!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,11 +59,18 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ(R"(FileOperationException thrown - creating directory "tmp")", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + R"( thrown - creating directory "tmp")";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
         FileOperationException);
+  }
+
+  TEST_F(FileOperationExceptionTest, getName)
+  {
+    ASSERT_STREQ("FileOperationException", FileOperationException{}.getName().c_str());
   }
 }

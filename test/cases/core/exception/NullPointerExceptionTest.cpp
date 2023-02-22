@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -39,8 +39,10 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("NullPointerException thrown - reference is null!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - reference is null!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,11 +59,18 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("NullPointerException thrown - _value is null", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - _value is null";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
         NullPointerException);
+  }
+
+  TEST_F(NullPointerExceptionTest, getName)
+  {
+    ASSERT_STREQ("NullPointerException", NullPointerException{"message"}.getName().c_str());
   }
 }

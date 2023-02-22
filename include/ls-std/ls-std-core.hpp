@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2023-02-13
+ * Changed:         2023-02-22
  *
  * */
 
@@ -17,6 +17,7 @@
 
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>
+#include <ls-std/core/exception/Exception.hpp>
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
@@ -25,7 +26,6 @@
 #include <ls-std/core/exception/IncompleteJsonException.hpp>
 #include <ls-std/core/exception/IndexOutOfBoundsException.hpp>
 #include <ls-std/core/exception/NullPointerException.hpp>
-#include <ls-std/core/exception/WrongCallException.hpp>
 
 #include <ls-std/core/interface/IBoxing.hpp>
 #include <ls-std/core/interface/IEncoding.hpp>

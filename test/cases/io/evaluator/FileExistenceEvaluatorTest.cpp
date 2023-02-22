@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -43,7 +43,7 @@ namespace
           catch (const FileNotFoundException &_exception)
           {
             string actual = _exception.what();
-            string expected = "FileNotFoundException thrown - \"" + GetParam() + "\" does not exist!";
+            string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" does not exist!";
             ;
 
             ASSERT_STREQ(expected.c_str(), actual.c_str());

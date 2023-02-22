@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-22
 *
 * */
 
@@ -39,8 +39,10 @@ namespace
           }
           catch (const IndexOutOfBoundsException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IndexOutOfBoundsException thrown - provided index is out of bounds!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - provided index is out of bounds!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,11 +59,18 @@ namespace
           }
           catch (const IndexOutOfBoundsException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IndexOutOfBoundsException thrown - index 3 is out of bounds!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - index 3 is out of bounds!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
         IndexOutOfBoundsException);
+  }
+
+  TEST_F(IndexOutOfBoundsExceptionTest, getName)
+  {
+    ASSERT_STREQ("IndexOutOfBoundsException", IndexOutOfBoundsException{}.getName().c_str());
   }
 }

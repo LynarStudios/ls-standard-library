@@ -57,7 +57,7 @@ namespace
           catch (const IllegalArgumentException &_exception)
           {
             ::std::string actual = _exception.what();
-            ::std::string expected = "IllegalArgumentException thrown - \"" + GetParam() + "\" is not a valid section!";
+            ::std::string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid section!";
 
             ASSERT_STREQ(SectionPairMessageFormatter::getFormattedMessage(expected).c_str(), actual.c_str());
             throw;

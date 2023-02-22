@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -39,8 +39,10 @@ namespace
           }
           catch (const EventNotSubscribedException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("EventNotSubscribedException thrown - event was not subscribed!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - event was not subscribed!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,11 +59,18 @@ namespace
           }
           catch (const EventNotSubscribedException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("EventNotSubscribedException thrown - id: OPEN_DOOR", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - id: OPEN_DOOR";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
         EventNotSubscribedException);
+  }
+
+  TEST_F(EventNotSubscribedExceptionTest, getName)
+  {
+    ASSERT_STREQ("EventNotSubscribedException", EventNotSubscribedException{}.getName().c_str());
   }
 }

@@ -133,6 +133,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/NullPointerEvaluator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotHandledException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotSubscribedException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/Exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/ExceptionMessage.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileNotFoundException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileOperationException.cpp
@@ -141,7 +142,6 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IncompleteJsonException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IndexOutOfBoundsException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/WrongCallException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEvaluator.cpp
@@ -252,7 +252,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IncompleteJsonExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IndexOutOfBoundsExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/NullPointerExceptionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/WrongCallExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ConditionalFunctionExecutorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp

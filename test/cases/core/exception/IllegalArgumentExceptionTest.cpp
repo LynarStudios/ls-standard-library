@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -39,8 +39,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - passed argument is not valid!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -57,11 +59,18 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string message = _exception.what();
-            EXPECT_STREQ("IllegalArgumentException thrown - value is empty", message.c_str());
+            ::std::string actual = _exception.what();
+            ::std::string expected = _exception.getName() + " thrown - value is empty";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
         IllegalArgumentException);
+  }
+
+  TEST_F(IllegalArgumentExceptionTest, getName)
+  {
+    ASSERT_STREQ("IllegalArgumentException", IllegalArgumentException{}.getName().c_str());
   }
 }
