@@ -34,13 +34,13 @@ namespace
   TEST_F(LogLevelTest, constructor_with_log_level_value_parameter)
   {
     LogLevel logLevel{LogLevelValue::INFO};
-    ASSERT_EQ(LogLevelValue::INFO, logLevel);
+    ASSERT_EQ(LogLevelValue::INFO, logLevel.getValue());
   }
 
   TEST_F(LogLevelTest, constructor_default)
   {
     LogLevel logLevel{};
-    ASSERT_EQ(LogLevelValue::FATAL, logLevel);
+    ASSERT_EQ(LogLevelValue::FATAL, logLevel.getValue());
   }
 
   TEST_F(LogLevelTest, operator_assign)
@@ -48,7 +48,7 @@ namespace
     LogLevel logLevel{LogLevelValue::DEBUG};
     logLevel = LogLevelValue::INFO;
 
-    ASSERT_EQ(LogLevelValue::INFO, logLevel);
+    ASSERT_EQ(LogLevelValue::INFO, logLevel.getValue());
   }
 
   TEST_F(LogLevelTest, operator_lessThan)
@@ -122,12 +122,17 @@ namespace
     ASSERT_FALSE(logLevel == LogLevelValue::DEBUG);
   }
 
+  TEST_F(LogLevelTest, getLogLevel)
+  {
+    ASSERT_EQ(LogLevelValue::FATAL, LogLevel{}.getValue());
+  }
+
   TEST_F(LogLevelTest, setLogLevel_with_log_level_value)
   {
     LogLevel logLevel{};
     logLevel.setLogLevel(LogLevelValue::INFO);
 
-    ASSERT_EQ(LogLevelValue::INFO, logLevel);
+    ASSERT_EQ(LogLevelValue::INFO, logLevel.getValue());
   }
 
   TEST_F(LogLevelTest, setLogLevel_with_string)
@@ -135,17 +140,17 @@ namespace
     LogLevel logLevel{};
 
     logLevel.setLogLevel("FATAL");
-    ASSERT_EQ(LogLevelValue::FATAL, logLevel);
+    ASSERT_EQ(LogLevelValue::FATAL, logLevel.getValue());
     logLevel.setLogLevel("ERROR");
-    ASSERT_EQ(LogLevelValue::ERR, logLevel);
+    ASSERT_EQ(LogLevelValue::ERR, logLevel.getValue());
     logLevel.setLogLevel("WARN");
-    ASSERT_EQ(LogLevelValue::WARN, logLevel);
+    ASSERT_EQ(LogLevelValue::WARN, logLevel.getValue());
     logLevel.setLogLevel("INFO");
-    ASSERT_EQ(LogLevelValue::INFO, logLevel);
+    ASSERT_EQ(LogLevelValue::INFO, logLevel.getValue());
     logLevel.setLogLevel("DEBUG");
-    ASSERT_EQ(LogLevelValue::DEBUG, logLevel);
+    ASSERT_EQ(LogLevelValue::DEBUG, logLevel.getValue());
     logLevel.setLogLevel("TRACE");
-    ASSERT_EQ(LogLevelValue::TRACE, logLevel);
+    ASSERT_EQ(LogLevelValue::TRACE, logLevel.getValue());
   }
 
   TEST_F(LogLevelTest, setLogLevel_string_no_valid_string)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -21,11 +21,6 @@ ls::std::io::LogLevel::LogLevel() : ls::std::core::Class("LogLevel")
 }
 
 ls::std::io::LogLevel::~LogLevel() = default;
-
-ls::std::io::LogLevel::operator unsigned char() const
-{
-  return this->value;
-}
 
 ls::std::io::LogLevel &ls::std::io::LogLevel::operator=(const ls::std::io::LogLevelValue &_value)
 {
@@ -56,6 +51,11 @@ bool ls::std::io::LogLevel::operator>=(const ls::std::io::LogLevelValue &_value)
 bool ls::std::io::LogLevel::operator==(const ls::std::io::LogLevelValue &_value)
 {
   return this->value == _value;
+}
+
+ls::std::io::LogLevelValue ls::std::io::LogLevel::getValue()
+{
+  return this->value;
 }
 
 void ls::std::io::LogLevel::setLogLevel(const ls::std::io::LogLevelValue &_value)

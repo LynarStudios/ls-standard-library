@@ -166,7 +166,7 @@ namespace
   TEST_F(LoggerTest, getLogLevel)
   {
     Logger logger{createFileLogger("output.log")};
-    ASSERT_EQ(LogLevelValue::INFO, logger.getLogLevel());
+    ASSERT_EQ(LogLevelValue::INFO, logger.getLogLevel().getValue());
   }
 
   TEST_F(LoggerTest, info)
@@ -203,7 +203,7 @@ namespace
     Logger logger{createFileLogger("output.log")};
     logger.setLogLevel(LogLevelValue::ERR);
 
-    ASSERT_EQ(LogLevelValue::ERR, logger.getLogLevel());
+    ASSERT_EQ(LogLevelValue::ERR, logger.getLogLevel().getValue());
   }
 
   TEST_F(LoggerTest, trace)
