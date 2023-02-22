@@ -13,10 +13,11 @@
 
 using namespace ls::std::core;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class EmptyStringArgumentEvaluatorTest : public ::testing::Test
+  class EmptyStringArgumentEvaluatorTest : public Test
   {
     protected:
 

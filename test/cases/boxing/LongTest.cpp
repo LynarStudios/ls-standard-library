@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -13,10 +13,12 @@
 
 using namespace ls::std::boxing;
 using namespace ls::std::core;
+using namespace ls::std::core::type;
+using namespace ::testing;
 
 namespace
 {
-  class LongTest : public ::testing::Test
+  class LongTest : public Test
   {
     protected:
 
@@ -45,7 +47,7 @@ namespace
   TEST_F(LongTest, operator_assignment_with_value)
   {
     Long x{13};
-    x = (type::long_type) 3;
+    x = (long_type) 3;
 
     ASSERT_EQ(3, x);
   }
@@ -72,7 +74,7 @@ namespace
   TEST_F(LongTest, operator_add_with_value)
   {
     Long x{13};
-    ASSERT_EQ(20, x + (type::long_type) 7);
+    ASSERT_EQ(20, x + (long_type) 7);
   }
 
   TEST_F(LongTest, operator_mul_with_reference)
@@ -86,7 +88,7 @@ namespace
   TEST_F(LongTest, operator_mul_with_value)
   {
     Long x{3};
-    ASSERT_EQ(21, x * (type::long_type) 7);
+    ASSERT_EQ(21, x * (long_type) 7);
   }
 
   TEST_F(LongTest, operator_sub_with_reference)
@@ -100,7 +102,7 @@ namespace
   TEST_F(LongTest, operator_sub_with_value)
   {
     Long x{51};
-    ASSERT_EQ(34, x - (type::long_type) 17);
+    ASSERT_EQ(34, x - (long_type) 17);
   }
 
   TEST_F(LongTest, operator_div_with_reference)
@@ -114,7 +116,7 @@ namespace
   TEST_F(LongTest, operator_div_with_value)
   {
     Long x{81};
-    ASSERT_EQ(9, x / (type::long_type) 9);
+    ASSERT_EQ(9, x / (long_type) 9);
   }
 
   TEST_F(LongTest, operator_div_by_zero_with_reference)
@@ -143,7 +145,7 @@ namespace
           try
           {
             Long x{9};
-            x = x / (type::long_type) 0;
+            x = x / (long_type) 0;
           }
           catch (const IllegalArithmeticOperationException &_exception)
           {
@@ -164,7 +166,7 @@ namespace
   TEST_F(LongTest, operator_mod_with_value)
   {
     Long x{85};
-    ASSERT_EQ(4, x % (type::long_type) 9);
+    ASSERT_EQ(4, x % (long_type) 9);
   }
 
   // compound operators
@@ -181,7 +183,7 @@ namespace
   TEST_F(LongTest, operator_add_equals_with_value)
   {
     Long x{4};
-    x += (type::long_type) 2;
+    x += (long_type) 2;
 
     ASSERT_EQ(6, x);
   }
@@ -198,7 +200,7 @@ namespace
   TEST_F(LongTest, operator_sub_equals_with_value)
   {
     Long x{14};
-    x -= (type::long_type) 2;
+    x -= (long_type) 2;
 
     ASSERT_EQ(12, x);
   }
@@ -215,7 +217,7 @@ namespace
   TEST_F(LongTest, operator_mul_equals_with_value)
   {
     Long x{6};
-    x *= (type::long_type) 3;
+    x *= (long_type) 3;
 
     ASSERT_EQ(18, x);
   }
@@ -232,7 +234,7 @@ namespace
   TEST_F(LongTest, operator_div_equals_with_value)
   {
     Long x{12};
-    x /= (type::long_type) 3;
+    x /= (long_type) 3;
 
     ASSERT_EQ(4, x);
   }
@@ -263,7 +265,7 @@ namespace
           try
           {
             Long x{9};
-            x = x /= (type::long_type) 0;
+            x = x /= (long_type) 0;
           }
           catch (const IllegalArithmeticOperationException &_exception)
           {
@@ -286,7 +288,7 @@ namespace
   TEST_F(LongTest, operator_equals_with_value)
   {
     Long x{12};
-    ASSERT_TRUE(x == (type::long_type) 12);
+    ASSERT_TRUE(x == (long_type) 12);
   }
 
   TEST_F(LongTest, operator_not_equals_with_reference)
@@ -300,7 +302,7 @@ namespace
   TEST_F(LongTest, operator_not_equals_with_value)
   {
     Long x{12};
-    ASSERT_TRUE(x != (type::long_type) 3);
+    ASSERT_TRUE(x != (long_type) 3);
   }
 
   TEST_F(LongTest, operator_greater_than_with_reference)
@@ -314,7 +316,7 @@ namespace
   TEST_F(LongTest, operator_greater_than_with_value)
   {
     Long x{12};
-    ASSERT_TRUE(x > (type::long_type) 3);
+    ASSERT_TRUE(x > (long_type) 3);
   }
 
   TEST_F(LongTest, operator_greater_than_equals_with_reference)
@@ -328,7 +330,7 @@ namespace
   TEST_F(LongTest, operator_greater_than_equals_with_value)
   {
     Long x{12};
-    ASSERT_TRUE(x >= (type::long_type) 12);
+    ASSERT_TRUE(x >= (long_type) 12);
   }
 
   TEST_F(LongTest, operator_less_than_with_reference)
@@ -344,7 +346,7 @@ namespace
     Long x{10};
     Long y{12};
 
-    ASSERT_TRUE(x < (type::long_type) 12);
+    ASSERT_TRUE(x < (long_type) 12);
   }
 
   TEST_F(LongTest, operator_less_than_equals_with_reference)
@@ -358,7 +360,7 @@ namespace
   TEST_F(LongTest, operator_less_than_equals_with_value)
   {
     Long x{10};
-    ASSERT_TRUE(x <= (type::long_type) 10);
+    ASSERT_TRUE(x <= (long_type) 10);
   }
 
   // logical operators
@@ -380,7 +382,7 @@ namespace
   TEST_F(LongTest, operator_and_with_value)
   {
     Long x{1};
-    ASSERT_TRUE(x && (type::long_type) 1);
+    ASSERT_TRUE(x && (long_type) 1);
   }
 
   TEST_F(LongTest, operator_and_with_boolean)
@@ -400,7 +402,7 @@ namespace
   TEST_F(LongTest, operator_or_with_value)
   {
     Long x{};
-    ASSERT_TRUE(x || (type::long_type) 1);
+    ASSERT_TRUE(x || (long_type) 1);
   }
 
   TEST_F(LongTest, operator_or_with_boolean)

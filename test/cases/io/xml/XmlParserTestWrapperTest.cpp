@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2023-02-05
+ * Changed:         2023-02-22
  *
  * */
 
@@ -12,10 +12,11 @@
 
 using namespace test::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class XmlParserTestWrapperTest : public ::testing::Test
+  class XmlParserTestWrapperTest : public Test
   {
     protected:
 

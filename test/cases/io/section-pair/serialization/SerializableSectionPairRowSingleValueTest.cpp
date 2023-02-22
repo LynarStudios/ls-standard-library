@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -16,10 +16,11 @@ using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SerializableSectionPairRowSingleValueTest : public ::testing::Test
+  class SerializableSectionPairRowSingleValueTest : public Test
   {
     protected:
 
@@ -121,5 +122,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairRowSingleValueTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairRowSingleValueTest_LineBreakTest, Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

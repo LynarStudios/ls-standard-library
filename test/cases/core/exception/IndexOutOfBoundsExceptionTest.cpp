@@ -12,10 +12,12 @@
 #include <string>
 
 using namespace ls::std::core;
+using namespace ::testing;
+using namespace ::std;
 
 namespace
 {
-  class IndexOutOfBoundsExceptionTest : public ::testing::Test
+  class IndexOutOfBoundsExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const IndexOutOfBoundsException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - provided index is out of bounds!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - provided index is out of bounds!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const IndexOutOfBoundsException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - index 3 is out of bounds!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - index 3 is out of bounds!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

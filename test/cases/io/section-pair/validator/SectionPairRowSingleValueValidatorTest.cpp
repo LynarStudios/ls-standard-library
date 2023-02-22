@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -15,10 +15,11 @@
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairRowSingleValueValidatorTest : public ::testing::Test
+  class SectionPairRowSingleValueValidatorTest : public Test
   {
     protected:
 
@@ -32,7 +33,7 @@ namespace
       {}
   };
 
-  class SectionPairRowSingleValueValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairRowSingleValueValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -40,7 +41,7 @@ namespace
       ~SectionPairRowSingleValueValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairRowSingleValueValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairRowSingleValueValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -55,7 +56,7 @@ namespace
 
   TEST_F(SectionPairRowSingleValueValidatorTest, getValidationRegex)
   {
-    ::std::string expected = R"(([a-z]([a-z0-9-]){1,31})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}){1}($|\n{1}|\r{1}\n{1}))";
+    string expected = R"(([a-z]([a-z0-9-]){1,31})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}){1}($|\n{1}|\r{1}\n{1}))";
     ASSERT_STREQ(expected.c_str(), SectionPairRowSingleValueValidator::getValidationRegex().c_str());
   }
 
@@ -69,6 +70,6 @@ namespace
     ASSERT_FALSE(SectionPairRowSingleValueValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowSingleValueValidatorTest_ValidArgumentTest, ::testing::Values("favourite-color=blue" + NewLine::getUnixNewLine(), "hair-color=red" + NewLine::getWindowsNewLine(), "height=167"));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowSingleValueValidatorTest_InvalidArgumentTest, ::testing::Values("color blue", "a value\n"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowSingleValueValidatorTest_ValidArgumentTest, Values("favourite-color=blue" + NewLine::getUnixNewLine(), "hair-color=red" + NewLine::getWindowsNewLine(), "height=167"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowSingleValueValidatorTest_InvalidArgumentTest, Values("color blue", "a value\n"));
 }

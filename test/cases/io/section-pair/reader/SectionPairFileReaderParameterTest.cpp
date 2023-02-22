@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -12,10 +12,11 @@
 
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairFileReaderParameterTest : public ::testing::Test
+  class SectionPairFileReaderParameterTest : public Test
   {
     protected:
 

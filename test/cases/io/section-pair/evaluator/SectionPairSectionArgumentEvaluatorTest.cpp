@@ -15,10 +15,11 @@
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairSectionArgumentEvaluatorTest : public ::testing::Test
+  class SectionPairSectionArgumentEvaluatorTest : public Test
   {
     protected:
 
@@ -32,7 +33,7 @@ namespace
       {}
   };
 
-  class SectionPairSectionArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairSectionArgumentEvaluatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -56,8 +57,8 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid section!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid section!";
 
             ASSERT_STREQ(SectionPairMessageFormatter::getFormattedMessage(expected).c_str(), actual.c_str());
             throw;
@@ -66,5 +67,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairSectionArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("\n[general]\n\n", "\n[section]\n\ncolors:"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairSectionArgumentEvaluatorTest_InvalidArgumentTest, Values("\n[general]\n\n", "\n[section]\n\ncolors:"));
 }

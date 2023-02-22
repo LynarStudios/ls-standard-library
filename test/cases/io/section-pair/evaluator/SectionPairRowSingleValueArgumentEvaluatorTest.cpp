@@ -15,10 +15,11 @@
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairRowSingleValueArgumentEvaluatorTest : public ::testing::Test
+  class SectionPairRowSingleValueArgumentEvaluatorTest : public Test
   {
     protected:
 
@@ -32,7 +33,7 @@ namespace
       {}
   };
 
-  class SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -56,8 +57,8 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid section pair single value row!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid section pair single value row!";
 
             ASSERT_STREQ(SectionPairMessageFormatter::getFormattedMessage(expected).c_str(), actual.c_str());
             throw;
@@ -66,5 +67,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("favourite-color", "a value\n"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowSingleValueArgumentEvaluatorTest_InvalidArgumentTest, Values("favourite-color", "a value\n"));
 }

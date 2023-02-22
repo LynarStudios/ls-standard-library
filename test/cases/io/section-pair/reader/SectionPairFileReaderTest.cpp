@@ -21,7 +21,7 @@ using namespace ::testing;
 
 namespace
 {
-  class SectionPairFileReaderTest : public ::testing::Test
+  class SectionPairFileReaderTest : public Test
   {
     protected:
 
@@ -61,7 +61,7 @@ namespace
       }
   };
 
-  class SectionPairFileReaderTest_NotValidFileExtension : public ::testing::TestWithParam<string>
+  class SectionPairFileReaderTest_NotValidFileExtension : public TestWithParam<string>
   {
     protected:
 
@@ -136,5 +136,5 @@ namespace
     ASSERT_EQ(2, reader.getDocument()->get(0)->getRowAmount());
   }
 
-  INSTANTIATE_TEST_SUITE_P(NotValidFileExtension, SectionPairFileReaderTest_NotValidFileExtension, ::testing::Values("settings.json", "/var/log/document.html"));
+  INSTANTIATE_TEST_SUITE_P(NotValidFileExtension, SectionPairFileReaderTest_NotValidFileExtension, Values("settings.json", "/var/log/document.html"));
 }

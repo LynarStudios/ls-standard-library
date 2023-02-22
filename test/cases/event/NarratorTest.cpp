@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-05
+ * Changed:         2023-02-22
  *
  * */
 
@@ -17,10 +17,11 @@ using namespace ls::std::core::interface_type;
 using namespace ls::std::event;
 using namespace ::std;
 using namespace test::event;
+using namespace ::testing;
 
 namespace
 {
-  class NarratorTest : public ::testing::Test
+  class NarratorTest : public Test
   {
     protected:
 

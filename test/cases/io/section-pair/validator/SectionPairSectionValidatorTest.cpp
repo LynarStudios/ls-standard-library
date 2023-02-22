@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -17,10 +17,11 @@ using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
 using namespace test::io;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairSectionValidatorTest : public ::testing::Test
+  class SectionPairSectionValidatorTest : public Test
   {
     protected:
 
@@ -34,7 +35,7 @@ namespace
       {}
   };
 
-  class SectionPairSectionValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairSectionValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -42,7 +43,7 @@ namespace
       ~SectionPairSectionValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairSectionValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairSectionValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -72,6 +73,6 @@ namespace
     ASSERT_FALSE(SectionPairSectionValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairSectionValidatorTest_ValidArgumentTest, ::testing::Values(SectionPairSectionProvider::createSerializedSectionWithTomExample(NewLine::getUnixNewLine()), SectionPairSectionProvider::createSerializedSectionWithTomExample(NewLine::getWindowsNewLine())));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairSectionValidatorTest_InvalidArgumentTest, ::testing::Values("[general]\nage=22"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairSectionValidatorTest_ValidArgumentTest, Values(SectionPairSectionProvider::createSerializedSectionWithTomExample(NewLine::getUnixNewLine()), SectionPairSectionProvider::createSerializedSectionWithTomExample(NewLine::getWindowsNewLine())));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairSectionValidatorTest_InvalidArgumentTest, Values("[general]\nage=22"));
 }

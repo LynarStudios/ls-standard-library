@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -14,10 +14,11 @@
 using namespace ls::std::boxing;
 using namespace ls::std::core;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class DoubleTest : public ::testing::Test
+  class DoubleTest : public Test
   {
     protected:
 

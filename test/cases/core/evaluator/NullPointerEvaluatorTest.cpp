@@ -13,10 +13,11 @@
 
 using namespace ls::std::core;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class NullPointerArgumentTest : public ::testing::Test
+  class NullPointerArgumentTest : public Test
   {
     protected:
 

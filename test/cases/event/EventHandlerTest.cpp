@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -13,10 +13,11 @@
 
 using namespace ls::std::core;
 using namespace ls::std::event;
+using namespace ::testing;
 
 namespace
 {
-  class EventHandlerTest : public ::testing::Test
+  class EventHandlerTest : public Test
   {
     protected:
 

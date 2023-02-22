@@ -15,10 +15,11 @@
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class FileExistenceEvaluatorTest : public ::testing::TestWithParam<string>
+  class FileExistenceEvaluatorTest : public TestWithParam<string>
   {
     protected:
 
@@ -53,5 +54,5 @@ namespace
         FileNotFoundException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(FileExistenceEvaluatorTest, FileExistenceEvaluatorTest, ::testing::Values("var/log/log.txt", ".test"));
+  INSTANTIATE_TEST_SUITE_P(FileExistenceEvaluatorTest, FileExistenceEvaluatorTest, Values("var/log/log.txt", ".test"));
 }

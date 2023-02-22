@@ -15,10 +15,11 @@ using namespace ls::std::core;
 using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairRowTest : public ::testing::Test
+  class SectionPairRowTest : public Test
   {
     protected:
 

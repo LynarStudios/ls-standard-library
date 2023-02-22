@@ -12,10 +12,12 @@
 #include <string>
 
 using namespace ls::std::core;
+using namespace ::testing;
+using namespace ::std;
 
 namespace
 {
-  class FileOperationExceptionTest : public ::testing::Test
+  class FileOperationExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - file operation failed!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - file operation failed!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + R"( thrown - creating directory "tmp")";
+            string actual = _exception.what();
+            string expected = _exception.getName() + R"( thrown - creating directory "tmp")";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

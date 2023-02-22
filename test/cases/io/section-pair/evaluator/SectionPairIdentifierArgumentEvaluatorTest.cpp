@@ -15,10 +15,11 @@
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairIdentifierArgumentEvaluatorTest : public ::testing::Test
+  class SectionPairIdentifierArgumentEvaluatorTest : public Test
   {
     protected:
 
@@ -32,7 +33,7 @@ namespace
       {}
   };
 
-  class SectionPairIdentifierArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairIdentifierArgumentEvaluatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -56,8 +57,8 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid identifier!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid identifier!";
 
             ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -66,5 +67,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("_color", "Color", "another_color"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierArgumentEvaluatorTest_InvalidArgumentTest, Values("_color", "Color", "another_color"));
 }

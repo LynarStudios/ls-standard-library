@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-30
- * Changed:         2023-02-05
+ * Changed:         2023-02-22
  *
  * */
 
@@ -16,10 +16,11 @@ using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
 using namespace test::io;
+using namespace ::testing;
 
 namespace
 {
-  class XmlDocumentTest : public ::testing::Test
+  class XmlDocumentTest : public Test
   {
     protected:
 
@@ -79,7 +80,6 @@ namespace
     XmlDocument document{};
     ASSERT_TRUE(document.getRootElement() == nullptr);
 
-    XmlDeclaration declaration{"1.0"};
     document.setRootElement(TestDataFactory::createXmlContent());
     ASSERT_TRUE(document.getRootElement() != nullptr);
     ASSERT_STREQ("dialog", document.getRootElement()->getName().c_str());

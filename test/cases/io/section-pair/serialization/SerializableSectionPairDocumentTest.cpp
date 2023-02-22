@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -18,10 +18,11 @@ using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ::std;
 using namespace test::io;
+using namespace ::testing;
 
 namespace
 {
-  class SerializableSectionPairDocumentTest : public ::testing::Test
+  class SerializableSectionPairDocumentTest : public Test
   {
     protected:
 
@@ -35,7 +36,7 @@ namespace
       {}
   };
 
-  class SerializableSectionPairDocumentTest_LineBreakTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairDocumentTest_LineBreakTest : public TestWithParam<string>
   {
     protected:
 
@@ -137,5 +138,5 @@ namespace
     ASSERT_STREQ("167", dynamic_pointer_cast<SectionPairRowSingleValue>(physical->get(2)->getValue())->get().c_str());
   }
 
-  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairDocumentTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairDocumentTest_LineBreakTest, Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

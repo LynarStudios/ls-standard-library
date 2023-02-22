@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -17,10 +17,11 @@ using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
 using namespace test::io;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairDocumentValidatorTest : public ::testing::Test
+  class SectionPairDocumentValidatorTest : public Test
   {
     protected:
 
@@ -34,7 +35,7 @@ namespace
       {}
   };
 
-  class SectionPairDocumentValidatorTest_LineBreakTest : public ::testing::TestWithParam<string>
+  class SectionPairDocumentValidatorTest_LineBreakTest : public TestWithParam<string>
   {
     protected:
 
@@ -42,7 +43,7 @@ namespace
       ~SectionPairDocumentValidatorTest_LineBreakTest() override = default;
   };
 
-  class SectionPairDocumentValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairDocumentValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -50,7 +51,7 @@ namespace
       ~SectionPairDocumentValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairDocumentValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairDocumentValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -78,7 +79,7 @@ namespace
     ASSERT_FALSE(SectionPairDocumentValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SectionPairDocumentValidatorTest_LineBreakTest, ::testing::Values(SectionPairDocumentProvider::createSerializedDocument(NewLine::getWindowsNewLine()), SectionPairDocumentProvider::createSerializedDocument(NewLine::getUnixNewLine())));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairDocumentValidatorTest_InvalidArgumentTest, ::testing::Values("\n[general]\n\ncolors:\nblue\n"));
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairDocumentValidatorTest_ValidArgumentTest, ::testing::Values(SectionPairDocumentProvider::createSerializedDocumentComputerExample(NewLine::get())));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SectionPairDocumentValidatorTest_LineBreakTest, Values(SectionPairDocumentProvider::createSerializedDocument(NewLine::getWindowsNewLine()), SectionPairDocumentProvider::createSerializedDocument(NewLine::getUnixNewLine())));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairDocumentValidatorTest_InvalidArgumentTest, Values("\n[general]\n\ncolors:\nblue\n"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairDocumentValidatorTest_ValidArgumentTest, Values(SectionPairDocumentProvider::createSerializedDocumentComputerExample(NewLine::get())));
 }

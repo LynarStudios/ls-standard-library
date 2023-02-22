@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -14,10 +14,11 @@
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairFileExtensionValidatorTest : public ::testing::Test
+  class SectionPairFileExtensionValidatorTest : public Test
   {
     protected:
 
@@ -31,7 +32,7 @@ namespace
       {}
   };
 
-  class SectionPairFileExtensionValidatorTest_ValidExtensionTest : public ::testing::TestWithParam<string>
+  class SectionPairFileExtensionValidatorTest_ValidExtensionTest : public TestWithParam<string>
   {
     protected:
 
@@ -39,7 +40,7 @@ namespace
       ~SectionPairFileExtensionValidatorTest_ValidExtensionTest() override = default;
   };
 
-  class SectionPairFileExtensionValidatorTest_NotValidExtensionTest : public ::testing::TestWithParam<string>
+  class SectionPairFileExtensionValidatorTest_NotValidExtensionTest : public TestWithParam<string>
   {
     protected:
 
@@ -62,6 +63,6 @@ namespace
     ASSERT_FALSE(SectionPairFileExtensionValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidExtensionTest, SectionPairFileExtensionValidatorTest_ValidExtensionTest, ::testing::Values("server-settings.txt", "settings.sp", "/var/log/settings.txt"));
-  INSTANTIATE_TEST_SUITE_P(NotValidExtensionTest, SectionPairFileExtensionValidatorTest_NotValidExtensionTest, ::testing::Values("server-settings.json", "settings.html", "/var/log/settings"));
+  INSTANTIATE_TEST_SUITE_P(ValidExtensionTest, SectionPairFileExtensionValidatorTest_ValidExtensionTest, Values("server-settings.txt", "settings.sp", "/var/log/settings.txt"));
+  INSTANTIATE_TEST_SUITE_P(NotValidExtensionTest, SectionPairFileExtensionValidatorTest_NotValidExtensionTest, Values("server-settings.json", "settings.html", "/var/log/settings"));
 }

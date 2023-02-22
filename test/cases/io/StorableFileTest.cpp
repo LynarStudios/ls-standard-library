@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -15,10 +15,11 @@ using namespace ls::std::core::type;
 using namespace ls::std::io;
 using namespace ls::std::test;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class StorableFileTest : public ::testing::Test
+  class StorableFileTest : public Test
   {
     protected:
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-08
- * Changed:         2023-02-03
+ * Changed:         2023-02-22
  *
  * */
 
@@ -11,10 +11,11 @@
 #include <ls-std/ls-std-encoding.hpp>
 
 using namespace ls::std::encoding;
+using namespace ::testing;
 
 namespace
 {
-  class Base64Test : public ::testing::Test
+  class Base64Test : public Test
   {
     protected:
 

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-13
+* Changed:         2023-02-22
 *
 * */
 
@@ -14,10 +14,11 @@
 using namespace ls::std::core;
 using namespace test::core;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class ConditionalFunctionExecutorTest : public ::testing::Test
+  class ConditionalFunctionExecutorTest : public Test
   {
     protected:
 

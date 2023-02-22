@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-09-18
- * Changed:         2023-02-03
+ * Changed:         2023-02-22
  *
  * */
 
@@ -11,10 +11,11 @@
 #include <ls-std/ls-std-io.hpp>
 
 using namespace ls::std::io;
+using namespace ::testing;
 
 namespace
 {
-  class StandardOutputWriterTest : public ::testing::Test
+  class StandardOutputWriterTest : public Test
   {
     protected:
 

@@ -14,10 +14,11 @@
 
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairMessageFormatterTest : public ::testing::TestWithParam<array<string, 2>>
+  class SectionPairMessageFormatterTest : public TestWithParam<array<string, 2>>
   {
     protected:
 
@@ -61,5 +62,5 @@ namespace
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairMessageFormatterTest, ::testing::Values(array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{UNIX_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\n")}, array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{WINDOWS_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\r\n")}));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairMessageFormatterTest, Values(array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{UNIX_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\n")}, array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{WINDOWS_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\r\n")}));
 }

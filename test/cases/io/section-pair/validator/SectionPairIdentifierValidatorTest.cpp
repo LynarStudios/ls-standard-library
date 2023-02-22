@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -15,10 +15,11 @@
 using namespace ls::std::core;
 using namespace ls::std::io;
 using namespace ::std;
+using namespace ::testing;
 
 namespace
 {
-  class SectionPairIdentifierValidatorTest : public ::testing::Test
+  class SectionPairIdentifierValidatorTest : public Test
   {
     protected:
 
@@ -32,7 +33,7 @@ namespace
       {}
   };
 
-  class SectionPairIdentifierValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairIdentifierValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -40,7 +41,7 @@ namespace
       ~SectionPairIdentifierValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairIdentifierValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairIdentifierValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -68,6 +69,6 @@ namespace
     ASSERT_FALSE(SectionPairIdentifierValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairIdentifierValidatorTest_ValidArgumentTest, ::testing::Values("color", "favourite-color", "age", "name"));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierValidatorTest_InvalidArgumentTest, ::testing::Values("_color", "8color", "colOr", "color:", "-color", "color-is-valid-but-too-long-because-it-exceeds-32-characters"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairIdentifierValidatorTest_ValidArgumentTest, Values("color", "favourite-color", "age", "name"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierValidatorTest_InvalidArgumentTest, Values("_color", "8color", "colOr", "color:", "-color", "color-is-valid-but-too-long-because-it-exceeds-32-characters"));
 }
