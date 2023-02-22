@@ -18,7 +18,7 @@ ls::std::core::NullPointerException::NullPointerException(::std::string _message
   this->message = ::std::move(_message);
 }
 
-ls::std::core::NullPointerException::~NullPointerException() = default;
+ls::std::core::NullPointerException::~NullPointerException() noexcept = default;
 
 const char *ls::std::core::NullPointerException::what() const noexcept
 {

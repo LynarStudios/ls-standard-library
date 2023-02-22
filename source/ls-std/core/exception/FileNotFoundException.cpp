@@ -18,7 +18,7 @@ ls::std::core::FileNotFoundException::FileNotFoundException(::std::string _messa
   this->message = ::std::move(_message);
 }
 
-ls::std::core::FileNotFoundException::~FileNotFoundException() = default;
+ls::std::core::FileNotFoundException::~FileNotFoundException() noexcept = default;
 
 const char *ls::std::core::FileNotFoundException::what() const noexcept
 {

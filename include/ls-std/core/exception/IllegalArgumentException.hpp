@@ -22,7 +22,7 @@ namespace ls::std::core
 
       IllegalArgumentException();
       explicit IllegalArgumentException(::std::string _message);
-      ~IllegalArgumentException() override;
+      ~IllegalArgumentException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

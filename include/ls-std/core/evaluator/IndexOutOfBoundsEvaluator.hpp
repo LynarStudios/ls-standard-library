@@ -22,7 +22,7 @@ namespace ls::std::core
 
       explicit IndexOutOfBoundsEvaluator(size_t _index, size_t _size);
       explicit IndexOutOfBoundsEvaluator(size_t _index, size_t _size, ::std::string _message);
-      ~IndexOutOfBoundsEvaluator() override;
+      ~IndexOutOfBoundsEvaluator() noexcept override;
 
       void evaluate() override;
 

@@ -12,7 +12,7 @@
 ls::std::core::Exception::Exception(::std::string _name) : name(::std::move(_name))
 {}
 
-ls::std::core::Exception::~Exception() = default;
+ls::std::core::Exception::~Exception() noexcept = default;
 
 ::std::string ls::std::core::Exception::getName() const
 {
@@ -21,5 +21,5 @@ ls::std::core::Exception::~Exception() = default;
 
 const char *ls::std::core::Exception::what() const noexcept
 {
-  return "base exception class class in use - method not implemented!";
+  return "base exception class in use - method not implemented!";
 }

@@ -18,7 +18,7 @@ ls::std::core::IncompleteJsonException::IncompleteJsonException(::std::string _m
   this->message = ::std::move(_message);
 }
 
-ls::std::core::IncompleteJsonException::~IncompleteJsonException() = default;
+ls::std::core::IncompleteJsonException::~IncompleteJsonException() noexcept = default;
 
 const char *ls::std::core::IncompleteJsonException::what() const noexcept
 {

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -13,7 +13,7 @@
 ls::std::core::Version::Version(ls::std::core::type::version_type _majorVersion, ls::std::core::type::version_type _minorVersion, ls::std::core::type::version_type _patchVersion) : majorVersion(_majorVersion), minorVersion(_minorVersion), patchVersion(_patchVersion)
 {}
 
-ls::std::core::Version::~Version() = default;
+ls::std::core::Version::~Version() noexcept = default;
 
 ls::std::core::type::byte_field ls::std::core::Version::marshal()
 {

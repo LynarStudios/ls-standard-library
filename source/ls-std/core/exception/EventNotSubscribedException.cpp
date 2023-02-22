@@ -18,7 +18,7 @@ ls::std::core::EventNotSubscribedException::EventNotSubscribedException(::std::s
   this->message = ::std::move(_message);
 }
 
-ls::std::core::EventNotSubscribedException::~EventNotSubscribedException() = default;
+ls::std::core::EventNotSubscribedException::~EventNotSubscribedException() noexcept = default;
 
 const char *ls::std::core::EventNotSubscribedException::what() const noexcept
 {

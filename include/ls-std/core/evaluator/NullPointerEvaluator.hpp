@@ -23,7 +23,7 @@ namespace ls::std::core
 
       explicit NullPointerEvaluator(const ::std::shared_ptr<void> &_argument);
       explicit NullPointerEvaluator(const ::std::shared_ptr<void> &_argument, ::std::string _message);
-      ~NullPointerEvaluator() override;
+      ~NullPointerEvaluator() noexcept override;
 
       void evaluate() override;
 

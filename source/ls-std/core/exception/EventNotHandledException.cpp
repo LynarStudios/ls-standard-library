@@ -18,7 +18,7 @@ ls::std::core::EventNotHandledException::EventNotHandledException(::std::string 
   this->message = ::std::move(_message);
 }
 
-ls::std::core::EventNotHandledException::~EventNotHandledException() = default;
+ls::std::core::EventNotHandledException::~EventNotHandledException() noexcept = default;
 
 const char *ls::std::core::EventNotHandledException::what() const noexcept
 {

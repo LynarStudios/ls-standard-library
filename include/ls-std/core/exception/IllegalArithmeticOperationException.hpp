@@ -22,7 +22,7 @@ namespace ls::std::core
 
       IllegalArithmeticOperationException();
       explicit IllegalArithmeticOperationException(::std::string _message);
-      ~IllegalArithmeticOperationException() override;
+      ~IllegalArithmeticOperationException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

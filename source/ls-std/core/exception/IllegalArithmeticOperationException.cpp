@@ -18,7 +18,7 @@ ls::std::core::IllegalArithmeticOperationException::IllegalArithmeticOperationEx
   this->message = ::std::move(_message);
 }
 
-ls::std::core::IllegalArithmeticOperationException::~IllegalArithmeticOperationException() = default;
+ls::std::core::IllegalArithmeticOperationException::~IllegalArithmeticOperationException() noexcept = default;
 
 const char *ls::std::core::IllegalArithmeticOperationException::what() const noexcept
 {

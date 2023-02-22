@@ -22,7 +22,7 @@ namespace ls::std::core
 
       EventNotHandledException();
       explicit EventNotHandledException(::std::string _message);
-      ~EventNotHandledException() override;
+      ~EventNotHandledException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

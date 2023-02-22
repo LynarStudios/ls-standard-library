@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-22
 *
 * */
 
@@ -16,7 +16,7 @@ ls::std::core::EmptyStringArgumentEvaluator::EmptyStringArgumentEvaluator(::std:
 ls::std::core::EmptyStringArgumentEvaluator::EmptyStringArgumentEvaluator(::std::string _argument, ::std::string _message) : argument(::std::move(_argument)), message(::std::move(_message))
 {}
 
-ls::std::core::EmptyStringArgumentEvaluator::~EmptyStringArgumentEvaluator() = default;
+ls::std::core::EmptyStringArgumentEvaluator::~EmptyStringArgumentEvaluator() noexcept = default;
 
 void ls::std::core::EmptyStringArgumentEvaluator::evaluate()
 {

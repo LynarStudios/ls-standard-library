@@ -22,7 +22,7 @@ namespace ls::std::core
 
       FileOperationException();
       explicit FileOperationException(::std::string _message);
-      ~FileOperationException() override;
+      ~FileOperationException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

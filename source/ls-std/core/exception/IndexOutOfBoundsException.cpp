@@ -18,7 +18,7 @@ ls::std::core::IndexOutOfBoundsException::IndexOutOfBoundsException(::std::strin
   this->message = ::std::move(_message);
 }
 
-ls::std::core::IndexOutOfBoundsException::~IndexOutOfBoundsException() = default;
+ls::std::core::IndexOutOfBoundsException::~IndexOutOfBoundsException() noexcept = default;
 
 const char *ls::std::core::IndexOutOfBoundsException::what() const noexcept
 {

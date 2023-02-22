@@ -18,7 +18,7 @@ ls::std::core::FileOperationException::FileOperationException(::std::string _mes
   this->message = ::std::move(_message);
 }
 
-ls::std::core::FileOperationException::~FileOperationException() = default;
+ls::std::core::FileOperationException::~FileOperationException() noexcept = default;
 
 const char *ls::std::core::FileOperationException::what() const noexcept
 {

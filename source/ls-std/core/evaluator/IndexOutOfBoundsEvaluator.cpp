@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-22
 *
 * */
 
@@ -16,7 +16,7 @@ ls::std::core::IndexOutOfBoundsEvaluator::IndexOutOfBoundsEvaluator(size_t _inde
 ls::std::core::IndexOutOfBoundsEvaluator::IndexOutOfBoundsEvaluator(size_t _index, size_t _size, ::std::string _message) : index(_index), size(_size), message(::std::move(_message))
 {}
 
-ls::std::core::IndexOutOfBoundsEvaluator::~IndexOutOfBoundsEvaluator() = default;
+ls::std::core::IndexOutOfBoundsEvaluator::~IndexOutOfBoundsEvaluator() noexcept = default;
 
 void ls::std::core::IndexOutOfBoundsEvaluator::evaluate()
 {

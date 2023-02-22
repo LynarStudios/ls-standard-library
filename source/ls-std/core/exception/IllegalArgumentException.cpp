@@ -18,7 +18,7 @@ ls::std::core::IllegalArgumentException::IllegalArgumentException(::std::string 
   this->message = ::std::move(_message);
 }
 
-ls::std::core::IllegalArgumentException::~IllegalArgumentException() = default;
+ls::std::core::IllegalArgumentException::~IllegalArgumentException() noexcept = default;
 
 const char *ls::std::core::IllegalArgumentException::what() const noexcept
 {

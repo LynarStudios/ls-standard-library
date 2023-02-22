@@ -22,7 +22,7 @@ namespace ls::std::core
 
       explicit EmptyStringArgumentEvaluator(::std::string _argument);
       explicit EmptyStringArgumentEvaluator(::std::string _argument, ::std::string _message);
-      ~EmptyStringArgumentEvaluator() override;
+      ~EmptyStringArgumentEvaluator() noexcept override;
 
       void evaluate() override;
 
