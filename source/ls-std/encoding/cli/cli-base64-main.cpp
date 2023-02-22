@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-07-03
- * Changed:         2023-02-05
+ * Changed:         2023-02-22
  *
  * */
 
@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-using CliCommand = std::vector<std::string>;
+using CliCommand = ::std::vector<::std::string>;
 
 void printHelp();
 bool isValidCommand(const CliCommand &_command);
@@ -26,12 +26,12 @@ int main(int argc, char *argv[])
   {
     if (command[1] == "--encode")
     {
-      std::cout << ls::std::encoding::Base64{}.encode(command[2]) << std::endl;
+      ::std::cout << ls::std::encoding::Base64{}.encode(command[2]) << ::std::endl;
     }
 
     if (command[1] == "--decode")
     {
-      std::cout << ls::std::encoding::Base64{}.decode(command[2]) << std::endl;
+      ::std::cout << ls::std::encoding::Base64{}.decode(command[2]) << ::std::endl;
     }
 
     if (command[1] == "--help")
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    std::cerr << "There is an error in this command. Please use \"--help\" to get more information." << std::endl;
+    ::std::cerr << "There is an error in this command. Please use \"--help\" to get more information." << ::std::endl;
   }
 
   exit(0);
@@ -49,13 +49,13 @@ int main(int argc, char *argv[])
 
 void printHelp()
 {
-  std::string help = "Base 64 CLI - " + ls::std::core::LibraryVersion::getVersion() + "\n\n";
+  ::std::string help = "Base 64 CLI - " + ls::std::core::LibraryVersion::getVersion() + "\n\n";
   help += "(1) encode a string:\t\t";
   help += "--encode [string]\n";
   help += "(2) decode a string:\t\t";
   help += "--decode [string]";
 
-  std::cout << help << std::endl;
+  ::std::cout << help << ::std::endl;
 }
 
 bool isValidCommand(const CliCommand &_command)

@@ -68,7 +68,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_co
   ls::std::core::type::byte_field currentRows = _currentRows;
   ls::std::core::type::byte_field currentRow{}, row{};
   ::std::string newLine = this->parameter.getNewLine();
-  _type = SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE;
+  _type = ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE;
   size_t iterations{};
   bool isStillListRow{};
 
@@ -95,7 +95,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_co
 
 ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_collectSectionSingleValueRow(const ls::std::core::type::byte_field &_firstRow, ls::std::io::SectionPairRowEnumType &_type)
 {
-  _type = SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE;
+  _type = ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE;
   return _firstRow;
 }
 

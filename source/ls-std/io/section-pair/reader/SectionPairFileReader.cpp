@@ -58,7 +58,7 @@ void ls::std::io::SectionPairFileReader::_createDocument()
 
 void ls::std::io::SectionPairFileReader::_createFileExistenceEvaluator()
 {
-  this->parameter.setFileExistenceEvaluator(::std::make_shared<FileExistenceEvaluator>(this->parameter.getFilePath()));
+  this->parameter.setFileExistenceEvaluator(::std::make_shared<ls::std::io::FileExistenceEvaluator>(this->parameter.getFilePath()));
 }
 
 void ls::std::io::SectionPairFileReader::_createReader()

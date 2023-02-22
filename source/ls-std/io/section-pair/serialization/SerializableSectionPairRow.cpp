@@ -15,7 +15,7 @@
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRow.hpp>
 
-ls::std::io::SerializableSectionPairRow::SerializableSectionPairRow(const SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairRow")
+ls::std::io::SerializableSectionPairRow::SerializableSectionPairRow(const ls::std::io::SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairRow")
 {
   ::std::string message = this->getClassName() + ": model reference is null!";
   ls::std::core::NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();

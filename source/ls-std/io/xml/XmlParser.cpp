@@ -403,7 +403,7 @@ void ls::std::io::XmlParser::_reset()
 {
   this->currentLevel = 1;
   this->maxLevel = 1;
-  this->mode = XML_PARSE_MODE_ANALYZE;
+  this->mode = ls::std::io::XML_PARSE_MODE_ANALYZE;
   this->parseParameters.clear();
 }
 

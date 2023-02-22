@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-22
 *
 * */
 
@@ -16,7 +16,7 @@ ls::std::core::NullPointerEvaluator::NullPointerEvaluator(const ::std::shared_pt
 ls::std::core::NullPointerEvaluator::NullPointerEvaluator(const ::std::shared_ptr<void> &_argument, ::std::string _message) : argument(_argument), message(::std::move(_message))
 {}
 
-ls::std::core::NullPointerEvaluator::~NullPointerEvaluator() = default;
+ls::std::core::NullPointerEvaluator::~NullPointerEvaluator() noexcept = default;
 
 void ls::std::core::NullPointerEvaluator::evaluate()
 {
