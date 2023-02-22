@@ -41,7 +41,7 @@ namespace
     Long y{3};
     x = y;
 
-    ASSERT_EQ(3, x);
+    ASSERT_EQ(3, x.getValue());
   }
 
   TEST_F(LongTest, operator_assignment_with_value)
@@ -49,7 +49,7 @@ namespace
     Long x{13};
     x = (long_type) 3;
 
-    ASSERT_EQ(3, x);
+    ASSERT_EQ(3, x.getValue());
   }
 
   // arithmetic operators
@@ -177,7 +177,7 @@ namespace
     Long y{2};
     x += y;
 
-    ASSERT_EQ(6, x);
+    ASSERT_EQ(6, x.getValue());
   }
 
   TEST_F(LongTest, operator_add_equals_with_value)
@@ -185,7 +185,7 @@ namespace
     Long x{4};
     x += (long_type) 2;
 
-    ASSERT_EQ(6, x);
+    ASSERT_EQ(6, x.getValue());
   }
 
   TEST_F(LongTest, operator_sub_equals_with_reference)
@@ -194,7 +194,7 @@ namespace
     Long y{2};
     x -= y;
 
-    ASSERT_EQ(12, x);
+    ASSERT_EQ(12, x.getValue());
   }
 
   TEST_F(LongTest, operator_sub_equals_with_value)
@@ -202,7 +202,7 @@ namespace
     Long x{14};
     x -= (long_type) 2;
 
-    ASSERT_EQ(12, x);
+    ASSERT_EQ(12, x.getValue());
   }
 
   TEST_F(LongTest, operator_mul_equals_with_reference)
@@ -211,7 +211,7 @@ namespace
     Long y{3};
     x *= y;
 
-    ASSERT_EQ(18, x);
+    ASSERT_EQ(18, x.getValue());
   }
 
   TEST_F(LongTest, operator_mul_equals_with_value)
@@ -219,7 +219,7 @@ namespace
     Long x{6};
     x *= (long_type) 3;
 
-    ASSERT_EQ(18, x);
+    ASSERT_EQ(18, x.getValue());
   }
 
   TEST_F(LongTest, operator_div_equals_with_reference)
@@ -228,7 +228,7 @@ namespace
     Long y{3};
     x /= y;
 
-    ASSERT_EQ(4, x);
+    ASSERT_EQ(4, x.getValue());
   }
 
   TEST_F(LongTest, operator_div_equals_with_value)
@@ -236,7 +236,7 @@ namespace
     Long x{12};
     x /= (long_type) 3;
 
-    ASSERT_EQ(4, x);
+    ASSERT_EQ(4, x.getValue());
   }
 
   TEST_F(LongTest, operator_div_equals_by_zero_with_reference)
@@ -418,7 +418,7 @@ namespace
     Long x{};
     ++x;
 
-    ASSERT_EQ(1, x);
+    ASSERT_EQ(1, x.getValue());
   }
 
   TEST_F(LongTest, operator_decrement)
@@ -426,7 +426,7 @@ namespace
     Long x{};
     --x;
 
-    ASSERT_EQ(-1, x);
+    ASSERT_EQ(-1, x.getValue());
   }
 
   // implementation
@@ -436,7 +436,7 @@ namespace
     Long x{};
 
     x.parse("1989");
-    ASSERT_EQ(1989, x);
+    ASSERT_EQ(1989, x.getValue());
   }
 
   TEST_F(LongTest, parse_with_negative_value)
@@ -444,7 +444,7 @@ namespace
     Long x{};
 
     x.parse("-17");
-    ASSERT_EQ(-17, x);
+    ASSERT_EQ(-17, x.getValue());
   }
 
   TEST_F(LongTest, toString)
@@ -466,7 +466,7 @@ namespace
   TEST_F(LongTest, constApproach)
   {
     const Long x{3};
-    ASSERT_EQ(3, x);
+    ASSERT_EQ(3, x.getValue());
 
     // x = 4; // wouldn't work
   }

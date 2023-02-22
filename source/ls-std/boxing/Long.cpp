@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -18,11 +18,6 @@ ls::std::boxing::Long::Long() : ls::std::core::Class("Long")
 
 ls::std::boxing::Long::~Long() = default;
 
-ls::std::boxing::Long::operator ls::std::core::type::long_type() const
-{
-  return this->value;
-}
-
 ls::std::boxing::Long &ls::std::boxing::Long::operator=(ls::std::core::type::long_type _value)
 {
   this->value = _value;
@@ -36,7 +31,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator-() const
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator+(const ls::std::boxing::Long &_long) const
 {
-  return this->value + _long;
+  return this->value + _long.getValue();
 }
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator+(ls::std::core::type::long_type _value) const
@@ -46,7 +41,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator+(ls::std::core::t
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator*(const ls::std::boxing::Long &_long) const
 {
-  return this->value * _long;
+  return this->value * _long.getValue();
 }
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator*(ls::std::core::type::long_type _value) const
@@ -56,7 +51,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator*(ls::std::core::t
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator-(const ls::std::boxing::Long &_long) const
 {
-  return this->value - _long;
+  return this->value - _long.getValue();
 }
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator-(ls::std::core::type::long_type _value) const
@@ -71,7 +66,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator/(const ls::std::b
     throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
-  return this->value / _long;
+  return this->value / _long.getValue();
 }
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator/(ls::std::core::type::long_type _value) const
@@ -86,7 +81,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator/(ls::std::core::t
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator%(const ls::std::boxing::Long &_long) const
 {
-  return this->value % _long;
+  return this->value % _long.getValue();
 }
 
 ls::std::core::type::long_type ls::std::boxing::Long::operator%(ls::std::core::type::long_type _value) const
@@ -96,7 +91,7 @@ ls::std::core::type::long_type ls::std::boxing::Long::operator%(ls::std::core::t
 
 ls::std::boxing::Long &ls::std::boxing::Long::operator+=(const ls::std::boxing::Long &_long)
 {
-  this->value += _long;
+  this->value += _long.getValue();
   return *this;
 }
 
@@ -108,7 +103,7 @@ ls::std::boxing::Long &ls::std::boxing::Long::operator+=(ls::std::core::type::lo
 
 ls::std::boxing::Long &ls::std::boxing::Long::operator-=(const ls::std::boxing::Long &_long)
 {
-  this->value -= _long;
+  this->value -= _long.getValue();
   return *this;
 }
 
@@ -120,7 +115,7 @@ ls::std::boxing::Long &ls::std::boxing::Long::operator-=(ls::std::core::type::lo
 
 ls::std::boxing::Long &ls::std::boxing::Long::operator*=(const ls::std::boxing::Long &_long)
 {
-  this->value *= _long;
+  this->value *= _long.getValue();
   return *this;
 }
 
@@ -137,7 +132,7 @@ ls::std::boxing::Long &ls::std::boxing::Long::operator/=(const ls::std::boxing::
     throw ls::std::core::IllegalArithmeticOperationException{"division by zero is not allowed"};
   }
 
-  this->value /= _long;
+  this->value /= _long.getValue();
   return *this;
 }
 
@@ -154,7 +149,7 @@ ls::std::boxing::Long &ls::std::boxing::Long::operator/=(ls::std::core::type::lo
 
 bool ls::std::boxing::Long::operator==(const ls::std::boxing::Long &_long) const
 {
-  return this->value == _long;
+  return this->value == _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator==(ls::std::core::type::long_type _value) const
@@ -164,7 +159,7 @@ bool ls::std::boxing::Long::operator==(ls::std::core::type::long_type _value) co
 
 bool ls::std::boxing::Long::operator!=(const ls::std::boxing::Long &_long) const
 {
-  return this->value != _long;
+  return this->value != _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator!=(ls::std::core::type::long_type _value) const
@@ -174,7 +169,7 @@ bool ls::std::boxing::Long::operator!=(ls::std::core::type::long_type _value) co
 
 bool ls::std::boxing::Long::operator>(const ls::std::boxing::Long &_long) const
 {
-  return this->value > _long;
+  return this->value > _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator>(ls::std::core::type::long_type _value) const
@@ -184,7 +179,7 @@ bool ls::std::boxing::Long::operator>(ls::std::core::type::long_type _value) con
 
 bool ls::std::boxing::Long::operator>=(const ls::std::boxing::Long &_long) const
 {
-  return this->value >= _long;
+  return this->value >= _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator>=(ls::std::core::type::long_type _value) const
@@ -194,7 +189,7 @@ bool ls::std::boxing::Long::operator>=(ls::std::core::type::long_type _value) co
 
 bool ls::std::boxing::Long::operator<(const ls::std::boxing::Long &_long) const
 {
-  return this->value < _long;
+  return this->value < _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator<(ls::std::core::type::long_type _value) const
@@ -204,7 +199,7 @@ bool ls::std::boxing::Long::operator<(ls::std::core::type::long_type _value) con
 
 bool ls::std::boxing::Long::operator<=(const ls::std::boxing::Long &_long) const
 {
-  return this->value <= _long;
+  return this->value <= _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator<=(ls::std::core::type::long_type _value) const
@@ -214,7 +209,7 @@ bool ls::std::boxing::Long::operator<=(ls::std::core::type::long_type _value) co
 
 bool ls::std::boxing::Long::operator&&(const ls::std::boxing::Long &_long) const
 {
-  return this->value && _long;
+  return this->value && _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator&&(ls::std::core::type::long_type _value) const
@@ -229,7 +224,7 @@ bool ls::std::boxing::Long::operator&&(bool _expression) const
 
 bool ls::std::boxing::Long::operator||(const ls::std::boxing::Long &_long) const
 {
-  return this->value || _long;
+  return this->value || _long.getValue();
 }
 
 bool ls::std::boxing::Long::operator||(ls::std::core::type::long_type _value) const
