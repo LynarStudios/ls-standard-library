@@ -26,7 +26,6 @@
 #include <ls-std/core/exception/IncompleteJsonException.hpp>
 #include <ls-std/core/exception/IndexOutOfBoundsException.hpp>
 #include <ls-std/core/exception/NullPointerException.hpp>
-#include <ls-std/core/exception/WrongCallException.hpp>
 
 #include <ls-std/core/interface/IBoxing.hpp>
 #include <ls-std/core/interface/IEncoding.hpp>
