@@ -11,9 +11,10 @@
 #include <ls-std/ls-std-time.hpp>
 #include <regex>
 
-using namespace ls::std::time;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::time::Date;
+using std::regex;
+using std::string;
+using testing::Test;
 
 namespace
 {
