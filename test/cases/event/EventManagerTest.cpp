@@ -11,12 +11,21 @@
 #include <ls-std-event-test.hpp>
 #include <ls-std/ls-std-event.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::event;
-using namespace ::std;
-using namespace test::event;
-using namespace ::testing;
+using ls::std::core::EventNotHandledException;
+using ls::std::core::EventNotSubscribedException;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::event_id;
+using ls::std::event::Event;
+using ls::std::event::EventHandler;
+using ls::std::event::EventManager;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using test::event::DailyNewsAgency;
+using test::event::GossipNewsAgency;
+using test::event::GossipNewsEvent;
+using test::event::SeriousNewsEvent;
+using testing::Test;
 
 namespace
 {

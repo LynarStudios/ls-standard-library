@@ -11,11 +11,15 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-event.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::event;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::core::type::event_parameter;
+using ls::std::core::type::event_parameter_list;
+using ls::std::event::Event;
+using ls::std::event::SerializableJsonEvent;
+using std::make_shared;
+using std::string;
+using testing::Test;
 
 namespace
 {

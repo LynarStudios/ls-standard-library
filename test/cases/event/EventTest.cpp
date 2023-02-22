@@ -11,10 +11,10 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-event.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::event;
-using namespace ::testing;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::event_parameter;
+using ls::std::event::Event;
+using testing::Test;
 
 namespace
 {
