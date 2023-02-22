@@ -3,13 +3,13 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
-#include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
 #include <ls-std/io/FileOutputStream.hpp>
+#include <ls-std/io/evaluator/FileExistenceEvaluator.hpp>
 
 ls::std::io::FileOutputStream::FileOutputStream(ls::std::io::File &_file) : ls::std::core::Class("FileOutputStream"), file(_file)
 {
@@ -60,19 +60,14 @@ void ls::std::io::FileOutputStream::_close()
 
 void ls::std::io::FileOutputStream::_init()
 {
-  if (!this->file.exists())
+  ls::std::io::FileExistenceEvaluator{this->file.getAbsoluteFilePath()}.evaluate();
+
+  if (this->append)
   {
-    throw ls::std::core::FileNotFoundException{"name: " + this->file.getAbsoluteFilePath()};
+    this->outputStream.open(this->file.getAbsoluteFilePath(), ::std::ios::out | ::std::ios::app);
   }
   else
   {
-    if (this->append)
-    {
-      this->outputStream.open(this->file.getAbsoluteFilePath(), ::std::ios::out | ::std::ios::app);
-    }
-    else
-    {
-      this->outputStream.open(this->file.getAbsoluteFilePath());
-    }
+    this->outputStream.open(this->file.getAbsoluteFilePath());
   }
 }

@@ -3,18 +3,18 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
 #include <fstream>
-#include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
 #include <ls-std/io/FileReader.hpp>
+#include <ls-std/io/evaluator/FileExistenceEvaluator.hpp>
 
 ls::std::io::FileReader::FileReader(ls::std::io::File &_file) : ls::std::core::Class("FileReader"), file(_file)
 {
-  ls::std::io::FileReader::_init(_file);
+  ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
 }
 
 ls::std::io::FileReader::~FileReader() = default;
@@ -41,14 +41,6 @@ ls::std::core::type::byte_field ls::std::io::FileReader::read()
 
 void ls::std::io::FileReader::reset(ls::std::io::File &_file)
 {
-  ls::std::io::FileReader::_init(_file);
+  ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
   this->file = _file;
-}
-
-void ls::std::io::FileReader::_init(ls::std::io::File &_file)
-{
-  if (!_file.exists())
-  {
-    throw ls::std::core::FileNotFoundException{"name: " + _file.getAbsoluteFilePath()};
-  }
 }

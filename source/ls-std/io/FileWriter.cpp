@@ -3,24 +3,24 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
 #include <fstream>
-#include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <ls-std/io/FileWriter.hpp>
+#include <ls-std/io/evaluator/FileExistenceEvaluator.hpp>
 
 ls::std::io::FileWriter::FileWriter(ls::std::io::File &_file) : ls::std::core::Class("FileWriter"), file(_file)
 {
-  ls::std::io::FileWriter::_init(_file);
+  ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
 }
 
 ls::std::io::FileWriter::~FileWriter() = default;
 
 void ls::std::io::FileWriter::reset(ls::std::io::File &_file)
 {
-  ls::std::io::FileWriter::_init(_file);
+  ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
   this->file = _file;
 }
 
@@ -31,12 +31,4 @@ bool ls::std::io::FileWriter::write(const ls::std::core::type::byte_field &_data
   outputStream << _data;
 
   return !outputStream.fail();
-}
-
-void ls::std::io::FileWriter::_init(ls::std::io::File &_file)
-{
-  if (!_file.exists())
-  {
-    throw ls::std::core::FileNotFoundException{"name: " + _file.getAbsoluteFilePath()};
-  }
 }
