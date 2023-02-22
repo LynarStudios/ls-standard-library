@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -19,11 +19,6 @@ ls::std::boxing::Boolean::Boolean() : ls::std::core::Class("Boolean")
 
 ls::std::boxing::Boolean::~Boolean() = default;
 
-ls::std::boxing::Boolean::operator bool() const
-{
-  return this->value;
-}
-
 ls::std::boxing::Boolean &ls::std::boxing::Boolean::operator=(int _value)
 {
   this->value = _value;
@@ -38,7 +33,7 @@ ls::std::boxing::Boolean &ls::std::boxing::Boolean::operator=(bool _value)
 
 bool ls::std::boxing::Boolean::operator&&(const ls::std::boxing::Boolean &_boolean) const
 {
-  return this->value && _boolean;
+  return this->value && _boolean.getValue();
 }
 
 bool ls::std::boxing::Boolean::operator&&(bool _value) const
@@ -53,7 +48,7 @@ bool ls::std::boxing::Boolean::operator&&(int _value) const
 
 bool ls::std::boxing::Boolean::operator||(const ls::std::boxing::Boolean &_boolean) const
 {
-  return this->value || _boolean;
+  return this->value || _boolean.getValue();
 }
 
 bool ls::std::boxing::Boolean::operator||(bool _value) const
@@ -100,7 +95,7 @@ bool ls::std::boxing::Boolean::getValue() const
 
 bool ls::std::boxing::Boolean::XOR(const ls::std::boxing::Boolean &_leftExpression, const ls::std::boxing::Boolean &_rightExpression)
 {
-  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
+  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression.getValue());
 }
 
 bool ls::std::boxing::Boolean::XOR(const ls::std::boxing::Boolean &_leftExpression, bool _rightExpression)
@@ -110,7 +105,7 @@ bool ls::std::boxing::Boolean::XOR(const ls::std::boxing::Boolean &_leftExpressi
 
 bool ls::std::boxing::Boolean::XOR(bool _leftExpression, const ls::std::boxing::Boolean &_rightExpression)
 {
-  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression);
+  return (_leftExpression && !_rightExpression) || (!_leftExpression && _rightExpression.getValue());
 }
 
 bool ls::std::boxing::Boolean::XOR(bool _leftExpression, bool _rightExpression)
