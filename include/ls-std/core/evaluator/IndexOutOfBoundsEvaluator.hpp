@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-22
 *
 * */
 
@@ -11,11 +11,12 @@
 #define LS_STD_INDEX_OUT_OF_BOUNDS_EVALUATOR_EVALUATOR_HPP
 
 #include <ls-std/core/interface/IEvaluator.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::core
 {
-  class IndexOutOfBoundsEvaluator : public ls::std::core::interface_type::IEvaluator
+  class LS_STD_DYNAMIC_GOAL IndexOutOfBoundsEvaluator : public ls::std::core::interface_type::IEvaluator
   {
     public:
 

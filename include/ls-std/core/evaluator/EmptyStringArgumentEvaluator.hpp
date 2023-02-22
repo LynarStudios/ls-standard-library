@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-22
 *
 * */
 
@@ -11,11 +11,12 @@
 #define LS_STD_EMPTY_STRING_ARGUMENT_EVALUATOR_HPP
 
 #include <ls-std/core/interface/IEvaluator.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
 namespace ls::std::core
 {
-  class EmptyStringArgumentEvaluator : public ls::std::core::interface_type::IEvaluator
+  class LS_STD_DYNAMIC_GOAL EmptyStringArgumentEvaluator : public ls::std::core::interface_type::IEvaluator
   {
     public:
 

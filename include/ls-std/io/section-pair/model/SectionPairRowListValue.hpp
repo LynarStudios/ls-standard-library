@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-16
+* Changed:         2023-02-22
 *
 * */
 
@@ -14,10 +14,11 @@
 #include <list>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/io/section-pair/SectionPairTypes.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 
 namespace ls::std::io
 {
-  class SectionPairRowListValue : public ::std::enable_shared_from_this<SectionPairRowListValue>, public ls::std::core::Class, public ls::std::io::SectionPairRowValue
+  class LS_STD_DYNAMIC_GOAL SectionPairRowListValue : public ::std::enable_shared_from_this<SectionPairRowListValue>, public ls::std::core::Class, public ls::std::io::SectionPairRowValue
   {
     public:
 

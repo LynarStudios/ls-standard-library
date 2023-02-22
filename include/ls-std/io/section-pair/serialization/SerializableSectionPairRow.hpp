@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-17
+* Changed:         2023-02-22
 *
 * */
 
@@ -13,12 +13,13 @@
 #include "SerializableSectionPairParameter.hpp"
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/interface/ISerializable.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 #include <string>
 
 namespace ls::std::io
 {
-  class SerializableSectionPairRow : public ls::std::core::interface_type::ISerializable, public ls::std::core::Class
+  class LS_STD_DYNAMIC_GOAL SerializableSectionPairRow : public ls::std::core::interface_type::ISerializable, public ls::std::core::Class
   {
     public:
 

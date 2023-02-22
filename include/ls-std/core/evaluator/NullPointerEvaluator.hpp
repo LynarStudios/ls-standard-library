@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-10
+* Changed:         2023-02-22
 *
 * */
 
@@ -11,12 +11,13 @@
 #define LS_STD_NULL_POINTER_EVALUATOR_HPP
 
 #include <ls-std/core/interface/IEvaluator.hpp>
+#include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 #include <string>
 
 namespace ls::std::core
 {
-  class NullPointerEvaluator : public ls::std::core::interface_type::IEvaluator // TODO: add missing dynamic goal
+  class LS_STD_DYNAMIC_GOAL NullPointerEvaluator : public ls::std::core::interface_type::IEvaluator
   {
     public:
 
