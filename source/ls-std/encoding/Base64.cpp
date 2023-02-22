@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-03
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -12,7 +12,7 @@
 
 ls::std::encoding::Base64::Base64() = default;
 
-ls::std::encoding::Base64::~Base64() = default;
+ls::std::encoding::Base64::~Base64() noexcept = default;
 
 ::std::string ls::std::encoding::Base64::encode(const ::std::string &_sequence)
 {
