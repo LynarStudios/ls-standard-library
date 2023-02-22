@@ -11,9 +11,9 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ::testing;
-using namespace ::std;
+using ls::std::core::IllegalArithmeticOperationException;
+using std::string;
+using testing::Test;
 
 namespace
 {

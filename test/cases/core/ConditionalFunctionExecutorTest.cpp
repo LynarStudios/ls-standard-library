@@ -11,10 +11,11 @@
 #include <ls-std-core-test.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::core;
-using namespace test::core;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::core::ConditionalFunctionExecutor;
+using std::make_shared;
+using std::shared_ptr;
+using test::core::MathOddValidator;
+using testing::Test;
 
 namespace
 {

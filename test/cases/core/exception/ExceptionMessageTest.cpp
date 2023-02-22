@@ -10,9 +10,9 @@
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::core;
-using namespace ::testing;
-using namespace ::std;
+using ls::std::core::ExceptionMessage;
+using std::string;
+using testing::Test;
 
 namespace
 {

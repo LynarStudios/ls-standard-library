@@ -11,9 +11,10 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::NullPointerArgumentEvaluator;
+using std::string;
+using testing::Test;
 
 namespace
 {
