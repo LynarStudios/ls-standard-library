@@ -10,8 +10,8 @@
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::core::type;
-using namespace ::testing;
+using ls::std::core::type::json;
+using testing::Test;
 
 namespace
 {
