@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -63,5 +63,10 @@ namespace
           }
         },
         FileOperationException);
+  }
+
+  TEST_F(FileOperationExceptionTest, getName)
+  {
+    ASSERT_STREQ("FileOperationException", FileOperationException{}.getName().c_str());
   }
 }

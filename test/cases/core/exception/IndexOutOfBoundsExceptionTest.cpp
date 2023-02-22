@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-10
+* Changed:         2023-02-22
 *
 * */
 
@@ -63,5 +63,10 @@ namespace
           }
         },
         IndexOutOfBoundsException);
+  }
+
+  TEST_F(IndexOutOfBoundsExceptionTest, getName)
+  {
+    ASSERT_STREQ("IndexOutOfBoundsException", IndexOutOfBoundsException{}.getName().c_str());
   }
 }

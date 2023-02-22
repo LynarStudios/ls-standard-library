@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -63,5 +63,10 @@ namespace
           }
         },
         EventNotHandledException);
+  }
+
+  TEST_F(EventNotHandledExceptionTest, getName)
+  {
+    ASSERT_STREQ("EventNotHandledException", EventNotHandledException{}.getName().c_str());
   }
 }
