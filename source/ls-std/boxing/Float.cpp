@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -19,11 +19,6 @@ ls::std::boxing::Float::Float(float _value) : ls::std::core::Class("Float"), eps
 
 ls::std::boxing::Float::~Float() = default;
 
-ls::std::boxing::Float::operator float() const
-{
-  return this->value;
-}
-
 ls::std::boxing::Float &ls::std::boxing::Float::operator=(float _value)
 {
   this->value = _value;
@@ -37,7 +32,7 @@ float ls::std::boxing::Float::operator-() const
 
 float ls::std::boxing::Float::operator+(const ls::std::boxing::Float &_float) const
 {
-  return this->value + _float;
+  return this->value + _float.getValue();
 }
 
 float ls::std::boxing::Float::operator+(float _value) const
@@ -47,7 +42,7 @@ float ls::std::boxing::Float::operator+(float _value) const
 
 float ls::std::boxing::Float::operator*(const ls::std::boxing::Float &_float) const
 {
-  return this->value * _float;
+  return this->value * _float.getValue();
 }
 
 float ls::std::boxing::Float::operator*(float _value) const
@@ -57,7 +52,7 @@ float ls::std::boxing::Float::operator*(float _value) const
 
 float ls::std::boxing::Float::operator-(const ls::std::boxing::Float &_float) const
 {
-  return this->value - _float;
+  return this->value - _float.getValue();
 }
 
 float ls::std::boxing::Float::operator-(float _value) const
@@ -67,7 +62,7 @@ float ls::std::boxing::Float::operator-(float _value) const
 
 float ls::std::boxing::Float::operator/(const ls::std::boxing::Float &_float) const
 {
-  return this->value / _float;
+  return this->value / _float.getValue();
 }
 
 float ls::std::boxing::Float::operator/(float _value) const
@@ -77,7 +72,7 @@ float ls::std::boxing::Float::operator/(float _value) const
 
 ls::std::boxing::Float &ls::std::boxing::Float::operator+=(const ls::std::boxing::Float &_float)
 {
-  this->value += _float;
+  this->value += _float.getValue();
   return *this;
 }
 
@@ -89,7 +84,7 @@ ls::std::boxing::Float &ls::std::boxing::Float::operator+=(float _value)
 
 ls::std::boxing::Float &ls::std::boxing::Float::operator-=(const ls::std::boxing::Float &_float)
 {
-  this->value -= _float;
+  this->value -= _float.getValue();
   return *this;
 }
 
@@ -101,7 +96,7 @@ ls::std::boxing::Float &ls::std::boxing::Float::operator-=(float _value)
 
 ls::std::boxing::Float &ls::std::boxing::Float::operator*=(const ls::std::boxing::Float &_float)
 {
-  this->value *= _float;
+  this->value *= _float.getValue();
   return *this;
 }
 
@@ -113,7 +108,7 @@ ls::std::boxing::Float &ls::std::boxing::Float::operator*=(float _value)
 
 ls::std::boxing::Float &ls::std::boxing::Float::operator/=(const ls::std::boxing::Float &_float)
 {
-  this->value /= _float;
+  this->value /= _float.getValue();
   return *this;
 }
 
@@ -125,7 +120,7 @@ ls::std::boxing::Float &ls::std::boxing::Float::operator/=(float _value)
 
 bool ls::std::boxing::Float::operator==(const ls::std::boxing::Float &_float) const
 {
-  return ::std::fabs(this->value - _float) < this->epsilon;
+  return ::std::fabs(this->value - _float.getValue()) < this->epsilon;
 }
 
 bool ls::std::boxing::Float::operator==(float _value) const
@@ -135,7 +130,7 @@ bool ls::std::boxing::Float::operator==(float _value) const
 
 bool ls::std::boxing::Float::operator!=(const ls::std::boxing::Float &_float) const
 {
-  return ::std::fabs(this->value - _float) >= this->epsilon;
+  return ::std::fabs(this->value - _float.getValue()) >= this->epsilon;
 }
 
 bool ls::std::boxing::Float::operator!=(float _value) const
@@ -145,7 +140,7 @@ bool ls::std::boxing::Float::operator!=(float _value) const
 
 bool ls::std::boxing::Float::operator>(const ls::std::boxing::Float &_float) const
 {
-  return this->value > _float;
+  return this->value > _float.getValue();
 }
 
 bool ls::std::boxing::Float::operator>(float _value) const
@@ -155,7 +150,7 @@ bool ls::std::boxing::Float::operator>(float _value) const
 
 bool ls::std::boxing::Float::operator>=(const ls::std::boxing::Float &_float) const
 {
-  return this->value >= _float;
+  return this->value >= _float.getValue();
 }
 
 bool ls::std::boxing::Float::operator>=(float _value) const
@@ -165,7 +160,7 @@ bool ls::std::boxing::Float::operator>=(float _value) const
 
 bool ls::std::boxing::Float::operator<(const ls::std::boxing::Float &_float) const
 {
-  return this->value < _float;
+  return this->value < _float.getValue();
 }
 
 bool ls::std::boxing::Float::operator<(float _value) const
@@ -175,7 +170,7 @@ bool ls::std::boxing::Float::operator<(float _value) const
 
 bool ls::std::boxing::Float::operator<=(const ls::std::boxing::Float &_float) const
 {
-  return this->value <= _float;
+  return this->value <= _float.getValue();
 }
 
 bool ls::std::boxing::Float::operator<=(float _value) const
@@ -203,12 +198,12 @@ void ls::std::boxing::Float::parse(::std::string _parseText)
   return ::std::to_string(this->value);
 }
 
-float ls::std::boxing::Float::getEpsilon()
+float ls::std::boxing::Float::getEpsilon() const
 {
   return this->epsilon;
 }
 
-float ls::std::boxing::Float::getValue()
+float ls::std::boxing::Float::getValue() const
 {
   return this->value;
 }
