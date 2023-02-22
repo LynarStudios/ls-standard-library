@@ -208,7 +208,7 @@ namespace
     text = "abcdef";
 
     ASSERT_STREQ("fedcba", text.reverse().c_str());
-    ASSERT_STREQ("abcdef", text); // verify, that original string didn't change
+    ASSERT_STREQ("abcdef", text.toString().c_str()); // verify, that original string didn't change
   }
 
   TEST_F(StringTest, startsWith)
@@ -233,7 +233,7 @@ namespace
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("abcdefghijklmn", text.toLowerCase().c_str());
-    ASSERT_STREQ("aBCdeFgHIJKLmn", text); // verify, that original String didn't change
+    ASSERT_STREQ("aBCdeFgHIJKLmn", text.toString().c_str()); // verify, that original String didn't change
   }
 
   TEST_F(StringTest, toUpperCase)
@@ -242,6 +242,6 @@ namespace
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("ABCDEFGHIJKLMN", text.toUpperCase().c_str());
-    ASSERT_STREQ("aBCdeFgHIJKLmn", text); // verify, that original String didn't change
+    ASSERT_STREQ("aBCdeFgHIJKLmn", text.toString().c_str()); // verify, that original String didn't change
   }
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-07
+ * Changed:         2023-02-22
  *
  * */
 
@@ -17,16 +17,6 @@ ls::std::boxing::String::String(::std::string _value) : ls::std::core::Class("St
 {}
 
 ls::std::boxing::String::~String() = default;
-
-ls::std::boxing::String::operator const char *() const
-{
-  return this->value.c_str();
-}
-
-ls::std::boxing::String::operator ::std::string() const
-{
-  return this->value;
-}
 
 ls::std::boxing::String &ls::std::boxing::String::operator=(::std::string _value)
 {
