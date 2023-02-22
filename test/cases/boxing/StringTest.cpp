@@ -10,9 +10,9 @@
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-boxing.hpp>
 
-using namespace ls::std::boxing;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::boxing::String;
+using std::string;
+using testing::Test;
 
 namespace
 {

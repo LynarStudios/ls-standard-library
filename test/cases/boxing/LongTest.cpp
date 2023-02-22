@@ -11,10 +11,10 @@
 #include <ls-std/ls-std-boxing.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::boxing;
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ::testing;
+using ls::std::boxing::Long;
+using ls::std::core::IllegalArithmeticOperationException;
+using ls::std::core::type::long_type;
+using testing::Test;
 
 namespace
 {
@@ -23,7 +23,6 @@ namespace
     protected:
 
       LongTest() = default;
-
       ~LongTest() override = default;
 
       void SetUp() override

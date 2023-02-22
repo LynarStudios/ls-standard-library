@@ -11,10 +11,10 @@
 #include <ls-std/ls-std-boxing.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::boxing;
-using namespace ls::std::core;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::boxing::Double;
+using ls::std::core::IllegalArgumentException;
+using std::string;
+using testing::Test;
 
 namespace
 {
@@ -23,7 +23,6 @@ namespace
     protected:
 
       DoubleTest() = default;
-
       ~DoubleTest() override = default;
 
       void SetUp() override

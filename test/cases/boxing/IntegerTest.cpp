@@ -11,9 +11,9 @@
 #include <ls-std/ls-std-boxing.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::boxing;
-using namespace ls::std::core;
-using namespace ::testing;
+using ls::std::boxing::Integer;
+using ls::std::core::IllegalArithmeticOperationException;
+using testing::Test;
 
 namespace
 {

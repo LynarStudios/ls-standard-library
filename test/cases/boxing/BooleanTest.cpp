@@ -11,10 +11,10 @@
 #include <ls-std/ls-std-boxing.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::boxing;
-using namespace ls::std::core;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::boxing::Boolean;
+using ls::std::core::IllegalArgumentException;
+using std::ostringstream;
+using testing::Test;
 
 namespace
 {
