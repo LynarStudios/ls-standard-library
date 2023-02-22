@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-06
+ * Changed:         2023-02-18
  *
  * */
 
@@ -17,7 +17,6 @@
 #include <list>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
-#include <regex>
 #include <string>
 #include <vector>
 #ifdef _WIN32

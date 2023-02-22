@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-10
 *
 * */
 
@@ -16,7 +16,7 @@
 
 namespace ls::std::core
 {
-  class NullPointerEvaluator : public ls::std::core::interface_type::IEvaluator
+  class NullPointerEvaluator : public ls::std::core::interface_type::IEvaluator // TODO: add missing dynamic goal
   {
     public:
 

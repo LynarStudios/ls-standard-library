@@ -34,7 +34,7 @@ BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: BeforeColon
 ColumnLimit: 700
-CompactNamespaces: false
+CompactNamespaces: true
 ContinuationIndentWidth: 4
 EmptyLineAfterAccessModifier: Always
 FixNamespaceComments: false
