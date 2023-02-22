@@ -10,8 +10,8 @@
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-encoding.hpp>
 
-using namespace ls::std::encoding;
-using namespace ::testing;
+using ls::std::encoding::Base64;
+using testing::Test;
 
 namespace
 {
