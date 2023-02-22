@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-19
+* Changed:         2023-02-22
 *
 * */
 
@@ -13,7 +13,6 @@
 #include <ls-std/io/section-pair/evaluator/SectionPairValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
-#include <string>
 
 ls::std::io::SectionPairRowListValue::SectionPairRowListValue() : ls::std::core::Class("SectionPairRowListValue"), ls::std::io::SectionPairRowValue(ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE)
 {}

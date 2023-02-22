@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -20,7 +20,6 @@ bool ls::std::io::SectionPairFileExtensionValidator::isValid()
   ::std::string sectionPairFileExtension = ".sp";
   bool endsWithTextFileExtension = this->fileName.rfind(textFileExtension) == (this->fileName.size() - textFileExtension.size());
   bool endsWithSectionPairFileExtension = this->fileName.rfind(sectionPairFileExtension) == (this->fileName.size() - sectionPairFileExtension.size());
-
 
   return endsWithTextFileExtension || endsWithSectionPairFileExtension;
 }

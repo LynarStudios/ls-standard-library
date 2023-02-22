@@ -3,11 +3,12 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/section-pair/SectionPairMessageFormatter.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairRowArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowValidator.hpp>
 #include <string>
@@ -22,6 +23,6 @@ void ls::std::io::SectionPairRowArgumentEvaluator::evaluate()
   if (!ls::std::io::SectionPairRowValidator{this->sectionPairRow}.isValid())
   {
     ::std::string message = "\"" + this->sectionPairRow + "\" is not a valid section pair row!";
-    throw ls::std::core::IllegalArgumentException{message};
+    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }

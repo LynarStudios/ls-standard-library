@@ -185,6 +185,12 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairSection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/reader/SectionPairFileReader.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/reader/SectionPairFileReaderParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairSection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairDocumentValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairFileExtensionValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairIdentifierValidator.cpp
@@ -193,12 +199,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairRowValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairSectionValidator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairValueValidator.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairParameter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairSection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/SectionPairMessageFormatter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlAttribute.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDeclaration.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDocument.cpp
@@ -287,14 +288,6 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairRowSingleValueArgumentEvaluatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairSectionArgumentEvaluatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairValueArgumentEvaluatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairDocumentValidatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairFileExtensionValidatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairIdentifierValidatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowListValueValidatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowSingleValueValidatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowValidatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairSectionValidatorTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairValueValidatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowListValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowSingleValueTest.cpp
@@ -308,6 +301,15 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowSingleValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairSectionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairDocumentValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairFileExtensionValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairIdentifierValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowListValueValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowSingleValueValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairSectionValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairValueValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/SectionPairMessageFormatterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlAttributeTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDeclarationTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDocumentTest.cpp

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-19
+* Changed:         2023-02-22
 *
 * */
 
@@ -12,6 +12,7 @@
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/section-pair/SectionPairMessageFormatter.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
@@ -126,7 +127,7 @@ void ls::std::io::SectionPairSection::_rowExistenceCheck(const ls::std::io::sect
   if (this->_hasRow(_key))
   {
     ::std::string message = this->getClassName() + ": row key \"" + _key + "\" already exists in section \"" + this->sectionId + "\"!";
-    throw ls::std::core::IllegalArgumentException{message};
+    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }
 void ls::std::io::SectionPairSection::_setSectionId(const ls::std::io::section_pair_identifier &_sectionId)

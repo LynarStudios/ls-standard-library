@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -11,6 +11,7 @@
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/section-pair/SectionPairMessageFormatter.hpp>
 #include <ls-std/io/section-pair/model/SectionPairDocument.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairDocument.hpp>
 
@@ -88,7 +89,8 @@ void ls::std::io::SectionPairDocument::_checkSectionExistence(const ls::std::io:
 {
   if (this->_hasSection(_sectionId))
   {
-    throw ls::std::core::IllegalArgumentException{this->getClassName() + "section ID \"" + _sectionId + "\" already exists in document!"};
+    ::std::string message = this->getClassName() + "section ID \"" + _sectionId + "\" already exists in document!";
+    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }
 

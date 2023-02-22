@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -59,7 +59,7 @@ namespace
             ::std::string actual = _exception.what();
             ::std::string expected = "IllegalArgumentException thrown - \"" + GetParam() + "\" is not a valid section pair single value row!";
 
-            ASSERT_STREQ(expected.c_str(), actual.c_str());
+            ASSERT_STREQ(SectionPairMessageFormatter::getFormattedMessage(expected).c_str(), actual.c_str());
             throw;
           }
         },

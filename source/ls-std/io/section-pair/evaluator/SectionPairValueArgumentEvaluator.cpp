@@ -3,11 +3,12 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-19
+* Changed:         2023-02-22
 *
 * */
 
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
+#include <ls-std/io/section-pair/SectionPairMessageFormatter.hpp>
 #include <ls-std/io/section-pair/evaluator/SectionPairValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairValueValidator.hpp>
 
@@ -21,6 +22,6 @@ void ls::std::io::SectionPairValueArgumentEvaluator::evaluate()
   if (!ls::std::io::SectionPairValueValidator(this->value).isValid())
   {
     ::std::string message = "\"" + this->value + "\" is not a valid value!";
-    throw ls::std::core::IllegalArgumentException{message};
+    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }
