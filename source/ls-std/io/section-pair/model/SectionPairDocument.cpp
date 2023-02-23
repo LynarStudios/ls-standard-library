@@ -28,6 +28,8 @@ using ls::std::io::SectionPairDocument;
 using ls::std::io::SectionPairMessageFormatter;
 using ls::std::io::SerializableSectionPairDocument;
 using ls::std::io::SerializableSectionPairParameter;
+using std::any_of;
+using std::find_if;
 using std::make_shared;
 using std::reinterpret_pointer_cast;
 using std::string;
@@ -136,32 +138,11 @@ void SectionPairDocument::_createSerializable()
 
 section_pair_document_section_list_element SectionPairDocument::_get(const section_pair_identifier &_sectionId)
 {
-  section_pair_document_section_list_element element{};
-
-  for (const auto &_section : this->sections)
-  {
-    if (_section->getSectionId() == _sectionId)
-    {
-      element = _section;
-      break;
-    }
-  }
-
-  return element;
+  const auto iterator = find_if(this->sections.begin(), this->sections.end(), [_sectionId](const section_pair_document_section_list_element &_section) { return _section->getSectionId() == _sectionId; });
+  return iterator != this->sections.end() ? *iterator : nullptr;
 }
 
 bool SectionPairDocument::_hasSection(const section_pair_identifier &_identifier)
 {
-  bool sectionExists{};
-
-  for (const auto &_section : this->sections)
-  {
-    if (_section->getSectionId() == _identifier)
-    {
-      sectionExists = true;
-      break;
-    }
-  }
-
-  return sectionExists;
+  return any_of(this->sections.begin(), this->sections.end(), [_identifier](const section_pair_document_section_list_element &_section) { return _section->getSectionId() == _identifier; });
 }
