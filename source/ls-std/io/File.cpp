@@ -71,7 +71,7 @@ bool File::canExecute()
 
 bool File::canRead()
 {
-  bool readable;
+  bool readable{};
 
 #if defined(unix) || defined(__APPLE__)
   readable = File::_isReadableUnix(this->absoluteFilePath);
@@ -591,7 +591,7 @@ time_t File::_lastModified(const string &_path)
 
 bool File::_makeDirectory(const string &_path)
 {
-  int result;
+  int result{};
 
 #ifdef _WIN32
   result = _mkdir(_path.c_str());
