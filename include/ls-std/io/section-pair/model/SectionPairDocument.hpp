@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -26,12 +26,14 @@ namespace ls::std::io
       SectionPairDocument();
       ~SectionPairDocument() noexcept override;
 
-      void add(const section_pair_document_section_list_element &_section);
+      void add(const ls::std::io::section_pair_document_section_list_element &_section);
       void clear();
-      [[nodiscard]] section_pair_document_section_list_element get(size_t _index);
+      [[nodiscard]] ls::std::io::section_pair_document_section_list_element get(size_t _index);
+      [[nodiscard]] ls::std::io::section_pair_document_section_list_element get(const ls::std::io::section_pair_identifier &_sectionId);
       [[nodiscard]] size_t getAmountOfSections();
       [[nodiscard]] ::std::string getHeader();
-      [[nodiscard]] section_pair_document_section_list getSectionList();
+      [[nodiscard]] ls::std::io::section_pair_document_section_list getSectionList();
+      [[nodiscard]] bool hasSection(const ls::std::io::section_pair_identifier &_sectionId);
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void reserveNewLine(const ::std::string &_reservedNewLine);
       void unmarshal(const ls::std::core::type::byte_field &_data) override;
@@ -45,6 +47,7 @@ namespace ls::std::io
 
       void _checkSectionExistence(const ls::std::io::section_pair_identifier &_sectionId);
       void _createSerializable();
+      [[nodiscard]] ls::std::io::section_pair_document_section_list_element _get(const ls::std::io::section_pair_identifier &_sectionId);
       [[nodiscard]] bool _hasSection(const ls::std::io::section_pair_identifier &_identifier);
   };
 }

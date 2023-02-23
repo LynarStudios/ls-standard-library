@@ -81,7 +81,7 @@ namespace
     ASSERT_TRUE(document->getSectionList().empty());
   }
 
-  TEST_F(SectionPairDocumentTest, get)
+  TEST_F(SectionPairDocumentTest, get_by_index)
   {
     shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
     document->add(make_shared<SectionPairSection>("general"));
@@ -89,7 +89,23 @@ namespace
     ASSERT_TRUE(document->get(0) != nullptr);
   }
 
-  TEST_F(SectionPairDocumentTest, get_out_of_bounds)
+  TEST_F(SectionPairDocumentTest, get_by_section_id)
+  {
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    document->add(make_shared<SectionPairSection>("general"));
+
+    ASSERT_TRUE(document->get("general") != nullptr);
+  }
+
+  TEST_F(SectionPairDocumentTest, get_by_section_id_not_found)
+  {
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    document->add(make_shared<SectionPairSection>("general"));
+
+    ASSERT_TRUE(document->get("about") == nullptr);
+  }
+
+  TEST_F(SectionPairDocumentTest, get_by_index_out_of_bounds)
   {
     shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
 
@@ -131,6 +147,22 @@ namespace
   {
     shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
     ASSERT_TRUE(document->getSectionList().empty());
+  }
+
+  TEST_F(SectionPairDocumentTest, hasSection)
+  {
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    document->add(make_shared<SectionPairSection>("general"));
+
+    ASSERT_TRUE(document->hasSection("general"));
+  }
+
+  TEST_F(SectionPairDocumentTest, hasSection_not_found)
+  {
+    shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
+    document->add(make_shared<SectionPairSection>("general"));
+
+    ASSERT_FALSE(document->hasSection("about"));
   }
 
   TEST_F(SectionPairDocumentTest, marshal)

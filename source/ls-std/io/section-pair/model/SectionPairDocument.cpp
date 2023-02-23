@@ -70,6 +70,11 @@ section_pair_document_section_list_element SectionPairDocument::get(size_t _inde
   return element;
 }
 
+section_pair_document_section_list_element SectionPairDocument::get(const section_pair_identifier &_sectionId)
+{
+  return this->_get(_sectionId);
+}
+
 size_t SectionPairDocument::getAmountOfSections()
 {
   return this->sections.size();
@@ -83,6 +88,11 @@ string SectionPairDocument::getHeader()
 section_pair_document_section_list SectionPairDocument::getSectionList()
 {
   return this->sections;
+}
+
+bool SectionPairDocument::hasSection(const section_pair_identifier &_sectionId)
+{
+  return this->_hasSection(_sectionId);
 }
 
 byte_field SectionPairDocument::marshal()
@@ -122,6 +132,22 @@ void SectionPairDocument::_createSerializable()
   }
 
   this->serializable = make_shared<SerializableSectionPairDocument>(parameter);
+}
+
+section_pair_document_section_list_element SectionPairDocument::_get(const section_pair_identifier &_sectionId)
+{
+  section_pair_document_section_list_element element{};
+
+  for (const auto &_section : this->sections)
+  {
+    if (_section->getSectionId() == _sectionId)
+    {
+      element = _section;
+      break;
+    }
+  }
+
+  return element;
 }
 
 bool SectionPairDocument::_hasSection(const section_pair_identifier &_identifier)
