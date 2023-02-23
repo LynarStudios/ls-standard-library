@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,16 +12,24 @@
 #include <ls-std/io/section-pair/evaluator/SectionPairRowListValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowListValueValidator.hpp>
 
-ls::std::io::SectionPairRowListValueArgumentEvaluator::SectionPairRowListValueArgumentEvaluator(::std::string _listValueRow) : ls::std::core::Class("SectionPairRowListValueArgumentEvaluator"), listValueRow(::std::move(_listValueRow))
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::SectionPairMessageFormatter;
+using ls::std::io::SectionPairRowListValueArgumentEvaluator;
+using ls::std::io::SectionPairRowListValueValidator;
+using std::move;
+using std::string;
+
+SectionPairRowListValueArgumentEvaluator::SectionPairRowListValueArgumentEvaluator(string _listValueRow) : Class("SectionPairRowListValueArgumentEvaluator"), listValueRow(::move(_listValueRow))
 {}
 
-ls::std::io::SectionPairRowListValueArgumentEvaluator::~SectionPairRowListValueArgumentEvaluator() noexcept = default;
+SectionPairRowListValueArgumentEvaluator::~SectionPairRowListValueArgumentEvaluator() noexcept = default;
 
-void ls::std::io::SectionPairRowListValueArgumentEvaluator::evaluate()
+void SectionPairRowListValueArgumentEvaluator::evaluate()
 {
-  if (!ls::std::io::SectionPairRowListValueValidator{this->listValueRow}.isValid())
+  if (!SectionPairRowListValueValidator{this->listValueRow}.isValid())
   {
-    ::std::string message = "\"" + this->listValueRow + "\" is not a valid section pair list value row!";
-    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
+    string message = "\"" + this->listValueRow + "\" is not a valid section pair list value row!";
+    throw IllegalArgumentException{SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }

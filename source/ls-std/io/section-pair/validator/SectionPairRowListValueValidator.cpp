@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,30 +12,39 @@
 #include <ls-std/io/section-pair/validator/SectionPairValueValidator.hpp>
 #include <regex>
 
-ls::std::io::SectionPairRowListValueValidator::SectionPairRowListValueValidator(::std::string _listValueRow) : ls::std::core::Class("SectionPairRowListValueValidator"), listValueRow(::std::move(_listValueRow))
+using ls::std::core::Class;
+using ls::std::io::SectionPairIdentifierValidator;
+using ls::std::io::SectionPairRowListValueValidator;
+using ls::std::io::SectionPairValueValidator;
+using std::move;
+using std::regex;
+using std::regex_match;
+using std::string;
+
+SectionPairRowListValueValidator::SectionPairRowListValueValidator(string _listValueRow) : Class("SectionPairRowListValueValidator"), listValueRow(::move(_listValueRow))
 {}
 
-ls::std::io::SectionPairRowListValueValidator::~SectionPairRowListValueValidator() noexcept = default;
+SectionPairRowListValueValidator::~SectionPairRowListValueValidator() noexcept = default;
 
-::std::string ls::std::io::SectionPairRowListValueValidator::getValidationRegex()
+string SectionPairRowListValueValidator::getValidationRegex()
 {
-  return ls::std::io::SectionPairRowListValueValidator::_getValidationRegex();
+  return SectionPairRowListValueValidator::_getValidationRegex();
 }
 
-bool ls::std::io::SectionPairRowListValueValidator::isValid()
+bool SectionPairRowListValueValidator::isValid()
 {
-  ::std::string validationRegex = ls::std::io::SectionPairRowListValueValidator::_getValidationRegex();
-  static ::std::regex listValueRowRegex = ::std::regex{"^" + validationRegex};
+  string validationRegex = SectionPairRowListValueValidator::_getValidationRegex();
+  static regex listValueRowRegex = regex{"^" + validationRegex};
 
-  return ::std::regex_match(this->listValueRow, listValueRowRegex);
+  return regex_match(this->listValueRow, listValueRowRegex);
 }
 
-::std::string ls::std::io::SectionPairRowListValueValidator::_getValidationRegex()
+string SectionPairRowListValueValidator::_getValidationRegex()
 {
-  ::std::string identifierRegex = ls::std::io::SectionPairIdentifierValidator::getValidationRegex();
-  ::std::string valueRegex = ls::std::io::SectionPairValueValidator::getValidationRegex();
-  ::std::string lineBreak = R"(((\n{1})|(\r{1}\n{1})))";
-  ::std::string firstLine = R"(((()" + identifierRegex + R"():{1}))" + lineBreak + R"())";
+  string identifierRegex = SectionPairIdentifierValidator::getValidationRegex();
+  string valueRegex = SectionPairValueValidator::getValidationRegex();
+  string lineBreak = R"(((\n{1})|(\r{1}\n{1})))";
+  string firstLine = R"(((()" + identifierRegex + R"():{1}))" + lineBreak + R"())";
 
   return R"((()" + firstLine + R"(( {2})" + valueRegex + R"()" + lineBreak + R"()){1}(( {2})" + valueRegex + R"()" + lineBreak + R"()*)))";
 }

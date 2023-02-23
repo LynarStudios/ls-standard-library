@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,16 +12,23 @@
 #include <ls-std/io/evaluator/FileExistenceEvaluator.hpp>
 #include <string>
 
-ls::std::io::FileExistenceEvaluator::FileExistenceEvaluator(::std::string _filePath) : ls::std::core::Class("FileExistenceEvaluator"), filePath(::std::move(_filePath))
+using ls::std::core::Class;
+using ls::std::core::FileNotFoundException;
+using ls::std::io::File;
+using ls::std::io::FileExistenceEvaluator;
+using std::move;
+using std::string;
+
+FileExistenceEvaluator::FileExistenceEvaluator(string _filePath) : Class("FileExistenceEvaluator"), filePath(::move(_filePath))
 {}
 
-ls::std::io::FileExistenceEvaluator::~FileExistenceEvaluator() noexcept = default;
+FileExistenceEvaluator::~FileExistenceEvaluator() noexcept = default;
 
-void ls::std::io::FileExistenceEvaluator::evaluate()
+void FileExistenceEvaluator::evaluate()
 {
-  if (!ls::std::io::File{this->filePath}.exists())
+  if (!File{this->filePath}.exists())
   {
-    ::std::string message = "\"" + this->filePath + "\" does not exist!";
-    throw ls::std::core::FileNotFoundException{message};
+    string message = "\"" + this->filePath + "\" does not exist!";
+    throw FileNotFoundException{message};
   }
 }

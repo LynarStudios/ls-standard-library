@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,25 +12,36 @@
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 
-ls::std::io::SerializableSectionPairRowListValue::SerializableSectionPairRowListValue(const ls::std::io::SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairRowListValue")
+using ls::std::core::Class;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::SectionPairRowListValue;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairRowListValue;
+using std::dynamic_pointer_cast;
+using std::shared_ptr;
+using std::string;
+
+SerializableSectionPairRowListValue::SerializableSectionPairRowListValue(const SerializableSectionPairParameter &_parameter) : Class("SerializableSectionPairRowListValue")
 {
-  ::std::string message = this->getClassName() + ": model reference is null!";
-  ls::std::core::NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();
+  string message = this->getClassName() + ": model reference is null!";
+  NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();
   this->parameter = _parameter;
 }
 
-ls::std::io::SerializableSectionPairRowListValue::~SerializableSectionPairRowListValue() noexcept = default;
+SerializableSectionPairRowListValue::~SerializableSectionPairRowListValue() noexcept = default;
 
-::std::shared_ptr<ls::std::core::Class> ls::std::io::SerializableSectionPairRowListValue::getValue()
+shared_ptr<Class> SerializableSectionPairRowListValue::getValue()
 {
   return this->parameter.getValue();
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairRowListValue::marshal()
+byte_field SerializableSectionPairRowListValue::marshal()
 {
-  ls::std::core::type::byte_field data{};
+  byte_field data{};
 
-  for (const auto &_value : ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowListValue>(this->getValue())->getList())
+  for (const auto &_value : dynamic_pointer_cast<SectionPairRowListValue>(this->getValue())->getList())
   {
     data += "  " + _value + this->parameter.getNewLine();
   }
@@ -38,27 +49,27 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairRowListValue
   return data;
 }
 
-void ls::std::io::SerializableSectionPairRowListValue::unmarshal(const ls::std::core::type::byte_field &_data)
+void SerializableSectionPairRowListValue::unmarshal(const byte_field &_data)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_data}.evaluate();
-  ls::std::core::type::byte_field searchText = _data;
-  ::std::string newLine = this->parameter.getNewLine();
+  EmptyStringArgumentEvaluator{_data}.evaluate();
+  byte_field searchText = _data;
+  string newLine = this->parameter.getNewLine();
 
   while (!searchText.empty() && searchText != newLine)
   {
-    ::std::string::size_type positionOfNewLine = searchText.find(newLine);
-    ::std::string line = ls::std::io::SerializableSectionPairRowListValue::_getLine(positionOfNewLine, searchText);
+    string::size_type positionOfNewLine = searchText.find(newLine);
+    string line = SerializableSectionPairRowListValue::_getLine(positionOfNewLine, searchText);
     line = line.substr(2);
-    ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowListValue>(this->getValue())->add(line);
+    dynamic_pointer_cast<SectionPairRowListValue>(this->getValue())->add(line);
     this->_updateSearchText(positionOfNewLine, searchText);
   }
 }
 
-::std::string ls::std::io::SerializableSectionPairRowListValue::_getLine(::std::string::size_type _position, const ls::std::core::type::byte_field &_searchText)
+string SerializableSectionPairRowListValue::_getLine(string::size_type _position, const byte_field &_searchText)
 {
-  ::std::string line{};
+  string line{};
 
-  if (_position != ::std::string::npos)
+  if (_position != string::npos)
   {
     line = _searchText.substr(0, _position);
   }
@@ -70,9 +81,9 @@ void ls::std::io::SerializableSectionPairRowListValue::unmarshal(const ls::std::
   return line;
 }
 
-void ls::std::io::SerializableSectionPairRowListValue::_updateSearchText(::std::string::size_type _position, ls::std::core::type::byte_field &_searchText)
+void SerializableSectionPairRowListValue::_updateSearchText(string::size_type _position, byte_field &_searchText)
 {
-  if (_position != ::std::string::npos)
+  if (_position != string::npos)
   {
     _searchText = _searchText.substr(_position + this->parameter.getNewLine().size());
   }

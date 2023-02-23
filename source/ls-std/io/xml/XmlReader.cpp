@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -13,48 +13,60 @@
 #include <ls-std/io/xml/XmlParser.hpp>
 #include <ls-std/io/xml/XmlReader.hpp>
 
-ls::std::io::XmlReader::XmlReader(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document, const ::std::string &_absolutePath) : ls::std::core::Class("XmlReader"), xmlFile(ls::std::io::File{""})
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::File;
+using ls::std::io::FileReader;
+using ls::std::io::XmlDocument;
+using ls::std::io::XmlParser;
+using ls::std::io::XmlReader;
+using std::shared_ptr;
+using std::string;
+
+XmlReader::XmlReader(const shared_ptr<XmlDocument> &_document, const string &_absolutePath) : Class("XmlReader"), xmlFile(File{""})
 {
   this->_assignDocument(_document);
-  this->_assignFile(ls::std::io::File{_absolutePath});
+  this->_assignFile(File{_absolutePath});
 }
 
-ls::std::io::XmlReader::~XmlReader() noexcept = default;
+XmlReader::~XmlReader() noexcept = default;
 
-ls::std::core::type::byte_field ls::std::io::XmlReader::read()
+byte_field XmlReader::read()
 {
-  ls::std::core::type::byte_field data = ls::std::io::FileReader{this->xmlFile}.read();
-  ls::std::io::XmlParser{this->document}.parse(data);
+  byte_field data = FileReader{this->xmlFile}.read();
+  XmlParser{this->document}.parse(data);
 
   return data;
 }
 
-::std::shared_ptr<ls::std::io::XmlDocument> ls::std::io::XmlReader::getDocument()
+shared_ptr<XmlDocument> XmlReader::getDocument()
 {
   return this->document;
 }
 
-void ls::std::io::XmlReader::setDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document)
+void XmlReader::setDocument(const shared_ptr<XmlDocument> &_document)
 {
   this->_assignDocument(_document);
 }
 
-void ls::std::io::XmlReader::setFile(const ls::std::io::File &_xmlFile)
+void XmlReader::setFile(const File &_xmlFile)
 {
   this->_assignFile(_xmlFile);
 }
 
-void ls::std::io::XmlReader::_assignDocument(const ::std::shared_ptr<ls::std::io::XmlDocument> &_document)
+void XmlReader::_assignDocument(const shared_ptr<XmlDocument> &_document)
 {
-  ls::std::core::NullPointerArgumentEvaluator{_document, "xml document reference is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_document, "xml document reference is null!"}.evaluate();
   this->document = _document;
 }
 
-void ls::std::io::XmlReader::_assignFile(ls::std::io::File _xmlFile)
+void XmlReader::_assignFile(File _xmlFile)
 {
   if (!_xmlFile.exists())
   {
-    throw ls::std::core::IllegalArgumentException{"file does not exist: " + _xmlFile.getAbsoluteFilePath()};
+    throw IllegalArgumentException{"file does not exist: " + _xmlFile.getAbsoluteFilePath()};
   }
 
   this->xmlFile = _xmlFile;

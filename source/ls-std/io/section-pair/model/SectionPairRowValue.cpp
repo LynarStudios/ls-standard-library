@@ -3,26 +3,31 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/io/section-pair/model/SectionPairRowValue.hpp>
 
-ls::std::io::SectionPairRowValue::SectionPairRowValue(const ls::std::io::SectionPairRowEnumType &_type) : type(_type)
+using ls::std::core::type::byte_field;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowValue;
+using std::string;
+
+SectionPairRowValue::SectionPairRowValue(const SectionPairRowEnumType &_type) : type(_type)
 {}
 
-ls::std::io::SectionPairRowValue::~SectionPairRowValue() noexcept = default;
+SectionPairRowValue::~SectionPairRowValue() noexcept = default;
 
-ls::std::core::type::byte_field ls::std::io::SectionPairRowValue::marshal()
+byte_field SectionPairRowValue::marshal()
 {
-  return ls::std::core::type::byte_field{};
+  return byte_field{};
 }
 
-void ls::std::io::SectionPairRowValue::reserveNewLine(const ::std::string &_reservedNewLine)
+void SectionPairRowValue::reserveNewLine(const string &_reservedNewLine)
 {
   this->reservedNewLine = _reservedNewLine;
 }
 
-void ls::std::io::SectionPairRowValue::unmarshal(const ls::std::core::type::byte_field &_data)
+void SectionPairRowValue::unmarshal(const byte_field &_data)
 {}

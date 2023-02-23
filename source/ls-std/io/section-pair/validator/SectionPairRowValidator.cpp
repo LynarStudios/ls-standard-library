@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,28 +12,36 @@
 #include <ls-std/io/section-pair/validator/SectionPairRowValidator.hpp>
 #include <regex>
 
-ls::std::io::SectionPairRowValidator::SectionPairRowValidator(::std::string _row) : ls::std::core::Class("SectionPairRowValidator"), row(::std::move(_row))
+using ls::std::core::Class;
+using ls::std::io::SectionPairRowListValueValidator;
+using ls::std::io::SectionPairRowValidator;
+using std::move;
+using std::regex;
+using std::regex_match;
+using std::string;
+
+SectionPairRowValidator::SectionPairRowValidator(string _row) : Class("SectionPairRowValidator"), row(::move(_row))
 {}
 
-ls::std::io::SectionPairRowValidator::~SectionPairRowValidator() noexcept = default;
+SectionPairRowValidator::~SectionPairRowValidator() noexcept = default;
 
-::std::string ls::std::io::SectionPairRowValidator::getValidationRegex()
+string SectionPairRowValidator::getValidationRegex()
 {
-  return ls::std::io::SectionPairRowValidator::_getValidationRegex();
+  return SectionPairRowValidator::_getValidationRegex();
 }
 
-bool ls::std::io::SectionPairRowValidator::isValid()
+bool SectionPairRowValidator::isValid()
 {
-  ::std::string validationRegex = ls::std::io::SectionPairRowValidator::_getValidationRegex();
-  static ::std::regex sectionPairRowRegex = ::std::regex{R"(^()" + validationRegex + R"())"};
+  string validationRegex = SectionPairRowValidator::_getValidationRegex();
+  static regex sectionPairRowRegex = regex{R"(^()" + validationRegex + R"())"};
 
-  return ::std::regex_match(this->row, sectionPairRowRegex);
+  return regex_match(this->row, sectionPairRowRegex);
 }
 
-::std::string ls::std::io::SectionPairRowValidator::_getValidationRegex()
+string SectionPairRowValidator::_getValidationRegex()
 {
-  ::std::string listValueRowRegex = ls::std::io::SectionPairRowListValueValidator::getValidationRegex();
-  ::std::string singleValueRowRegex = ls::std::io::SectionPairRowSingleValueValidator::getValidationRegex();
+  string listValueRowRegex = SectionPairRowListValueValidator::getValidationRegex();
+  string singleValueRowRegex = SectionPairRowSingleValueValidator::getValidationRegex();
 
   return R"(()" + singleValueRowRegex + R"()|()" + listValueRowRegex + R"())";
 }

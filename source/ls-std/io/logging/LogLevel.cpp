@@ -3,67 +3,73 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/logging/LogLevel.hpp>
 
-ls::std::io::LogLevel::LogLevel(const ls::std::io::LogLevelValue &_value) : ls::std::core::Class("LogLevel"), value(_value)
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::LogLevel;
+using ls::std::io::LogLevelValue;
+using std::string;
+
+LogLevel::LogLevel(const LogLevelValue &_value) : Class("LogLevel"), value(_value)
 {
   this->_init();
 }
 
-ls::std::io::LogLevel::LogLevel() : ls::std::core::Class("LogLevel")
+LogLevel::LogLevel() : Class("LogLevel")
 {
   this->_init();
 }
 
-ls::std::io::LogLevel::~LogLevel() noexcept = default;
+LogLevel::~LogLevel() noexcept = default;
 
-ls::std::io::LogLevel &ls::std::io::LogLevel::operator=(const ls::std::io::LogLevelValue &_value)
+LogLevel &LogLevel::operator=(const LogLevelValue &_value)
 {
   this->value = _value;
   return *this;
 }
 
-bool ls::std::io::LogLevel::operator<(const ls::std::io::LogLevelValue &_value)
+bool LogLevel::operator<(const LogLevelValue &_value)
 {
   return this->value < _value;
 }
 
-bool ls::std::io::LogLevel::operator<=(const ls::std::io::LogLevelValue &_value)
+bool LogLevel::operator<=(const LogLevelValue &_value)
 {
   return this->value <= _value;
 }
 
-bool ls::std::io::LogLevel::operator>(const ls::std::io::LogLevelValue &_value)
+bool LogLevel::operator>(const LogLevelValue &_value)
 {
   return this->value > _value;
 }
 
-bool ls::std::io::LogLevel::operator>=(const ls::std::io::LogLevelValue &_value)
+bool LogLevel::operator>=(const LogLevelValue &_value)
 {
   return this->value >= _value;
 }
 
-bool ls::std::io::LogLevel::operator==(const ls::std::io::LogLevelValue &_value)
+bool LogLevel::operator==(const LogLevelValue &_value)
 {
   return this->value == _value;
 }
 
-ls::std::io::LogLevelValue ls::std::io::LogLevel::getValue()
+LogLevelValue LogLevel::getValue()
 {
   return this->value;
 }
 
-void ls::std::io::LogLevel::setLogLevel(const ls::std::io::LogLevelValue &_value)
+void LogLevel::setLogLevel(const LogLevelValue &_value)
 {
   this->value = _value;
 }
 
-void ls::std::io::LogLevel::setLogLevel(const ::std::string &_value)
+void LogLevel::setLogLevel(const string &_value)
 {
   if (this->_isValidLogLevelString(_value))
   {
@@ -71,24 +77,24 @@ void ls::std::io::LogLevel::setLogLevel(const ::std::string &_value)
   }
   else
   {
-    throw ls::std::core::IllegalArgumentException{_value + " is not a valid log level string"};
+    throw IllegalArgumentException{_value + " is not a valid log level string"};
   }
 }
 
-::std::string ls::std::io::LogLevel::toString() const
+string LogLevel::toString() const
 {
   return this->level.at(this->value);
 }
 
-ls::std::io::LogLevelValue ls::std::io::LogLevel::_getValueFromString(const ::std::string &_value)
+LogLevelValue LogLevel::_getValueFromString(const string &_value)
 {
-  ls::std::io::LogLevelValue logLevelValue{};
+  LogLevelValue logLevelValue{};
 
   for (const auto &logLevelString : this->level)
   {
     if (logLevelString.second == _value)
     {
-      logLevelValue = (ls::std::io::LogLevelValue) logLevelString.first;
+      logLevelValue = (LogLevelValue) logLevelString.first;
       break;
     }
   }
@@ -96,17 +102,17 @@ ls::std::io::LogLevelValue ls::std::io::LogLevel::_getValueFromString(const ::st
   return logLevelValue;
 }
 
-void ls::std::io::LogLevel::_init()
+void LogLevel::_init()
 {
-  this->level.insert({ls::std::io::LogLevelValue::FATAL, "FATAL"});
-  this->level.insert({ls::std::io::LogLevelValue::ERR, "ERROR"});
-  this->level.insert({ls::std::io::LogLevelValue::WARN, "WARN"});
-  this->level.insert({ls::std::io::LogLevelValue::INFO, "INFO"});
-  this->level.insert({ls::std::io::LogLevelValue::DEBUG, "DEBUG"});
-  this->level.insert({ls::std::io::LogLevelValue::TRACE, "TRACE"});
+  this->level.insert({LogLevelValue::FATAL, "FATAL"});
+  this->level.insert({LogLevelValue::ERR, "ERROR"});
+  this->level.insert({LogLevelValue::WARN, "WARN"});
+  this->level.insert({LogLevelValue::INFO, "INFO"});
+  this->level.insert({LogLevelValue::DEBUG, "DEBUG"});
+  this->level.insert({LogLevelValue::TRACE, "TRACE"});
 }
 
-bool ls::std::io::LogLevel::_isValidLogLevelString(const ::std::string &_value)
+bool LogLevel::_isValidLogLevelString(const string &_value)
 {
   bool isValidString{};
 

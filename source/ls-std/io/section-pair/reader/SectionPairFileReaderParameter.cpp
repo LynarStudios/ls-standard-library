@@ -3,52 +3,59 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/io/section-pair/reader/SectionPairFileReaderParameter.hpp>
 
-ls::std::io::SectionPairFileReaderParameter::SectionPairFileReaderParameter() = default;
+using ls::std::core::interface_type::IEvaluator;
+using ls::std::core::interface_type::IReader;
+using ls::std::io::SectionPairDocument;
+using ls::std::io::SectionPairFileReaderParameter;
+using std::shared_ptr;
+using std::string;
 
-ls::std::io::SectionPairFileReaderParameter::~SectionPairFileReaderParameter() = default;
+SectionPairFileReaderParameter::SectionPairFileReaderParameter() = default;
 
-::std::shared_ptr<ls::std::io::SectionPairDocument> ls::std::io::SectionPairFileReaderParameter::getDocument()
+SectionPairFileReaderParameter::~SectionPairFileReaderParameter() = default;
+
+shared_ptr<SectionPairDocument> SectionPairFileReaderParameter::getDocument()
 {
   return this->document;
 }
 
-::std::shared_ptr<ls::std::core::interface_type::IEvaluator> ls::std::io::SectionPairFileReaderParameter::getFileExistenceEvaluator()
+shared_ptr<IEvaluator> SectionPairFileReaderParameter::getFileExistenceEvaluator()
 {
   return this->fileExistenceEvaluator;
 }
 
-::std::string ls::std::io::SectionPairFileReaderParameter::getFilePath()
+string SectionPairFileReaderParameter::getFilePath()
 {
   return this->filePath;
 }
 
-::std::shared_ptr<ls::std::core::interface_type::IReader> ls::std::io::SectionPairFileReaderParameter::getReader()
+shared_ptr<IReader> SectionPairFileReaderParameter::getReader()
 {
   return this->reader;
 }
 
-void ls::std::io::SectionPairFileReaderParameter::setDocument(const ::std::shared_ptr<ls::std::io::SectionPairDocument> &_document)
+void SectionPairFileReaderParameter::setDocument(const shared_ptr<SectionPairDocument> &_document)
 {
   this->document = _document;
 }
 
-void ls::std::io::SectionPairFileReaderParameter::setFileExistenceEvaluator(const ::std::shared_ptr<ls::std::core::interface_type::IEvaluator> &_fileExistenceEvaluator)
+void SectionPairFileReaderParameter::setFileExistenceEvaluator(const shared_ptr<IEvaluator> &_fileExistenceEvaluator)
 {
   this->fileExistenceEvaluator = _fileExistenceEvaluator;
 }
 
-void ls::std::io::SectionPairFileReaderParameter::setFilePath(const ::std::string &_filePath)
+void SectionPairFileReaderParameter::setFilePath(const string &_filePath)
 {
   this->filePath = _filePath;
 }
 
-void ls::std::io::SectionPairFileReaderParameter::setReader(const ::std::shared_ptr<ls::std::core::interface_type::IReader> &_reader)
+void SectionPairFileReaderParameter::setReader(const shared_ptr<IReader> &_reader)
 {
   this->reader = _reader;
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -16,53 +16,68 @@
 #include <ls-std/io/section-pair/validator/SectionPairFileExtensionValidator.hpp>
 #include <memory>
 
-ls::std::io::SectionPairFileReader::SectionPairFileReader(const ls::std::io::SectionPairFileReaderParameter &_parameter) : ls::std::core::Class("SectionPairFileReader")
+using ls::std::core::Class;
+using ls::std::core::ConditionalFunctionExecutor;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::io::File;
+using ls::std::io::FileExistenceEvaluator;
+using ls::std::io::FileReader;
+using ls::std::io::SectionPairDocument;
+using ls::std::io::SectionPairFileExtensionValidator;
+using ls::std::io::SectionPairFileReader;
+using ls::std::io::SectionPairFileReaderParameter;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+
+SectionPairFileReader::SectionPairFileReader(const SectionPairFileReaderParameter &_parameter) : Class("SectionPairFileReader")
 {
   this->parameter = _parameter;
-  ls::std::core::ConditionalFunctionExecutor{this->parameter.getFileExistenceEvaluator() == nullptr}.execute([this] { _createFileExistenceEvaluator(); });
+  ConditionalFunctionExecutor{this->parameter.getFileExistenceEvaluator() == nullptr}.execute([this] { _createFileExistenceEvaluator(); });
   this->parameter.getFileExistenceEvaluator()->evaluate();
   this->_checkFileExtension();
-  ls::std::core::ConditionalFunctionExecutor{this->parameter.getReader() == nullptr}.execute([this] { _createReader(); });
-  ls::std::core::ConditionalFunctionExecutor{this->parameter.getDocument() == nullptr}.execute([this] { _createDocument(); });
+  ConditionalFunctionExecutor{this->parameter.getReader() == nullptr}.execute([this] { _createReader(); });
+  ConditionalFunctionExecutor{this->parameter.getDocument() == nullptr}.execute([this] { _createDocument(); });
 }
 
-ls::std::io::SectionPairFileReader::~SectionPairFileReader() noexcept = default;
+SectionPairFileReader::~SectionPairFileReader() noexcept = default;
 
-::std::shared_ptr<ls::std::io::SectionPairDocument> ls::std::io::SectionPairFileReader::getDocument()
+shared_ptr<SectionPairDocument> SectionPairFileReader::getDocument()
 {
   return this->parameter.getDocument();
 }
 
-ls::std::core::type::byte_field ls::std::io::SectionPairFileReader::read()
+byte_field SectionPairFileReader::read()
 {
   this->parameter.getDocument()->clear();
-  ls::std::core::type::byte_field data = this->parameter.getReader()->read();
+  byte_field data = this->parameter.getReader()->read();
   this->parameter.getDocument()->unmarshal(data);
 
   return data;
 }
 
-void ls::std::io::SectionPairFileReader::_checkFileExtension()
+void SectionPairFileReader::_checkFileExtension()
 {
-  if (!ls::std::io::SectionPairFileExtensionValidator{this->parameter.getFilePath()}.isValid())
+  if (!SectionPairFileExtensionValidator{this->parameter.getFilePath()}.isValid())
   {
-    ::std::string message = "\"" + this->parameter.getFilePath() + "\" does not have a valid section pair file extension (.txt or .sp)!";
-    throw ls::std::core::IllegalArgumentException{message};
+    string message = "\"" + this->parameter.getFilePath() + "\" does not have a valid section pair file extension (.txt or .sp)!";
+    throw IllegalArgumentException{message};
   }
 }
 
-void ls::std::io::SectionPairFileReader::_createDocument()
+void SectionPairFileReader::_createDocument()
 {
-  this->parameter.setDocument(::std::make_shared<ls::std::io::SectionPairDocument>());
+  this->parameter.setDocument(make_shared<SectionPairDocument>());
 }
 
-void ls::std::io::SectionPairFileReader::_createFileExistenceEvaluator()
+void SectionPairFileReader::_createFileExistenceEvaluator()
 {
-  this->parameter.setFileExistenceEvaluator(::std::make_shared<ls::std::io::FileExistenceEvaluator>(this->parameter.getFilePath()));
+  this->parameter.setFileExistenceEvaluator(make_shared<FileExistenceEvaluator>(this->parameter.getFilePath()));
 }
 
-void ls::std::io::SectionPairFileReader::_createReader()
+void SectionPairFileReader::_createReader()
 {
-  ls::std::io::File file{this->parameter.getFilePath()};
-  this->parameter.setReader(::std::make_shared<ls::std::io::FileReader>(file));
+  File file{this->parameter.getFilePath()};
+  this->parameter.setReader(make_shared<FileReader>(file));
 }

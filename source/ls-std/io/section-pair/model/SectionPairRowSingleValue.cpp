@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -14,41 +14,55 @@
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>
 
-ls::std::io::SectionPairRowSingleValue::SectionPairRowSingleValue(const ls::std::io::section_pair_row_value &_value) : ls::std::core::Class("SectionPairRowSingleValue"), ls::std::io::SectionPairRowValue(ls::std::io::SECTION_PAIR_ROW_SINGLE_VALUE)
+using ls::std::core::Class;
+using ls::std::core::ConditionalFunctionExecutor;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::NewLine;
+using ls::std::io::section_pair_row_value;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SectionPairRowValue;
+using ls::std::io::SectionPairValueArgumentEvaluator;
+using ls::std::io::SerializableSectionPairRowSingleValue;
+using std::make_shared;
+using std::string;
+
+SectionPairRowSingleValue::SectionPairRowSingleValue(const section_pair_row_value &_value) : Class("SectionPairRowSingleValue"), SectionPairRowValue(SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE)
 {
   this->_set(_value);
 }
 
-ls::std::io::SectionPairRowSingleValue::~SectionPairRowSingleValue() noexcept = default;
+SectionPairRowSingleValue::~SectionPairRowSingleValue() noexcept = default;
 
-ls::std::io::section_pair_row_value ls::std::io::SectionPairRowSingleValue::get()
+section_pair_row_value SectionPairRowSingleValue::get()
 {
   return this->value;
 }
 
-ls::std::io::SectionPairRowEnumType ls::std::io::SectionPairRowSingleValue::getType()
+SectionPairRowEnumType SectionPairRowSingleValue::getType()
 {
   return this->type;
 }
 
-ls::std::core::type::byte_field ls::std::io::SectionPairRowSingleValue::marshal()
+byte_field SectionPairRowSingleValue::marshal()
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   return this->serializable->marshal();
 }
 
-void ls::std::io::SectionPairRowSingleValue::set(const ls::std::io::section_pair_row_value &_value)
+void SectionPairRowSingleValue::set(const section_pair_row_value &_value)
 {
   this->_set(_value);
 }
 
-void ls::std::io::SectionPairRowSingleValue::unmarshal(const ls::std::core::type::byte_field &_data)
+void SectionPairRowSingleValue::unmarshal(const byte_field &_data)
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   this->serializable->unmarshal(_data);
 }
 
-void ls::std::io::SectionPairRowSingleValue::_createSerializable()
+void SectionPairRowSingleValue::_createSerializable()
 {
   SerializableSectionPairParameter parameter{};
   parameter.setValue(shared_from_this());
@@ -58,17 +72,17 @@ void ls::std::io::SectionPairRowSingleValue::_createSerializable()
     parameter.setNewLine(this->reservedNewLine);
   }
 
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRowSingleValue>(parameter);
+  this->serializable = make_shared<SerializableSectionPairRowSingleValue>(parameter);
 }
 
-void ls::std::io::SectionPairRowSingleValue::_set(const ls::std::io::section_pair_row_value &_value)
+void SectionPairRowSingleValue::_set(const section_pair_row_value &_value)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
-  ls::std::io::SectionPairValueArgumentEvaluator(_value).evaluate();
-  ::std::string newLine = this->reservedNewLine.empty() ? NewLine::get() : this->reservedNewLine;
+  EmptyStringArgumentEvaluator{_value}.evaluate();
+  SectionPairValueArgumentEvaluator(_value).evaluate();
+  string newLine = this->reservedNewLine.empty() ? NewLine::get() : this->reservedNewLine;
   this->value = _value;
 
-  if (this->value.find(newLine) != ::std::string::npos)
+  if (this->value.find(newLine) != string::npos)
   {
     this->value.replace(this->value.find(newLine), newLine.size(), "");
   }

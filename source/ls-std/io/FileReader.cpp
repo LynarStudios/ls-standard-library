@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -12,35 +12,44 @@
 #include <ls-std/io/FileReader.hpp>
 #include <ls-std/io/evaluator/FileExistenceEvaluator.hpp>
 
-ls::std::io::FileReader::FileReader(ls::std::io::File &_file) : ls::std::core::Class("FileReader"), file(_file)
+using ls::std::core::Class;
+using ls::std::core::FileOperationException;
+using ls::std::core::type::byte;
+using ls::std::core::type::byte_field;
+using ls::std::io::File;
+using ls::std::io::FileExistenceEvaluator;
+using ls::std::io::FileReader;
+using std::ifstream;
+
+FileReader::FileReader(File &_file) : Class("FileReader"), file(_file)
 {
-  ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
+  FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
 }
 
-ls::std::io::FileReader::~FileReader() noexcept = default;
+FileReader::~FileReader() noexcept = default;
 
-ls::std::core::type::byte_field ls::std::io::FileReader::read()
+byte_field FileReader::read()
 {
-  ls::std::core::type::byte *data;
-  ::std::ifstream inputStream{this->file.getAbsoluteFilePath(), ::std::ifstream::binary};
+  byte *data;
+  ifstream inputStream{this->file.getAbsoluteFilePath(), ifstream::binary};
   int length = (int) this->file.getSize();
-  data = new ls::std::core::type::byte[length];
+  data = new byte[length];
   inputStream.read(data, length);
 
   if (inputStream.fail())
   {
-    throw ls::std::core::FileOperationException{"operation: read"};
+    throw FileOperationException{"operation: read"};
   }
 
   inputStream.close();
-  ls::std::core::type::byte_field readData = ls::std::core::type::byte_field{data, (size_t) this->file.getSize()};
+  byte_field readData = byte_field{data, (size_t) this->file.getSize()};
   delete[] data;
 
   return readData;
 }
 
-void ls::std::io::FileReader::reset(ls::std::io::File &_file)
+void FileReader::reset(File &_file)
 {
-  ls::std::io::FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
+  FileExistenceEvaluator{_file.getAbsoluteFilePath()}.evaluate();
   this->file = _file;
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,16 +12,24 @@
 #include <ls-std/io/section-pair/evaluator/SectionPairRowSingleValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairRowSingleValueValidator.hpp>
 
-ls::std::io::SectionPairRowSingleValueArgumentEvaluator::SectionPairRowSingleValueArgumentEvaluator(::std::string _singleValueRow) : ls::std::core::Class("SectionPairRowSingleValueArgumentEvaluator"), singleValueRow(::std::move(_singleValueRow))
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::SectionPairMessageFormatter;
+using ls::std::io::SectionPairRowSingleValueArgumentEvaluator;
+using ls::std::io::SectionPairRowSingleValueValidator;
+using std::move;
+using std::string;
+
+SectionPairRowSingleValueArgumentEvaluator::SectionPairRowSingleValueArgumentEvaluator(string _singleValueRow) : Class("SectionPairRowSingleValueArgumentEvaluator"), singleValueRow(::move(_singleValueRow))
 {}
 
-ls::std::io::SectionPairRowSingleValueArgumentEvaluator::~SectionPairRowSingleValueArgumentEvaluator() noexcept = default;
+SectionPairRowSingleValueArgumentEvaluator::~SectionPairRowSingleValueArgumentEvaluator() noexcept = default;
 
-void ls::std::io::SectionPairRowSingleValueArgumentEvaluator::evaluate()
+void SectionPairRowSingleValueArgumentEvaluator::evaluate()
 {
-  if (!ls::std::io::SectionPairRowSingleValueValidator{this->singleValueRow}.isValid())
+  if (!SectionPairRowSingleValueValidator{this->singleValueRow}.isValid())
   {
-    ::std::string message = "\"" + this->singleValueRow + "\" is not a valid section pair single value row!";
-    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
+    string message = "\"" + this->singleValueRow + "\" is not a valid section pair single value row!";
+    throw IllegalArgumentException{SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }
