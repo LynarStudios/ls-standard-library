@@ -18,7 +18,7 @@ Colour::Colour(const string &_value) : Class("Colour")
   this->value = _value;
 }
 
-Colour::~Colour() = default;
+Colour::~Colour() noexcept = default;
 
 string Colour::getValue() const
 {

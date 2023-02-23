@@ -19,7 +19,7 @@ TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
   this->setColor("blue");
 }
 
-TestDataMercedesCar::~TestDataMercedesCar() = default;
+TestDataMercedesCar::~TestDataMercedesCar() noexcept = default;
 
 void TestDataMercedesCar::listen(const Class &_info)
 {

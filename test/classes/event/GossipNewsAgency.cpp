@@ -19,7 +19,7 @@ using test::event::NewsAgency;
 GossipNewsAgency::GossipNewsAgency() : NewsAgency("GossipNewsAgency")
 {}
 
-GossipNewsAgency::~GossipNewsAgency() = default;
+GossipNewsAgency::~GossipNewsAgency() noexcept = default;
 
 void GossipNewsAgency::listen(const Class &_info)
 {

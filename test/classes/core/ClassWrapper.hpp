@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-04-24
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
@@ -20,7 +20,7 @@ namespace test::core
     public:
 
       ClassWrapper();
-      ~ClassWrapper() override;
+      ~ClassWrapper() noexcept override;
 
       MOCK_METHOD0(Die, void());
   };

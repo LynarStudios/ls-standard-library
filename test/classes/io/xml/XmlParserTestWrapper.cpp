@@ -20,7 +20,7 @@ using test::io::XmlParserTestWrapper;
 XmlParserTestWrapper::XmlParserTestWrapper() : XmlParser(nullptr)
 {}
 
-XmlParserTestWrapper::~XmlParserTestWrapper() = default;
+XmlParserTestWrapper::~XmlParserTestWrapper() noexcept = default;
 
 pair<string, string> XmlParserTestWrapper::readAttribute(const byte_field &_data)
 {

@@ -13,4 +13,4 @@ using test::io::MockFileReader;
 
 MockFileReader::MockFileReader() = default;
 
-MockFileReader::~MockFileReader() = default;
+MockFileReader::~MockFileReader() noexcept = default;

@@ -21,4 +21,4 @@ SeriousNewsEvent::SeriousNewsEvent(const string &_news) : Event("SeriousNewsEven
   this->addParameter(newsParameter);
 }
 
-SeriousNewsEvent::~SeriousNewsEvent() = default;
+SeriousNewsEvent::~SeriousNewsEvent() noexcept = default;

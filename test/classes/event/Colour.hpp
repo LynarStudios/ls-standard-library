@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
@@ -19,7 +19,7 @@ namespace test::event
     public:
 
       explicit Colour(const ::std::string &_value);
-      ~Colour() override;
+      ~Colour() noexcept override;
 
       [[nodiscard]] ::std::string getValue() const;
 

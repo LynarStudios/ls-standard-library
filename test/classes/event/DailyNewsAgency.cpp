@@ -19,7 +19,7 @@ using test::event::NewsAgency;
 DailyNewsAgency::DailyNewsAgency() : NewsAgency("DailyNewsAgency")
 {}
 
-DailyNewsAgency::~DailyNewsAgency() = default;
+DailyNewsAgency::~DailyNewsAgency() noexcept = default;
 
 void DailyNewsAgency::listen(const Class &_info)
 {

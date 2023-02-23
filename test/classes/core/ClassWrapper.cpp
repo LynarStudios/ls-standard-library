@@ -15,7 +15,7 @@ using test::core::ClassWrapper;
 ClassWrapper::ClassWrapper() : Class("ClassWrapper")
 {}
 
-ClassWrapper::~ClassWrapper()
+ClassWrapper::~ClassWrapper() noexcept
 {
   Die();
 }

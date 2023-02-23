@@ -19,7 +19,7 @@ using test::io::MockFileExistenceEvaluator;
 MockFileExistenceEvaluator::MockFileExistenceEvaluator(bool _fileExists) : Class("MockFileExistenceEvaluator"), fileExists(_fileExists)
 {}
 
-MockFileExistenceEvaluator::~MockFileExistenceEvaluator() = default;
+MockFileExistenceEvaluator::~MockFileExistenceEvaluator() noexcept = default;
 
 void MockFileExistenceEvaluator::evaluate()
 {

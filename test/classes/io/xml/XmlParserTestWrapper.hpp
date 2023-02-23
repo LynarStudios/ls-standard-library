@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
@@ -19,7 +19,7 @@ namespace test::io
     public:
 
       XmlParserTestWrapper();
-      ~XmlParserTestWrapper() override;
+      ~XmlParserTestWrapper() noexcept override;
 
       static ::std::pair<::std::string, ::std::string> readAttribute(const ls::std::core::type::byte_field &_data);
       static ::std::list<::std::pair<::std::string, ::std::string>> readAttributes(ls::std::core::type::byte_field _data);

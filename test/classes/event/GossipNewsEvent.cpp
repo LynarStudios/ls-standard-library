@@ -21,4 +21,4 @@ GossipNewsEvent::GossipNewsEvent(const string &_news) : Event("GossipNewsEvent")
   this->addParameter(newsParameter);
 }
 
-GossipNewsEvent::~GossipNewsEvent() = default;
+GossipNewsEvent::~GossipNewsEvent() noexcept = default;
