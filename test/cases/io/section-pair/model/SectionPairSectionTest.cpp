@@ -113,7 +113,7 @@ namespace
     ASSERT_TRUE(section->getList().empty());
   }
 
-  TEST_F(SectionPairSectionTest, get)
+  TEST_F(SectionPairSectionTest, get_by_index)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
     section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
@@ -121,7 +121,7 @@ namespace
     ASSERT_TRUE(section->get(0) != nullptr);
   }
 
-  TEST_F(SectionPairSectionTest, get_out_of_bounds)
+  TEST_F(SectionPairSectionTest, get_by_index_out_of_bounds)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
 
@@ -137,6 +137,22 @@ namespace
           }
         },
         IndexOutOfBoundsException);
+  }
+
+  TEST_F(SectionPairSectionTest, get_by_key)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_TRUE(section->get("color") != nullptr);
+  }
+
+  TEST_F(SectionPairSectionTest, get_by_key_not_found)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_TRUE(section->get("hobbies") == nullptr);
   }
 
   TEST_F(SectionPairSectionTest, getAmount)
@@ -160,6 +176,22 @@ namespace
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
     ASSERT_STREQ("general", section->getSectionId().c_str());
+  }
+
+  TEST_F(SectionPairSectionTest, hasRow)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_TRUE(section->hasRow("color"));
+  }
+
+  TEST_F(SectionPairSectionTest, hasRow_not_found)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_FALSE(section->hasRow("hobbies"));
   }
 
   TEST_F(SectionPairSectionTest, marshal)

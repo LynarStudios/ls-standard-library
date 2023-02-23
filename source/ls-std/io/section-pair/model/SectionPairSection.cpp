@@ -75,6 +75,11 @@ section_pair_row_list_element SectionPairSection::get(size_t _index)
   return element;
 }
 
+section_pair_row_list_element SectionPairSection::get(const section_pair_identifier &_key)
+{
+  return this->_get(_key);
+}
+
 section_pair_row_list SectionPairSection::getList()
 {
   return this->rows;
@@ -88,6 +93,11 @@ size_t SectionPairSection::getRowAmount()
 section_pair_identifier SectionPairSection::getSectionId()
 {
   return this->sectionId;
+}
+
+bool SectionPairSection::hasRow(const section_pair_identifier &_key)
+{
+  return this->_hasRow(_key);
 }
 
 byte_field SectionPairSection::marshal()
@@ -123,6 +133,22 @@ void SectionPairSection::_createSerializable()
   }
 
   this->serializable = make_shared<SerializableSectionPairSection>(parameter);
+}
+
+section_pair_row_list_element SectionPairSection::_get(const section_pair_identifier &_key)
+{
+  section_pair_row_list_element element{};
+
+  for (const auto &_row : this->rows)
+  {
+    if (_row->getKey() == _key)
+    {
+      element = _row;
+      break;
+    }
+  }
+
+  return element;
 }
 
 bool SectionPairSection::_hasRow(const section_pair_identifier &_key)
