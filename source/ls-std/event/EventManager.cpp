@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -13,15 +13,29 @@
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>
 #include <ls-std/event/EventManager.hpp>
 
-ls::std::event::EventManager::EventManager() : ls::std::core::Class("EventManager")
+using ls::std::core::Class;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::EventNotHandledException;
+using ls::std::core::EventNotSubscribedException;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::interface_type::IListener;
+using ls::std::core::type::event_id;
+using ls::std::event::Event;
+using ls::std::event::EventHandler;
+using ls::std::event::EventManager;
+using std::make_pair;
+using std::pair;
+using std::shared_ptr;
+
+EventManager::EventManager() : Class("EventManager")
 {}
 
-ls::std::event::EventManager::~EventManager() noexcept = default;
+EventManager::~EventManager() noexcept = default;
 
-void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
+void EventManager::subscribe(const event_id &_id, const shared_ptr<IListener> &_listener)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be subscribed!"}.evaluate();
-  ls::std::core::NullPointerArgumentEvaluator{_listener, "listener reference for subscribe attempt is null!"}.evaluate();
+  EmptyStringArgumentEvaluator{_id, "event id is empty and can not be subscribed!"}.evaluate();
+  NullPointerArgumentEvaluator{_listener, "listener reference for subscribe attempt is null!"}.evaluate();
 
   if (this->_hasEventHandler(_id))
   {
@@ -29,14 +43,14 @@ void ls::std::event::EventManager::subscribe(const ls::std::core::type::event_id
   }
   else
   {
-    throw ls::std::core::EventNotSubscribedException{"id: " + _id};
+    throw EventNotSubscribedException{"id: " + _id};
   }
 }
 
-void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_id &_id, const ::std::shared_ptr<ls::std::core::interface_type::IListener> &_listener)
+void EventManager::unsubscribe(const event_id &_id, const shared_ptr<IListener> &_listener)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be unsubscribed!"}.evaluate();
-  ls::std::core::NullPointerArgumentEvaluator{_listener, "listener reference for unsubscribe attempt is null!"}.evaluate();
+  EmptyStringArgumentEvaluator{_id, "event id is empty and can not be unsubscribed!"}.evaluate();
+  NullPointerArgumentEvaluator{_listener, "listener reference for unsubscribe attempt is null!"}.evaluate();
 
   if (this->_hasEventHandler(_id))
   {
@@ -44,21 +58,21 @@ void ls::std::event::EventManager::unsubscribe(const ls::std::core::type::event_
   }
 }
 
-bool ls::std::event::EventManager::addEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
+bool EventManager::addEventHandler(const shared_ptr<EventHandler> &_eventHandler)
 {
   bool wasAdded{};
-  ls::std::core::NullPointerArgumentEvaluator{_eventHandler, "event handler reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_eventHandler, "event handler reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasEventHandler(_eventHandler->getId()))
   {
-    ::std::pair<ls::std::core::type::event_id, ::std::shared_ptr<ls::std::event::EventHandler>> element = ::std::make_pair(_eventHandler->getId(), _eventHandler);
+    pair<event_id, shared_ptr<EventHandler>> element = make_pair(_eventHandler->getId(), _eventHandler);
     wasAdded = this->eventHandlers.insert(element).second;
   }
 
   return wasAdded;
 }
 
-void ls::std::event::EventManager::fire(ls::std::event::Event _event)
+void EventManager::fire(Event _event)
 {
   if (this->_hasEventHandler(_event.getId()))
   {
@@ -66,28 +80,28 @@ void ls::std::event::EventManager::fire(ls::std::event::Event _event)
   }
   else
   {
-    throw ls::std::core::EventNotHandledException{"id: " + _event.getId()};
+    throw EventNotHandledException{"id: " + _event.getId()};
   }
 }
 
-bool ls::std::event::EventManager::hasEventHandler(const ls::std::core::type::event_id &_id)
+bool EventManager::hasEventHandler(const event_id &_id)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_id, "event id is empty and can not be passed!"}.evaluate();
+  EmptyStringArgumentEvaluator{_id, "event id is empty and can not be passed!"}.evaluate();
   return this->_hasEventHandler(_id);
 }
 
-bool ls::std::event::EventManager::removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
+bool EventManager::removeEventHandler(const shared_ptr<EventHandler> &_eventHandler)
 {
-  ls::std::core::NullPointerArgumentEvaluator{_eventHandler, "event handler reference for remove attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_eventHandler, "event handler reference for remove attempt is null!"}.evaluate();
   return this->_removeEventHandler(_eventHandler);
 }
 
-bool ls::std::event::EventManager::_hasEventHandler(const ls::std::core::type::event_id &_id)
+bool EventManager::_hasEventHandler(const event_id &_id)
 {
   return this->eventHandlers.find(_id) != this->eventHandlers.end();
 }
 
-bool ls::std::event::EventManager::_removeEventHandler(const ::std::shared_ptr<ls::std::event::EventHandler> &_eventHandler)
+bool EventManager::_removeEventHandler(const shared_ptr<EventHandler> &_eventHandler)
 {
   return this->eventHandlers.erase(_eventHandler->getId()) == 1;
 }
