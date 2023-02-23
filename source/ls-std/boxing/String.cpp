@@ -12,7 +12,7 @@
 
 using ls::std::boxing::String;
 using ls::std::core::Class;
-using ls::std::core::type::byte;
+using ls::std::core::type::byte_type;
 using std::move;
 using std::reverse;
 using std::string;
@@ -128,9 +128,9 @@ bool String::equalsIgnoreCase(string _text)
   return this->toLowerCase() == String{::move(_text)}.toLowerCase();
 }
 
-vector<byte> String::getByteData()
+vector<byte_type> String::getByteData()
 {
-  vector<byte> byteData(this->value.begin(), this->value.end());
+  vector<byte_type> byteData(this->value.begin(), this->value.end());
   byteData.push_back('\0');
 
   return byteData;

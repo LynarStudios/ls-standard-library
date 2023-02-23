@@ -19,7 +19,7 @@
 using ls::std::core::Class;
 using ls::std::core::NullPointerArgumentEvaluator;
 using ls::std::core::interface_type::IWriter;
-using ls::std::core::type::byte;
+using ls::std::core::type::byte_type;
 using ls::std::io::Logger;
 using ls::std::io::LogLevel;
 using ls::std::io::LogLevelValue;
@@ -38,7 +38,7 @@ Logger::Logger(const shared_ptr<IWriter> &_writer) : Class("Logger"), logLevel(L
 
 Logger::~Logger() noexcept = default;
 
-void Logger::debug(const byte *_data)
+void Logger::debug(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::DEBUG)
   {
@@ -46,7 +46,7 @@ void Logger::debug(const byte *_data)
   }
 }
 
-void Logger::error(const byte *_data)
+void Logger::error(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::ERR)
   {
@@ -54,7 +54,7 @@ void Logger::error(const byte *_data)
   }
 }
 
-void Logger::fatal(const byte *_data)
+void Logger::fatal(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::FATAL)
   {
@@ -67,7 +67,7 @@ LogLevel Logger::getLogLevel()
   return this->logLevel;
 }
 
-void Logger::info(const byte *_data)
+void Logger::info(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::INFO)
   {
@@ -80,7 +80,7 @@ void Logger::setLogLevel(const LogLevelValue &_logLevelValue)
   this->logLevel = _logLevelValue;
 }
 
-void Logger::trace(const byte *_data)
+void Logger::trace(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::TRACE)
   {
@@ -88,7 +88,7 @@ void Logger::trace(const byte *_data)
   }
 }
 
-void Logger::warn(const byte *_data)
+void Logger::warn(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::WARN)
   {
@@ -136,7 +136,7 @@ string Logger::_generateTimeString(tm *_localTime)
   return _stream.str();
 }
 
-void Logger::_log(const byte *_data, const LogLevel &_logLevel)
+void Logger::_log(const byte_type *_data, const LogLevel &_logLevel)
 {
   time_t timestamp = ::time(nullptr);
   tm *localTime = localtime(&timestamp);

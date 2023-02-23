@@ -14,8 +14,8 @@
 
 using ls::std::core::Class;
 using ls::std::core::FileOperationException;
-using ls::std::core::type::byte;
 using ls::std::core::type::byte_field;
+using ls::std::core::type::byte_type;
 using ls::std::io::File;
 using ls::std::io::FileExistenceEvaluator;
 using ls::std::io::FileReader;
@@ -30,10 +30,10 @@ FileReader::~FileReader() noexcept = default;
 
 byte_field FileReader::read()
 {
-  byte *data;
+  byte_type *data;
   ifstream inputStream{this->file.getAbsoluteFilePath(), ifstream::binary};
   int length = (int) this->file.getSize();
-  data = new byte[length];
+  data = new byte_type[length];
   inputStream.read(data, length);
 
   if (inputStream.fail())
