@@ -3,21 +3,27 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
 #include "DailyNewsAgency.hpp"
 #include <ls-std/ls-std-event.hpp>
 
-test::event::DailyNewsAgency::DailyNewsAgency() : test::event::NewsAgency("DailyNewsAgency")
+using ls::std::core::Class;
+using ls::std::event::Event;
+using std::string;
+using test::event::DailyNewsAgency;
+using test::event::NewsAgency;
+
+DailyNewsAgency::DailyNewsAgency() : NewsAgency("DailyNewsAgency")
 {}
 
-test::event::DailyNewsAgency::~DailyNewsAgency() = default;
+DailyNewsAgency::~DailyNewsAgency() = default;
 
-void test::event::DailyNewsAgency::listen(const ls::std::core::Class &_info)
+void DailyNewsAgency::listen(const Class &_info)
 {
-  ls::std::event::Event event = dynamic_cast<const ls::std::event::Event &>(_info);
+  Event event = dynamic_cast<const Event &>(_info);
 
   if (event.getId() == "SeriousNewsEvent")
   {
@@ -25,12 +31,12 @@ void test::event::DailyNewsAgency::listen(const ls::std::core::Class &_info)
   }
 }
 
-void test::event::DailyNewsAgency::clear()
+void DailyNewsAgency::clear()
 {
   this->news.clear();
 }
 
-::std::string test::event::DailyNewsAgency::getNews()
+string DailyNewsAgency::getNews()
 {
   return this->news;
 }

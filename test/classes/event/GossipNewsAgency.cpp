@@ -3,21 +3,27 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
 #include "GossipNewsAgency.hpp"
 #include <ls-std/ls-std-event.hpp>
 
-test::event::GossipNewsAgency::GossipNewsAgency() : test::event::NewsAgency("GossipNewsAgency")
+using ls::std::core::Class;
+using ls::std::event::Event;
+using std::string;
+using test::event::GossipNewsAgency;
+using test::event::NewsAgency;
+
+GossipNewsAgency::GossipNewsAgency() : NewsAgency("GossipNewsAgency")
 {}
 
-test::event::GossipNewsAgency::~GossipNewsAgency() = default;
+GossipNewsAgency::~GossipNewsAgency() = default;
 
-void test::event::GossipNewsAgency::listen(const ls::std::core::Class &_info)
+void GossipNewsAgency::listen(const Class &_info)
 {
-  ls::std::event::Event event = dynamic_cast<const ls::std::event::Event &>(_info);
+  Event event = dynamic_cast<const Event &>(_info);
 
   if (event.getId() == "SeriousNewsEvent")
   {
@@ -30,12 +36,12 @@ void test::event::GossipNewsAgency::listen(const ls::std::core::Class &_info)
   }
 }
 
-void test::event::GossipNewsAgency::clear()
+void GossipNewsAgency::clear()
 {
   this->news.clear();
 }
 
-::std::string test::event::GossipNewsAgency::getNews()
+string GossipNewsAgency::getNews()
 {
   return this->news;
 }

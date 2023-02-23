@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,16 +11,21 @@
 #include <ls-std/core/exception/FileNotFoundException.hpp>
 #include <string>
 
-test::io::MockFileExistenceEvaluator::MockFileExistenceEvaluator(bool _fileExists) : ls::std::core::Class("MockFileExistenceEvaluator"), fileExists(_fileExists)
+using ls::std::core::Class;
+using ls::std::core::FileNotFoundException;
+using std::string;
+using test::io::MockFileExistenceEvaluator;
+
+MockFileExistenceEvaluator::MockFileExistenceEvaluator(bool _fileExists) : Class("MockFileExistenceEvaluator"), fileExists(_fileExists)
 {}
 
-test::io::MockFileExistenceEvaluator::~MockFileExistenceEvaluator() = default;
+MockFileExistenceEvaluator::~MockFileExistenceEvaluator() = default;
 
-void test::io::MockFileExistenceEvaluator::evaluate()
+void MockFileExistenceEvaluator::evaluate()
 {
   if (!this->fileExists)
   {
-    ::std::string message = this->getClassName() + " called - this is just a simulation!";
-    throw ls::std::core::FileNotFoundException{message};
+    string message = this->getClassName() + " called - this is just a simulation!";
+    throw FileNotFoundException{message};
   }
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
@@ -24,7 +24,6 @@ namespace ls::std::test
 
       static ::std::string getResourcesFolderLocation();
       static ::std::string getTestFolderLocation();
-      static ::std::string normalize(const ::std::string &_path);
 
     private:
 

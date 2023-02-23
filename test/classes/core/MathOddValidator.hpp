@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-13
+* Changed:         2023-02-23
 *
 * */
 
@@ -19,7 +19,6 @@ namespace test::core
       MathOddValidator();
       ~MathOddValidator();
 
-      [[nodiscard]] bool isEven() const;
       [[nodiscard]] bool isOdd() const;
       void validate(int _number);
 

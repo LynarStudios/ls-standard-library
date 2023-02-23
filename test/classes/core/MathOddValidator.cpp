@@ -3,27 +3,24 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-13
+* Changed:         2023-02-23
 *
 * */
 
 #include "MathOddValidator.hpp"
 
-test::core::MathOddValidator::MathOddValidator() = default;
+using test::core::MathOddValidator;
 
-test::core::MathOddValidator::~MathOddValidator() = default;
+MathOddValidator::MathOddValidator() = default;
 
-bool test::core::MathOddValidator::isEven() const
-{
-  return !this->isOddNumber;
-}
+MathOddValidator::~MathOddValidator() = default;
 
-bool test::core::MathOddValidator::isOdd() const
+bool MathOddValidator::isOdd() const
 {
   return this->isOddNumber;
 }
 
-void test::core::MathOddValidator::validate(int _number)
+void MathOddValidator::validate(int _number)
 {
   this->isOddNumber = _number % 2 != 0;
 }

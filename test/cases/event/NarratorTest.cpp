@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -157,7 +157,7 @@ namespace
     ASSERT_STREQ("blue", this->mercedes2->getColor().c_str());
     ASSERT_STREQ("red", this->mercedes3->getColor().c_str());
 
-    Colour newColor{"black"};
+    Colour newColor = Colour{"black"};
     paintingMachine.tell(static_cast<const Class &>(newColor));
 
     ASSERT_STREQ("black", this->mercedes1->getColor().c_str());

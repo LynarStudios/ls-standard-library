@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,33 +11,46 @@
 #include <classes/io/section-pair/SectionPairSectionProvider.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-test::io::SectionPairDocumentProvider::SectionPairDocumentProvider() = default;
+using ls::std::core::type::byte_field;
+using ls::std::io::SectionPairDocument;
+using ls::std::io::SectionPairRow;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SectionPairSection;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using test::io::SectionPairDocumentProvider;
+using test::io::SectionPairSectionProvider;
 
-test::io::SectionPairDocumentProvider::~SectionPairDocumentProvider() = default;
+SectionPairDocumentProvider::SectionPairDocumentProvider() = default;
 
-::std::shared_ptr<ls::std::io::SectionPairDocument> test::io::SectionPairDocumentProvider::createDocument()
+SectionPairDocumentProvider::~SectionPairDocumentProvider() = default;
+
+shared_ptr<SectionPairDocument> SectionPairDocumentProvider::createDocument()
 {
-  ::std::shared_ptr<ls::std::io::SectionPairDocument> document = ::std::make_shared<ls::std::io::SectionPairDocument>();
+  shared_ptr<SectionPairDocument> document = make_shared<SectionPairDocument>();
 
   // general section
 
-  ::std::shared_ptr<ls::std::io::SectionPairSection> generalSection = test::io::SectionPairSectionProvider::createSectionWithSandraExample();
+  shared_ptr<SectionPairSection> generalSection = SectionPairSectionProvider::createSectionWithSandraExample();
   document->add(generalSection);
 
   // physical
 
-  ::std::shared_ptr<ls::std::io::SectionPairSection> physicalSection = ::std::make_shared<ls::std::io::SectionPairSection>("physical");
+  shared_ptr<SectionPairSection> physicalSection = make_shared<SectionPairSection>("physical");
 
-  ::std::shared_ptr<ls::std::io::SectionPairRow> eyeColor = ::std::make_shared<ls::std::io::SectionPairRow>("eye-color", ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(eyeColor->getValue())->set("blue");
+  shared_ptr<SectionPairRow> eyeColor = make_shared<SectionPairRow>("eye-color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
+  dynamic_pointer_cast<SectionPairRowSingleValue>(eyeColor->getValue())->set("blue");
   physicalSection->add(eyeColor);
 
-  ::std::shared_ptr<ls::std::io::SectionPairRow> hairColor = ::std::make_shared<ls::std::io::SectionPairRow>("hair-color", ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(hairColor->getValue())->set("red");
+  shared_ptr<SectionPairRow> hairColor = make_shared<SectionPairRow>("hair-color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
+  dynamic_pointer_cast<SectionPairRowSingleValue>(hairColor->getValue())->set("red");
   physicalSection->add(hairColor);
 
-  ::std::shared_ptr<ls::std::io::SectionPairRow> height = ::std::make_shared<ls::std::io::SectionPairRow>("height", ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(height->getValue())->set("167");
+  shared_ptr<SectionPairRow> height = make_shared<SectionPairRow>("height", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE);
+  dynamic_pointer_cast<SectionPairRowSingleValue>(height->getValue())->set("167");
   physicalSection->add(height);
 
   document->add(physicalSection);
@@ -45,13 +58,13 @@ test::io::SectionPairDocumentProvider::~SectionPairDocumentProvider() = default;
   return document;
 }
 
-ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSerializedDocument(const ::std::string &_newLine)
+byte_field SectionPairDocumentProvider::createSerializedDocument(const string &_newLine)
 {
-  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + _newLine;
+  byte_field serializedDocument = "# section-pair document" + _newLine;
 
   // general section
 
-  serializedDocument += test::io::SectionPairSectionProvider::createSerializedSectionWithSandraExample(_newLine);
+  serializedDocument += SectionPairSectionProvider::createSerializedSectionWithSandraExample(_newLine);
 
   // physical
 
@@ -63,9 +76,9 @@ ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSer
   return serializedDocument;
 }
 
-ls::std::core::type::byte_field test::io::SectionPairDocumentProvider::createSerializedDocumentComputerExample(const ::std::string &_newLine)
+byte_field SectionPairDocumentProvider::createSerializedDocumentComputerExample(const string &_newLine)
 {
-  ls::std::core::type::byte_field serializedDocument = "# section-pair document" + _newLine;
+  byte_field serializedDocument = "# section-pair document" + _newLine;
   serializedDocument += _newLine + "[model]" + _newLine + _newLine;
   serializedDocument += "graphics-card=GTX 720" + _newLine;
   serializedDocument += "ram-size=4096" + _newLine;
