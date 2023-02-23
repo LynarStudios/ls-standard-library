@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/EventNotHandledException.hpp>
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 
-ls::std::core::EventNotHandledException::EventNotHandledException() : ls::std::core::Exception("EventNotHandledException")
+using ls::std::core::EventNotHandledException;
+using ls::std::core::Exception;
+using std::move;
+using std::string;
+
+EventNotHandledException::EventNotHandledException() : Exception("EventNotHandledException")
 {}
 
-ls::std::core::EventNotHandledException::EventNotHandledException(::std::string _message) : ls::std::core::EventNotHandledException()
+EventNotHandledException::EventNotHandledException(string _message) : EventNotHandledException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::EventNotHandledException::~EventNotHandledException() noexcept = default;
+EventNotHandledException::~EventNotHandledException() noexcept = default;
 
-const char *ls::std::core::EventNotHandledException::what() const noexcept
+const char *EventNotHandledException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

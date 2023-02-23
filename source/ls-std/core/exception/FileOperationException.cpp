@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/FileOperationException.hpp>
 
-ls::std::core::FileOperationException::FileOperationException() : ls::std::core::Exception("FileOperationException")
+using ls::std::core::Exception;
+using ls::std::core::FileOperationException;
+using std::move;
+using std::string;
+
+FileOperationException::FileOperationException() : Exception("FileOperationException")
 {}
 
-ls::std::core::FileOperationException::FileOperationException(::std::string _message) : ls::std::core::FileOperationException()
+FileOperationException::FileOperationException(string _message) : FileOperationException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::FileOperationException::~FileOperationException() noexcept = default;
+FileOperationException::~FileOperationException() noexcept = default;
 
-const char *ls::std::core::FileOperationException::what() const noexcept
+const char *FileOperationException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/NullPointerException.hpp>
 
-ls::std::core::NullPointerException::NullPointerException() : ls::std::core::Exception("NullPointerException")
+using ls::std::core::Exception;
+using ls::std::core::NullPointerException;
+using std::move;
+using std::string;
+
+NullPointerException::NullPointerException() : Exception("NullPointerException")
 {}
 
-ls::std::core::NullPointerException::NullPointerException(::std::string _message) : ls::std::core::NullPointerException()
+NullPointerException::NullPointerException(string _message) : NullPointerException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::NullPointerException::~NullPointerException() noexcept = default;
+NullPointerException::~NullPointerException() noexcept = default;
 
-const char *ls::std::core::NullPointerException::what() const noexcept
+const char *NullPointerException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

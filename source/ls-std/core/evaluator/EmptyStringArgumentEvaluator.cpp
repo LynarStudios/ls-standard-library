@@ -3,32 +3,37 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::core::EmptyStringArgumentEvaluator::EmptyStringArgumentEvaluator(::std::string _argument) : argument(::std::move(_argument))
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::IllegalArgumentException;
+using std::move;
+using std::string;
+
+EmptyStringArgumentEvaluator::EmptyStringArgumentEvaluator(string _argument) : argument(::move(_argument))
 {}
 
-ls::std::core::EmptyStringArgumentEvaluator::EmptyStringArgumentEvaluator(::std::string _argument, ::std::string _message) : argument(::std::move(_argument)), message(::std::move(_message))
+EmptyStringArgumentEvaluator::EmptyStringArgumentEvaluator(string _argument, string _message) : argument(::move(_argument)), message(::move(_message))
 {}
 
-ls::std::core::EmptyStringArgumentEvaluator::~EmptyStringArgumentEvaluator() noexcept = default;
+EmptyStringArgumentEvaluator::~EmptyStringArgumentEvaluator() noexcept = default;
 
-void ls::std::core::EmptyStringArgumentEvaluator::evaluate()
+void EmptyStringArgumentEvaluator::evaluate()
 {
   if (this->argument.empty())
   {
     if (this->message.empty())
     {
-      throw ls::std::core::IllegalArgumentException{"passed argument is empty!"};
+      throw IllegalArgumentException{"passed argument is empty!"};
     }
     else
     {
-      throw ls::std::core::IllegalArgumentException{this->message};
+      throw IllegalArgumentException{this->message};
     }
   }
 }

@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/EventNotSubscribedException.hpp>
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 
-ls::std::core::EventNotSubscribedException::EventNotSubscribedException() : ls::std::core::Exception("EventNotSubscribedException")
+using ls::std::core::EventNotSubscribedException;
+using ls::std::core::Exception;
+using std::move;
+using std::string;
+
+EventNotSubscribedException::EventNotSubscribedException() : Exception("EventNotSubscribedException")
 {}
 
-ls::std::core::EventNotSubscribedException::EventNotSubscribedException(::std::string _message) : ls::std::core::EventNotSubscribedException()
+EventNotSubscribedException::EventNotSubscribedException(string _message) : EventNotSubscribedException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::EventNotSubscribedException::~EventNotSubscribedException() noexcept = default;
+EventNotSubscribedException::~EventNotSubscribedException() noexcept = default;
 
-const char *ls::std::core::EventNotSubscribedException::what() const noexcept
+const char *EventNotSubscribedException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

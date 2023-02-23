@@ -3,32 +3,38 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/core/evaluator/NullPointerEvaluator.hpp>
 #include <ls-std/core/exception/NullPointerException.hpp>
 
-ls::std::core::NullPointerEvaluator::NullPointerEvaluator(const ::std::shared_ptr<void> &_argument) : argument(_argument)
+using ls::std::core::NullPointerEvaluator;
+using ls::std::core::NullPointerException;
+using std::move;
+using std::shared_ptr;
+using std::string;
+
+NullPointerEvaluator::NullPointerEvaluator(const shared_ptr<void> &_argument) : argument(_argument)
 {}
 
-ls::std::core::NullPointerEvaluator::NullPointerEvaluator(const ::std::shared_ptr<void> &_argument, ::std::string _message) : argument(_argument), message(::std::move(_message))
+NullPointerEvaluator::NullPointerEvaluator(const shared_ptr<void> &_argument, string _message) : argument(_argument), message(::move(_message))
 {}
 
-ls::std::core::NullPointerEvaluator::~NullPointerEvaluator() noexcept = default;
+NullPointerEvaluator::~NullPointerEvaluator() noexcept = default;
 
-void ls::std::core::NullPointerEvaluator::evaluate()
+void NullPointerEvaluator::evaluate()
 {
   if (this->argument == nullptr)
   {
     if (this->message.empty())
     {
-      throw ls::std::core::NullPointerException{"reference in use is null!"};
+      throw NullPointerException{"reference in use is null!"};
     }
     else
     {
-      throw ls::std::core::NullPointerException{this->message};
+      throw NullPointerException{this->message};
     }
   }
 }

@@ -3,18 +3,21 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/core/ConditionalFunctionExecutor.hpp>
 
-ls::std::core::ConditionalFunctionExecutor::ConditionalFunctionExecutor(bool _condition) : condition(_condition)
+using ls::std::core::ConditionalFunctionExecutor;
+using std::function;
+
+ConditionalFunctionExecutor::ConditionalFunctionExecutor(bool _condition) : condition(_condition)
 {}
 
-ls::std::core::ConditionalFunctionExecutor::~ConditionalFunctionExecutor() = default;
+ConditionalFunctionExecutor::~ConditionalFunctionExecutor() = default;
 
-void ls::std::core::ConditionalFunctionExecutor::execute(const ::std::function<void()> &_function) const
+void ConditionalFunctionExecutor::execute(const function<void()> &_function) const
 {
   if (this->condition)
   {

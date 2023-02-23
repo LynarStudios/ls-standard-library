@@ -3,32 +3,37 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/core/evaluator/IndexOutOfBoundsEvaluator.hpp>
 #include <ls-std/core/exception/IndexOutOfBoundsException.hpp>
 
-ls::std::core::IndexOutOfBoundsEvaluator::IndexOutOfBoundsEvaluator(size_t _index, size_t _size) : index(_index), size(_size)
+using ls::std::core::IndexOutOfBoundsEvaluator;
+using ls::std::core::IndexOutOfBoundsException;
+using std::move;
+using std::string;
+
+IndexOutOfBoundsEvaluator::IndexOutOfBoundsEvaluator(size_t _index, size_t _size) : index(_index), size(_size)
 {}
 
-ls::std::core::IndexOutOfBoundsEvaluator::IndexOutOfBoundsEvaluator(size_t _index, size_t _size, ::std::string _message) : index(_index), size(_size), message(::std::move(_message))
+IndexOutOfBoundsEvaluator::IndexOutOfBoundsEvaluator(size_t _index, size_t _size, string _message) : index(_index), size(_size), message(::move(_message))
 {}
 
-ls::std::core::IndexOutOfBoundsEvaluator::~IndexOutOfBoundsEvaluator() noexcept = default;
+IndexOutOfBoundsEvaluator::~IndexOutOfBoundsEvaluator() noexcept = default;
 
-void ls::std::core::IndexOutOfBoundsEvaluator::evaluate()
+void IndexOutOfBoundsEvaluator::evaluate()
 {
   if (this->index >= this->size)
   {
     if (this->message.empty())
     {
-      throw ls::std::core::IndexOutOfBoundsException{};
+      throw IndexOutOfBoundsException{};
     }
     else
     {
-      throw ls::std::core::IndexOutOfBoundsException{this->message};
+      throw IndexOutOfBoundsException{this->message};
     }
   }
 }
