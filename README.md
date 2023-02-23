@@ -47,8 +47,11 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - __logic__ module has been removed from this library and can now be found in __ls-game-tool-kit__ library
 - __core.utils__ module has been removed from this library to provide more clean implementations where it's needed
-- namespaces have been completely removed from module tests to improve readability
-- a new naming convention for files and directories has been introduced, where underscores were replaced by dashes entirely
+- the complexity of source files has been reduced by declaring usages of namespaces at the file beginning sections
+  instead of using those in every definition implementation, this overall improves the readability of the libraries
+  source files
+- a new naming convention for files and directories has been introduced, where underscores were replaced by dashes
+  entirely
 - fetching the library version can now be achieved by using a dedicated __LibraryVersion__ class - the usage of a static function for this purpose has been removed completely
 - missing nodiscard attributes have been added to library classes
 - rename "types" folder in __core__ submodule to stick to naming convention
