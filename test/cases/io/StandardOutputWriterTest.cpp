@@ -3,15 +3,15 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-09-18
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::io;
-using namespace ::testing;
+using ls::std::io::StandardOutputWriter;
+using testing::Test;
 
 namespace
 {

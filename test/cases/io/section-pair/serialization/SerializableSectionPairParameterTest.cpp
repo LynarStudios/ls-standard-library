@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-17
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,11 +11,11 @@
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::io::NewLine;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SerializableSectionPairParameter;
+using std::make_shared;
+using testing::Test;
 
 namespace
 {

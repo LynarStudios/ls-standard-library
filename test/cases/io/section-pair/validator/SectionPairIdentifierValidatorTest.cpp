@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,10 +12,11 @@
 #include <ls-std/ls-std-io.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::io::SectionPairIdentifierValidator;
+using std::string;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {

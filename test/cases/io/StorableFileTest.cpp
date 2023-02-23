@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -11,11 +11,13 @@
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ls::std::test;
-using namespace ::std;
-using namespace ::testing;
+using ls::std::core::type::byte_field;
+using ls::std::io::File;
+using ls::std::io::NewLine;
+using ls::std::io::StorableFile;
+using ls::std::test::TestHelper;
+using std::string;
+using testing::Test;
 
 namespace
 {

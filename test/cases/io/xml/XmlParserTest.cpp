@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -12,12 +12,20 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace ls::std::test;
-using namespace ::testing;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::io::File;
+using ls::std::io::FileReader;
+using ls::std::io::XmlAttribute;
+using ls::std::io::XmlDocument;
+using ls::std::io::XmlNode;
+using ls::std::io::XmlParser;
+using ls::std::test::TestHelper;
+using std::list;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
 
 namespace
 {
@@ -35,7 +43,7 @@ namespace
 
         if (_index < _attributes.size())
         {
-          for (const auto &_value: _attributes)
+          for (const auto &_value : _attributes)
           {
             if (counter == _index)
             {
@@ -57,7 +65,7 @@ namespace
 
         if (_index < _children.size())
         {
-          for (const auto &_value: _children)
+          for (const auto &_value : _children)
           {
             if (counter == _index)
             {

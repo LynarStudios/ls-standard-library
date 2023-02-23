@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -11,9 +11,10 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::testing;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::LogLevel;
+using ls::std::io::LogLevelValue;
+using testing::Test;
 
 namespace
 {

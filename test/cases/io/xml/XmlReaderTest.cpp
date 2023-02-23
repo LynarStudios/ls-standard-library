@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-10
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
@@ -12,11 +12,15 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace ls::std::test;
-using namespace ::testing;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::File;
+using ls::std::io::XmlDocument;
+using ls::std::io::XmlReader;
+using ls::std::test::TestHelper;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
 
 namespace
 {
