@@ -3,184 +3,198 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <algorithm>
 #include <ls-std/boxing/String.hpp>
 
-ls::std::boxing::String::String() : ls::std::core::Class("String")
+using ls::std::boxing::String;
+using ls::std::core::Class;
+using ls::std::core::type::byte;
+using std::move;
+using std::reverse;
+using std::string;
+using std::transform;
+using std::vector;
+
+String::String() : Class("String")
 {}
 
-ls::std::boxing::String::String(::std::string _value) : ls::std::core::Class("String"), value(::std::move(_value))
-{}
-
-ls::std::boxing::String::~String() noexcept = default;
-
-ls::std::boxing::String &ls::std::boxing::String::operator=(::std::string _value)
+String::String(string _value) : String()
 {
-  this->value = ::std::move(_value);
+  this->value = ::move(_value);
+}
+
+String::~String() noexcept = default;
+
+String &String::operator=(string _value)
+{
+  this->value = ::move(_value);
   return *this;
 }
 
-::std::string ls::std::boxing::String::operator+(ls::std::boxing::String _string) const
+string String::operator+(String _string) const
 {
   return this->value + _string.toString();
 }
 
-::std::string ls::std::boxing::String::operator+(const ::std::string &_string) const
+string String::operator+(const string &_string) const
 {
   return this->value + _string;
 }
 
-::std::string ls::std::boxing::String::operator+(const char *_string) const
+string String::operator+(const char *_string) const
 {
   return this->value + _string;
 }
 
-::std::string ls::std::boxing::String::operator-(int _number)
+string String::operator-(int _number)
 {
-  ::std::string copy = this->value;
+  string copy = this->value;
   return copy.substr(0, copy.size() - _number);
 }
 
-ls::std::boxing::String &ls::std::boxing::String::operator+=(ls::std::boxing::String _string)
+String &String::operator+=(String _string)
 {
   this->value = this->value + _string.toString();
   return *this;
 }
 
-ls::std::boxing::String &ls::std::boxing::String::operator+=(const ::std::string &_text)
+String &String::operator+=(const string &_text)
 {
   this->value = this->value + _text;
   return *this;
 }
 
-bool ls::std::boxing::String::operator==(ls::std::boxing::String _string)
+bool String::operator==(String _string)
 {
   return this->value == _string.toString();
 }
 
-bool ls::std::boxing::String::operator==(const ::std::string &_value)
+bool String::operator==(const string &_value)
 {
   return this->value == _value;
 }
 
-bool ls::std::boxing::String::operator==(const char *_value)
+bool String::operator==(const char *_value)
 {
   return this->value == _value;
 }
 
-bool ls::std::boxing::String::operator!=(ls::std::boxing::String _string)
+bool String::operator!=(String _string)
 {
   return this->value != _string.toString();
 }
 
-bool ls::std::boxing::String::operator!=(const ::std::string &_value)
+bool String::operator!=(const string &_value)
 {
   return this->value != _value;
 }
 
-bool ls::std::boxing::String::operator!=(const char *_value)
+bool String::operator!=(const char *_value)
 {
   return this->value != _value;
 }
 
-void ls::std::boxing::String::parse(::std::string _parseText)
+void String::parse(string _parseText)
 {
-  this->value = ::std::move(_parseText);
+  this->value = ::move(_parseText);
 }
 
-::std::string ls::std::boxing::String::toString()
+string String::toString()
 {
   return this->value;
 }
 
-bool ls::std::boxing::String::contains(const ::std::string &_text)
+bool String::contains(const string &_text)
 {
-  return this->value.find(_text) != ::std::string::npos;
+  return this->value.find(_text) != string::npos;
 }
 
-bool ls::std::boxing::String::endsWith(const ::std::string &_text)
+bool String::endsWith(const string &_text)
 {
   return this->value.rfind(_text) == (this->value.size() - _text.size());
 }
 
-bool ls::std::boxing::String::equalsIgnoreCase(ls::std::boxing::String _string)
+bool String::equalsIgnoreCase(String _string)
 {
   return this->toLowerCase() == _string.toLowerCase();
 }
 
-bool ls::std::boxing::String::equalsIgnoreCase(::std::string _text)
+bool String::equalsIgnoreCase(string _text)
 {
-  return this->toLowerCase() == ls::std::boxing::String{::std::move(_text)}.toLowerCase();
+  return this->toLowerCase() == String{::move(_text)}.toLowerCase();
 }
 
-::std::vector<ls::std::core::type::byte> ls::std::boxing::String::getByteData()
+vector<byte> String::getByteData()
 {
-  ::std::vector<ls::std::core::type::byte> byteData(this->value.begin(), this->value.end());
+  vector<byte> byteData(this->value.begin(), this->value.end());
   byteData.push_back('\0');
 
   return byteData;
 }
 
-::std::string ls::std::boxing::String::padLeft(size_t _width, const char _fillCharacter)
+string String::padLeft(size_t _width, const char _fillCharacter)
 {
-  return ls::std::boxing::String::_createFillContent(this->value, _width, _fillCharacter) + this->value;
+  return String::_createFillContent(this->value, _width, _fillCharacter) + this->value;
 }
 
-::std::string ls::std::boxing::String::padRight(size_t _width, const char _fillCharacter)
+string String::padRight(size_t _width, const char _fillCharacter)
 {
-  return this->value + ls::std::boxing::String::_createFillContent(this->value, _width, _fillCharacter);
+  return this->value + String::_createFillContent(this->value, _width, _fillCharacter);
 }
 
-::std::string ls::std::boxing::String::reverse()
+string String::reverse()
 {
-  ::std::string copy = this->value;
-  ::std::reverse(copy.begin(), copy.end());
+  string copy = this->value;
+  ::reverse(copy.begin(), copy.end());
 
   return copy;
 }
 
-bool ls::std::boxing::String::startsWith(const ::std::string &_text)
+bool String::startsWith(const string &_text)
 {
   return this->value.rfind(_text, 0) == 0;
 }
 
-::std::string ls::std::boxing::String::toLowerCase()
+string String::toLowerCase()
 {
-  ::std::string copy = this->value;
-  ::std::transform(copy.begin(), copy.end(), copy.begin(), ::tolower);
+  string copy = this->value;
+  transform(copy.begin(), copy.end(), copy.begin(), ::tolower);
 
   return copy;
 }
 
-::std::string ls::std::boxing::String::toUpperCase()
+string String::toUpperCase()
 {
-  ::std::string copy = this->value;
-  ::std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
+  string copy = this->value;
+  transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
 
   return copy;
 }
 
-::std::string ls::std::boxing::String::_buildCharacterChain(size_t _amount, const char _fillCharacter)
+string String::_buildCharacterChain(size_t _amount, const char _fillCharacter)
 {
-  ::std::string fillContent{};
+  string fillContent{};
 
-  for (size_t iteration{}; iteration < _amount; iteration++) { fillContent += _fillCharacter; }
+  for (size_t iteration{}; iteration < _amount; iteration++)
+  {
+    fillContent += _fillCharacter;
+  }
 
   return fillContent;
 }
 
-::std::string ls::std::boxing::String::_createFillContent(const ::std::string &_text, size_t _width, const char _fillCharacter)
+string String::_createFillContent(const string &_text, size_t _width, const char _fillCharacter)
 {
   size_t fillSize = _text.size() > _width ? 0 : _width - _text.size();
-  ::std::string fillContent{};
+  string fillContent{};
 
   if (fillSize > 0)
   {
-    fillContent = ls::std::boxing::String::_buildCharacterChain(fillSize, _fillCharacter);
+    fillContent = String::_buildCharacterChain(fillSize, _fillCharacter);
   }
 
   return fillContent;
