@@ -3,10 +3,11 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-23
+ * Changed:         2023-02-24
  *
  * */
 
+#include <algorithm>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 #include <ls-std/io/logging/LogLevel.hpp>
 
@@ -14,6 +15,8 @@ using ls::std::core::Class;
 using ls::std::core::IllegalArgumentException;
 using ls::std::io::LogLevel;
 using ls::std::io::LogLevelValue;
+using std::find_if;
+using std::pair;
 using std::string;
 
 LogLevel::LogLevel(const LogLevelValue &_value) : Class("LogLevel"), value(_value)
@@ -88,18 +91,10 @@ string LogLevel::toString() const
 
 LogLevelValue LogLevel::_getValueFromString(const string &_value)
 {
-  LogLevelValue logLevelValue{};
+  const auto &iterator = find_if(this->level.begin(), this->level.end(), [_value](const pair<uint8_t, string> &_logLevelString) { return _logLevelString.second == _value; });
+  pair<uint8_t, string> levelPair = *iterator;
 
-  for (const auto &logLevelString : this->level)
-  {
-    if (logLevelString.second == _value)
-    {
-      logLevelValue = (LogLevelValue) logLevelString.first;
-      break;
-    }
-  }
-
-  return logLevelValue;
+  return iterator != level.end() ? (LogLevelValue) levelPair.first : LogLevelValue{};
 }
 
 void LogLevel::_init()
