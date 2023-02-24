@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-23
+ * Changed:         2023-02-24
  *
  * */
 
@@ -20,6 +20,7 @@ using ls::std::io::XmlNode;
 using ls::std::io::XmlParseMode;
 using ls::std::io::XmlParseParameter;
 using ls::std::io::XmlParser;
+using std::find_if;
 using std::list;
 using std::make_shared;
 using std::move;
@@ -130,18 +131,8 @@ bool XmlParser::_endsWith(const string &_text, const string &_ending)
 
 pair<string, string> XmlParser::_findAttribute(const list<pair<string, string>> &_attributes, const string &_name)
 {
-  pair<string, string> attribute{};
-
-  for (const auto &currentAttribute : _attributes)
-  {
-    if (currentAttribute.first == _name)
-    {
-      attribute = currentAttribute;
-      break;
-    }
-  }
-
-  return attribute;
+  const auto &iterator = find_if(_attributes.begin(), _attributes.end(), [_name](const pair<string, string> &_attribute) { return _attribute.first == _name; });
+  return iterator != _attributes.end() ? *iterator : pair<string, string>{};
 }
 
 size_t XmlParser::_findAttributeEndPosition(const byte_field &_data)
