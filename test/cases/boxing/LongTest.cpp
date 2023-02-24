@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-22
+ * Changed:         2023-02-24
  *
  * */
 
@@ -401,13 +401,17 @@ namespace
   TEST_F(LongTest, operator_or_with_value)
   {
     Long x{};
-    ASSERT_TRUE(x || (long_type) 1);
+    bool orWithValue = x || (long_type) 1;
+
+    ASSERT_TRUE(orWithValue);
   }
 
   TEST_F(LongTest, operator_or_with_boolean)
   {
     Long x{};
-    ASSERT_TRUE(x || true);
+    bool orWithBoolean = x || true;
+
+    ASSERT_TRUE(orWithBoolean);
   }
 
   // increment / decrement operator

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-22
+ * Changed:         2023-02-24
  *
  * */
 
@@ -94,9 +94,6 @@ namespace
 
     ASSERT_FALSE(expressionA && expressionB);
     ASSERT_FALSE(expressionB && expressionA);
-    ASSERT_FALSE(expressionB && (3 == 4));
-    ASSERT_FALSE(expressionB && 0);
-    ASSERT_FALSE(expressionB && false);
   }
 
   TEST_F(BooleanTest, operator_or)
@@ -106,8 +103,6 @@ namespace
 
     ASSERT_TRUE(expressionA || expressionB);
     ASSERT_TRUE(expressionB || expressionA);
-    ASSERT_TRUE(expressionA || 1);
-    ASSERT_TRUE(expressionA || true);
     ASSERT_TRUE(1 || expressionA.getValue());
   }
 

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-22
+ * Changed:         2023-02-24
  *
  * */
 
@@ -399,13 +399,17 @@ namespace
   TEST_F(IntegerTest, operator_or_with_value)
   {
     Integer x{};
-    ASSERT_TRUE(x || 1);
+    bool orWithValue = x || 1;
+
+    ASSERT_TRUE(orWithValue);
   }
 
   TEST_F(IntegerTest, operator_or_with_boolean)
   {
     Integer x{};
-    ASSERT_TRUE(x || true);
+    bool orWithBoolean = x || true;
+
+    ASSERT_TRUE(orWithBoolean);
   }
 
   // increment / decrement operator
