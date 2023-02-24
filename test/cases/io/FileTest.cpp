@@ -261,8 +261,6 @@ namespace
     string expectedFile{};
     const char separator = FilePathSeparator::get();
 
-    auto filesIterator = filesInDirectory.begin();
-
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(7, filesInDirectory.size());
 
