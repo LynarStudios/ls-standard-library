@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-23
+ * Changed:         2023-02-24
  *
  * */
 
@@ -39,10 +39,11 @@ namespace
       static shared_ptr<XmlAttribute> getAttributeAtPosition(const list<shared_ptr<XmlAttribute>> &_attributes, size_t _index)
       {
         shared_ptr<XmlAttribute> attribute{};
-        size_t counter{};
 
         if (_index < _attributes.size())
         {
+          size_t counter{};
+
           for (const auto &_value : _attributes)
           {
             if (counter == _index)
@@ -61,10 +62,11 @@ namespace
       static shared_ptr<XmlNode> getChildAtPosition(const list<shared_ptr<XmlNode>> &_children, size_t _index)
       {
         shared_ptr<XmlNode> node{};
-        size_t counter{};
 
         if (_index < _children.size())
         {
+          size_t counter{};
+
           for (const auto &_value : _children)
           {
             if (counter == _index)
@@ -283,15 +285,12 @@ namespace
 
   TEST_F(XmlParserTest, getDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     XmlParser xmlParser{make_shared<XmlDocument>()};
-
     ASSERT_TRUE(xmlParser.getDocument() != nullptr);
   }
 
   TEST_F(XmlParserTest, setDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
     XmlParser xmlParser{document};
     ASSERT_TRUE(xmlParser.getDocument() == document);
