@@ -8,15 +8,18 @@
  * */
 
 #include <algorithm>
+#include <iterator>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/xml/XmlNode.hpp>
+#include <numeric>
 
 using ls::std::core::Class;
 using ls::std::core::EmptyStringArgumentEvaluator;
 using ls::std::core::NullPointerArgumentEvaluator;
 using ls::std::io::XmlAttribute;
 using ls::std::io::XmlNode;
+using std::accumulate;
 using std::any_of;
 using std::back_inserter;
 using std::copy_if;
@@ -86,7 +89,6 @@ bool XmlNode::addAttributeToBeginning(const shared_ptr<XmlAttribute> &_attribute
 {
   bool added{};
   NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
-  ;
 
   if (!_hasAttribute(_attribute->getName()))
   {
@@ -361,29 +363,12 @@ bool XmlNode::_hasChild(const string &_name)
 
 string XmlNode::_toXmlAttributes()
 {
-  string stream{};
-
-  for (const auto &_attribute : this->attributes)
-  {
-    stream += " " + _attribute->toXml();
-  }
-
-  return stream;
+  return accumulate(this->attributes.begin(), this->attributes.end(), string{}, [](string stream, const shared_ptr<XmlAttribute> &_attribute) { return ::move(stream) + " " + _attribute->toXml(); });
 }
 
 string XmlNode::_toXmlChildren(uint8_t _tabSize)
 {
-  string stream{};
-
-  if (this->value.empty())
-  {
-    for (const auto &_child : this->children)
-    {
-      stream += _child->_toXml_(_tabSize);
-    }
-  }
-
-  return stream;
+  return accumulate(this->children.begin(), this->children.end(), string{}, [_tabSize](string stream, const shared_ptr<XmlNode> &_child) { return ::move(stream) + _child->_toXml_(_tabSize); });
 }
 
 string XmlNode::_toXmlCloseTag()
