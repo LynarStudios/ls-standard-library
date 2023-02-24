@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-23
+ * Changed:         2023-02-24
  *
  * */
 
@@ -18,6 +18,7 @@
 #include <ls-std/io/File.hpp>
 #include <ls-std/io/FilePathSeparator.hpp>
 #include <ls-std/io/FilePathSeparatorMatch.hpp>
+#include <numeric>
 #include <sstream>
 #include <sys/stat.h>
 #ifdef _WIN32
@@ -33,6 +34,7 @@ using ls::std::core::FileOperationException;
 using ls::std::io::File;
 using ls::std::io::FilePathSeparator;
 using ls::std::io::FilePathSeparatorMatch;
+using std::accumulate;
 using std::find_if;
 using std::getline;
 using std::ifstream;
@@ -330,17 +332,11 @@ bool File::_exists(const string &_path)
 
 string File::_getParent(const string &_path)
 {
-  string parent{};
   vector<string> subDirectoryNames = File::_splitIntoSubDirectoryNames(_path);
   const char separator = FilePathSeparator::get();
   subDirectoryNames.pop_back();
 
-  for (auto const &subDirectoryName : subDirectoryNames)
-  {
-    parent += subDirectoryName + separator;
-  }
-
-  return parent;
+  return accumulate(subDirectoryNames.begin(), subDirectoryNames.end(), string{}, [separator](string parent, const string &subDirectoryName) { return ::move(parent) + subDirectoryName + separator; });
 }
 
 #if defined(unix) || defined(__APPLE__)
