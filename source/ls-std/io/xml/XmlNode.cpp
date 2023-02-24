@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2023-02-23
+ * Changed:         2023-02-24
  *
  * */
 
@@ -17,6 +17,9 @@ using ls::std::core::EmptyStringArgumentEvaluator;
 using ls::std::core::NullPointerArgumentEvaluator;
 using ls::std::io::XmlAttribute;
 using ls::std::io::XmlNode;
+using std::any_of;
+using std::back_inserter;
+using std::copy_if;
 using std::find;
 using std::list;
 using std::move;
@@ -205,14 +208,7 @@ list<shared_ptr<XmlNode>> XmlNode::getChildren()
 list<shared_ptr<XmlNode>> XmlNode::getChildren(const string &_name)
 {
   list<shared_ptr<XmlNode>> childrenWithName{};
-
-  for (const auto &child : this->children)
-  {
-    if (child->getName() == _name)
-    {
-      childrenWithName.push_back(child);
-    }
-  }
+  copy_if(this->children.begin(), this->children.end(), back_inserter(childrenWithName), [_name](const shared_ptr<XmlNode> &_node) { return _node->getName() == _name; });
 
   return childrenWithName;
 }
@@ -347,19 +343,8 @@ string XmlNode::_getTab(uint8_t _tabSize)
 
 bool XmlNode::_hasAttribute(const string &_name)
 {
-  bool exists{};
   EmptyStringArgumentEvaluator{_name, "xml attribute name is empty!"}.evaluate();
-
-  for (const auto &attribute : this->attributes)
-  {
-    if (attribute->getName() == _name)
-    {
-      exists = true;
-      break;
-    }
-  }
-
-  return exists;
+  return any_of(this->attributes.begin(), this->attributes.end(), [_name](const shared_ptr<XmlAttribute> &_attribute) { return _attribute->getName() == _name; });
 }
 
 bool XmlNode::_hasChild(const shared_ptr<XmlNode> &_child)
@@ -370,19 +355,8 @@ bool XmlNode::_hasChild(const shared_ptr<XmlNode> &_child)
 
 bool XmlNode::_hasChild(const string &_name)
 {
-  bool exists{};
   EmptyStringArgumentEvaluator{_name, "xml child node name is empty!"}.evaluate();
-
-  for (const auto &attribute : this->children)
-  {
-    if (attribute->getName() == _name)
-    {
-      exists = true;
-      break;
-    }
-  }
-
-  return exists;
+  return any_of(this->children.begin(), this->children.end(), [_name](const shared_ptr<XmlNode> &_node) { return _node->getName() == _name; });
 }
 
 string XmlNode::_toXmlAttributes()
