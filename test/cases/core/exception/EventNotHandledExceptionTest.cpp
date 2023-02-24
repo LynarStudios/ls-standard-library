@@ -3,16 +3,21 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-27
- * Changed:         2022-05-13
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
+#include <ls-std/ls-std-core.hpp>
+#include <string>
+
+using ls::std::core::EventNotHandledException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class EventNotHandledExceptionTest : public ::testing::Test
+  class EventNotHandledExceptionTest : public Test
   {
     protected:
 
@@ -28,16 +33,46 @@ namespace
 
   TEST_F(EventNotHandledExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw ls::std::core::EventNotHandledException{};
-                   }
-                   catch (const ls::std::core::EventNotHandledException &_exception)
-                   {
-                     EXPECT_STREQ("EventNotHandledException thrown - event was not handled - nothing happened!", _exception.what());
-                     throw;
-                   }
-                 }, ls::std::core::EventNotHandledException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotHandledException{};
+          }
+          catch (const EventNotHandledException &_exception)
+          {
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - event was not handled - nothing happened!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
+            throw;
+          }
+        },
+        EventNotHandledException);
+  }
+
+  TEST_F(EventNotHandledExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw EventNotHandledException{"id: OPEN_DOOR"};
+          }
+          catch (const EventNotHandledException &_exception)
+          {
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - id: OPEN_DOOR";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
+            throw;
+          }
+        },
+        EventNotHandledException);
+  }
+
+  TEST_F(EventNotHandledExceptionTest, getName)
+  {
+    ASSERT_STREQ("EventNotHandledException", EventNotHandledException{}.getName().c_str());
   }
 }

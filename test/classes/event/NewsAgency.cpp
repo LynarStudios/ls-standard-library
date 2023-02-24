@@ -3,16 +3,22 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-20
+ * Changed:         2023-02-23
  *
  * */
 
 #include "NewsAgency.hpp"
 
-ls_std_event_test::NewsAgency::NewsAgency(::std::string _agencyName) : agencyName(::std::move(_agencyName))
+using std::move;
+using std::string;
+using test::event::NewsAgency;
+
+NewsAgency::NewsAgency(string _agencyName) : agencyName(::move(_agencyName))
 {}
 
-::std::string ls_std_event_test::NewsAgency::getName()
+NewsAgency::~NewsAgency() = default;
+
+string NewsAgency::getName()
 {
   return this->agencyName;
 }

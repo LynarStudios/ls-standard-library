@@ -3,16 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2022-07-02
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
+#include <ls-std/ls-std-core.hpp>
+
+using ls::std::core::LibraryVersion;
+using testing::Test;
 
 namespace
 {
-  class LibraryVersionTest : public ::testing::Test
+  class LibraryVersionTest : public Test
   {
     protected:
 
@@ -28,6 +31,6 @@ namespace
 
   TEST_F(LibraryVersionTest, getVersion)
   {
-    ASSERT_STREQ("2022.2.0", ls::std::core::getVersion().c_str());
+    ASSERT_STREQ("2023.1.0", LibraryVersion::getVersion().c_str());
   }
 }

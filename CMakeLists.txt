@@ -11,17 +11,18 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-project(ls_std VERSION 2022.2.0)
+project(ls-std VERSION 2023.1.0)
 
-set(MODULE_NAME_BOXING ls_std_boxing)
-set(MODULE_NAME_CORE ls_std_core)
-set(MODULE_NAME_ENCODING ls_std_encoding)
-set(MODULE_NAME_EVENT ls_std_event)
-set(MODULE_NAME_IO ls_std_io)
-set(MODULE_NAME_LOGIC ls_std_logic)
-set(MODULE_NAME_TIME ls_std_time)
+set(MODULE_NAME_BOXING ls-std-boxing)
+set(MODULE_NAME_CORE ls-std-core)
+set(MODULE_NAME_ENCODING ls-std-encoding)
+set(MODULE_NAME_EVENT ls-std-event)
+set(MODULE_NAME_IO ls-std-io)
+set(MODULE_NAME_TIME ls-std-time)
 
 set(GOOGLE_TEST_MODULE googletest-1.11.0)
+
+set(CLI_NAME_BASE64 cli-base64)
 
 ##########################################################
 # Options
@@ -29,9 +30,8 @@ set(GOOGLE_TEST_MODULE googletest-1.11.0)
 
 option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
 option(LS_STD_BUILD_WITH_SUPPORTED_COMPILER "Build project with supported compiler only..." ON)
-option(LS_STD_BUILD_STATIC "Build ls_std static library..." ON)
-option(LS_STD_BUILD_SHARED "Build ls_std shared library..." OFF)
-option(LS_STD_BUILD_MODULE "Build ls_std module library..." OFF)
+option(LS_STD_BUILD_STATIC "Build ls-std static library..." ON)
+option(LS_STD_BUILD_SHARED "Build ls-std shared library..." OFF)
 
 set(TARGET_COUNTER 0)
 
@@ -43,11 +43,6 @@ endif ()
 if (${LS_STD_BUILD_SHARED})
     math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
     set(GOAL "shared library")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    math(EXPR TARGET_COUNTER "${TARGET_COUNTER} + 1")
-    set(GOAL "module library")
 endif ()
 
 message("${PROJECT_NAME}: [Goal] ${GOAL}")
@@ -82,27 +77,14 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
 
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC OR
             ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR
-            ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
+            ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang OR
+            ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
         message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
     else()
         message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
         return()
     endif ()
-
-    # define which compilers are supported for shared or module goal
-
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC AND ${LS_STD_BUILD_MODULE})
-        message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
-        return()
-    endif ()
 endif()
-
-# define which goals can run tests
-
-if (${LS_STD_BUILD_WITH_TESTS} AND ${LS_STD_BUILD_MODULE})
-    message("${PROJECT_NAME}: [Error] building \"${GOAL}\" with tests is not supported... terminated!")
-    return()
-endif ()
 
 ######################################################
 # Include Directories
@@ -137,68 +119,117 @@ endif ()
 ####################################################################################################################
 
 set(SOURCE_FILES_BOXING
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Boolean.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Double.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Float.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Integer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/Long.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/boxing/String.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Boolean.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Double.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Float.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Integer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/Long.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/boxing/String.cpp)
 
 set(SOURCE_FILES_CORE
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Class.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/EmptyStringArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/IndexOutOfBoundsEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/NullPointerArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/evaluator/NullPointerEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotHandledException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/EventNotSubscribedException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/Exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/ExceptionMessage.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileNotFoundException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/FileOperationException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArgumentException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArithmeticOperationException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IncompleteJsonException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IndexOutOfBoundsException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEventSubscriber.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IListener.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/ISerializable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IStorable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Class.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/ConditionalFunctionExecutor.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
 set(SOURCE_FILES_ENCODING
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp)
 
 set(SOURCE_FILES_EVENT
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/serialization/SerializableJsonEvent.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Event.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventHandler.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/EventManager.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/event/Narrator.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/serialization/SerializableJsonEvent.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/Event.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/EventHandler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/EventManager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/event/Narrator.cpp)
 
 set(SOURCE_FILES_IO
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvFileReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvPair.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/kv/KvParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/Logger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/logging/LogLevel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlAttribute.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDeclaration.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlDocument.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlNode.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlParser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/xml/XmlReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/File.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileOutputStream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileReader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/FileWriter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StandardOutputWriter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/io/StorableFile.cpp)
-
-set(SOURCE_FILES_LOGIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonState.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonStateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/serialization/SerializableJsonStateMachine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/State.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateConnection.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/logic/StateMachine.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/evaluator/FileExistenceEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/Logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/logging/LogLevel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairRowArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairRowListValueArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairRowSingleValueArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairSectionArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/evaluator/SectionPairValueArgumentEvaluator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairRow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairRowListValue.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairRowSingleValue.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairRowValue.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/model/SectionPairSection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/reader/SectionPairFileReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/reader/SectionPairFileReaderParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/serialization/SerializableSectionPairSection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairDocumentValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairFileExtensionValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairIdentifierValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairRowListValueValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairRowSingleValueValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairRowValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairSectionValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/validator/SectionPairValueValidator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/section-pair/SectionPairMessageFormatter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlAttribute.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDeclaration.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlDocument.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlNode.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlParseParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlParser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/xml/XmlReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/File.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileOutputStream.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FilePathSeparator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FilePathSeparatorMatch.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileReader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/FileWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/NewLine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StandardOutputWriter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StorableFile.cpp)
 
 set(SOURCE_FILES_TIME
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/time/Date.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/Date.cpp)
 
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
-# Test Files Modularization
+# Unit Test Files Modularization
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    set(TEST_FILES_BOXING
+    set(UNIT_TEST_FILES_BOXING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/BooleanTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/DoubleTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/FloatTest.cpp
@@ -206,25 +237,32 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/LongTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/boxing/StringTest.cpp)
 
-    set(TEST_FILES_CORE
+    set(UNIT_TEST_FILES_CORE
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/evaluator/EmptyStringArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/evaluator/IndexOutOfBoundsEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/evaluator/NullPointerArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/evaluator/NullPointerEvaluatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotHandledExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/EventNotSubscribedExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/ExceptionMessageTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/FileNotFoundExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/FileOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IllegalArgumentExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IllegalArithmeticOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IncompleteJsonExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IndexOutOfBoundsExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/NullPointerExceptionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/utils/RegexUtilsTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/utils/STLUtilsTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ConditionalFunctionExecutorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/LibraryVersionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/ClassWrapper.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/MathOddValidator.cpp)
 
-    set(TEST_FILES_ENCODING
+    set(UNIT_TEST_FILES_ENCODING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
 
-    set(TEST_FILES_EVENT
+    set(UNIT_TEST_FILES_EVENT
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/serialization/SerializableJsonEventTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventHandlerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/event/EventManagerTest.cpp
@@ -239,17 +277,43 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/TestDataCar.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/event/TestDataMercedesCar.cpp)
 
-    set(TEST_FILES_IO
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvDocumentTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvFileReaderTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvPairTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/kv/KvParserTest.cpp
+    set(UNIT_TEST_FILES_IO
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/evaluator/FileExistenceEvaluatorTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LoggerTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/logging/LogLevelTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairIdentifierArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairRowArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairRowListValueArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairRowSingleValueArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairSectionArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/evaluator/SectionPairValueArgumentEvaluatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairDocumentTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowListValueTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowSingleValueTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairRowTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/model/SectionPairSectionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/reader/SectionPairFileReaderParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/reader/SectionPairFileReaderTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairDocumentTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowListValueTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowSingleValueTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairRowTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/serialization/SerializableSectionPairSectionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairDocumentValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairFileExtensionValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairIdentifierValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowListValueValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowSingleValueValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairRowValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairSectionValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/validator/SectionPairValueValidatorTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/SectionPairMessageFormatterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlAttributeTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDeclarationTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlDocumentTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlNodeTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParseParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlParserTestWrapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/xml/XmlReaderTest.cpp
@@ -259,111 +323,154 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/FileWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StandardOutputWriterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/StorableFileTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SectionPairDocumentProvider.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SectionPairSectionProvider.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/section-pair/SerializableSectionPairRowProvider.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/TestDataFactory.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/xml/XmlParserTestWrapper.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/MockFileExistenceEvaluator.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/io/MockFileReader.cpp)
 
-    set(TEST_FILES_LOGIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateConnectionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateMachineTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/serialization/SerializableJsonStateTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateConnectionTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateMachineTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/logic/StateTest.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/logic/TestDataFactory.cpp)
-
-    set(TEST_FILES_SERIALIZATION
+    set(UNIT_TEST_FILES_SERIALIZATION
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
-    set(TEST_FILES_TIME
+    set(UNIT_TEST_FILES_TIME
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp)
 endif ()
 
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
-# Test Suite Builds
+# Unit Test Suite Builds
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
 
 ##########################################################
-# Build Tests (boxing)
+# Unit Build Tests (boxing)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_BOXING}: Building tests...")
-    add_executable(${MODULE_NAME_BOXING}_test ${TEST_FILES_BOXING})
+    message("${MODULE_NAME_BOXING}: Building unit tests...")
+    add_executable(${MODULE_NAME_BOXING}-unit-test ${UNIT_TEST_FILES_BOXING})
 endif ()
 
 ##########################################################
-# Build Tests (core)
+# Unit Build Tests (core)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_CORE}: Building tests...")
-    add_executable(${MODULE_NAME_CORE}_test ${TEST_FILES_CORE})
+    message("${MODULE_NAME_CORE}: Building unit tests...")
+    add_executable(${MODULE_NAME_CORE}-unit-test ${UNIT_TEST_FILES_CORE})
 endif ()
 
 ##########################################################
-# Build Tests (encoding)
+# Unit Build Tests (encoding)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_ENCODING}: Building tests...")
-    add_executable(${MODULE_NAME_ENCODING}_test ${TEST_FILES_ENCODING})
+    message("${MODULE_NAME_ENCODING}: Building unit tests...")
+    add_executable(${MODULE_NAME_ENCODING}-unit-test ${UNIT_TEST_FILES_ENCODING})
 endif ()
 
 ##########################################################
-# Build Tests (event)
+# Unit Build Tests (event)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_EVENT}: Building tests...")
-    add_executable(${MODULE_NAME_EVENT}_test ${TEST_FILES_EVENT})
+    message("${MODULE_NAME_EVENT}: Building unit tests...")
+    add_executable(${MODULE_NAME_EVENT}-unit-test ${UNIT_TEST_FILES_EVENT})
 endif ()
 
 ##########################################################
-# Build Tests (io)
+# Unit Build Tests (io)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_IO}: Building tests...")
-    add_executable(${MODULE_NAME_IO}_test ${TEST_FILES_IO})
+    message("${MODULE_NAME_IO}: Building unit tests...")
+    add_executable(${MODULE_NAME_IO}-unit-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+            ${UNIT_TEST_FILES_IO})
 endif ()
 
 ##########################################################
-# Build Tests (logic)
+# Unit Build Tests (time)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_LOGIC}: Building tests...")
-    add_executable(${MODULE_NAME_LOGIC}_test ${TEST_FILES_LOGIC})
+    message("${MODULE_NAME_TIME}: Building unit tests...")
+    add_executable(${MODULE_NAME_TIME}-unit-test ${UNIT_TEST_FILES_TIME})
 endif ()
 
 ##########################################################
-# Build Tests (time)
+# Unit Build Tests (all)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_TIME}: Building tests...")
-    add_executable(${MODULE_NAME_TIME}_test ${TEST_FILES_TIME})
+    message("${PROJECT_NAME}: Building unit tests...")
+    add_executable(${PROJECT_NAME}-unit-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+            ${UNIT_TEST_FILES_BOXING}
+            ${UNIT_TEST_FILES_CORE}
+            ${UNIT_TEST_FILES_ENCODING}
+            ${UNIT_TEST_FILES_EVENT}
+            ${UNIT_TEST_FILES_IO}
+            ${UNIT_TEST_FILES_SERIALIZATION}
+            ${UNIT_TEST_FILES_TIME})
 endif ()
 
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Integration Test Files Modularization
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    set(INTEGRATION_TEST_FILES_IO
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/io/section-pair/reader/SectionPairFileReaderIT.cpp)
+endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Integration Test Suite Builds
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
 ##########################################################
-# Build Tests (all)
+# Integration Build Tests (io)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${PROJECT_NAME}: Building tests...")
-    add_executable(${PROJECT_NAME}_test
-            ${TEST_FILES_BOXING}
-            ${TEST_FILES_CORE}
-            ${TEST_FILES_ENCODING}
-            ${TEST_FILES_EVENT}
-            ${TEST_FILES_IO}
-            ${TEST_FILES_LOGIC}
-            ${TEST_FILES_SERIALIZATION}
-            ${TEST_FILES_TIME})
+    message("${MODULE_NAME_IO}: Building integration tests...")
+    add_executable(${MODULE_NAME_IO}-integration-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+            ${INTEGRATION_TEST_FILES_IO})
+endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Whole Test Suite Builds
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${PROJECT_NAME}: Building all tests...")
+    add_executable(${PROJECT_NAME}-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+            ${UNIT_TEST_FILES_BOXING}
+            ${UNIT_TEST_FILES_CORE}
+            ${UNIT_TEST_FILES_ENCODING}
+            ${UNIT_TEST_FILES_EVENT}
+            ${UNIT_TEST_FILES_IO}
+            ${INTEGRATION_TEST_FILES_IO}
+            ${UNIT_TEST_FILES_SERIALIZATION}
+            ${UNIT_TEST_FILES_TIME})
 endif ()
 
 ####################################################################################################################
@@ -382,18 +489,13 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_BOXING} library version ${PROJE
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_BOXING}" STATIC ${SOURCE_FILES_BOXING})
-    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_BOXING}" SHARED ${SOURCE_FILES_BOXING})
     target_link_libraries("${MODULE_NAME_BOXING}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_BOXING}" MODULE ${SOURCE_FILES_BOXING})
-    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_BOXING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -404,17 +506,12 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_CORE} library version ${PROJECT
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_CORE}" STATIC ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_CORE}" MODULE ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -425,25 +522,19 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_ENCODING} library version ${PRO
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_ENCODING}" STATIC ${SOURCE_FILES_ENCODING})
-    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_ENCODING}" SHARED ${SOURCE_FILES_ENCODING})
-    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_ENCODING}" MODULE ${SOURCE_FILES_ENCODING})
-    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "_d")
+    target_link_libraries("${MODULE_NAME_ENCODING}" ${MODULE_NAME_CORE})
+    set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 # CLI base64
 
-add_executable(cli_base64
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/cli/cli_base64_main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/encoding/Base64.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls_std/core/Version.cpp)
+add_executable(${CLI_NAME_BASE64}
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/cli/cli-base64-main.cpp)
 
 ##########################################################
 # Build Library (event)
@@ -453,18 +544,13 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_EVENT} library version ${PROJEC
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_EVENT}" STATIC ${SOURCE_FILES_EVENT})
-    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_EVENT}" SHARED ${SOURCE_FILES_EVENT})
     target_link_libraries("${MODULE_NAME_EVENT}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_EVENT}" MODULE ${SOURCE_FILES_EVENT})
-    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_EVENT}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -475,40 +561,13 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_IO} library version ${PROJECT_V
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_IO}" STATIC ${SOURCE_FILES_IO})
-    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_IO}" SHARED ${SOURCE_FILES_IO})
     target_link_libraries("${MODULE_NAME_IO}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_IO}" MODULE ${SOURCE_FILES_IO})
-    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-##########################################################
-# Build Library (logic)
-##########################################################
-
-message("${PROJECT_NAME}: Building ${MODULE_NAME_LOGIC} library version ${PROJECT_VERSION}...")
-
-if (${LS_STD_BUILD_STATIC})
-    add_library("${MODULE_NAME_LOGIC}" STATIC ${SOURCE_FILES_LOGIC})
-    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_SHARED})
-    add_library("${MODULE_NAME_LOGIC}" SHARED ${SOURCE_FILES_LOGIC})
-    target_link_libraries("${MODULE_NAME_LOGIC}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_LOGIC}" MODULE ${SOURCE_FILES_LOGIC})
-    set_target_properties("${MODULE_NAME_LOGIC}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_IO}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ##########################################################
@@ -519,49 +578,43 @@ message("${PROJECT_NAME}: Building ${MODULE_NAME_TIME} library version ${PROJECT
 
 if (${LS_STD_BUILD_STATIC})
     add_library("${MODULE_NAME_TIME}" STATIC ${SOURCE_FILES_TIME})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
     target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
-endif ()
-
-if (${LS_STD_BUILD_MODULE})
-    add_library("${MODULE_NAME_TIME}" MODULE ${SOURCE_FILES_TIME})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "_d")
+    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
-# Test Suite: Linking
+# Unit Test Suite: Linking
 ####################################################################################################################
 ####################################################################################################################
 ####################################################################################################################
 
 ##########################################################
-# Linking (boxing)
+# Unit Linking (boxing)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_BOXING}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_BOXING}_test
+    message("${MODULE_NAME_BOXING}: Linking libraries for unit test application...")
+    target_link_libraries(${MODULE_NAME_BOXING}-unit-test
             gtest
-            gmock
             gtest_main
             "${MODULE_NAME_BOXING}"
             "${MODULE_NAME_CORE}")
 endif ()
 
 ##########################################################
-# Linking (core)
+# Unit Linking (core)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_CORE}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_CORE}_test
+    message("${MODULE_NAME_CORE}: Linking libraries for unit test application...")
+    target_link_libraries(${MODULE_NAME_CORE}-unit-test
             gtest
             gmock
             gtest_main
@@ -569,40 +622,38 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (encoding)
+# Unit Linking (encoding)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_ENCODING}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_ENCODING}_test
+    message("${MODULE_NAME_ENCODING}: Linking libraries for unit test application...")
+    target_link_libraries(${MODULE_NAME_ENCODING}-unit-test
             gtest
-            gmock
             gtest_main
             "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_CORE}")
 endif ()
 
 ##########################################################
-# Linking (event)
+# Unit Linking (event)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_EVENT}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_EVENT}_test
+    message("${MODULE_NAME_EVENT}: Linking libraries for unit test application...")
+    target_link_libraries(${MODULE_NAME_EVENT}-unit-test
             gtest
-            gmock
             gtest_main
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_CORE}")
 endif ()
 
 ##########################################################
-# Linking (io)
+# Unit Linking (io)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_IO}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_IO}_test
+    message("${MODULE_NAME_IO}: Linking libraries for unit test application...")
+    target_link_libraries(${MODULE_NAME_IO}-unit-test
             gtest
             gmock
             gtest_main
@@ -611,48 +662,87 @@ if (${LS_STD_BUILD_WITH_TESTS})
 endif ()
 
 ##########################################################
-# Linking (logic)
+# Unit Linking (time)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_LOGIC}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_LOGIC}_test
+    message("${MODULE_NAME_TIME}: Linking libraries for unit test application...")
+    target_link_libraries(${MODULE_NAME_TIME}-unit-test
             gtest
-            gmock
-            gtest_main
-            "${MODULE_NAME_LOGIC}"
-            "${MODULE_NAME_CORE}")
-endif ()
-
-##########################################################
-# Linking (time)
-##########################################################
-
-if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_TIME}: Linking libraries for test application...")
-    target_link_libraries(${MODULE_NAME_TIME}_test
-            gtest
-            gmock
             gtest_main
             "${MODULE_NAME_TIME}"
             "${MODULE_NAME_CORE}")
 endif ()
 
 ##########################################################
-# Linking (all)
+# Unit Linking (all)
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${PROJECT_NAME}: Linking libraries for test application...")
-    target_link_libraries(${PROJECT_NAME}_test
+    message("${PROJECT_NAME}: Linking libraries for unit test application...")
+    target_link_libraries(${PROJECT_NAME}-unit-test
             gtest
             gmock
             gtest_main
-            "${MODULE_NAME_CORE}"
             "${MODULE_NAME_BOXING}"
             "${MODULE_NAME_ENCODING}"
             "${MODULE_NAME_EVENT}"
             "${MODULE_NAME_IO}"
-            "${MODULE_NAME_LOGIC}"
-            "${MODULE_NAME_TIME}")
+            "${MODULE_NAME_TIME}"
+            "${MODULE_NAME_CORE}")
 endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Integration Test Suite: Linking
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+##########################################################
+# Integration Linking (io)
+##########################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${MODULE_NAME_IO}: Linking libraries for integration test application...")
+    target_link_libraries(${MODULE_NAME_IO}-integration-test
+            gtest
+            gtest_main
+            "${MODULE_NAME_IO}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# Whole Test Suite: Linking
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+if (${LS_STD_BUILD_WITH_TESTS})
+    message("${PROJECT_NAME}: Linking libraries for whole test application...")
+    target_link_libraries(${PROJECT_NAME}-test
+            gtest
+            gmock
+            gtest_main
+            "${MODULE_NAME_BOXING}"
+            "${MODULE_NAME_ENCODING}"
+            "${MODULE_NAME_EVENT}"
+            "${MODULE_NAME_IO}"
+            "${MODULE_NAME_TIME}"
+            "${MODULE_NAME_CORE}")
+endif ()
+
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# CLI - Base64: Linking
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+target_link_libraries(${CLI_NAME_BASE64}
+        "${MODULE_NAME_ENCODING}"
+        "${MODULE_NAME_CORE}")

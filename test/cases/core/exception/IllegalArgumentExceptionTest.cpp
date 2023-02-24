@@ -3,16 +3,21 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-13
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
+#include <ls-std/ls-std-core.hpp>
+#include <string>
+
+using ls::std::core::IllegalArgumentException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class IllegalArgumentExceptionTest : public ::testing::Test
+  class IllegalArgumentExceptionTest : public Test
   {
     protected:
 
@@ -28,16 +33,46 @@ namespace
 
   TEST_F(IllegalArgumentExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw ls::std::core::IllegalArgumentException{};
-                   }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
-                   {
-                     EXPECT_STREQ("IllegalArgumentException thrown - passed argument is not valid!", _exception.what());
-                     throw;
-                   }
-                 }, ls::std::core::IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArgumentException{};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - passed argument is not valid!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_F(IllegalArgumentExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArgumentException{"value is empty"};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - value is empty";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
+            throw;
+          }
+        },
+        IllegalArgumentException);
+  }
+
+  TEST_F(IllegalArgumentExceptionTest, getName)
+  {
+    ASSERT_STREQ("IllegalArgumentException", IllegalArgumentException{}.getName().c_str());
   }
 }

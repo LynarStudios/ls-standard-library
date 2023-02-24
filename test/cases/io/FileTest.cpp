@@ -3,41 +3,54 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2022-05-20
+ * Changed:         2023-02-23
  *
  * */
 
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_io.hpp>
-#include "TestHelper.hpp"
+#include <ls-std/ls-std-core.hpp>
+#include <ls-std/ls-std-io.hpp>
+
+using ls::std::core::FileOperationException;
+using ls::std::io::File;
+using ls::std::io::FilePathSeparator;
+using ls::std::test::TestHelper;
+using std::list;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class FileTest : public ::testing::Test
+  class FileTest : public Test
   {
     protected:
 
       FileTest() = default;
       ~FileTest() override = default;
 
-      ::std::string fileLocation = ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt";
+      string fileLocation = TestHelper::getResourcesFolderLocation() + "simple.txt";
 
       void SetUp() override
       {}
 
       void TearDown() override
       {}
+
+      static bool hasFileInDirectory(const list<string> &_fileNamesInDirectory, const string &_fileName)
+      {
+        return find(_fileNamesInDirectory.begin(), _fileNamesInDirectory.end(), _fileName) != _fileNamesInDirectory.end();
+      }
   };
 
   // comparison operators
 
   TEST_F(FileTest, operator_equals)
   {
-    ls::std::io::File file{this->fileLocation};
-    ls::std::io::File file2{this->fileLocation};
-    ls::std::io::File file3{"/home/bla/text.txt"};
-    ls::std::io::File file4{"\\home/bla\\text.txt"};
+    File file{this->fileLocation};
+    File file2{this->fileLocation};
+    File file3{"/home/bla/text.txt"};
+    File file4{"\\home/bla\\text.txt"};
 
     ASSERT_TRUE(file == file2);
     ASSERT_TRUE(file2 == file);
@@ -47,8 +60,8 @@ namespace
 
   TEST_F(FileTest, operator_not_equals)
   {
-    ls::std::io::File file{this->fileLocation};
-    ls::std::io::File file2{ls_std_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
+    File file{this->fileLocation};
+    File file2{TestHelper::getResourcesFolderLocation() + "app.exe"};
 
     ASSERT_TRUE(file != file2);
     ASSERT_TRUE(file2 != file);
@@ -58,65 +71,67 @@ namespace
 
   TEST_F(FileTest, canExecute)
   {
-    #ifdef _WIN32
-    ls::std::io::File executableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
-    #endif
-    #if defined(unix) || defined(__APPLE__)
-    ls::std::io::File executableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "app"};
-    #endif
+#ifdef _WIN32
+    File executableFile{TestHelper::getResourcesFolderLocation() + "app.exe"};
+#endif
+#if defined(unix) || defined(__APPLE__)
+    File executableFile{TestHelper::getResourcesFolderLocation() + "app"};
+#endif
 
     ASSERT_TRUE(executableFile.canExecute());
   }
 
   TEST_F(FileTest, canExecute_not_executable)
   {
-    ls::std::io::File file{this->fileLocation};
+    File file{this->fileLocation};
     ASSERT_FALSE(file.canExecute());
   }
 
   TEST_F(FileTest, canRead)
   {
-    ls::std::io::File readableFile{this->fileLocation};
+    File readableFile{this->fileLocation};
     ASSERT_TRUE(readableFile.canRead());
   }
 
   TEST_F(FileTest, canRead_file_does_not_exist)
   {
-    ls::std::io::File file{""};
+    File file{""};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     file.canRead();
-                   }
-                   catch (const ls::std::core::FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            bool isReadable = file.canRead();
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 
   TEST_F(FileTest, canWrite)
   {
-    ls::std::io::File readableFile{this->fileLocation};
+    File readableFile{this->fileLocation};
     ASSERT_TRUE(readableFile.canWrite());
   }
 
   TEST_F(FileTest, canWrite_not_writable)
   {
-    #if defined(unix) || defined(__APPLE__)
-    ls::std::io::File noWritableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable.txt"};
+#if defined(unix) || defined(__APPLE__)
+    File noWritableFile{TestHelper::getResourcesFolderLocation() + "no-writable.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
-    #endif
-    #ifdef _WIN32
-    ls::std::io::File noWritableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "no_writable_windows.txt"};
+#endif
+#ifdef _WIN32
+    File noWritableFile{TestHelper::getResourcesFolderLocation() + "no-writable-windows.txt"};
     ASSERT_FALSE(noWritableFile.canWrite());
-    #endif
+#endif
   }
 
   TEST_F(FileTest, createNewFile)
   {
-    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "tmp.txt"};
     ASSERT_FALSE(file.exists());
 
     file.createNewFile();
@@ -128,24 +143,26 @@ namespace
 
   TEST_F(FileTest, createNewFile_file_does_already_exist)
   {
-    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "simple.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "simple.txt"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     file.createNewFile();
-                   }
-                   catch (const ls::std::core::FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            file.createNewFile();
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 
   TEST_F(FileTest, exists)
   {
-    ls::std::io::File file{this->fileLocation};
-    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
+    File file{this->fileLocation};
+    File directory{TestHelper::getResourcesFolderLocation()};
 
     ASSERT_TRUE(file.exists());
     ASSERT_TRUE(directory.exists());
@@ -153,28 +170,28 @@ namespace
 
   TEST_F(FileTest, exists_does_not_exist)
   {
-    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "bla.txt"};
+    File file{TestHelper::getResourcesFolderLocation() + "bla.txt"};
     ASSERT_FALSE(file.exists());
   }
 
   TEST_F(FileTest, getAbsoluteFilePath)
   {
-    ls::std::io::File file{this->fileLocation};
+    File file{this->fileLocation};
     ASSERT_STREQ(this->fileLocation.c_str(), file.getAbsoluteFilePath().c_str());
-    ::std::string s = {ls::std::io::FilePathSeparator::get()};
+    string s = {FilePathSeparator::get()};
 
-    ::std::string wrongFilePath = "home" + s + s + s + "user" + s + "bla" + s + s + "sub_folder";
-    ::std::string expectedFilePath = "home" + s + "user" + s + "bla" + s + "sub_folder";
-    ls::std::io::File anotherFile{wrongFilePath};
+    string wrongFilePath = "home" + s + s + s + "user" + s + "bla" + s + s + "sub_folder";
+    string expectedFilePath = "home" + s + "user" + s + "bla" + s + "sub_folder";
+    File anotherFile{wrongFilePath};
     ASSERT_STREQ(expectedFilePath.c_str(), anotherFile.getAbsoluteFilePath().c_str());
   }
 
   TEST_F(FileTest, getName)
   {
-    ls::std::io::File file{this->fileLocation};
-    ls::std::io::File executableFile{ls_std_test::TestHelper::getResourcesFolderLocation() + "app.exe"};
-    ls::std::io::File anotherFile{"bla.txt"};
-    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
+    File file{this->fileLocation};
+    File executableFile{TestHelper::getResourcesFolderLocation() + "app.exe"};
+    File anotherFile{"bla.txt"};
+    File directory{TestHelper::getResourcesFolderLocation()};
 
     ASSERT_STREQ("simple.txt", file.getName().c_str());
     ASSERT_STREQ("app.exe", executableFile.getName().c_str());
@@ -184,19 +201,19 @@ namespace
 
   TEST_F(FileTest, getParent)
   {
-    ls::std::io::File file{this->fileLocation};
-    ASSERT_STREQ(ls_std_test::TestHelper::getResourcesFolderLocation().c_str(), file.getParent().c_str());
+    File file{this->fileLocation};
+    ASSERT_STREQ(TestHelper::getResourcesFolderLocation().c_str(), file.getParent().c_str());
   }
 
   TEST_F(FileTest, getWorkingDirectory)
   {
-    ::std::string workingDirectory = ls::std::io::File::getWorkingDirectory();
+    string workingDirectory = File::getWorkingDirectory();
     ASSERT_FALSE(workingDirectory.empty());
   }
 
   TEST_F(FileTest, getSize)
   {
-    ls::std::io::File file{this->fileLocation};
+    File file{this->fileLocation};
     size_t size = file.getSize();
 
     ASSERT_TRUE(size == 7 || size == 8); // different OS specific new lines
@@ -204,90 +221,88 @@ namespace
 
   TEST_F(FileTest, isDirectory)
   {
-    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
+    File directory{TestHelper::getResourcesFolderLocation()};
     ASSERT_TRUE(directory.isDirectory());
   }
 
   TEST_F(FileTest, isDirectory_is_a_file)
   {
-    ls::std::io::File file{this->fileLocation};
+    File file{this->fileLocation};
     ASSERT_FALSE(file.isDirectory());
   }
 
   TEST_F(FileTest, isFile)
   {
-    const char separator = ls::std::io::FilePathSeparator::get();
+    const char separator = FilePathSeparator::get();
 
-    ls::std::io::File file{this->fileLocation};
+    File file{this->fileLocation};
     ASSERT_TRUE(file.isFile());
 
-    ls::std::io::File file2{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test" + separator + "bla.txt"};
+    File file2{TestHelper::getResourcesFolderLocation() + "list-test" + separator + "bla.txt"};
     ASSERT_TRUE(file2.isFile());
   }
 
   TEST_F(FileTest, isFile_is_a_directory)
   {
-    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation()};
+    File directory{TestHelper::getResourcesFolderLocation()};
     ASSERT_FALSE(directory.isFile());
   }
 
   TEST_F(FileTest, lastModified)
   {
-    ls::std::io::File file{this->fileLocation};
+    File file{this->fileLocation};
     ASSERT_TRUE(file.lastModified() > 1590000000);
   }
 
   TEST_F(FileTest, list)
   {
-    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
-    ::std::list<std::string> filesInDirectory = file.list();
-    ::std::string expectedFile{};
-    const char separator = ls::std::io::FilePathSeparator::get();
-
-    auto filesIterator = filesInDirectory.begin();
+    File file{TestHelper::getResourcesFolderLocation() + "list-test"};
+    list<string> filesInDirectory = file.list();
+    string expectedFile{};
+    const char separator = FilePathSeparator::get();
 
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(7, filesInDirectory.size());
 
     expectedFile = file.getAbsoluteFilePath() + separator + ".";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "..";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
+    expectedFile = file.getAbsoluteFilePath() + separator + "another-file.txt";
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + "list_test_sub";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
+    expectedFile = file.getAbsoluteFilePath() + separator + "list-test-sub";
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
+    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden-file.txt";
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
   }
 
   TEST_F(FileTest, listFiles)
   {
-    ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
-    ::std::list<::std::string> filesInDirectory = file.listFiles();
-    ::std::string expectedFile{};
-    const char separator = ls::std::io::FilePathSeparator::get();
+    File file{TestHelper::getResourcesFolderLocation() + "list-test"};
+    list<string> filesInDirectory = file.listFiles();
+    string expectedFile{};
+    const char separator = FilePathSeparator::get();
 
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(4, filesInDirectory.size());
 
-    expectedFile = file.getAbsoluteFilePath() + separator + "another_file.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
+    expectedFile = file.getAbsoluteFilePath() + separator + "another-file.txt";
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "bla.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
     expectedFile = file.getAbsoluteFilePath() + separator + "hello.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
-    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden_file.txt";
-    ASSERT_TRUE((ls::std::core::STLUtils::contains(filesInDirectory, expectedFile)));
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
+    expectedFile = file.getAbsoluteFilePath() + separator + ".hidden-file.txt";
+    ASSERT_TRUE(FileTest::hasFileInDirectory(filesInDirectory, expectedFile));
   }
 
   TEST_F(FileTest, makeDirectory)
   {
-    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir"};
+    File directory{TestHelper::getResourcesFolderLocation() + "testDir"};
     ASSERT_FALSE(directory.exists());
 
     directory.makeDirectory();
@@ -299,23 +314,25 @@ namespace
 
   TEST_F(FileTest, makeDirectory_directory_already_exists)
   {
-    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test"};
+    File directory{TestHelper::getResourcesFolderLocation() + "list-test"};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     directory.makeDirectory();
-                   }
-                   catch (const ls::std::core::FileOperationException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::FileOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            directory.makeDirectory();
+          }
+          catch (const FileOperationException &_exception)
+          {
+            throw;
+          }
+        },
+        FileOperationException);
   }
 
   TEST_F(FileTest, makeDirectories)
   {
-    ls::std::io::File directory{ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp/bla"};
+    File directory{TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp/bla"};
     ASSERT_FALSE(directory.exists());
 
     directory.makeDirectories();
@@ -324,18 +341,18 @@ namespace
     // clean up
 
     directory.remove();
-    directory = ls::std::io::File(ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp");
+    directory = File(TestHelper::getResourcesFolderLocation() + "testDir/sub/tmp");
     directory.remove();
-    directory = ls::std::io::File(ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir/sub");
+    directory = File(TestHelper::getResourcesFolderLocation() + "testDir/sub");
     directory.remove();
-    directory = ls::std::io::File(ls_std_test::TestHelper::getResourcesFolderLocation() + "testDir");
+    directory = File(TestHelper::getResourcesFolderLocation() + "testDir");
     directory.remove();
   }
 
   TEST_F(FileTest, remove)
   {
-    ::std::string fileName = ls_std_test::TestHelper::getResourcesFolderLocation() + "removable_file.txt";
-    ls::std::io::File file{fileName};
+    string fileName = TestHelper::getResourcesFolderLocation() + "removable-file.txt";
+    File file{fileName};
     file.createNewFile();
 
     ASSERT_TRUE(file.exists());
@@ -346,10 +363,10 @@ namespace
 
   TEST_F(FileTest, renameTo)
   {
-    ::std::string currentName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to.txt";
-    ::std::string newName = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_rename_to_better_name.txt";
+    string currentName = TestHelper::getResourcesFolderLocation() + "tmp-rename-to.txt";
+    string newName = TestHelper::getResourcesFolderLocation() + "tmp-rename-to-better-name.txt";
 
-    ls::std::io::File file{currentName};
+    File file{currentName};
     file.createNewFile();
 
     ASSERT_TRUE(file.exists());
@@ -364,10 +381,10 @@ namespace
 
   TEST_F(FileTest, reset)
   {
-    ls::std::io::File file{this->fileLocation};
+    File file{this->fileLocation};
     ASSERT_TRUE(file.exists());
 
-    file.reset(ls_std_test::TestHelper::getResourcesFolderLocation() + "list_test/hello.txt");
+    file.reset(TestHelper::getResourcesFolderLocation() + "list-test/hello.txt");
     ASSERT_TRUE(file.exists());
   }
 }

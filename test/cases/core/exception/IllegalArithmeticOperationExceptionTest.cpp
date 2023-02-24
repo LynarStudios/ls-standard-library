@@ -3,16 +3,21 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2022-05-13
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
+#include <ls-std/ls-std-core.hpp>
+#include <string>
+
+using ls::std::core::IllegalArithmeticOperationException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class IllegalArithmeticOperationExceptionTest : public ::testing::Test
+  class IllegalArithmeticOperationExceptionTest : public Test
   {
     protected:
 
@@ -28,16 +33,46 @@ namespace
 
   TEST_F(IllegalArithmeticOperationExceptionTest, constructor)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     throw ls::std::core::IllegalArithmeticOperationException{};
-                   }
-                   catch (const ls::std::core::IllegalArithmeticOperationException &_exception)
-                   {
-                     EXPECT_STREQ("IllegalArithmeticOperationException thrown - arithmetic operation is not allowed!", _exception.what());
-                     throw;
-                   }
-                 }, ls::std::core::IllegalArithmeticOperationException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArithmeticOperationException{};
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - arithmetic operation is not allowed!";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
+  }
+
+  TEST_F(IllegalArithmeticOperationExceptionTest, constructor_dedicated_message)
+  {
+    EXPECT_THROW(
+        {
+          try
+          {
+            throw IllegalArithmeticOperationException{"division by zero"};
+          }
+          catch (const IllegalArithmeticOperationException &_exception)
+          {
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - division by zero";
+
+            EXPECT_STREQ(expected.c_str(), actual.c_str());
+            throw;
+          }
+        },
+        IllegalArithmeticOperationException);
+  }
+
+  TEST_F(IllegalArithmeticOperationExceptionTest, getName)
+  {
+    ASSERT_STREQ("IllegalArithmeticOperationException", IllegalArithmeticOperationException{}.getName().c_str());
   }
 }

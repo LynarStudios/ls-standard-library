@@ -3,17 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-09-18
- * Changed:         2022-05-14
+ * Changed:         2023-02-23
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_io.hpp>
+#include <ls-std/ls-std-io.hpp>
+
+using ls::std::io::StandardOutputWriter;
+using testing::Test;
 
 namespace
 {
-  class StandardOutputWriterTest : public ::testing::Test
+  class StandardOutputWriterTest : public Test
   {
     protected:
 
@@ -29,7 +31,7 @@ namespace
 
   TEST_F(StandardOutputWriterTest, write)
   {
-    ls::std::io::StandardOutputWriter writer{};
+    StandardOutputWriter writer{};
     ASSERT_TRUE(writer.write("Try something!"));
   }
 }

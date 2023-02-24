@@ -1,33 +1,29 @@
-# Lynar Studios - Standard Library 2022.2.0 #
+# Lynar Studios - Standard Library 2023.1.0 #
 
 This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
 This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
-Following a modularized approach the following submodules are defined in scope of this library, which are independent:
+Following a modularized approach the following independent submodules are defined in scope of this library:
  
 #### Boxing ####
 
-This library module provides boxing classes for primitive data types (e.g. string, int, long, float...) to provide additional functionalities.
+This library module provides boxing classes for primitive data types (e.g. string, int, long, float...), adding additional functionalities.
 
 #### Core ####
 
-The core module is a base module providing a base __Class__, exceptions, data types and interfaces. Usually the other submodules are dependent on this module. 
+The core module is a base module providing common functionalities being shared among other library submodules. Functionalities provided by this module include interfaces, exceptions and base classes, which provide basic reflection functionalities.
 
 #### Encoding ####
 
-To encode a byte field (e.g. a binary file) for transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
+To encode a byte field (e.g. a binary file) for network transfer the __Base64__ encoding / decoding functionality is being provided by this submodule as a first feature.
 
 #### Event ####
 
-This submodule comes with an __Event__ class, as well as with handlers and managers to provide an intuitive event handling for your application.
+This submodule comes with events in a primitive form, as well as with handlers and managers to provide an intuitive event handling for your application.
 
 #### IO ####
 
 To handle file operations - or to receive information of a file - this library submodule provides an own __File__ class implementation, which can also be passed to library implemented input or output stream classes.  
-Additionally __XML__ and __KV__ parsing functionalities are provided by this submodule.
-
-#### Logic (Deprecated) ####
-
-Functionalities provided by this submodule support your project with some nice logical features. The first one being provided by it is a state machine.
+Additionally __XML__ and __KV__ parsing functionalities are provided.
 
 #### Time ####
 
@@ -38,19 +34,33 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- this library is now being compiled with C++ 17 standard
-- this library can now build shared libraries by using MSVC
-- Clang support has been added to this library
-- added Base64 CLI Tool, which enables a user to use Base64 encoding and decoding functionalities via CLI
+- __AppleClang__ compiler is now officially supported
+- exceptions provided by __core__ submodule now offer a constructor for passing dedicated messages
+- evaluators have been added, which can check a state of variables and throw a dedicated exception in a single line and
+  more convenient way
+- a section-pair file standard has been implemented and is provided via __ls-std-io__ module, a definition of this
+  standard can be found in the libraries __doc__ folder
+- a base Exception class has been added, which provides basic reflection functionality - all existing library exceptions
+  inherit from this class now
 
 #### Improvements ####
 
-- JSON type alias has been added to avoid direct nlohmann library usage
-- logic module is now officially deprecated
+- __logic__ module has been removed from this library and can now be found in __ls-game-tool-kit__ library
+- __core.utils__ module has been removed from this library to provide more clean implementations where it's needed
+- the complexity of source files has been reduced by declaring usages of namespaces at the file beginning sections
+  instead of using those in every definition implementation, this overall improves the readability of the libraries
+  source files
+- a new naming convention for files and directories has been introduced, where underscores were replaced by dashes
+  entirely
+- fetching the library version can now be achieved by using a dedicated __LibraryVersion__ class - the usage of a static function for this purpose has been removed completely
+- missing nodiscard attributes have been added to library classes
+- rename "types" folder in __core__ submodule to stick to naming convention
+- key-value file standard has been removed from this library and is replaced by section-pair file standard
 
 #### Fixes ####
 
-- none
+- potential memory leaks have been resolved by strictly splitting prototypes and implementation project-wide, which enabled the usage of virtual or overridden destructors
+- memory leaks inside exception test suite have been fixed
 
 ---
 ### Documentation ###
@@ -65,53 +75,91 @@ This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ f
 ---
 ### Building ###
 
-To build this library you'd need a recent version of __cmake__ and your OS specific compiler collection, like __gcc__ or __MinGW__ installed.  
-Inside project's root directory create the following folder:
+Building this library would result into providing binaries for each library module and CLI tool: 
+
+| binary              | type                       |
+|---------------------|----------------------------|
+| __cli-base64__      | CLI executable             |
+| __ls-std-boxing__   | library (static / dynamic) |
+| __ls-std-core__     | library (static / dynamic) |
+| __ls-std-encoding__ | library (static / dynamic) |
+| __ls-std-event__    | library (static / dynamic) |
+| __ls-std-io__       | library (static / dynamic) |
+| __ls-std-time__     | library (static / dynamic) |
+
+#### Prerequisites ####
+
+To build this library you'd need a supported __toolchain__ in place, consisting of a build tool and compiler. The following table is a listing of supported compilers and build tools associated with operating systems, where this library has been tested:
+
+| Supported Compiler<br/>(mandatory) | OS              | Supported Compiler Version<br/>(mandatory) | Build Tool<br/>(mandatory) | Build Tool Version (mandatory) |
+|------------------------------------|-----------------|--------------------------------------------|----------------------------|--------------------------------|
+| GCC                                | Linux Mint 20.3 | 12.2.0                                     | CMake                      | \>= 3.24.0                     |
+| Clang                              | Linux Mint 20.3 | 12.0.0-3ubuntu1~20.04.5                    | CMake                      | \>= 3.24.0                     |
+| MinGW-w64 / GCC                    | Windows 10      | 11.2.0                                     | CMake                      | \>= 3.24.0                     |
+| MSVC                               | Windows 10      | 19.32.31332.0                              | CMake                      | \>= 3.24.0                     |
+| AppleClang                         | MacOS Monterey  | 14.0.0                                     | CMake                      | \>= 3.24.0                     |
+
+Please note, that where the underlying operating system is optional in this listing, the toolchain itself is not! This means, that by default you should use one of the supported listed toolchains.  
+In case you'd like to use an unsupported toolchain, you can enforce this during CMake project generation. For that have a look at the CMake flag usage section below.
+
+#### Generate CMake Project (Unix) ####
+
+To prepare a CMake project, create a build folder within the project's root folder (where the CMakeLists.txt file is located) via CLI and navigate to it:
 
 ```
-cmake_build_release
+mkdir cmake-build-release
+cd cmake-build-release
 ```
 
-Open your OS specific command line interface (CLI) and navigate to this new folder and run the following command to configure the project and generate a native build system:  
+Inside this folder generate the CMake project:
 
 ```
 cmake ../
 ```
 
-Inside __cmake_build_release__ folder you will now find cmake generated files. To compile the library now, just run:   
+Alternatively, the CMake project generation can be controlled by providing library specific CMake flags. The following table is a listing of available flags:
+
+| CMake Flag                               | Default Value | Description                                                                                                                                          |
+|------------------------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| __LS_STD_BUILD_WITH_TESTS__              | OFF           | This flag can be enabled to build automated tests, like unit or integration tests.                                                                   |
+| __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ | ON            | This flag enforces the usage of supported compilers, only.<br/>For usage of an unsupported toolchain, set this flag to __OFF__.                      |
+| __LS_STD_BUILD_STATIC__                  | ON            | This flag indicates, that all library modules should be built as static goals.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned off. |
+| __LS_STD_BUILD_SHARED__                  | OFF           | This flag indicates, that all library modules should be built as shared goals.  <br/>Please note, that __LS_STD_BUILD_STATIC__ has to be turned off. |
+
+To use one or more of these flags, you'd have to adjust previous command, like:
+
+```
+cmake -DLS_STD_BUILD_WITH_TESTS=ON ../
+```
+
+#### Compile Project ####
+
+Now, that the CMake project is generated, you should find CMake generated files inside previously created build folder. In order to compile the project run:   
 
 ```
 cmake --build . --config Release
 ```
 
-__Please note__: Currently only a small set of compilers is officially supported. If you'd like to compile with an unsupported compiler, you have to set __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ - option in _CMakeLists.txt_ file to __OFF__ - then reset and reload the cmake project.  
-
-Find below a table of compiler/OS combinations which have been tested during library version development:
-
-| Supported Compiler | OS              | Compiler Version        |
-|--------------------|-----------------|-------------------------|
-| GCC                | Linux Mint 20.3 | 12.1.0                  |
-| Clang              | Linux Mint 20.3 | 12.0.0-3ubuntu1~20.04.5 |
-| MinGW-w64 / GCC    | Windows 10      | 11.2.0                  |
-| MSVC               | Windows 10      | 19.32.31332.0           |
+Once compilation is done, you should find generated binaries within __cmake-build-release__ folder.
 
 ---
-### Add Library To Your CMake Project ###
+### Link ls-std Libraries (CMake) ###
 
-If you would like to add this library to your CMake project (__CMakeLists.txt__ file), make sure that you would add the libraries' include directory:
+If you would like to add this library's modules to your own CMake project, make sure that you would add the libraries' include directory:
 
 ```
 include_directories(${CMAKE_CURRENT_LIST_DIR}/path/to/this/library/include)
 ```
 
-Then link the libraries' binary file inside your __CMakeLists.txt__ file:
+Then link the libraries' binary files, like:
 
 ```
-target_link_libraries(... libls_std_core libls_std_boxing ...)
+target_link_libraries(... ls-std-core ls-std-boxing ...)
 ```
 
 ---
-### Testing ###
 
-This project contains unit tests to provide test coverage.  
-To run those tests you have to build this project with option __LS_STD_BUILD_WITH_TESTS__ set to __ON__ - then reset and reload the CMake project.
+### Run Automated Tests ###
+
+When enabling test build CMake flag during CMake project generation, executable test suite binaries will be generated during project compilation.  
+You would then find individual module test suites, as well as a whole project test suite, which can be run via CLI.

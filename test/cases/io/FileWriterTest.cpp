@@ -3,18 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2022-05-20
+ * Changed:         2023-02-23
  *
  * */
 
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_io.hpp>
-#include "TestHelper.hpp"
+#include <ls-std/ls-std-core.hpp>
+#include <ls-std/ls-std-io.hpp>
+
+using ls::std::core::FileNotFoundException;
+using ls::std::io::File;
+using ls::std::io::FileWriter;
+using ls::std::test::TestHelper;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class FileWriterTest : public ::testing::Test
+  class FileWriterTest : public Test
   {
     protected:
 
@@ -30,33 +37,35 @@ namespace
 
   TEST_F(FileWriterTest, constructor_file_does_not_exist)
   {
-    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "not_existing_file.txt";
-    ls::std::io::File file{path};
+    string path = TestHelper::getResourcesFolderLocation() + "not-existing-file.txt";
+    File file{path};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     ls::std::io::FileWriter writer{file};
-                   }
-                   catch (const ls::std::core::FileNotFoundException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::FileNotFoundException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            FileWriter writer{file};
+          }
+          catch (const FileNotFoundException &_exception)
+          {
+            throw;
+          }
+        },
+        FileNotFoundException);
   }
 
   TEST_F(FileWriterTest, reset)
   {
-    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
-    ls::std::io::File file{path};
+    string path = TestHelper::getResourcesFolderLocation() + "tmp-file-writer-test.txt";
+    File file{path};
     file.createNewFile();
-    ls::std::io::FileWriter writer{file};
+    FileWriter writer{file};
     ASSERT_TRUE(writer.write("Testing something!\n"));
 
     // reset
 
-    path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test2.txt";
-    ls::std::io::File anotherFile{path};
+    path = TestHelper::getResourcesFolderLocation() + "tmp-file-writer-test2.txt";
+    File anotherFile{path};
     anotherFile.createNewFile();
 
     writer.reset(anotherFile);
@@ -72,14 +81,14 @@ namespace
 
   TEST_F(FileWriterTest, write)
   {
-    ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + "tmp_file_writer_test.txt";
-    ls::std::io::File file{path};
+    string path = TestHelper::getResourcesFolderLocation() + "tmp-file-writer-test.txt";
+    File file{path};
 
     ASSERT_FALSE(file.exists());
     file.createNewFile();
     ASSERT_TRUE(file.exists());
 
-    ls::std::io::FileWriter writer{file};
+    FileWriter writer{file};
     ASSERT_TRUE(writer.write("Testing something!\n"));
 
     file.remove();

@@ -3,17 +3,24 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2022-05-20
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std_core_test.hpp>
+#include <ls-std-core-test.hpp>
+#include <ls-std/ls-std-core.hpp>
+
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using std::make_shared;
+using std::shared_ptr;
+using test::core::ClassWrapper;
+using testing::Test;
 
 namespace
 {
-  class ClassTest : public ::testing::Test
+  class ClassTest : public Test
   {
     protected:
 
@@ -29,27 +36,29 @@ namespace
 
   TEST_F(ClassTest, constructor_empty_parameter)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     ls::std::core::Class object{""};
-                   }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Class object{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(ClassTest, destructor)
   {
-    ::std::shared_ptr<ls_std_core_test::ClassWrapper> object = ::std::make_shared<ls_std_core_test::ClassWrapper>();
+    shared_ptr<ClassWrapper> object = make_shared<ClassWrapper>();
     EXPECT_CALL(*object, Die());
   }
 
   TEST_F(ClassTest, getClassName)
   {
-    ls::std::core::Class object{"Class"};
+    Class object{"Class"};
     ASSERT_STREQ("Class", object.getClassName().c_str());
   }
 

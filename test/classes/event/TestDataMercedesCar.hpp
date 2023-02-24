@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2022-05-19
+ * Changed:         2023-02-23
  *
  * */
 
@@ -11,16 +11,16 @@
 #define LS_STD_TEST_DATA_MERCEDES_CAR_HPP
 
 #include "TestDataCar.hpp"
-#include <ls_std/ls_std_core.hpp>
+#include <ls-std/ls-std-core.hpp>
 
-namespace ls_std_event_test
+namespace test::event
 {
-  class TestDataMercedesCar : public ls_std_event_test::TestDataCar, public ls::std::core::interface_type::IListener
+  class TestDataMercedesCar : public test::event::TestDataCar, public ls::std::core::interface_type::IListener
   {
     public:
 
       TestDataMercedesCar();
-      ~TestDataMercedesCar() = default;
+      ~TestDataMercedesCar() noexcept override;
 
       void listen(const ls::std::core::Class &_info) override;
   };

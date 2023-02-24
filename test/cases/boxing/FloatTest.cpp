@@ -3,17 +3,22 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2022-05-20
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_boxing.hpp>
+#include <ls-std/ls-std-boxing.hpp>
+#include <ls-std/ls-std-core.hpp>
+
+using ls::std::boxing::Float;
+using ls::std::core::IllegalArgumentException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class FloatTest : public ::testing::Test
+  class FloatTest : public Test
   {
     protected:
 
@@ -31,77 +36,77 @@ namespace
 
   TEST_F(FloatTest, operator_assignment)
   {
-    ls::std::boxing::Float x{13.023f};
+    Float x{13.023f};
 
     x = 44.22f;
-    ASSERT_EQ(44.22f, x);
+    ASSERT_EQ(44.22f, x.getValue());
   }
 
   // arithmetic operators
 
   TEST_F(FloatTest, operator_negative)
   {
-    ls::std::boxing::Float x{3.25f};
+    Float x{3.25f};
     ASSERT_FLOAT_EQ(-3.25f, -x);
   }
 
   TEST_F(FloatTest, operator_addition_with_reference)
   {
-    ls::std::boxing::Float x{3.1415f};
-    ls::std::boxing::Float y{2.223f};
-    ls::std::boxing::Float z{x + y};
+    Float x{3.1415f};
+    Float y{2.223f};
+    Float z{x + y};
 
-    ASSERT_FLOAT_EQ(5.3645f, z);
+    ASSERT_FLOAT_EQ(5.3645f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_addition_with_value)
   {
-    ls::std::boxing::Float x{3.1415f};
+    Float x{3.1415f};
     ASSERT_FLOAT_EQ(5.3645f, x + 2.223f);
   }
 
   TEST_F(FloatTest, operator_multiplication_with_reference)
   {
-    ls::std::boxing::Float x{3.14f};
-    ls::std::boxing::Float y{2.22f};
-    ls::std::boxing::Float z{x * y};
+    Float x{3.14f};
+    Float y{2.22f};
+    Float z{x * y};
 
-    ASSERT_FLOAT_EQ(6.9708f, z);
+    ASSERT_FLOAT_EQ(6.9708f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_multiplication_with_value)
   {
-    ls::std::boxing::Float x{3.14f};
+    Float x{3.14f};
     ASSERT_FLOAT_EQ(6.9708f, x * 2.22f);
   }
 
   TEST_F(FloatTest, operator_substraction_with_reference)
   {
-    ls::std::boxing::Float x{3.1415f};
-    ls::std::boxing::Float y{2.225f};
-    ls::std::boxing::Float z{x - y};
+    Float x{3.1415f};
+    Float y{2.225f};
+    Float z{x - y};
 
-    ASSERT_FLOAT_EQ(0.9165f, z);
+    ASSERT_FLOAT_EQ(0.9165f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_substraction_with_value)
   {
-    ls::std::boxing::Float x{3.1415f};
+    Float x{3.1415f};
     ASSERT_FLOAT_EQ(0.9165f, x - 2.225f);
   }
 
   TEST_F(FloatTest, operator_division_with_reference)
   {
-    ls::std::boxing::Float x{2.25f};
-    ls::std::boxing::Float y{0.5f};
-    ls::std::boxing::Float z{x / y};
+    Float x{2.25f};
+    Float y{0.5f};
+    Float z{x / y};
 
-    ASSERT_FLOAT_EQ(4.5f, z);
+    ASSERT_FLOAT_EQ(4.5f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_division_with_value)
   {
-    ls::std::boxing::Float x{2.25f};
+    Float x{2.25f};
     ASSERT_FLOAT_EQ(4.5f, x / 0.5f);
   }
 
@@ -109,78 +114,78 @@ namespace
 
   TEST_F(FloatTest, operator_add_assign_with_reference)
   {
-    ls::std::boxing::Float x{2.25f};
-    ls::std::boxing::Float y{3.14f};
+    Float x{2.25f};
+    Float y{3.14f};
     x += y;
 
-    ASSERT_FLOAT_EQ(5.39f, x);
+    ASSERT_FLOAT_EQ(5.39f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_add_assign_with_value)
   {
-    ls::std::boxing::Float x{2.25f};
+    Float x{2.25f};
     x += 3.14f;
 
-    ASSERT_FLOAT_EQ(5.39f, x);
+    ASSERT_FLOAT_EQ(5.39f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_sub_assign_with_reference)
   {
-    ls::std::boxing::Float x{2.25f};
-    ls::std::boxing::Float y{1.14f};
+    Float x{2.25f};
+    Float y{1.14f};
     x -= y;
 
-    ASSERT_FLOAT_EQ(1.11f, x);
+    ASSERT_FLOAT_EQ(1.11f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_sub_assign_with_value)
   {
-    ls::std::boxing::Float x{2.25f};
+    Float x{2.25f};
     x -= 1.14f;
 
-    ASSERT_FLOAT_EQ(1.11f, x);
+    ASSERT_FLOAT_EQ(1.11f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_mul_assign_with_reference)
   {
-    ls::std::boxing::Float x{2.25f};
-    ls::std::boxing::Float y{0.04f};
+    Float x{2.25f};
+    Float y{0.04f};
     x *= y;
 
-    ASSERT_FLOAT_EQ(0.09f, x);
+    ASSERT_FLOAT_EQ(0.09f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_mul_assign_with_value)
   {
-    ls::std::boxing::Float x{2.25f};
+    Float x{2.25f};
     x *= 1.14f;
 
-    ASSERT_FLOAT_EQ(2.565f, x);
+    ASSERT_FLOAT_EQ(2.565f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_division_assign_with_reference)
   {
-    ls::std::boxing::Float x{2.25f};
-    ls::std::boxing::Float y{1.5f};
+    Float x{2.25f};
+    Float y{1.5f};
     x /= y;
 
-    ASSERT_FLOAT_EQ(1.5f, x);
+    ASSERT_FLOAT_EQ(1.5f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_division_assign_with_value)
   {
-    ls::std::boxing::Float x{2.25f};
+    Float x{2.25f};
     x /= 0.05f;
 
-    ASSERT_FLOAT_EQ(45.0f, x);
+    ASSERT_FLOAT_EQ(45.0f, x.getValue());
   }
 
   // comparison operators
 
   TEST_F(FloatTest, operator_equals_with_reference)
   {
-    ls::std::boxing::Float x{3.14159f};
-    ls::std::boxing::Float y{3.14159f};
+    Float x{3.14159f};
+    Float y{3.14159f};
 
     ASSERT_TRUE(x == y);
     ASSERT_TRUE(y == x);
@@ -188,14 +193,14 @@ namespace
 
   TEST_F(FloatTest, operator_equals_with_value)
   {
-    ls::std::boxing::Float x{3.14159f};
+    Float x{3.14159f};
     ASSERT_TRUE(x == 3.14159f);
   }
 
   TEST_F(FloatTest, operator_not_equals_with_reference)
   {
-    ls::std::boxing::Float x{3.1415f};
-    ls::std::boxing::Float y{3.1414f};
+    Float x{3.1415f};
+    Float y{3.1414f};
 
     ASSERT_TRUE(x != y);
     ASSERT_TRUE(y != x);
@@ -203,14 +208,14 @@ namespace
 
   TEST_F(FloatTest, operator_not_equals_with_value)
   {
-    ls::std::boxing::Float x{3.1415f};
+    Float x{3.1415f};
     ASSERT_TRUE(x != 3.1414f);
   }
 
   TEST_F(FloatTest, operator_greater_than_with_reference)
   {
-    ls::std::boxing::Float x{3.1415f};
-    ls::std::boxing::Float y{3.1414f};
+    Float x{3.1415f};
+    Float y{3.1414f};
 
     ASSERT_TRUE(x > y);
     ASSERT_TRUE(x > 3.1414f);
@@ -218,15 +223,15 @@ namespace
 
   TEST_F(FloatTest, operator_greater_than_with_value)
   {
-    ls::std::boxing::Float x{3.1415f};
+    Float x{3.1415f};
     ASSERT_TRUE(x > 3.1414f);
   }
 
   TEST_F(FloatTest, operator_greater_than_equals_with_reference)
   {
-    ls::std::boxing::Float x{3.1414f};
-    ls::std::boxing::Float y{3.1414f};
-    ls::std::boxing::Float z{3.1415f};
+    Float x{3.1414f};
+    Float y{3.1414f};
+    Float z{3.1415f};
 
     ASSERT_TRUE(x >= y);
     ASSERT_TRUE(z >= y);
@@ -234,8 +239,8 @@ namespace
 
   TEST_F(FloatTest, operator_greater_than_equals_with_value)
   {
-    ls::std::boxing::Float x{3.1414f};
-    ls::std::boxing::Float z{3.1415f};
+    Float x{3.1414f};
+    Float z{3.1415f};
 
     ASSERT_TRUE(x >= 3.1414f);
     ASSERT_TRUE(z >= 3.1414f);
@@ -243,23 +248,23 @@ namespace
 
   TEST_F(FloatTest, operator_less_than_with_reference)
   {
-    ls::std::boxing::Float x{3.1413f};
-    ls::std::boxing::Float y{3.1414f};
+    Float x{3.1413f};
+    Float y{3.1414f};
 
     ASSERT_TRUE(x < y);
   }
 
   TEST_F(FloatTest, operator_less_than_with_value)
   {
-    ls::std::boxing::Float x{3.1413f};
+    Float x{3.1413f};
     ASSERT_TRUE(x < 3.1414f);
   }
 
   TEST_F(FloatTest, operator_less_than_equals_with_reference)
   {
-    ls::std::boxing::Float x{3.1414f};
-    ls::std::boxing::Float y{3.1414f};
-    ls::std::boxing::Float z{3.1415f};
+    Float x{3.1414f};
+    Float y{3.1414f};
+    Float z{3.1415f};
 
     ASSERT_TRUE(x <= y);
     ASSERT_TRUE(x <= z);
@@ -267,7 +272,7 @@ namespace
 
   TEST_F(FloatTest, operator_less_than_equals_with_value)
   {
-    ls::std::boxing::Float x{3.1414f};
+    Float x{3.1414f};
 
     ASSERT_TRUE(x <= 3.1414f);
     ASSERT_TRUE(x <= 3.1415f);
@@ -277,53 +282,53 @@ namespace
 
   TEST_F(FloatTest, operator_increment)
   {
-    ls::std::boxing::Float x{3.1415f};
+    Float x{3.1415f};
     ++x;
 
-    ASSERT_FLOAT_EQ(4.1415f, x);
+    ASSERT_FLOAT_EQ(4.1415f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_decrement)
   {
-    ls::std::boxing::Float x{3.1415f};
+    Float x{3.1415f};
     --x;
 
-    ASSERT_FLOAT_EQ(2.1415f, x);
+    ASSERT_FLOAT_EQ(2.1415f, x.getValue());
   }
 
   // implementation
 
   TEST_F(FloatTest, parse)
   {
-    ls::std::boxing::Float number{};
+    Float number{};
 
     number.parse("3.1415f");
-    ASSERT_FLOAT_EQ(3.1415f, number);
+    ASSERT_FLOAT_EQ(3.1415f, number.getValue());
   }
 
   TEST_F(FloatTest, toString)
   {
-    ls::std::boxing::Float x{13.1543f};
-    ASSERT_TRUE(x.toString().find("13.1543") != ::std::string::npos);
+    Float x{13.1543f};
+    ASSERT_TRUE(x.toString().find("13.1543") != string::npos);
   }
 
   // additional functionality
 
   TEST_F(FloatTest, getEpsilon)
   {
-    ls::std::boxing::Float x{};
+    Float x{};
     ASSERT_FLOAT_EQ(0.00001f, x.getEpsilon());
   }
 
   TEST_F(FloatTest, getValue)
   {
-    ls::std::boxing::Float x{3.1415f};
+    Float x{3.1415f};
     ASSERT_FLOAT_EQ(3.1415f, x.getValue());
   }
 
   TEST_F(FloatTest, setEpsilon)
   {
-    ls::std::boxing::Float x{};
+    Float x{};
     x.setEpsilon(0.01f);
 
     ASSERT_FLOAT_EQ(0.01f, x.getEpsilon());
@@ -331,17 +336,19 @@ namespace
 
   TEST_F(FloatTest, setEpsilon_invalid_value)
   {
-    ls::std::boxing::Float x{};
+    Float x{};
 
-    EXPECT_THROW({
-                   try
-                   {
-                     x.setEpsilon(0.0f);
-                   }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            x.setEpsilon(0.0f);
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 }

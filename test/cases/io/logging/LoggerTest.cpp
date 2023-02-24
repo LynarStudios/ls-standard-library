@@ -3,18 +3,32 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2022-05-20
+ * Changed:         2023-02-23
  *
  * */
 
+#include <classes/TestHelper.hpp>
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_io.hpp>
-#include "TestHelper.hpp"
+#include <ls-std/ls-std-core.hpp>
+#include <ls-std/ls-std-io.hpp>
+
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::interface_type::IWriter;
+using ls::std::io::File;
+using ls::std::io::FileOutputStream;
+using ls::std::io::FileReader;
+using ls::std::io::Logger;
+using ls::std::io::LogLevelValue;
+using ls::std::test::TestHelper;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class LoggerTest : public ::testing::Test
+  class LoggerTest : public Test
   {
     protected:
 
@@ -27,26 +41,26 @@ namespace
       void TearDown() override
       {}
 
-      static ::std::shared_ptr<ls::std::core::interface_type::IWriter> createFileLogger(const ::std::string &_logName)
+      static shared_ptr<IWriter> createFileLogger(const string &_logName)
       {
-        ::std::string path = ls_std_test::TestHelper::getResourcesFolderLocation() + _logName;
-        ls::std::io::File file{path};
+        string path = TestHelper::getResourcesFolderLocation() + _logName;
+        File file{path};
 
         if (!file.exists())
         {
           file.createNewFile();
         }
 
-        ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = ::std::dynamic_pointer_cast<ls::std::core::interface_type::IWriter>(::std::make_shared<ls::std::io::FileOutputStream>(file));
+        shared_ptr<IWriter> writer = make_shared<FileOutputStream>(file);
 
         return writer;
       }
 
-      static ::std::string getContentFromLogFile(const ::std::string &_logName)
+      static string getContentFromLogFile(const string &_logName)
       {
-        ls::std::io::File file{ls_std_test::TestHelper::getResourcesFolderLocation() + _logName};
-        ls::std::io::FileReader reader{file};
-        ::std::string content{reader.read()};
+        File file{TestHelper::getResourcesFolderLocation() + _logName};
+        FileReader reader{file};
+        string content{reader.read()};
         file.remove();
 
         return content;
@@ -55,27 +69,29 @@ namespace
 
   TEST_F(LoggerTest, constructor_no_writer_reference)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     ls::std::io::Logger logger{nullptr};
-                   }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            Logger logger{nullptr};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(LoggerTest, debug)
   {
     // write to log file
 
-    ::std::string logName = "output_debug.log";
-    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    string logName = "output-debug.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
 
-    ls::std::io::Logger logger{writer};
-    logger.setLogLevel(ls::std::io::LogLevelValue::DEBUG);
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::DEBUG);
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -85,26 +101,26 @@ namespace
 
     // get content and check
 
-    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ::std::string content = getContentFromLogFile(logName);
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("5. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("1. line!") != string::npos);
+    ASSERT_TRUE(content.find("2. line!") != string::npos);
+    ASSERT_TRUE(content.find("3. line!") != string::npos);
+    ASSERT_TRUE(content.find("4. line!") != string::npos);
+    ASSERT_TRUE(content.find("5. line!") != string::npos);
+    ASSERT_FALSE(content.find("6. line!") != string::npos);
   }
 
   TEST_F(LoggerTest, error)
   {
     // write to log file
 
-    ::std::string logName = "output_error.log";
-    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    string logName = "output-error.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
 
-    ls::std::io::Logger logger{writer};
-    logger.setLogLevel(ls::std::io::LogLevelValue::ERR);
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::ERR);
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -114,26 +130,26 @@ namespace
 
     // get content and check
 
-    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ::std::string content = getContentFromLogFile(logName);
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
 
-    ASSERT_FALSE(content.find("1. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("2. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("1. line!") != string::npos);
+    ASSERT_FALSE(content.find("2. line!") != string::npos);
+    ASSERT_TRUE(content.find("3. line!") != string::npos);
+    ASSERT_TRUE(content.find("4. line!") != string::npos);
+    ASSERT_FALSE(content.find("5. line!") != string::npos);
+    ASSERT_FALSE(content.find("6. line!") != string::npos);
   }
 
   TEST_F(LoggerTest, fatal)
   {
     // write to log file
 
-    ::std::string logName = "output_fatal.log";
-    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    string logName = "output-fatal.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
 
-    ls::std::io::Logger logger{writer};
-    logger.setLogLevel(ls::std::io::LogLevelValue::FATAL);
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::FATAL);
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -143,32 +159,32 @@ namespace
 
     // get content and check
 
-    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ::std::string content = getContentFromLogFile(logName);
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
 
-    ASSERT_FALSE(content.find("1. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("2. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("3. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
+    ASSERT_FALSE(content.find("1. line!") != string::npos);
+    ASSERT_FALSE(content.find("2. line!") != string::npos);
+    ASSERT_FALSE(content.find("3. line!") != string::npos);
+    ASSERT_TRUE(content.find("4. line!") != string::npos);
+    ASSERT_FALSE(content.find("5. line!") != string::npos);
+    ASSERT_FALSE(content.find("6. line!") != string::npos);
   }
 
   TEST_F(LoggerTest, getLogLevel)
   {
-    ls::std::io::Logger logger{createFileLogger("output.log")};
-    ASSERT_EQ(ls::std::io::LogLevelValue::INFO, logger.getLogLevel());
+    Logger logger{createFileLogger("output.log")};
+    ASSERT_EQ(LogLevelValue::INFO, logger.getLogLevel().getValue());
   }
 
   TEST_F(LoggerTest, info)
   {
     // write to log file
 
-    ::std::string logName = "output_info.log";
-    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    string logName = "output-info.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
 
-    ls::std::io::Logger logger{writer};
-    logger.setLogLevel(ls::std::io::LogLevelValue::INFO);
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::INFO);
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");
@@ -178,34 +194,34 @@ namespace
 
     // get content and check
 
-    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ::std::string content = getContentFromLogFile(logName);
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("1. line!") != string::npos);
+    ASSERT_TRUE(content.find("2. line!") != string::npos);
+    ASSERT_TRUE(content.find("3. line!") != string::npos);
+    ASSERT_TRUE(content.find("4. line!") != string::npos);
+    ASSERT_FALSE(content.find("5. line!") != string::npos);
+    ASSERT_FALSE(content.find("6. line!") != string::npos);
   }
 
   TEST_F(LoggerTest, setLogLevel)
   {
-    ls::std::io::Logger logger{createFileLogger("output.log")};
-    logger.setLogLevel(ls::std::io::LogLevelValue::ERR);
+    Logger logger{createFileLogger("output.log")};
+    logger.setLogLevel(LogLevelValue::ERR);
 
-    ASSERT_EQ(ls::std::io::LogLevelValue::ERR, logger.getLogLevel());
+    ASSERT_EQ(LogLevelValue::ERR, logger.getLogLevel().getValue());
   }
 
   TEST_F(LoggerTest, trace)
   {
     // write to log file
 
-    ::std::string logName = "output_trace.log";
-    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    string logName = "output-trace.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
 
-    ls::std::io::Logger logger{writer};
-    logger.setLogLevel(ls::std::io::LogLevelValue::TRACE);
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::TRACE);
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");
@@ -215,26 +231,26 @@ namespace
 
     // get content and check
 
-    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ::std::string content = getContentFromLogFile(logName);
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("4. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("5. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("6. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("1. line!") != string::npos);
+    ASSERT_TRUE(content.find("2. line!") != string::npos);
+    ASSERT_TRUE(content.find("3. line!") != string::npos);
+    ASSERT_TRUE(content.find("4. line!") != string::npos);
+    ASSERT_TRUE(content.find("5. line!") != string::npos);
+    ASSERT_TRUE(content.find("6. line!") != string::npos);
   }
 
   TEST_F(LoggerTest, warn)
   {
     // write to log file
 
-    ::std::string logName = "output_warn.log";
-    ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer = createFileLogger(logName);
+    string logName = "output-warn.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
 
-    ls::std::io::Logger logger{writer};
-    logger.setLogLevel(ls::std::io::LogLevelValue::WARN);
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::WARN);
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");
@@ -244,14 +260,14 @@ namespace
 
     // get content and check
 
-    ::std::dynamic_pointer_cast<ls::std::io::FileOutputStream>(writer)->close();
-    ::std::string content = getContentFromLogFile(logName);
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
 
-    ASSERT_TRUE(content.find("1. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("2. line!") != ::std::string::npos);
-    ASSERT_TRUE(content.find("3. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("4. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("5. line!") != ::std::string::npos);
-    ASSERT_FALSE(content.find("6. line!") != ::std::string::npos);
+    ASSERT_TRUE(content.find("1. line!") != string::npos);
+    ASSERT_TRUE(content.find("2. line!") != string::npos);
+    ASSERT_TRUE(content.find("3. line!") != string::npos);
+    ASSERT_FALSE(content.find("4. line!") != string::npos);
+    ASSERT_FALSE(content.find("5. line!") != string::npos);
+    ASSERT_FALSE(content.find("6. line!") != string::npos);
   }
 }

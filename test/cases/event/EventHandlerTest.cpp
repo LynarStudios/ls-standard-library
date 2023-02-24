@@ -3,17 +3,21 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2022-05-14
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
-#include <ls_std/ls_std_core.hpp>
-#include <ls_std/ls_std_event.hpp>
+#include <ls-std/ls-std-core.hpp>
+#include <ls-std/ls-std-event.hpp>
+
+using ls::std::core::IllegalArgumentException;
+using ls::std::event::EventHandler;
+using testing::Test;
 
 namespace
 {
-  class EventHandlerTest : public ::testing::Test
+  class EventHandlerTest : public Test
   {
     protected:
 
@@ -29,21 +33,23 @@ namespace
 
   TEST_F(EventHandlerTest, constructor_empty_parameter)
   {
-    EXPECT_THROW({
-                   try
-                   {
-                     ls::std::event::EventHandler eventHandler{""};
-                   }
-                   catch (const ls::std::core::IllegalArgumentException &_exception)
-                   {
-                     throw;
-                   }
-                 }, ls::std::core::IllegalArgumentException);
+    EXPECT_THROW(
+        {
+          try
+          {
+            EventHandler eventHandler{""};
+          }
+          catch (const IllegalArgumentException &_exception)
+          {
+            throw;
+          }
+        },
+        IllegalArgumentException);
   }
 
   TEST_F(EventHandlerTest, getId)
   {
-    ls::std::event::EventHandler eventHandler{"EventId"};
+    EventHandler eventHandler{"EventId"};
     ASSERT_STREQ("EventId", eventHandler.getId().c_str());
   }
 }
