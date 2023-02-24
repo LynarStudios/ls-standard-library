@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-23
+* Changed:         2023-02-24
 *
 * */
 
@@ -32,8 +32,11 @@ using ls::std::io::SectionPairMessageFormatter;
 using ls::std::io::SectionPairSection;
 using ls::std::io::SerializableSectionPairParameter;
 using ls::std::io::SerializableSectionPairSection;
+using std::any_of;
+using std::find_if;
 using std::make_shared;
 using std::reinterpret_pointer_cast;
+using std::shared_ptr;
 using std::string;
 
 SectionPairSection::SectionPairSection(const section_pair_identifier &_sectionId) : Class("SectionPairSection")
@@ -137,34 +140,13 @@ void SectionPairSection::_createSerializable()
 
 section_pair_row_list_element SectionPairSection::_get(const section_pair_identifier &_key)
 {
-  section_pair_row_list_element element{};
-
-  for (const auto &_row : this->rows)
-  {
-    if (_row->getKey() == _key)
-    {
-      element = _row;
-      break;
-    }
-  }
-
-  return element;
+  const auto &iterator = find_if(this->rows.begin(), this->rows.end(), [_key](const shared_ptr<SectionPairRow> &_row) { return _row->getKey() == _key; });
+  return iterator != this->rows.end() ? *iterator : nullptr;
 }
 
 bool SectionPairSection::_hasRow(const section_pair_identifier &_key)
 {
-  bool rowExists{};
-
-  for (const auto &_row : this->rows)
-  {
-    if (_row->getKey() == _key)
-    {
-      rowExists = true;
-      break;
-    }
-  }
-
-  return rowExists;
+  return any_of(this->rows.begin(), this->rows.end(), [_key](const shared_ptr<SectionPairRow> &_row) { return _row->getKey() == _key; });
 }
 
 void SectionPairSection::_rowExistenceCheck(const section_pair_identifier &_key)
