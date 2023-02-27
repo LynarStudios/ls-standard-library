@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-04
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/interface/IBoxing.hpp>
 
-ls::std::core::interface_type::IBoxing::IBoxing() = default;
+using ls::std::core::interface_type::IBoxing;
 
-ls::std::core::interface_type::IBoxing::~IBoxing() = default;
+IBoxing::IBoxing() = default;
+
+IBoxing::~IBoxing() = default;

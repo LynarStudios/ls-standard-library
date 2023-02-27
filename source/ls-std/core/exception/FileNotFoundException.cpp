@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/FileNotFoundException.hpp>
 
-ls::std::core::FileNotFoundException::FileNotFoundException() : ls::std::core::Exception("FileNotFoundException")
+using ls::std::core::Exception;
+using ls::std::core::FileNotFoundException;
+using std::move;
+using std::string;
+
+FileNotFoundException::FileNotFoundException() : Exception("FileNotFoundException")
 {}
 
-ls::std::core::FileNotFoundException::FileNotFoundException(::std::string _message) : ls::std::core::FileNotFoundException()
+FileNotFoundException::FileNotFoundException(string _message) : FileNotFoundException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::FileNotFoundException::~FileNotFoundException() = default;
+FileNotFoundException::~FileNotFoundException() noexcept = default;
 
-const char *ls::std::core::FileNotFoundException::what() const noexcept
+const char *FileNotFoundException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

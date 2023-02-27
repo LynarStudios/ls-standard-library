@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-20
+* Changed:         2023-02-23
 *
 * */
 
@@ -13,15 +13,26 @@
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace test::io;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::io::NewLine;
+using ls::std::io::SectionPairRowListValue;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SectionPairSection;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairSection;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using test::io::SectionPairSectionProvider;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SerializableSectionPairSectionTest : public ::testing::Test
+  class SerializableSectionPairSectionTest : public Test
   {
     protected:
 
@@ -173,5 +184,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairSectionTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairSectionTest_LineBreakTest, Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
 }

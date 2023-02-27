@@ -11,11 +11,13 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
+using ls::std::core::NullPointerException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class NullPointerExceptionTest : public ::testing::Test
+  class NullPointerExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - reference is null!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - reference is null!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - _value is null";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - _value is null";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/IncompleteJsonException.hpp>
 
-ls::std::core::IncompleteJsonException::IncompleteJsonException() : ls::std::core::Exception("IncompleteJsonException")
+using ls::std::core::Exception;
+using ls::std::core::IncompleteJsonException;
+using std::move;
+using std::string;
+
+IncompleteJsonException::IncompleteJsonException() : Exception("IncompleteJsonException")
 {}
 
-ls::std::core::IncompleteJsonException::IncompleteJsonException(::std::string _message) : ls::std::core::IncompleteJsonException()
+IncompleteJsonException::IncompleteJsonException(string _message) : IncompleteJsonException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::IncompleteJsonException::~IncompleteJsonException() = default;
+IncompleteJsonException::~IncompleteJsonException() noexcept = default;
 
-const char *ls::std::core::IncompleteJsonException::what() const noexcept
+const char *IncompleteJsonException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

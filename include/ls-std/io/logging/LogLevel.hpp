@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -23,9 +23,8 @@ namespace ls::std::io
 
       explicit LogLevel(const ls::std::io::LogLevelValue &_value);
       LogLevel();
-      ~LogLevel() override;
-
-      operator unsigned char() const;
+      ~LogLevel() noexcept override;
+      ;
       ls::std::io::LogLevel &operator=(const ls::std::io::LogLevelValue &_value);
       bool operator<(const ls::std::io::LogLevelValue &_value);
       bool operator<=(const ls::std::io::LogLevelValue &_value);
@@ -33,6 +32,7 @@ namespace ls::std::io
       bool operator>=(const ls::std::io::LogLevelValue &_value);
       bool operator==(const ls::std::io::LogLevelValue &_value);
 
+      [[nodiscard]] ls::std::io::LogLevelValue getValue();
       void setLogLevel(const ls::std::io::LogLevelValue &_value);
       void setLogLevel(const ::std::string &_value);
       [[nodiscard]] ::std::string toString() const;

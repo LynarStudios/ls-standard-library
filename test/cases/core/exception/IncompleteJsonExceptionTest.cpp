@@ -11,11 +11,13 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
+using ls::std::core::IncompleteJsonException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class IncompleteJsonExceptionTest : public ::testing::Test
+  class IncompleteJsonExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const IncompleteJsonException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - this JSON string is incomplete.";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - this JSON string is incomplete.";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const IncompleteJsonException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - incomplete: {\"name\":\"}";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - incomplete: {\"name\":\"}";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -22,7 +22,7 @@ namespace ls::std::io
     public:
 
       explicit FileReader(ls::std::io::File &_file);
-      ~FileReader() override;
+      ~FileReader() noexcept override;
 
       [[nodiscard]] ls::std::core::type::byte_field read() override;
       void reset(ls::std::io::File &_file);
@@ -30,8 +30,6 @@ namespace ls::std::io
     private:
 
       ls::std::io::File file;
-
-      static void _init(ls::std::io::File &_file);
   };
 }
 

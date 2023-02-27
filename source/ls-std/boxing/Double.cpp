@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-07
+ * Changed:         2023-02-23
  *
  * */
 
@@ -11,222 +11,225 @@
 #include <ls-std/boxing/Double.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::boxing::Double::Double() : ls::std::core::Class("Double")
+using ls::std::boxing::Double;
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using std::fabs;
+using std::stod;
+using std::string;
+using std::to_string;
+
+Double::Double() : Class("Double")
 {
   this->_assignEpsilon(0.00000001);
 }
 
-ls::std::boxing::Double::Double(double _value) : ls::std::core::Class("Double"), value(_value)
+Double::Double(double _value) : Double()
 {
-  this->_assignEpsilon(0.00000001);
+  this->value = _value;
 }
 
-ls::std::boxing::Double::~Double() = default;
+Double::~Double() noexcept = default;
 
-ls::std::boxing::Double::operator double() const
-{
-  return this->value;
-}
-
-ls::std::boxing::Double &ls::std::boxing::Double::operator=(double _value)
+Double &Double::operator=(double _value)
 {
   this->value = _value;
   return *this;
 }
 
-double ls::std::boxing::Double::operator-() const
+double Double::operator-() const
 {
   return -this->value;
 }
 
-double ls::std::boxing::Double::operator+(const ls::std::boxing::Double &_double) const
+double Double::operator+(const Double &_double) const
 {
-  return this->value + _double;
+  return this->value + _double.getValue();
 }
 
-double ls::std::boxing::Double::operator+(double _value) const
+double Double::operator+(double _value) const
 {
   return this->value + _value;
 }
 
-double ls::std::boxing::Double::operator*(const ls::std::boxing::Double &_double) const
+double Double::operator*(const Double &_double) const
 {
-  return this->value * _double;
+  return this->value * _double.getValue();
 }
 
-double ls::std::boxing::Double::operator*(double _value) const
+double Double::operator*(double _value) const
 {
   return this->value * _value;
 }
 
-double ls::std::boxing::Double::operator-(const ls::std::boxing::Double &_double) const
+double Double::operator-(const Double &_double) const
 {
-  return this->value - _double;
+  return this->value - _double.getValue();
 }
 
-double ls::std::boxing::Double::operator-(double _value) const
+double Double::operator-(double _value) const
 {
   return this->value - _value;
 }
 
-double ls::std::boxing::Double::operator/(const ls::std::boxing::Double &_double) const
+double Double::operator/(const Double &_double) const
 {
-  return this->value / _double;
+  return this->value / _double.getValue();
 }
 
-double ls::std::boxing::Double::operator/(double _value) const
+double Double::operator/(double _value) const
 {
   return this->value / _value;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator+=(const ls::std::boxing::Double &_double)
+Double &Double::operator+=(const Double &_double)
 {
-  this->value += _double;
+  this->value += _double.getValue();
   return *this;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator+=(double _value)
+Double &Double::operator+=(double _value)
 {
   this->value += _value;
   return *this;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator-=(const ls::std::boxing::Double &_double)
+Double &Double::operator-=(const Double &_double)
 {
-  this->value -= _double;
+  this->value -= _double.getValue();
   return *this;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator-=(double _value)
+Double &Double::operator-=(double _value)
 {
   this->value -= _value;
   return *this;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator*=(const ls::std::boxing::Double &_double)
+Double &Double::operator*=(const Double &_double)
 {
-  this->value *= _double;
+  this->value *= _double.getValue();
   return *this;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator*=(double _value)
+Double &Double::operator*=(double _value)
 {
   this->value *= _value;
   return *this;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator/=(const ls::std::boxing::Double &_double)
+Double &Double::operator/=(const Double &_double)
 {
-  this->value /= _double;
+  this->value /= _double.getValue();
   return *this;
 }
 
-ls::std::boxing::Double &ls::std::boxing::Double::operator/=(double _value)
+Double &Double::operator/=(double _value)
 {
   this->value /= _value;
   return *this;
 }
 
-bool ls::std::boxing::Double::operator==(const ls::std::boxing::Double &_double) const
+bool Double::operator==(const Double &_double) const
 {
-  return ::std::fabs(this->value - _double) < this->epsilon;
+  return fabs(this->value - _double.getValue()) < this->epsilon;
 }
 
-bool ls::std::boxing::Double::operator==(double _value) const
+bool Double::operator==(double _value) const
 {
-  return ::std::fabs(this->value - _value) < this->epsilon;
+  return fabs(this->value - _value) < this->epsilon;
 }
 
-bool ls::std::boxing::Double::operator!=(const ls::std::boxing::Double &_double) const
+bool Double::operator!=(const Double &_double) const
 {
-  return ::std::fabs(this->value - _double) >= this->epsilon;
+  return fabs(this->value - _double.getValue()) >= this->epsilon;
 }
 
-bool ls::std::boxing::Double::operator!=(double _value) const
+bool Double::operator!=(double _value) const
 {
-  return ::std::fabs(this->value - _value) >= this->epsilon;
+  return fabs(this->value - _value) >= this->epsilon;
 }
 
-bool ls::std::boxing::Double::operator>(const ls::std::boxing::Double &_double) const
+bool Double::operator>(const Double &_double) const
 {
-  return this->value > _double;
+  return this->value > _double.getValue();
 }
 
-bool ls::std::boxing::Double::operator>(double _value) const
+bool Double::operator>(double _value) const
 {
   return this->value > _value;
 }
 
-bool ls::std::boxing::Double::operator>=(const ls::std::boxing::Double &_double) const
+bool Double::operator>=(const Double &_double) const
 {
-  return this->value >= _double;
+  return this->value >= _double.getValue();
 }
 
-bool ls::std::boxing::Double::operator>=(double _value) const
+bool Double::operator>=(double _value) const
 {
   return this->value >= _value;
 }
 
-bool ls::std::boxing::Double::operator<(const ls::std::boxing::Double &_double) const
+bool Double::operator<(const Double &_double) const
 {
-  return this->value < _double;
+  return this->value < _double.getValue();
 }
 
-bool ls::std::boxing::Double::operator<(double _value) const
+bool Double::operator<(double _value) const
 {
   return this->value < _value;
 }
 
-bool ls::std::boxing::Double::operator<=(const ls::std::boxing::Double &_double) const
+bool Double::operator<=(const Double &_double) const
 {
-  return this->value <= _double;
+  return this->value <= _double.getValue();
 }
 
-bool ls::std::boxing::Double::operator<=(double _value) const
+bool Double::operator<=(double _value) const
 {
   return this->value <= _value;
 }
 
-void ls::std::boxing::Double::operator++()
+void Double::operator++()
 {
   this->value += 1.0f;
 }
 
-void ls::std::boxing::Double::operator--()
+void Double::operator--()
 {
   this->value -= 1.0f;
 }
 
-void ls::std::boxing::Double::parse(::std::string _parseText)
+void Double::parse(string _parseText)
 {
-  this->value = ::std::stod(_parseText);
+  this->value = stod(_parseText);
 }
 
-::std::string ls::std::boxing::Double::toString()
+string Double::toString()
 {
-  return ::std::to_string(this->value);
+  return to_string(this->value);
 }
 
-double ls::std::boxing::Double::getEpsilon()
+double Double::getEpsilon() const
 {
   return this->epsilon;
 }
 
-double ls::std::boxing::Double::getValue()
+double Double::getValue() const
 {
   return this->value;
 }
 
-void ls::std::boxing::Double::setEpsilon(double _epsilon)
+void Double::setEpsilon(double _epsilon)
 {
   this->_assignEpsilon(_epsilon);
 }
 
-void ls::std::boxing::Double::_assignEpsilon(double _epsilon)
+void Double::_assignEpsilon(double _epsilon)
 {
   if (_epsilon <= 0.0)
   {
-    throw ls::std::core::IllegalArgumentException{"_epsilon is less than or equal zero"};
+    throw IllegalArgumentException{"_epsilon is less than or equal zero"};
   }
 
   this->epsilon = _epsilon;

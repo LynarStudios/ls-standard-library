@@ -11,12 +11,14 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ::std;
+using ls::std::core::NullPointerEvaluator;
+using ls::std::core::NullPointerException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class NullPointerArgumentTest : public ::testing::Test
+  class NullPointerArgumentTest : public Test
   {
     protected:
 

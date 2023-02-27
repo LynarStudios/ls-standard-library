@@ -38,7 +38,6 @@
 #include <ls-std/core/interface/IWriter.hpp>
 
 #include <ls-std/core/type/EventTypes.hpp>
-#include <ls-std/core/type/KvTypes.hpp>
 #include <ls-std/core/type/Types.hpp>
 
 #include <ls-std/core/Class.hpp>

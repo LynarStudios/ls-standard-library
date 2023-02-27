@@ -22,7 +22,7 @@ namespace ls::std::core
 
       IncompleteJsonException();
       explicit IncompleteJsonException(::std::string _message);
-      ~IncompleteJsonException() override;
+      ~IncompleteJsonException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

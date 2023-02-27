@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -23,11 +23,7 @@ namespace ls::std::boxing
 
       Float();
       explicit Float(float _value);
-      ~Float() override;
-
-      // conversion operator
-
-      operator float() const; // do not make explicit!
+      ~Float() noexcept override;
 
       // assignment operators
 
@@ -83,8 +79,8 @@ namespace ls::std::boxing
 
       // additional functionality
 
-      [[nodiscard]] float getEpsilon();
-      [[nodiscard]] float getValue();
+      [[nodiscard]] float getEpsilon() const;
+      [[nodiscard]] float getValue() const;
       void setEpsilon(float _epsilon);
 
     private:

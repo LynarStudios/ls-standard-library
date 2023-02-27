@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,13 +12,19 @@
 #include <ls-std/ls-std-io.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::SectionPairMessageFormatter;
+using ls::std::io::SectionPairRowArgumentEvaluator;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SectionPairRowArgumentEvaluatorTest : public ::testing::Test
+  class SectionPairRowArgumentEvaluatorTest : public Test
   {
     protected:
 
@@ -32,7 +38,7 @@ namespace
       {}
   };
 
-  class SectionPairRowArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairRowArgumentEvaluatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -56,8 +62,8 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid section pair row!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid section pair row!";
 
             ASSERT_STREQ(SectionPairMessageFormatter::getFormattedMessage(expected).c_str(), actual.c_str());
             throw;
@@ -66,5 +72,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("heroes:\n  phil", "shapes:\r\n  triangle\r\nsquare"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowArgumentEvaluatorTest_InvalidArgumentTest, Values("heroes:\n  phil", "shapes:\r\n  triangle\r\nsquare"));
 }

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-06
+ * Changed:         2023-02-23
  *
  * */
 
@@ -12,15 +12,23 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::interface_type;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace ls::std::test;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::interface_type::IWriter;
+using ls::std::io::File;
+using ls::std::io::FileOutputStream;
+using ls::std::io::FileReader;
+using ls::std::io::Logger;
+using ls::std::io::LogLevelValue;
+using ls::std::test::TestHelper;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class LoggerTest : public ::testing::Test
+  class LoggerTest : public Test
   {
     protected:
 
@@ -43,7 +51,7 @@ namespace
           file.createNewFile();
         }
 
-        shared_ptr<IWriter> writer = dynamic_pointer_cast<IWriter>(make_shared<FileOutputStream>(file));
+        shared_ptr<IWriter> writer = make_shared<FileOutputStream>(file);
 
         return writer;
       }
@@ -165,7 +173,7 @@ namespace
   TEST_F(LoggerTest, getLogLevel)
   {
     Logger logger{createFileLogger("output.log")};
-    ASSERT_EQ(LogLevelValue::INFO, logger.getLogLevel());
+    ASSERT_EQ(LogLevelValue::INFO, logger.getLogLevel().getValue());
   }
 
   TEST_F(LoggerTest, info)
@@ -202,7 +210,7 @@ namespace
     Logger logger{createFileLogger("output.log")};
     logger.setLogLevel(LogLevelValue::ERR);
 
-    ASSERT_EQ(LogLevelValue::ERR, logger.getLogLevel());
+    ASSERT_EQ(LogLevelValue::ERR, logger.getLogLevel().getValue());
   }
 
   TEST_F(LoggerTest, trace)

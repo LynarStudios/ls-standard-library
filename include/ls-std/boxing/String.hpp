@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-08
+ * Changed:         2023-02-23
  *
  * */
 
@@ -26,12 +26,7 @@ namespace ls::std::boxing
 
       String();
       explicit String(::std::string _value);
-      ~String() override;
-
-      // conversion operator
-
-      operator const char *() const;  // do not make explicit!
-      operator ::std::string() const; // do not make explicit!
+      ~String() noexcept override;
 
       // assignment operators
 
@@ -69,7 +64,7 @@ namespace ls::std::boxing
       [[nodiscard]] bool endsWith(const ::std::string &_text);
       [[nodiscard]] bool equalsIgnoreCase(ls::std::boxing::String _string);
       [[nodiscard]] bool equalsIgnoreCase(::std::string _text);
-      [[nodiscard]] ::std::vector<ls::std::core::type::byte> getByteData();
+      [[nodiscard]] ::std::vector<ls::std::core::type::byte_type> getByteData();
       [[nodiscard]] ::std::string padLeft(size_t _width, char _fillCharacter);
       [[nodiscard]] ::std::string padRight(size_t _width, char _fillCharacter);
       [[nodiscard]] ::std::string reverse();

@@ -3,19 +3,23 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-07
-* Changed:         2023-02-07
+* Changed:         2023-02-23
 *
 * */
 
 #include <cstring>
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 
-ls::std::core::ExceptionMessage::ExceptionMessage(::std::string _message) : message(::std::move(_message))
+using ls::std::core::ExceptionMessage;
+using std::move;
+using std::string;
+
+ExceptionMessage::ExceptionMessage(string _message) : message(::move(_message))
 {}
 
-ls::std::core::ExceptionMessage::~ExceptionMessage() = default;
+ExceptionMessage::~ExceptionMessage() = default;
 
-char *ls::std::core::ExceptionMessage::toCharacterPointer()
+char *ExceptionMessage::toCharacterPointer()
 {
   char *rawPointerMessage{};
 

@@ -527,6 +527,7 @@ endif ()
 
 if (${LS_STD_BUILD_SHARED})
     add_library("${MODULE_NAME_ENCODING}" SHARED ${SOURCE_FILES_ENCODING})
+    target_link_libraries("${MODULE_NAME_ENCODING}" ${MODULE_NAME_CORE})
     set_target_properties("${MODULE_NAME_ENCODING}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 

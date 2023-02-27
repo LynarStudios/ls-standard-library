@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -22,7 +22,7 @@ namespace ls::std::io
     public:
 
       explicit SectionPairRowListValueArgumentEvaluator(::std::string _listValueRow);
-      ~SectionPairRowListValueArgumentEvaluator() override;
+      ~SectionPairRowListValueArgumentEvaluator() noexcept override;
 
       void evaluate() override;
 

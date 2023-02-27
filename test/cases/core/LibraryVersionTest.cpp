@@ -3,18 +3,19 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2023-02-05
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::core;
+using ls::std::core::LibraryVersion;
+using testing::Test;
 
 namespace
 {
-  class LibraryVersionTest : public ::testing::Test
+  class LibraryVersionTest : public Test
   {
     protected:
 

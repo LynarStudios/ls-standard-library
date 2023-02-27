@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -13,23 +13,38 @@
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
 
-ls::std::io::SerializableSectionPairSection::SerializableSectionPairSection(const ls::std::io::SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairSection")
+using ls::std::core::Class;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::section_pair_row_list_element;
+using ls::std::io::SectionPairRow;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairSection;
+using ls::std::io::SectionPairSectionArgumentEvaluator;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairSection;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+
+SerializableSectionPairSection::SerializableSectionPairSection(const SerializableSectionPairParameter &_parameter) : Class("SerializableSectionPairSection")
 {
-  ::std::string message = this->getClassName() + ": model reference is null!";
-  ls::std::core::NullPointerArgumentEvaluator(_parameter.getValue(), message).evaluate();
+  string message = this->getClassName() + ": model reference is null!";
+  NullPointerArgumentEvaluator(_parameter.getValue(), message).evaluate();
   this->parameter = _parameter;
 }
 
-ls::std::io::SerializableSectionPairSection::~SerializableSectionPairSection() = default;
+SerializableSectionPairSection::~SerializableSectionPairSection() noexcept = default;
 
-::std::shared_ptr<ls::std::core::Class> ls::std::io::SerializableSectionPairSection::getValue()
+shared_ptr<Class> SerializableSectionPairSection::getValue()
 {
   return this->parameter.getValue();
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::marshal()
+byte_field SerializableSectionPairSection::marshal()
 {
-  ls::std::core::type::byte_field serializedSection{};
+  byte_field serializedSection{};
 
   serializedSection += this->_marshalSectionId();
   serializedSection += this->_marshalRows();
@@ -37,25 +52,25 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::mar
   return serializedSection;
 }
 
-void ls::std::io::SerializableSectionPairSection::unmarshal(const ls::std::core::type::byte_field &_data)
+void SerializableSectionPairSection::unmarshal(const byte_field &_data)
 {
-  ls::std::io::SectionPairSectionArgumentEvaluator{_data}.evaluate();
+  SectionPairSectionArgumentEvaluator{_data}.evaluate();
   size_t sectionHeaderSize = this->_unmarshalSectionHeader(_data);
   this->_unmarshalRows(_data.substr(sectionHeaderSize));
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_collectSectionRow(const ls::std::core::type::byte_field &_currentRows, ls::std::io::SectionPairRowEnumType &_type)
+byte_field SerializableSectionPairSection::_collectSectionRow(const byte_field &_currentRows, SectionPairRowEnumType &_type)
 {
-  ::std::string row{};
-  ::std::string newLine = this->parameter.getNewLine();
-  ::std::string firstRow = _currentRows.substr(0, _currentRows.find(newLine) + newLine.size());
+  string row{};
+  string newLine = this->parameter.getNewLine();
+  string firstRow = _currentRows.substr(0, _currentRows.find(newLine) + newLine.size());
 
-  if (ls::std::io::SerializableSectionPairSection::_isSingleValueRow(firstRow))
+  if (SerializableSectionPairSection::_isSingleValueRow(firstRow))
   {
-    row = ls::std::io::SerializableSectionPairSection::_collectSectionSingleValueRow(firstRow, _type);
+    row = SerializableSectionPairSection::_collectSectionSingleValueRow(firstRow, _type);
   }
 
-  if (ls::std::io::SerializableSectionPairSection::_isListValueRow(firstRow))
+  if (SerializableSectionPairSection::_isListValueRow(firstRow))
   {
     row = this->_collectSectionListValueRow(_currentRows, _type);
   }
@@ -63,11 +78,11 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_co
   return row;
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_collectSectionListValueRow(const ls::std::core::type::byte_field &_currentRows, ls::std::io::SectionPairRowEnumType &_type)
+byte_field SerializableSectionPairSection::_collectSectionListValueRow(const byte_field &_currentRows, SectionPairRowEnumType &_type)
 {
-  ls::std::core::type::byte_field currentRows = _currentRows;
-  ls::std::core::type::byte_field currentRow{}, row{};
-  ::std::string newLine = this->parameter.getNewLine();
+  byte_field currentRows = _currentRows;
+  byte_field currentRow{}, row{};
+  string newLine = this->parameter.getNewLine();
   _type = SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE;
   size_t iterations{};
   bool isStillListRow{};
@@ -82,7 +97,7 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_co
     ++iterations;
     currentRow = currentRows.substr(0, currentRows.find(newLine) + newLine.size());
     currentRows = currentRows.substr(currentRow.size());
-    isStillListRow = !ls::std::io::SerializableSectionPairSection::_isStartingValueRow(currentRow) || iterations == 1;
+    isStillListRow = !SerializableSectionPairSection::_isStartingValueRow(currentRow) || iterations == 1;
 
     if (isStillListRow)
     {
@@ -93,13 +108,13 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_co
   return row;
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_collectSectionSingleValueRow(const ls::std::core::type::byte_field &_firstRow, ls::std::io::SectionPairRowEnumType &_type)
+byte_field SerializableSectionPairSection::_collectSectionSingleValueRow(const byte_field &_firstRow, SectionPairRowEnumType &_type)
 {
   _type = SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE;
   return _firstRow;
 }
 
-size_t ls::std::io::SerializableSectionPairSection::_getNthSubStringPosition(const ls::std::core::type::byte_field &_text, const ls::std::core::type::byte_field &_subText)
+size_t SerializableSectionPairSection::_getNthSubStringPosition(const byte_field &_text, const byte_field &_subText)
 {
   size_t position = -1;
   size_t amount{};
@@ -121,11 +136,11 @@ size_t ls::std::io::SerializableSectionPairSection::_getNthSubStringPosition(con
   return position;
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_getSectionHeader(const ls::std::core::type::byte_field &_data)
+byte_field SerializableSectionPairSection::_getSectionHeader(const byte_field &_data)
 {
-  ls::std::core::type::byte_field sectionHeader{};
-  ::std::string newLine = this->parameter.getNewLine();
-  size_t position = ls::std::io::SerializableSectionPairSection::_getNthSubStringPosition(_data, newLine);
+  byte_field sectionHeader{};
+  string newLine = this->parameter.getNewLine();
+  size_t position = SerializableSectionPairSection::_getNthSubStringPosition(_data, newLine);
 
   if (position != -1)
   {
@@ -135,35 +150,35 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_ge
   return sectionHeader;
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_getSectionId(const ls::std::core::type::byte_field &_sectionHeader)
+byte_field SerializableSectionPairSection::_getSectionId(const byte_field &_sectionHeader)
 {
-  ls::std::core::type::byte_field sectionId = _sectionHeader.substr(_sectionHeader.find('[') + 1);
+  byte_field sectionId = _sectionHeader.substr(_sectionHeader.find('[') + 1);
   return sectionId.substr(0, sectionId.find(']'));
 }
 
-bool ls::std::io::SerializableSectionPairSection::_isListValueRow(const ::std::string &_currentRow)
+bool SerializableSectionPairSection::_isListValueRow(const string &_currentRow)
 {
-  return _currentRow.find(':') != ::std::string::npos;
+  return _currentRow.find(':') != string::npos;
 }
 
-bool ls::std::io::SerializableSectionPairSection::_isStartingValueRow(const ::std::string &_currentRow)
+bool SerializableSectionPairSection::_isStartingValueRow(const string &_currentRow)
 {
-  bool isSingleValue = ls::std::io::SerializableSectionPairSection::_isSingleValueRow(_currentRow);
-  bool isListValue = ls::std::io::SerializableSectionPairSection::_isListValueRow(_currentRow);
+  bool isSingleValue = SerializableSectionPairSection::_isSingleValueRow(_currentRow);
+  bool isListValue = SerializableSectionPairSection::_isListValueRow(_currentRow);
 
   return isSingleValue || isListValue;
 }
 
-bool ls::std::io::SerializableSectionPairSection::_isSingleValueRow(const ::std::string &_currentRow)
+bool SerializableSectionPairSection::_isSingleValueRow(const string &_currentRow)
 {
-  return _currentRow.find('=') != ::std::string::npos;
+  return _currentRow.find('=') != string::npos;
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_marshalRows()
+byte_field SerializableSectionPairSection::_marshalRows()
 {
-  ls::std::core::type::byte_field serializedSectionRows{};
+  byte_field serializedSectionRows{};
 
-  for (const auto &_row : ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->parameter.getValue())->getList())
+  for (const auto &_row : dynamic_pointer_cast<SectionPairSection>(this->parameter.getValue())->getList())
   {
     _row->reserveNewLine(this->parameter.getNewLine());
     serializedSectionRows += _row->marshal();
@@ -172,37 +187,37 @@ ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_ma
   return serializedSectionRows;
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairSection::_marshalSectionId()
+byte_field SerializableSectionPairSection::_marshalSectionId()
 {
-  ::std::string newLine = this->parameter.getNewLine();
-  return newLine + "[" + ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->parameter.getValue())->getSectionId() + "]" + newLine + newLine;
+  string newLine = this->parameter.getNewLine();
+  return newLine + "[" + dynamic_pointer_cast<SectionPairSection>(this->parameter.getValue())->getSectionId() + "]" + newLine + newLine;
 }
 
-void ls::std::io::SerializableSectionPairSection::_unmarshalRow(const ::std::string &_sectionRow, ls::std::io::SectionPairRowEnumType _type)
+void SerializableSectionPairSection::_unmarshalRow(const string &_sectionRow, SectionPairRowEnumType _type)
 {
-  ls::std::io::section_pair_row_list_element row = ::std::make_shared<ls::std::io::SectionPairRow>("tmp-dir", _type);
+  section_pair_row_list_element row = make_shared<SectionPairRow>("tmp-dir", _type);
   row->reserveNewLine(this->parameter.getNewLine());
   row->unmarshal(_sectionRow);
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->parameter.getValue())->add(row);
+  dynamic_pointer_cast<SectionPairSection>(this->parameter.getValue())->add(row);
 }
 
-void ls::std::io::SerializableSectionPairSection::_unmarshalRows(const ls::std::core::type::byte_field &_serializedRows)
+void SerializableSectionPairSection::_unmarshalRows(const byte_field &_serializedRows)
 {
-  ::std::string currentRows = _serializedRows;
-  ls::std::io::SectionPairRowEnumType type{};
+  string currentRows = _serializedRows;
+  SectionPairRowEnumType type{};
 
   while (!currentRows.empty())
   {
-    ::std::string sectionRow = this->_collectSectionRow(currentRows, type);
+    string sectionRow = this->_collectSectionRow(currentRows, type);
     this->_unmarshalRow(sectionRow, type);
     currentRows = currentRows.substr(sectionRow.size());
   }
 }
 
-size_t ls::std::io::SerializableSectionPairSection::_unmarshalSectionHeader(const ls::std::core::type::byte_field &_data)
+size_t SerializableSectionPairSection::_unmarshalSectionHeader(const byte_field &_data)
 {
-  ls::std::core::type::byte_field sectionHeader = this->_getSectionHeader(_data);
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairSection>(this->parameter.getValue())->setSectionId(ls::std::io::SerializableSectionPairSection::_getSectionId(sectionHeader));
+  byte_field sectionHeader = this->_getSectionHeader(_data);
+  dynamic_pointer_cast<SectionPairSection>(this->parameter.getValue())->setSectionId(SerializableSectionPairSection::_getSectionId(sectionHeader));
 
   return sectionHeader.size();
 }

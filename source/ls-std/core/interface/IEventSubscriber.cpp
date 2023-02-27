@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-04
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/interface/IEventSubscriber.hpp>
 
-ls::std::core::interface_type::IEventSubscriber::IEventSubscriber() = default;
+using ls::std::core::interface_type::IEventSubscriber;
 
-ls::std::core::interface_type::IEventSubscriber::~IEventSubscriber() = default;
+IEventSubscriber::IEventSubscriber() = default;
+
+IEventSubscriber::~IEventSubscriber() = default;

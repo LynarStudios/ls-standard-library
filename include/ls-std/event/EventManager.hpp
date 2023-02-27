@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-08
+ * Changed:         2023-02-22
  *
  * */
 
@@ -25,7 +25,7 @@ namespace ls::std::event
     public:
 
       explicit EventManager();
-      ~EventManager() override;
+      ~EventManager() noexcept override;
 
       // implementation
 

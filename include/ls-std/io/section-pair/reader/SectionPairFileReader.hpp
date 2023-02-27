@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       explicit SectionPairFileReader(const ls::std::io::SectionPairFileReaderParameter &_parameter);
-      ~SectionPairFileReader() override;
+      ~SectionPairFileReader() noexcept override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::io::SectionPairDocument> getDocument();
       ls::std::core::type::byte_field read() override; // nodiscard is optional here

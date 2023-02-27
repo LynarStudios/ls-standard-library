@@ -22,7 +22,7 @@ namespace ls::std::core
 
       NullPointerException();
       explicit NullPointerException(::std::string _message);
-      ~NullPointerException() override;
+      ~NullPointerException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

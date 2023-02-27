@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-22
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,12 +12,16 @@
 #include <ls-std/ls-std-io.hpp>
 #include <string>
 
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::io::SectionPairMessageFormatter;
+using std::array;
+using std::string;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SectionPairMessageFormatterTest : public ::testing::TestWithParam<array<string, 2>>
+  class SectionPairMessageFormatterTest : public TestWithParam<array<string, 2>>
   {
     protected:
 
@@ -61,5 +65,5 @@ namespace
     ASSERT_STREQ(expected.c_str(), actual.c_str());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairMessageFormatterTest, ::testing::Values(array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{UNIX_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\n")}, array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{WINDOWS_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\r\n")}));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairMessageFormatterTest, Values(array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{UNIX_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\n")}, array<string, 2>{SectionPairMessageFormatterTest::getFormattedExampleMessage("{WINDOWS_LINE_BREAK}"), SectionPairMessageFormatterTest::getOriginalExampleMessage("\r\n")}));
 }

@@ -3,16 +3,19 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-05
-* Changed:         2023-02-05
+* Changed:         2023-02-23
 *
 * */
 
 #include <classes/core/ClassWrapper.hpp>
 
-test::core::ClassWrapper::ClassWrapper() : ls::std::core::Class("ClassWrapper")
+using ls::std::core::Class;
+using test::core::ClassWrapper;
+
+ClassWrapper::ClassWrapper() : Class("ClassWrapper")
 {}
 
-test::core::ClassWrapper::~ClassWrapper()
+ClassWrapper::~ClassWrapper() noexcept
 {
   Die();
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,26 +11,34 @@
 #include <ls-std/io/section-pair/validator/SectionPairSectionValidator.hpp>
 #include <regex>
 
-ls::std::io::SectionPairDocumentValidator::SectionPairDocumentValidator(::std::string _document) : ls::std::core::Class("SectionPairDocumentValidator"), document(::std::move(_document))
+using ls::std::core::Class;
+using ls::std::io::SectionPairDocumentValidator;
+using ls::std::io::SectionPairSectionValidator;
+using std::move;
+using std::regex;
+using std::regex_match;
+using std::string;
+
+SectionPairDocumentValidator::SectionPairDocumentValidator(string _document) : Class("SectionPairDocumentValidator"), document(::move(_document))
 {}
 
-ls::std::io::SectionPairDocumentValidator::~SectionPairDocumentValidator() = default;
+SectionPairDocumentValidator::~SectionPairDocumentValidator() noexcept = default;
 
-bool ls::std::io::SectionPairDocumentValidator::isValid()
+bool SectionPairDocumentValidator::isValid()
 {
-  ::std::string validationRegex = ls::std::io::SectionPairDocumentValidator::_getValidationRegex();
-  static ::std::regex documentRegex = ::std::regex{"^" + validationRegex + "$"};
+  string validationRegex = SectionPairDocumentValidator::_getValidationRegex();
+  static regex documentRegex = regex{"^" + validationRegex + "$"};
 
-  return ::std::regex_match(this->document, documentRegex);
+  return regex_match(this->document, documentRegex);
 }
 
-::std::string ls::std::io::SectionPairDocumentValidator::_getValidationRegex()
+string SectionPairDocumentValidator::_getValidationRegex()
 {
-  ::std::string newLine = R"(((\n)|(\r\n)))";
-  ::std::string documentHeader = R"((# {1}(section\-pair document))" + newLine + R"())";
-  ::std::string section = ls::std::io::SectionPairSectionValidator::getValidationRegex();
-  ::std::string atLeastOneSection = R"(()" + section + R"())";
-  ::std::string optionalSections = R"(()" + section + R"()*)";
+  string newLine = R"(((\n)|(\r\n)))";
+  string documentHeader = R"((# {1}(section\-pair document))" + newLine + R"())";
+  string section = SectionPairSectionValidator::getValidationRegex();
+  string atLeastOneSection = R"(()" + section + R"())";
+  string optionalSections = R"(()" + section + R"()*)";
 
   return documentHeader + atLeastOneSection + optionalSections;
 }

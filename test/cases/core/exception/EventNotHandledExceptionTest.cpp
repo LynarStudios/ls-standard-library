@@ -11,11 +11,13 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
+using ls::std::core::EventNotHandledException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class EventNotHandledExceptionTest : public ::testing::Test
+  class EventNotHandledExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const EventNotHandledException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - event was not handled - nothing happened!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - event was not handled - nothing happened!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const EventNotHandledException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - id: OPEN_DOOR";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - id: OPEN_DOOR";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

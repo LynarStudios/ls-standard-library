@@ -11,12 +11,14 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ::std;
+using ls::std::core::IndexOutOfBoundsEvaluator;
+using ls::std::core::IndexOutOfBoundsException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class IndexOutOfBoundsEvaluatorTest : public ::testing::Test
+  class IndexOutOfBoundsEvaluatorTest : public Test
   {
     protected:
 

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-20
+* Changed:         2023-02-23
 *
 * */
 
@@ -15,31 +15,45 @@
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRow.hpp>
 
-ls::std::io::SerializableSectionPairRow::SerializableSectionPairRow(const SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairRow")
+using ls::std::core::Class;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::SectionPairRow;
+using ls::std::io::SectionPairRowListValue;
+using ls::std::io::SectionPairRowListValueArgumentEvaluator;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SectionPairRowSingleValueArgumentEvaluator;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairRow;
+using std::dynamic_pointer_cast;
+using std::shared_ptr;
+using std::string;
+
+SerializableSectionPairRow::SerializableSectionPairRow(const SerializableSectionPairParameter &_parameter) : Class("SerializableSectionPairRow")
 {
-  ::std::string message = this->getClassName() + ": model reference is null!";
-  ls::std::core::NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();
+  string message = this->getClassName() + ": model reference is null!";
+  NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();
   this->parameter = _parameter;
 }
 
-ls::std::io::SerializableSectionPairRow::~SerializableSectionPairRow() = default;
+SerializableSectionPairRow::~SerializableSectionPairRow() noexcept = default;
 
-::std::shared_ptr<ls::std::core::Class> ls::std::io::SerializableSectionPairRow::getValue()
+shared_ptr<Class> SerializableSectionPairRow::getValue()
 {
   return this->parameter.getValue();
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairRow::marshal()
+byte_field SerializableSectionPairRow::marshal()
 {
-  ls::std::core::type::byte_field data = this->_marshalKey();
-  ::std::shared_ptr<SectionPairRow> row = ::std::dynamic_pointer_cast<ls::std::io::SectionPairRow>(this->parameter.getValue());
+  byte_field data = this->_marshalKey();
+  shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(this->parameter.getValue());
   row->getValue()->reserveNewLine(this->parameter.getNewLine());
   return data + row->getValue()->marshal();
 }
 
-void ls::std::io::SerializableSectionPairRow::unmarshal(const ls::std::core::type::byte_field &_data)
+void SerializableSectionPairRow::unmarshal(const byte_field &_data)
 {
-  ::std::shared_ptr<ls::std::io::SectionPairRow> row = ::std::dynamic_pointer_cast<ls::std::io::SectionPairRow>(this->parameter.getValue());
+  shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(this->parameter.getValue());
   row->getValue()->reserveNewLine(this->parameter.getNewLine());
 
   if (row->isSingleValue())
@@ -53,10 +67,10 @@ void ls::std::io::SerializableSectionPairRow::unmarshal(const ls::std::core::typ
   }
 }
 
-::std::string ls::std::io::SerializableSectionPairRow::_marshalKey()
+string SerializableSectionPairRow::_marshalKey()
 {
-  ::std::string serializedKey{};
-  ::std::shared_ptr<ls::std::io::SectionPairRow> row = ::std::dynamic_pointer_cast<ls::std::io::SectionPairRow>(this->parameter.getValue());
+  string serializedKey{};
+  shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(this->parameter.getValue());
 
   if (row->isSingleValue())
   {
@@ -71,30 +85,30 @@ void ls::std::io::SerializableSectionPairRow::unmarshal(const ls::std::core::typ
   return serializedKey;
 }
 
-void ls::std::io::SerializableSectionPairRow::_unmarshalListValue(const ls::std::core::type::byte_field &_data)
+void SerializableSectionPairRow::_unmarshalListValue(const byte_field &_data)
 {
-  ls::std::io::SectionPairRowListValueArgumentEvaluator{_data}.evaluate();
-  ::std::string::size_type separatorPosition = _data.find(':');
-  ::std::string newLine = this->parameter.getNewLine();
+  SectionPairRowListValueArgumentEvaluator{_data}.evaluate();
+  string::size_type separatorPosition = _data.find(':');
+  string newLine = this->parameter.getNewLine();
 
-  if (separatorPosition != ::std::string::npos)
+  if (separatorPosition != string::npos)
   {
-    ::std::shared_ptr<ls::std::io::SectionPairRow> row = ::std::dynamic_pointer_cast<ls::std::io::SectionPairRow>(this->parameter.getValue());
+    shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(this->parameter.getValue());
     row->setKey(_data.substr(0, separatorPosition));
-    ::std::string::size_type newLinePosition = _data.find(newLine) + (newLine.size() - 1);
-    ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowListValue>(row->getValue())->unmarshal(_data.substr(newLinePosition + 1));
+    string::size_type newLinePosition = _data.find(newLine) + (newLine.size() - 1);
+    dynamic_pointer_cast<SectionPairRowListValue>(row->getValue())->unmarshal(_data.substr(newLinePosition + 1));
   }
 }
 
-void ls::std::io::SerializableSectionPairRow::_unmarshalSingleValue(const ls::std::core::type::byte_field &_data)
+void SerializableSectionPairRow::_unmarshalSingleValue(const byte_field &_data)
 {
-  ls::std::io::SectionPairRowSingleValueArgumentEvaluator{_data}.evaluate();
-  ::std::string::size_type position = _data.find('=');
+  SectionPairRowSingleValueArgumentEvaluator{_data}.evaluate();
+  string::size_type position = _data.find('=');
 
-  if (position != ::std::string::npos)
+  if (position != string::npos)
   {
-    ::std::shared_ptr<ls::std::io::SectionPairRow> row = ::std::dynamic_pointer_cast<ls::std::io::SectionPairRow>(this->parameter.getValue());
+    shared_ptr<SectionPairRow> row = dynamic_pointer_cast<SectionPairRow>(this->parameter.getValue());
     row->setKey(_data.substr(0, position));
-    ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(row->getValue())->unmarshal(_data.substr(position + 1));
+    dynamic_pointer_cast<SectionPairRowSingleValue>(row->getValue())->unmarshal(_data.substr(position + 1));
   }
 }

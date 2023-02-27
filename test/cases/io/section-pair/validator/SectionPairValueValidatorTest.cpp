@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-20
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,13 +12,16 @@
 #include <ls-std/ls-std-io.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::io::NewLine;
+using ls::std::io::SectionPairValueValidator;
+using std::string;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SectionPairValueValidatorTest : public ::testing::Test
+  class SectionPairValueValidatorTest : public Test
   {
     protected:
 
@@ -32,7 +35,7 @@ namespace
       {}
   };
 
-  class SectionPairValueValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairValueValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -40,7 +43,7 @@ namespace
       ~SectionPairValueValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairValueValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairValueValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -71,6 +74,6 @@ namespace
     ASSERT_FALSE(SectionPairValueValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairValueValidatorTest_ValidArgumentTest, ::testing::Values("blue is my favourite color!", "Age", "Tom", "\"Tom\"", "Hello!" + NewLine::getUnixNewLine(), "Hello!" + NewLine::getWindowsNewLine()));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairValueValidatorTest_InvalidArgumentTest, ::testing::Values("1+2=3", "\\escape"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairValueValidatorTest_ValidArgumentTest, Values("blue is my favourite color!", "Age", "Tom", "\"Tom\"", "Hello!" + NewLine::getUnixNewLine(), "Hello!" + NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairValueValidatorTest_InvalidArgumentTest, Values("1+2=3", "\\escape"));
 }

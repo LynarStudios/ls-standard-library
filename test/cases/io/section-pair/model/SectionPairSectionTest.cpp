@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-17
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,15 +12,25 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace test::io;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::IndexOutOfBoundsException;
+using ls::std::core::type::byte_field;
+using ls::std::io::NewLine;
+using ls::std::io::section_pair_row_list_element;
+using ls::std::io::SectionPairRow;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowListValue;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SectionPairSection;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using test::io::SectionPairSectionProvider;
+using testing::Test;
 
 namespace
 {
-  class SectionPairSectionTest : public ::testing::Test
+  class SectionPairSectionTest : public Test
   {
     protected:
 
@@ -103,7 +113,7 @@ namespace
     ASSERT_TRUE(section->getList().empty());
   }
 
-  TEST_F(SectionPairSectionTest, get)
+  TEST_F(SectionPairSectionTest, get_by_index)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
     section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
@@ -111,7 +121,7 @@ namespace
     ASSERT_TRUE(section->get(0) != nullptr);
   }
 
-  TEST_F(SectionPairSectionTest, get_out_of_bounds)
+  TEST_F(SectionPairSectionTest, get_by_index_out_of_bounds)
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
 
@@ -127,6 +137,22 @@ namespace
           }
         },
         IndexOutOfBoundsException);
+  }
+
+  TEST_F(SectionPairSectionTest, get_by_key)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_TRUE(section->get("color") != nullptr);
+  }
+
+  TEST_F(SectionPairSectionTest, get_by_key_not_found)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_TRUE(section->get("hobbies") == nullptr);
   }
 
   TEST_F(SectionPairSectionTest, getAmount)
@@ -150,6 +176,22 @@ namespace
   {
     shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
     ASSERT_STREQ("general", section->getSectionId().c_str());
+  }
+
+  TEST_F(SectionPairSectionTest, hasRow)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_TRUE(section->hasRow("color"));
+  }
+
+  TEST_F(SectionPairSectionTest, hasRow_not_found)
+  {
+    shared_ptr<SectionPairSection> section = make_shared<SectionPairSection>("general");
+    section->add(make_shared<SectionPairRow>("color", SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE));
+
+    ASSERT_FALSE(section->hasRow("hobbies"));
   }
 
   TEST_F(SectionPairSectionTest, marshal)

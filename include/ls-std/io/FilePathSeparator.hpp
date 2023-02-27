@@ -3,12 +3,12 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
-#ifndef FILE_PATH_SEPARATOR_HPP
-#define FILE_PATH_SEPARATOR_HPP
+#ifndef LS_STD_FILE_PATH_SEPARATOR_HPP
+#define LS_STD_FILE_PATH_SEPARATOR_HPP
 
 #include <ls-std/os/dynamic-goal.hpp>
 #include <string>

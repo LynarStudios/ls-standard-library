@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -21,7 +21,7 @@ namespace test::io
     public:
 
       MockFileReader();
-      ~MockFileReader() override;
+      ~MockFileReader() noexcept override;
 
       MOCK_METHOD(ls::std::core::type::byte_field, read, (), (override));
   };

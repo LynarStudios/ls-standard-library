@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,13 +12,18 @@
 #include <ls-std/ls-std-io.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::SectionPairValueArgumentEvaluator;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SectionPairValueArgumentEvaluatorTest : public ::testing::Test
+  class SectionPairValueArgumentEvaluatorTest : public Test
   {
     protected:
 
@@ -32,7 +37,7 @@ namespace
       {}
   };
 
-  class SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -56,8 +61,8 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid value!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" is not a valid value!";
 
             ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -66,5 +71,5 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest, ::testing::Values("=33", "\\empty"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairValueArgumentEvaluatorTest_InvalidArgumentTest, Values("=33", "\\empty"));
 }

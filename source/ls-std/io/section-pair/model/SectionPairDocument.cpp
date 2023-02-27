@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -15,28 +15,47 @@
 #include <ls-std/io/section-pair/model/SectionPairDocument.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairDocument.hpp>
 
-ls::std::io::SectionPairDocument::SectionPairDocument() : ls::std::core::Class("SectionPairDocument")
+using ls::std::core::Class;
+using ls::std::core::ConditionalFunctionExecutor;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::IndexOutOfBoundsEvaluator;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::section_pair_document_section_list;
+using ls::std::io::section_pair_document_section_list_element;
+using ls::std::io::section_pair_identifier;
+using ls::std::io::SectionPairDocument;
+using ls::std::io::SectionPairMessageFormatter;
+using ls::std::io::SerializableSectionPairDocument;
+using ls::std::io::SerializableSectionPairParameter;
+using std::any_of;
+using std::find_if;
+using std::make_shared;
+using std::reinterpret_pointer_cast;
+using std::string;
+
+SectionPairDocument::SectionPairDocument() : Class("SectionPairDocument")
 {}
 
-ls::std::io::SectionPairDocument::~SectionPairDocument() = default;
+SectionPairDocument::~SectionPairDocument() noexcept = default;
 
-void ls::std::io::SectionPairDocument::add(const section_pair_document_section_list_element &_section)
+void SectionPairDocument::add(const section_pair_document_section_list_element &_section)
 {
-  ::std::string message = this->getClassName() + ": add section attempt failed, since \"_section\" argument is null!";
-  ls::std::core::NullPointerArgumentEvaluator(::std::reinterpret_pointer_cast<void>(_section), message).evaluate();
+  string message = this->getClassName() + ": add section attempt failed, since \"_section\" argument is null!";
+  NullPointerArgumentEvaluator(reinterpret_pointer_cast<void>(_section), message).evaluate();
   this->_checkSectionExistence(_section->getSectionId());
   this->sections.push_back(_section);
 }
 
-void ls::std::io::SectionPairDocument::clear()
+void SectionPairDocument::clear()
 {
   this->sections.clear();
 }
 
-ls::std::io::section_pair_document_section_list_element ls::std::io::SectionPairDocument::get(size_t _index)
+section_pair_document_section_list_element SectionPairDocument::get(size_t _index)
 {
-  ls::std::io::section_pair_document_section_list_element element{};
-  ls::std::core::IndexOutOfBoundsEvaluator{_index, this->sections.size()}.evaluate();
+  section_pair_document_section_list_element element{};
+  IndexOutOfBoundsEvaluator{_index, this->sections.size()}.evaluate();
   size_t index{};
 
   for (const auto &_element : this->sections)
@@ -53,50 +72,60 @@ ls::std::io::section_pair_document_section_list_element ls::std::io::SectionPair
   return element;
 }
 
-size_t ls::std::io::SectionPairDocument::getAmountOfSections()
+section_pair_document_section_list_element SectionPairDocument::get(const section_pair_identifier &_sectionId)
+{
+  return this->_get(_sectionId);
+}
+
+size_t SectionPairDocument::getAmountOfSections()
 {
   return this->sections.size();
 }
 
-::std::string ls::std::io::SectionPairDocument::getHeader()
+string SectionPairDocument::getHeader()
 {
   return this->header;
 }
 
-ls::std::io::section_pair_document_section_list ls::std::io::SectionPairDocument::getSectionList()
+section_pair_document_section_list SectionPairDocument::getSectionList()
 {
   return this->sections;
 }
 
-ls::std::core::type::byte_field ls::std::io::SectionPairDocument::marshal()
+bool SectionPairDocument::hasSection(const section_pair_identifier &_sectionId)
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  return this->_hasSection(_sectionId);
+}
+
+byte_field SectionPairDocument::marshal()
+{
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   return this->serializable->marshal();
 }
 
-void ls::std::io::SectionPairDocument::reserveNewLine(const ::std::string &_reservedNewLine)
+void SectionPairDocument::reserveNewLine(const string &_reservedNewLine)
 {
   this->reservedNewLine = _reservedNewLine;
 }
 
-void ls::std::io::SectionPairDocument::unmarshal(const ls::std::core::type::byte_field &_data)
+void SectionPairDocument::unmarshal(const byte_field &_data)
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   this->serializable->unmarshal(_data);
 }
 
-void ls::std::io::SectionPairDocument::_checkSectionExistence(const ls::std::io::section_pair_identifier &_sectionId)
+void SectionPairDocument::_checkSectionExistence(const section_pair_identifier &_sectionId)
 {
   if (this->_hasSection(_sectionId))
   {
-    ::std::string message = this->getClassName() + "section ID \"" + _sectionId + "\" already exists in document!";
-    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
+    string message = this->getClassName() + "section ID \"" + _sectionId + "\" already exists in document!";
+    throw IllegalArgumentException{SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }
 
-void ls::std::io::SectionPairDocument::_createSerializable()
+void SectionPairDocument::_createSerializable()
 {
-  ls::std::io::SerializableSectionPairParameter parameter{};
+  SerializableSectionPairParameter parameter{};
   parameter.setValue(shared_from_this());
 
   if (!this->reservedNewLine.empty())
@@ -104,21 +133,16 @@ void ls::std::io::SectionPairDocument::_createSerializable()
     parameter.setNewLine(this->reservedNewLine);
   }
 
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairDocument>(parameter);
+  this->serializable = make_shared<SerializableSectionPairDocument>(parameter);
 }
 
-bool ls::std::io::SectionPairDocument::_hasSection(const ls::std::io::section_pair_identifier &_identifier)
+section_pair_document_section_list_element SectionPairDocument::_get(const section_pair_identifier &_sectionId)
 {
-  bool sectionExists{};
+  const auto iterator = find_if(this->sections.begin(), this->sections.end(), [_sectionId](const section_pair_document_section_list_element &_section) { return _section->getSectionId() == _sectionId; });
+  return iterator != this->sections.end() ? *iterator : nullptr;
+}
 
-  for (const auto &_section : this->sections)
-  {
-    if (_section->getSectionId() == _identifier)
-    {
-      sectionExists = true;
-      break;
-    }
-  }
-
-  return sectionExists;
+bool SectionPairDocument::_hasSection(const section_pair_identifier &_identifier)
+{
+  return any_of(this->sections.begin(), this->sections.end(), [_identifier](const section_pair_document_section_list_element &_section) { return _section->getSectionId() == _identifier; });
 }

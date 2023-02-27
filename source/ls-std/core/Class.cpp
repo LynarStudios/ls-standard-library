@@ -3,27 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-07
- * Changed:         2023-02-08
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 
-ls::std::core::Class::Class(const ::std::string &_name)
+using ls::std::core::Class;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using std::string;
+
+Class::Class(const string &_name)
 {
   this->_assignClassName(_name);
 }
 
-ls::std::core::Class::~Class() = default;
+Class::~Class() = default;
 
-::std::string ls::std::core::Class::getClassName()
+string Class::getClassName()
 {
   return this->name;
 }
 
-void ls::std::core::Class::_assignClassName(const ::std::string &_name)
+void Class::_assignClassName(const string &_name)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_name, "class name is empty!"}.evaluate();
+  EmptyStringArgumentEvaluator{_name, "class name is empty!"}.evaluate();
   this->name = _name;
 }

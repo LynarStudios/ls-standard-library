@@ -11,11 +11,13 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
+using ls::std::core::FileNotFoundException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class FileNotFoundExceptionTest : public ::testing::Test
+  class FileNotFoundExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const FileNotFoundException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - file not found!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - file not found!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const FileNotFoundException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + R"( thrown - "settings.txt" not found!)";
+            string actual = _exception.what();
+            string expected = _exception.getName() + R"( thrown - "settings.txt" not found!)";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

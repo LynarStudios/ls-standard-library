@@ -11,11 +11,13 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
+using ls::std::core::IllegalArithmeticOperationException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class IllegalArithmeticOperationExceptionTest : public ::testing::Test
+  class IllegalArithmeticOperationExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const IllegalArithmeticOperationException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - arithmetic operation is not allowed!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - arithmetic operation is not allowed!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const IllegalArithmeticOperationException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - division by zero";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - division by zero";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

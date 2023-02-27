@@ -3,22 +3,27 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-22
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/io/section-pair/SectionPairMessageFormatter.hpp>
 #include <regex>
 
-ls::std::io::SectionPairMessageFormatter::SectionPairMessageFormatter() = default;
+using ls::std::io::SectionPairMessageFormatter;
+using std::regex;
+using std::regex_replace;
+using std::string;
 
-ls::std::io::SectionPairMessageFormatter::~SectionPairMessageFormatter() = default;
+SectionPairMessageFormatter::SectionPairMessageFormatter() = default;
 
-::std::string ls::std::io::SectionPairMessageFormatter::getFormattedMessage(const ::std::string &_message)
+SectionPairMessageFormatter::~SectionPairMessageFormatter() = default;
+
+string SectionPairMessageFormatter::getFormattedMessage(const string &_message)
 {
-  ::std::string formattedMessage = _message;
-  formattedMessage = ::std::regex_replace(formattedMessage, ::std::regex(R"(\r{1}\n{1})"), "{WINDOWS_LINE_BREAK}");
-  formattedMessage = ::std::regex_replace(formattedMessage, ::std::regex(R"(\n{1})"), "{UNIX_LINE_BREAK}");
+  string formattedMessage = _message;
+  formattedMessage = regex_replace(formattedMessage, regex(R"(\r{1}\n{1})"), "{WINDOWS_LINE_BREAK}");
+  formattedMessage = regex_replace(formattedMessage, regex(R"(\n{1})"), "{UNIX_LINE_BREAK}");
 
   return formattedMessage;
 }

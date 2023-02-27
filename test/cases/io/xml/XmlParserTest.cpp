@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-26
- * Changed:         2023-02-06
+ * Changed:         2023-02-24
  *
  * */
 
@@ -12,15 +12,24 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace ls::std::test;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::io::File;
+using ls::std::io::FileReader;
+using ls::std::io::XmlAttribute;
+using ls::std::io::XmlDocument;
+using ls::std::io::XmlNode;
+using ls::std::io::XmlParser;
+using ls::std::test::TestHelper;
+using std::list;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class XmlParserTest : public ::testing::Test
+  class XmlParserTest : public Test
   {
     protected:
 
@@ -30,11 +39,12 @@ namespace
       static shared_ptr<XmlAttribute> getAttributeAtPosition(const list<shared_ptr<XmlAttribute>> &_attributes, size_t _index)
       {
         shared_ptr<XmlAttribute> attribute{};
-        size_t counter{};
 
         if (_index < _attributes.size())
         {
-          for (const auto &_value: _attributes)
+          size_t counter{};
+
+          for (const auto &_value : _attributes)
           {
             if (counter == _index)
             {
@@ -52,11 +62,12 @@ namespace
       static shared_ptr<XmlNode> getChildAtPosition(const list<shared_ptr<XmlNode>> &_children, size_t _index)
       {
         shared_ptr<XmlNode> node{};
-        size_t counter{};
 
         if (_index < _children.size())
         {
-          for (const auto &_value: _children)
+          size_t counter{};
+
+          for (const auto &_value : _children)
           {
             if (counter == _index)
             {
@@ -274,15 +285,12 @@ namespace
 
   TEST_F(XmlParserTest, getDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     XmlParser xmlParser{make_shared<XmlDocument>()};
-
     ASSERT_TRUE(xmlParser.getDocument() != nullptr);
   }
 
   TEST_F(XmlParserTest, setDocument)
   {
-    string xmlPath = TestHelper::getResourcesFolderLocation() + "state-machine-test.xml";
     shared_ptr<XmlDocument> document = make_shared<XmlDocument>();
     XmlParser xmlParser{document};
     ASSERT_TRUE(xmlParser.getDocument() == document);

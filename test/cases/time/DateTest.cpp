@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-03
+ * Changed:         2023-02-22
  *
  * */
 
@@ -11,12 +11,14 @@
 #include <ls-std/ls-std-time.hpp>
 #include <regex>
 
-using namespace ls::std::time;
-using namespace ::std;
+using ls::std::time::Date;
+using std::regex;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class DateTest : public ::testing::Test
+  class DateTest : public Test
   {
     protected:
 

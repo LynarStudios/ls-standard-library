@@ -3,19 +3,22 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::io::FileExistenceEvaluator;
+using ls::std::io::SectionPairDocument;
+using ls::std::io::SectionPairFileReaderParameter;
+using std::make_shared;
+using testing::Test;
 
 namespace
 {
-  class SectionPairFileReaderParameterTest : public ::testing::Test
+  class SectionPairFileReaderParameterTest : public Test
   {
     protected:
 

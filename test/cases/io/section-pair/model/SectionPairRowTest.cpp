@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-17
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,14 +11,23 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::io::NewLine;
+using ls::std::io::SectionPairRow;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowListValue;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SectionPairRowValue;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class SectionPairRowTest : public ::testing::Test
+  class SectionPairRowTest : public Test
   {
     protected:
 
@@ -114,8 +123,9 @@ namespace
     listValue->add("blue");
     listValue->add("red");
     listValue->add("purple");
+    string newLine = NewLine::get();
 
-    string expected = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();
+    string expected = "favourite-colors:" + newLine + "  blue" + newLine + "  red" + newLine + "  purple" + newLine;
 
     ASSERT_STREQ(expected.c_str(), row->marshal().c_str());
   }
@@ -179,8 +189,9 @@ namespace
   {
     shared_ptr<SectionPairRow> row = make_shared<SectionPairRow>("tmp-key", SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE);
     shared_ptr<SectionPairRowListValue> listValue = dynamic_pointer_cast<SectionPairRowListValue>(row->getValue());
+    string newLine = NewLine::get();
 
-    string data = "favourite-colors:" + NewLine::get() + "  blue" + NewLine::get() + "  red" + NewLine::get() + "  purple" + NewLine::get();
+    string data = "favourite-colors:" + newLine + "  blue" + newLine + "  red" + newLine + "  purple" + newLine;
     row->unmarshal(data);
 
     ASSERT_STREQ("favourite-colors", row->getKey().c_str());

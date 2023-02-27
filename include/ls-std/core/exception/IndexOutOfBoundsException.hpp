@@ -22,7 +22,7 @@ namespace ls::std::core
 
       IndexOutOfBoundsException();
       explicit IndexOutOfBoundsException(::std::string _message);
-      ~IndexOutOfBoundsException() override;
+      ~IndexOutOfBoundsException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

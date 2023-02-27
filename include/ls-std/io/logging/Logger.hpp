@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-06
+ * Changed:         2023-02-23
  *
  * */
 
@@ -25,16 +25,16 @@ namespace ls::std::io
     public:
 
       explicit Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer);
-      ~Logger() override;
+      ~Logger() noexcept override;
 
-      void debug(const ls::std::core::type::byte *_data);
-      void error(const ls::std::core::type::byte *_data);
-      void fatal(const ls::std::core::type::byte *_data);
+      void debug(const ls::std::core::type::byte_type *_data);
+      void error(const ls::std::core::type::byte_type *_data);
+      void fatal(const ls::std::core::type::byte_type *_data);
       [[nodiscard]] ls::std::io::LogLevel getLogLevel();
-      void info(const ls::std::core::type::byte *_data);
+      void info(const ls::std::core::type::byte_type *_data);
       void setLogLevel(const ls::std::io::LogLevelValue &_logLevelValue);
-      void trace(const ls::std::core::type::byte *_data);
-      void warn(const ls::std::core::type::byte *_data);
+      void trace(const ls::std::core::type::byte_type *_data);
+      void warn(const ls::std::core::type::byte_type *_data);
 
     private:
 
@@ -45,7 +45,7 @@ namespace ls::std::io
       [[nodiscard]] static ::std::string _buildCharacterChain(size_t _amount);
       [[nodiscard]] static ::std::string _createFillContent(const ::std::string &_text);
       [[nodiscard]] static ::std::string _generateTimeString(tm *_localTime);
-      void _log(const ls::std::core::type::byte *_data, const ls::std::io::LogLevel &_logLevel);
+      void _log(const ls::std::core::type::byte_type *_data, const ls::std::io::LogLevel &_logLevel);
       [[nodiscard]] static ::std::string _padRight(const ::std::string &_text);
   };
 }

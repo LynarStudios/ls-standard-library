@@ -3,18 +3,20 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-07
-* Changed:         2023-02-07
+* Changed:         2023-02-22
 *
 * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::core;
+using ls::std::core::ExceptionMessage;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class ExceptionMessageTest : public ::testing::Test
+  class ExceptionMessageTest : public Test
   {
     protected:
 
@@ -30,7 +32,7 @@ namespace
 
   TEST_F(ExceptionMessageTest, toCharacterPointer)
   {
-    ::std::string text = "hello!";
+    string text = "hello!";
 
     ExceptionMessage message{text};
     char *characterPointer = message.toCharacterPointer();

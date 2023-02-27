@@ -3,21 +3,25 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
 #include "TestDataMercedesCar.hpp"
 #include "Colour.hpp"
 
-test::event::TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
+using ls::std::core::Class;
+using test::event::Colour;
+using test::event::TestDataMercedesCar;
+
+TestDataMercedesCar::TestDataMercedesCar() : TestDataCar()
 {
   this->setColor("blue");
 }
 
-test::event::TestDataMercedesCar::~TestDataMercedesCar() = default;
+TestDataMercedesCar::~TestDataMercedesCar() noexcept = default;
 
-void test::event::TestDataMercedesCar::listen(const ls::std::core::Class &_info)
+void TestDataMercedesCar::listen(const Class &_info)
 {
-  this->setColor(dynamic_cast<const test::event::Colour &>(_info).getValue());
+  this->setColor(dynamic_cast<const Colour &>(_info).getValue());
 }

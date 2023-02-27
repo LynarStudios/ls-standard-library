@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-04
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/interface/IWriter.hpp>
 
-ls::std::core::interface_type::IWriter::IWriter() = default;
+using ls::std::core::interface_type::IWriter;
 
-ls::std::core::interface_type::IWriter::~IWriter() = default;
+IWriter::IWriter() = default;
+
+IWriter::~IWriter() = default;

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -13,32 +13,41 @@
 #include <regex>
 #include <string>
 
-ls::std::io::SectionPairSectionValidator::SectionPairSectionValidator(::std::string _section) : ls::std::core::Class("SectionPairSectionValidator"), section(::std::move(_section))
+using ls::std::core::Class;
+using ls::std::io::SectionPairIdentifierValidator;
+using ls::std::io::SectionPairRowValidator;
+using ls::std::io::SectionPairSectionValidator;
+using std::move;
+using std::regex;
+using std::regex_match;
+using std::string;
+
+SectionPairSectionValidator::SectionPairSectionValidator(string _section) : Class("SectionPairSectionValidator"), section(::move(_section))
 {}
 
-ls::std::io::SectionPairSectionValidator::~SectionPairSectionValidator() = default;
+SectionPairSectionValidator::~SectionPairSectionValidator() noexcept = default;
 
-::std::string ls::std::io::SectionPairSectionValidator::getValidationRegex()
+string SectionPairSectionValidator::getValidationRegex()
 {
-  return ls::std::io::SectionPairSectionValidator::_getValidationRegex();
+  return SectionPairSectionValidator::_getValidationRegex();
 }
 
-bool ls::std::io::SectionPairSectionValidator::isValid()
+bool SectionPairSectionValidator::isValid()
 {
-  ::std::string validationRegex = ls::std::io::SectionPairSectionValidator::_getValidationRegex();
-  static ::std::regex sectionRegex = ::std::regex{"^" + validationRegex};
+  string validationRegex = SectionPairSectionValidator::_getValidationRegex();
+  static regex sectionRegex = regex{"^" + validationRegex};
 
-  return ::std::regex_match(this->section, sectionRegex);
+  return regex_match(this->section, sectionRegex);
 }
 
-::std::string ls::std::io::SectionPairSectionValidator::_getValidationRegex()
+string SectionPairSectionValidator::_getValidationRegex()
 {
-  ::std::string newLine = R"(((\n)|(\r\n)))";
-  ::std::string identifier = ls::std::io::SectionPairIdentifierValidator::getValidationRegex();
-  ::std::string sectionHeader = newLine + R"(\[{1}()" + identifier + R"()\]{1}()" + newLine + R"({2}))";
-  ::std::string row = ls::std::io::SectionPairRowValidator::getValidationRegex();
-  ::std::string atLeastOneRow = R"((()" + row + R"(){1}))";
-  ::std::string optionalRows = R"((()" + row + R"()*))";
+  string newLine = R"(((\n)|(\r\n)))";
+  string identifier = SectionPairIdentifierValidator::getValidationRegex();
+  string sectionHeader = newLine + R"(\[{1}()" + identifier + R"()\]{1}()" + newLine + R"({2}))";
+  string row = SectionPairRowValidator::getValidationRegex();
+  string atLeastOneRow = R"((()" + row + R"(){1}))";
+  string optionalRows = R"((()" + row + R"()*))";
 
   return sectionHeader + atLeastOneRow + optionalRows;
 }

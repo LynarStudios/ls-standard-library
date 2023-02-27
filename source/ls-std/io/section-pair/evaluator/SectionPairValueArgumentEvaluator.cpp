@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,16 +12,25 @@
 #include <ls-std/io/section-pair/evaluator/SectionPairValueArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairValueValidator.hpp>
 
-ls::std::io::SectionPairValueArgumentEvaluator::SectionPairValueArgumentEvaluator(ls::std::io::section_pair_row_value _value) : ls::std::core::Class("SectionPairValueArgumentEvaluator"), value(::std::move(_value))
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::section_pair_row_value;
+using ls::std::io::SectionPairMessageFormatter;
+using ls::std::io::SectionPairValueArgumentEvaluator;
+using ls::std::io::SectionPairValueValidator;
+using std::move;
+using std::string;
+
+SectionPairValueArgumentEvaluator::SectionPairValueArgumentEvaluator(section_pair_row_value _value) : Class("SectionPairValueArgumentEvaluator"), value(::move(_value))
 {}
 
-ls::std::io::SectionPairValueArgumentEvaluator::~SectionPairValueArgumentEvaluator() = default;
+SectionPairValueArgumentEvaluator::~SectionPairValueArgumentEvaluator() noexcept = default;
 
-void ls::std::io::SectionPairValueArgumentEvaluator::evaluate()
+void SectionPairValueArgumentEvaluator::evaluate()
 {
-  if (!ls::std::io::SectionPairValueValidator(this->value).isValid())
+  if (!SectionPairValueValidator(this->value).isValid())
   {
-    ::std::string message = "\"" + this->value + "\" is not a valid value!";
-    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
+    string message = "\"" + this->value + "\" is not a valid value!";
+    throw IllegalArgumentException{SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }

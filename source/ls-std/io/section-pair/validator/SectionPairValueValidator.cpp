@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-20
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,27 +11,35 @@
 #include <ls-std/io/section-pair/validator/SectionPairValueValidator.hpp>
 #include <regex>
 
-ls::std::io::SectionPairValueValidator::SectionPairValueValidator(ls::std::io::section_pair_row_value _value) : ls::std::core::Class("SectionPairValueValidator"), value(::std::move(_value))
+using ls::std::core::Class;
+using ls::std::io::section_pair_row_value;
+using ls::std::io::SectionPairValueValidator;
+using std::move;
+using std::regex;
+using std::regex_match;
+using std::string;
+
+SectionPairValueValidator::SectionPairValueValidator(section_pair_row_value _value) : Class("SectionPairValueValidator"), value(::move(_value))
 {}
 
-ls::std::io::SectionPairValueValidator::~SectionPairValueValidator() = default;
+SectionPairValueValidator::~SectionPairValueValidator() noexcept = default;
 
-::std::string ls::std::io::SectionPairValueValidator::getValidationRegex()
+string SectionPairValueValidator::getValidationRegex()
 {
-  return ls::std::io::SectionPairValueValidator::_getValidationRegex();
+  return SectionPairValueValidator::_getValidationRegex();
 }
 
-bool ls::std::io::SectionPairValueValidator::isValid()
+bool SectionPairValueValidator::isValid()
 {
-  ::std::string validationRegex = ls::std::io::SectionPairValueValidator::_getValidationRegex();
-  ::std::string concatenation = "(^" + validationRegex + ")|(^" + validationRegex + R"(\n{1})|(^)" + validationRegex + R"(\r{1}\n{1}))";
-  static ::std::regex valueRegex{concatenation};
+  string validationRegex = SectionPairValueValidator::_getValidationRegex();
+  string concatenation = "(^" + validationRegex + ")|(^" + validationRegex + R"(\n{1})|(^)" + validationRegex + R"(\r{1}\n{1}))";
+  static regex valueRegex{concatenation};
 
-  return ::std::regex_match(this->value, valueRegex);
+  return regex_match(this->value, valueRegex);
 }
 
-::std::string ls::std::io::SectionPairValueValidator::_getValidationRegex()
+string SectionPairValueValidator::_getValidationRegex()
 {
-  ::std::string value = R"([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32})";
+  string value = R"([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32})";
   return value;
 }

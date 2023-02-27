@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-17
+* Changed:         2023-02-22
 *
 * */
 
@@ -26,7 +26,7 @@ namespace ls::std::io
     public:
 
       explicit SectionPairRow(const ls::std::io::section_pair_identifier &_key, const ls::std::io::SectionPairRowEnumType &_type);
-      ~SectionPairRow() override;
+      ~SectionPairRow() noexcept override;
 
       [[nodiscard]] ls::std::io::section_pair_identifier getKey();
       [[nodiscard]] ::std::shared_ptr<ls::std::io::SectionPairRowValue> getValue();

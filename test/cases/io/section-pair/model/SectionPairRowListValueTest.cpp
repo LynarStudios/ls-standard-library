@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-17
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,14 +11,20 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::IndexOutOfBoundsException;
+using ls::std::io::NewLine;
+using ls::std::io::section_pair_row_value;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowListValue;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class SectionPairRowListValueTest : public ::testing::Test
+  class SectionPairRowListValueTest : public Test
   {
     protected:
 
@@ -95,7 +101,7 @@ namespace
         {
           try
           {
-            ls::std::io::section_pair_row_value value = list.get(0);
+            section_pair_row_value value = list.get(0);
           }
           catch (const IndexOutOfBoundsException &_exception)
           {
@@ -125,7 +131,7 @@ namespace
   TEST_F(SectionPairRowListValueTest, getType)
   {
     SectionPairRowListValue list{};
-    ASSERT_EQ(ls::std::io::SECTION_PAIR_ROW_LIST_VALUE, list.getType());
+    ASSERT_EQ(SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE, list.getType());
   }
 
   TEST_F(SectionPairRowListValueTest, marshal)
@@ -134,8 +140,9 @@ namespace
     value->add("Drumming");
     value->add("Reading");
     value->add("Coding");
+    string newLine = NewLine::get();
 
-    ::std::string expected = "  Drumming" + NewLine::get() + "  Reading" + NewLine::get() + "  Coding" + NewLine::get();
+    string expected = "  Drumming" + newLine + "  Reading" + newLine + "  Coding" + newLine;
 
     ASSERT_STREQ(expected.c_str(), value->marshal().c_str());
   }
@@ -143,7 +150,8 @@ namespace
   TEST_F(SectionPairRowListValueTest, unmarshal)
   {
     shared_ptr<SectionPairRowListValue> value = make_shared<SectionPairRowListValue>();
-    ::std::string serializedListValue = "  Drumming" + NewLine::get() + "  Reading" + NewLine::get() + "  Coding" + NewLine::get();
+    string newLine = NewLine::get();
+    string serializedListValue = "  Drumming" + newLine + "  Reading" + newLine + "  Coding" + newLine;
     value->unmarshal(serializedListValue);
 
     ASSERT_EQ(3, value->getSize());

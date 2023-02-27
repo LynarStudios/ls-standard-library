@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-12
-* Changed:         2023-02-20
+* Changed:         2023-02-23
 *
 * */
 
@@ -14,16 +14,28 @@
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
 
-using namespace ls::std::core;
-using namespace ls::std::core::interface_type;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace test::io;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::io::NewLine;
+using ls::std::io::SectionPairRow;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowListValue;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairRow;
+using std::array;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using test::io::SerializableSectionPairRowProvider;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SerializableSectionPairRowTest : public ::testing::Test
+  class SerializableSectionPairRowTest : public Test
   {
     protected:
 
@@ -37,7 +49,7 @@ namespace
       {}
   };
 
-  class SerializableSectionPairRowTest_LineBreakTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairRowTest_LineBreakTest : public TestWithParam<string>
   {
     protected:
 
@@ -45,7 +57,7 @@ namespace
       ~SerializableSectionPairRowTest_LineBreakTest() override = default;
   };
 
-  class SerializableSectionPairRowTest_IsValidSingleValueTest : public ::testing::TestWithParam<array<string, 3>>
+  class SerializableSectionPairRowTest_IsValidSingleValueTest : public TestWithParam<array<string, 3>>
   {
     protected:
 
@@ -53,7 +65,7 @@ namespace
       ~SerializableSectionPairRowTest_IsValidSingleValueTest() override = default;
   };
 
-  class SerializableSectionPairRowTest_IsInvalidSingleValueTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairRowTest_IsInvalidSingleValueTest : public TestWithParam<string>
   {
     protected:
 
@@ -61,7 +73,7 @@ namespace
       ~SerializableSectionPairRowTest_IsInvalidSingleValueTest() override = default;
   };
 
-  class SerializableSectionPairRowTest_IsInvalidListValueTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairRowTest_IsInvalidListValueTest : public TestWithParam<string>
   {
     protected:
 
@@ -197,8 +209,8 @@ namespace
         IllegalArgumentException);
   }
 
-  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairRowTest_LineBreakTest, ::testing::Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
-  INSTANTIATE_TEST_SUITE_P(IsValidSingleValueTest, SerializableSectionPairRowTest_IsValidSingleValueTest, ::testing::Values(array<string, 3>{"favourite-color=blue", "favourite-color", "blue"}, array<string, 3>{"hair-color=red" + NewLine::getWindowsNewLine(), "hair-color", "red"}));
-  INSTANTIATE_TEST_SUITE_P(IsInvalidSingleValueTest, SerializableSectionPairRowTest_IsInvalidSingleValueTest, ::testing::Values("favourite-color", "color="));
-  INSTANTIATE_TEST_SUITE_P(IsInvalidListValueTest, SerializableSectionPairRowTest_IsInvalidListValueTest, ::testing::Values("favourite-color:\n", "colors:\r\n  blue"));
+  INSTANTIATE_TEST_SUITE_P(LineBreakTest, SerializableSectionPairRowTest_LineBreakTest, Values(NewLine::getUnixNewLine(), NewLine::getWindowsNewLine()));
+  INSTANTIATE_TEST_SUITE_P(IsValidSingleValueTest, SerializableSectionPairRowTest_IsValidSingleValueTest, Values(array<string, 3>{"favourite-color=blue", "favourite-color", "blue"}, array<string, 3>{"hair-color=red" + NewLine::getWindowsNewLine(), "hair-color", "red"}));
+  INSTANTIATE_TEST_SUITE_P(IsInvalidSingleValueTest, SerializableSectionPairRowTest_IsInvalidSingleValueTest, Values("favourite-color", "color="));
+  INSTANTIATE_TEST_SUITE_P(IsInvalidListValueTest, SerializableSectionPairRowTest_IsInvalidListValueTest, Values("favourite-color:\n", "colors:\r\n  blue"));
 }

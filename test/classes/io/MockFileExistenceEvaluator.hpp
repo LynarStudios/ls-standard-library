@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -20,7 +20,7 @@ namespace test::io
     public:
 
       explicit MockFileExistenceEvaluator(bool _fileExists);
-      ~MockFileExistenceEvaluator() override;
+      ~MockFileExistenceEvaluator() noexcept override;
 
       void evaluate() override;
 

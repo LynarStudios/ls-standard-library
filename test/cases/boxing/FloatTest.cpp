@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -11,13 +11,14 @@
 #include <ls-std/ls-std-boxing.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::boxing;
-using namespace ls::std::core;
-using namespace ::std;
+using ls::std::boxing::Float;
+using ls::std::core::IllegalArgumentException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class FloatTest : public ::testing::Test
+  class FloatTest : public Test
   {
     protected:
 
@@ -38,7 +39,7 @@ namespace
     Float x{13.023f};
 
     x = 44.22f;
-    ASSERT_EQ(44.22f, x);
+    ASSERT_EQ(44.22f, x.getValue());
   }
 
   // arithmetic operators
@@ -55,7 +56,7 @@ namespace
     Float y{2.223f};
     Float z{x + y};
 
-    ASSERT_FLOAT_EQ(5.3645f, z);
+    ASSERT_FLOAT_EQ(5.3645f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_addition_with_value)
@@ -70,7 +71,7 @@ namespace
     Float y{2.22f};
     Float z{x * y};
 
-    ASSERT_FLOAT_EQ(6.9708f, z);
+    ASSERT_FLOAT_EQ(6.9708f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_multiplication_with_value)
@@ -85,7 +86,7 @@ namespace
     Float y{2.225f};
     Float z{x - y};
 
-    ASSERT_FLOAT_EQ(0.9165f, z);
+    ASSERT_FLOAT_EQ(0.9165f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_substraction_with_value)
@@ -100,7 +101,7 @@ namespace
     Float y{0.5f};
     Float z{x / y};
 
-    ASSERT_FLOAT_EQ(4.5f, z);
+    ASSERT_FLOAT_EQ(4.5f, z.getValue());
   }
 
   TEST_F(FloatTest, operator_division_with_value)
@@ -117,7 +118,7 @@ namespace
     Float y{3.14f};
     x += y;
 
-    ASSERT_FLOAT_EQ(5.39f, x);
+    ASSERT_FLOAT_EQ(5.39f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_add_assign_with_value)
@@ -125,7 +126,7 @@ namespace
     Float x{2.25f};
     x += 3.14f;
 
-    ASSERT_FLOAT_EQ(5.39f, x);
+    ASSERT_FLOAT_EQ(5.39f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_sub_assign_with_reference)
@@ -134,7 +135,7 @@ namespace
     Float y{1.14f};
     x -= y;
 
-    ASSERT_FLOAT_EQ(1.11f, x);
+    ASSERT_FLOAT_EQ(1.11f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_sub_assign_with_value)
@@ -142,7 +143,7 @@ namespace
     Float x{2.25f};
     x -= 1.14f;
 
-    ASSERT_FLOAT_EQ(1.11f, x);
+    ASSERT_FLOAT_EQ(1.11f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_mul_assign_with_reference)
@@ -151,7 +152,7 @@ namespace
     Float y{0.04f};
     x *= y;
 
-    ASSERT_FLOAT_EQ(0.09f, x);
+    ASSERT_FLOAT_EQ(0.09f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_mul_assign_with_value)
@@ -159,7 +160,7 @@ namespace
     Float x{2.25f};
     x *= 1.14f;
 
-    ASSERT_FLOAT_EQ(2.565f, x);
+    ASSERT_FLOAT_EQ(2.565f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_division_assign_with_reference)
@@ -168,7 +169,7 @@ namespace
     Float y{1.5f};
     x /= y;
 
-    ASSERT_FLOAT_EQ(1.5f, x);
+    ASSERT_FLOAT_EQ(1.5f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_division_assign_with_value)
@@ -176,7 +177,7 @@ namespace
     Float x{2.25f};
     x /= 0.05f;
 
-    ASSERT_FLOAT_EQ(45.0f, x);
+    ASSERT_FLOAT_EQ(45.0f, x.getValue());
   }
 
   // comparison operators
@@ -284,7 +285,7 @@ namespace
     Float x{3.1415f};
     ++x;
 
-    ASSERT_FLOAT_EQ(4.1415f, x);
+    ASSERT_FLOAT_EQ(4.1415f, x.getValue());
   }
 
   TEST_F(FloatTest, operator_decrement)
@@ -292,7 +293,7 @@ namespace
     Float x{3.1415f};
     --x;
 
-    ASSERT_FLOAT_EQ(2.1415f, x);
+    ASSERT_FLOAT_EQ(2.1415f, x.getValue());
   }
 
   // implementation
@@ -302,7 +303,7 @@ namespace
     Float number{};
 
     number.parse("3.1415f");
-    ASSERT_FLOAT_EQ(3.1415f, number);
+    ASSERT_FLOAT_EQ(3.1415f, number.getValue());
   }
 
   TEST_F(FloatTest, toString)

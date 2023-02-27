@@ -3,26 +3,31 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/IndexOutOfBoundsException.hpp>
 
-ls::std::core::IndexOutOfBoundsException::IndexOutOfBoundsException() : ls::std::core::Exception("IndexOutOfBoundsException")
+using ls::std::core::Exception;
+using ls::std::core::IndexOutOfBoundsException;
+using std::move;
+using std::string;
+
+IndexOutOfBoundsException::IndexOutOfBoundsException() : Exception("IndexOutOfBoundsException")
 {}
 
-ls::std::core::IndexOutOfBoundsException::IndexOutOfBoundsException(::std::string _message) : ls::std::core::IndexOutOfBoundsException()
+IndexOutOfBoundsException::IndexOutOfBoundsException(string _message) : IndexOutOfBoundsException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::IndexOutOfBoundsException::~IndexOutOfBoundsException() = default;
+IndexOutOfBoundsException::~IndexOutOfBoundsException() noexcept = default;
 
-const char *ls::std::core::IndexOutOfBoundsException::what() const noexcept
+const char *IndexOutOfBoundsException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

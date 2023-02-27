@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -24,11 +24,7 @@ namespace ls::std::boxing
 
       explicit Boolean(bool _value);
       Boolean();
-      ~Boolean() override;
-
-      // conversion operator
-
-      operator bool() const;
+      ~Boolean() noexcept override;
 
       // assignment operators
 

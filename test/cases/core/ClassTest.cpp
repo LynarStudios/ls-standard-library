@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-16
- * Changed:         2023-02-05
+ * Changed:         2023-02-22
  *
  * */
 
@@ -11,13 +11,16 @@
 #include <ls-std-core-test.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::core;
-using namespace ::std;
-using namespace test::core;
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using std::make_shared;
+using std::shared_ptr;
+using test::core::ClassWrapper;
+using testing::Test;
 
 namespace
 {
-  class ClassTest : public ::testing::Test
+  class ClassTest : public Test
   {
     protected:
 

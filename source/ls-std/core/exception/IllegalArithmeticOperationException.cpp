@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/IllegalArithmeticOperationException.hpp>
 
-ls::std::core::IllegalArithmeticOperationException::IllegalArithmeticOperationException() : ls::std::core::Exception("IllegalArithmeticOperationException")
+using ls::std::core::Exception;
+using ls::std::core::IllegalArithmeticOperationException;
+using std::move;
+using std::string;
+
+IllegalArithmeticOperationException::IllegalArithmeticOperationException() : Exception("IllegalArithmeticOperationException")
 {}
 
-ls::std::core::IllegalArithmeticOperationException::IllegalArithmeticOperationException(::std::string _message) : ls::std::core::IllegalArithmeticOperationException()
+IllegalArithmeticOperationException::IllegalArithmeticOperationException(string _message) : IllegalArithmeticOperationException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::IllegalArithmeticOperationException::~IllegalArithmeticOperationException() = default;
+IllegalArithmeticOperationException::~IllegalArithmeticOperationException() noexcept = default;
 
-const char *ls::std::core::IllegalArithmeticOperationException::what() const noexcept
+const char *IllegalArithmeticOperationException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

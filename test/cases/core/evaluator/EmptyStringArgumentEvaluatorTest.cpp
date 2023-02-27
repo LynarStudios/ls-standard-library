@@ -11,12 +11,14 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ::std;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::IllegalArgumentException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class EmptyStringArgumentEvaluatorTest : public ::testing::Test
+  class EmptyStringArgumentEvaluatorTest : public Test
   {
     protected:
 

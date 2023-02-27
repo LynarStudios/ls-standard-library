@@ -3,26 +3,43 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-24
- * Changed:         2023-02-08
+ * Changed:         2023-02-24
  *
  * */
 
 #include <algorithm>
+#include <iterator>
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/io/xml/XmlNode.hpp>
+#include <numeric>
 
-ls::std::io::XmlNode::XmlNode(::std::string _name) : ls::std::core::Class("XmlNode"), name(::std::move(_name))
+using ls::std::core::Class;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::io::XmlAttribute;
+using ls::std::io::XmlNode;
+using std::accumulate;
+using std::any_of;
+using std::back_inserter;
+using std::copy_if;
+using std::find;
+using std::list;
+using std::move;
+using std::shared_ptr;
+using std::string;
+
+XmlNode::XmlNode(string _name) : Class("XmlNode"), name(::move(_name))
 {}
 
-ls::std::io::XmlNode::~XmlNode() = default;
+XmlNode::~XmlNode() noexcept = default;
 
-bool ls::std::io::XmlNode::addAttributeAfter(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute, const ::std::string &_name)
+bool XmlNode::addAttributeAfter(const shared_ptr<XmlAttribute> &_attribute, const string &_name)
 {
   bool added{};
   auto iterator = this->attributes.begin();
-  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
-  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
+  NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
+  EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
 
   if (!this->_hasAttribute(_attribute->getName()))
   {
@@ -43,12 +60,12 @@ bool ls::std::io::XmlNode::addAttributeAfter(const ::std::shared_ptr<ls::std::io
   return added;
 }
 
-bool ls::std::io::XmlNode::addAttributeBefore(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute, const ::std::string &_name)
+bool XmlNode::addAttributeBefore(const shared_ptr<XmlAttribute> &_attribute, const string &_name)
 {
   bool added{};
   auto iterator = this->attributes.begin();
-  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
-  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
+  NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
+  EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
 
   if (!this->_hasAttribute(_attribute->getName()))
   {
@@ -68,11 +85,10 @@ bool ls::std::io::XmlNode::addAttributeBefore(const ::std::shared_ptr<ls::std::i
   return added;
 }
 
-bool ls::std::io::XmlNode::addAttributeToBeginning(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute)
+bool XmlNode::addAttributeToBeginning(const shared_ptr<XmlAttribute> &_attribute)
 {
   bool added{};
-  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
-  ;
+  NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
 
   if (!_hasAttribute(_attribute->getName()))
   {
@@ -83,10 +99,10 @@ bool ls::std::io::XmlNode::addAttributeToBeginning(const ::std::shared_ptr<ls::s
   return added;
 }
 
-bool ls::std::io::XmlNode::addAttributeToEnd(const ::std::shared_ptr<ls::std::io::XmlAttribute> &_attribute)
+bool XmlNode::addAttributeToEnd(const shared_ptr<XmlAttribute> &_attribute)
 {
   bool added{};
-  ls::std::core::NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_attribute, "passed attribute reference for add attempt is null!"}.evaluate();
 
   if (!_hasAttribute(_attribute->getName()))
   {
@@ -97,12 +113,12 @@ bool ls::std::io::XmlNode::addAttributeToEnd(const ::std::shared_ptr<ls::std::io
   return added;
 }
 
-bool ls::std::io::XmlNode::addChildAfter(const ::std::shared_ptr<ls::std::io::XmlNode> &_child, const ::std::shared_ptr<ls::std::io::XmlNode> &_search)
+bool XmlNode::addChildAfter(const shared_ptr<XmlNode> &_child, const shared_ptr<XmlNode> &_search)
 {
   bool added{};
   auto iterator = this->children.begin();
-  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
-  ls::std::core::NullPointerArgumentEvaluator{_search, "passed search node reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_search, "passed search node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -123,12 +139,12 @@ bool ls::std::io::XmlNode::addChildAfter(const ::std::shared_ptr<ls::std::io::Xm
   return added;
 }
 
-bool ls::std::io::XmlNode::addChildBefore(const ::std::shared_ptr<ls::std::io::XmlNode> &_child, const ::std::shared_ptr<ls::std::io::XmlNode> &_search)
+bool XmlNode::addChildBefore(const shared_ptr<XmlNode> &_child, const shared_ptr<XmlNode> &_search)
 {
   bool added{};
   auto iterator = this->children.begin();
-  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
-  ls::std::core::NullPointerArgumentEvaluator{_search, "passed search node reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_search, "passed search node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -148,10 +164,10 @@ bool ls::std::io::XmlNode::addChildBefore(const ::std::shared_ptr<ls::std::io::X
   return added;
 }
 
-bool ls::std::io::XmlNode::addChildToBeginning(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
+bool XmlNode::addChildToBeginning(const shared_ptr<XmlNode> &_child)
 {
   bool added{};
-  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -162,10 +178,10 @@ bool ls::std::io::XmlNode::addChildToBeginning(const ::std::shared_ptr<ls::std::
   return added;
 }
 
-bool ls::std::io::XmlNode::addChildToEnd(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
+bool XmlNode::addChildToEnd(const shared_ptr<XmlNode> &_child)
 {
   bool added{};
-  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_child, "passed child node reference for add attempt is null!"}.evaluate();
 
   if (!this->_hasChild(_child))
   {
@@ -176,62 +192,55 @@ bool ls::std::io::XmlNode::addChildToEnd(const ::std::shared_ptr<ls::std::io::Xm
   return added;
 }
 
-void ls::std::io::XmlNode::clearValue()
+void XmlNode::clearValue()
 {
   this->value.clear();
 }
 
-std::list<std::shared_ptr<ls::std::io::XmlAttribute>> ls::std::io::XmlNode::getAttributes()
+list<shared_ptr<XmlAttribute>> XmlNode::getAttributes()
 {
   return this->attributes;
 }
 
-std::list<std::shared_ptr<ls::std::io::XmlNode>> ls::std::io::XmlNode::getChildren()
+list<shared_ptr<XmlNode>> XmlNode::getChildren()
 {
   return this->children;
 }
 
-std::list<std::shared_ptr<ls::std::io::XmlNode>> ls::std::io::XmlNode::getChildren(const ::std::string &_name)
+list<shared_ptr<XmlNode>> XmlNode::getChildren(const string &_name)
 {
-  ::std::list<::std::shared_ptr<ls::std::io::XmlNode>> childrenWithName{};
-
-  for (const auto &child : this->children)
-  {
-    if (child->getName() == _name)
-    {
-      childrenWithName.push_back(child);
-    }
-  }
+  list<shared_ptr<XmlNode>> childrenWithName{};
+  copy_if(this->children.begin(), this->children.end(), back_inserter(childrenWithName), [_name](const shared_ptr<XmlNode> &_node) { return _node->getName() == _name; });
 
   return childrenWithName;
 }
 
-std::string ls::std::io::XmlNode::getName()
+string XmlNode::getName()
 {
   return this->name;
 }
 
-std::string ls::std::io::XmlNode::getValue()
+string XmlNode::getValue()
 {
   return this->value;
 }
 
-bool ls::std::io::XmlNode::hasAttribute(const ::std::string &_name)
+bool XmlNode::hasAttribute(const string &_name)
 {
   return this->_hasAttribute(_name);
 }
 
-bool ls::std::io::XmlNode::hasChild(const ::std::string &_name)
+bool XmlNode::hasChild(const string &_name)
 {
   return this->_hasChild(_name);
 }
 
-bool ls::std::io::XmlNode::hasChild(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
+bool XmlNode::hasChild(const shared_ptr<XmlNode> &_child)
 {
   return this->_hasChild(_child);
 }
 
-bool ls::std::io::XmlNode::removeFirstAttribute()
+bool XmlNode::removeFirstAttribute()
 {
   bool isValidOperation = !this->attributes.empty();
 
@@ -243,7 +252,7 @@ bool ls::std::io::XmlNode::removeFirstAttribute()
   return isValidOperation;
 }
 
-bool ls::std::io::XmlNode::removeLastAttribute()
+bool XmlNode::removeLastAttribute()
 {
   bool isValidOperation = !this->attributes.empty();
 
@@ -255,7 +264,7 @@ bool ls::std::io::XmlNode::removeLastAttribute()
   return isValidOperation;
 }
 
-bool ls::std::io::XmlNode::removeFirstChild()
+bool XmlNode::removeFirstChild()
 {
   bool isValidOperation = !this->children.empty();
 
@@ -267,7 +276,7 @@ bool ls::std::io::XmlNode::removeFirstChild()
   return isValidOperation;
 }
 
-bool ls::std::io::XmlNode::removeLastChild()
+bool XmlNode::removeLastChild()
 {
   bool isValidOperation = !this->children.empty();
 
@@ -279,52 +288,52 @@ bool ls::std::io::XmlNode::removeLastChild()
   return isValidOperation;
 }
 
-void ls::std::io::XmlNode::setName(const ::std::string &_name)
+void XmlNode::setName(const string &_name)
 {
   this->_assignName(_name);
 }
 
-void ls::std::io::XmlNode::setValue(const ::std::string &_value)
+void XmlNode::setValue(const string &_value)
 {
   this->_assignValue(_value);
 }
 
-std::string ls::std::io::XmlNode::toXml()
+string XmlNode::toXml()
 {
   return this->_toXml_(0);
 }
 
-std::string ls::std::io::XmlNode::_toXml_(uint8_t _tabSize)
+string XmlNode::_toXml_(uint8_t _tabSize)
 {
-  ::std::string xmlStream{};
+  string xmlStream{};
 
-  xmlStream += ls::std::io::XmlNode::_getTab(_tabSize);
+  xmlStream += XmlNode::_getTab(_tabSize);
   xmlStream += this->_toXmlOpenTag();
   xmlStream += this->_toXmlAttributes();
   xmlStream += this->_toXmlOpenTagClose();
   xmlStream += this->_toXmlValue();
   xmlStream += this->_toXmlChildren(_tabSize + TAB_SIZE);
-  xmlStream += this->value.empty() ? ls::std::io::XmlNode::_getTab(_tabSize) : "";
+  xmlStream += this->value.empty() ? XmlNode::_getTab(_tabSize) : "";
   xmlStream += this->_toXmlCloseTag() + "\n";
 
   return xmlStream;
 }
 
-void ls::std::io::XmlNode::_assignName(const ::std::string &_name)
+void XmlNode::_assignName(const string &_name)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
+  EmptyStringArgumentEvaluator{_name, "xml node name is empty!"}.evaluate();
   this->name = _name;
 }
 
-void ls::std::io::XmlNode::_assignValue(const ::std::string &_value)
+void XmlNode::_assignValue(const string &_value)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_value, "xml node value is empty!"}.evaluate();
+  EmptyStringArgumentEvaluator{_value, "xml node value is empty!"}.evaluate();
   this->value = _value;
 }
 
-std::string ls::std::io::XmlNode::_getTab(uint8_t _tabSize)
+string XmlNode::_getTab(uint8_t _tabSize)
 {
-  ::std::string tab{};
+  string tab{};
 
   for (uint8_t index = 0; index < _tabSize; index++)
   {
@@ -334,76 +343,37 @@ std::string ls::std::io::XmlNode::_getTab(uint8_t _tabSize)
   return tab;
 }
 
-bool ls::std::io::XmlNode::_hasAttribute(const ::std::string &_name)
+bool XmlNode::_hasAttribute(const string &_name)
 {
-  bool exists{};
-  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml attribute name is empty!"}.evaluate();
-
-  for (const auto &attribute : this->attributes)
-  {
-    if (attribute->getName() == _name)
-    {
-      exists = true;
-      break;
-    }
-  }
-
-  return exists;
+  EmptyStringArgumentEvaluator{_name, "xml attribute name is empty!"}.evaluate();
+  return any_of(this->attributes.begin(), this->attributes.end(), [_name](const shared_ptr<XmlAttribute> &_attribute) { return _attribute->getName() == _name; });
 }
 
-bool ls::std::io::XmlNode::_hasChild(const ::std::shared_ptr<ls::std::io::XmlNode> &_child)
+bool XmlNode::_hasChild(const shared_ptr<XmlNode> &_child)
 {
-  ls::std::core::NullPointerArgumentEvaluator{_child, "passed child node reference for check attempt is null!"}.evaluate();
-  return ::std::find(this->children.begin(), this->children.end(), _child) != this->children.end();
+  NullPointerArgumentEvaluator{_child, "passed child node reference for check attempt is null!"}.evaluate();
+  return find(this->children.begin(), this->children.end(), _child) != this->children.end();
 }
 
-bool ls::std::io::XmlNode::_hasChild(const ::std::string &_name)
+bool XmlNode::_hasChild(const string &_name)
 {
-  bool exists{};
-  ls::std::core::EmptyStringArgumentEvaluator{_name, "xml child node name is empty!"}.evaluate();
-
-  for (const auto &attribute : this->children)
-  {
-    if (attribute->getName() == _name)
-    {
-      exists = true;
-      break;
-    }
-  }
-
-  return exists;
+  EmptyStringArgumentEvaluator{_name, "xml child node name is empty!"}.evaluate();
+  return any_of(this->children.begin(), this->children.end(), [_name](const shared_ptr<XmlNode> &_node) { return _node->getName() == _name; });
 }
 
-std::string ls::std::io::XmlNode::_toXmlAttributes()
+string XmlNode::_toXmlAttributes()
 {
-  ::std::string stream{};
-
-  for (const auto &_attribute : this->attributes)
-  {
-    stream += " " + _attribute->toXml();
-  }
-
-  return stream;
+  return accumulate(this->attributes.begin(), this->attributes.end(), string{}, [](string stream, const shared_ptr<XmlAttribute> &_attribute) { return ::move(stream) + " " + _attribute->toXml(); });
 }
 
-std::string ls::std::io::XmlNode::_toXmlChildren(uint8_t _tabSize)
+string XmlNode::_toXmlChildren(uint8_t _tabSize)
 {
-  ::std::string stream{};
-
-  if (this->value.empty())
-  {
-    for (const auto &_child : this->children)
-    {
-      stream += _child->_toXml_(_tabSize);
-    }
-  }
-
-  return stream;
+  return accumulate(this->children.begin(), this->children.end(), string{}, [_tabSize](string stream, const shared_ptr<XmlNode> &_child) { return ::move(stream) + _child->_toXml_(_tabSize); });
 }
 
-std::string ls::std::io::XmlNode::_toXmlCloseTag()
+string XmlNode::_toXmlCloseTag()
 {
-  ::std::string stream{};
+  string stream{};
 
   if (!this->children.empty() || !this->value.empty())
   {
@@ -413,14 +383,14 @@ std::string ls::std::io::XmlNode::_toXmlCloseTag()
   return stream;
 }
 
-std::string ls::std::io::XmlNode::_toXmlOpenTag()
+string XmlNode::_toXmlOpenTag()
 {
   return "<" + this->name;
 }
 
-std::string ls::std::io::XmlNode::_toXmlOpenTagClose()
+string XmlNode::_toXmlOpenTagClose()
 {
-  ::std::string stream{};
+  string stream{};
 
   if (this->children.empty() && this->value.empty())
   {
@@ -434,7 +404,7 @@ std::string ls::std::io::XmlNode::_toXmlOpenTagClose()
   return stream;
 }
 
-std::string ls::std::io::XmlNode::_toXmlValue()
+string XmlNode::_toXmlValue()
 {
   return this->value.empty() ? "\n" : this->value;
 }

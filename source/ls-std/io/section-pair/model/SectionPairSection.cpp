@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-22
+* Changed:         2023-02-24
 *
 * */
 
@@ -17,29 +17,51 @@
 #include <ls-std/io/section-pair/model/SectionPairSection.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairSection.hpp>
 
-ls::std::io::SectionPairSection::SectionPairSection(const ls::std::io::section_pair_identifier &_sectionId) : ls::std::core::Class("SectionPairSection")
+using ls::std::core::Class;
+using ls::std::core::ConditionalFunctionExecutor;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::IndexOutOfBoundsEvaluator;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::section_pair_identifier;
+using ls::std::io::section_pair_row_list;
+using ls::std::io::section_pair_row_list_element;
+using ls::std::io::SectionPairIdentifierArgumentEvaluator;
+using ls::std::io::SectionPairMessageFormatter;
+using ls::std::io::SectionPairSection;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairSection;
+using std::any_of;
+using std::find_if;
+using std::make_shared;
+using std::reinterpret_pointer_cast;
+using std::shared_ptr;
+using std::string;
+
+SectionPairSection::SectionPairSection(const section_pair_identifier &_sectionId) : Class("SectionPairSection")
 {
   this->_setSectionId(_sectionId);
 }
 
-ls::std::io::SectionPairSection::~SectionPairSection() = default;
+SectionPairSection::~SectionPairSection() noexcept = default;
 
-void ls::std::io::SectionPairSection::add(const section_pair_row_list_element &_row)
+void SectionPairSection::add(const section_pair_row_list_element &_row)
 {
-  ls::std::core::NullPointerArgumentEvaluator{::std::reinterpret_pointer_cast<void>(_row)}.evaluate();
+  NullPointerArgumentEvaluator{reinterpret_pointer_cast<void>(_row)}.evaluate();
   this->_rowExistenceCheck(_row->getKey());
   this->rows.push_back(_row);
 }
 
-void ls::std::io::SectionPairSection::clear()
+void SectionPairSection::clear()
 {
   this->rows.clear();
 }
 
-ls::std::io::section_pair_row_list_element ls::std::io::SectionPairSection::get(size_t _index)
+section_pair_row_list_element SectionPairSection::get(size_t _index)
 {
-  ls::std::core::IndexOutOfBoundsEvaluator{_index, this->rows.size()}.evaluate();
-  ls::std::io::section_pair_row_list_element element{};
+  IndexOutOfBoundsEvaluator{_index, this->rows.size()}.evaluate();
+  section_pair_row_list_element element{};
   size_t index{};
 
   for (const auto &_element : this->rows)
@@ -56,46 +78,56 @@ ls::std::io::section_pair_row_list_element ls::std::io::SectionPairSection::get(
   return element;
 }
 
-ls::std::io::section_pair_row_list ls::std::io::SectionPairSection::getList()
+section_pair_row_list_element SectionPairSection::get(const section_pair_identifier &_key)
+{
+  return this->_get(_key);
+}
+
+section_pair_row_list SectionPairSection::getList()
 {
   return this->rows;
 }
 
-size_t ls::std::io::SectionPairSection::getRowAmount()
+size_t SectionPairSection::getRowAmount()
 {
   return this->rows.size();
 }
 
-ls::std::io::section_pair_identifier ls::std::io::SectionPairSection::getSectionId()
+section_pair_identifier SectionPairSection::getSectionId()
 {
   return this->sectionId;
 }
 
-ls::std::core::type::byte_field ls::std::io::SectionPairSection::marshal()
+bool SectionPairSection::hasRow(const section_pair_identifier &_key)
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  return this->_hasRow(_key);
+}
+
+byte_field SectionPairSection::marshal()
+{
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   return this->serializable->marshal();
 }
 
-void ls::std::io::SectionPairSection::reserveNewLine(const ::std::string &_reservedNewLine)
+void SectionPairSection::reserveNewLine(const string &_reservedNewLine)
 {
   this->reservedNewLine = _reservedNewLine;
 }
 
-void ls::std::io::SectionPairSection::setSectionId(const ls::std::io::section_pair_identifier &_sectionId)
+void SectionPairSection::setSectionId(const section_pair_identifier &_sectionId)
 {
   this->_setSectionId(_sectionId);
 }
 
-void ls::std::io::SectionPairSection::unmarshal(const ls::std::core::type::byte_field &_data)
+void SectionPairSection::unmarshal(const byte_field &_data)
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   this->serializable->unmarshal(_data);
 }
 
-void ls::std::io::SectionPairSection::_createSerializable()
+void SectionPairSection::_createSerializable()
 {
-  ls::std::io::SerializableSectionPairParameter parameter{};
+  SerializableSectionPairParameter parameter{};
   parameter.setValue(shared_from_this());
 
   if (!this->reservedNewLine.empty())
@@ -103,36 +135,31 @@ void ls::std::io::SectionPairSection::_createSerializable()
     parameter.setNewLine(this->reservedNewLine);
   }
 
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairSection>(parameter);
+  this->serializable = make_shared<SerializableSectionPairSection>(parameter);
 }
 
-bool ls::std::io::SectionPairSection::_hasRow(const ls::std::io::section_pair_identifier &_key)
+section_pair_row_list_element SectionPairSection::_get(const section_pair_identifier &_key)
 {
-  bool rowExists{};
-
-  for (const auto &_row : this->rows)
-  {
-    if (_row->getKey() == _key)
-    {
-      rowExists = true;
-      break;
-    }
-  }
-
-  return rowExists;
+  const auto &iterator = find_if(this->rows.begin(), this->rows.end(), [_key](const shared_ptr<SectionPairRow> &_row) { return _row->getKey() == _key; });
+  return iterator != this->rows.end() ? *iterator : nullptr;
 }
 
-void ls::std::io::SectionPairSection::_rowExistenceCheck(const ls::std::io::section_pair_identifier &_key)
+bool SectionPairSection::_hasRow(const section_pair_identifier &_key)
+{
+  return any_of(this->rows.begin(), this->rows.end(), [_key](const shared_ptr<SectionPairRow> &_row) { return _row->getKey() == _key; });
+}
+
+void SectionPairSection::_rowExistenceCheck(const section_pair_identifier &_key)
 {
   if (this->_hasRow(_key))
   {
-    ::std::string message = this->getClassName() + ": row key \"" + _key + "\" already exists in section \"" + this->sectionId + "\"!";
-    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
+    string message = this->getClassName() + ": row key \"" + _key + "\" already exists in section \"" + this->sectionId + "\"!";
+    throw IllegalArgumentException{SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }
-void ls::std::io::SectionPairSection::_setSectionId(const ls::std::io::section_pair_identifier &_sectionId)
+void SectionPairSection::_setSectionId(const section_pair_identifier &_sectionId)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_sectionId}.evaluate();
-  ls::std::io::SectionPairIdentifierArgumentEvaluator(_sectionId).evaluate();
+  EmptyStringArgumentEvaluator{_sectionId}.evaluate();
+  SectionPairIdentifierArgumentEvaluator(_sectionId).evaluate();
   this->sectionId = _sectionId;
 }

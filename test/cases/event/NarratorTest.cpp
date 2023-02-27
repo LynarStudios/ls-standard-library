@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
@@ -12,15 +12,19 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-event.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::interface_type;
-using namespace ls::std::event;
-using namespace ::std;
-using namespace test::event;
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::interface_type::IListener;
+using ls::std::event::Narrator;
+using std::make_shared;
+using std::shared_ptr;
+using test::event::Colour;
+using test::event::TestDataMercedesCar;
+using testing::Test;
 
 namespace
 {
-  class NarratorTest : public ::testing::Test
+  class NarratorTest : public Test
   {
     protected:
 
@@ -53,9 +57,9 @@ namespace
     this->createCars();
     Narrator paintingMachine{};
 
-    ASSERT_TRUE(paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes1)));
-    ASSERT_TRUE(paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes2)));
-    ASSERT_TRUE(paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes3)));
+    ASSERT_TRUE(paintingMachine.addListener(this->mercedes1));
+    ASSERT_TRUE(paintingMachine.addListener(this->mercedes2));
+    ASSERT_TRUE(paintingMachine.addListener(this->mercedes3));
   }
 
   TEST_F(NarratorTest, addListener_listener_already_exists)
@@ -63,8 +67,8 @@ namespace
     this->createCars();
     Narrator paintingMachine{};
 
-    ASSERT_TRUE(paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes1)));
-    ASSERT_FALSE(paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes1)));
+    ASSERT_TRUE(paintingMachine.addListener(this->mercedes1));
+    ASSERT_FALSE(paintingMachine.addListener(this->mercedes1));
   }
 
   TEST_F(NarratorTest, addListener_no_reference)
@@ -88,9 +92,9 @@ namespace
   {
     this->createCars();
     Narrator paintingMachine{};
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes1));
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes2));
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes3));
+    paintingMachine.addListener(this->mercedes1);
+    paintingMachine.addListener(this->mercedes2);
+    paintingMachine.addListener(this->mercedes3);
 
     ASSERT_FALSE(paintingMachine.getListeners().empty());
     paintingMachine.clear();
@@ -107,9 +111,9 @@ namespace
   {
     this->createCars();
     Narrator paintingMachine{};
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes1));
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes2));
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes3));
+    paintingMachine.addListener(this->mercedes1);
+    paintingMachine.addListener(this->mercedes2);
+    paintingMachine.addListener(this->mercedes3);
 
     ASSERT_TRUE(paintingMachine.removeListener(this->mercedes2));
     ASSERT_TRUE(paintingMachine.removeListener(this->mercedes1));
@@ -145,15 +149,15 @@ namespace
   {
     this->createCars();
     Narrator paintingMachine{};
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes1));
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes2));
-    paintingMachine.addListener(dynamic_pointer_cast<IListener>(this->mercedes3));
+    paintingMachine.addListener(this->mercedes1);
+    paintingMachine.addListener(this->mercedes2);
+    paintingMachine.addListener(this->mercedes3);
 
     ASSERT_STREQ("pink", this->mercedes1->getColor().c_str());
     ASSERT_STREQ("blue", this->mercedes2->getColor().c_str());
     ASSERT_STREQ("red", this->mercedes3->getColor().c_str());
 
-    Colour newColor{"black"};
+    Colour newColor = Colour{"black"};
     paintingMachine.tell(static_cast<const Class &>(newColor));
 
     ASSERT_STREQ("black", this->mercedes1->getColor().c_str());

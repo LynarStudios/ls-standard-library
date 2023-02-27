@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-08
+ * Changed:         2023-02-23
  *
  * */
 
@@ -16,80 +16,95 @@
   #include <sstream>
 #endif
 
-ls::std::io::Logger::Logger(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer) : ls::std::core::Class("Logger"), logLevel(ls::std::io::LogLevelValue::INFO)
+using ls::std::core::Class;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::interface_type::IWriter;
+using ls::std::core::type::byte_type;
+using ls::std::io::Logger;
+using ls::std::io::LogLevel;
+using ls::std::io::LogLevelValue;
+using ls::std::io::NewLine;
+using std::localtime;
+using std::put_time;
+using std::shared_ptr;
+using std::string;
+using std::stringstream;
+using std::time;
+
+Logger::Logger(const shared_ptr<IWriter> &_writer) : Class("Logger"), logLevel(LogLevelValue::INFO)
 {
   this->_assignWriter(_writer);
 }
 
-ls::std::io::Logger::~Logger() = default;
+Logger::~Logger() noexcept = default;
 
-void ls::std::io::Logger::debug(const ls::std::core::type::byte *_data)
+void Logger::debug(const byte_type *_data)
 {
-  if (this->logLevel >= ls::std::io::LogLevelValue::DEBUG)
+  if (this->logLevel >= LogLevelValue::DEBUG)
   {
-    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::DEBUG));
+    this->_log(_data, LogLevel(LogLevelValue::DEBUG));
   }
 }
 
-void ls::std::io::Logger::error(const ls::std::core::type::byte *_data)
+void Logger::error(const byte_type *_data)
 {
-  if (this->logLevel >= ls::std::io::LogLevelValue::ERR)
+  if (this->logLevel >= LogLevelValue::ERR)
   {
-    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::ERR));
+    this->_log(_data, LogLevel(LogLevelValue::ERR));
   }
 }
 
-void ls::std::io::Logger::fatal(const ls::std::core::type::byte *_data)
+void Logger::fatal(const byte_type *_data)
 {
-  if (this->logLevel >= ls::std::io::LogLevelValue::FATAL)
+  if (this->logLevel >= LogLevelValue::FATAL)
   {
-    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::FATAL));
+    this->_log(_data, LogLevel(LogLevelValue::FATAL));
   }
 }
 
-ls::std::io::LogLevel ls::std::io::Logger::getLogLevel()
+LogLevel Logger::getLogLevel()
 {
   return this->logLevel;
 }
 
-void ls::std::io::Logger::info(const ls::std::core::type::byte *_data)
+void Logger::info(const byte_type *_data)
 {
-  if (this->logLevel >= ls::std::io::LogLevelValue::INFO)
+  if (this->logLevel >= LogLevelValue::INFO)
   {
-    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::INFO));
+    this->_log(_data, LogLevel(LogLevelValue::INFO));
   }
 }
 
-void ls::std::io::Logger::setLogLevel(const ls::std::io::LogLevelValue &_logLevelValue)
+void Logger::setLogLevel(const LogLevelValue &_logLevelValue)
 {
   this->logLevel = _logLevelValue;
 }
 
-void ls::std::io::Logger::trace(const ls::std::core::type::byte *_data)
+void Logger::trace(const byte_type *_data)
 {
-  if (this->logLevel >= ls::std::io::LogLevelValue::TRACE)
+  if (this->logLevel >= LogLevelValue::TRACE)
   {
-    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::TRACE));
+    this->_log(_data, LogLevel(LogLevelValue::TRACE));
   }
 }
 
-void ls::std::io::Logger::warn(const ls::std::core::type::byte *_data)
+void Logger::warn(const byte_type *_data)
 {
-  if (this->logLevel >= ls::std::io::LogLevelValue::WARN)
+  if (this->logLevel >= LogLevelValue::WARN)
   {
-    this->_log(_data, ls::std::io::LogLevel(ls::std::io::LogLevelValue::WARN));
+    this->_log(_data, LogLevel(LogLevelValue::WARN));
   }
 }
 
-void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::interface_type::IWriter> &_writer)
+void Logger::_assignWriter(const shared_ptr<IWriter> &_writer)
 {
-  ls::std::core::NullPointerArgumentEvaluator{_writer, "writer reference is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_writer, "writer reference is null!"}.evaluate();
   this->writer = _writer;
 }
 
-::std::string ls::std::io::Logger::_buildCharacterChain(size_t _amount)
+string Logger::_buildCharacterChain(size_t _amount)
 {
-  ::std::string fillContent{};
+  string fillContent{};
 
   for (size_t iteration{}; iteration < _amount; iteration++)
   {
@@ -99,39 +114,39 @@ void ls::std::io::Logger::_assignWriter(const ::std::shared_ptr<ls::std::core::i
   return fillContent;
 }
 
-::std::string ls::std::io::Logger::_createFillContent(const ::std::string &_text)
+string Logger::_createFillContent(const string &_text)
 {
   size_t padSize = 10;
   size_t fillSize = _text.size() > padSize ? 0 : padSize - _text.size();
-  ::std::string fillContent{};
+  string fillContent{};
 
   if (fillSize > 0)
   {
-    fillContent = ls::std::io::Logger::_buildCharacterChain(fillSize);
+    fillContent = Logger::_buildCharacterChain(fillSize);
   }
 
   return fillContent;
 }
 
-::std::string ls::std::io::Logger::_generateTimeString(tm *_localTime)
+string Logger::_generateTimeString(tm *_localTime)
 {
-  ::std::stringstream _stream{};
-  _stream << ::std::put_time(_localTime, "%Y-%m-%d %H:%M:%S");
+  stringstream _stream{};
+  _stream << put_time(_localTime, "%Y-%m-%d %H:%M:%S");
 
   return _stream.str();
 }
 
-void ls::std::io::Logger::_log(const ls::std::core::type::byte *_data, const ls::std::io::LogLevel &_logLevel)
+void Logger::_log(const byte_type *_data, const LogLevel &_logLevel)
 {
-  time_t timestamp = ::std::time(nullptr);
-  tm *localTime = ::std::localtime(&timestamp);
+  time_t timestamp = ::time(nullptr);
+  tm *localTime = localtime(&timestamp);
 
-  ::std::string logLevelString = ls::std::io::Logger::_padRight(::std::string{_logLevel.toString() + ":"});
-  ::std::string message = "[" + ls::std::io::Logger::_generateTimeString(localTime) + "] " + logLevelString + ::std::string(_data) + ls::std::io::NewLine::getUnixNewLine();
+  string logLevelString = Logger::_padRight(string{_logLevel.toString() + ":"});
+  string message = "[" + Logger::_generateTimeString(localTime) + "] " + logLevelString + string(_data) + NewLine::getUnixNewLine();
   this->writer->write(message);
 }
 
-::std::string ls::std::io::Logger::_padRight(const ::std::string &_text)
+string Logger::_padRight(const string &_text)
 {
-  return _text + ls::std::io::Logger::_createFillContent(_text);
+  return _text + Logger::_createFillContent(_text);
 }

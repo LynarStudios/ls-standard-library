@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -14,27 +14,42 @@
 #include <ls-std/io/section-pair/model/SectionPairRowListValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowListValue.hpp>
 
-ls::std::io::SectionPairRowListValue::SectionPairRowListValue() : ls::std::core::Class("SectionPairRowListValue"), ls::std::io::SectionPairRowValue(ls::std::io::SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE)
+using ls::std::core::Class;
+using ls::std::core::ConditionalFunctionExecutor;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::IndexOutOfBoundsEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::section_pair_row_value;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowListValue;
+using ls::std::io::SectionPairRowValue;
+using ls::std::io::SectionPairValueArgumentEvaluator;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairRowListValue;
+using std::list;
+using std::make_shared;
+
+SectionPairRowListValue::SectionPairRowListValue() : Class("SectionPairRowListValue"), SectionPairRowValue(SectionPairRowEnumType::SECTION_PAIR_ROW_LIST_VALUE)
 {}
 
-ls::std::io::SectionPairRowListValue::~SectionPairRowListValue() = default;
+SectionPairRowListValue::~SectionPairRowListValue() noexcept = default;
 
-void ls::std::io::SectionPairRowListValue::add(const ls::std::io::section_pair_row_value &_value)
+void SectionPairRowListValue::add(const section_pair_row_value &_value)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_value}.evaluate();
-  ls::std::io::SectionPairValueArgumentEvaluator{_value}.evaluate();
+  EmptyStringArgumentEvaluator{_value}.evaluate();
+  SectionPairValueArgumentEvaluator{_value}.evaluate();
   this->values.push_back(_value);
 }
 
-void ls::std::io::SectionPairRowListValue::clear()
+void SectionPairRowListValue::clear()
 {
   this->values.clear();
 }
 
-ls::std::io::section_pair_row_value ls::std::io::SectionPairRowListValue::get(size_t _index)
+section_pair_row_value SectionPairRowListValue::get(size_t _index)
 {
-  ls::std::core::IndexOutOfBoundsEvaluator(_index, this->values.size()).evaluate();
-  ls::std::io::section_pair_row_value value{};
+  IndexOutOfBoundsEvaluator(_index, this->values.size()).evaluate();
+  section_pair_row_value value{};
   size_t index{};
 
   for (const auto &_value : this->values)
@@ -51,36 +66,36 @@ ls::std::io::section_pair_row_value ls::std::io::SectionPairRowListValue::get(si
   return value;
 }
 
-::std::list<ls::std::io::section_pair_row_value> ls::std::io::SectionPairRowListValue::getList()
+list<section_pair_row_value> SectionPairRowListValue::getList()
 {
   return this->values;
 }
 
-size_t ls::std::io::SectionPairRowListValue::getSize()
+size_t SectionPairRowListValue::getSize()
 {
   return this->values.size();
 }
 
-ls::std::io::SectionPairRowEnumType ls::std::io::SectionPairRowListValue::getType()
+SectionPairRowEnumType SectionPairRowListValue::getType()
 {
   return this->type;
 }
 
-ls::std::core::type::byte_field ls::std::io::SectionPairRowListValue::marshal()
+byte_field SectionPairRowListValue::marshal()
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   return this->serializable->marshal();
 }
 
-void ls::std::io::SectionPairRowListValue::unmarshal(const ls::std::core::type::byte_field &_data)
+void SectionPairRowListValue::unmarshal(const byte_field &_data)
 {
-  ls::std::core::ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
+  ConditionalFunctionExecutor{this->serializable == nullptr}.execute([this] { _createSerializable(); });
   this->serializable->unmarshal(_data);
 }
 
-void ls::std::io::SectionPairRowListValue::_createSerializable()
+void SectionPairRowListValue::_createSerializable()
 {
-  ls::std::io::SerializableSectionPairParameter parameter{};
+  SerializableSectionPairParameter parameter{};
   parameter.setValue(shared_from_this());
 
   if (!this->reservedNewLine.empty())
@@ -88,5 +103,5 @@ void ls::std::io::SectionPairRowListValue::_createSerializable()
     parameter.setNewLine(this->reservedNewLine);
   }
 
-  this->serializable = ::std::make_shared<ls::std::io::SerializableSectionPairRowListValue>(parameter);
+  this->serializable = make_shared<SerializableSectionPairRowListValue>(parameter);
 }

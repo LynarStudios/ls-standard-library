@@ -22,7 +22,7 @@ namespace ls::std::core
 
       EventNotSubscribedException();
       explicit EventNotSubscribedException(::std::string _message);
-      ~EventNotSubscribedException() override;
+      ~EventNotSubscribedException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

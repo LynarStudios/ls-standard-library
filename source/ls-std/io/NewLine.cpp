@@ -3,36 +3,39 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-04
-* Changed:         2023-02-04
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/io/NewLine.hpp>
 
-ls::std::io::NewLine::NewLine() = default;
+using ls::std::io::NewLine;
+using std::string;
 
-ls::std::io::NewLine::~NewLine() = default;
+NewLine::NewLine() = default;
 
-::std::string ls::std::io::NewLine::get()
+NewLine::~NewLine() = default;
+
+string NewLine::get()
 {
-  ::std::string newLine{};
+  string newLine{};
 
 #if defined(unix) || defined(__APPLE__)
-  newLine = ls::std::io::NewLine::getUnixNewLine();
+  newLine = NewLine::getUnixNewLine();
 #endif
 #ifdef _WIN32
-  newLine = ls::std::io::NewLine::getWindowsNewLine();
+  newLine = NewLine::getWindowsNewLine();
 #endif
 
   return newLine;
 }
 
-::std::string ls::std::io::NewLine::getUnixNewLine()
+string NewLine::getUnixNewLine()
 {
   return "\n";
 }
 
-::std::string ls::std::io::NewLine::getWindowsNewLine()
+string NewLine::getWindowsNewLine()
 {
   return "\r\n";
 }

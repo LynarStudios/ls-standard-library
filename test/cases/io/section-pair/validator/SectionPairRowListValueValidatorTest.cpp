@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,13 +12,15 @@
 #include <ls-std/ls-std-io.hpp>
 #include <string>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::io::SectionPairRowListValueValidator;
+using std::string;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SectionPairRowListValueValidatorTest : public ::testing::Test
+  class SectionPairRowListValueValidatorTest : public Test
   {
     protected:
 
@@ -32,7 +34,7 @@ namespace
       {}
   };
 
-  class SectionPairRowListValueValidatorTest_ValidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairRowListValueValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -40,7 +42,7 @@ namespace
       ~SectionPairRowListValueValidatorTest_ValidArgumentTest() override = default;
   };
 
-  class SectionPairRowListValueValidatorTest_InvalidArgumentTest : public ::testing::TestWithParam<string>
+  class SectionPairRowListValueValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
     protected:
 
@@ -71,6 +73,6 @@ namespace
     ASSERT_FALSE(SectionPairRowListValueValidator{GetParam()}.isValid());
   }
 
-  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowListValueValidatorTest_ValidArgumentTest, ::testing::Values("colors:\n  blue\n  red\n", "colors:\r\n  blue\r\n  green\r\n  yellow\r\n"));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowListValueValidatorTest_InvalidArgumentTest, ::testing::Values("colors:\nblue", "colors:\r\n hello!"));
+  INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairRowListValueValidatorTest_ValidArgumentTest, Values("colors:\n  blue\n  red\n", "colors:\r\n  blue\r\n  green\r\n  yellow\r\n"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairRowListValueValidatorTest_InvalidArgumentTest, Values("colors:\nblue", "colors:\r\n hello!"));
 }

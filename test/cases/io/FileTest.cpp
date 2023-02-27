@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-06
+ * Changed:         2023-02-23
  *
  * */
 
@@ -12,14 +12,17 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ls::std::test;
-using namespace ::std;
+using ls::std::core::FileOperationException;
+using ls::std::io::File;
+using ls::std::io::FilePathSeparator;
+using ls::std::test::TestHelper;
+using std::list;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class FileTest : public ::testing::Test
+  class FileTest : public Test
   {
     protected:
 
@@ -257,8 +260,6 @@ namespace
     list<string> filesInDirectory = file.list();
     string expectedFile{};
     const char separator = FilePathSeparator::get();
-
-    auto filesIterator = filesInDirectory.begin();
 
     ASSERT_FALSE(filesInDirectory.empty());
     ASSERT_EQ(7, filesInDirectory.size());

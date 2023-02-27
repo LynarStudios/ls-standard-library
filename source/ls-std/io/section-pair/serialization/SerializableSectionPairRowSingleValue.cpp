@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-17
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,27 +12,38 @@
 #include <ls-std/io/section-pair/model/SectionPairRowSingleValue.hpp>
 #include <ls-std/io/section-pair/serialization/SerializableSectionPairRowSingleValue.hpp>
 
-ls::std::io::SerializableSectionPairRowSingleValue::SerializableSectionPairRowSingleValue(const ls::std::io::SerializableSectionPairParameter &_parameter) : ls::std::core::Class("SerializableSectionPairRowSingleValue")
+using ls::std::core::Class;
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::io::SectionPairRowSingleValue;
+using ls::std::io::SerializableSectionPairParameter;
+using ls::std::io::SerializableSectionPairRowSingleValue;
+using std::dynamic_pointer_cast;
+using std::shared_ptr;
+using std::string;
+
+SerializableSectionPairRowSingleValue::SerializableSectionPairRowSingleValue(const SerializableSectionPairParameter &_parameter) : Class("SerializableSectionPairRowSingleValue")
 {
-  ::std::string message = this->getClassName() + ": model reference is null!";
-  ls::std::core::NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();
+  string message = this->getClassName() + ": model reference is null!";
+  NullPointerArgumentEvaluator{_parameter.getValue(), message}.evaluate();
   this->parameter = _parameter;
 }
 
-ls::std::io::SerializableSectionPairRowSingleValue::~SerializableSectionPairRowSingleValue() = default;
+SerializableSectionPairRowSingleValue::~SerializableSectionPairRowSingleValue() noexcept = default;
 
-::std::shared_ptr<ls::std::core::Class> ls::std::io::SerializableSectionPairRowSingleValue::getValue()
+shared_ptr<Class> SerializableSectionPairRowSingleValue::getValue()
 {
   return this->parameter.getValue();
 }
 
-ls::std::core::type::byte_field ls::std::io::SerializableSectionPairRowSingleValue::marshal()
+byte_field SerializableSectionPairRowSingleValue::marshal()
 {
-  return ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(this->parameter.getValue())->get() + this->parameter.getNewLine();
+  return dynamic_pointer_cast<SectionPairRowSingleValue>(this->parameter.getValue())->get() + this->parameter.getNewLine();
 }
 
-void ls::std::io::SerializableSectionPairRowSingleValue::unmarshal(const ls::std::core::type::byte_field &_data)
+void SerializableSectionPairRowSingleValue::unmarshal(const byte_field &_data)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_data}.evaluate();
-  ::std::dynamic_pointer_cast<ls::std::io::SectionPairRowSingleValue>(this->parameter.getValue())->set(_data);
+  EmptyStringArgumentEvaluator{_data}.evaluate();
+  dynamic_pointer_cast<SectionPairRowSingleValue>(this->parameter.getValue())->set(_data);
 }

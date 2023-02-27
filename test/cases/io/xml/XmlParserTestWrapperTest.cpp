@@ -3,19 +3,22 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std-io-test.hpp>
 
-using namespace test::io;
-using namespace ::std;
+using std::list;
+using std::pair;
+using std::string;
+using test::io::XmlParserTestWrapper;
+using testing::Test;
 
 namespace
 {
-  class XmlParserTestWrapperTest : public ::testing::Test
+  class XmlParserTestWrapperTest : public Test
   {
     protected:
 

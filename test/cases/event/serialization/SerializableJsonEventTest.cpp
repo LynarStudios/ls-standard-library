@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-20
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -11,14 +11,19 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-event.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::event;
-using namespace ::std;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::core::type::event_parameter;
+using ls::std::core::type::event_parameter_list;
+using ls::std::event::Event;
+using ls::std::event::SerializableJsonEvent;
+using std::make_shared;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class SerializableJsonEventTest : public ::testing::Test
+  class SerializableJsonEventTest : public Test
   {
     protected:
 

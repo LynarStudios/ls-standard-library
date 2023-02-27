@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
@@ -23,7 +23,7 @@ namespace test::event
     public:
 
       DailyNewsAgency();
-      ~DailyNewsAgency() override;
+      ~DailyNewsAgency() noexcept override;
 
       // implementation
 

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-21
+* Changed:         2023-02-22
 *
 * */
 
@@ -22,7 +22,7 @@ namespace ls::std::io
     public:
 
       explicit FileExistenceEvaluator(::std::string _filePath);
-      ~FileExistenceEvaluator() override;
+      ~FileExistenceEvaluator() noexcept override;
 
       void evaluate() override;
 

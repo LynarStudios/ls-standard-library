@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2023-02-06
+ * Changed:         2023-02-23
  *
  * */
 
@@ -12,15 +12,19 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ls::std::test;
-using namespace ::std;
+using ls::std::core::FileNotFoundException;
+using ls::std::core::FileOperationException;
+using ls::std::core::type::byte_field;
+using ls::std::io::File;
+using ls::std::io::FileReader;
+using ls::std::io::NewLine;
+using ls::std::test::TestHelper;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class FileReaderTest : public ::testing::Test
+  class FileReaderTest : public Test
   {
     protected:
 

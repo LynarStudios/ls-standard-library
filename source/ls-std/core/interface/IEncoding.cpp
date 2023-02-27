@@ -3,12 +3,14 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-04
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/interface/IEncoding.hpp>
 
-ls::std::core::interface_type::IEncoding::IEncoding() = default;
+using ls::std::core::interface_type::IEncoding;
 
-ls::std::core::interface_type::IEncoding::~IEncoding() = default;
+IEncoding::IEncoding() = default;
+
+IEncoding::~IEncoding() = default;

@@ -22,7 +22,7 @@ namespace ls::std::core
 
       FileNotFoundException();
       explicit FileNotFoundException(::std::string _message);
-      ~FileNotFoundException() override;
+      ~FileNotFoundException() noexcept override;
 
       [[nodiscard]] const char *what() const noexcept override;
   };

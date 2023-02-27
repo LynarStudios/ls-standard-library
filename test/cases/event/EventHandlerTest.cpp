@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
@@ -11,12 +11,13 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-event.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::event;
+using ls::std::core::IllegalArgumentException;
+using ls::std::event::EventHandler;
+using testing::Test;
 
 namespace
 {
-  class EventHandlerTest : public ::testing::Test
+  class EventHandlerTest : public Test
   {
     protected:
 

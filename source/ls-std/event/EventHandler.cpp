@@ -3,27 +3,32 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-08
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/evaluator/EmptyStringArgumentEvaluator.hpp>
 #include <ls-std/event/EventHandler.hpp>
 
-ls::std::event::EventHandler::EventHandler(const ls::std::core::type::event_id &_id) : ls::std::event::Narrator()
+using ls::std::core::EmptyStringArgumentEvaluator;
+using ls::std::core::type::event_id;
+using ls::std::event::EventHandler;
+using ls::std::event::Narrator;
+
+EventHandler::EventHandler(const event_id &_id) : Narrator()
 {
   this->_assignId(_id);
 }
 
-ls::std::event::EventHandler::~EventHandler() = default;
+EventHandler::~EventHandler() noexcept = default;
 
-ls::std::core::type::event_id ls::std::event::EventHandler::getId()
+event_id EventHandler::getId()
 {
   return this->id;
 }
 
-void ls::std::event::EventHandler::_assignId(const ls::std::core::type::event_id &_id)
+void EventHandler::_assignId(const event_id &_id)
 {
-  ls::std::core::EmptyStringArgumentEvaluator{_id, "event manager id is empty!"}.evaluate();
+  EmptyStringArgumentEvaluator{_id, "event manager id is empty!"}.evaluate();
   this->id = _id;
 }

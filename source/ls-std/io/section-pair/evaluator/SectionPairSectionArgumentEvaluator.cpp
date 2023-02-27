@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -12,16 +12,24 @@
 #include <ls-std/io/section-pair/evaluator/SectionPairSectionArgumentEvaluator.hpp>
 #include <ls-std/io/section-pair/validator/SectionPairSectionValidator.hpp>
 
-ls::std::io::SectionPairSectionArgumentEvaluator::SectionPairSectionArgumentEvaluator(::std::string _section) : ls::std::core::Class("SectionPairSectionArgumentEvaluator"), section(::std::move(_section))
+using ls::std::core::Class;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::SectionPairMessageFormatter;
+using ls::std::io::SectionPairSectionArgumentEvaluator;
+using ls::std::io::SectionPairSectionValidator;
+using std::move;
+using std::string;
+
+SectionPairSectionArgumentEvaluator::SectionPairSectionArgumentEvaluator(string _section) : Class("SectionPairSectionArgumentEvaluator"), section(::move(_section))
 {}
 
-ls::std::io::SectionPairSectionArgumentEvaluator::~SectionPairSectionArgumentEvaluator() = default;
+SectionPairSectionArgumentEvaluator::~SectionPairSectionArgumentEvaluator() noexcept = default;
 
-void ls::std::io::SectionPairSectionArgumentEvaluator::evaluate()
+void SectionPairSectionArgumentEvaluator::evaluate()
 {
-  if (!ls::std::io::SectionPairSectionValidator{this->section}.isValid())
+  if (!SectionPairSectionValidator{this->section}.isValid())
   {
-    ::std::string message = "\"" + this->section + "\" is not a valid section!";
-    throw ls::std::core::IllegalArgumentException{ls::std::io::SectionPairMessageFormatter::getFormattedMessage(message)};
+    string message = "\"" + this->section + "\" is not a valid section!";
+    throw IllegalArgumentException{SectionPairMessageFormatter::getFormattedMessage(message)};
   }
 }

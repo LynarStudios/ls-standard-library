@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-04
+ * Changed:         2023-02-24
  *
  * */
 
@@ -11,12 +11,13 @@
 #include <ls-std/ls-std-boxing.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::boxing;
-using namespace ls::std::core;
+using ls::std::boxing::Integer;
+using ls::std::core::IllegalArithmeticOperationException;
+using testing::Test;
 
 namespace
 {
-  class IntegerTest : public ::testing::Test
+  class IntegerTest : public Test
   {
     protected:
 
@@ -38,7 +39,7 @@ namespace
     Integer y{3};
     x = y;
 
-    ASSERT_EQ(3, x);
+    ASSERT_EQ(3, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_assignment_with_value)
@@ -46,7 +47,7 @@ namespace
     Integer x{};
     x = 44;
 
-    ASSERT_EQ(44, x);
+    ASSERT_EQ(44, x.getValue());
   }
 
   // arithmetic operators
@@ -174,7 +175,7 @@ namespace
     Integer y{2};
     x += y;
 
-    ASSERT_EQ(6, x);
+    ASSERT_EQ(6, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_add_assign_with_value)
@@ -182,7 +183,7 @@ namespace
     Integer x{4};
     x += 2;
 
-    ASSERT_EQ(6, x);
+    ASSERT_EQ(6, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_sub_assign_with_reference)
@@ -191,7 +192,7 @@ namespace
     Integer y{2};
     x -= y;
 
-    ASSERT_EQ(12, x);
+    ASSERT_EQ(12, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_sub_assign_with_value)
@@ -199,7 +200,7 @@ namespace
     Integer x{14};
     x -= 2;
 
-    ASSERT_EQ(12, x);
+    ASSERT_EQ(12, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_mul_assign_with_reference)
@@ -208,7 +209,7 @@ namespace
     Integer y{3};
     x *= y;
 
-    ASSERT_EQ(18, x);
+    ASSERT_EQ(18, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_mul_assign_with_value)
@@ -216,7 +217,7 @@ namespace
     Integer x{6};
     x *= 3;
 
-    ASSERT_EQ(18, x);
+    ASSERT_EQ(18, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_div_assign_with_reference)
@@ -225,7 +226,7 @@ namespace
     Integer y{3};
     x /= y;
 
-    ASSERT_EQ(4, x);
+    ASSERT_EQ(4, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_div_assign_with_value)
@@ -233,7 +234,7 @@ namespace
     Integer x{12};
     x /= 3;
 
-    ASSERT_EQ(4, x);
+    ASSERT_EQ(4, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_div_assign_by_zero_with_reference)
@@ -398,13 +399,17 @@ namespace
   TEST_F(IntegerTest, operator_or_with_value)
   {
     Integer x{};
-    ASSERT_TRUE(x || 1);
+    bool orWithValue = x || 1;
+
+    ASSERT_TRUE(orWithValue);
   }
 
   TEST_F(IntegerTest, operator_or_with_boolean)
   {
     Integer x{};
-    ASSERT_TRUE(x || true);
+    bool orWithBoolean = x || true;
+
+    ASSERT_TRUE(orWithBoolean);
   }
 
   // increment / decrement operator
@@ -414,7 +419,7 @@ namespace
     Integer x{};
     ++x;
 
-    ASSERT_EQ(1, x);
+    ASSERT_EQ(1, x.getValue());
   }
 
   TEST_F(IntegerTest, operator_decrement)
@@ -422,7 +427,7 @@ namespace
     Integer x{};
 
     --x;
-    ASSERT_EQ(-1, x);
+    ASSERT_EQ(-1, x.getValue());
   }
 
   // implementation
@@ -432,7 +437,7 @@ namespace
     Integer number{};
 
     number.parse("1989");
-    ASSERT_EQ(1989, number);
+    ASSERT_EQ(1989, number.getValue());
   }
 
   TEST_F(IntegerTest, parse_with_negative_value)
@@ -440,7 +445,7 @@ namespace
     Integer number{};
 
     number.parse("-13");
-    ASSERT_EQ(-13, number);
+    ASSERT_EQ(-13, number.getValue());
   }
 
   TEST_F(IntegerTest, toString)
@@ -462,7 +467,7 @@ namespace
   TEST_F(IntegerTest, constApproach)
   {
     const Integer x{3};
-    ASSERT_EQ(3, x);
+    ASSERT_EQ(3, x.getValue());
 
     // x = 4; // wouldn't work
   }

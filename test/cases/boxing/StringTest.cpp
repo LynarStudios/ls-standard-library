@@ -3,19 +3,20 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-14
- * Changed:         2023-02-04
+ * Changed:         2023-02-22
  *
  * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-boxing.hpp>
 
-using namespace ls::std::boxing;
-using namespace ::std;
+using ls::std::boxing::String;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class StringTest : public ::testing::Test
+  class StringTest : public Test
   {
     protected:
 
@@ -207,7 +208,7 @@ namespace
     text = "abcdef";
 
     ASSERT_STREQ("fedcba", text.reverse().c_str());
-    ASSERT_STREQ("abcdef", text); // verify, that original string didn't change
+    ASSERT_STREQ("abcdef", text.toString().c_str()); // verify, that original string didn't change
   }
 
   TEST_F(StringTest, startsWith)
@@ -232,7 +233,7 @@ namespace
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("abcdefghijklmn", text.toLowerCase().c_str());
-    ASSERT_STREQ("aBCdeFgHIJKLmn", text); // verify, that original String didn't change
+    ASSERT_STREQ("aBCdeFgHIJKLmn", text.toString().c_str()); // verify, that original String didn't change
   }
 
   TEST_F(StringTest, toUpperCase)
@@ -241,6 +242,6 @@ namespace
     text = "aBCdeFgHIJKLmn";
 
     ASSERT_STREQ("ABCDEFGHIJKLMN", text.toUpperCase().c_str());
-    ASSERT_STREQ("aBCdeFgHIJKLmn", text); // verify, that original String didn't change
+    ASSERT_STREQ("aBCdeFgHIJKLmn", text.toString().c_str()); // verify, that original String didn't change
   }
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-10
-* Changed:         2023-02-17
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,14 +11,18 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::core::type;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::type::byte_field;
+using ls::std::io::NewLine;
+using ls::std::io::SectionPairRowEnumType;
+using ls::std::io::SectionPairRowSingleValue;
+using std::make_shared;
+using std::shared_ptr;
+using testing::Test;
 
 namespace
 {
-  class SectionPairRowSingleValueTest : public ::testing::Test
+  class SectionPairRowSingleValueTest : public Test
   {
     protected:
 
@@ -78,7 +82,7 @@ namespace
   TEST_F(SectionPairRowSingleValueTest, getType)
   {
     SectionPairRowSingleValue value{"blue"};
-    ASSERT_EQ(ls::std::io::SECTION_PAIR_ROW_SINGLE_VALUE, value.getType());
+    ASSERT_EQ(SectionPairRowEnumType::SECTION_PAIR_ROW_SINGLE_VALUE, value.getType());
   }
 
   TEST_F(SectionPairRowSingleValueTest, marshal)

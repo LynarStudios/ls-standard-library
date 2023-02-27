@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-27
- * Changed:         2023-02-06
+ * Changed:         2023-02-22
  *
  * */
 
@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       XmlDocument();
-      ~XmlDocument() override;
+      ~XmlDocument() noexcept override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::io::XmlDeclaration> getDeclaration();
       [[nodiscard]] ::std::shared_ptr<ls::std::io::XmlNode> getRootElement();

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-18
+* Changed:         2023-02-23
 *
 * */
 
@@ -26,14 +26,16 @@ namespace ls::std::io
     public:
 
       explicit SectionPairSection(const ls::std::io::section_pair_identifier &_sectionId);
-      ~SectionPairSection() override;
+      ~SectionPairSection() noexcept override;
 
-      void add(const section_pair_row_list_element &_row);
+      void add(const ls::std::io::section_pair_row_list_element &_row);
       void clear();
-      [[nodiscard]] section_pair_row_list_element get(size_t _index);
+      [[nodiscard]] ls::std::io::section_pair_row_list_element get(size_t _index);
+      [[nodiscard]] ls::std::io::section_pair_row_list_element get(const ls::std::io::section_pair_identifier &_key);
       [[nodiscard]] ls::std::io::section_pair_row_list getList();
       [[nodiscard]] size_t getRowAmount();
       [[nodiscard]] ls::std::io::section_pair_identifier getSectionId();
+      [[nodiscard]] bool hasRow(const ls::std::io::section_pair_identifier &_key);
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
       void reserveNewLine(const ::std::string &_reservedNewLine);
       void setSectionId(const ls::std::io::section_pair_identifier &_sectionId);
@@ -47,6 +49,7 @@ namespace ls::std::io
       ::std::shared_ptr<ls::std::core::interface_type::ISerializable> serializable{};
 
       void _createSerializable();
+      [[nodiscard]] ls::std::io::section_pair_row_list_element _get(const ls::std::io::section_pair_identifier &_key);
       [[nodiscard]] bool _hasRow(const ls::std::io::section_pair_identifier &_key);
       void _rowExistenceCheck(const ls::std::io::section_pair_identifier &_key);
       void _setSectionId(const ls::std::io::section_pair_identifier &_sectionId);

@@ -3,32 +3,38 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-08
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::core::NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const ::std::shared_ptr<void> &_argument) : argument(_argument)
+using ls::std::core::IllegalArgumentException;
+using ls::std::core::NullPointerArgumentEvaluator;
+using std::move;
+using std::shared_ptr;
+using std::string;
+
+NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const shared_ptr<void> &_argument) : argument(_argument)
 {}
 
-ls::std::core::NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const ::std::shared_ptr<void> &_argument, ::std::string _message) : argument(_argument), message(::std::move(_message))
+NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const shared_ptr<void> &_argument, string _message) : argument(_argument), message(::move(_message))
 {}
 
-ls::std::core::NullPointerArgumentEvaluator::~NullPointerArgumentEvaluator() = default;
+NullPointerArgumentEvaluator::~NullPointerArgumentEvaluator() noexcept = default;
 
-void ls::std::core::NullPointerArgumentEvaluator::evaluate()
+void NullPointerArgumentEvaluator::evaluate()
 {
   if (this->argument == nullptr)
   {
     if (this->message.empty())
     {
-      throw ls::std::core::IllegalArgumentException{"passed argument is null!"};
+      throw IllegalArgumentException{"passed argument is null!"};
     }
     else
     {
-      throw ls::std::core::IllegalArgumentException{this->message};
+      throw IllegalArgumentException{this->message};
     }
   }
 }

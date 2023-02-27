@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-05
-* Changed:         2023-02-05
+* Changed:         2023-02-23
 *
 * */
 
@@ -11,13 +11,15 @@
 #include <ls-std/ls-std-core.hpp>
 #include <ls-std/ls-std-io.hpp>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::XmlNode;
+using ls::std::io::XmlParseParameter;
+using std::make_shared;
+using testing::Test;
 
 namespace
 {
-  class XmlParseParameterTest : public ::testing::Test
+  class XmlParseParameterTest : public Test
   {
     protected:
 

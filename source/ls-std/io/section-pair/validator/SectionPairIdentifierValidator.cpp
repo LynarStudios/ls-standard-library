@@ -3,30 +3,38 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-21
+* Changed:         2023-02-23
 *
 * */
 
 #include <ls-std/io/section-pair/validator/SectionPairIdentifierValidator.hpp>
 #include <regex>
 
-ls::std::io::SectionPairIdentifierValidator::SectionPairIdentifierValidator(ls::std::io::section_pair_identifier _identifier) : ls::std::core::Class("SectionPairIdentifierValidator"), identifier(::std::move(_identifier))
+using ls::std::core::Class;
+using ls::std::io::section_pair_identifier;
+using ls::std::io::SectionPairIdentifierValidator;
+using std::move;
+using std::regex;
+using std::regex_match;
+using std::string;
+
+SectionPairIdentifierValidator::SectionPairIdentifierValidator(section_pair_identifier _identifier) : Class("SectionPairIdentifierValidator"), identifier(::move(_identifier))
 {}
 
-ls::std::io::SectionPairIdentifierValidator::~SectionPairIdentifierValidator() = default;
+SectionPairIdentifierValidator::~SectionPairIdentifierValidator() noexcept = default;
 
-::std::string ls::std::io::SectionPairIdentifierValidator::getValidationRegex()
+string SectionPairIdentifierValidator::getValidationRegex()
 {
-  return ls::std::io::SectionPairIdentifierValidator::_getValidationRegex();
+  return SectionPairIdentifierValidator::_getValidationRegex();
 }
 
-bool ls::std::io::SectionPairIdentifierValidator::isValid()
+bool SectionPairIdentifierValidator::isValid()
 {
-  static ::std::regex identifierRegex("^" + ls::std::io::SectionPairIdentifierValidator::_getValidationRegex());
-  return ::std::regex_match(this->identifier, identifierRegex);
+  static regex identifierRegex("^" + SectionPairIdentifierValidator::_getValidationRegex());
+  return regex_match(this->identifier, identifierRegex);
 }
 
-::std::string ls::std::io::SectionPairIdentifierValidator::_getValidationRegex()
+string SectionPairIdentifierValidator::_getValidationRegex()
 {
   return R"([a-z]([a-z0-9-]){1,31})";
 }

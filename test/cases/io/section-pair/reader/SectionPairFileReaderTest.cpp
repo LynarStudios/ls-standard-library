@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-22
+* Changed:         2023-02-23
 *
 * */
 
@@ -13,15 +13,27 @@
 #include <ls-std/ls-std-io.hpp>
 #include <memory>
 
-using namespace ls::std::core;
-using namespace ls::std::io;
-using namespace ::std;
-using namespace test::io;
-using namespace ::testing;
+using ls::std::core::FileNotFoundException;
+using ls::std::core::IllegalArgumentException;
+using ls::std::io::NewLine;
+using ls::std::io::SectionPairDocument;
+using ls::std::io::SectionPairFileReader;
+using ls::std::io::SectionPairFileReaderParameter;
+using std::dynamic_pointer_cast;
+using std::make_shared;
+using std::shared_ptr;
+using std::string;
+using test::io::MockFileExistenceEvaluator;
+using test::io::MockFileReader;
+using testing::AtLeast;
+using testing::Return;
+using testing::Test;
+using testing::TestWithParam;
+using testing::Values;
 
 namespace
 {
-  class SectionPairFileReaderTest : public ::testing::Test
+  class SectionPairFileReaderTest : public Test
   {
     protected:
 
@@ -61,7 +73,7 @@ namespace
       }
   };
 
-  class SectionPairFileReaderTest_NotValidFileExtension : public ::testing::TestWithParam<string>
+  class SectionPairFileReaderTest_NotValidFileExtension : public TestWithParam<string>
   {
     protected:
 
@@ -136,5 +148,5 @@ namespace
     ASSERT_EQ(2, reader.getDocument()->get(0)->getRowAmount());
   }
 
-  INSTANTIATE_TEST_SUITE_P(NotValidFileExtension, SectionPairFileReaderTest_NotValidFileExtension, ::testing::Values("settings.json", "/var/log/document.html"));
+  INSTANTIATE_TEST_SUITE_P(NotValidFileExtension, SectionPairFileReaderTest_NotValidFileExtension, Values("settings.json", "/var/log/document.html"));
 }

@@ -11,11 +11,13 @@
 #include <ls-std/ls-std-core.hpp>
 #include <string>
 
-using namespace ls::std::core;
+using ls::std::core::IllegalArgumentException;
+using std::string;
+using testing::Test;
 
 namespace
 {
-  class IllegalArgumentExceptionTest : public ::testing::Test
+  class IllegalArgumentExceptionTest : public Test
   {
     protected:
 
@@ -39,8 +41,8 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - passed argument is not valid!";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - passed argument is not valid!";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;
@@ -59,8 +61,8 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
-            ::std::string actual = _exception.what();
-            ::std::string expected = _exception.getName() + " thrown - value is empty";
+            string actual = _exception.what();
+            string expected = _exception.getName() + " thrown - value is empty";
 
             EXPECT_STREQ(expected.c_str(), actual.c_str());
             throw;

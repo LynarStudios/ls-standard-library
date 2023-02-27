@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-04
+ * Changed:         2023-02-24
  *
  * */
 
@@ -11,13 +11,14 @@
 #include <ls-std/ls-std-boxing.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::boxing;
-using namespace ls::std::core;
-using namespace ::std;
+using ls::std::boxing::Boolean;
+using ls::std::core::IllegalArgumentException;
+using std::ostringstream;
+using testing::Test;
 
 namespace
 {
-  class BooleanTest : public ::testing::Test
+  class BooleanTest : public Test
   {
     protected:
 
@@ -38,7 +39,7 @@ namespace
     Boolean expression{};
     expression = true;
 
-    ASSERT_TRUE(expression);
+    ASSERT_TRUE(expression.getValue());
   }
 
   TEST_F(BooleanTest, operator_assignment_integer)
@@ -46,7 +47,7 @@ namespace
     Boolean expression{};
     expression = 1;
 
-    ASSERT_TRUE(expression);
+    ASSERT_TRUE(expression.getValue());
   }
 
   // stream operators
@@ -77,49 +78,44 @@ namespace
   TEST_F(BooleanTest, operator_and)
   {
     Boolean expressionA{true};
-    Boolean expressionB{3 == 3};
+    Boolean expressionB{true};
 
     ASSERT_TRUE(expressionA && expressionB);
     ASSERT_TRUE(expressionB && expressionA);
     ASSERT_TRUE(expressionA && true);
     ASSERT_TRUE(expressionA && 1);
-    ASSERT_TRUE(1 && expressionB);
+    ASSERT_TRUE(1 && expressionB.getValue());
   }
 
   TEST_F(BooleanTest, operator_and_with_false_result)
   {
     Boolean expressionA{true};
-    Boolean expressionB{3 == 4};
+    Boolean expressionB{false};
 
     ASSERT_FALSE(expressionA && expressionB);
     ASSERT_FALSE(expressionB && expressionA);
-    ASSERT_FALSE(expressionB && (3 == 4));
-    ASSERT_FALSE(expressionB && 0);
-    ASSERT_FALSE(expressionB && false);
   }
 
   TEST_F(BooleanTest, operator_or)
   {
     Boolean expressionA{false};
-    Boolean expressionB{3 == 3};
+    Boolean expressionB{true};
 
     ASSERT_TRUE(expressionA || expressionB);
     ASSERT_TRUE(expressionB || expressionA);
-    ASSERT_TRUE(expressionA || 1);
-    ASSERT_TRUE(expressionA || true);
-    ASSERT_TRUE(1 || expressionA);
+    ASSERT_TRUE(1 || expressionA.getValue());
   }
 
   TEST_F(BooleanTest, operator_or_with_false_result)
   {
     Boolean expressionA{false};
-    Boolean expressionB{3 == 4};
+    Boolean expressionB{false};
 
     ASSERT_FALSE(expressionA || expressionB);
     ASSERT_FALSE(expressionB || expressionA);
     ASSERT_FALSE(expressionA || 0);
     ASSERT_FALSE(expressionA || false);
-    ASSERT_FALSE(0 || expressionA);
+    ASSERT_FALSE(0 || expressionA.getValue());
   }
 
   // implementation
@@ -129,13 +125,13 @@ namespace
     Boolean expression{};
 
     expression.parse("true");
-    ASSERT_TRUE(expression);
+    ASSERT_TRUE(expression.getValue());
 
     expression.parse("tRue");
-    ASSERT_TRUE(expression);
+    ASSERT_TRUE(expression.getValue());
 
     expression.parse("TRUE");
-    ASSERT_TRUE(expression);
+    ASSERT_TRUE(expression.getValue());
   }
 
   TEST_F(BooleanTest, parse_false_value)

@@ -3,75 +3,85 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-12-07
- * Changed:         2023-02-08
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/event/serialization/SerializableJsonEvent.hpp>
 
-ls::std::event::SerializableJsonEvent::SerializableJsonEvent(const ::std::shared_ptr<ls::std::event::Event> &_value) : ls::std::core::Class("SerializableJsonEvent")
+using ls::std::core::Class;
+using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::type::byte_field;
+using ls::std::core::type::event_parameter;
+using ls::std::core::type::json;
+using ls::std::event::Event;
+using ls::std::event::SerializableJsonEvent;
+using std::shared_ptr;
+using std::string;
+
+SerializableJsonEvent::SerializableJsonEvent(const shared_ptr<Event> &_value) : Class("SerializableJsonEvent")
 {
   this->_assignValue(_value);
 }
 
-ls::std::event::SerializableJsonEvent::~SerializableJsonEvent() = default;
+SerializableJsonEvent::~SerializableJsonEvent() noexcept = default;
 
-ls::std::core::type::byte_field ls::std::event::SerializableJsonEvent::marshal()
+byte_field SerializableJsonEvent::marshal()
 {
   this->_update();
   return this->jsonObject.dump();
 }
 
-void ls::std::event::SerializableJsonEvent::unmarshal(const ls::std::core::type::byte_field &_data)
+void SerializableJsonEvent::unmarshal(const byte_field &_data)
 {
-  this->jsonObject = ls::std::core::type::json::parse(_data);
+  this->jsonObject = json::parse(_data);
 
   this->value->setId(this->jsonObject["id"]);
   this->_unmarshalParameterList();
 }
 
-::std::shared_ptr<ls::std::event::Event> ls::std::event::SerializableJsonEvent::getValue()
+shared_ptr<Event> SerializableJsonEvent::getValue()
 {
   return this->value;
 }
 
-void ls::std::event::SerializableJsonEvent::setValue(const ::std::shared_ptr<ls::std::event::Event> &_value)
+void SerializableJsonEvent::setValue(const shared_ptr<Event> &_value)
 {
   this->_assignValue(_value);
 }
 
-void ls::std::event::SerializableJsonEvent::_assignValue(const ::std::shared_ptr<ls::std::event::Event> &_value)
+void SerializableJsonEvent::_assignValue(const shared_ptr<Event> &_value)
 {
-  ls::std::core::NullPointerArgumentEvaluator{_value, "event reference for serialization attempt is null!"}.evaluate();
+  NullPointerArgumentEvaluator{_value, "event reference for serialization attempt is null!"}.evaluate();
   this->value = _value;
 }
 
-void ls::std::event::SerializableJsonEvent::_unmarshalParameterList()
+void SerializableJsonEvent::_unmarshalParameterList()
 {
   this->value->clearParameterList();
 
   for (const auto &parameterJson : this->jsonObject["parameterList"])
   {
-    ls::std::core::type::event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
+    event_parameter parameter = {parameterJson.at(0), parameterJson.at(1)};
     this->value->addParameter(parameter);
   }
 }
 
-void ls::std::event::SerializableJsonEvent::_update()
+void SerializableJsonEvent::_update()
 {
   this->jsonObject = {{"id", this->value->getId()}};
 
   this->_updateEventParameterList();
 }
 
-void ls::std::event::SerializableJsonEvent::_updateEventParameterList()
+void SerializableJsonEvent::_updateEventParameterList()
 {
-  ::std::string jsonString{};
+  string jsonString{};
 
   for (const auto &eventParameter : this->value->getParameterList())
   {
-    ls::std::core::type::json parameterJson = {eventParameter.first, eventParameter.second};
+    json parameterJson = {eventParameter.first, eventParameter.second};
     this->jsonObject["parameterList"][eventParameter.first] = parameterJson;
   }
 }

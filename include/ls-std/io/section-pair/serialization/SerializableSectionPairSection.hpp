@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-14
-* Changed:         2023-02-20
+* Changed:         2023-02-22
 *
 * */
 
@@ -23,7 +23,7 @@ namespace ls::std::io
     public:
 
       explicit SerializableSectionPairSection(const ls::std::io::SerializableSectionPairParameter &_parameter);
-      ~SerializableSectionPairSection() override;
+      ~SerializableSectionPairSection() noexcept override;
 
       [[nodiscard]] ::std::shared_ptr<ls::std::core::Class> getValue();
       [[nodiscard]] ls::std::core::type::byte_field marshal() override;
@@ -34,8 +34,8 @@ namespace ls::std::io
       ls::std::io::SerializableSectionPairParameter parameter{};
 
       [[nodiscard]] ls::std::core::type::byte_field _collectSectionRow(const ls::std::core::type::byte_field &_currentRows, ls::std::io::SectionPairRowEnumType &_type);
-      [[nodiscard]] ls::std::core::type::byte_field _collectSectionListValueRow(const core::type::byte_field &_currentRows, SectionPairRowEnumType &_type);
-      [[nodiscard]] static core::type::byte_field _collectSectionSingleValueRow(const ls::std::core::type::byte_field &_firstRow, SectionPairRowEnumType &type);
+      [[nodiscard]] ls::std::core::type::byte_field _collectSectionListValueRow(const core::type::byte_field &_currentRows, ls::std::io::SectionPairRowEnumType &_type);
+      [[nodiscard]] static core::type::byte_field _collectSectionSingleValueRow(const ls::std::core::type::byte_field &_firstRow, ls::std::io::SectionPairRowEnumType &type);
       [[nodiscard]] static size_t _getNthSubStringPosition(const ls::std::core::type::byte_field &_text, const ls::std::core::type::byte_field &_subText);
       [[nodiscard]] ls::std::core::type::byte_field _getSectionHeader(const ls::std::core::type::byte_field &_data);
       [[nodiscard]] static ls::std::core::type::byte_field _getSectionId(const ls::std::core::type::byte_field &_sectionHeader);

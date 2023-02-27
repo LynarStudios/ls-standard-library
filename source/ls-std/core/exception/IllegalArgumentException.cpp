@@ -3,26 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-22
+ * Changed:         2023-02-23
  *
  * */
 
 #include <ls-std/core/exception/ExceptionMessage.hpp>
 #include <ls-std/core/exception/IllegalArgumentException.hpp>
 
-ls::std::core::IllegalArgumentException::IllegalArgumentException() : ls::std::core::Exception("IllegalArgumentException")
+using ls::std::core::Exception;
+using ls::std::core::IllegalArgumentException;
+using std::move;
+using std::string;
+
+IllegalArgumentException::IllegalArgumentException() : Exception("IllegalArgumentException")
 {}
 
-ls::std::core::IllegalArgumentException::IllegalArgumentException(::std::string _message) : ls::std::core::IllegalArgumentException()
+IllegalArgumentException::IllegalArgumentException(string _message) : IllegalArgumentException()
 {
-  this->message = ::std::move(_message);
+  this->message = ::move(_message);
 }
 
-ls::std::core::IllegalArgumentException::~IllegalArgumentException() = default;
+IllegalArgumentException::~IllegalArgumentException() noexcept = default;
 
-const char *ls::std::core::IllegalArgumentException::what() const noexcept
+const char *IllegalArgumentException::what() const noexcept
 {
-  ::std::string concatenatedMessage = this->name + " thrown - ";
+  string concatenatedMessage = this->name + " thrown - ";
 
   if (this->message.empty())
   {

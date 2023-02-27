@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-13
+* Changed:         2023-02-22
 *
 * */
 
@@ -11,13 +11,15 @@
 #include <ls-std-core-test.hpp>
 #include <ls-std/ls-std-core.hpp>
 
-using namespace ls::std::core;
-using namespace test::core;
-using namespace ::std;
+using ls::std::core::ConditionalFunctionExecutor;
+using std::make_shared;
+using std::shared_ptr;
+using test::core::MathOddValidator;
+using testing::Test;
 
 namespace
 {
-  class ConditionalFunctionExecutorTest : public ::testing::Test
+  class ConditionalFunctionExecutorTest : public Test
   {
     protected:
 

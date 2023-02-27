@@ -3,23 +3,31 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2023-02-05
+ * Changed:         2023-02-23
  *
  * */
 
 #include "XmlParserTestWrapper.hpp"
 
-test::io::XmlParserTestWrapper::XmlParserTestWrapper() : ls::std::io::XmlParser(nullptr)
+using ls::std::core::type::byte_field;
+using ls::std::io::XmlParser;
+using std::list;
+using std::move;
+using std::pair;
+using std::string;
+using test::io::XmlParserTestWrapper;
+
+XmlParserTestWrapper::XmlParserTestWrapper() : XmlParser(nullptr)
 {}
 
-test::io::XmlParserTestWrapper::~XmlParserTestWrapper() = default;
+XmlParserTestWrapper::~XmlParserTestWrapper() noexcept = default;
 
-::std::pair<::std::string, ::std::string> test::io::XmlParserTestWrapper::readAttribute(const ls::std::core::type::byte_field &_data)
+pair<string, string> XmlParserTestWrapper::readAttribute(const byte_field &_data)
 {
-  return ls::std::io::XmlParser::_readAttribute_(_data);
+  return XmlParser::_readAttribute_(_data);
 }
 
-::std::list<::std::pair<::std::string, ::std::string>> test::io::XmlParserTestWrapper::readAttributes(ls::std::core::type::byte_field _data)
+list<pair<string, string>> XmlParserTestWrapper::readAttributes(byte_field _data)
 {
-  return ls::std::io::XmlParser::_readAttributes_(::std::move(_data));
+  return XmlParser::_readAttributes_(::move(_data));
 }
