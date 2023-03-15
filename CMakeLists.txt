@@ -218,6 +218,10 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StorableFile.cpp)
 
 set(SOURCE_FILES_TIME
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/IPosixClock.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/PosixClock.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTime.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTimeParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/Date.cpp)
 
 ####################################################################################################################
@@ -335,7 +339,10 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
     set(UNIT_TEST_FILES_TIME
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/time/system-time/MockPosixClock.cpp)
 endif ()
 
 ####################################################################################################################
@@ -669,6 +676,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_TIME}: Linking libraries for unit test application...")
     target_link_libraries(${MODULE_NAME_TIME}-unit-test
             gtest
+            gmock
             gtest_main
             "${MODULE_NAME_TIME}"
             "${MODULE_NAME_CORE}")
