@@ -107,6 +107,7 @@ Alternatively, the CMake project generation can be controlled by providing libra
 | __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ | ON            | This flag enforces the usage of supported compilers, only.<br/>For usage of an unsupported toolchain, set this flag to __OFF__.                      |
 | __LS_STD_BUILD_STATIC__                  | ON            | This flag indicates, that all library modules should be built as static goals.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned off. |
 | __LS_STD_BUILD_SHARED__                  | OFF           | This flag indicates, that all library modules should be built as shared goals.  <br/>Please note, that __LS_STD_BUILD_STATIC__ has to be turned off. |
+| __LS_STD_BUILD_WITH_JNI__                | OFF           | This flag enables the build of JNI dependencies.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned on.                                |
 
 To use one or more of these flags, you'd have to adjust previous command, like:
 

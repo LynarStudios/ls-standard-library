@@ -32,6 +32,7 @@ option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
 option(LS_STD_BUILD_WITH_SUPPORTED_COMPILER "Build project with supported compiler only..." ON)
 option(LS_STD_BUILD_STATIC "Build ls-std static library..." ON)
 option(LS_STD_BUILD_SHARED "Build ls-std shared library..." OFF)
+option(LS_STD_BUILD_WITH_JNI "Build ls-std shared library with JNI..." OFF)
 
 set(TARGET_COUNTER 0)
 
@@ -58,6 +59,19 @@ if (TARGET_COUNTER EQUAL 0)
 endif ()
 
 ##########################################################
+# JNI flag check
+##########################################################
+
+if (${LS_STD_BUILD_WITH_JNI})
+    if (${LS_STD_BUILD_SHARED})
+        message("${PROJECT_NAME}: build with JNI support...")
+    else ()
+        message("${PROJECT_NAME}: [Error] JNI support requires shared build goal!")
+        return()
+    endif ()
+endif ()
+
+##########################################################
 # Compiler Settings
 ##########################################################
 
@@ -80,17 +94,39 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
             ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang OR
             ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
         message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
-    else()
+    else ()
         message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
         return()
     endif ()
-endif()
+endif ()
+
+######################################################
+# Find Packages
+######################################################
+
+if (${LS_STD_BUILD_WITH_JNI})
+    if (DEFINED ENV{JAVA_HOME})
+        message("JAVA_HOME found in '$ENV{JAVA_HOME}' location...")
+    else ()
+        message("[Error] JAVA_HOME not found!")
+        return()
+    endif ()
+
+    message("${PROJECT_NAME}: finding JNI package in '$ENV{JAVA_HOME}'...")
+    find_package(JNI REQUIRED)
+endif ()
 
 ######################################################
 # Include Directories
 ######################################################
 
 message("${PROJECT_NAME}: Adding include directories...")
+
+if (${LS_STD_BUILD_WITH_JNI})
+    include_directories(${JAVA_INCLUDE_PATH})
+    include_directories(${JAVA_INCLUDE_PATH2})
+    include_directories(${JAVA_AWT_INCLUDE_PATH})
+endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
@@ -223,6 +259,9 @@ set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTimeParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/Date.cpp)
+
+set(SOURCE_FILES_TIME_JNI
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/jni/com_lynarstudios_ls_std_time_systemtime_SystemTimeJni.cpp)
 
 ####################################################################################################################
 ####################################################################################################################
@@ -589,9 +628,16 @@ if (${LS_STD_BUILD_STATIC})
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
-    add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
-    target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${MODULE_NAME_TIME}: building with JNI...")
+        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME} ${SOURCE_FILES_TIME_JNI})
+        target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
+        set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
+    else ()
+        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
+        target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
+        set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
+    endif ()
 endif ()
 
 ####################################################################################################################
