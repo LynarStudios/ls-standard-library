@@ -1,0 +1,17 @@
+# section-pair document
+
+[general]
+
+name=Lynar Studios - Standard Library
+version=2023.2.0
+
+[input]
+
+directories:
+  source/ls-std
+extensions:
+  .cpp
+
+[output]
+
+directory=doc
