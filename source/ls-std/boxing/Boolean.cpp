@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-23
+ * Changed:         2023-03-21
  *
  * */
 
@@ -17,10 +17,27 @@ using ls::std::core::IllegalArgumentException;
 using std::string;
 using std::transform;
 
+/*
+ * @doku("method", "Boolean::Boolean")
+ *
+ * @description("This is an overloaded constructor of the Boolean class.")
+ * @parameter("bool", "_value", "This is the value, which you'd like to box. It can be either true or false.")
+ *
+ * @!doku
+ * */
+
 Boolean::Boolean(bool _value) : Boolean()
 {
   this->value = _value;
 }
+
+/*
+ * @doku("method", "Boolean::Boolean")
+ *
+ * @description("This is the default constructor of the Boolean class.")
+ *
+ * @!doku
+ * */
 
 Boolean::Boolean() : Class("Boolean")
 {}
@@ -68,6 +85,16 @@ bool Boolean::operator||(int _value) const
 {
   return this->value || _value;
 }
+
+/*
+ * @doku("method", "Boolean::parse")
+ *
+ * @description("This method parses a string and converts it to a boolean value. This boolean value will be assigned to the internal boolean member of this class, which can then be accessed via getter method.")
+ * @parameter("::std::string", "_parseText", "This is the boolean string representation and should be valid by being either "true" or "false" (non case-sensitive). If the string representation is invalid an IllegalArgumentException will be thrown.")
+ * @return("void", "nothing")
+ *
+ * @!doku
+ * */
 
 void Boolean::parse(string _parseText)
 {
