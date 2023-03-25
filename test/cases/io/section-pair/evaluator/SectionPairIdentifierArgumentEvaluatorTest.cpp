@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -25,21 +25,15 @@ namespace
 {
   class SectionPairIdentifierArgumentEvaluatorTest : public Test
   {
-    protected:
+    public:
 
       SectionPairIdentifierArgumentEvaluatorTest() = default;
       ~SectionPairIdentifierArgumentEvaluatorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   class SectionPairIdentifierArgumentEvaluatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairIdentifierArgumentEvaluatorTest_InvalidArgumentTest() = default;
       ~SectionPairIdentifierArgumentEvaluatorTest_InvalidArgumentTest() override = default;

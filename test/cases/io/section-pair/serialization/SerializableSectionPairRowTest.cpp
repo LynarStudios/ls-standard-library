@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-12
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -37,21 +37,15 @@ namespace
 {
   class SerializableSectionPairRowTest : public Test
   {
-    protected:
+    public:
 
       SerializableSectionPairRowTest() = default;
       ~SerializableSectionPairRowTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   class SerializableSectionPairRowTest_LineBreakTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SerializableSectionPairRowTest_LineBreakTest() = default;
       ~SerializableSectionPairRowTest_LineBreakTest() override = default;
@@ -59,7 +53,7 @@ namespace
 
   class SerializableSectionPairRowTest_IsValidSingleValueTest : public TestWithParam<array<string, 3>>
   {
-    protected:
+    public:
 
       SerializableSectionPairRowTest_IsValidSingleValueTest() = default;
       ~SerializableSectionPairRowTest_IsValidSingleValueTest() override = default;
@@ -67,7 +61,7 @@ namespace
 
   class SerializableSectionPairRowTest_IsInvalidSingleValueTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SerializableSectionPairRowTest_IsInvalidSingleValueTest() = default;
       ~SerializableSectionPairRowTest_IsInvalidSingleValueTest() override = default;
@@ -75,7 +69,7 @@ namespace
 
   class SerializableSectionPairRowTest_IsInvalidListValueTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SerializableSectionPairRowTest_IsInvalidListValueTest() = default;
       ~SerializableSectionPairRowTest_IsInvalidListValueTest() override = default;

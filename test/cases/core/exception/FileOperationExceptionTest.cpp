@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-22
+ * Changed:         2023-03-25
  *
  * */
 
@@ -19,16 +19,10 @@ namespace
 {
   class FileOperationExceptionTest : public Test
   {
-    protected:
+    public:
 
       FileOperationExceptionTest() = default;
       ~FileOperationExceptionTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(FileOperationExceptionTest, constructor)

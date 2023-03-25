@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-01
- * Changed:         2023-02-22
+ * Changed:         2023-03-25
  *
  * */
 
@@ -19,16 +19,10 @@ namespace
 {
   class IllegalArgumentExceptionTest : public Test
   {
-    protected:
+    public:
 
       IllegalArgumentExceptionTest() = default;
       ~IllegalArgumentExceptionTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(IllegalArgumentExceptionTest, constructor)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-28
- * Changed:         2023-02-22
+ * Changed:         2023-03-25
  *
  * */
 
@@ -17,16 +17,10 @@ namespace
 {
   class VersionTest : public Test
   {
-    protected:
+    public:
 
       VersionTest() = default;
       ~VersionTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   // implementation

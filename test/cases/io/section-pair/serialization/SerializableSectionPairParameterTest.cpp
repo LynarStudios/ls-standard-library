@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-17
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -21,16 +21,10 @@ namespace
 {
   class SerializableSectionPairParameterTest : public Test
   {
-    protected:
+    public:
 
       SerializableSectionPairParameterTest() = default;
       ~SerializableSectionPairParameterTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(SerializableSectionPairParameterTest, getNewLine)

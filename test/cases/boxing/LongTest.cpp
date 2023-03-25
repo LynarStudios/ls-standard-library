@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-17
- * Changed:         2023-02-24
+ * Changed:         2023-03-25
  *
  * */
 
@@ -20,16 +20,10 @@ namespace
 {
   class LongTest : public Test
   {
-    protected:
+    public:
 
       LongTest() = default;
       ~LongTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   // assignment operators

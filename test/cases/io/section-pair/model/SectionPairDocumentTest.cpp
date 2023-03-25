@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-15
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -31,16 +31,10 @@ namespace
 {
   class SectionPairDocumentTest : public Test
   {
-    protected:
+    public:
 
       SectionPairDocumentTest() = default;
       ~SectionPairDocumentTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(SectionPairDocumentTest, add)
