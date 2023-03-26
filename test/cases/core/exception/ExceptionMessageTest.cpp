@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-07
-* Changed:         2023-02-22
+* Changed:         2023-03-25
 *
 * */
 
@@ -18,16 +18,10 @@ namespace
 {
   class ExceptionMessageTest : public Test
   {
-    protected:
+    public:
 
       ExceptionMessageTest() = default;
       ~ExceptionMessageTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(ExceptionMessageTest, toCharacterPointer)

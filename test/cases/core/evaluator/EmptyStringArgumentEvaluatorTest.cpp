@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-22
+* Changed:         2023-03-25
 *
 * */
 
@@ -20,16 +20,10 @@ namespace
 {
   class EmptyStringArgumentEvaluatorTest : public Test
   {
-    protected:
+    public:
 
       EmptyStringArgumentEvaluatorTest() = default;
       ~EmptyStringArgumentEvaluatorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(EmptyStringArgumentEvaluatorTest, evaluate)

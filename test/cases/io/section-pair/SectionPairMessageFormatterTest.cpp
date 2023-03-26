@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-22
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -23,18 +23,10 @@ namespace
 {
   class SectionPairMessageFormatterTest : public TestWithParam<array<string, 2>>
   {
-    protected:
+    public:
 
       SectionPairMessageFormatterTest() = default;
       ~SectionPairMessageFormatterTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
-
-    public:
 
       static string getFormattedExampleMessage(const string &_replacementString)
       {

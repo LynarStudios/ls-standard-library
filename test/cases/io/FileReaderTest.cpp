@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-18
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -26,16 +26,10 @@ namespace
 {
   class FileReaderTest : public Test
   {
-    protected:
+    public:
 
       FileReaderTest() = default;
       ~FileReaderTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(FileReaderTest, constructor_file_does_not_exist)

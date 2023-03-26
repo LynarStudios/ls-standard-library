@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-05
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -21,16 +21,10 @@ namespace
 {
   class XmlParseParameterTest : public Test
   {
-    protected:
+    public:
 
       XmlParseParameterTest() = default;
       ~XmlParseParameterTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(XmlParseParameterTest, getLevel)

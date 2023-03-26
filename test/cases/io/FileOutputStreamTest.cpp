@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -25,16 +25,10 @@ namespace
 {
   class FileOutputStreamTest : public Test
   {
-    protected:
+    public:
 
       FileOutputStreamTest() = default;
       ~FileOutputStreamTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(FileOutputStreamTest, constructor_file_does_not_exist)

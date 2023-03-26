@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -20,16 +20,10 @@ namespace
 {
   class LogLevelTest : public Test
   {
-    protected:
+    public:
 
       LogLevelTest() = default;
       ~LogLevelTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(LogLevelTest, constructor_with_log_level_value_parameter)

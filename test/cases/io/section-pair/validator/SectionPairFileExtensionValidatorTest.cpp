@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -21,21 +21,15 @@ namespace
 {
   class SectionPairFileExtensionValidatorTest : public Test
   {
-    protected:
+    public:
 
       SectionPairFileExtensionValidatorTest() = default;
       ~SectionPairFileExtensionValidatorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   class SectionPairFileExtensionValidatorTest_ValidExtensionTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairFileExtensionValidatorTest_ValidExtensionTest() = default;
       ~SectionPairFileExtensionValidatorTest_ValidExtensionTest() override = default;
@@ -43,7 +37,7 @@ namespace
 
   class SectionPairFileExtensionValidatorTest_NotValidExtensionTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairFileExtensionValidatorTest_NotValidExtensionTest() = default;
       ~SectionPairFileExtensionValidatorTest_NotValidExtensionTest() override = default;

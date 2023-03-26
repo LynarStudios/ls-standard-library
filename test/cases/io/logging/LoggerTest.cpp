@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -30,16 +30,10 @@ namespace
 {
   class LoggerTest : public Test
   {
-    protected:
+    public:
 
       LoggerTest() = default;
       ~LoggerTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
 
       static shared_ptr<IWriter> createFileLogger(const string &_logName)
       {

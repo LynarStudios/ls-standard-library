@@ -38,7 +38,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Improvements ####
 
-- no comment
+- made test constructors public and reduced test setup overhead
 
 #### Fixes ####
 

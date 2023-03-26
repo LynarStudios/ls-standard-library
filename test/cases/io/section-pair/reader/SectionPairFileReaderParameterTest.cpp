@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -20,16 +20,10 @@ namespace
 {
   class SectionPairFileReaderParameterTest : public Test
   {
-    protected:
+    public:
 
       SectionPairFileReaderParameterTest() = default;
       ~SectionPairFileReaderParameterTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(SectionPairFileReaderParameterTest, getDocument)
