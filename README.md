@@ -34,7 +34,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- no comment
+- added NotImplementedException class, which can be thrown in case a method is provided, but not implemented
 
 #### Improvements ####
 
