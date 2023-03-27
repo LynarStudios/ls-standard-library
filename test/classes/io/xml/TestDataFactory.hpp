@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-14
- * Changed:         2023-02-05
+ * Changed:         2023-03-27
  *
  * */
 
@@ -22,7 +22,7 @@ namespace test::io
       TestDataFactory();
       ~TestDataFactory();
 
-      static ::std::shared_ptr<ls::std::io::XmlNode> createXmlContent();
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::XmlNode> createXmlContent();
   };
 }
 

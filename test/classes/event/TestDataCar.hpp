@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-05
+ * Changed:         2023-03-27
  *
  * */
 
@@ -21,7 +21,7 @@ namespace test::event
       TestDataCar();
       virtual ~TestDataCar();
 
-      ::std::string getColor();
+      [[nodiscard]] ::std::string getColor();
       void setColor(::std::string _color);
 
     private:
