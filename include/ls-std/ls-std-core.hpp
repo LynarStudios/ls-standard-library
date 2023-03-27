@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-13
- * Changed:         2023-02-22
+ * Changed:         2023-03-27
  *
  * */
 
@@ -25,6 +25,7 @@
 #include <ls-std/core/exception/IllegalArithmeticOperationException.hpp>
 #include <ls-std/core/exception/IncompleteJsonException.hpp>
 #include <ls-std/core/exception/IndexOutOfBoundsException.hpp>
+#include <ls-std/core/exception/NotImplementedException.hpp>
 #include <ls-std/core/exception/NullPointerException.hpp>
 
 #include <ls-std/core/interface/IBoxing.hpp>
