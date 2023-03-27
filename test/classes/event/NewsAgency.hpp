@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-05
+ * Changed:         2023-03-27
  *
  * */
 
@@ -21,7 +21,7 @@ namespace test::event
       explicit NewsAgency(::std::string _agencyName);
       virtual ~NewsAgency();
 
-      ::std::string getName();
+      [[nodiscard]] ::std::string getName();
 
     private:
 
