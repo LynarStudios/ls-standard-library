@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-27
- * Changed:         2023-02-22
+ * Changed:         2023-03-25
  *
  * */
 
@@ -19,16 +19,10 @@ namespace
 {
   class EventHandlerTest : public Test
   {
-    protected:
+    public:
 
       EventHandlerTest() = default;
       ~EventHandlerTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(EventHandlerTest, constructor_empty_parameter)

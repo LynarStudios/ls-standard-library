@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -24,18 +24,12 @@ namespace
 {
   class FileTest : public Test
   {
-    protected:
+    public:
 
       FileTest() = default;
       ~FileTest() override = default;
 
       string fileLocation = TestHelper::getResourcesFolderLocation() + "simple.txt";
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
 
       static bool hasFileInDirectory(const list<string> &_fileNamesInDirectory, const string &_fileName)
       {

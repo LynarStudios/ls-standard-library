@@ -34,11 +34,13 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- no comment
+- added NotImplementedException class, which can be thrown in case a method is provided, but not implemented
 
 #### Improvements ####
 
-- no comment
+- made test constructors public and reduced test setup overhead
+- added missing __nodiscard__ attributes to test package
+- made __Exception__ base class abstract, which prevents it from being instantiated
 
 #### Fixes ####
 
@@ -59,15 +61,15 @@ This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ f
 
 Building this library would result into providing binaries for each library module and CLI tool: 
 
-| binary              | type                       |
-|---------------------|----------------------------|
-| __cli-base64__      | CLI executable             |
-| __ls-std-boxing__   | library (static / dynamic) |
-| __ls-std-core__     | library (static / dynamic) |
-| __ls-std-encoding__ | library (static / dynamic) |
-| __ls-std-event__    | library (static / dynamic) |
-| __ls-std-io__       | library (static / dynamic) |
-| __ls-std-time__     | library (static / dynamic) |
+| binary              | type                       | dependency                   |
+|---------------------|----------------------------|------------------------------|
+| __cli-base64__      | CLI executable             | ls-std-encoding, ls-std-core |
+| __ls-std-boxing__   | library (static / dynamic) | ls-std-core                  |
+| __ls-std-core__     | library (static / dynamic) | ---                          |
+| __ls-std-encoding__ | library (static / dynamic) | ls-std-core                  |
+| __ls-std-event__    | library (static / dynamic) | ls-std-core                  |
+| __ls-std-io__       | library (static / dynamic) | ls-std-core                  |
+| __ls-std-time__     | library (static / dynamic) | ls-std-core                  |
 
 #### Prerequisites ####
 

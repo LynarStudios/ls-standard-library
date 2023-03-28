@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-23
+ * Changed:         2023-03-27
  *
  * */
 
@@ -22,26 +22,26 @@ namespace ls::std::test
       TestHelper();
       ~TestHelper();
 
-      static ::std::string getResourcesFolderLocation();
-      static ::std::string getTestFolderLocation();
+      [[nodiscard]] static ::std::string getResourcesFolderLocation();
+      [[nodiscard]] static ::std::string getTestFolderLocation();
 
     private:
 
-      static char _getFilePathSeparator();
-      static ::std::string _getParent(const ::std::string &_path);
-      static ::std::string _getWorkingDirectory();
+      [[nodiscard]] static char _getFilePathSeparator();
+      [[nodiscard]] static ::std::string _getParent(const ::std::string &_path);
+      [[nodiscard]] static ::std::string _getWorkingDirectory();
 
 #if defined(unix) || defined(__APPLE__)
-      static ::std::string _getWorkingDirectoryUnix();
+      [[nodiscard]] static ::std::string _getWorkingDirectoryUnix();
 #endif
 #ifdef _WIN32
-      static ::std::string _getWorkingDirectoryWindows();
+      [[nodiscard]] static ::std::string _getWorkingDirectoryWindows();
 #endif
 
-      static ::std::string _normalizePath(::std::string _path);
-      static ::std::string _reduceSeparators(const ::std::string &_path);
-      static ::std::string _replaceWrongSeparator(::std::string _path);
-      static ::std::vector<::std::string> _splitIntoSubDirectoryNames(const ::std::string &_path);
+      [[nodiscard]] static ::std::string _normalizePath(::std::string _path);
+      [[nodiscard]] static ::std::string _reduceSeparators(const ::std::string &_path);
+      [[nodiscard]] static ::std::string _replaceWrongSeparator(::std::string _path);
+      [[nodiscard]] static ::std::vector<::std::string> _splitIntoSubDirectoryNames(const ::std::string &_path);
   };
 }
 

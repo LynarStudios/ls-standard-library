@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-29
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -19,16 +19,10 @@ namespace
 {
   class XmlDeclarationTest : public Test
   {
-    protected:
+    public:
 
       XmlDeclarationTest() = default;
       ~XmlDeclarationTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(XmlDeclarationTest, constructor_empty_version)

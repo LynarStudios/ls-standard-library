@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-01-08
- * Changed:         2023-02-22
+ * Changed:         2023-03-25
  *
  * */
 
@@ -17,16 +17,10 @@ namespace
 {
   class Base64Test : public Test
   {
-    protected:
+    public:
 
       Base64Test() = default;
       ~Base64Test() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(Base64Test, encode)

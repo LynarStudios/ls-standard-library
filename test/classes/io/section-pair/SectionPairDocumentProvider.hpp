@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-16
-* Changed:         2023-02-21
+* Changed:         2023-03-27
 *
 * */
 
@@ -24,9 +24,9 @@ namespace test::io
       SectionPairDocumentProvider();
       ~SectionPairDocumentProvider();
 
-      static ::std::shared_ptr<ls::std::io::SectionPairDocument> createDocument();
-      static ls::std::core::type::byte_field createSerializedDocument(const ::std::string &_newLine);
-      static ls::std::core::type::byte_field createSerializedDocumentComputerExample(const ::std::string &_newLine);
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::SectionPairDocument> createDocument();
+      [[nodiscard]] static ls::std::core::type::byte_field createSerializedDocument(const ::std::string &_newLine);
+      [[nodiscard]] static ls::std::core::type::byte_field createSerializedDocumentComputerExample(const ::std::string &_newLine);
   };
 }
 

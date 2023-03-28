@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-19
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -23,18 +23,12 @@ namespace
 {
   class StorableFileTest : public Test
   {
-    protected:
+    public:
 
       StorableFileTest() = default;
       ~StorableFileTest() override = default;
 
       string fileLocation = TestHelper::getResourcesFolderLocation() + "simple.txt";
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(StorableFileTest, getFile)

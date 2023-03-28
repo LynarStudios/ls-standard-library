@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-11-14
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -26,16 +26,10 @@ namespace
 {
   class NarratorTest : public Test
   {
-    protected:
+    public:
 
       NarratorTest() = default;
       ~NarratorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
 
       shared_ptr<TestDataMercedesCar> mercedes1{};
       shared_ptr<TestDataMercedesCar> mercedes2{};

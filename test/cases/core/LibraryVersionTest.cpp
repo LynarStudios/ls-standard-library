@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2021-05-02
- * Changed:         2023-03-05
+ * Changed:         2023-03-25
  *
  * */
 
@@ -17,16 +17,10 @@ namespace
 {
   class LibraryVersionTest : public Test
   {
-    protected:
+    public:
 
       LibraryVersionTest() = default;
       ~LibraryVersionTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(LibraryVersionTest, getVersion)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-09
- * Changed:         2023-02-24
+ * Changed:         2023-03-25
  *
  * */
 
@@ -19,16 +19,10 @@ namespace
 {
   class IntegerTest : public Test
   {
-    protected:
+    public:
 
       IntegerTest() = default;
       ~IntegerTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   // assignment operators

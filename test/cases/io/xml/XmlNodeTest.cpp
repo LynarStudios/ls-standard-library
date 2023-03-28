@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-09-25
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -25,16 +25,10 @@ namespace
 {
   class XmlNodeTest : public Test
   {
-    protected:
+    public:
 
       XmlNodeTest() = default;
       ~XmlNodeTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(XmlNodeTest, addAttributeAfter)

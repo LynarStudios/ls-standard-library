@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -35,16 +35,10 @@ namespace
 {
   class SectionPairFileReaderTest : public Test
   {
-    protected:
+    public:
 
       SectionPairFileReaderTest() = default;
       ~SectionPairFileReaderTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
 
       static string getMockSectionPairFileContent()
       {
@@ -58,8 +52,6 @@ namespace
                "  1989\n"
                "host=localhost\n";
       }
-
-    public:
 
       static SectionPairFileReaderParameter createMockParameter(bool _fileExists)
       {
@@ -75,7 +67,7 @@ namespace
 
   class SectionPairFileReaderTest_NotValidFileExtension : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairFileReaderTest_NotValidFileExtension() = default;
       ~SectionPairFileReaderTest_NotValidFileExtension() override = default;
