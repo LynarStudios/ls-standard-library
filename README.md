@@ -40,6 +40,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - made test constructors public and reduced test setup overhead
 - added missing __nodiscard__ attributes to test package
+- made __Exception__ base class abstract, which prevents it from being instantiated
 
 #### Fixes ####
 
