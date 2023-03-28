@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-23
+ * Changed:         2023-03-28
  *
  * */
 
@@ -27,16 +27,5 @@ FileOperationException::~FileOperationException() noexcept = default;
 
 const char *FileOperationException::what() const noexcept
 {
-  string concatenatedMessage = this->name + " thrown - ";
-
-  if (this->message.empty())
-  {
-    concatenatedMessage = concatenatedMessage + "file operation failed!";
-  }
-  else
-  {
-    concatenatedMessage = concatenatedMessage + this->message;
-  }
-
-  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
+  return this->_getIdentifiedMessage("file operation failed!");
 }

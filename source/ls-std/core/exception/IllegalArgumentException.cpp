@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-23
+ * Changed:         2023-03-28
  *
  * */
 
@@ -27,16 +27,5 @@ IllegalArgumentException::~IllegalArgumentException() noexcept = default;
 
 const char *IllegalArgumentException::what() const noexcept
 {
-  string concatenatedMessage = this->name + " thrown - ";
-
-  if (this->message.empty())
-  {
-    concatenatedMessage = concatenatedMessage + "passed argument is not valid!";
-  }
-  else
-  {
-    concatenatedMessage = concatenatedMessage + this->message;
-  }
-
-  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
+  return this->_getIdentifiedMessage("passed argument is not valid!");
 }

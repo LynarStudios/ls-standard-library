@@ -3,11 +3,12 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-22
-* Changed:         2023-02-23
+* Changed:         2023-03-28
 *
 * */
 
 #include <ls-std/core/exception/Exception.hpp>
+#include <ls-std/core/exception/ExceptionMessage.hpp>
 
 using ls::std::core::Exception;
 using std::move;
@@ -23,7 +24,18 @@ string Exception::getName() const
   return this->name;
 }
 
-const char *Exception::what() const noexcept
+const char *Exception::_getIdentifiedMessage(const string &_defaultMessage) const
 {
-  return "base exception class in use - method not implemented!";
+  string concatenatedMessage = this->name + " thrown - ";
+
+  if (this->message.empty())
+  {
+    concatenatedMessage = concatenatedMessage + _defaultMessage;
+  }
+  else
+  {
+    concatenatedMessage = concatenatedMessage + this->message;
+  }
+
+  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
 }
