@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-27
-* Changed:         2023-03-27
+* Changed:         2023-03-28
 *
 * */
 
@@ -29,16 +29,5 @@ NotImplementedException::~NotImplementedException() noexcept = default;
 
 const char *NotImplementedException::what() const noexcept
 {
-  string concatenatedMessage = this->name + " thrown - ";
-
-  if (this->message.empty())
-  {
-    concatenatedMessage = concatenatedMessage + "method is not implemented and should not be used!";
-  }
-  else
-  {
-    concatenatedMessage = concatenatedMessage + this->message;
-  }
-
-  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
+  return this->_getIdentifiedMessage("method is not implemented and should not be used!");
 }

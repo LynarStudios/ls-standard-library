@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-23
+ * Changed:         2023-03-28
  *
  * */
 
@@ -27,16 +27,5 @@ IncompleteJsonException::~IncompleteJsonException() noexcept = default;
 
 const char *IncompleteJsonException::what() const noexcept
 {
-  string concatenatedMessage = this->name + " thrown - ";
-
-  if (this->message.empty())
-  {
-    concatenatedMessage = concatenatedMessage + "this JSON string is incomplete.";
-  }
-  else
-  {
-    concatenatedMessage = concatenatedMessage + this->message;
-  }
-
-  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
+  return this->_getIdentifiedMessage("this JSON string is incomplete.");
 }
