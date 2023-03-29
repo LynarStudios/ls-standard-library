@@ -255,6 +255,7 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StorableFile.cpp)
 
 set(SOURCE_FILES_TIME
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/DateParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/IPosixClock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/PosixClock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTime.cpp
@@ -380,6 +381,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
     set(UNIT_TEST_FILES_TIME
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/common/DateParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp
