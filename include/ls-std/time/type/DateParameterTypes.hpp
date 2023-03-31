@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-29
-* Changed:         2023-03-29
+* Changed:         2023-03-31
 *
 * */
 
@@ -14,11 +14,11 @@ namespace ls::std::time::type
 {
   using Day = uint8_t;
   using Hour = uint8_t;
-  using Millisecond = uint16_t;
   using Minute = uint8_t;
   using Month = uint8_t;
   using Second = uint8_t;
-  using Year = uint32_t;
+  using UnixTimestamp = uint32_t;
+  using Year = int;
 }
 
 #endif

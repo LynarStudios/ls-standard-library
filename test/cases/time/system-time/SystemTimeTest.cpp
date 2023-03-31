@@ -3,11 +3,10 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-15
-* Changed:         2023-03-15
+* Changed:         2023-03-31
 *
 * */
 
-#include <cstdint>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <ls-std-time-test.hpp>
@@ -16,6 +15,7 @@
 #include <memory>
 
 using ls::std::core::IllegalArgumentException;
+using ls::std::time::DateParameter;
 using ls::std::time::SystemTime;
 using ls::std::time::SystemTimeParameter;
 using std::make_shared;
@@ -60,8 +60,8 @@ namespace
   {
     shared_ptr<SystemTimeParameter> parameter = make_shared<SystemTimeParameter>();
     shared_ptr<MockPosixClock> posixClock = make_shared<MockPosixClock>();
-    parameter->setPosixClock(posixClock);
-    uint32_t birthday = 612694333;
+    parameter->setClock(posixClock);
+    DateParameter birthday = DateParameter(1990, 10, 26, 11, 25, 00);
 
     EXPECT_CALL(*posixClock, setTime(birthday)).Times(AtLeast(1));
     ON_CALL(*posixClock, setTime(birthday)).WillByDefault(Return(true));

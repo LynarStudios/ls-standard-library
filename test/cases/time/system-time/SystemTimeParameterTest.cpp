@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-15
-* Changed:         2023-03-15
+* Changed:         2023-03-31
 *
 * */
 
@@ -11,6 +11,7 @@
 #include <ls-std/ls-std-time.hpp>
 #include <memory>
 
+using ls::std::time::IClock;
 using ls::std::time::PosixClock;
 using ls::std::time::SystemTimeParameter;
 using std::make_shared;
@@ -27,17 +28,17 @@ namespace
       ~SystemTimeParameterTest() override = default;
   };
 
-  TEST_F(SystemTimeParameterTest, getPosixClock)
+  TEST_F(SystemTimeParameterTest, getClock)
   {
-    ASSERT_TRUE(SystemTimeParameter{}.getPosixClock() == nullptr);
+    ASSERT_TRUE(SystemTimeParameter{}.getClock() == nullptr);
   }
 
-  TEST_F(SystemTimeParameterTest, setPosixClock)
+  TEST_F(SystemTimeParameterTest, setClock)
   {
     SystemTimeParameter parameter{};
-    shared_ptr<PosixClock> posixClock = make_shared<PosixClock>();
-    parameter.setPosixClock(posixClock);
+    shared_ptr<IClock> posixClock = make_shared<PosixClock>();
+    parameter.setClock(posixClock);
 
-    ASSERT_TRUE(parameter.getPosixClock() == posixClock);
+    ASSERT_TRUE(parameter.getClock() == posixClock);
   }
 }

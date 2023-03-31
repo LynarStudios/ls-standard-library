@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-29
-* Changed:         2023-03-29
+* Changed:         2023-03-31
 *
 * */
 
@@ -25,7 +25,7 @@ namespace
 
   TEST_F(DateParameterTest, constructor)
   {
-    DateParameter parameter{1989, 6, 1, 10, 52, 13, 102};
+    DateParameter parameter{1989, 6, 1, 10, 52, 13};
 
     ASSERT_EQ(1989, parameter.getYear());
     ASSERT_EQ(6, parameter.getMonth());
@@ -33,7 +33,22 @@ namespace
     ASSERT_EQ(10, parameter.getHour());
     ASSERT_EQ(52, parameter.getMinute());
     ASSERT_EQ(13, parameter.getSecond());
-    ASSERT_EQ(102, parameter.getMillisecond());
+  }
+
+  TEST_F(DateParameterTest, operator_equals)
+  {
+    DateParameter requiredBirthday{1989, 6, 1, 10, 52, 13};
+    DateParameter hisBirthday{1989, 6, 1, 10, 52, 13};
+
+    ASSERT_TRUE(requiredBirthday == hisBirthday);
+  }
+
+  TEST_F(DateParameterTest, operator_equals_not_equals)
+  {
+    DateParameter hisBirthday{1989, 6, 1, 10, 52, 00};
+    DateParameter herBirthday{1990, 10, 26, 11, 25, 00};
+
+    ASSERT_FALSE(herBirthday == hisBirthday);
   }
 
   TEST_F(DateParameterTest, getDay)
@@ -46,12 +61,6 @@ namespace
   {
     DateParameter parameter{};
     ASSERT_EQ(0, parameter.getHour());
-  }
-
-  TEST_F(DateParameterTest, getMillisecond)
-  {
-    DateParameter parameter{};
-    ASSERT_EQ(0, parameter.getMillisecond());
   }
 
   TEST_F(DateParameterTest, getMinute)
@@ -92,14 +101,6 @@ namespace
     parameter.setHour(10);
 
     ASSERT_EQ(10, parameter.getHour());
-  }
-
-  TEST_F(DateParameterTest, setMillisecond)
-  {
-    DateParameter parameter{};
-    parameter.setMillisecond(133);
-
-    ASSERT_EQ(133, parameter.getMillisecond());
   }
 
   TEST_F(DateParameterTest, setMinute)

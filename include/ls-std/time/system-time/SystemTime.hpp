@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-07
-* Changed:         2023-03-15
+* Changed:         2023-03-31
 *
 * */
 
@@ -14,6 +14,8 @@
 #include <cstdint>
 #include <ls-std/core/Class.hpp>
 #include <ls-std/os/dynamic-goal.hpp>
+#include <ls-std/time/common/DateParameter.hpp>
+#include <ls-std/time/type/DateParameterTypes.hpp>
 #include <memory>
 
 namespace ls::std::time
@@ -26,7 +28,7 @@ namespace ls::std::time
       SystemTime();
       ~SystemTime() noexcept override;
 
-      [[nodiscard]] bool set(uint32_t _timeStamp);
+      [[nodiscard]] bool set(const ls::std::time::DateParameter &_dateParameter);
 
     private:
 

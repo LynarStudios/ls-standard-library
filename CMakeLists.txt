@@ -84,7 +84,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 # Compiler Support
 ##########################################################
 
-if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
+if (${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
     message("${PROJECT_NAME}: build with compiler support...")
 
     # define supported compilers
@@ -256,7 +256,8 @@ set(SOURCE_FILES_IO
 
 set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/DateParameter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/IPosixClock.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/DateParameterMapper.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/IClock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/PosixClock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTimeParameter.cpp
@@ -381,6 +382,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
     set(UNIT_TEST_FILES_TIME
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/common/DateParameterMapperTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/common/DateParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeTest.cpp

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-15
-* Changed:         2023-03-15
+* Changed:         2023-03-31
 *
 * */
 
@@ -16,9 +16,11 @@
 
 using ls::std::core::Class;
 using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::time::DateParameter;
 using ls::std::time::PosixClock;
 using ls::std::time::SystemTime;
 using ls::std::time::SystemTimeParameter;
+using ls::std::time::type::UnixTimestamp;
 using std::make_shared;
 using std::shared_ptr;
 
@@ -35,13 +37,13 @@ SystemTime::SystemTime() : Class("SystemTime")
 
 SystemTime::~SystemTime() noexcept = default;
 
-bool SystemTime::set(uint32_t _timeStamp)
+bool SystemTime::set(const DateParameter &_dateParameter)
 {
-  return this->parameter->getPosixClock()->setTime(_timeStamp);
+  return this->parameter->getClock()->setTime(_dateParameter);
 }
 
 void SystemTime::_generateParameter()
 {
   this->parameter = make_shared<SystemTimeParameter>();
-  this->parameter->setPosixClock(make_shared<PosixClock>());
+  this->parameter->setClock(make_shared<PosixClock>());
 }
