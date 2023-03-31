@@ -45,5 +45,8 @@ bool SystemTime::set(const DateParameter &_dateParameter)
 void SystemTime::_generateParameter()
 {
   this->parameter = make_shared<SystemTimeParameter>();
+
+#if defined(unix) || defined(__APPLE__)
   this->parameter->setClock(make_shared<PosixClock>());
+#endif
 }

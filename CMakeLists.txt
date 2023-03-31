@@ -258,10 +258,16 @@ set(SOURCE_FILES_TIME
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/DateParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/DateParameterMapper.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/IClock.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/PosixClock.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTimeParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/Date.cpp)
+
+if (UNIX OR APPLE)
+    set(SOURCE_FILES_LINUX_TIME
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/PosixClock.cpp)
+else ()
+    set(SOURCE_FILES_LINUX_TIME)
+endif ()
 
 set(SOURCE_FILES_TIME_JNI
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/jni/com_lynarstudios_ls_std_time_systemtime_SystemTimeJni.cpp)
@@ -629,18 +635,18 @@ endif ()
 message("${PROJECT_NAME}: Building ${MODULE_NAME_TIME} library version ${PROJECT_VERSION}...")
 
 if (${LS_STD_BUILD_STATIC})
-    add_library("${MODULE_NAME_TIME}" STATIC ${SOURCE_FILES_TIME})
+    add_library("${MODULE_NAME_TIME}" STATIC ${SOURCE_FILES_TIME} ${SOURCE_FILES_LINUX_TIME})
     set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
     if (${LS_STD_BUILD_WITH_JNI})
         message("${MODULE_NAME_TIME}: building with JNI...")
-        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME} ${SOURCE_FILES_TIME_JNI})
+        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME} ${SOURCE_FILES_LINUX_TIME} ${SOURCE_FILES_TIME_JNI})
         target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
         set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
     else ()
-        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
+        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME} ${SOURCE_FILES_LINUX_TIME})
         target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
         set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
     endif ()

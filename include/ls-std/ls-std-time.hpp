@@ -13,10 +13,10 @@
 #include <ls-std/time/common/DateParameter.hpp>
 #include <ls-std/time/common/DateParameterMapper.hpp>
 
-#include <ls-std/time/system-time/jni/com_lynarstudios_ls_std_time_systemtime_SystemTimeJni.h>
-
 #include <ls-std/time/system-time/IClock.hpp>
-#include <ls-std/time/system-time/PosixClock.hpp>
+#if defined(unix) || defined(__APPLE__)
+  #include <ls-std/time/system-time/PosixClock.hpp>
+#endif
 #include <ls-std/time/system-time/SystemTime.hpp>
 #include <ls-std/time/system-time/SystemTimeParameter.hpp>
 
