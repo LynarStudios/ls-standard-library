@@ -37,3 +37,20 @@ UnixTimestamp DateParameterMapper::toUnixTimestamp(const DateParameter &_datePar
   return (UnixTimestamp) mktime(timeInfo);
 }
 #endif
+
+#ifdef _WIN32
+SYSTEMTIME DateParameterMapper::toWindowsSystemTime(const DateParameter &_dateParameter)
+{
+  SYSTEMTIME systemTime{};
+  systemTime.wYear = _dateParameter.getYear();
+  systemTime.wMonth = _dateParameter.getMonth();
+  systemTime.wDayOfWeek = 0;
+  systemTime.wDay = _dateParameter.getDay();
+  systemTime.wHour = _dateParameter.getHour();
+  systemTime.wMinute = _dateParameter.getMinute();
+  systemTime.wSecond = _dateParameter.getSecond();
+  systemTime.wMilliseconds = 0;
+
+  return systemTime;
+}
+#endif

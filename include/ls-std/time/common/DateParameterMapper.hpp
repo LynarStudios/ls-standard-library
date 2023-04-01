@@ -13,6 +13,9 @@
 #include "DateParameter.hpp"
 #include <ls-std/os/dynamic-goal.hpp>
 #include <ls-std/time/type/DateParameterTypes.hpp>
+#ifdef _WIN32
+  #include <windows.h>
+#endif
 
 namespace ls::std::time
 {
@@ -25,6 +28,9 @@ namespace ls::std::time
 
 #if defined(unix) || defined(__APPLE__)
       [[nodiscard]] static ls::std::time::type::UnixTimestamp toUnixTimestamp(const ls::std::time::DateParameter &_dateParameter);
+#endif
+#ifdef _WIN32
+      [[nodiscard]] static SYSTEMTIME toWindowsSystemTime(const ls::std::time::DateParameter &_dateParameter);
 #endif
   };
 }
