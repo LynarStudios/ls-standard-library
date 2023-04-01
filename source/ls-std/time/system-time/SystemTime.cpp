@@ -27,7 +27,9 @@ using ls::std::time::PosixClock;
 #endif
 using ls::std::time::SystemTime;
 using ls::std::time::SystemTimeParameter;
+#ifdef _WIN32
 using ls::std::time::WindowsClock;
+#endif
 using ls::std::time::type::UnixTimestamp;
 using std::make_shared;
 using std::shared_ptr;
