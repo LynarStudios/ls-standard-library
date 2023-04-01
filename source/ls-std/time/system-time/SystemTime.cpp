@@ -3,23 +3,31 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-15
-* Changed:         2023-03-31
+* Changed:         2023-04-01
 *
 * */
 
 #include <ls-std/core/Class.hpp>
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
-#include <ls-std/time/system-time/PosixClock.hpp>
+#if defined(unix) || defined(__APPLE__)
+  #include <ls-std/time/system-time/PosixClock.hpp>
+#endif
 #include <ls-std/time/system-time/SystemTime.hpp>
 #include <ls-std/time/system-time/SystemTimeParameter.hpp>
+#ifdef _WIN32
+  #include <ls-std/time/system-time/WindowsClock.hpp>
+#endif
 #include <memory>
 
 using ls::std::core::Class;
 using ls::std::core::NullPointerArgumentEvaluator;
 using ls::std::time::DateParameter;
+#if defined(unix) || defined(__APPLE__)
 using ls::std::time::PosixClock;
+#endif
 using ls::std::time::SystemTime;
 using ls::std::time::SystemTimeParameter;
+using ls::std::time::WindowsClock;
 using ls::std::time::type::UnixTimestamp;
 using std::make_shared;
 using std::shared_ptr;
@@ -48,5 +56,8 @@ void SystemTime::_generateParameter()
 
 #if defined(unix) || defined(__APPLE__)
   this->parameter->setClock(make_shared<PosixClock>());
+#endif
+#ifdef _WIN32
+  this->parameter->setClock(make_shared<WindowsClock>());
 #endif
 }

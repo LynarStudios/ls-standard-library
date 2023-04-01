@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-31
-* Changed:         2023-03-31
+* Changed:         2023-04-01
 *
 * */
 
@@ -22,12 +22,13 @@ using testing::Values;
 
 namespace
 {
-  class DateParameterMapperTest : public TestWithParam<pair<UnixTimestamp, DateParameter>>
+#if defined(unix) || defined(__APPLE__)
+  class DateParameterMapperTest_Unix : public TestWithParam<pair<UnixTimestamp, DateParameter>>
   {
     public:
 
-      DateParameterMapperTest() = default;
-      ~DateParameterMapperTest() override = default;
+      DateParameterMapperTest_Unix() = default;
+      ~DateParameterMapperTest_Unix() override = default;
 
       static vector<pair<UnixTimestamp, DateParameter>> getTestParameterList()
       {
@@ -39,7 +40,7 @@ namespace
       }
   };
 
-  TEST_P(DateParameterMapperTest, toUnixTimestamp)
+  TEST_P(DateParameterMapperTest_Unix, toUnixTimestamp)
   {
     DateParameter dateParameter = GetParam().second;
     UnixTimestamp timestamp = DateParameterMapper::toUnixTimestamp(dateParameter);
@@ -47,5 +48,6 @@ namespace
     ASSERT_EQ(GetParam().first, timestamp);
   }
 
-  INSTANTIATE_TEST_SUITE_P(toUnixTimestamp, DateParameterMapperTest, Values(DateParameterMapperTest::getTestParameterList().at(0), DateParameterMapperTest::getTestParameterList().at(1)));
+  INSTANTIATE_TEST_SUITE_P(toUnixTimestamp, DateParameterMapperTest_Unix, Values(DateParameterMapperTest_Unix::getTestParameterList().at(0), DateParameterMapperTest_Unix::getTestParameterList().at(1)));
+#endif
 }

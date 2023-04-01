@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-31
-* Changed:         2023-03-31
+* Changed:         2023-04-01
 *
 * */
 
@@ -23,7 +23,9 @@ namespace ls::std::time
       DateParameterMapper();
       ~DateParameterMapper();
 
+#if defined(unix) || defined(__APPLE__)
       [[nodiscard]] static ls::std::time::type::UnixTimestamp toUnixTimestamp(const ls::std::time::DateParameter &_dateParameter);
+#endif
   };
 }
 

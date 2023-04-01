@@ -7,9 +7,10 @@
 *
 * */
 
-#ifndef LS_STD_LS_STD_TIME_TEST_HPP
-#define LS_STD_LS_STD_TIME_TEST_HPP
+#include "MockClock.hpp"
 
-#include <classes/time/system-time/MockClock.hpp>
+using test::time::MockClock;
 
-#endif
+MockClock::MockClock() = default;
+
+MockClock::~MockClock() noexcept = default;

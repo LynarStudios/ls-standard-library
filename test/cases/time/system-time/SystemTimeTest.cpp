@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-15
-* Changed:         2023-03-31
+* Changed:         2023-04-01
 *
 * */
 
@@ -20,7 +20,7 @@ using ls::std::time::SystemTime;
 using ls::std::time::SystemTimeParameter;
 using std::make_shared;
 using std::shared_ptr;
-using test::time::MockPosixClock;
+using test::time::MockClock;
 using testing::AtLeast;
 using testing::Return;
 using testing::Test;
@@ -59,7 +59,7 @@ namespace
   TEST_F(SystemTimeTest, setTime)
   {
     shared_ptr<SystemTimeParameter> parameter = make_shared<SystemTimeParameter>();
-    shared_ptr<MockPosixClock> posixClock = make_shared<MockPosixClock>();
+    shared_ptr<MockClock> posixClock = make_shared<MockClock>();
     parameter->setClock(posixClock);
     DateParameter birthday = DateParameter(1990, 10, 26, 11, 25, 00);
 

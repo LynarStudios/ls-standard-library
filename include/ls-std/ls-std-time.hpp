@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2022-05-16
- * Changed:         2023-03-31
+ * Changed:         2023-04-01
  *
  * */
 
@@ -19,6 +19,9 @@
 #endif
 #include <ls-std/time/system-time/SystemTime.hpp>
 #include <ls-std/time/system-time/SystemTimeParameter.hpp>
+#ifdef _WIN32
+  #include <ls-std/time/system-time/WindowsClock.hpp>
+#endif
 
 #include <ls-std/time/type/DateParameterTypes.hpp>
 

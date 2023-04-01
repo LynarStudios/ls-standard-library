@@ -3,11 +3,13 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-31
-* Changed:         2023-03-31
+* Changed:         2023-04-01
 *
 * */
 
-#include <ctime>
+#if defined(unix) || defined(__APPLE__)
+  #include <ctime>
+#endif
 #include <ls-std/time/common/DateParameterMapper.hpp>
 
 using ls::std::time::DateParameter;
@@ -18,6 +20,7 @@ DateParameterMapper::DateParameterMapper() = default;
 
 DateParameterMapper::~DateParameterMapper() = default;
 
+#if defined(unix) || defined(__APPLE__)
 UnixTimestamp DateParameterMapper::toUnixTimestamp(const DateParameter &_dateParameter)
 {
   time_t rawTime{};
@@ -33,3 +36,4 @@ UnixTimestamp DateParameterMapper::toUnixTimestamp(const DateParameter &_datePar
 
   return (UnixTimestamp) mktime(timeInfo);
 }
+#endif

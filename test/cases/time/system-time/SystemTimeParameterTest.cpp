@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-15
-* Changed:         2023-03-31
+* Changed:         2023-04-01
 *
 * */
 
@@ -12,8 +12,13 @@
 #include <memory>
 
 using ls::std::time::IClock;
+#if defined(unix) || defined(__APPLE__)
 using ls::std::time::PosixClock;
+#endif
 using ls::std::time::SystemTimeParameter;
+#ifdef _WIN32
+using ls::std::time::WindowsClock;
+#endif
 using std::make_shared;
 using std::shared_ptr;
 using testing::Test;
@@ -36,9 +41,17 @@ namespace
   TEST_F(SystemTimeParameterTest, setClock)
   {
     SystemTimeParameter parameter{};
-    shared_ptr<IClock> posixClock = make_shared<PosixClock>();
-    parameter.setClock(posixClock);
+    shared_ptr<IClock> clock{};
 
-    ASSERT_TRUE(parameter.getClock() == posixClock);
+#if defined(unix) || defined(__APPLE__)
+    clock = make_shared<PosixClock>();
+#endif
+#ifdef _WIN32
+    clock = make_shared<WindowsClock>();
+#endif
+
+    parameter.setClock(clock);
+
+    ASSERT_TRUE(parameter.getClock() == clock);
   }
 }
