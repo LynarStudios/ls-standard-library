@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-23
+* Changed:         2023-04-04
 *
 * */
 
@@ -12,9 +12,27 @@
 
 using ls::std::core::NullPointerEvaluator;
 using ls::std::core::NullPointerException;
+using std::make_shared;
 using std::move;
 using std::shared_ptr;
 using std::string;
+
+NullPointerEvaluator::NullPointerEvaluator(const void *_rawArgument)
+{
+  shared_ptr<void> value{};
+
+  if (_rawArgument != nullptr)
+  {
+    value = make_shared<int>();
+  }
+
+  this->argument = value;
+}
+
+NullPointerEvaluator::NullPointerEvaluator(const void *_rawArgument, string _message) : NullPointerEvaluator(_rawArgument)
+{
+  this->message = ::move(_message);
+}
 
 NullPointerEvaluator::NullPointerEvaluator(const shared_ptr<void> &_argument) : argument(_argument)
 {}
