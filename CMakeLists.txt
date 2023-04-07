@@ -194,6 +194,12 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
 
+set(SOURCE_FILES_CORE_JNI
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IJniApi.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniApi.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniClass.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniClassParameter.cpp)
+
 set(SOURCE_FILES_ENCODING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp)
 
@@ -318,6 +324,12 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/ClassWrapper.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/MathOddValidator.cpp)
 
+    set(UNIT_TEST_FILES_CORE_JNI
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniApiTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniClassParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniClassTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/jni/MockJniApi.cpp)
+
     set(UNIT_TEST_FILES_ENCODING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
 
@@ -424,8 +436,13 @@ endif ()
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_CORE}: Building unit tests...")
-    add_executable(${MODULE_NAME_CORE}-unit-test ${UNIT_TEST_FILES_CORE})
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${MODULE_NAME_CORE}: Building unit tests with JNI support...")
+        add_executable(${MODULE_NAME_CORE}-unit-test ${UNIT_TEST_FILES_CORE} ${UNIT_TEST_FILES_CORE_JNI})
+    else ()
+        message("${MODULE_NAME_CORE}: Building unit tests...")
+        add_executable(${MODULE_NAME_CORE}-unit-test ${UNIT_TEST_FILES_CORE})
+    endif ()
 endif ()
 
 ##########################################################
@@ -471,16 +488,30 @@ endif ()
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${PROJECT_NAME}: Building unit tests...")
-    add_executable(${PROJECT_NAME}-unit-test
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
-            ${UNIT_TEST_FILES_BOXING}
-            ${UNIT_TEST_FILES_CORE}
-            ${UNIT_TEST_FILES_ENCODING}
-            ${UNIT_TEST_FILES_EVENT}
-            ${UNIT_TEST_FILES_IO}
-            ${UNIT_TEST_FILES_SERIALIZATION}
-            ${UNIT_TEST_FILES_TIME})
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${PROJECT_NAME}: Building unit tests with JNI support...")
+        add_executable(${PROJECT_NAME}-unit-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_CORE_JNI}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    else ()
+        message("${PROJECT_NAME}: Building unit tests...")
+        add_executable(${PROJECT_NAME}-unit-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    endif ()
 endif ()
 
 ####################################################################################################################
@@ -524,17 +555,32 @@ endif ()
 ####################################################################################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${PROJECT_NAME}: Building all tests...")
-    add_executable(${PROJECT_NAME}-test
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
-            ${UNIT_TEST_FILES_BOXING}
-            ${UNIT_TEST_FILES_CORE}
-            ${UNIT_TEST_FILES_ENCODING}
-            ${UNIT_TEST_FILES_EVENT}
-            ${UNIT_TEST_FILES_IO}
-            ${INTEGRATION_TEST_FILES_IO}
-            ${UNIT_TEST_FILES_SERIALIZATION}
-            ${UNIT_TEST_FILES_TIME})
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${PROJECT_NAME}: Building all tests...")
+        add_executable(${PROJECT_NAME}-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_CORE_JNI}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${INTEGRATION_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    else ()
+        message("${PROJECT_NAME}: Building all tests with JNI support...")
+        add_executable(${PROJECT_NAME}-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${INTEGRATION_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    endif ()
 endif ()
 
 ####################################################################################################################
@@ -574,8 +620,14 @@ if (${LS_STD_BUILD_STATIC})
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
-    add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${MODULE_NAME_CORE}: building with JNI...")
+        add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE} ${SOURCE_FILES_CORE_JNI})
+        set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
+    else ()
+        add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE})
+        set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
+    endif ()
 endif ()
 
 ##########################################################
