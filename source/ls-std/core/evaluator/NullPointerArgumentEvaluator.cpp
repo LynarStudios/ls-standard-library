@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-23
+* Changed:         2023-04-07
 *
 * */
 
@@ -12,15 +12,35 @@
 
 using ls::std::core::IllegalArgumentException;
 using ls::std::core::NullPointerArgumentEvaluator;
+using std::make_shared;
 using std::move;
 using std::shared_ptr;
 using std::string;
 
+NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const void *_rawArgument)
+{
+  shared_ptr<void> value{};
+
+  if (_rawArgument != nullptr)
+  {
+    value = make_shared<int>();
+  }
+
+  this->argument = value;
+}
+
+NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const void *_rawArgument, string _message) : NullPointerArgumentEvaluator(_rawArgument)
+{
+  this->message = ::move(_message);
+}
+
 NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const shared_ptr<void> &_argument) : argument(_argument)
 {}
 
-NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const shared_ptr<void> &_argument, string _message) : argument(_argument), message(::move(_message))
-{}
+NullPointerArgumentEvaluator::NullPointerArgumentEvaluator(const shared_ptr<void> &_argument, string _message) : NullPointerArgumentEvaluator(_argument)
+{
+  this->message = ::move(_message);
+}
 
 NullPointerArgumentEvaluator::~NullPointerArgumentEvaluator() noexcept = default;
 
