@@ -16,6 +16,7 @@
 #include <ls-std/os/dynamic-goal.hpp>
 #include <memory>
 #include <string>
+#include <unordered_map>
 
 namespace ls::std::core
 {
@@ -26,15 +27,19 @@ namespace ls::std::core
       explicit JniClass(const ::std::shared_ptr<ls::std::core::JniClassParameter> &_parameter, const ::std::string &_path);
       virtual ~JniClass();
 
-      bool load(); // nodiscard is optional here
+      [[nodiscard]] bool hasMethod(const ::std::string &_methodIdentifier);
+      bool load();                                                                                    // nodiscard is optional here
+      bool loadMethod(const ::std::string &_methodIdentifier, const ::std::string &_methodSignature); // nodiscard is optional here
 
     private:
 
       jclass javaClass{};
+      ::std::unordered_map<::std::string, jmethodID> methods{};
       ::std::shared_ptr<ls::std::core::JniClassParameter> parameter{};
       ::std::string path{};
 
       void _createJniApi();
+      [[nodiscard]] bool _hasMethod(const ::std::string &_methodIdentifier);
   };
 }
 

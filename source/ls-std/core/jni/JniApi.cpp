@@ -26,3 +26,8 @@ jclass JniApi::findClass(const string &_classPath)
 {
   return this->environment->FindClass(_classPath.c_str());
 }
+
+jmethodID JniApi::getMethodId(jclass _javaClass, const char *_methodIdentifier, const char *_methodSignature)
+{
+  return this->environment->GetMethodID(_javaClass, _methodIdentifier, _methodSignature);
+}

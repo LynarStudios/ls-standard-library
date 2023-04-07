@@ -24,6 +24,7 @@ namespace ls::std::core::interface_type
       virtual ~IJniApi();
 
       virtual jclass findClass(const ::std::string &_classPath) = 0;
+      virtual jmethodID getMethodId(jclass _javaClass, const char *_methodIdentifier, const char *_methodSignature) = 0;
   };
 }
 
