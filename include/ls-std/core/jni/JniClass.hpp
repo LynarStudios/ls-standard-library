@@ -42,6 +42,7 @@ namespace ls::std::core
       ::std::string path{};
 
       void _callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::JniReturnValue &_returnValue);
+      void _callIntMethod(const ::std::string &_methodIdentifier, ls::std::core::JniReturnValue &_returnValue);
       void _createJniApi();
       [[nodiscard]] bool _hasMethod(const ::std::string &_methodIdentifier);
   };

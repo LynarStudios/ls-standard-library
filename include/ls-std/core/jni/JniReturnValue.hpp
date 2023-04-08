@@ -23,11 +23,14 @@ namespace ls::std::core
       ~JniReturnValue();
 
       [[nodiscard]] jbyte getByteValue() const;
+      [[nodiscard]] jint getIntegerValue() const;
       void setByteValue(jbyte _byteValue);
+      void setIntegerValue(jint _integerValue);
 
     private:
 
       jbyte byteValue{};
+      jint integerValue{};
   };
 }
 

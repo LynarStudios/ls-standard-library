@@ -104,17 +104,41 @@ namespace
 
     EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
     ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
     string methodIdentifier = "getDay";
     string methodSignature = "()B";
     EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));
     jmethodID methodId = (jmethodID) make_shared<int>().get();
     ON_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).WillByDefault(Return(methodId));
+
     EXPECT_CALL(*this->jniApi, callByteMethod(testing::_, methodId)).Times(AtLeast(1));
     ON_CALL(*this->jniApi, callByteMethod(testing::_, methodId)).WillByDefault(Return(22));
 
     ASSERT_TRUE(javaClass.load());
     ASSERT_TRUE(javaClass.loadMethod(methodIdentifier, methodSignature));
     ASSERT_EQ(22, javaClass.callMethod(methodIdentifier).getByteValue());
+  }
+
+  TEST_F(JniClassTest, callMethod_integer_return_value)
+  {
+    string classPath = "java.utils.String";
+    JniClass javaClass = this->createJniClass(classPath);
+
+    EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
+    string methodIdentifier = "getYear";
+    string methodSignature = "()I";
+    EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));
+    jmethodID methodId = (jmethodID) make_shared<int>().get();
+    ON_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).WillByDefault(Return(methodId));
+
+    EXPECT_CALL(*this->jniApi, callIntMethod(testing::_, methodId)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, callIntMethod(testing::_, methodId)).WillByDefault(Return(1989));
+
+    ASSERT_TRUE(javaClass.load());
+    ASSERT_TRUE(javaClass.loadMethod(methodIdentifier, methodSignature));
+    ASSERT_EQ(1989, javaClass.callMethod(methodIdentifier).getIntegerValue());
   }
 
   TEST_F(JniClassTest, hasMethod)
@@ -143,6 +167,7 @@ namespace
 
     EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
     ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
     string methodIdentifier = "getDay";
     string methodSignature = "()B";
     EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));
@@ -160,6 +185,7 @@ namespace
 
     EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
     ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
     string methodIdentifier = "getDay";
     string methodSignature = "()B";
     EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));

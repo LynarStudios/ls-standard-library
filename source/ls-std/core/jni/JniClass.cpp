@@ -49,6 +49,7 @@ JniReturnValue JniClass::callMethod(const string &_methodIdentifier)
   if (this->_hasMethod(_methodIdentifier))
   {
     this->_callByteMethod(_methodIdentifier, returnValue);
+    this->_callIntMethod(_methodIdentifier, returnValue);
   }
 
   return returnValue;
@@ -86,11 +87,24 @@ void JniClass::_callByteMethod(const string &_methodIdentifier, JniReturnValue &
   JniMethod method = this->methods.at(_methodIdentifier);
   string searchString = ")B";
   string methodSignature = method.getMethodSignature();
-  bool hasBooleanReturnType = methodSignature.rfind(searchString) == (methodSignature.size() - searchString.size());
+  bool hasByteReturnType = methodSignature.rfind(searchString) == (methodSignature.size() - searchString.size());
 
-  if (hasBooleanReturnType)
+  if (hasByteReturnType)
   {
     _returnValue.setByteValue(this->parameter->getJniApi()->callByteMethod(this->parameter->getJavaObject(), method.getMethodId()));
+  }
+}
+
+void JniClass::_callIntMethod(const string &_methodIdentifier, JniReturnValue &_returnValue)
+{
+  JniMethod method = this->methods.at(_methodIdentifier);
+  string searchString = ")I";
+  string methodSignature = method.getMethodSignature();
+  bool hasIntegerReturnType = methodSignature.rfind(searchString) == (methodSignature.size() - searchString.size());
+
+  if (hasIntegerReturnType)
+  {
+    _returnValue.setIntegerValue(this->parameter->getJniApi()->callIntMethod(this->parameter->getJavaObject(), method.getMethodId()));
   }
 }
 

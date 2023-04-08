@@ -20,7 +20,17 @@ jbyte JniReturnValue::getByteValue() const
   return this->byteValue;
 }
 
+jint JniReturnValue::getIntegerValue() const
+{
+  return this->integerValue;
+}
+
 void JniReturnValue::setByteValue(jbyte _byteValue)
 {
   this->byteValue = _byteValue;
+}
+
+void JniReturnValue::setIntegerValue(jint _integerValue)
+{
+  this->integerValue = _integerValue;
 }

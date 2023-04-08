@@ -27,6 +27,11 @@ jbyte JniApi::callByteMethod(jobject _javaObject, jmethodID _methodId)
   return this->environment->CallByteMethod(_javaObject, _methodId);
 }
 
+jint JniApi::callIntMethod(jobject _javaObject, jmethodID _methodId)
+{
+  return this->environment->CallIntMethod(_javaObject, _methodId);
+}
+
 jclass JniApi::findClass(const string &_classPath)
 {
   return this->environment->FindClass(_classPath.c_str());

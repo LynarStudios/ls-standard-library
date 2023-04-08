@@ -23,6 +23,7 @@ namespace ls::std::core
       ~JniApi() noexcept override;
 
       jbyte callByteMethod(jobject _javaObject, jmethodID _methodId) override;
+      jint callIntMethod(jobject _javaObject, jmethodID _methodId) override;
       jclass findClass(const ::std::string &_classPath) override;
       jmethodID getMethodId(jclass _javaClass, const char *_methodIdentifier, const char *_methodSignature) override;
 
