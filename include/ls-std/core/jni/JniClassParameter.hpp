@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-07
+* Changed:         2023-04-08
 *
 * */
 
@@ -26,13 +26,16 @@ namespace ls::std::core
       ~JniClassParameter();
 
       [[nodiscard]] JNIEnv *getJavaEnvironment();
+      [[nodiscard]] jobject getJavaObject();
       [[nodiscard]] ::std::shared_ptr<ls::std::core::interface_type::IJniApi> getJniApi();
       void setJavaEnvironment(JNIEnv *_environment);
+      void setJavaObject(jobject _javaObject);
       void setJniApi(const ::std::shared_ptr<ls::std::core::interface_type::IJniApi> &_jniApi);
 
     private:
 
       JNIEnv *environment{};
+      jobject javaObject{};
       ::std::shared_ptr<ls::std::core::interface_type::IJniApi> jniApi{};
   };
 }

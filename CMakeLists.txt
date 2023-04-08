@@ -198,7 +198,9 @@ set(SOURCE_FILES_CORE_JNI
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IJniApi.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniApi.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniClass.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniClassParameter.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniClassParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniMethod.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniReturnValue.cpp)
 
 set(SOURCE_FILES_ENCODING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp)
@@ -328,6 +330,8 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniApiTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniClassParameterTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniClassTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniMethodTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniReturnValueTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/jni/MockJniApi.cpp)
 
     set(UNIT_TEST_FILES_ENCODING

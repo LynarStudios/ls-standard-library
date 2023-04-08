@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-07
+* Changed:         2023-04-08
 *
 * */
 
@@ -23,6 +23,11 @@ JNIEnv *JniClassParameter::getJavaEnvironment()
   return this->environment;
 }
 
+jobject JniClassParameter::getJavaObject()
+{
+  return this->javaObject;
+}
+
 shared_ptr<IJniApi> JniClassParameter::getJniApi()
 {
   return this->jniApi;
@@ -31,6 +36,11 @@ shared_ptr<IJniApi> JniClassParameter::getJniApi()
 void JniClassParameter::setJavaEnvironment(JNIEnv *_environment)
 {
   this->environment = _environment;
+}
+
+void JniClassParameter::setJavaObject(jobject _javaObject)
+{
+  this->javaObject = _javaObject;
 }
 
 void JniClassParameter::setJniApi(const shared_ptr<IJniApi> &_jniApi)

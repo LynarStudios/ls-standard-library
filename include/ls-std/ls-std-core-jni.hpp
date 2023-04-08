@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-07
+* Changed:         2023-04-08
 *
 * */
 
@@ -13,5 +13,7 @@
 #include <ls-std/core/jni/JniApi.hpp>
 #include <ls-std/core/jni/JniClass.hpp>
 #include <ls-std/core/jni/JniClassParameter.hpp>
+#include <ls-std/core/jni/JniMethod.hpp>
+#include <ls-std/core/jni/JniReturnValue.hpp>
 
 #endif

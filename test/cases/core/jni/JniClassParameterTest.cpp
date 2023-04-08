@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-07
+* Changed:         2023-04-08
 *
 * */
 
@@ -36,19 +36,16 @@ namespace
     ASSERT_TRUE(parameter.getJavaEnvironment() == nullptr);
   }
 
+  TEST_F(JniClassParameterTest, getJavaObject)
+  {
+    JniClassParameter parameter{};
+    ASSERT_TRUE(parameter.getJavaObject() == nullptr);
+  }
+
   TEST_F(JniClassParameterTest, getJniApi)
   {
     JniClassParameter parameter{};
     ASSERT_TRUE(parameter.getJniApi() == nullptr);
-  }
-
-  TEST_F(JniClassParameterTest, setJniApi)
-  {
-    JniClassParameter parameter{};
-    shared_ptr<IJniApi> jniApi = make_shared<MockJniApi>();
-    parameter.setJniApi(jniApi);
-
-    ASSERT_TRUE(parameter.getJniApi() == jniApi);
   }
 
   TEST_F(JniClassParameterTest, setJavaEnvironment)
@@ -58,5 +55,23 @@ namespace
     parameter.setJavaEnvironment(environment.get());
 
     ASSERT_TRUE(parameter.getJavaEnvironment() == environment.get());
+  }
+
+  TEST_F(JniClassParameterTest, setJavaObject)
+  {
+    JniClassParameter parameter{};
+    shared_ptr<_jobject> javaObject = make_shared<_jobject>();
+    parameter.setJavaObject(javaObject.get());
+
+    ASSERT_TRUE(parameter.getJavaObject() == javaObject.get());
+  }
+
+  TEST_F(JniClassParameterTest, setJniApi)
+  {
+    JniClassParameter parameter{};
+    shared_ptr<IJniApi> jniApi = make_shared<MockJniApi>();
+    parameter.setJniApi(jniApi);
+
+    ASSERT_TRUE(parameter.getJniApi() == jniApi);
   }
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-07
+* Changed:         2023-04-08
 *
 * */
 
@@ -22,6 +22,7 @@ namespace ls::std::core
       explicit JniApi(JNIEnv *_environment);
       ~JniApi() noexcept override;
 
+      jbyte callByteMethod(jobject _javaObject, jmethodID _methodId) override;
       jclass findClass(const ::std::string &_classPath) override;
       jmethodID getMethodId(jclass _javaClass, const char *_methodIdentifier, const char *_methodSignature) override;
 

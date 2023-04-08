@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-07
+* Changed:         2023-04-08
 *
 * */
 
@@ -21,6 +21,11 @@ JniApi::JniApi(JNIEnv *_environment)
 }
 
 JniApi::~JniApi() noexcept = default;
+
+jbyte JniApi::callByteMethod(jobject _javaObject, jmethodID _methodId)
+{
+  return this->environment->CallByteMethod(_javaObject, _methodId);
+}
 
 jclass JniApi::findClass(const string &_classPath)
 {
