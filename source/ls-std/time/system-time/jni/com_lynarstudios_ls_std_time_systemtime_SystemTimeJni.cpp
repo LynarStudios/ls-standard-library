@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-16
-* Changed:         2023-04-08
+* Changed:         2023-04-09
 *
 * */
 
@@ -11,6 +11,7 @@
 #include <ls-std/core/evaluator/NullPointerEvaluator.hpp>
 #include <ls-std/core/jni/JniClass.hpp>
 #include <ls-std/core/jni/JniClassParameter.hpp>
+#include <ls-std/time/common/jni/JniDateParameterMapper.hpp>
 #include <ls-std/time/system-time/SystemTime.hpp>
 #include <ls-std/time/system-time/jni/com_lynarstudios_ls_std_time_systemtime_SystemTimeJni.h>
 #include <memory>
@@ -20,6 +21,7 @@ using ls::std::core::JniClassParameter;
 using ls::std::core::NullPointerEvaluator;
 using ls::std::time::DateParameter;
 using ls::std::time::SystemTime;
+using ls::std::time::experimental::JniDateParameterMapper;
 using ls::std::time::type::Day;
 using ls::std::time::type::Hour;
 using ls::std::time::type::Minute;
@@ -40,32 +42,28 @@ JNIEXPORT jboolean JNICALL Java_com_lynarstudios_ls_std_time_systemtime_SystemTi
   parameter->setJavaObject(_dateParameter);
 
   JniClass javaClass{parameter, "com/lynarstudios/ls/std/time/systemtime/DateParameter"};
-  cout << (javaClass.load() ? "class loaded..." : "could not load class...") << endl;
+  javaClass.load();
 
-  cout << (javaClass.loadMethod("getYear", "()I") ? "method loaded..." : "could not load method...") << endl;
-  cout << (javaClass.loadMethod("getMonth", "()B") ? "method loaded..." : "could not load method...") << endl;
-  cout << (javaClass.loadMethod("getDay", "()B") ? "method loaded..." : "could not load method...") << endl;
-  cout << (javaClass.loadMethod("getHour", "()B") ? "method loaded..." : "could not load method...") << endl;
-  cout << (javaClass.loadMethod("getMinute", "()B") ? "method loaded..." : "could not load method...") << endl;
-  cout << (javaClass.loadMethod("getSecond", "()B") ? "method loaded..." : "could not load method...") << endl;
-
-  Year year = javaClass.callMethod("getYear").getIntegerValue();
-  Month month = javaClass.callMethod("getMonth").getByteValue();
-  Day day = javaClass.callMethod("getDay").getByteValue();
-  Hour hour = javaClass.callMethod("getHour").getByteValue();
-  Minute minute = javaClass.callMethod("getMinute").getByteValue();
-  Second second = javaClass.callMethod("getSecond").getByteValue();
+  javaClass.loadMethod("getYear", "()I");
+  javaClass.loadMethod("getMonth", "()B");
+  javaClass.loadMethod("getDay", "()B");
+  javaClass.loadMethod("getHour", "()B");
+  javaClass.loadMethod("getMinute", "()B");
+  javaClass.loadMethod("getSecond", "()B");
 
   // map
 
-  DateParameter dateParameter{};
+  DateParameter dateParameter = JniDateParameterMapper::toDateParameter(javaClass);
+  bool success = SystemTime{}.set(dateParameter);
 
-  dateParameter.setYear(year);
-  dateParameter.setMonth(month);
-  dateParameter.setDay(day);
-  dateParameter.setHour(hour);
-  dateParameter.setMinute(minute);
-  dateParameter.setSecond(second);
+  if (success)
+  {
+    cout << R"lit(system time successfully set to ")lit" << dateParameter.getYear() << "-" << (int) dateParameter.getMonth() << "-" << (int) dateParameter.getDay() << " " << (int) dateParameter.getHour() << ":" << (int) dateParameter.getMinute() << ":" << (int) dateParameter.getSecond() << R"lit(" ...)lit" << endl;
+  }
+  else
+  {
+    cout << "could not set system time ..." << endl;
+  }
 
-  return SystemTime{}.set(dateParameter);
+  return success;
 }

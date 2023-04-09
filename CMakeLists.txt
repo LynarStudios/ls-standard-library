@@ -284,6 +284,7 @@ else (WIN32)
 endif ()
 
 set(SOURCE_FILES_TIME_JNI
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/jni/JniDateParameterMapper.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/jni/com_lynarstudios_ls_std_time_systemtime_SystemTimeJni.cpp)
 
 ####################################################################################################################
