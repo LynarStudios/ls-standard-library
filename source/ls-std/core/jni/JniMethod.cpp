@@ -16,8 +16,8 @@ using std::string;
 
 JniMethod::JniMethod(const string &_methodIdentifier, const string &_methodSignature)
 {
-  EmptyStringArgumentEvaluator{_methodIdentifier}.evaluate();
-  EmptyStringArgumentEvaluator{_methodSignature}.evaluate();
+  EmptyStringArgumentEvaluator{_methodIdentifier, "no method identifier has been provided!"}.evaluate();
+  EmptyStringArgumentEvaluator{_methodSignature, "no method signature has been provided!"}.evaluate();
   this->methodIdentifier = _methodIdentifier;
   this->methodSignature = _methodSignature;
 }

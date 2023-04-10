@@ -16,7 +16,7 @@ using std::string;
 
 JniApi::JniApi(JNIEnv *_environment)
 {
-  NullPointerArgumentEvaluator{_environment}.evaluate();
+  NullPointerArgumentEvaluator{_environment, "Java environment is not being provided!"}.evaluate();
   this->environment = _environment;
 }
 

@@ -59,6 +59,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
+            string expected = _exception.getName() + " thrown - no provided reference to JNI class parameter!";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -75,6 +79,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
+            string expected = _exception.getName() + " thrown - path to associated Java class is empty!";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -91,6 +99,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
+            string expected = _exception.getName() + " thrown - Java environment is not being provided!";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

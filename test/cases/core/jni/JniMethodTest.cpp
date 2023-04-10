@@ -11,10 +11,12 @@
 #include <ls-std/ls-std-core-jni.hpp>
 #include <ls-std/ls-std-core.hpp>
 #include <memory>
+#include <string>
 
 using ls::std::core::IllegalArgumentException;
 using ls::std::core::experimental::JniMethod;
 using std::make_shared;
+using std::string;
 using testing::Test;
 
 namespace
@@ -37,6 +39,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
+            string expected = _exception.getName() + " thrown - no method identifier has been provided!";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -53,6 +59,10 @@ namespace
           }
           catch (const IllegalArgumentException &_exception)
           {
+            string expected = _exception.getName() + " thrown - no method signature has been provided!";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

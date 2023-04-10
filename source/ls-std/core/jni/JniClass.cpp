@@ -32,9 +32,9 @@ using std::string;
 
 JniClass::JniClass(const shared_ptr<JniClassParameter> &_parameter, const string &_path)
 {
-  NullPointerArgumentEvaluator{_parameter}.evaluate();
-  EmptyStringArgumentEvaluator{_path}.evaluate();
-  NullPointerArgumentEvaluator{_parameter->getJavaEnvironment()}.evaluate();
+  NullPointerArgumentEvaluator{_parameter, "no provided reference to JNI class parameter!"}.evaluate();
+  EmptyStringArgumentEvaluator{_path, "path to associated Java class is empty!"}.evaluate();
+  NullPointerArgumentEvaluator{_parameter->getJavaEnvironment(), "Java environment is not being provided!"}.evaluate();
   this->parameter = _parameter;
   this->path = _path;
   ConditionalFunctionExecutor{_parameter->getJniApi() == nullptr}.execute([this]() { _createJniApi(); });
