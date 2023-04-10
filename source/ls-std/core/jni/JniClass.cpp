@@ -48,6 +48,7 @@ JniReturnValue JniClass::callMethod(const string &_methodIdentifier)
 
   if (this->_hasMethod(_methodIdentifier))
   {
+    this->_callBooleanMethod(_methodIdentifier, returnValue);
     this->_callByteMethod(_methodIdentifier, returnValue);
     this->_callIntMethod(_methodIdentifier, returnValue);
   }
@@ -68,7 +69,7 @@ bool JniClass::load()
 
 bool JniClass::loadMethod(const string &_methodIdentifier, const string &_methodSignature)
 {
-  NullPointerEvaluator{this->javaClass}.evaluate();
+  NullPointerEvaluator{this->javaClass, "no Java class reference available for loading class method!"}.evaluate();
   jmethodID methodId = this->parameter->getJniApi()->getMethodId(this->javaClass, _methodIdentifier.c_str(), _methodSignature.c_str());
   bool succeeded = methodId != nullptr && !this->_hasMethod(_methodIdentifier);
 
@@ -82,7 +83,20 @@ bool JniClass::loadMethod(const string &_methodIdentifier, const string &_method
   return succeeded;
 }
 
-void JniClass::_callByteMethod(const string &_methodIdentifier, JniReturnValue &_returnValue)
+void JniClass::_callBooleanMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue)
+{
+  JniMethod method = this->methods.at(_methodIdentifier);
+  string searchString = ")Z";
+  string methodSignature = method.getMethodSignature();
+  bool hasBooleanReturnType = methodSignature.rfind(searchString) == (methodSignature.size() - searchString.size());
+
+  if (hasBooleanReturnType)
+  {
+    _returnValue.setBooleanValue(this->parameter->getJniApi()->callBooleanMethod(this->parameter->getJavaObject(), method.getMethodId()));
+  }
+}
+
+void JniClass::_callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue)
 {
   JniMethod method = this->methods.at(_methodIdentifier);
   string searchString = ")B";

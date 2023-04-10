@@ -22,6 +22,7 @@ namespace test::core::jni
       MockJniApi();
       ~MockJniApi() noexcept override;
 
+      MOCK_METHOD(jboolean, callBooleanMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jbyte, callByteMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jint, callIntMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jclass, findClass, (const ::std::string &_classPath), (override));

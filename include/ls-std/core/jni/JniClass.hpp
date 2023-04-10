@@ -41,6 +41,7 @@ namespace ls::std::core::experimental
       ::std::shared_ptr<ls::std::core::experimental::JniClassParameter> parameter{};
       ::std::string path{};
 
+      void _callBooleanMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _callIntMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _createJniApi();

@@ -15,6 +15,11 @@ JniReturnValue::JniReturnValue() = default;
 
 JniReturnValue::~JniReturnValue() = default;
 
+jboolean JniReturnValue::getBooleanValue() const
+{
+  return this->booleanValue;
+}
+
 jbyte JniReturnValue::getByteValue() const
 {
   return this->byteValue;
@@ -23,6 +28,11 @@ jbyte JniReturnValue::getByteValue() const
 jint JniReturnValue::getIntegerValue() const
 {
   return this->integerValue;
+}
+
+void JniReturnValue::setBooleanValue(jboolean _booleanValue)
+{
+  this->booleanValue = _booleanValue;
 }
 
 void JniReturnValue::setByteValue(jbyte _byteValue)

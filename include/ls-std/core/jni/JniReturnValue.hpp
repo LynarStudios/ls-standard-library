@@ -22,13 +22,16 @@ namespace ls::std::core::experimental
       JniReturnValue();
       ~JniReturnValue();
 
+      [[nodiscard]] jboolean getBooleanValue() const;
       [[nodiscard]] jbyte getByteValue() const;
       [[nodiscard]] jint getIntegerValue() const;
+      void setBooleanValue(jboolean _booleanValue);
       void setByteValue(jbyte _byteValue);
       void setIntegerValue(jint _integerValue);
 
     private:
 
+      jboolean booleanValue{};
       jbyte byteValue{};
       jint integerValue{};
   };

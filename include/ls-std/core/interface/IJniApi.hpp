@@ -23,6 +23,7 @@ namespace ls::std::core::experimental::interface_type
       IJniApi();
       virtual ~IJniApi();
 
+      virtual jboolean callBooleanMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jbyte callByteMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jint callIntMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jclass findClass(const ::std::string &_classPath) = 0;

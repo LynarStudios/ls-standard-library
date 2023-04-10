@@ -22,6 +22,7 @@ namespace ls::std::core::experimental
       explicit JniApi(JNIEnv *_environment);
       ~JniApi() noexcept override;
 
+      jboolean callBooleanMethod(jobject _javaObject, jmethodID _methodId) override;
       jbyte callByteMethod(jobject _javaObject, jmethodID _methodId) override;
       jint callIntMethod(jobject _javaObject, jmethodID _methodId) override;
       jclass findClass(const ::std::string &_classPath) override;

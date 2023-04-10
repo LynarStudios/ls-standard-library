@@ -23,6 +23,12 @@ namespace
       ~JniReturnValueTest() override = default;
   };
 
+  TEST_F(JniReturnValueTest, getBooleanValue)
+  {
+    JniReturnValue returnValue{};
+    ASSERT_FALSE(returnValue.getBooleanValue());
+  }
+
   TEST_F(JniReturnValueTest, getByteValue)
   {
     JniReturnValue returnValue{};
@@ -33,6 +39,14 @@ namespace
   {
     JniReturnValue returnValue{};
     ASSERT_EQ(0, returnValue.getIntegerValue());
+  }
+
+  TEST_F(JniReturnValueTest, setBooleanValue)
+  {
+    JniReturnValue returnValue{};
+    returnValue.setBooleanValue(true);
+
+    ASSERT_TRUE(returnValue.getBooleanValue());
   }
 
   TEST_F(JniReturnValueTest, setByteValue)

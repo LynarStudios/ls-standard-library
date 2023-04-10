@@ -22,6 +22,11 @@ JniApi::JniApi(JNIEnv *_environment)
 
 JniApi::~JniApi() noexcept = default;
 
+jboolean JniApi::callBooleanMethod(jobject _javaObject, jmethodID _methodId)
+{
+  return this->environment->CallBooleanMethod(_javaObject, _methodId);
+}
+
 jbyte JniApi::callByteMethod(jobject _javaObject, jmethodID _methodId)
 {
   return this->environment->CallByteMethod(_javaObject, _methodId);

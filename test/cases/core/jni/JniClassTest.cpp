@@ -109,6 +109,28 @@ namespace
         IllegalArgumentException);
   }
 
+  TEST_F(JniClassTest, callMethod_boolean_return_value)
+  {
+    string classPath = "java.utils.String";
+    JniClass javaClass = this->createJniClass(classPath);
+
+    EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
+    string methodIdentifier = "isBlue";
+    string methodSignature = "()Z";
+    EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));
+    jmethodID methodId = (jmethodID) make_shared<int>().get();
+    ON_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).WillByDefault(Return(methodId));
+
+    EXPECT_CALL(*this->jniApi, callBooleanMethod(testing::_, methodId)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, callBooleanMethod(testing::_, methodId)).WillByDefault(Return(true));
+
+    ASSERT_TRUE(javaClass.load());
+    ASSERT_TRUE(javaClass.loadMethod(methodIdentifier, methodSignature));
+    ASSERT_TRUE(javaClass.callMethod(methodIdentifier).getBooleanValue());
+  }
+
   TEST_F(JniClassTest, callMethod_byte_return_value)
   {
     string classPath = "java.utils.String";
@@ -225,6 +247,10 @@ namespace
           }
           catch (const NullPointerException &_exception)
           {
+            string expected = _exception.getName() + " thrown - no Java class reference available for loading class method!";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
