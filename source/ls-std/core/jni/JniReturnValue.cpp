@@ -35,6 +35,11 @@ jint JniReturnValue::getIntegerValue() const
   return this->integerValue;
 }
 
+jshort JniReturnValue::getShortValue() const
+{
+  return this->shortValue;
+}
+
 void JniReturnValue::setBooleanValue(jboolean _booleanValue)
 {
   this->booleanValue = _booleanValue;
@@ -53,4 +58,9 @@ void JniReturnValue::setCharValue(jchar _charValue)
 void JniReturnValue::setIntegerValue(jint _integerValue)
 {
   this->integerValue = _integerValue;
+}
+
+void JniReturnValue::setShortValue(jshort _shortValue)
+{
+  this->shortValue = _shortValue;
 }

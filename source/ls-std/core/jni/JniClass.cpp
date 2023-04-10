@@ -52,6 +52,7 @@ JniReturnValue JniClass::callMethod(const string &_methodIdentifier)
     this->_callByteMethod(_methodIdentifier, returnValue);
     this->_callCharMethod(_methodIdentifier, returnValue);
     this->_callIntMethod(_methodIdentifier, returnValue);
+    this->_callShortMethod(_methodIdentifier, returnValue);
   }
 
   return returnValue;
@@ -133,6 +134,19 @@ void JniClass::_callIntMethod(const string &_methodIdentifier, JniReturnValue &_
   if (hasIntegerReturnType)
   {
     _returnValue.setIntegerValue(this->parameter->getJniApi()->callIntMethod(this->parameter->getJavaObject(), method.getMethodId()));
+  }
+}
+
+void JniClass::_callShortMethod(const string &_methodIdentifier, JniReturnValue &_returnValue)
+{
+  JniMethod method = this->methods.at(_methodIdentifier);
+  string searchString = ")S";
+  string methodSignature = method.getMethodSignature();
+  bool hasShortReturnType = methodSignature.rfind(searchString) == (methodSignature.size() - searchString.size());
+
+  if (hasShortReturnType)
+  {
+    _returnValue.setShortValue(this->parameter->getJniApi()->callShortMethod(this->parameter->getJavaObject(), method.getMethodId()));
   }
 }
 

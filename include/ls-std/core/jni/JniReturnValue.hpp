@@ -26,10 +26,12 @@ namespace ls::std::core::experimental
       [[nodiscard]] jbyte getByteValue() const;
       [[nodiscard]] jchar getCharValue() const;
       [[nodiscard]] jint getIntegerValue() const;
+      [[nodiscard]] jshort getShortValue() const;
       void setBooleanValue(jboolean _booleanValue);
       void setByteValue(jbyte _byteValue);
       void setCharValue(jchar _charValue);
       void setIntegerValue(jint _integerValue);
+      void setShortValue(jshort _shortValue);
 
     private:
 
@@ -37,6 +39,7 @@ namespace ls::std::core::experimental
       jbyte byteValue{};
       jchar charValue{};
       jint integerValue{};
+      jshort shortValue{};
   };
 }
 

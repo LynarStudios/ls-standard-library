@@ -45,6 +45,7 @@ namespace ls::std::core::experimental
       void _callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _callCharMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _callIntMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
+      void _callShortMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _createJniApi();
       [[nodiscard]] bool _hasMethod(const ::std::string &_methodIdentifier);
   };
