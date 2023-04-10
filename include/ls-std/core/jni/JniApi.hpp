@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-10
+* Changed:         2023-04-11
 *
 * */
 
@@ -24,6 +24,7 @@ namespace ls::std::core::experimental
 
       jboolean callBooleanMethod(jobject _javaObject, jmethodID _methodId) override;
       jbyte callByteMethod(jobject _javaObject, jmethodID _methodId) override;
+      jchar callCharMethod(jobject _javaObject, jmethodID _methodId) override;
       jint callIntMethod(jobject _javaObject, jmethodID _methodId) override;
       jclass findClass(const ::std::string &_classPath) override;
       jmethodID getMethodId(jclass _javaClass, const char *_methodIdentifier, const char *_methodSignature) override;

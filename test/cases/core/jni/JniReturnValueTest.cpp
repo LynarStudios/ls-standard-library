@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-08
-* Changed:         2023-04-10
+* Changed:         2023-04-11
 *
 * */
 
@@ -35,6 +35,12 @@ namespace
     ASSERT_EQ(0, returnValue.getByteValue());
   }
 
+  TEST_F(JniReturnValueTest, getCharValue)
+  {
+    JniReturnValue returnValue{};
+    ASSERT_EQ(0, (int) returnValue.getCharValue());
+  }
+
   TEST_F(JniReturnValueTest, getIntegerValue)
   {
     JniReturnValue returnValue{};
@@ -55,6 +61,14 @@ namespace
     returnValue.setByteValue(22);
 
     ASSERT_EQ(22, returnValue.getByteValue());
+  }
+
+  TEST_F(JniReturnValueTest, setCharValue)
+  {
+    JniReturnValue returnValue{};
+    returnValue.setCharValue('P');
+
+    ASSERT_EQ('P', returnValue.getCharValue());
   }
 
   TEST_F(JniReturnValueTest, setIntegerValue)

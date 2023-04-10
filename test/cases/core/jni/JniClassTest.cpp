@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-10
+* Changed:         2023-04-11
 *
 * */
 
@@ -151,6 +151,28 @@ namespace
     ASSERT_TRUE(javaClass.load());
     ASSERT_TRUE(javaClass.loadMethod(methodIdentifier, methodSignature));
     ASSERT_EQ(22, javaClass.callMethod(methodIdentifier).getByteValue());
+  }
+
+  TEST_F(JniClassTest, callMethod_char_return_value)
+  {
+    string classPath = "java.utils.String";
+    JniClass javaClass = this->createJniClass(classPath);
+
+    EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
+    string methodIdentifier = "getLetter";
+    string methodSignature = "()C";
+    EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));
+    jmethodID methodId = (jmethodID) make_shared<int>().get();
+    ON_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).WillByDefault(Return(methodId));
+
+    EXPECT_CALL(*this->jniApi, callCharMethod(testing::_, methodId)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, callCharMethod(testing::_, methodId)).WillByDefault(Return('P'));
+
+    ASSERT_TRUE(javaClass.load());
+    ASSERT_TRUE(javaClass.loadMethod(methodIdentifier, methodSignature));
+    ASSERT_EQ('P', javaClass.callMethod(methodIdentifier).getCharValue());
   }
 
   TEST_F(JniClassTest, callMethod_integer_return_value)

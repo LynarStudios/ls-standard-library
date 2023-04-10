@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-10
+* Changed:         2023-04-11
 *
 * */
 
@@ -30,6 +30,11 @@ jboolean JniApi::callBooleanMethod(jobject _javaObject, jmethodID _methodId)
 jbyte JniApi::callByteMethod(jobject _javaObject, jmethodID _methodId)
 {
   return this->environment->CallByteMethod(_javaObject, _methodId);
+}
+
+jchar JniApi::callCharMethod(jobject _javaObject, jmethodID _methodId)
+{
+  return this->environment->CallCharMethod(_javaObject, _methodId);
 }
 
 jint JniApi::callIntMethod(jobject _javaObject, jmethodID _methodId)

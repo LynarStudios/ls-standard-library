@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-10
+* Changed:         2023-04-11
 *
 * */
 
@@ -50,6 +50,7 @@ JniReturnValue JniClass::callMethod(const string &_methodIdentifier)
   {
     this->_callBooleanMethod(_methodIdentifier, returnValue);
     this->_callByteMethod(_methodIdentifier, returnValue);
+    this->_callCharMethod(_methodIdentifier, returnValue);
     this->_callIntMethod(_methodIdentifier, returnValue);
   }
 
@@ -83,7 +84,7 @@ bool JniClass::loadMethod(const string &_methodIdentifier, const string &_method
   return succeeded;
 }
 
-void JniClass::_callBooleanMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue)
+void JniClass::_callBooleanMethod(const string &_methodIdentifier, JniReturnValue &_returnValue)
 {
   JniMethod method = this->methods.at(_methodIdentifier);
   string searchString = ")Z";
@@ -96,7 +97,7 @@ void JniClass::_callBooleanMethod(const ::std::string &_methodIdentifier, ls::st
   }
 }
 
-void JniClass::_callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue)
+void JniClass::_callByteMethod(const string &_methodIdentifier, JniReturnValue &_returnValue)
 {
   JniMethod method = this->methods.at(_methodIdentifier);
   string searchString = ")B";
@@ -106,6 +107,19 @@ void JniClass::_callByteMethod(const ::std::string &_methodIdentifier, ls::std::
   if (hasByteReturnType)
   {
     _returnValue.setByteValue(this->parameter->getJniApi()->callByteMethod(this->parameter->getJavaObject(), method.getMethodId()));
+  }
+}
+
+void JniClass::_callCharMethod(const string &_methodIdentifier, JniReturnValue &_returnValue)
+{
+  JniMethod method = this->methods.at(_methodIdentifier);
+  string searchString = ")C";
+  string methodSignature = method.getMethodSignature();
+  bool hasCharReturnType = methodSignature.rfind(searchString) == (methodSignature.size() - searchString.size());
+
+  if (hasCharReturnType)
+  {
+    _returnValue.setCharValue(this->parameter->getJniApi()->callCharMethod(this->parameter->getJavaObject(), method.getMethodId()));
   }
 }
 

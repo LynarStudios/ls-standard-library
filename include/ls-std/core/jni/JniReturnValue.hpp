@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-08
-* Changed:         2023-04-10
+* Changed:         2023-04-11
 *
 * */
 
@@ -24,15 +24,18 @@ namespace ls::std::core::experimental
 
       [[nodiscard]] jboolean getBooleanValue() const;
       [[nodiscard]] jbyte getByteValue() const;
+      [[nodiscard]] jchar getCharValue() const;
       [[nodiscard]] jint getIntegerValue() const;
       void setBooleanValue(jboolean _booleanValue);
       void setByteValue(jbyte _byteValue);
+      void setCharValue(jchar _charValue);
       void setIntegerValue(jint _integerValue);
 
     private:
 
       jboolean booleanValue{};
       jbyte byteValue{};
+      jchar charValue{};
       jint integerValue{};
   };
 }

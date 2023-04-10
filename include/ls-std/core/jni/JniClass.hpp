@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-10
+* Changed:         2023-04-11
 *
 * */
 
@@ -43,6 +43,7 @@ namespace ls::std::core::experimental
 
       void _callBooleanMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
+      void _callCharMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _callIntMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _createJniApi();
       [[nodiscard]] bool _hasMethod(const ::std::string &_methodIdentifier);
