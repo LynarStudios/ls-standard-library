@@ -3,13 +3,13 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-08
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
 #include <ls-std/core/jni/JniReturnValue.hpp>
 
-using ls::std::core::JniReturnValue;
+using ls::std::core::experimental::JniReturnValue;
 
 JniReturnValue::JniReturnValue() = default;
 

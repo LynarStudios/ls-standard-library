@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -17,13 +17,13 @@
 
 using ls::std::core::ConditionalFunctionExecutor;
 using ls::std::core::EmptyStringArgumentEvaluator;
-using ls::std::core::JniApi;
-using ls::std::core::JniClass;
-using ls::std::core::JniClassParameter;
-using ls::std::core::JniMethod;
-using ls::std::core::JniReturnValue;
 using ls::std::core::NullPointerArgumentEvaluator;
 using ls::std::core::NullPointerEvaluator;
+using ls::std::core::experimental::JniApi;
+using ls::std::core::experimental::JniClass;
+using ls::std::core::experimental::JniClassParameter;
+using ls::std::core::experimental::JniMethod;
+using ls::std::core::experimental::JniReturnValue;
 using std::make_pair;
 using std::make_shared;
 using std::pair;

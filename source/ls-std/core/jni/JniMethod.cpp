@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-08
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -11,7 +11,7 @@
 #include <ls-std/core/jni/JniMethod.hpp>
 
 using ls::std::core::EmptyStringArgumentEvaluator;
-using ls::std::core::JniMethod;
+using ls::std::core::experimental::JniMethod;
 using std::string;
 
 JniMethod::JniMethod(const string &_methodIdentifier, const string &_methodSignature)

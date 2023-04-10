@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -15,9 +15,9 @@
 #include <memory>
 
 using ls::std::core::IllegalArgumentException;
-using ls::std::core::JniClass;
-using ls::std::core::JniClassParameter;
 using ls::std::core::NullPointerException;
+using ls::std::core::experimental::JniClass;
+using ls::std::core::experimental::JniClassParameter;
 using std::make_shared;
 using std::shared_ptr;
 using std::string;

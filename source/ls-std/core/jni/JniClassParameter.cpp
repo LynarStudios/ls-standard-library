@@ -3,14 +3,14 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
 #include <ls-std/core/jni/JniClassParameter.hpp>
 
-using ls::std::core::JniClassParameter;
-using ls::std::core::interface_type::IJniApi;
+using ls::std::core::experimental::JniClassParameter;
+using ls::std::core::experimental::interface_type::IJniApi;
 using std::shared_ptr;
 using std::string;
 

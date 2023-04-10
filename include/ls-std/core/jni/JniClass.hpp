@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -20,16 +20,16 @@
 #include <string>
 #include <unordered_map>
 
-namespace ls::std::core
+namespace ls::std::core::experimental
 {
   class LS_STD_DYNAMIC_GOAL JniClass
   {
     public:
 
-      explicit JniClass(const ::std::shared_ptr<ls::std::core::JniClassParameter> &_parameter, const ::std::string &_path);
+      explicit JniClass(const ::std::shared_ptr<ls::std::core::experimental::JniClassParameter> &_parameter, const ::std::string &_path);
       virtual ~JniClass();
 
-      [[nodiscard]] ls::std::core::JniReturnValue callMethod(const ::std::string &_methodIdentifier);
+      [[nodiscard]] ls::std::core::experimental::JniReturnValue callMethod(const ::std::string &_methodIdentifier);
       [[nodiscard]] bool hasMethod(const ::std::string &_methodIdentifier);
       bool load();                                                                                    // nodiscard is optional here
       bool loadMethod(const ::std::string &_methodIdentifier, const ::std::string &_methodSignature); // nodiscard is optional here
@@ -37,12 +37,12 @@ namespace ls::std::core
     private:
 
       jclass javaClass{};
-      ::std::unordered_map<::std::string, ls::std::core::JniMethod> methods{};
-      ::std::shared_ptr<ls::std::core::JniClassParameter> parameter{};
+      ::std::unordered_map<::std::string, ls::std::core::experimental::JniMethod> methods{};
+      ::std::shared_ptr<ls::std::core::experimental::JniClassParameter> parameter{};
       ::std::string path{};
 
-      void _callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::JniReturnValue &_returnValue);
-      void _callIntMethod(const ::std::string &_methodIdentifier, ls::std::core::JniReturnValue &_returnValue);
+      void _callByteMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
+      void _callIntMethod(const ::std::string &_methodIdentifier, ls::std::core::experimental::JniReturnValue &_returnValue);
       void _createJniApi();
       [[nodiscard]] bool _hasMethod(const ::std::string &_methodIdentifier);
   };

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -14,7 +14,7 @@
 #include <ls-std/os/dynamic-goal.hpp>
 #include <string>
 
-namespace ls::std::core::interface_type
+namespace ls::std::core::experimental::interface_type
 {
   class LS_STD_DYNAMIC_GOAL IJniApi
   {

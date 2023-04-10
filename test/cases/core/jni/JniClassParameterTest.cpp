@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -12,9 +12,9 @@
 #include <ls-std/ls-std-core-jni.hpp>
 #include <memory>
 
-using ls::std::core::JniApi;
-using ls::std::core::JniClassParameter;
-using ls::std::core::interface_type::IJniApi;
+using ls::std::core::experimental::JniApi;
+using ls::std::core::experimental::JniClassParameter;
+using ls::std::core::experimental::interface_type::IJniApi;
 using std::make_shared;
 using std::shared_ptr;
 using test::core::jni::MockJniApi;

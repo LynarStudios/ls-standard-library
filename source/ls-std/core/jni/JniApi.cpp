@@ -3,15 +3,15 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
 #include <ls-std/core/evaluator/NullPointerArgumentEvaluator.hpp>
 #include <ls-std/core/jni/JniApi.hpp>
 
-using ls::std::core::JniApi;
 using ls::std::core::NullPointerArgumentEvaluator;
+using ls::std::core::experimental::JniApi;
 using std::string;
 
 JniApi::JniApi(JNIEnv *_environment)

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-09
-* Changed:         2023-04-09
+* Changed:         2023-04-10
 *
 * */
 
@@ -11,7 +11,7 @@
 #include <ls-std/time/common/DateParameter.hpp>
 #include <ls-std/time/common/jni/JniDateParameterMapper.hpp>
 
-using ls::std::core::JniClass;
+using ls::std::core::experimental::JniClass;
 using ls::std::time::DateParameter;
 using ls::std::time::experimental::JniDateParameterMapper;
 

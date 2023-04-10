@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-08
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -13,7 +13,7 @@
 #include <memory>
 
 using ls::std::core::IllegalArgumentException;
-using ls::std::core::JniMethod;
+using ls::std::core::experimental::JniMethod;
 using std::make_shared;
 using testing::Test;
 

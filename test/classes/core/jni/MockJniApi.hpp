@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -15,7 +15,7 @@
 
 namespace test::core::jni
 {
-  class MockJniApi : public ls::std::core::interface_type::IJniApi
+  class MockJniApi : public ls::std::core::experimental::interface_type::IJniApi
   {
     public:
 

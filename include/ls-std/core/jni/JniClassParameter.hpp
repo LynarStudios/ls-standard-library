@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-07
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
@@ -16,7 +16,7 @@
 #include <memory>
 #include <string>
 
-namespace ls::std::core
+namespace ls::std::core::experimental
 {
   class LS_STD_DYNAMIC_GOAL JniClassParameter
   {
@@ -27,16 +27,16 @@ namespace ls::std::core
 
       [[nodiscard]] JNIEnv *getJavaEnvironment();
       [[nodiscard]] jobject getJavaObject();
-      [[nodiscard]] ::std::shared_ptr<ls::std::core::interface_type::IJniApi> getJniApi();
+      [[nodiscard]] ::std::shared_ptr<ls::std::core::experimental::interface_type::IJniApi> getJniApi();
       void setJavaEnvironment(JNIEnv *_environment);
       void setJavaObject(jobject _javaObject);
-      void setJniApi(const ::std::shared_ptr<ls::std::core::interface_type::IJniApi> &_jniApi);
+      void setJniApi(const ::std::shared_ptr<ls::std::core::experimental::interface_type::IJniApi> &_jniApi);
 
     private:
 
       JNIEnv *environment{};
       jobject javaObject{};
-      ::std::shared_ptr<ls::std::core::interface_type::IJniApi> jniApi{};
+      ::std::shared_ptr<ls::std::core::experimental::interface_type::IJniApi> jniApi{};
   };
 }
 

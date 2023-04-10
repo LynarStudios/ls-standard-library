@@ -3,14 +3,14 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-04-08
-* Changed:         2023-04-08
+* Changed:         2023-04-10
 *
 * */
 
 #include <gtest/gtest.h>
 #include <ls-std/ls-std-core-jni.hpp>
 
-using ls::std::core::JniReturnValue;
+using ls::std::core::experimental::JniReturnValue;
 using testing::Test;
 
 namespace

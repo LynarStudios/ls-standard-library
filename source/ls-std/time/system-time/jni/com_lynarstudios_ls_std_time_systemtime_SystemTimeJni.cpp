@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-03-16
-* Changed:         2023-04-09
+* Changed:         2023-04-10
 *
 * */
 
@@ -16,9 +16,9 @@
 #include <ls-std/time/system-time/jni/com_lynarstudios_ls_std_time_systemtime_SystemTimeJni.h>
 #include <memory>
 
-using ls::std::core::JniClass;
-using ls::std::core::JniClassParameter;
 using ls::std::core::NullPointerEvaluator;
+using ls::std::core::experimental::JniClass;
+using ls::std::core::experimental::JniClassParameter;
 using ls::std::time::DateParameter;
 using ls::std::time::SystemTime;
 using ls::std::time::experimental::JniDateParameterMapper;
