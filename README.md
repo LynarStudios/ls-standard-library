@@ -36,7 +36,9 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 - added NotImplementedException class, which can be thrown in case a method is provided, but not implemented
 - a JNI class is now available, wrapping C-like JNI functionalities, which can be found in __ls-std-core__ module - in
-  order to use this feature the CMake option __LS_STD_BUILD_WITH_JNI__ has to be enabled
+  order to use this feature the CMake option __LS_STD_BUILD_WITH_JNI__ has to be enabled - please note, that this
+  feature is experimental and incomplete
+- a SystemTime class has been added to the library's time module for setting the local system time
 
 #### Improvements ####
 
