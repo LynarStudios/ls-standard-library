@@ -25,6 +25,7 @@ namespace ls::std::core::experimental
       jboolean callBooleanMethod(jobject _javaObject, jmethodID _methodId) override;
       jbyte callByteMethod(jobject _javaObject, jmethodID _methodId) override;
       jchar callCharMethod(jobject _javaObject, jmethodID _methodId) override;
+      jdouble callDoubleMethod(jobject _javaObject, jmethodID _methodId) override;
       jfloat callFloatMethod(jobject _javaObject, jmethodID _methodId) override;
       jint callIntMethod(jobject _javaObject, jmethodID _methodId) override;
       jlong callLongMethod(jobject _javaObject, jmethodID _methodId) override;

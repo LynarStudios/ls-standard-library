@@ -25,6 +25,7 @@ namespace ls::std::core::experimental
       [[nodiscard]] jboolean getBooleanValue() const;
       [[nodiscard]] jbyte getByteValue() const;
       [[nodiscard]] jchar getCharValue() const;
+      [[nodiscard]] jdouble getDoubleValue() const;
       [[nodiscard]] jfloat getFloatValue() const;
       [[nodiscard]] jint getIntegerValue() const;
       [[nodiscard]] jlong getLongValue() const;
@@ -32,6 +33,7 @@ namespace ls::std::core::experimental
       void setBooleanValue(jboolean _booleanValue);
       void setByteValue(jbyte _byteValue);
       void setCharValue(jchar _charValue);
+      void setDoubleValue(jdouble _doubleValue);
       void setFloatValue(jfloat _floatValue);
       void setIntegerValue(jint _integerValue);
       void setLongValue(jlong _longValue);
@@ -42,6 +44,7 @@ namespace ls::std::core::experimental
       jboolean booleanValue{};
       jbyte byteValue{};
       jchar charValue{};
+      jdouble doubleValue{};
       jfloat floatValue{};
       jint integerValue{};
       jlong longValue{};

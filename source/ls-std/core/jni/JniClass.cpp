@@ -51,6 +51,7 @@ JniReturnValue JniClass::callMethod(const string &_methodIdentifier)
     this->_callBooleanMethod(_methodIdentifier, returnValue);
     this->_callByteMethod(_methodIdentifier, returnValue);
     this->_callCharMethod(_methodIdentifier, returnValue);
+    this->_callDoubleMethod(_methodIdentifier, returnValue);
     this->_callFloatMethod(_methodIdentifier, returnValue);
     this->_callIntMethod(_methodIdentifier, returnValue);
     this->_callLongMethod(_methodIdentifier, returnValue);
@@ -123,6 +124,19 @@ void JniClass::_callCharMethod(const string &_methodIdentifier, JniReturnValue &
   if (hasCharReturnType)
   {
     _returnValue.setCharValue(this->parameter->getJniApi()->callCharMethod(this->parameter->getJavaObject(), method.getMethodId()));
+  }
+}
+
+void JniClass::_callDoubleMethod(const string &_methodIdentifier, JniReturnValue &_returnValue)
+{
+  JniMethod method = this->methods.at(_methodIdentifier);
+  string searchString = ")D";
+  string methodSignature = method.getMethodSignature();
+  bool hasDoubleReturnType = methodSignature.rfind(searchString) == (methodSignature.size() - searchString.size());
+
+  if (hasDoubleReturnType)
+  {
+    _returnValue.setDoubleValue(this->parameter->getJniApi()->callDoubleMethod(this->parameter->getJavaObject(), method.getMethodId()));
   }
 }
 

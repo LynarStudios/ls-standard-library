@@ -26,6 +26,7 @@ namespace ls::std::core::experimental::interface_type
       virtual jboolean callBooleanMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jbyte callByteMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jchar callCharMethod(jobject _javaObject, jmethodID _methodId) = 0;
+      virtual jdouble callDoubleMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jfloat callFloatMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jint callIntMethod(jobject _javaObject, jmethodID _methodId) = 0;
       virtual jlong callLongMethod(jobject _javaObject, jmethodID _methodId) = 0;

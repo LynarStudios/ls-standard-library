@@ -41,6 +41,12 @@ namespace
     ASSERT_EQ(0, (int) returnValue.getCharValue());
   }
 
+  TEST_F(JniReturnValueTest, getDoubleValue)
+  {
+    JniReturnValue returnValue{};
+    ASSERT_FLOAT_EQ(0.0l, returnValue.getDoubleValue());
+  }
+
   TEST_F(JniReturnValueTest, getFloatValue)
   {
     JniReturnValue returnValue{};
@@ -87,6 +93,14 @@ namespace
     returnValue.setCharValue('P');
 
     ASSERT_EQ('P', returnValue.getCharValue());
+  }
+
+  TEST_F(JniReturnValueTest, setDoubleValue)
+  {
+    JniReturnValue returnValue{};
+    returnValue.setDoubleValue(3.14159265l);
+
+    ASSERT_FLOAT_EQ(3.14159265l, returnValue.getDoubleValue());
   }
 
   TEST_F(JniReturnValueTest, setFloatValue)

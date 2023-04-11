@@ -175,6 +175,28 @@ namespace
     ASSERT_EQ('P', javaClass.callMethod(methodIdentifier).getCharValue());
   }
 
+  TEST_F(JniClassTest, callMethod_double_return_value)
+  {
+    string classPath = "java.utils.String";
+    JniClass javaClass = this->createJniClass(classPath);
+
+    EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
+    string methodIdentifier = "getPi";
+    string methodSignature = "()D";
+    EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));
+    jmethodID methodId = (jmethodID) make_shared<int>().get();
+    ON_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).WillByDefault(Return(methodId));
+
+    EXPECT_CALL(*this->jniApi, callDoubleMethod(testing::_, methodId)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, callDoubleMethod(testing::_, methodId)).WillByDefault(Return(3.14159265l));
+
+    ASSERT_TRUE(javaClass.load());
+    ASSERT_TRUE(javaClass.loadMethod(methodIdentifier, methodSignature));
+    ASSERT_DOUBLE_EQ(3.14159265l, javaClass.callMethod(methodIdentifier).getDoubleValue());
+  }
+
   TEST_F(JniClassTest, callMethod_float_return_value)
   {
     string classPath = "java.utils.String";
