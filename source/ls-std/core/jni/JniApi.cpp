@@ -37,6 +37,11 @@ jchar JniApi::callCharMethod(jobject _javaObject, jmethodID _methodId)
   return this->environment->CallCharMethod(_javaObject, _methodId);
 }
 
+jfloat JniApi::callFloatMethod(jobject _javaObject, jmethodID _methodId)
+{
+  return this->environment->CallFloatMethod(_javaObject, _methodId);
+}
+
 jint JniApi::callIntMethod(jobject _javaObject, jmethodID _methodId)
 {
   return this->environment->CallIntMethod(_javaObject, _methodId);

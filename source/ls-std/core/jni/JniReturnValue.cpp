@@ -30,6 +30,11 @@ jchar JniReturnValue::getCharValue() const
   return this->charValue;
 }
 
+jfloat JniReturnValue::getFloatValue() const
+{
+  return this->floatValue;
+}
+
 jint JniReturnValue::getIntegerValue() const
 {
   return this->integerValue;
@@ -58,6 +63,11 @@ void JniReturnValue::setByteValue(jbyte _byteValue)
 void JniReturnValue::setCharValue(jchar _charValue)
 {
   this->charValue = _charValue;
+}
+
+void JniReturnValue::setFloatValue(jfloat _floatValue)
+{
+  this->floatValue = _floatValue;
 }
 
 void JniReturnValue::setIntegerValue(jint _integerValue)

@@ -25,6 +25,7 @@ namespace test::core::jni
       MOCK_METHOD(jboolean, callBooleanMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jbyte, callByteMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jchar, callCharMethod, (jobject _javaObject, jmethodID _methodId), (override));
+      MOCK_METHOD(jfloat, callFloatMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jint, callIntMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jlong, callLongMethod, (jobject _javaObject, jmethodID _methodId), (override));
       MOCK_METHOD(jshort, callShortMethod, (jobject _javaObject, jmethodID _methodId), (override));
