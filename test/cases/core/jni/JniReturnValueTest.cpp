@@ -47,6 +47,12 @@ namespace
     ASSERT_EQ(0, returnValue.getIntegerValue());
   }
 
+  TEST_F(JniReturnValueTest, getLongValue)
+  {
+    JniReturnValue returnValue{};
+    ASSERT_EQ(0, returnValue.getLongValue());
+  }
+
   TEST_F(JniReturnValueTest, getShortValue)
   {
     JniReturnValue returnValue{};
@@ -83,6 +89,14 @@ namespace
     returnValue.setIntegerValue(1989);
 
     ASSERT_EQ(1989, returnValue.getIntegerValue());
+  }
+
+  TEST_F(JniReturnValueTest, setLongValue)
+  {
+    JniReturnValue returnValue{};
+    returnValue.setLongValue(16992831);
+
+    ASSERT_EQ(16992831, returnValue.getLongValue());
   }
 
   TEST_F(JniReturnValueTest, setShortValue)

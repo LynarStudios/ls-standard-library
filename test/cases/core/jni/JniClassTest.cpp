@@ -197,6 +197,28 @@ namespace
     ASSERT_EQ(1989, javaClass.callMethod(methodIdentifier).getIntegerValue());
   }
 
+  TEST_F(JniClassTest, callMethod_long_return_value)
+  {
+    string classPath = "java.utils.String";
+    JniClass javaClass = this->createJniClass(classPath);
+
+    EXPECT_CALL(*this->jniApi, findClass(classPath)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, findClass(classPath)).WillByDefault(Return(make_shared<_jclass>().get()));
+
+    string methodIdentifier = "getAmountOfMoney";
+    string methodSignature = "()J";
+    EXPECT_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).Times(AtLeast(1));
+    jmethodID methodId = (jmethodID) make_shared<int>().get();
+    ON_CALL(*this->jniApi, getMethodId(testing::_, methodIdentifier.c_str(), methodSignature.c_str())).WillByDefault(Return(methodId));
+
+    EXPECT_CALL(*this->jniApi, callLongMethod(testing::_, methodId)).Times(AtLeast(1));
+    ON_CALL(*this->jniApi, callLongMethod(testing::_, methodId)).WillByDefault(Return(18837828981));
+
+    ASSERT_TRUE(javaClass.load());
+    ASSERT_TRUE(javaClass.loadMethod(methodIdentifier, methodSignature));
+    ASSERT_EQ(18837828981, javaClass.callMethod(methodIdentifier).getLongValue());
+  }
+
   TEST_F(JniClassTest, callMethod_short_return_value)
   {
     string classPath = "java.utils.String";

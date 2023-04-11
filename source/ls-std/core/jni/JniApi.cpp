@@ -42,6 +42,11 @@ jint JniApi::callIntMethod(jobject _javaObject, jmethodID _methodId)
   return this->environment->CallIntMethod(_javaObject, _methodId);
 }
 
+jlong JniApi::callLongMethod(jobject _javaObject, jmethodID _methodId)
+{
+  return this->environment->CallLongMethod(_javaObject, _methodId);
+}
+
 jshort JniApi::callShortMethod(jobject _javaObject, jmethodID _methodId)
 {
   return this->environment->CallShortMethod(_javaObject, _methodId);

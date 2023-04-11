@@ -35,6 +35,11 @@ jint JniReturnValue::getIntegerValue() const
   return this->integerValue;
 }
 
+jlong JniReturnValue::getLongValue() const
+{
+  return this->longValue;
+}
+
 jshort JniReturnValue::getShortValue() const
 {
   return this->shortValue;
@@ -58,6 +63,11 @@ void JniReturnValue::setCharValue(jchar _charValue)
 void JniReturnValue::setIntegerValue(jint _integerValue)
 {
   this->integerValue = _integerValue;
+}
+
+void JniReturnValue::setLongValue(jlong _longValue)
+{
+  this->longValue = _longValue;
 }
 
 void JniReturnValue::setShortValue(jshort _shortValue)
