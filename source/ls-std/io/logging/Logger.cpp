@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-23
+ * Changed:         2023-04-12
  *
  * */
 
@@ -67,6 +67,16 @@ LogLevel Logger::getLogLevel()
   return this->logLevel;
 }
 
+void Logger::hideLogLevel()
+{
+  this->displayLogLevel = false;
+}
+
+void Logger::hideTimestamp()
+{
+  this->displayTimestamp = false;
+}
+
 void Logger::info(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::INFO)
@@ -78,6 +88,16 @@ void Logger::info(const byte_type *_data)
 void Logger::setLogLevel(const LogLevelValue &_logLevelValue)
 {
   this->logLevel = _logLevelValue;
+}
+
+void Logger::showLogLevel()
+{
+  this->displayLogLevel = true;
+}
+
+void Logger::showTimestamp()
+{
+  this->displayTimestamp = true;
 }
 
 void Logger::trace(const byte_type *_data)
@@ -136,13 +156,37 @@ string Logger::_generateTimeString(tm *_localTime)
   return _stream.str();
 }
 
-void Logger::_log(const byte_type *_data, const LogLevel &_logLevel)
+string Logger::_getLogLevelString(const LogLevel &_logLevel) const
+{
+  string logLevelString{};
+
+  if (this->displayLogLevel)
+  {
+    logLevelString = Logger::_padRight(string{_logLevel.toString() + ":"});
+  }
+
+  return logLevelString;
+}
+
+string Logger::_getTimestampString() const
 {
   time_t timestamp = ::time(nullptr);
   tm *localTime = localtime(&timestamp);
+  string timestampString{};
 
-  string logLevelString = Logger::_padRight(string{_logLevel.toString() + ":"});
-  string message = "[" + Logger::_generateTimeString(localTime) + "] " + logLevelString + string(_data) + NewLine::getUnixNewLine();
+  if (this->displayTimestamp)
+  {
+    timestampString = "[" + Logger::_generateTimeString(localTime) + "] ";
+  }
+
+  return timestampString;
+}
+
+void Logger::_log(const byte_type *_data, const LogLevel &_logLevel)
+{
+  string logLevelString = this->_getLogLevelString(_logLevel);
+  string timestampString = this->_getTimestampString();
+  string message = timestampString + logLevelString + string(_data) + NewLine::getUnixNewLine();
   this->writer->write(message);
 }
 

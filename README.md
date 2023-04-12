@@ -39,6 +39,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
   order to use this feature the CMake option __LS_STD_BUILD_WITH_JNI__ has to be enabled - please note, that this
   feature is experimental and incomplete
 - a SystemTime class has been added to the library's time module for setting the local system time
+- Logger class is now configurable to silent log level or timestamp output
 
 #### Improvements ####
 
