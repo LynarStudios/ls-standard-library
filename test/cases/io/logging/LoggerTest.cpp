@@ -230,7 +230,7 @@ namespace
     dynamic_pointer_cast<FileOutputStream>(writer)->close();
     string content = getContentFromLogFile(logName);
 
-    ASSERT_STREQ(string(message + NewLine::getUnixNewLine()).c_str(), content.c_str());
+    ASSERT_STREQ(string(message + NewLine::get()).c_str(), content.c_str());
   }
 
   TEST_F(LoggerTest, info)
