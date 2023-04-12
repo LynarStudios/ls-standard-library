@@ -32,15 +32,18 @@ namespace ls::std::io
       void fatal(const ls::std::core::type::byte_type *_data);
       [[nodiscard]] ls::std::io::LogLevel getLogLevel();
       void hideLogLevel();
+      void hideTimestamp();
       void info(const ls::std::core::type::byte_type *_data);
       void setLogLevel(const ls::std::io::LogLevelValue &_logLevelValue);
       void showLogLevel();
+      void showTimestamp();
       void trace(const ls::std::core::type::byte_type *_data);
       void warn(const ls::std::core::type::byte_type *_data);
 
     private:
 
       bool displayLogLevel{};
+      bool displayTimestamp{};
       ls::std::io::LogLevel logLevel{};
       ::std::shared_ptr<ls::std::core::interface_type::IWriter> writer{};
 
@@ -49,6 +52,7 @@ namespace ls::std::io
       [[nodiscard]] static ::std::string _createFillContent(const ::std::string &_text);
       [[nodiscard]] static ::std::string _generateTimeString(tm *_localTime);
       [[nodiscard]] ::std::string _getLogLevelString(const ls::std::io::LogLevel &_logLevel) const;
+      [[nodiscard]] ::std::string _getTimestampString() const;
       void _log(const ls::std::core::type::byte_type *_data, const ls::std::io::LogLevel &_logLevel);
       [[nodiscard]] static ::std::string _padRight(const ::std::string &_text);
   };

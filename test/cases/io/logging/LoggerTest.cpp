@@ -19,6 +19,7 @@ using ls::std::io::FileOutputStream;
 using ls::std::io::FileReader;
 using ls::std::io::Logger;
 using ls::std::io::LogLevelValue;
+using ls::std::io::NewLine;
 using ls::std::test::TestHelper;
 using std::dynamic_pointer_cast;
 using std::make_shared;
@@ -87,6 +88,7 @@ namespace
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::DEBUG);
     logger.showLogLevel();
+    logger.showTimestamp();
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -117,6 +119,7 @@ namespace
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::ERR);
     logger.showLogLevel();
+    logger.showTimestamp();
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -147,6 +150,7 @@ namespace
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::FATAL);
     logger.showLogLevel();
+    logger.showTimestamp();
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -191,6 +195,44 @@ namespace
     ASSERT_TRUE(content.find("FATAL") == string::npos);
   }
 
+  TEST_F(LoggerTest, hideTimestamp)
+  {
+    string logName = "hide-time-stamp-output-fatal.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
+
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::DEBUG);
+    logger.hideTimestamp();
+    logger.fatal("test message");
+
+    // get content and check
+
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
+
+    ASSERT_TRUE(content.find('[') == string::npos);
+  }
+
+  TEST_F(LoggerTest, hideInformation)
+  {
+    string logName = "hide-info-output-fatal.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
+    string message = "test message";
+
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::DEBUG);
+    logger.hideLogLevel();
+    logger.hideTimestamp();
+    logger.fatal(message.c_str());
+
+    // get content and check
+
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
+
+    ASSERT_STREQ(string(message + NewLine::getUnixNewLine()).c_str(), content.c_str());
+  }
+
   TEST_F(LoggerTest, info)
   {
     // write to log file
@@ -201,6 +243,7 @@ namespace
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::INFO);
     logger.showLogLevel();
+    logger.showTimestamp();
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");
@@ -247,6 +290,24 @@ namespace
     ASSERT_TRUE(content.find("FATAL") != string::npos);
   }
 
+  TEST_F(LoggerTest, showTimestamp)
+  {
+    string logName = "hide-time-stamp-output-fatal.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
+
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::DEBUG);
+    logger.showTimestamp();
+    logger.fatal("test message");
+
+    // get content and check
+
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
+
+    ASSERT_TRUE(content.find('[') != string::npos);
+  }
+
   TEST_F(LoggerTest, trace)
   {
     // write to log file
@@ -257,6 +318,7 @@ namespace
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::TRACE);
     logger.showLogLevel();
+    logger.showTimestamp();
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");
@@ -287,6 +349,7 @@ namespace
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::WARN);
     logger.showLogLevel();
+    logger.showTimestamp();
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");

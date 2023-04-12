@@ -72,6 +72,11 @@ void Logger::hideLogLevel()
   this->displayLogLevel = false;
 }
 
+void Logger::hideTimestamp()
+{
+  this->displayTimestamp = false;
+}
+
 void Logger::info(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::INFO)
@@ -88,6 +93,11 @@ void Logger::setLogLevel(const LogLevelValue &_logLevelValue)
 void Logger::showLogLevel()
 {
   this->displayLogLevel = true;
+}
+
+void Logger::showTimestamp()
+{
+  this->displayTimestamp = true;
 }
 
 void Logger::trace(const byte_type *_data)
@@ -158,13 +168,25 @@ string Logger::_getLogLevelString(const LogLevel &_logLevel) const
   return logLevelString;
 }
 
-void Logger::_log(const byte_type *_data, const LogLevel &_logLevel)
+string Logger::_getTimestampString() const
 {
   time_t timestamp = ::time(nullptr);
   tm *localTime = localtime(&timestamp);
+  string timestampString{};
 
+  if (this->displayTimestamp)
+  {
+    timestampString = "[" + Logger::_generateTimeString(localTime) + "] ";
+  }
+
+  return timestampString;
+}
+
+void Logger::_log(const byte_type *_data, const LogLevel &_logLevel)
+{
   string logLevelString = this->_getLogLevelString(_logLevel);
-  string message = "[" + Logger::_generateTimeString(localTime) + "] " + logLevelString + string(_data) + NewLine::getUnixNewLine();
+  string timestampString = this->_getTimestampString();
+  string message = timestampString + logLevelString + string(_data) + NewLine::getUnixNewLine();
   this->writer->write(message);
 }
 
