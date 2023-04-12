@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-03-25
+ * Changed:         2023-04-12
  *
  * */
 
@@ -86,6 +86,7 @@ namespace
 
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::DEBUG);
+    logger.showLogLevel();
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -115,6 +116,7 @@ namespace
 
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::ERR);
+    logger.showLogLevel();
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -144,6 +146,7 @@ namespace
 
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::FATAL);
+    logger.showLogLevel();
     logger.debug("1. line!");
     logger.info("2. line!");
     logger.error("3. line!");
@@ -170,6 +173,24 @@ namespace
     ASSERT_EQ(LogLevelValue::INFO, logger.getLogLevel().getValue());
   }
 
+  TEST_F(LoggerTest, hideLogLevel)
+  {
+    string logName = "hide-log-level-output-fatal.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
+
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::DEBUG);
+    logger.hideLogLevel();
+    logger.fatal("test message");
+
+    // get content and check
+
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
+
+    ASSERT_TRUE(content.find("FATAL") == string::npos);
+  }
+
   TEST_F(LoggerTest, info)
   {
     // write to log file
@@ -179,6 +200,7 @@ namespace
 
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::INFO);
+    logger.showLogLevel();
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");
@@ -207,6 +229,24 @@ namespace
     ASSERT_EQ(LogLevelValue::ERR, logger.getLogLevel().getValue());
   }
 
+  TEST_F(LoggerTest, showLogLevel)
+  {
+    string logName = "show-log-level-output-fatal.log";
+    shared_ptr<IWriter> writer = createFileLogger(logName);
+
+    Logger logger{writer};
+    logger.setLogLevel(LogLevelValue::DEBUG);
+    logger.showLogLevel();
+    logger.fatal("test message");
+
+    // get content and check
+
+    dynamic_pointer_cast<FileOutputStream>(writer)->close();
+    string content = getContentFromLogFile(logName);
+
+    ASSERT_TRUE(content.find("FATAL") != string::npos);
+  }
+
   TEST_F(LoggerTest, trace)
   {
     // write to log file
@@ -216,6 +256,7 @@ namespace
 
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::TRACE);
+    logger.showLogLevel();
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");
@@ -245,6 +286,7 @@ namespace
 
     Logger logger{writer};
     logger.setLogLevel(LogLevelValue::WARN);
+    logger.showLogLevel();
     logger.fatal("1. line!");
     logger.error("2. line!");
     logger.warn("3. line!");

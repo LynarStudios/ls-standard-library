@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-20
- * Changed:         2023-02-23
+ * Changed:         2023-04-12
  *
  * */
 
@@ -67,6 +67,11 @@ LogLevel Logger::getLogLevel()
   return this->logLevel;
 }
 
+void Logger::hideLogLevel()
+{
+  this->displayLogLevel = false;
+}
+
 void Logger::info(const byte_type *_data)
 {
   if (this->logLevel >= LogLevelValue::INFO)
@@ -78,6 +83,11 @@ void Logger::info(const byte_type *_data)
 void Logger::setLogLevel(const LogLevelValue &_logLevelValue)
 {
   this->logLevel = _logLevelValue;
+}
+
+void Logger::showLogLevel()
+{
+  this->displayLogLevel = true;
 }
 
 void Logger::trace(const byte_type *_data)
@@ -136,12 +146,24 @@ string Logger::_generateTimeString(tm *_localTime)
   return _stream.str();
 }
 
+string Logger::_getLogLevelString(const LogLevel &_logLevel) const
+{
+  string logLevelString{};
+
+  if (this->displayLogLevel)
+  {
+    logLevelString = Logger::_padRight(string{_logLevel.toString() + ":"});
+  }
+
+  return logLevelString;
+}
+
 void Logger::_log(const byte_type *_data, const LogLevel &_logLevel)
 {
   time_t timestamp = ::time(nullptr);
   tm *localTime = localtime(&timestamp);
 
-  string logLevelString = Logger::_padRight(string{_logLevel.toString() + ":"});
+  string logLevelString = this->_getLogLevelString(_logLevel);
   string message = "[" + Logger::_generateTimeString(localTime) + "] " + logLevelString + string(_data) + NewLine::getUnixNewLine();
   this->writer->write(message);
 }
