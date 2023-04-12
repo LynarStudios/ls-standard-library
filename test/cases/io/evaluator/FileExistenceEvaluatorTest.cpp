@@ -40,7 +40,6 @@ namespace
           {
             string actual = _exception.what();
             string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" does not exist!";
-            ;
 
             ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;

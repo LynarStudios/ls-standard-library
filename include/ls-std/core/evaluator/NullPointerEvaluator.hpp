@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-08
-* Changed:         2023-02-22
+* Changed:         2023-04-04
 *
 * */
 
@@ -21,6 +21,8 @@ namespace ls::std::core
   {
     public:
 
+      explicit NullPointerEvaluator(const void *_rawArgument);
+      explicit NullPointerEvaluator(const void *_rawArgument, ::std::string _message);
       explicit NullPointerEvaluator(const ::std::shared_ptr<void> &_argument);
       explicit NullPointerEvaluator(const ::std::shared_ptr<void> &_argument, ::std::string _message);
       ~NullPointerEvaluator() noexcept override;

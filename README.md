@@ -35,12 +35,17 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 #### Features ####
 
 - added NotImplementedException class, which can be thrown in case a method is provided, but not implemented
+- a JNI class is now available, wrapping C-like JNI functionalities, which can be found in __ls-std-core__ module - in
+  order to use this feature the CMake option __LS_STD_BUILD_WITH_JNI__ has to be enabled - please note, that this
+  feature is experimental and incomplete
+- a SystemTime class has been added to the library's time module for setting the local system time
 
 #### Improvements ####
 
 - made test constructors public and reduced test setup overhead
 - added missing __nodiscard__ attributes to test package
 - made __Exception__ base class abstract, which prevents it from being instantiated
+- __NullPointerEvaluator__ & __NullPointerArgumentEvaluator__ now except raw pointers
 
 #### Fixes ####
 
@@ -109,6 +114,7 @@ Alternatively, the CMake project generation can be controlled by providing libra
 | __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ | ON            | This flag enforces the usage of supported compilers, only.<br/>For usage of an unsupported toolchain, set this flag to __OFF__.                      |
 | __LS_STD_BUILD_STATIC__                  | ON            | This flag indicates, that all library modules should be built as static goals.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned off. |
 | __LS_STD_BUILD_SHARED__                  | OFF           | This flag indicates, that all library modules should be built as shared goals.  <br/>Please note, that __LS_STD_BUILD_STATIC__ has to be turned off. |
+| __LS_STD_BUILD_WITH_JNI__                | OFF           | This flag enables the build of JNI dependencies.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned on.                                |
 
 To use one or more of these flags, you'd have to adjust previous command, like:
 
