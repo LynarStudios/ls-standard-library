@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-24
+ * Changed:         2023-04-13
  *
  * */
 
@@ -99,7 +99,7 @@ void File::createNewFile()
   }
   else
   {
-    throw FileOperationException{"operation: create new file"};
+    throw FileOperationException{R"lit(file ")lit" + this->absoluteFilePath + R"lit(" could not be created!)lit"};
   }
 }
 
