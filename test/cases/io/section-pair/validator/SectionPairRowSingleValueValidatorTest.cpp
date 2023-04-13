@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-19
-* Changed:         2023-03-25
+* Changed:         2023-04-13
 *
 * */
 
@@ -52,7 +52,7 @@ namespace
 
   TEST_F(SectionPairRowSingleValueValidatorTest, getValidationRegex)
   {
-    string expected = R"(([a-z]([a-z0-9-]){1,31})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}){1}($|\n{1}|\r{1}\n{1}))";
+    string expected = R"(([a-z]([a-z0-9-]){1,63})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}){1}($|\n{1}|\r{1}\n{1}))";
     ASSERT_STREQ(expected.c_str(), SectionPairRowSingleValueValidator::getValidationRegex().c_str());
   }
 
