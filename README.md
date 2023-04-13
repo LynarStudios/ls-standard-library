@@ -49,6 +49,7 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 - __NullPointerEvaluator__ & __NullPointerArgumentEvaluator__ now except raw pointers
 - Section-Pair identifiers can now have a length of 64 characters
 - Section-Pair values can now have a length of 512 characters
+- exceptions for creation of files or directories have been improved and now show the absolute file path
 
 #### Fixes ####
 
