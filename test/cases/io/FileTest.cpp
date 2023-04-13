@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-03-25
+ * Changed:         2023-04-13
  *
  * */
 
@@ -147,6 +147,10 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
+            string expected = _exception.getName() + R"lit( thrown - file ")lit" + TestHelper::getResourcesFolderLocation() + R"lit(simple.txt" could not be created!)lit";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -318,6 +322,10 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
+            string expected = _exception.getName() + R"lit( thrown - directory ")lit" + TestHelper::getResourcesFolderLocation() + R"lit(list-test" could not be created!)lit";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
