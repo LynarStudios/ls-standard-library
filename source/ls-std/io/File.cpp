@@ -208,7 +208,7 @@ void File::makeDirectory()
 {
   if (!File::_makeDirectory(this->absoluteFilePath))
   {
-    throw FileOperationException{"operation: create directory"};
+    throw FileOperationException{R"lit(directory ")lit" + this->absoluteFilePath + R"lit(" could not be created!)lit"};
   }
 }
 

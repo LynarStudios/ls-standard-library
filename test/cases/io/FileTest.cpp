@@ -322,6 +322,10 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
+            string expected = _exception.getName() + R"lit( thrown - directory ")lit" + TestHelper::getResourcesFolderLocation() + R"lit(list-test" could not be created!)lit";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
