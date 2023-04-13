@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-23
+* Changed:         2023-04-13
 *
 * */
 
@@ -40,6 +40,6 @@ bool SectionPairValueValidator::isValid()
 
 string SectionPairValueValidator::_getValidationRegex()
 {
-  string value = R"([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32})";
+  string value = R"([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512})";
   return value;
 }

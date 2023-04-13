@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-23
+* Changed:         2023-04-13
 *
 * */
 
@@ -36,5 +36,5 @@ bool SectionPairIdentifierValidator::isValid()
 
 string SectionPairIdentifierValidator::_getValidationRegex()
 {
-  return R"([a-z]([a-z0-9-]){1,31})";
+  return R"([a-z]([a-z0-9-]){1,63})";
 }
