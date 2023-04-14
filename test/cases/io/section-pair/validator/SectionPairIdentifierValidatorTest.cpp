@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-09
-* Changed:         2023-02-23
+* Changed:         2023-04-13
 *
 * */
 
@@ -22,21 +22,15 @@ namespace
 {
   class SectionPairIdentifierValidatorTest : public Test
   {
-    protected:
+    public:
 
       SectionPairIdentifierValidatorTest() = default;
       ~SectionPairIdentifierValidatorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   class SectionPairIdentifierValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairIdentifierValidatorTest_ValidArgumentTest() = default;
       ~SectionPairIdentifierValidatorTest_ValidArgumentTest() override = default;
@@ -44,7 +38,7 @@ namespace
 
   class SectionPairIdentifierValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairIdentifierValidatorTest_InvalidArgumentTest() = default;
       ~SectionPairIdentifierValidatorTest_InvalidArgumentTest() override = default;
@@ -57,7 +51,7 @@ namespace
 
   TEST_F(SectionPairIdentifierValidatorTest, getValidationRegex)
   {
-    ASSERT_STREQ(R"([a-z]([a-z0-9-]){1,31})", SectionPairIdentifierValidator{"tmp-key"}.getValidationRegex().c_str());
+    ASSERT_STREQ(R"([a-z]([a-z0-9-]){1,63})", SectionPairIdentifierValidator{"tmp-key"}.getValidationRegex().c_str());
   }
 
   TEST_P(SectionPairIdentifierValidatorTest_ValidArgumentTest, isValid)
@@ -71,5 +65,5 @@ namespace
   }
 
   INSTANTIATE_TEST_SUITE_P(ValidArgumentTest, SectionPairIdentifierValidatorTest_ValidArgumentTest, Values("color", "favourite-color", "age", "name"));
-  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierValidatorTest_InvalidArgumentTest, Values("_color", "8color", "colOr", "color:", "-color", "color-is-valid-but-too-long-because-it-exceeds-32-characters"));
+  INSTANTIATE_TEST_SUITE_P(InvalidArgumentTest, SectionPairIdentifierValidatorTest_InvalidArgumentTest, Values("_color", "8color", "colOr", "color:", "-color", "color-would-be-usually-valid-but-too-long-because-it-exceeds-64-characters"));
 }

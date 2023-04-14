@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-10-18
- * Changed:         2023-02-23
+ * Changed:         2023-03-25
  *
  * */
 
@@ -20,16 +20,10 @@ namespace
 {
   class XmlParserTestWrapperTest : public Test
   {
-    protected:
+    public:
 
       XmlParserTestWrapperTest() = default;
       ~XmlParserTestWrapperTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(XmlParserTestWrapperTest, readAttribute)

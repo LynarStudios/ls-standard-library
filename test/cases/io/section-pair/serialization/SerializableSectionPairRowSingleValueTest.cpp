@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-11
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -23,27 +23,22 @@ using std::make_shared;
 using std::shared_ptr;
 using std::string;
 using testing::Test;
+using testing::TestWithParam;
 using testing::Values;
 
 namespace
 {
   class SerializableSectionPairRowSingleValueTest : public Test
   {
-    protected:
+    public:
 
       SerializableSectionPairRowSingleValueTest() = default;
       ~SerializableSectionPairRowSingleValueTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
-  class SerializableSectionPairRowSingleValueTest_LineBreakTest : public ::testing::TestWithParam<string>
+  class SerializableSectionPairRowSingleValueTest_LineBreakTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SerializableSectionPairRowSingleValueTest_LineBreakTest() = default;
       ~SerializableSectionPairRowSingleValueTest_LineBreakTest() override = default;

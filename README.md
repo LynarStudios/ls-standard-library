@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2023.1.0 #
+# Lynar Studios - Standard Library 2023.2.0 #
 
 This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
 This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
@@ -34,33 +34,26 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- __AppleClang__ compiler is now officially supported
-- exceptions provided by __core__ submodule now offer a constructor for passing dedicated messages
-- evaluators have been added, which can check a state of variables and throw a dedicated exception in a single line and
-  more convenient way
-- a section-pair file standard has been implemented and is provided via __ls-std-io__ module, a definition of this
-  standard can be found in the libraries __doc__ folder
-- a base Exception class has been added, which provides basic reflection functionality - all existing library exceptions
-  inherit from this class now
+- added NotImplementedException class, which can be thrown in case a method is provided, but not implemented
+- a JNI class is now available, wrapping C-like JNI functionalities, which can be found in __ls-std-core__ module - in
+  order to use this feature the CMake option __LS_STD_BUILD_WITH_JNI__ has to be enabled - please note, that this
+  feature is experimental and incomplete
+- a SystemTime class has been added to the library's time module for setting the local system time
+- Logger class is now configurable to silent log level or timestamp output
 
 #### Improvements ####
 
-- __logic__ module has been removed from this library and can now be found in __ls-game-tool-kit__ library
-- __core.utils__ module has been removed from this library to provide more clean implementations where it's needed
-- the complexity of source files has been reduced by declaring usages of namespaces at the file beginning sections
-  instead of using those in every definition implementation, this overall improves the readability of the libraries
-  source files
-- a new naming convention for files and directories has been introduced, where underscores were replaced by dashes
-  entirely
-- fetching the library version can now be achieved by using a dedicated __LibraryVersion__ class - the usage of a static function for this purpose has been removed completely
-- missing nodiscard attributes have been added to library classes
-- rename "types" folder in __core__ submodule to stick to naming convention
-- key-value file standard has been removed from this library and is replaced by section-pair file standard
+- made test constructors public and reduced test setup overhead
+- added missing __nodiscard__ attributes to test package
+- made __Exception__ base class abstract, which prevents it from being instantiated
+- __NullPointerEvaluator__ & __NullPointerArgumentEvaluator__ now except raw pointers
+- Section-Pair identifiers can now have a length of 64 characters
+- Section-Pair values can now have a length of 512 characters
+- exceptions for creation of files or directories have been improved and now show the absolute file path
 
 #### Fixes ####
 
-- potential memory leaks have been resolved by strictly splitting prototypes and implementation project-wide, which enabled the usage of virtual or overridden destructors
-- memory leaks inside exception test suite have been fixed
+- no comment
 
 ---
 ### Documentation ###
@@ -77,15 +70,15 @@ This software is licensed and uses MIT-license. You can find a __LICENSE.MIT__ f
 
 Building this library would result into providing binaries for each library module and CLI tool: 
 
-| binary              | type                       |
-|---------------------|----------------------------|
-| __cli-base64__      | CLI executable             |
-| __ls-std-boxing__   | library (static / dynamic) |
-| __ls-std-core__     | library (static / dynamic) |
-| __ls-std-encoding__ | library (static / dynamic) |
-| __ls-std-event__    | library (static / dynamic) |
-| __ls-std-io__       | library (static / dynamic) |
-| __ls-std-time__     | library (static / dynamic) |
+| binary              | type                       | dependency                   |
+|---------------------|----------------------------|------------------------------|
+| __cli-base64__      | CLI executable             | ls-std-encoding, ls-std-core |
+| __ls-std-boxing__   | library (static / dynamic) | ls-std-core                  |
+| __ls-std-core__     | library (static / dynamic) | ---                          |
+| __ls-std-encoding__ | library (static / dynamic) | ls-std-core                  |
+| __ls-std-event__    | library (static / dynamic) | ls-std-core                  |
+| __ls-std-io__       | library (static / dynamic) | ls-std-core                  |
+| __ls-std-time__     | library (static / dynamic) | ls-std-core                  |
 
 #### Prerequisites ####
 
@@ -125,6 +118,7 @@ Alternatively, the CMake project generation can be controlled by providing libra
 | __LS_STD_BUILD_WITH_SUPPORTED_COMPILER__ | ON            | This flag enforces the usage of supported compilers, only.<br/>For usage of an unsupported toolchain, set this flag to __OFF__.                      |
 | __LS_STD_BUILD_STATIC__                  | ON            | This flag indicates, that all library modules should be built as static goals.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned off. |
 | __LS_STD_BUILD_SHARED__                  | OFF           | This flag indicates, that all library modules should be built as shared goals.  <br/>Please note, that __LS_STD_BUILD_STATIC__ has to be turned off. |
+| __LS_STD_BUILD_WITH_JNI__                | OFF           | This flag enables the build of JNI dependencies.  <br/>Please note, that __LS_STD_BUILD_SHARED__ has to be turned on.                                |
 
 To use one or more of these flags, you'd have to adjust previous command, like:
 

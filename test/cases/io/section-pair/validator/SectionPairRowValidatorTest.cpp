@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-23
+* Changed:         2023-04-13
 *
 * */
 
@@ -22,21 +22,15 @@ namespace
 {
   class SectionPairRowValidatorTest : public Test
   {
-    protected:
+    public:
 
       SectionPairRowValidatorTest() = default;
       ~SectionPairRowValidatorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   class SectionPairRowValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairRowValidatorTest_ValidArgumentTest() = default;
       ~SectionPairRowValidatorTest_ValidArgumentTest() override = default;
@@ -44,7 +38,7 @@ namespace
 
   class SectionPairRowValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairRowValidatorTest_InvalidArgumentTest() = default;
       ~SectionPairRowValidatorTest_InvalidArgumentTest() override = default;
@@ -57,7 +51,7 @@ namespace
 
   TEST_F(SectionPairRowValidatorTest, getValidationRegex)
   {
-    string expected = R"((([a-z]([a-z0-9-]){1,31})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}){1}($|\n{1}|\r{1}\n{1}))|(((((([a-z]([a-z0-9-]){1,31}):{1})((\n{1})|(\r{1}\n{1})))( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))*))))";
+    string expected = R"((([a-z]([a-z0-9-]){1,63})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}){1}($|\n{1}|\r{1}\n{1}))|(((((([a-z]([a-z0-9-]){1,63}):{1})((\n{1})|(\r{1}\n{1})))( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}((\n{1})|(\r{1}\n{1})))){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}((\n{1})|(\r{1}\n{1})))*))))";
     ASSERT_STREQ(expected.c_str(), SectionPairRowValidator::getValidationRegex().c_str());
   }
 

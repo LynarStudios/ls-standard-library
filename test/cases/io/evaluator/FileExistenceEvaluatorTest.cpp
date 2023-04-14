@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-21
-* Changed:         2023-02-23
+* Changed:         2023-03-25
 *
 * */
 
@@ -22,16 +22,10 @@ namespace
 {
   class FileExistenceEvaluatorTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       FileExistenceEvaluatorTest() = default;
       ~FileExistenceEvaluatorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_P(FileExistenceEvaluatorTest, evaluate)
@@ -46,7 +40,6 @@ namespace
           {
             string actual = _exception.what();
             string expected = _exception.getName() + " thrown - \"" + GetParam() + "\" does not exist!";
-            ;
 
             ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;

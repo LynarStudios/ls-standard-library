@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2020-08-15
- * Changed:         2023-02-23
+ * Changed:         2023-04-13
  *
  * */
 
@@ -24,18 +24,12 @@ namespace
 {
   class FileTest : public Test
   {
-    protected:
+    public:
 
       FileTest() = default;
       ~FileTest() override = default;
 
       string fileLocation = TestHelper::getResourcesFolderLocation() + "simple.txt";
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
 
       static bool hasFileInDirectory(const list<string> &_fileNamesInDirectory, const string &_fileName)
       {
@@ -153,6 +147,10 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
+            string expected = _exception.getName() + R"lit( thrown - file ")lit" + TestHelper::getResourcesFolderLocation() + R"lit(simple.txt" could not be created!)lit";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },
@@ -324,6 +322,10 @@ namespace
           }
           catch (const FileOperationException &_exception)
           {
+            string expected = _exception.getName() + R"lit( thrown - directory ")lit" + TestHelper::getResourcesFolderLocation() + R"lit(list-test" could not be created!)lit";
+            string actual = _exception.what();
+
+            ASSERT_STREQ(expected.c_str(), actual.c_str());
             throw;
           }
         },

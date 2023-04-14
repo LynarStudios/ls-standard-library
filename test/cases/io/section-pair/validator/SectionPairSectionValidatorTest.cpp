@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-20
-* Changed:         2023-02-23
+* Changed:         2023-04-13
 *
 * */
 
@@ -25,21 +25,15 @@ namespace
 {
   class SectionPairSectionValidatorTest : public Test
   {
-    protected:
+    public:
 
       SectionPairSectionValidatorTest() = default;
       ~SectionPairSectionValidatorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   class SectionPairSectionValidatorTest_ValidArgumentTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairSectionValidatorTest_ValidArgumentTest() = default;
       ~SectionPairSectionValidatorTest_ValidArgumentTest() override = default;
@@ -47,7 +41,7 @@ namespace
 
   class SectionPairSectionValidatorTest_InvalidArgumentTest : public TestWithParam<string>
   {
-    protected:
+    public:
 
       SectionPairSectionValidatorTest_InvalidArgumentTest() = default;
       ~SectionPairSectionValidatorTest_InvalidArgumentTest() override = default;
@@ -61,7 +55,7 @@ namespace
   TEST_F(SectionPairSectionValidatorTest, getValidationRegex)
   {
     string expected =
-        R"(((\n)|(\r\n))\[{1}([a-z]([a-z0-9-]){1,31})\]{1}(((\n)|(\r\n)){2})(((([a-z]([a-z0-9-]){1,31})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}){1}($|\n{1}|\r{1}\n{1}))|(((((([a-z]([a-z0-9-]){1,31}):{1})((\n{1})|(\r{1}\n{1})))( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))*)))){1})(((([a-z]([a-z0-9-]){1,31})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}){1}($|\n{1}|\r{1}\n{1}))|(((((([a-z]([a-z0-9-]){1,31}):{1})((\n{1})|(\r{1}\n{1})))( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,32}((\n{1})|(\r{1}\n{1})))*))))*))";
+        R"(((\n)|(\r\n))\[{1}([a-z]([a-z0-9-]){1,63})\]{1}(((\n)|(\r\n)){2})(((([a-z]([a-z0-9-]){1,63})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}){1}($|\n{1}|\r{1}\n{1}))|(((((([a-z]([a-z0-9-]){1,63}):{1})((\n{1})|(\r{1}\n{1})))( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}((\n{1})|(\r{1}\n{1})))){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}((\n{1})|(\r{1}\n{1})))*)))){1})(((([a-z]([a-z0-9-]){1,63})={1}([a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}){1}($|\n{1}|\r{1}\n{1}))|(((((([a-z]([a-z0-9-]){1,63}):{1})((\n{1})|(\r{1}\n{1})))( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}((\n{1})|(\r{1}\n{1})))){1}(( {2}[a-zA-Z0-9\-_#!?\[\]\{\}\(\)\$€§<>+:;., \*\/"]{1,512}((\n{1})|(\r{1}\n{1})))*))))*))";
     ASSERT_STREQ(expected.c_str(), SectionPairSectionValidator::getValidationRegex().c_str());
   }
 

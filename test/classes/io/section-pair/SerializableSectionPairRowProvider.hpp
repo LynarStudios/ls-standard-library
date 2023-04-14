@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-17
-* Changed:         2023-02-17
+* Changed:         2023-03-27
 *
 * */
 
@@ -23,10 +23,10 @@ namespace test::io
       SerializableSectionPairRowProvider();
       ~SerializableSectionPairRowProvider();
 
-      static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createListValueForMarshal(const ::std::string &_newLine);
-      static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createListValueForUnmarshal(const ::std::string &_newLine);
-      static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createSingleValueForMarshal(const ::std::string &_newLine);
-      static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createSingleValueForUnmarshal(const ::std::string &_newLine);
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createListValueForMarshal(const ::std::string &_newLine);
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createListValueForUnmarshal(const ::std::string &_newLine);
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createSingleValueForMarshal(const ::std::string &_newLine);
+      [[nodiscard]] static ::std::shared_ptr<ls::std::io::SerializableSectionPairRow> createSingleValueForUnmarshal(const ::std::string &_newLine);
   };
 }
 

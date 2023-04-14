@@ -11,7 +11,7 @@
 ##########################################################
 
 cmake_minimum_required(VERSION 3.17)
-project(ls-std VERSION 2023.1.0)
+project(ls-std VERSION 2023.2.0)
 
 set(MODULE_NAME_BOXING ls-std-boxing)
 set(MODULE_NAME_CORE ls-std-core)
@@ -32,6 +32,7 @@ option(LS_STD_BUILD_WITH_TESTS "Build project with tests..." OFF)
 option(LS_STD_BUILD_WITH_SUPPORTED_COMPILER "Build project with supported compiler only..." ON)
 option(LS_STD_BUILD_STATIC "Build ls-std static library..." ON)
 option(LS_STD_BUILD_SHARED "Build ls-std shared library..." OFF)
+option(LS_STD_BUILD_WITH_JNI "Build ls-std shared library with JNI..." OFF)
 
 set(TARGET_COUNTER 0)
 
@@ -58,6 +59,19 @@ if (TARGET_COUNTER EQUAL 0)
 endif ()
 
 ##########################################################
+# JNI flag check
+##########################################################
+
+if (${LS_STD_BUILD_WITH_JNI})
+    if (${LS_STD_BUILD_SHARED})
+        message("${PROJECT_NAME}: build with JNI support...")
+    else ()
+        message("${PROJECT_NAME}: [Error] JNI support requires shared build goal!")
+        return()
+    endif ()
+endif ()
+
+##########################################################
 # Compiler Settings
 ##########################################################
 
@@ -70,7 +84,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 # Compiler Support
 ##########################################################
 
-if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
+if (${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
     message("${PROJECT_NAME}: build with compiler support...")
 
     # define supported compilers
@@ -80,17 +94,39 @@ if(${LS_STD_BUILD_WITH_SUPPORTED_COMPILER})
             ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang OR
             ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
         message("${PROJECT_NAME}: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is supported...")
-    else()
+    else ()
         message("${PROJECT_NAME}: [Error] ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} is not supported... terminated!")
         return()
     endif ()
-endif()
+endif ()
+
+######################################################
+# Find Packages
+######################################################
+
+if (${LS_STD_BUILD_WITH_JNI})
+    if (DEFINED ENV{JAVA_HOME})
+        message("JAVA_HOME found in '$ENV{JAVA_HOME}' location...")
+    else ()
+        message("[Error] JAVA_HOME not found!")
+        return()
+    endif ()
+
+    message("${PROJECT_NAME}: finding JNI package in '$ENV{JAVA_HOME}'...")
+    find_package(JNI REQUIRED)
+endif ()
 
 ######################################################
 # Include Directories
 ######################################################
 
 message("${PROJECT_NAME}: Adding include directories...")
+
+if (${LS_STD_BUILD_WITH_JNI})
+    include_directories(${JAVA_INCLUDE_PATH})
+    include_directories(${JAVA_INCLUDE_PATH2})
+    include_directories(${JAVA_AWT_INCLUDE_PATH})
+endif ()
 
 if (${LS_STD_BUILD_WITH_TESTS})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
@@ -141,6 +177,7 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IllegalArithmeticOperationException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IncompleteJsonException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/IndexOutOfBoundsException.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NotImplementedException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/exception/NullPointerException.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IBoxing.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IEncoding.cpp
@@ -156,6 +193,14 @@ set(SOURCE_FILES_CORE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/ConditionalFunctionExecutor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/LibraryVersion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/Version.cpp)
+
+set(SOURCE_FILES_CORE_JNI
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/interface/IJniApi.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniApi.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniClass.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniClassParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniMethod.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/core/jni/JniReturnValue.cpp)
 
 set(SOURCE_FILES_ENCODING
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/encoding/Base64.cpp)
@@ -218,7 +263,29 @@ set(SOURCE_FILES_IO
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/io/StorableFile.cpp)
 
 set(SOURCE_FILES_TIME
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/DateParameter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/DateParameterMapper.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/IClock.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTime.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/SystemTimeParameter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/Date.cpp)
+
+set(SOURCE_FILES_LINUX_TIME)
+set(SOURCE_FILES_WINDOWS_TIME)
+
+if (UNIX OR APPLE)
+    message("${MODULE_NAME_TIME}: Add UNIX files for time module...")
+    set(SOURCE_FILES_LINUX_TIME
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/PosixClock.cpp)
+else (WIN32)
+    message("${MODULE_NAME_TIME}: Add Windows files for time module...")
+    set(SOURCE_FILES_WINDOWS_TIME
+            ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/WindowsClock.cpp)
+endif ()
+
+set(SOURCE_FILES_TIME_JNI
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/common/jni/JniDateParameterMapper.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/ls-std/time/system-time/jni/com_lynarstudios_ls_std_time_systemtime_SystemTimeJni.cpp)
 
 ####################################################################################################################
 ####################################################################################################################
@@ -251,6 +318,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IllegalArithmeticOperationExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IncompleteJsonExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/IndexOutOfBoundsExceptionTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/NotImplementedExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/exception/NullPointerExceptionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ClassTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/ConditionalFunctionExecutorTest.cpp
@@ -258,6 +326,14 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/VersionTest.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/ClassWrapper.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/MathOddValidator.cpp)
+
+    set(UNIT_TEST_FILES_CORE_JNI
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniApiTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniClassParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniClassTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniMethodTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/core/jni/JniReturnValueTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/core/jni/MockJniApi.cpp)
 
     set(UNIT_TEST_FILES_ENCODING
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/encoding/Base64Test.cpp)
@@ -335,7 +411,12 @@ if (${LS_STD_BUILD_WITH_TESTS})
             ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/serialization/JsonTest.cpp)
 
     set(UNIT_TEST_FILES_TIME
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp)
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/common/DateParameterMapperTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/common/DateParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeParameterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/system-time/SystemTimeTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/cases/time/DateTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/time/system-time/MockClock.cpp)
 endif ()
 
 ####################################################################################################################
@@ -360,8 +441,13 @@ endif ()
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${MODULE_NAME_CORE}: Building unit tests...")
-    add_executable(${MODULE_NAME_CORE}-unit-test ${UNIT_TEST_FILES_CORE})
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${MODULE_NAME_CORE}: Building unit tests with JNI support...")
+        add_executable(${MODULE_NAME_CORE}-unit-test ${UNIT_TEST_FILES_CORE} ${UNIT_TEST_FILES_CORE_JNI})
+    else ()
+        message("${MODULE_NAME_CORE}: Building unit tests...")
+        add_executable(${MODULE_NAME_CORE}-unit-test ${UNIT_TEST_FILES_CORE})
+    endif ()
 endif ()
 
 ##########################################################
@@ -407,16 +493,30 @@ endif ()
 ##########################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${PROJECT_NAME}: Building unit tests...")
-    add_executable(${PROJECT_NAME}-unit-test
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
-            ${UNIT_TEST_FILES_BOXING}
-            ${UNIT_TEST_FILES_CORE}
-            ${UNIT_TEST_FILES_ENCODING}
-            ${UNIT_TEST_FILES_EVENT}
-            ${UNIT_TEST_FILES_IO}
-            ${UNIT_TEST_FILES_SERIALIZATION}
-            ${UNIT_TEST_FILES_TIME})
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${PROJECT_NAME}: Building unit tests with JNI support...")
+        add_executable(${PROJECT_NAME}-unit-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_CORE_JNI}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    else ()
+        message("${PROJECT_NAME}: Building unit tests...")
+        add_executable(${PROJECT_NAME}-unit-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    endif ()
 endif ()
 
 ####################################################################################################################
@@ -460,17 +560,32 @@ endif ()
 ####################################################################################################################
 
 if (${LS_STD_BUILD_WITH_TESTS})
-    message("${PROJECT_NAME}: Building all tests...")
-    add_executable(${PROJECT_NAME}-test
-            ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
-            ${UNIT_TEST_FILES_BOXING}
-            ${UNIT_TEST_FILES_CORE}
-            ${UNIT_TEST_FILES_ENCODING}
-            ${UNIT_TEST_FILES_EVENT}
-            ${UNIT_TEST_FILES_IO}
-            ${INTEGRATION_TEST_FILES_IO}
-            ${UNIT_TEST_FILES_SERIALIZATION}
-            ${UNIT_TEST_FILES_TIME})
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${PROJECT_NAME}: Building all tests...")
+        add_executable(${PROJECT_NAME}-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_CORE_JNI}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${INTEGRATION_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    else ()
+        message("${PROJECT_NAME}: Building all tests with JNI support...")
+        add_executable(${PROJECT_NAME}-test
+                ${CMAKE_CURRENT_SOURCE_DIR}/test/classes/TestHelper.cpp
+                ${UNIT_TEST_FILES_BOXING}
+                ${UNIT_TEST_FILES_CORE}
+                ${UNIT_TEST_FILES_ENCODING}
+                ${UNIT_TEST_FILES_EVENT}
+                ${UNIT_TEST_FILES_IO}
+                ${INTEGRATION_TEST_FILES_IO}
+                ${UNIT_TEST_FILES_SERIALIZATION}
+                ${UNIT_TEST_FILES_TIME})
+    endif ()
 endif ()
 
 ####################################################################################################################
@@ -510,8 +625,14 @@ if (${LS_STD_BUILD_STATIC})
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
-    add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE})
-    set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${MODULE_NAME_CORE}: building with JNI...")
+        add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE} ${SOURCE_FILES_CORE_JNI})
+        set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
+    else ()
+        add_library("${MODULE_NAME_CORE}" SHARED ${SOURCE_FILES_CORE})
+        set_target_properties("${MODULE_NAME_CORE}" PROPERTIES DEBUG_POSTFIX "-d")
+    endif ()
 endif ()
 
 ##########################################################
@@ -577,14 +698,21 @@ endif ()
 message("${PROJECT_NAME}: Building ${MODULE_NAME_TIME} library version ${PROJECT_VERSION}...")
 
 if (${LS_STD_BUILD_STATIC})
-    add_library("${MODULE_NAME_TIME}" STATIC ${SOURCE_FILES_TIME})
+    add_library("${MODULE_NAME_TIME}" STATIC ${SOURCE_FILES_TIME} ${SOURCE_FILES_LINUX_TIME} ${SOURCE_FILES_WINDOWS_TIME})
     set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
 endif ()
 
 if (${LS_STD_BUILD_SHARED})
-    add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME})
-    target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
-    set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
+    if (${LS_STD_BUILD_WITH_JNI})
+        message("${MODULE_NAME_TIME}: building with JNI...")
+        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME} ${SOURCE_FILES_LINUX_TIME} ${SOURCE_FILES_WINDOWS_TIME} ${SOURCE_FILES_TIME_JNI})
+        target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
+        set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
+    else ()
+        add_library("${MODULE_NAME_TIME}" SHARED ${SOURCE_FILES_TIME} ${SOURCE_FILES_LINUX_TIME} ${SOURCE_FILES_WINDOWS_TIME})
+        target_link_libraries("${MODULE_NAME_TIME}" ${MODULE_NAME_CORE})
+        set_target_properties("${MODULE_NAME_TIME}" PROPERTIES DEBUG_POSTFIX "-d")
+    endif ()
 endif ()
 
 ####################################################################################################################
@@ -669,6 +797,7 @@ if (${LS_STD_BUILD_WITH_TESTS})
     message("${MODULE_NAME_TIME}: Linking libraries for unit test application...")
     target_link_libraries(${MODULE_NAME_TIME}-unit-test
             gtest
+            gmock
             gtest_main
             "${MODULE_NAME_TIME}"
             "${MODULE_NAME_CORE}")

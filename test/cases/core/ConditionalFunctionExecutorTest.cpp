@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-13
-* Changed:         2023-02-22
+* Changed:         2023-03-25
 *
 * */
 
@@ -21,16 +21,10 @@ namespace
 {
   class ConditionalFunctionExecutorTest : public Test
   {
-    protected:
+    public:
 
       ConditionalFunctionExecutorTest() = default;
       ~ConditionalFunctionExecutorTest() override = default;
-
-      void SetUp() override
-      {}
-
-      void TearDown() override
-      {}
   };
 
   TEST_F(ConditionalFunctionExecutorTest, execute)

@@ -3,7 +3,7 @@
  * Company:         Lynar Studios
  * E-Mail:          webmaster@lynarstudios.com
  * Created:         2023-02-04
- * Changed:         2023-02-23
+ * Changed:         2023-03-28
  *
  * */
 
@@ -27,16 +27,5 @@ EventNotHandledException::~EventNotHandledException() noexcept = default;
 
 const char *EventNotHandledException::what() const noexcept
 {
-  string concatenatedMessage = this->name + " thrown - ";
-
-  if (this->message.empty())
-  {
-    concatenatedMessage = concatenatedMessage + "event was not handled - nothing happened!";
-  }
-  else
-  {
-    concatenatedMessage = concatenatedMessage + this->message;
-  }
-
-  return ExceptionMessage{concatenatedMessage}.toCharacterPointer();
+  return this->_getIdentifiedMessage("event was not handled - nothing happened!");
 }

@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-22
-* Changed:         2023-02-22
+* Changed:         2023-03-28
 *
 * */
 
@@ -24,12 +24,14 @@ namespace ls::std::core
       ~Exception() noexcept override;
 
       [[nodiscard]] ::std::string getName() const;
-      [[nodiscard]] const char *what() const noexcept override;
+      [[nodiscard]] const char *what() const noexcept override = 0;
 
     protected:
 
       ::std::string message{};
       ::std::string name{};
+
+      [[nodiscard]] const char *_getIdentifiedMessage(const ::std::string &_defaultMessage) const;
   };
 }
 
