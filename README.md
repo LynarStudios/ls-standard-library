@@ -1,4 +1,4 @@
-# Lynar Studios - Standard Library 2023.2.0 #
+# Lynar Studios - Standard Library 2023.3.0 #
 
 This is a cross-platform standard library written in C++ offering functionalities you would usually miss in C++'s standard template library (STL), especially if you would search for cross-platform implementations.  
 This library has been tested on __Windows__, __Linux__ and __MacOS__ systems.
@@ -34,26 +34,15 @@ A __Date__ class comes with this submodule, which you can use to represent a dat
 
 #### Features ####
 
-- added NotImplementedException class, which can be thrown in case a method is provided, but not implemented
-- a JNI class is now available, wrapping C-like JNI functionalities, which can be found in __ls-std-core__ module - in
-  order to use this feature the CMake option __LS_STD_BUILD_WITH_JNI__ has to be enabled - please note, that this
-  feature is experimental and incomplete
-- a SystemTime class has been added to the library's time module for setting the local system time
-- Logger class is now configurable to silent log level or timestamp output
+- none
 
 #### Improvements ####
 
-- made test constructors public and reduced test setup overhead
-- added missing __nodiscard__ attributes to test package
-- made __Exception__ base class abstract, which prevents it from being instantiated
-- __NullPointerEvaluator__ & __NullPointerArgumentEvaluator__ now except raw pointers
-- Section-Pair identifiers can now have a length of 64 characters
-- Section-Pair values can now have a length of 512 characters
-- exceptions for creation of files or directories have been improved and now show the absolute file path
+- none
 
 #### Fixes ####
 
-- no comment
+- none
 
 ---
 ### Documentation ###

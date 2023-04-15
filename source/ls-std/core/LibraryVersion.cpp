@@ -3,7 +3,7 @@
 * Company:         Lynar Studios
 * E-Mail:          webmaster@lynarstudios.com
 * Created:         2023-02-05
-* Changed:         2023-03-05
+* Changed:         2023-04-15
 *
 * */
 
@@ -18,5 +18,5 @@ LibraryVersion::~LibraryVersion() = default;
 
 string LibraryVersion::getVersion()
 {
-  return "2023.2.0";
+  return "2023.3.0";
 }
